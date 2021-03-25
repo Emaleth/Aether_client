@@ -76,6 +76,10 @@ w_character={
  ]
 }
 
+[locale]
+
+translations=PoolStringArray(  )
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
