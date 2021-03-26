@@ -3,15 +3,16 @@ extends SpringArm
 var max_zoom : int = 10
 var min_zoom : int = 3
 var def_zoom : int = 7
-var zoom_sensibility : float = 0.1
+var zoom_sensibility : float = 0.2
 var pan_sensibility : float = 0.002
 var pan_deadzone : float = 0.1
 var pan_return_speed : float = 10
-
-onready var camera : Camera = $Camera
+var cur_rot_x : float
+var cur_rot_y : float
 
 func _ready() -> void:
 	spring_length = def_zoom
+#	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event: InputEvent) -> void:
 ### ZOOM ###
@@ -25,28 +26,22 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_pressed("pan"):
 		if event is InputEventMouseMotion:
 			if abs(event.relative.y) > pan_deadzone:
-				camera.rotation.x -= event.relative.y * pan_sensibility
-				camera.rotation.x = clamp(
-					camera.rotation.x, 
-					max(deg2rad(-80), deg2rad(-80 + rotation.x)), 
-					min(deg2rad(80), deg2rad(80 - rotation.x))
-					)
+				rotation.x -= event.relative.y * pan_sensibility
+				rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(80))
 			if abs(event.relative.x) > pan_deadzone:
-				camera.rotation.y -= event.relative.x * pan_sensibility
+				rotation.y -= event.relative.x * pan_sensibility
 ### MOVE ###
 	if Input.is_action_pressed("secondary_action"):
 		if event is InputEventMouseMotion:
 			if abs(event.relative.y) > pan_deadzone:
 				rotation.x -= event.relative.y * pan_sensibility
-				rotation.x = clamp(
-					rotation.x, 
-					max(deg2rad(-80), deg2rad(-80 + camera.rotation.x)), 
-					min(deg2rad(80), deg2rad(80 - camera.rotation.x))
-					)
+				rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(80))
+				cur_rot_x = rotation.x
+
 			
 func _process(delta: float) -> void:
 	if Input.is_action_pressed("pan"):
 		return
 	else:
-		camera.rotation.x = lerp_angle(camera.rotation.x, 0, pan_return_speed * delta)
-		camera.rotation.y = lerp_angle(camera.rotation.y, 0, pan_return_speed * delta)
+		rotation.x = lerp_angle(rotation.x, cur_rot_x, pan_return_speed * delta)
+		rotation.y = lerp_angle(rotation.y, cur_rot_y, pan_return_speed * delta)
