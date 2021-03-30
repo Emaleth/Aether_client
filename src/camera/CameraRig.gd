@@ -1,18 +1,18 @@
 extends SpringArm
 
-var max_zoom : int = 10
-var min_zoom : int = 3
-var def_zoom : int = 7
+var max_zoom : int = 7
+var min_zoom : int = 2
+var def_zoom : int = 5
 var zoom_sensibility : float = 0.2
 var pan_sensibility : float = 0.002
 var pan_deadzone : float = 0.1
 var pan_return_speed : float = 10
 var cur_rot_x : float
-var cur_rot_y : float
+var def_rot_x : float = deg2rad(-15)
 
 func _ready() -> void:
+	cur_rot_x = def_rot_x
 	spring_length = def_zoom
-#	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event: InputEvent) -> void:
 ### ZOOM ###
@@ -44,4 +44,4 @@ func _process(delta: float) -> void:
 		return
 	else:
 		rotation.x = lerp_angle(rotation.x, cur_rot_x, pan_return_speed * delta)
-		rotation.y = lerp_angle(rotation.y, cur_rot_y, pan_return_speed * delta)
+		rotation.y = lerp_angle(rotation.y, 0, pan_return_speed * delta)

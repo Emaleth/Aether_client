@@ -1,28 +1,42 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/actors/Actor.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/actors/player/Player.gd" type="Script" id=2]
-[ext_resource path="res://src/camera/CameraGimbal.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/camera/CameraRig.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/gui/GUI.tscn" type="PackedScene" id=4]
 
-[sub_resource type="CapsuleMesh" id=1]
+[sub_resource type="CapsuleShape" id=1]
 radius = 0.4
 
-[sub_resource type="CapsuleShape" id=2]
-radius = 0.4
+[sub_resource type="SpatialMaterial" id=2]
+albedo_color = Color( 0, 1, 1, 1 )
+
+[sub_resource type="CubeMesh" id=3]
+size = Vector3( 0.5, 0.2, 0.2 )
+
+[sub_resource type="SpatialMaterial" id=4]
+albedo_color = Color( 0.901961, 0.305882, 0.878431, 1 )
 
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="MeshInstance" type="MeshInstance" parent="." index="0"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-mesh = SubResource( 1 )
-material/0 = null
+[node name="CollisionShape" type="CollisionShape" parent="." index="0"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0.9, 0 )
+shape = SubResource( 1 )
 
-[node name="CollisionShape" type="CollisionShape" parent="." index="1"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 2 )
+[node name="GUI" parent="." index="1" instance=ExtResource( 4 )]
 
-[node name="Gimbal" parent="." index="2" instance=ExtResource( 3 )]
+[node name="CameraRig" parent="." index="2" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68352, 0 )
 
-[node name="GUI" parent="." index="3" instance=ExtResource( 4 )]
+[node name="Debug" parent="." index="3"]
+material/0 = SubResource( 2 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Debug" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.408572, -0.570399 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
+
+[node name="MiniMapCameraRT" type="RemoteTransform" parent="." index="4"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 10, 0 )
+update_scale = false

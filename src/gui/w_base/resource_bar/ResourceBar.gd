@@ -24,7 +24,7 @@ func updt(res_current : int) -> void:
 		"value", 
 		res_bar.value, 
 		res_current, 
-		(res_bar.value - res_current) * step_time, 
+		abs(res_bar.value - res_current) * step_time, 
 		Tween.TRANS_LINEAR, 
 		Tween.EASE_IN
 		)

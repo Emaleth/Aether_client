@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/knight.glb-5f04373bd9196f6332a96dbdc6fc491a.scn"
+path="res://.import/ybot.fbx-ef16a3953a4f5bf31f3a215366a35b1a.scn"
 
 [deps]
 
-source_file="res://assets/model/actors/knight.glb"
-dest_files=[ "res://.import/knight.glb-5f04373bd9196f6332a96dbdc6fc491a.scn" ]
+source_file="res://assets/model/actors/ybot.fbx"
+dest_files=[ "res://.import/ybot.fbx-ef16a3953a4f5bf31f3a215366a35b1a.scn" ]
 
 [params]
 
@@ -29,7 +29,7 @@ external_files/store_in_subdir=false
 animation/import=true
 animation/fps=15
 animation/filter_script=""
-animation/storage=false
+animation/storage=0
 animation/keep_custom_tracks=false
 animation/optimizer/enabled=true
 animation/optimizer/max_linear_error=0.05

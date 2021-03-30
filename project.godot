@@ -15,9 +15,13 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Aether"
+config/name="Aether - Client"
 run/main_scene="res://src/world/World.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+Relay="*res://Relay.gd"
 
 [display]
 
@@ -156,7 +160,8 @@ secondary_action={
 
 [locale]
 
-translations=PoolStringArray( "res://data/localization/localization.en.translation", "res://data/localization/localization.pl.translation", "res://data/localization/localization.it.translation" )
+translations=PoolStringArray( "res://data/localization/localization.en.translation" )
+locale_filter=[ 0, [  ] ]
 
 [rendering]
 
