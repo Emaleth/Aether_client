@@ -2,7 +2,7 @@ extends WindowDialog
 
 
 func _ready() -> void:
-	window_title = tr("1011")
+	window_title = tr("00012")
 	show()
 
 func _on_MarginContainer_sort_children() -> void:

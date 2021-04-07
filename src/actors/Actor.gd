@@ -5,7 +5,7 @@ enum STATE {IDLE, RUN, JUMP, FALL}
 
 var statistics : Dictionary = {
 	"speed" : 7,
-	"jump" : 9, 
+	"jump" : 12, 
 	"acceleration" : 15
 }
 
@@ -22,27 +22,61 @@ var animations = {
 }
 
 var resources : Dictionary = {
-	"max_health" : 100,
-	"health" : 100,
-	"mana" : 100,
-	"max_mana" : 100,
-	"stamina" : 100,
-	"max_stamina" : 100
+	"health" : {
+		"maximum" : 100,
+		"current" : 100
+	},
+	"mana" : {
+		"maximum" : 100,
+		"current" : 100
+	},
+	"stamina" : {
+		"maximum" : 100,
+		"current" : 100
+	}
 }
 
 var equipment : Dictionary = {
-	"mainhand" : null,
-	"offhand" : null,
-	"boots" : null,
-	"gloves" : null,
-	"torso" : null,
-	"helmet" : null,
-	"cape" : null
+	"mainhand" : {
+		"bone" : ["RightHand"],
+		"slot" : null,
+		"item" : null
+	},
+	"offhand" : {
+		"bone" : ["LeftHand"],
+		"slot" : null,
+		"item" : null
+	},
+	"boots" : {
+		"bone" : ["LeftFoot", "RightFoot"],
+		"slot" : null,
+		"item" : null
+	},
+	"gloves" : {
+		"bone" : ["LeftHand", "RightHand"],
+		"slot" : null,
+		"item" : null
+	},
+	"torso" : {
+		"bone" : ["Spine2"],
+		"slot" : null,
+		"item" : null
+	},
+	"helmet" : {
+		"bone" : ["Head"],
+		"slot" : null,
+		"item" : null
+	},
+	"cape" : {
+		"bone" : ["Spine2"],
+		"slot" : null,
+		"item" : null
+	}
 }
 	
 var inventory : Array = []
 # INTERNAL WORKING STUFF
-var model : PackedScene
+var model
 var velocity = Vector3()
 var gravity_vec = Vector3()
 var direction = Vector3()
@@ -66,10 +100,10 @@ func _physics_process(delta: float) -> void:
 		anim_fsm()
 		
 func conf():
-	var m  = model.instance()
-	add_child(m)
-	m.rotate_y(deg2rad(180))
-	anim_player = m.find_node("AnimationPlayer")
+	model = model.instance()
+	add_child(model)
+	model.rotate_y(deg2rad(180))
+	anim_player = model.find_node("AnimationPlayer")
 	load_animations()
 	set_process(true)
 	set_physics_process(true)
@@ -116,11 +150,28 @@ func calculate_gravity(delta):
 
 func conf_gui(gui_node : CanvasLayer) -> void:
 	gui = gui_node
-	gui.get_node("Progress").health_bar.conf(tr("1005"), resources.max_health, resources.health, Color(1, 0, 0, 1))
-	gui.get_node("Progress").mana_bar.conf(tr("1007"), resources.max_mana, resources.mana, Color(0, 0, 1, 1))
-	gui.get_node("Progress").stamina_bar.conf(tr("1009"), resources.max_stamina, resources.stamina, Color(1, 1, 0, 1))
+	gui.get_node("Progress").health_bar.conf(tr("00006"), resources.health.maximum, resources.health.current, Color(1, 0, 0, 1))
+	gui.get_node("Progress").mana_bar.conf(tr("00008"), resources.mana.maximum, resources.mana.current, Color(0, 0, 1, 1))
+	gui.get_node("Progress").stamina_bar.conf(tr("00010"), resources.stamina.maximum, resources.stamina.current, Color(1, 1, 0, 1))
 
 
 func rotate_me(delta) -> void:
 	rotate_y(delta * sign(rot_direction) * turn_speed)
 	rot_direction = 0
+
+func create_bone_attachments():
+	for i in equipment:
+		for s in equipment.get(i).bone: 
+			equipment.get(i).slot = BoneAttachment.new()
+			model.add_child(equipment.get(i).slot)
+			equipment.get(i).slot.bone_name = s
+			
+# get test items
+	var sword = (preload("res://assets/model/weapons/sword.fbx")).instance()
+	equipment.mainhand.slot.add_child(sword)
+	sword.rotate_x(deg2rad(-90))
+	sword.rotate_y(deg2rad(180))
+	
+#	var sword2 = (preload("res://assets/model/weapons/sword.fbx")).instance()
+#	equipment.offhand.slot.add_child(sword2)
+#	sword2.rotate_x(deg2rad(-90))

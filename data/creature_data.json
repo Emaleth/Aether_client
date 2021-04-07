@@ -1,8 +1,0 @@
-{
-    "dummy" : {
-        "damage" : 1,
-        "speed" : 5,
-        "stackable" : false,
-        "max_stack" : 1
-    }
-}

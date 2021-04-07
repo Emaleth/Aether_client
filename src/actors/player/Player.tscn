@@ -38,5 +38,5 @@ mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="MiniMapCameraRT" type="RemoteTransform" parent="." index="4"]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 10, 0 )
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 20, 0 )
 update_scale = false

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/knightlowres.png-ee95663077f817f5437bda7db2dd4e53.s3tc.stex"
-path.etc="res://.import/knightlowres.png-ee95663077f817f5437bda7db2dd4e53.etc.stex"
+path.s3tc="res://.import/ch_default.png-c663b83f7e985f7a9877ddd55059603c.s3tc.stex"
+path.etc="res://.import/ch_default.png-c663b83f7e985f7a9877ddd55059603c.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/texture/actors/knightlowres.png"
-dest_files=[ "res://.import/knightlowres.png-ee95663077f817f5437bda7db2dd4e53.s3tc.stex", "res://.import/knightlowres.png-ee95663077f817f5437bda7db2dd4e53.etc.stex" ]
+source_file="res://assets/texture/ch_default.png"
+dest_files=[ "res://.import/ch_default.png-c663b83f7e985f7a9877ddd55059603c.s3tc.stex", "res://.import/ch_default.png-c663b83f7e985f7a9877ddd55059603c.etc.stex" ]
 
 [params]
 

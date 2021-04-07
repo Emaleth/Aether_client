@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/actors/player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -14,9 +14,15 @@ size = Vector2( 100, 100 )
 [sub_resource type="ConcavePolygonShape" id=3]
 data = PoolVector3Array( 50, 0, 50, -50, 0, 50, 50, 0, -50, -50, 0, 50, -50, 0, -50, 50, 0, -50 )
 
+[sub_resource type="ConcavePolygonShape" id=4]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="CubeMesh" id=5]
+
 [node name="World" type="Spatial"]
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0104485, 0.044466, -0.164391 )
 mesh = SubResource( 2 )
 material/0 = null
 
@@ -27,3 +33,35 @@ shape = SubResource( 3 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
+
+[node name="test" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.28979, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="test"]
+shape = SubResource( 4 )
+
+[node name="test" type="MeshInstance" parent="test"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2981, -1.19209e-07, 0 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="t-rex" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00829, 1, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="t-rex"]
+shape = SubResource( 4 )
+
+[node name="t-rex" type="MeshInstance" parent="t-rex"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2981, 1.19209e-07, 0 )
+mesh = SubResource( 5 )
+material/0 = null
+
+[node name="dog" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.00829, 1, -9.60738 )
+
+[node name="CollisionShape" type="CollisionShape" parent="dog"]
+shape = SubResource( 4 )
+
+[node name="dog" type="MeshInstance" parent="dog"]
+mesh = SubResource( 5 )
+material/0 = null
