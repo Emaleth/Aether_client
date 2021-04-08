@@ -13,7 +13,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	get_input()
-	$MiniMapCameraRT.global_transform.origin.y = 20 # fixes minimap zooming when jumping
+	$GUI.nesw.rect_rotation = rotation_degrees.y
 	
 func get_input():
 	direction += (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")) * transform.basis.z
