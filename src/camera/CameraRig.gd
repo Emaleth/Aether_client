@@ -1,40 +1,39 @@
 extends SpringArm
 
-var max_zoom : int = 7
-var min_zoom : int = 2
-var def_zoom : int = 5
+var max_zoom : int = 10
+var min_zoom : int = 1
+var def_zoom : int = 8
 var zoom_sensibility : float = 0.2
 var pan_sensibility : float = 0.002
 var pan_deadzone : float = 0.1
 var pan_return_speed : float = 10
 var cur_rot_x : float
-var def_rot_x : float = deg2rad(-15)
+var def_rot_x : float = deg2rad(-30)
 
 
 func _ready() -> void:
 	cur_rot_x = def_rot_x
 	spring_length = def_zoom
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-	### ZOOM ###
-		if Input.is_action_just_pressed("zoom_in"):
-			spring_length -= zoom_sensibility
-		elif Input.is_action_just_pressed("zoom_out"):
-			spring_length += zoom_sensibility
-		spring_length = clamp(spring_length, min_zoom, max_zoom)
-			
-	### PAN ###
-		if Input.is_action_pressed("pan"):
-			if event is InputEventMouseMotion:
-				if abs(event.relative.y) > pan_deadzone:
-					rotation.x -= event.relative.y * pan_sensibility
-					rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(80))
-				if abs(event.relative.x) > pan_deadzone:
-					rotation.y -= event.relative.x * pan_sensibility
-	### MOVE ###
-		else:
+### ZOOM ###
+	if Input.is_action_just_pressed("zoom_in"):
+		spring_length -= zoom_sensibility
+	elif Input.is_action_just_pressed("zoom_out"):
+		spring_length += zoom_sensibility
+	spring_length = clamp(spring_length, min_zoom, max_zoom)
+		
+### PAN ###
+	if Input.is_action_pressed("pan") && not Input.is_action_pressed("secondary_action"):
+		if event is InputEventMouseMotion:
+			if abs(event.relative.y) > pan_deadzone:
+				rotation.x -= event.relative.y * pan_sensibility
+				rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(80))
+			if abs(event.relative.x) > pan_deadzone:
+				rotation.y -= event.relative.x * pan_sensibility
+### MOVE ###
+	else:
+		if Input.is_action_pressed("secondary_action"):
 			if event is InputEventMouseMotion:
 				if abs(event.relative.y) > pan_deadzone:
 					rotation.x -= event.relative.y * pan_sensibility
@@ -43,6 +42,11 @@ func _unhandled_input(event: InputEvent) -> void:
 
 				
 func _process(delta: float) -> void:
+	if Input.is_action_pressed("pan") || Input.is_action_pressed("secondary_action"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		
 	if Input.is_action_pressed("pan"):
 		return
 	else:

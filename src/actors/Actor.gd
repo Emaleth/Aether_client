@@ -1,16 +1,16 @@
 extends KinematicBody
 
-enum STANCE {NORMAL, COMBAT}
-enum STATE {IDLE, RUN, JUMP, FALL}
+enum STATE {IDLE, RUN, JUMP, FALL, DIE}
 
 var statistics : Dictionary = {
 	"speed" : 7,
-	"jump" : 12, 
-	"acceleration" : 15
+	"jump_force" : 12, 
+	"acceleration" : 15,
+	"deceleration" : 10
 }
 
 
-var animations = {
+var animations : Dictionary = {
 	"idle" : preload("res://assets/animations/2h_idle.anim"),
 	"run" : preload("res://assets/animations/2h_run.anim"),
 	"death" : preload("res://assets/animations/2h_death.anim"),
@@ -76,102 +76,120 @@ var equipment : Dictionary = {
 	
 var inventory : Array = []
 # INTERNAL WORKING STUFF
+var state = null
 var model
 var velocity = Vector3()
 var gravity_vec = Vector3()
 var direction = Vector3()
+var jumping = false
+var falling = false
 var rot_direction : int
 var gui : CanvasLayer
 var turn_speed : float = 3.0
-var weight = 3
 
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var anim_player : AnimationPlayer
+onready var attack_area = $AttackArea
+onready var attack_ray = $AttackRay
 
 
 func _ready() -> void:
+	gravity *= 3 # gravity multiplier
+	# HALT PROCESSING 
 	set_process(false)
 	set_physics_process(false)
+	# SET INITIAL STATE
+	state = STATE.IDLE
 	
 func _physics_process(delta: float) -> void:
-	rotate_me(delta)
-	move_and_slide(calculate_velocity(delta) + calculate_gravity(delta), Vector3.UP)
-	if anim_player: # FIXME (rework as to not call in process if possible)
-		anim_fsm()
+	finite_state_machine(delta)
 		
+func finite_state_machine(delta: float) -> void:
+	match state:
+		STATE.IDLE:
+			anim_player.play("idle")
+			gravity_vec = (get_floor_normal() * -1) * gravity
+			velocity = velocity.linear_interpolate(Vector3.ZERO, statistics.deceleration * delta)
+			
+			if direction != Vector3.ZERO:
+				state = STATE.RUN
+			if jumping == true:
+				state = STATE.JUMP
+			if  not is_on_floor():
+				state = STATE.FALL
+			if resources.health.current <= 0:
+				state = STATE.DIE
+					
+		STATE.RUN:
+			anim_player.play("run")
+			gravity_vec = (get_floor_normal() * -1) * gravity
+			velocity = velocity.linear_interpolate(direction * statistics.speed, statistics.acceleration * delta)
+			
+			if direction == Vector3.ZERO:
+				state = STATE.IDLE
+			if jumping == true:
+				state = STATE.JUMP
+			if not is_on_floor():
+				state = STATE.FALL
+			if resources.health.current <= 0:
+				state = STATE.DIE
+			
+		STATE.JUMP:
+			anim_player.play("jump")
+			velocity = velocity.linear_interpolate(direction * statistics.speed, statistics.deceleration * delta)
+			if jumping == true:
+				gravity_vec = Vector3.UP * statistics.jump_force
+				jumping = false
+			else:
+				gravity_vec += Vector3.DOWN * gravity * delta 
+				
+			if gravity_vec < Vector3.ZERO:
+				state = STATE.FALL
+			
+		STATE.FALL:
+			anim_player.play("idle")
+			gravity_vec += Vector3.DOWN * gravity * delta
+			velocity = velocity.linear_interpolate(direction * statistics.speed, statistics.deceleration * delta)
+			if is_on_floor():
+				state = STATE.IDLE
+			
+		STATE.DIE:
+			anim_player.play("die")
+			gravity_vec = Vector3.DOWN * gravity
+			velocity = velocity.linear_interpolate(Vector3.ZERO, statistics.deceleration * delta)
+			
+			
+	rotate_y(delta * sign(rot_direction) * turn_speed)
+	move_and_slide(velocity + gravity_vec, Vector3.UP, true)
+
 func conf():
+	# GET 3D MODEL
 	model = model.instance()
 	add_child(model)
 	model.rotate_y(deg2rad(180))
-	anim_player = model.find_node("AnimationPlayer")
-	load_animations()
-	set_process(true)
-	set_physics_process(true)
-	
-func load_animations() -> void:
-	for i in animations:
-		anim_player.add_animation(i, animations.get(i))
-
-func modify_resource(resource : String, amount : int) -> void:
-	resources[resource] += amount
-
-func hurt(amount) -> void:
-	modify_resource("health", amount)
-
-func calculate_velocity(delta):
-	velocity = velocity.linear_interpolate(direction * statistics.speed, statistics.acceleration * delta)
-	direction = Vector3.ZERO
-	return velocity
-
-func anim_fsm() -> void:
-	if velocity.z < -0.1:
-		anim_player.play("run")
-	elif velocity.z > 0.1:
-		anim_player.play_backwards("run")
-	elif velocity.x < -0.1:
-		anim_player.play("strafe")
-	elif velocity.x > 0.1:
-		anim_player.play_backwards("strafe")
-#	elif gravity_vec.y < -0.1:
-#		anim_player.play_backwards("jump")
-	elif gravity_vec.y > 0.1:
-		anim_player.play("jump")
-	else:
-		anim_player.play("idle")
-
-func calculate_gravity(delta):
-	if is_on_floor():
-		gravity_vec = Vector3.DOWN * gravity * delta * weight
-	else:
-		gravity_vec += Vector3.DOWN * gravity * delta * weight
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		gravity_vec = Vector3.UP * statistics.jump
-	return gravity_vec
-
-func conf_gui(gui_node : CanvasLayer) -> void:
-	gui = gui_node
-	gui.get_node("Progress").health_bar.conf(tr("00006"), resources.health.maximum, resources.health.current, Color(1, 0, 0, 1))
-	gui.get_node("Progress").mana_bar.conf(tr("00008"), resources.mana.maximum, resources.mana.current, Color(0, 0, 1, 1))
-	gui.get_node("Progress").stamina_bar.conf(tr("00010"), resources.stamina.maximum, resources.stamina.current, Color(1, 1, 0, 1))
-
-
-func rotate_me(delta) -> void:
-	rotate_y(delta * sign(rot_direction) * turn_speed)
-	rot_direction = 0
-
-func create_bone_attachments():
+	# CREATE BONE ATTACHMENT NODES
 	for i in equipment:
 		for s in equipment.get(i).bone: 
 			equipment.get(i).slot = BoneAttachment.new()
 			model.add_child(equipment.get(i).slot)
 			equipment.get(i).slot.bone_name = s
-			
-# get test items
-	var sword = (preload("res://assets/model/weapons/sword.fbx")).instance()
-	equipment.mainhand.slot.add_child(sword)
-	sword.rotate_x(deg2rad(-90))
-	sword.rotate_y(deg2rad(180))
+	# GET ANIMATION PLAYER
+	anim_player = model.find_node("AnimationPlayer")
+	# LOAD ANIMATIONS
+	for i in animations:
+		anim_player.add_animation(i, animations.get(i))
+	# RESTART PROCESSING
+	set_process(true)
+	set_physics_process(true)
 	
-#	var sword2 = (preload("res://assets/model/weapons/sword.fbx")).instance()
-#	equipment.offhand.slot.add_child(sword2)
-#	sword2.rotate_x(deg2rad(-90))
+func modify_resource(resource : String, amount : int) -> void:
+	resources[resource] += amount
+
+func hurt(amount) -> void:
+	modify_resource("health", amount)
+			
+func equip_item(item) -> void:
+	equipment.mainhand.slot.add_child(item)
+	item.rotate_x(deg2rad(-90))
+	item.rotate_y(deg2rad(180))
+	

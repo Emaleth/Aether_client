@@ -3,7 +3,7 @@
 [ext_resource path="res://src/gui/GUI.gd" type="Script" id=1]
 [ext_resource path="res://src/gui/w_progress/Progress.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/gui/w_minimap/MiniMap.tscn" type="PackedScene" id=3]
-[ext_resource path="res://src/gui/crosshair/Crosshair.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/gui/chatbox/ChatBox.tscn" type="PackedScene" id=4]
 [ext_resource path="res://src/gui/w_base/inventory/Inventory.tscn" type="PackedScene" id=5]
 [ext_resource path="res://src/gui/map/Map.tscn" type="PackedScene" id=6]
 
@@ -43,7 +43,7 @@ margin_top = -179.409
 margin_right = -276.016
 margin_bottom = -178.409
 
-[node name="Crosshair" parent="." instance=ExtResource( 4 )]
-
 [node name="Map" parent="." instance=ExtResource( 6 )]
 visible = false
+
+[node name="ChatBox" parent="." instance=ExtResource( 4 )]
