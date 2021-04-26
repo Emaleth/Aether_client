@@ -5,10 +5,11 @@
 [ext_resource path="res://src/gui/w_base/portret/Portrait.gd" type="Script" id=3]
 
 [node name="Portrait" type="PanelContainer"]
-margin_left = 2.0
-margin_right = 80.0
+margin_right = 78.0
 margin_bottom = 78.0
 mouse_filter = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -19,7 +20,10 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 71.0
 margin_bottom = 71.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture_normal = ExtResource( 2 )
+stretch_mode = 4
 
 [node name="Border" type="TextureRect" parent="."]
 margin_left = 7.0
@@ -27,9 +31,11 @@ margin_top = 7.0
 margin_right = 71.0
 margin_bottom = 71.0
 mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = ExtResource( 1 )
 expand = true
-stretch_mode = 1
+stretch_mode = 5
 __meta__ = {
 "_edit_use_anchors_": false
 }

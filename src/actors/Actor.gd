@@ -2,6 +2,7 @@ extends KinematicBody
 
 enum STATE {IDLE, RUN, JUMP, FALL, DIE}
 
+var target_list = []
 var statistics : Dictionary = {
 	"name" : "",
 	"race" : "",
@@ -87,8 +88,8 @@ var direction = Vector3()
 var jumping = false
 var falling = false
 var rot_direction : int
-var gui : CanvasLayer
 var turn_speed : float = 3.0
+var target = null
 
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var anim_player : AnimationPlayer
@@ -170,6 +171,9 @@ func conf():
 	model = model.instance()
 	add_child(model)
 	model.rotate_y(deg2rad(180))
+	for i in model.get_children():
+		if i is MeshInstance:
+			hide_from_minimap_camera(i)
 	# CREATE BONE ATTACHMENT NODES
 	for i in equipment:
 		for s in equipment.get(i).bone: 
@@ -195,6 +199,30 @@ func hurt(amount) -> void:
 			
 func equip_item(item) -> void:
 	equipment.mainhand.slot.add_child(item)
-	item.rotate_x(deg2rad(-90))
-	item.rotate_y(deg2rad(180))
+	item.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+	item.rotate_y(deg2rad(180)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+	for i in item.get_children():
+		if i is MeshInstance:
+			hide_from_minimap_camera(i)
 	
+func hide_from_minimap_camera(mesh):
+	mesh.set_layer_mask_bit(0, false)
+	mesh.set_layer_mask_bit(2, true)
+	
+func show_indicator(yay_or_nay : bool):
+	for i in $TargetIndicator.get_children():
+		if i is MeshInstance:
+			if yay_or_nay == true:
+				i.set_layer_mask_bit(2, true)
+				$TargetIndicator.bounce()
+			else:
+				i.set_layer_mask_bit(2, false)
+				$TargetIndicator.halt()
+				
+
+func _on_AttackArea_body_entered(body: Node) -> void:
+	pass
+
+
+func _on_AttackArea_body_exited(body: Node) -> void:
+	pass

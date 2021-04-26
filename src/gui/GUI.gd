@@ -23,3 +23,17 @@ func conf(resources, minimap_camera_remote_transform):
 	$Progress.stamina_bar.conf(tr("00010"), resources.stamina.maximum, resources.stamina.current, Color(1, 1, 0, 1))
 			
 	minimap_camera_remote_transform.remote_path = $MiniMap/MarginContainer/ViewportContainer/Viewport/MiniMapCamera.get_path()
+
+func get_target_info(target, yay_or_nay):
+	if yay_or_nay == false:
+		$TargetProgress.hide()
+	else:
+		$TargetProgress.name_label.text = target.statistics.name
+		$TargetProgress.lvl_label.text = "666"
+#		$TargetProgress.class_texture.texture = load("res://icon.png")
+		$TargetProgress.target_stuff.show()
+		$TargetProgress.health_bar.conf(tr("00006"), target.resources.health.maximum, target.resources.health.current, Color(1, 0, 0, 1))
+		$TargetProgress.mana_bar.conf(tr("00008"), target.resources.mana.maximum, target.resources.mana.current, Color(0, 0, 1, 1))
+		$TargetProgress.stamina_bar.conf(tr("00010"), target.resources.stamina.maximum, target.resources.stamina.current, Color(1, 1, 0, 1))
+		$TargetProgress.show()
+	
