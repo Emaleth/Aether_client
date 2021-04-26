@@ -4,6 +4,10 @@ onready var minimap_camera_remote_transform : RemoteTransform = $MiniMapCameraRT
 
 
 func _ready() -> void:
+	statistics.name = "Emaleth"
+	statistics.race = "Necromorph"
+	statistics.guild = "Empire"
+	
 #	Input.set_use_accumulated_input(false)
 	model = preload("res://assets/model/actors/ybot.fbx")
 	$Debug.queue_free()

@@ -3,6 +3,9 @@ extends KinematicBody
 enum STATE {IDLE, RUN, JUMP, FALL, DIE}
 
 var statistics : Dictionary = {
+	"name" : "",
+	"race" : "",
+	"guild" : "",
 	"speed" : 7,
 	"jump_force" : 12, 
 	"acceleration" : 15,
@@ -178,6 +181,8 @@ func conf():
 	# LOAD ANIMATIONS
 	for i in animations:
 		anim_player.add_animation(i, animations.get(i))
+	# CONF HUD
+	$NameResHud.conf(statistics.name, resources)
 	# RESTART PROCESSING
 	set_process(true)
 	set_physics_process(true)
