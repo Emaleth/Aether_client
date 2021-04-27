@@ -7,6 +7,8 @@ var statistics : Dictionary = {
 	"name" : "",
 	"race" : "",
 	"guild" : "",
+	"title" : "",
+	"level" : "0",
 	"speed" : 7,
 	"jump_force" : 12, 
 	"acceleration" : 15,
@@ -96,6 +98,7 @@ onready var anim_player : AnimationPlayer
 onready var attack_area = $AttackArea
 onready var attack_ray = $AttackRay
 
+signal target_lost
 
 func _ready() -> void:
 	gravity *= 3 # gravity multiplier
@@ -186,7 +189,7 @@ func conf():
 	for i in animations:
 		anim_player.add_animation(i, animations.get(i))
 	# CONF HUD
-	$NameResHud.conf(statistics.name, resources)
+	$NameResHud.conf(statistics, resources)
 	# RESTART PROCESSING
 	set_process(true)
 	set_physics_process(true)
@@ -221,8 +224,15 @@ func show_indicator(yay_or_nay : bool):
 				
 
 func _on_AttackArea_body_entered(body: Node) -> void:
-	pass
+	if body is KinematicBody:
+		if body != self:
+			target_list.append(body)
 
 
 func _on_AttackArea_body_exited(body: Node) -> void:
-	pass
+	if body is KinematicBody:
+		if body == target:
+			emit_signal("target_lost")
+			target = null
+		target_list.erase(body)
+

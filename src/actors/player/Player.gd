@@ -7,6 +7,8 @@ func _ready() -> void:
 	statistics.name = "Emaleth"
 	statistics.race = "Necromorph"
 	statistics.guild = "Empire"
+	statistics.lvl = "69"
+	statistics.title = "Ancient God"
 	
 #	Input.set_use_accumulated_input(false)
 	model = preload("res://assets/model/actors/ybot.fbx")
@@ -14,6 +16,7 @@ func _ready() -> void:
 	conf()
 	$GUI.conf(resources, minimap_camera_remote_transform)
 	equip_item((preload("res://assets/model/weapons/sword.fbx")).instance())
+	connect("target_lost", self, "loose_target_ui")
 	
 func _process(delta: float) -> void:
 	get_input()
@@ -40,17 +43,19 @@ func _unhandled_input(event: InputEvent) -> void:
 				rotate_y(-event.relative.x * 0.005)
 		
 func get_next_target():
-	target_list = []
-	for i in $AttackArea.get_overlapping_bodies():
-		if i != self:
-			if i is KinematicBody:
-				target_list.append(i)
-				print(i)
 	var new_target = target_list.pop_front()
 	if new_target:
 		if target:
 			target.show_indicator(false)
 			$GUI.get_target_info(target, false)
+			if $AttackArea.overlaps_body(target): 
+				target_list.append(target)
 		target = new_target
 		target.show_indicator(true)
 		$GUI.get_target_info(target, true)
+		look_at(target.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS
+
+func loose_target_ui():
+	if target:
+		target.show_indicator(false)
+		$GUI.get_target_info(target, false)

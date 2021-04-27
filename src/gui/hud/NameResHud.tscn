@@ -26,7 +26,7 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="Viewport" type="Viewport" parent="Quat"]
-size = Vector2( 300, 100 )
+size = Vector2( 500, 300 )
 transparent_bg = true
 handle_input_locally = false
 disable_3d = true
@@ -35,24 +35,41 @@ render_target_v_flip = true
 gui_disable_input = true
 
 [node name="vbox" type="VBoxContainer" parent="Quat/Viewport"]
-margin_right = 300.0
-margin_bottom = 100.0
+margin_right = 500.0
+margin_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
+rect_min_size = Vector2( 500, 300 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Quat/Viewport/vbox"]
-margin_right = 300.0
-margin_bottom = 27.0
+[node name="Title" type="Label" parent="Quat/Viewport/vbox"]
+margin_right = 500.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.568627, 0.568627, 0.568627, 1 )
+text = "<title>"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Quat/Viewport/vbox"]
+margin_top = 60.0
+margin_right = 500.0
+margin_bottom = 120.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 alignment = 1
 
 [node name="Class" type="TextureRect" parent="Quat/Viewport/vbox/HBoxContainer"]
-margin_right = 91.0
-margin_bottom = 27.0
+margin_right = 113.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 4 )
@@ -60,9 +77,9 @@ expand = true
 stretch_mode = 6
 
 [node name="Name" type="Label" parent="Quat/Viewport/vbox/HBoxContainer"]
-margin_left = 95.0
-margin_right = 204.0
-margin_bottom = 27.0
+margin_left = 117.0
+margin_right = 332.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -71,9 +88,9 @@ align = 1
 valign = 1
 
 [node name="Lvl" type="Label" parent="Quat/Viewport/vbox/HBoxContainer"]
-margin_left = 208.0
-margin_right = 300.0
-margin_bottom = 27.0
+margin_left = 336.0
+margin_right = 500.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -81,12 +98,25 @@ text = "<lvl>"
 align = 1
 valign = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Quat/Viewport/vbox"]
-margin_top = 31.0
-margin_right = 300.0
-margin_bottom = 145.0
+[node name="Guild" type="Label" parent="Quat/Viewport/vbox"]
+margin_top = 120.0
+margin_right = 500.0
+margin_bottom = 180.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.94902, 0.988235, 0.235294, 1 )
+text = "<guild>"
+align = 1
+valign = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Quat/Viewport/vbox"]
+margin_top = 180.0
+margin_right = 500.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 10
@@ -95,27 +125,27 @@ custom_constants/margin_bottom = 10
 [node name="VBoxContainer" type="VBoxContainer" parent="Quat/Viewport/vbox/MarginContainer"]
 margin_left = 10.0
 margin_top = 5.0
-margin_right = 295.0
-margin_bottom = 104.0
+margin_right = 495.0
+margin_bottom = 110.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Heatlh" parent="Quat/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
-margin_right = 285.0
-margin_bottom = 30.0
+margin_right = 485.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Mana" parent="Quat/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 34.0
-margin_right = 285.0
-margin_bottom = 64.0
+margin_top = 36.0
+margin_right = 485.0
+margin_bottom = 68.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Stamina" parent="Quat/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 68.0
-margin_right = 285.0
-margin_bottom = 99.0
+margin_top = 72.0
+margin_right = 485.0
+margin_bottom = 105.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
