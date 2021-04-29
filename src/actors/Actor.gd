@@ -249,4 +249,5 @@ func attack():
 		if target:
 			gcd.start(1)
 			target.hurt(10)
+			modify_resource("mana", -5)
 			

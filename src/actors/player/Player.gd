@@ -15,6 +15,7 @@ func _ready() -> void:
 	$Debug.queue_free()
 	conf()
 	$GUI.conf(resources, minimap_camera_remote_transform)
+	connect("res_mod", $GUI, "update_gui", [resources])
 	equip_item((preload("res://assets/model/weapons/sword.fbx")).instance())
 	connect("target_lost", self, "loose_target_ui")
 	
@@ -47,6 +48,7 @@ func get_next_target():
 	if new_target:
 		if target:
 			target.show_indicator(false)
+			target.disconnect("res_mod", $GUI, "update_targe_info")
 			$GUI.get_target_info(target, false)
 			if $AttackArea.overlaps_body(target): 
 				target_list.append(target)

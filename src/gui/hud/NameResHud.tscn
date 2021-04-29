@@ -50,7 +50,7 @@ __meta__ = {
 
 [node name="Title" type="Label" parent="Quat/Viewport/vbox"]
 margin_right = 500.0
-margin_bottom = 60.0
+margin_bottom = 85.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -60,16 +60,16 @@ align = 1
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Quat/Viewport/vbox"]
-margin_top = 60.0
+margin_top = 85.0
 margin_right = 500.0
-margin_bottom = 120.0
+margin_bottom = 171.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="Class" type="TextureRect" parent="Quat/Viewport/vbox/HBoxContainer"]
 margin_right = 113.0
-margin_bottom = 60.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = ExtResource( 4 )
@@ -79,7 +79,7 @@ stretch_mode = 6
 [node name="Name" type="Label" parent="Quat/Viewport/vbox/HBoxContainer"]
 margin_left = 117.0
 margin_right = 332.0
-margin_bottom = 60.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -90,7 +90,7 @@ valign = 1
 [node name="Lvl" type="Label" parent="Quat/Viewport/vbox/HBoxContainer"]
 margin_left = 336.0
 margin_right = 500.0
-margin_bottom = 60.0
+margin_bottom = 86.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -99,9 +99,9 @@ align = 1
 valign = 1
 
 [node name="Guild" type="Label" parent="Quat/Viewport/vbox"]
-margin_top = 120.0
+margin_top = 171.0
 margin_right = 500.0
-margin_bottom = 180.0
+margin_bottom = 257.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -111,12 +111,12 @@ align = 1
 valign = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="Quat/Viewport/vbox"]
-margin_top = 180.0
+margin_top = 257.0
 margin_right = 500.0
 margin_bottom = 300.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-size_flags_stretch_ratio = 2.0
+size_flags_stretch_ratio = 0.5
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 10
@@ -126,26 +126,26 @@ custom_constants/margin_bottom = 10
 margin_left = 10.0
 margin_top = 5.0
 margin_right = 495.0
-margin_bottom = 110.0
+margin_bottom = 33.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Heatlh" parent="Quat/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
 margin_right = 485.0
-margin_bottom = 32.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Mana" parent="Quat/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 36.0
+visible = false
+margin_top = 22.0
 margin_right = 485.0
-margin_bottom = 68.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Stamina" parent="Quat/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
-margin_top = 72.0
+visible = false
+margin_top = 22.0
 margin_right = 485.0
-margin_bottom = 105.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

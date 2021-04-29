@@ -47,6 +47,7 @@ margin_bottom = -178.409
 visible = false
 
 [node name="ChatBox" parent="." instance=ExtResource( 4 )]
+visible = false
 
 [node name="TargetProgress" parent="." instance=ExtResource( 2 )]
 visible = false

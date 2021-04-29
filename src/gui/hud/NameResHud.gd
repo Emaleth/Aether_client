@@ -39,26 +39,28 @@ func conf(stats = {}, res = {}) -> void:
 	else:
 		health_bar.hide()
 
-	if res.mana.maximum > 0:
-		mana_bar.conf(tr("00008"), res.mana.maximum, res.mana.current, Color(0, 0, 1, 1))
-	else:
-		mana_bar.hide()
-
-	if res.stamina.maximum > 0:
-		stamina_bar.conf(tr("00010"), res.stamina.maximum, res.stamina.current, Color(1, 1, 0, 1))
-	else:
-		stamina_bar.hide()
+#	if res.mana.maximum > 0:
+#		mana_bar.conf(tr("00008"), res.mana.maximum, res.mana.current, Color(0, 0, 1, 1))
+#	else:
+#		mana_bar.hide()
+#
+#	if res.stamina.maximum > 0:
+#		stamina_bar.conf(tr("00010"), res.stamina.maximum, res.stamina.current, Color(1, 1, 0, 1))
+#	else:
+#		stamina_bar.hide()
 		
 		
 	health_bar.get_node("ProgressBar").percent_visible = false
-	mana_bar.get_node("ProgressBar").percent_visible = false
-	stamina_bar.get_node("ProgressBar").percent_visible = false
+#	mana_bar.get_node("ProgressBar").percent_visible = false
+#	stamina_bar.get_node("ProgressBar").percent_visible = false
 		
-	mana_bar.get_node("Label").hide()
-	stamina_bar.get_node("Label").hide()
 	health_bar.get_node("Label").hide()
+#	mana_bar.get_node("Label").hide()
+#	stamina_bar.get_node("Label").hide()
 
+	mana_bar.hide()
+	stamina_bar.hide()
 func upd(res):
 	health_bar.updt(res.health.current)
-	mana_bar.updt(res.mana.current)
-	stamina_bar.updt(res.stamina.current)
+#	mana_bar.updt(res.mana.current)
+#	stamina_bar.updt(res.stamina.current)
