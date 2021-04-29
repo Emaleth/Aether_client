@@ -29,7 +29,7 @@ func get_target_info(target, yay_or_nay):
 		$TargetProgress.hide()
 	else:
 		$TargetProgress.name_label.text = target.statistics.name
-		$TargetProgress.lvl_label.text = "666"
+		$TargetProgress.lvl_label.text = target.statistics.level
 #		$TargetProgress.class_texture.texture = load("res://icon.png")
 		$TargetProgress.target_stuff.show()
 		$TargetProgress.health_bar.conf(tr("00006"), target.resources.health.maximum, target.resources.health.current, Color(1, 0, 0, 1))
@@ -37,3 +37,7 @@ func get_target_info(target, yay_or_nay):
 		$TargetProgress.stamina_bar.conf(tr("00010"), target.resources.stamina.maximum, target.resources.stamina.current, Color(1, 1, 0, 1))
 		$TargetProgress.show()
 	
+func update_targe_info(res):
+	$TargetProgress.health_bar.updt(res.health.current)
+	$TargetProgress.mana_bar.updt(res.mana.current)
+	$TargetProgress.stamina_bar.updt(res.stamina.current)

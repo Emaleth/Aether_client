@@ -8,7 +8,7 @@ var statistics : Dictionary = {
 	"race" : "",
 	"guild" : "",
 	"title" : "",
-	"level" : "0",
+	"level" : "",
 	"speed" : 7,
 	"jump_force" : 12, 
 	"acceleration" : 15,
@@ -92,21 +92,26 @@ var falling = false
 var rot_direction : int
 var turn_speed : float = 3.0
 var target = null
+var attacking = false
 
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var anim_player : AnimationPlayer
 onready var attack_area = $AttackArea
 onready var attack_ray = $AttackRay
+onready var gcd : Timer = $GlobalCoolDown 
 
 signal target_lost
+signal res_mod
 
 func _ready() -> void:
+	gcd.connect("timeout", self, "attack")
 	gravity *= 3 # gravity multiplier
 	# HALT PROCESSING 
 	set_process(false)
 	set_physics_process(false)
 	# SET INITIAL STATE
 	state = STATE.IDLE
+	attacking = true
 	
 func _physics_process(delta: float) -> void:
 	finite_state_machine(delta)
@@ -161,7 +166,8 @@ func finite_state_machine(delta: float) -> void:
 				state = STATE.IDLE
 			
 		STATE.DIE:
-			anim_player.play("die")
+#			anim_player.play("die")
+			queue_free()
 			gravity_vec = Vector3.DOWN * gravity
 			velocity = velocity.linear_interpolate(Vector3.ZERO, statistics.deceleration * delta)
 			
@@ -191,14 +197,16 @@ func conf():
 	# CONF HUD
 	$NameResHud.conf(statistics, resources)
 	# RESTART PROCESSING
+	connect("res_mod", $NameResHud, "upd", [resources])
 	set_process(true)
 	set_physics_process(true)
 	
 func modify_resource(resource : String, amount : int) -> void:
-	resources[resource] += amount
+	resources[resource].current += amount
+	emit_signal("res_mod")
 
 func hurt(amount) -> void:
-	modify_resource("health", amount)
+	modify_resource("health", -amount)
 			
 func equip_item(item) -> void:
 	equipment.mainhand.slot.add_child(item)
@@ -236,3 +244,9 @@ func _on_AttackArea_body_exited(body: Node) -> void:
 			target = null
 		target_list.erase(body)
 
+func attack():
+	if attacking == true:
+		if target:
+			gcd.start(1)
+			target.hurt(10)
+			

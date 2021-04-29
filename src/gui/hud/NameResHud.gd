@@ -57,3 +57,8 @@ func conf(stats = {}, res = {}) -> void:
 	mana_bar.get_node("Label").hide()
 	stamina_bar.get_node("Label").hide()
 	health_bar.get_node("Label").hide()
+
+func upd(res):
+	health_bar.updt(res.health.current)
+	mana_bar.updt(res.mana.current)
+	stamina_bar.updt(res.stamina.current)

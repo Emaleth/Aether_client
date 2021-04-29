@@ -7,7 +7,7 @@ func _ready() -> void:
 	statistics.name = "Emaleth"
 	statistics.race = "Necromorph"
 	statistics.guild = "Empire"
-	statistics.lvl = "69"
+	statistics.level = "69"
 	statistics.title = "Ancient God"
 	
 #	Input.set_use_accumulated_input(false)
@@ -51,11 +51,14 @@ func get_next_target():
 			if $AttackArea.overlaps_body(target): 
 				target_list.append(target)
 		target = new_target
+		target.connect("res_mod", $GUI, "update_targe_info", [target.resources])
 		target.show_indicator(true)
 		$GUI.get_target_info(target, true)
+		attack()
 		look_at(target.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS
 
 func loose_target_ui():
 	if target:
 		target.show_indicator(false)
 		$GUI.get_target_info(target, false)
+
