@@ -99,6 +99,7 @@ onready var anim_player : AnimationPlayer
 onready var attack_area = $AttackArea
 onready var attack_ray = $AttackRay
 onready var gcd : Timer = $GlobalCoolDown 
+onready var hit_num = preload("res://src/hit_number/HitNumber.tscn")
 
 signal target_lost
 signal res_mod
@@ -207,7 +208,11 @@ func modify_resource(resource : String, amount : int) -> void:
 
 func hurt(amount) -> void:
 	modify_resource("health", -amount)
-			
+	var h = hit_num.instance()
+	get_tree().root.add_child(h)
+	h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
+	h.conf(amount)
+	
 func equip_item(item) -> void:
 	equipment.mainhand.slot.add_child(item)
 	item.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
@@ -221,21 +226,15 @@ func hide_from_minimap_camera(mesh):
 	mesh.set_layer_mask_bit(2, true)
 	
 func show_indicator(yay_or_nay : bool):
-	for i in $TargetIndicator.get_children():
-		if i is MeshInstance:
-			if yay_or_nay == true:
-				i.set_layer_mask_bit(2, true)
-				$TargetIndicator.bounce()
-			else:
-				i.set_layer_mask_bit(2, false)
-				$TargetIndicator.halt()
-				
+	if yay_or_nay:
+		$TargetIndicator.bounce()
+	else:
+		$TargetIndicator.halt()
 
 func _on_AttackArea_body_entered(body: Node) -> void:
 	if body is KinematicBody:
 		if body != self:
 			target_list.append(body)
-
 
 func _on_AttackArea_body_exited(body: Node) -> void:
 	if body is KinematicBody:
