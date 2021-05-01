@@ -8,10 +8,10 @@ func _ready() -> void:
 	statistics.level = "5"
 	statistics.title = "virus"
 	
-#	Input.set_use_accumulated_input(false)
 	model = preload("res://assets/model/actors/ybot.fbx")
 	$Debug.queue_free()
 	conf()
+	load_eq()
 	for i in model.get_children():
 		if i is MeshInstance:
 			pass # set albedo to red

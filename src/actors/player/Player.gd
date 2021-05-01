@@ -16,7 +16,7 @@ func _ready() -> void:
 	conf()
 	$GUI.conf(resources, minimap_camera_remote_transform)
 	connect("res_mod", $GUI, "update_gui", [resources])
-	equip_item((preload("res://assets/model/weapons/sword.fbx")).instance())
+	load_eq()
 	connect("target_lost", self, "loose_target_ui")
 	
 func _process(delta: float) -> void:

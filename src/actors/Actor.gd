@@ -46,7 +46,7 @@ var equipment : Dictionary = {
 	"mainhand" : {
 		"bone" : ["RightHand"],
 		"slot" : null,
-		"item" : null
+		"item" : "00001"
 	},
 	"offhand" : {
 		"bone" : ["LeftHand"],
@@ -250,3 +250,15 @@ func attack():
 			target.hurt(10)
 			modify_resource("mana", -5)
 			
+func load_eq():
+	for i in equipment:
+		if equipment.get(i).item:
+			var model_path = "res://assets/model/weapons/%s.fbx" % equipment.get(i).item
+			var item_model = (load(model_path)).instance()
+			equipment.get(i).slot.add_child(item_model)
+			item_model.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+			item_model.rotate_y(deg2rad(180)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+			for z in item_model.get_children():
+				if z is MeshInstance:
+					hide_from_minimap_camera(z)
+			print("ID: ",equipment.get(i).item, " >> DATA: ", DataLoader.item_db.get(equipment.get(i).item))

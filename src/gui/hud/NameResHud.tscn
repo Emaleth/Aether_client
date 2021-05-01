@@ -134,18 +134,15 @@ size_flags_vertical = 3
 margin_right = 485.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="Mana" parent="Quat/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
 visible = false
 margin_top = 22.0
 margin_right = 485.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
 
 [node name="Stamina" parent="Quat/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
 visible = false
 margin_top = 22.0
 margin_right = 485.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
