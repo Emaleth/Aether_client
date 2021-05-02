@@ -27,6 +27,9 @@ margin_top = -14.0
 grow_horizontal = 0
 mouse_filter = 1
 size_flags_horizontal = 4
-text = "0"
+text = "<num>"
 align = 2
 valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,12 +1,12 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://src/shaders/CircleCut.tres" type="Material" id=1]
+[ext_resource path="res://shaders/CircleCut.tres" type="Material" id=1]
 [ext_resource path="res://src/gui/w_minimap/MiniMap.gd" type="Script" id=2]
-[ext_resource path="res://assets/texture/W.png" type="Texture" id=3]
-[ext_resource path="res://assets/texture/N.png" type="Texture" id=4]
-[ext_resource path="res://assets/texture/S.png" type="Texture" id=5]
-[ext_resource path="res://assets/texture/E.png" type="Texture" id=6]
-[ext_resource path="res://assets/texture/ui/minimapMap_stoneRing.png" type="Texture" id=7]
+[ext_resource path="res://textures/W.png" type="Texture" id=3]
+[ext_resource path="res://textures/N.png" type="Texture" id=4]
+[ext_resource path="res://textures/S.png" type="Texture" id=5]
+[ext_resource path="res://textures/E.png" type="Texture" id=6]
+[ext_resource path="res://textures/minimapMap_stoneRing.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

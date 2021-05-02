@@ -8,7 +8,7 @@ func _ready() -> void:
 	statistics.level = "5"
 	statistics.title = "virus"
 	
-	model = preload("res://assets/model/actors/ybot.fbx")
+	model = preload("res://models/human.fbx")
 	$Debug.queue_free()
 	conf()
 	load_eq()

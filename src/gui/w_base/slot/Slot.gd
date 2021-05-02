@@ -6,12 +6,14 @@ var quantity : int
 onready var texture = $TextureRect
 onready var q_label = $Label
 
-
+func _ready() -> void:
+	q_label.text = ""
+	
 func conf(item, q = 1):
 	item_uid = item
 	quantity = q
 	if item_uid:
-		texture.texture = preload("res://icon.png")
+		texture.texture = load("res://previews/%s.png" % item)
 		hint_tooltip = "wierd fuckery"
 	
 		if q > 1:

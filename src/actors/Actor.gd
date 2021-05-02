@@ -17,14 +17,14 @@ var statistics : Dictionary = {
 
 
 var animations : Dictionary = {
-	"idle" : preload("res://assets/animations/2h_idle.anim"),
-	"run" : preload("res://assets/animations/2h_run.anim"),
-	"death" : preload("res://assets/animations/2h_death.anim"),
-	"sheath" : preload("res://assets/animations/2h_sheath.anim"),
-	"slash" : preload("res://assets/animations/2h_slash.anim"),
-	"slash2" : preload("res://assets/animations/2h_slash2.anim"),
-	"strafe" : preload("res://assets/animations/2h_strafe.anim"),
-	"jump" : preload("res://assets/animations/2h_jump.anim")
+	"idle" : preload("res://animations/2h_idle.anim"),
+	"run" : preload("res://animations/2h_run.anim"),
+	"death" : preload("res://animations/2h_death.anim"),
+	"sheath" : preload("res://animations/2h_sheath.anim"),
+	"slash" : preload("res://animations/2h_slash.anim"),
+	"slash2" : preload("res://animations/2h_slash2.anim"),
+	"strafe" : preload("res://animations/2h_strafe.anim"),
+	"jump" : preload("res://animations/2h_jump.anim")
 }
 
 var resources : Dictionary = {
@@ -253,7 +253,7 @@ func attack():
 func load_eq():
 	for i in equipment:
 		if equipment.get(i).item:
-			var model_path = "res://assets/model/weapons/%s.fbx" % equipment.get(i).item
+			var model_path = "res://models/%s.fbx" % equipment.get(i).item
 			var item_model = (load(model_path)).instance()
 			equipment.get(i).slot.add_child(item_model)
 			item_model.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE

@@ -11,7 +11,7 @@ func _ready() -> void:
 	statistics.title = "Ancient God"
 	
 #	Input.set_use_accumulated_input(false)
-	model = preload("res://assets/model/actors/ybot.fbx")
+	model = preload("res://models/human.fbx")
 	$Debug.queue_free()
 	conf()
 	$GUI.conf(resources, minimap_camera_remote_transform)

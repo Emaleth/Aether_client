@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/00001.fbx-a17a8d6ae4fc6bcea0f51eff71c95315.scn"
+path="res://.import/00001.fbx-7d195a410550236facba80793e232342.scn"
 
 [deps]
 
-source_file="res://assets/model/weapons/00001.fbx"
-dest_files=[ "res://.import/00001.fbx-a17a8d6ae4fc6bcea0f51eff71c95315.scn" ]
+source_file="res://models/00001.fbx"
+dest_files=[ "res://.import/00001.fbx-7d195a410550236facba80793e232342.scn" ]
 
 [params]
 
@@ -17,9 +17,9 @@ nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
 nodes/use_legacy_names=true
-materials/location=1
-materials/storage=2
-materials/keep_on_reimport=true
+materials/location=0
+materials/storage=0
+materials/keep_on_reimport=false
 meshes/compress=true
 meshes/ensure_tangents=true
 meshes/storage=0
