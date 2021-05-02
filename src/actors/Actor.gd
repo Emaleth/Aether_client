@@ -80,7 +80,7 @@ var equipment : Dictionary = {
 	}
 }
 	
-var inventory : Array = []
+var inventory : Dictionary = {}
 # INTERNAL WORKING STUFF
 var state = null
 var model
@@ -261,4 +261,4 @@ func load_eq():
 			for z in item_model.get_children():
 				if z is MeshInstance:
 					hide_from_minimap_camera(z)
-			print("ID: ",equipment.get(i).item, " >> DATA: ", DataLoader.item_db.get(equipment.get(i).item))
+#			print("ID: ",equipment.get(i).item, " >> DATA: ", DataLoader.item_db.get(equipment.get(i).item))

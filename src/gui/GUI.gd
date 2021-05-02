@@ -46,3 +46,6 @@ func update_targe_info(res):
 	$TargetProgress.health_bar.updt(res.health.current)
 	$TargetProgress.mana_bar.updt(res.mana.current)
 	$TargetProgress.stamina_bar.updt(res.stamina.current)
+
+func configure_inv(inv):
+	$Inventory.conf(inv)

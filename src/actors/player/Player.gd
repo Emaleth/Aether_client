@@ -18,6 +18,7 @@ func _ready() -> void:
 	connect("res_mod", $GUI, "update_gui", [resources])
 	load_eq()
 	connect("target_lost", self, "loose_target_ui")
+	get_test_items()
 	
 func _process(delta: float) -> void:
 	get_input()
@@ -64,3 +65,7 @@ func loose_target_ui():
 		target.show_indicator(false)
 		$GUI.get_target_info(target, false)
 
+func get_test_items():
+	var td = {"quantity" : 7}
+	inventory["00001"] = td
+	$GUI.configure_inv(inventory)
