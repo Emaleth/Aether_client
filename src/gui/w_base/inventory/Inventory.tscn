@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://src/gui/w_base/inventory/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://src/gui/w_base/slot/Slot.tscn" type="PackedScene" id=2]
 
 [node name="Inventory" type="WindowDialog"]
+visible = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 433.0
@@ -22,6 +22,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -3.0
 margin_bottom = -7.0
+mouse_filter = 2
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
 custom_constants/margin_left = 5
@@ -30,141 +31,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="materials" type="GridContainer" parent="MarginContainer"]
+[node name="grid" type="GridContainer" parent="MarginContainer"]
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 331.0
 margin_bottom = 221.0
+mouse_filter = 2
 columns = 5
-
-[node name="Slot" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-
-[node name="Slot2" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_right = 84.0
-
-[node name="Slot3" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_right = 128.0
-
-[node name="Slot4" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_right = 172.0
-
-[node name="Slot5" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_right = 216.0
-
-[node name="Slot6" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_top = 44.0
-margin_bottom = 84.0
-
-[node name="Slot7" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 44.0
-margin_right = 84.0
-margin_bottom = 84.0
-
-[node name="Slot8" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 44.0
-margin_right = 128.0
-margin_bottom = 84.0
-
-[node name="Slot9" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 44.0
-margin_right = 172.0
-margin_bottom = 84.0
-
-[node name="Slot10" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 44.0
-margin_right = 216.0
-margin_bottom = 84.0
-
-[node name="Slot11" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_top = 88.0
-margin_bottom = 128.0
-
-[node name="Slot12" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 88.0
-margin_right = 84.0
-margin_bottom = 128.0
-
-[node name="Slot13" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 88.0
-margin_right = 128.0
-margin_bottom = 128.0
-
-[node name="Slot14" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 88.0
-margin_right = 172.0
-margin_bottom = 128.0
-
-[node name="Slot15" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 88.0
-margin_right = 216.0
-margin_bottom = 128.0
-
-[node name="Slot16" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_top = 132.0
-margin_bottom = 172.0
-
-[node name="Slot17" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 132.0
-margin_right = 84.0
-margin_bottom = 172.0
-
-[node name="Slot18" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 132.0
-margin_right = 128.0
-margin_bottom = 172.0
-
-[node name="Slot19" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 132.0
-margin_right = 172.0
-margin_bottom = 172.0
-
-[node name="Slot20" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 132.0
-margin_right = 216.0
-margin_bottom = 172.0
-
-[node name="Slot21" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_top = 176.0
-margin_bottom = 216.0
-
-[node name="Slot22" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 176.0
-margin_right = 84.0
-margin_bottom = 216.0
-
-[node name="Slot23" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 176.0
-margin_right = 128.0
-margin_bottom = 216.0
-
-[node name="Slot24" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 176.0
-margin_right = 172.0
-margin_bottom = 216.0
-
-[node name="Slot25" parent="MarginContainer/materials" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 176.0
-margin_right = 216.0
-margin_bottom = 216.0
 
 [connection signal="sort_children" from="MarginContainer" to="." method="_on_MarginContainer_sort_children"]

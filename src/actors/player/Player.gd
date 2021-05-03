@@ -1,7 +1,7 @@
 extends "res://src/actors/Actor.gd"
 
 onready var minimap_camera_remote_transform : RemoteTransform = $MiniMapCameraRT
-
+var inv_slot_num = 20
 
 func _ready() -> void:
 	statistics.name = "Emaleth"
@@ -18,7 +18,9 @@ func _ready() -> void:
 	connect("res_mod", $GUI, "update_gui", [resources])
 	load_eq()
 	connect("target_lost", self, "loose_target_ui")
+	make_inv()
 	get_test_items()
+	$GUI.configure_inv(inventory)
 	
 func _process(delta: float) -> void:
 	get_input()
@@ -66,6 +68,18 @@ func loose_target_ui():
 		$GUI.get_target_info(target, false)
 
 func get_test_items():
-	var td = {"quantity" : 7}
-	inventory["00001"] = td
-	$GUI.configure_inv(inventory)
+	inventory[0].item = "00001"
+	inventory[2].item = "00001"
+	inventory[3].item = "00001"
+	inventory[9].item = "00001"
+	inventory[9].quantity = 5
+	
+
+func make_inv():
+	for i in inv_slot_num:
+#		print(i)
+		var slot_construct = {"item" : "",
+							"quantity" : 0,
+							"slot_node" : null}
+		inventory[i] = slot_construct
+							
