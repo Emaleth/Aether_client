@@ -1,4 +1,4 @@
-extends Panel
+extends Button
 
 var item_uid : String
 var quantity : int
@@ -16,9 +16,11 @@ func conf(inv = null, item = "", q = 1):
 	item_uid = item
 	quantity = q
 	if item_uid:
+		disabled = false
 		texture.texture = load("res://previews/%s.png" % item)
 		hint_tooltip = "wierd fuckery"
 	else:
+		disabled = true
 		texture.texture = null
 		hint_tooltip = ""
 	
@@ -40,6 +42,7 @@ func get_drag_data(position: Vector2):
 	inventory.source_slot["slot"] = self
 	inventory.source_slot["item"] = item_uid
 	inventory.source_slot["quantity"] = quantity
+	make_preview()
 	
 	return inventory.source_slot
 
@@ -57,3 +60,14 @@ func swap():
 	inventory.source_slot["slot"].conf(null, inventory.target_slot["item"], inventory.target_slot["quantity"])
 	inventory.target_slot["slot"].conf(null, inventory.source_slot["item"], inventory.source_slot["quantity"])
 
+func make_preview():
+	var pw = TextureRect.new()
+	pw.expand = true
+	pw.texture = texture.texture
+	pw.rect_min_size = Vector2(40, 40)
+	pw.self_modulate = Color.cadetblue
+	set_drag_preview(pw)
+
+
+func _on_Slot_pressed() -> void:
+	pass # Consume
