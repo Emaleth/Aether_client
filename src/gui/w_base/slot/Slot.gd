@@ -66,7 +66,8 @@ func drop_data(position: Vector2, data) -> void:
 func swap():
 	if inventory.target_slot["slot"] != inventory.source_slot["slot"]:
 		if inventory.target_slot["item"] == inventory.source_slot["item"]:
-			if DataLoader.item_db.get(inventory.target_slot["item"]).STACK == "NO": # change to bool
+			if DataLoader.item_db.get(inventory.target_slot["item"]).STACKS == true: # change to bool
+				print(DataLoader.item_db.get(inventory.target_slot["item"]).STACKS)
 				inventory.source_slot["slot"].conf(null, "", 0)
 				inventory.target_slot["slot"].conf(null, inventory.source_slot["item"], (inventory.source_slot["quantity"] + inventory.target_slot["quantity"]))
 			else:

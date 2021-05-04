@@ -27,6 +27,10 @@ func convert_csv_data_to_dictionary(data):
 				var entry = {}
 				for k in keys.size():
 					if k != 0:
+						if data.get(row)[k] == "true":
+							data.get(row)[k] = true
+						elif data.get(row)[k] == "false":
+							data.get(row)[k] = false
 						entry[str(keys[k])] = data.get(row)[k]
 				db_dict[data.get(row)[0]] = entry
 

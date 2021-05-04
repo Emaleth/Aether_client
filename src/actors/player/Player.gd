@@ -69,10 +69,11 @@ func loose_target_ui():
 
 func get_test_items():
 	inventory[0].item = "00001"
-	inventory[2].item = "00001"
+	inventory[2].item = "00002"
+	inventory[2].quantity = 50
 	inventory[3].item = "00001"
-	inventory[9].item = "00001"
-	inventory[9].quantity = 5
+	inventory[9].item = "00002"
+	inventory[9].quantity = 10
 	
 
 func make_inv():
