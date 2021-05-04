@@ -10,6 +10,7 @@ onready var q_label = $Label
 
 func _ready() -> void:
 	q_label.text = ""
+	disabled = true
 	
 func conf(inv = null, item = "", q = 1, pia : int = -1):
 	if pia != -1:
@@ -20,7 +21,10 @@ func conf(inv = null, item = "", q = 1, pia : int = -1):
 	if item && q > 0:
 		quantity = q
 		item_uid = item
-		disabled = false
+		if DataLoader.item_db.get(item).CONSUMABLE == true:
+			disabled = false
+		else:
+			disabled = true
 		texture.texture = load("res://previews/%s.png" % item)
 		hint_tooltip = "wierd fuckery"
 	else:
