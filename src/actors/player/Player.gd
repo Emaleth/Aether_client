@@ -79,7 +79,7 @@ func make_inv():
 	for i in inv_slot_num:
 #		print(i)
 		var slot_construct = {"item" : "",
-							"quantity" : 0,
+							"quantity" : 1,
 							"slot_node" : null}
 		inventory[i] = slot_construct
 							

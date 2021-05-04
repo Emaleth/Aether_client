@@ -3,6 +3,7 @@ extends Button
 var item_uid : String
 var quantity : int
 var inventory = null
+var place_in_actor = null
 
 onready var texture = $TextureRect
 onready var q_label = $Label
@@ -10,7 +11,10 @@ onready var q_label = $Label
 func _ready() -> void:
 	q_label.text = ""
 	
-func conf(inv = null, item = "", q = 1):
+func conf(inv = null, item = "", q = 1, pia : int = -1):
+	if pia != -1:
+#		print(pia)
+		place_in_actor = pia
 	if inv:
 		inventory = inv
 	item_uid = item
@@ -29,7 +33,9 @@ func conf(inv = null, item = "", q = 1):
 	else:
 		q_label.text = ""
 	
-	
+	if pia == -1:
+		update_og_inv()
+		
 func _make_custom_tooltip(for_text):
 	if item_uid:
 		var tooltip = preload("res://src/gui/tooltip/Tooltip.tscn").instance()
@@ -42,6 +48,7 @@ func get_drag_data(position: Vector2):
 	inventory.source_slot["slot"] = self
 	inventory.source_slot["item"] = item_uid
 	inventory.source_slot["quantity"] = quantity
+	
 	make_preview()
 	
 	return inventory.source_slot
@@ -57,8 +64,18 @@ func drop_data(position: Vector2, data) -> void:
 	swap()
 	
 func swap():
-	inventory.source_slot["slot"].conf(null, inventory.target_slot["item"], inventory.target_slot["quantity"])
-	inventory.target_slot["slot"].conf(null, inventory.source_slot["item"], inventory.source_slot["quantity"])
+	if inventory.target_slot["slot"] != inventory.source_slot["slot"]:
+		if inventory.target_slot["item"] == inventory.source_slot["item"]:
+			if DataLoader.item_db.get(inventory.target_slot["item"]).STACK == "NO": # change to bool
+				inventory.source_slot["slot"].conf(null, "", 0)
+				inventory.target_slot["slot"].conf(null, inventory.source_slot["item"], (inventory.source_slot["quantity"] + inventory.target_slot["quantity"]))
+			else:
+				inventory.source_slot["slot"].conf(null, inventory.target_slot["item"], inventory.target_slot["quantity"])
+				inventory.target_slot["slot"].conf(null, inventory.source_slot["item"], inventory.source_slot["quantity"])
+		else:
+			inventory.source_slot["slot"].conf(null, inventory.target_slot["item"], inventory.target_slot["quantity"])
+			inventory.target_slot["slot"].conf(null, inventory.source_slot["item"], inventory.source_slot["quantity"])
+
 
 func make_preview():
 	var pw = TextureRect.new()
@@ -71,3 +88,18 @@ func make_preview():
 
 func _on_Slot_pressed() -> void:
 	pass # Consume
+	
+#func _unhandled_input(event: InputEvent) -> void:
+#	if Input.is_action_just_pressed("jump"):
+#		test()
+#
+#func test():
+#	print(place_in_actor)
+#	print(inventory.actor_inv.get(place_in_actor))
+	
+func update_og_inv():
+	if item_uid != inventory.actor_inv.get(place_in_actor)["item"]:
+		inventory.actor_inv.get(place_in_actor)["item"] = item_uid
+	if quantity != inventory.actor_inv.get(place_in_actor)["quantity"]:
+		inventory.actor_inv.get(place_in_actor)["quantity"] = quantity
+		
