@@ -17,13 +17,15 @@ func conf(inv = null, item = "", q = 1, pia : int = -1):
 		place_in_actor = pia
 	if inv:
 		inventory = inv
-	item_uid = item
-	quantity = q
-	if item_uid:
+	if item && q > 0:
+		quantity = q
+		item_uid = item
 		disabled = false
 		texture.texture = load("res://previews/%s.png" % item)
 		hint_tooltip = "wierd fuckery"
 	else:
+		quantity = 1
+		item_uid = ""
 		disabled = true
 		texture.texture = null
 		hint_tooltip = ""
@@ -87,8 +89,10 @@ func make_preview():
 	set_drag_preview(pw)
 
 
-func _on_Slot_pressed() -> void:
-	pass # Consume
+func _on_Slot_pressed() -> void: 
+	conf(null, item_uid, (quantity - 1))
+	# trigget some function
+	
 	
 #func _unhandled_input(event: InputEvent) -> void:
 #	if Input.is_action_just_pressed("jump"):
