@@ -253,7 +253,7 @@ func attack():
 func load_eq():
 	for i in equipment:
 		if equipment.get(i).item:
-			var model_path = "res://models/%s.fbx" % equipment.get(i).item
+			var model_path = "res://models/%s.glb" % equipment.get(i).item
 			var item_model = (load(model_path)).instance()
 			equipment.get(i).slot.add_child(item_model)
 			item_model.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE

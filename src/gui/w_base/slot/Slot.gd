@@ -94,7 +94,8 @@ func make_preview():
 
 
 func _on_Slot_pressed() -> void: 
-	conf(null, item_uid, (quantity - 1))
+	if DataLoader.item_db.get(item_uid).CONSUMABLE == true:
+		conf(null, item_uid, (quantity - 1))
 	# trigget some function
 	
 	
