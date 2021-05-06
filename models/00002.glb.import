@@ -2,18 +2,18 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/00001.glb-fbe70c28ae32f3e15fe7645ff50fbe3f.scn"
+path="res://.import/00002.glb-765a455e2053d524cd3717c9aefbcf6f.scn"
 
 [deps]
 
-source_file="res://models/00001.glb"
-dest_files=[ "res://.import/00001.glb-fbe70c28ae32f3e15fe7645ff50fbe3f.scn" ]
+source_file="res://models/00002.glb"
+dest_files=[ "res://.import/00002.glb-765a455e2053d524cd3717c9aefbcf6f.scn" ]
 
 [params]
 
 nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
-nodes/root_scale=0.07
+nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
 nodes/use_legacy_names=true
