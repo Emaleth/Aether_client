@@ -11,6 +11,7 @@ background_mode = 1
 
 [node name="00001" parent="." instance=ExtResource( 2 )]
 transform = Transform( 0.0536231, 0.0449951, 0, -0.0449951, 0.0536231, 0, 0, 0, 0.07, 0, 0, 0 )
+visible = false
 
 [node name="00002" parent="." instance=ExtResource( 3 )]
 visible = false

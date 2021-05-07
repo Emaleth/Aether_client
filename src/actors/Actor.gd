@@ -261,11 +261,11 @@ func load_eq():
 			var model_path = "res://models/%s.glb" % equipment.get(i).item
 			var item_model : Spatial = (load(model_path)).instance()
 			equipment.get(i).slot.add_child(item_model)
-			print(equipment.get(i).slot)
-			item_model.scale = item_model.get_parent_spatial().scale
+#			print(equipment.get(i).slot)
+			item_model.scale = item_model.get_parent_spatial().scale # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
 			item_model.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
 			item_model.rotate_y(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-			item_model.transform.origin = Vector3(10, 0, 0)
+			item_model.transform.origin = Vector3(10, 0, 0) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
 			for z in item_model.get_children():
 				if z is MeshInstance:
 					hide_from_minimap_camera(z)
