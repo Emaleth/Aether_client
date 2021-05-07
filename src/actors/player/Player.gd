@@ -11,8 +11,8 @@ func _ready() -> void:
 	statistics.title = "Ancient God"
 	
 #	Input.set_use_accumulated_input(false)
-	model = preload("res://models/human.fbx")
-	$Debug.queue_free()
+	model = preload("res://models/human_female.fbx")
+#	$Debug.queue_free()
 	conf()
 	$GUI.conf(resources, minimap_camera_remote_transform)
 	connect("res_mod", $GUI, "update_gui", [resources])

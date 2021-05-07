@@ -8,8 +8,8 @@ func _ready() -> void:
 	statistics.level = "5"
 	statistics.title = "virus"
 	
-	model = preload("res://models/human.fbx")
-	$Debug.queue_free()
+	model = preload("res://models/human_male.fbx")
+#	$Debug.queue_free()
 	conf()
 	load_eq()
 	for i in model.get_children():

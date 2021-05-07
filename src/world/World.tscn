@@ -21,34 +21,34 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.76634 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.56263, 0, -5.91768 )
 
 [node name="Crate" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1.04447, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 0 )
 
 [node name="Crate6" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 3.04447, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.3008, 1, 0 )
 
 [node name="Crate7" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 3.04447, 2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3008, 1, 2 )
 
 [node name="Crate8" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1.04447, 2 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 2 )
 
 [node name="Crate9" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1.04447, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 4 )
 
 [node name="Crate10" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3008, 1.04447, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3008, 1, 4 )
 
 [node name="Crate2" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1.04447, -7.71904 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, -5.71904 )
 
 [node name="Crate3" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8457, 1.04447, -7.71904 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8457, 1, -7.71904 )
 
 [node name="Crate4" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8457, 1.04447, 2.498 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8457, 1, 2.498 )
 
 [node name="Crate5" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36626, 1.04447, -11.2284 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36626, 1, -11.2284 )
 
 [node name="Ground" parent="." instance=ExtResource( 2 )]
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0 )

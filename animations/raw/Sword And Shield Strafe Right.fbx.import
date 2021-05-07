@@ -2,18 +2,18 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/00001.glb-fbe70c28ae32f3e15fe7645ff50fbe3f.scn"
+path="res://.import/Sword And Shield Strafe Right.fbx-a6703193c57e32e0fb89b1a1e0c47565.scn"
 
 [deps]
 
-source_file="res://models/00001.glb"
-dest_files=[ "res://.import/00001.glb-fbe70c28ae32f3e15fe7645ff50fbe3f.scn" ]
+source_file="res://animations/raw/Sword And Shield Strafe Right.fbx"
+dest_files=[ "res://.import/Sword And Shield Strafe Right.fbx-a6703193c57e32e0fb89b1a1e0c47565.scn" ]
 
 [params]
 
 nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
-nodes/root_scale=0.05
+nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
 nodes/use_legacy_names=true
@@ -30,8 +30,8 @@ external_files/store_in_subdir=false
 animation/import=true
 animation/fps=15
 animation/filter_script=""
-animation/storage=false
-animation/keep_custom_tracks=false
+animation/storage=true
+animation/keep_custom_tracks=true
 animation/optimizer/enabled=true
 animation/optimizer/max_linear_error=0.05
 animation/optimizer/max_angular_error=0.01

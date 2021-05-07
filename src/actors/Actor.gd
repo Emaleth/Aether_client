@@ -17,14 +17,18 @@ var statistics : Dictionary = {
 
 
 var animations : Dictionary = {
-	"idle" : preload("res://animations/2h_idle.anim"),
-	"run" : preload("res://animations/sword&shield_run.anim"),
-	"death" : preload("res://animations/2h_death.anim"),
-	"sheath" : preload("res://animations/2h_sheath.anim"),
-	"slash" : preload("res://animations/2h_slash.anim"),
-	"slash2" : preload("res://animations/2h_slash2.anim"),
-	"strafe" : preload("res://animations/2h_strafe.anim"),
-	"jump" : preload("res://animations/2h_jump.anim")
+	"idle" : preload("res://animations/Sword_And_Shield_Idle.anim"),
+	"run_forward" : preload("res://animations/Sword_And_Shield_Run.anim"),
+	"walk_backwards" : preload("res://animations/Sword_And_Shield_Walk_Backwards.anim"),
+	"walk_forward" : preload("res://animations/Sword_And_Shield_Walk_Forward.anim"),
+	"strafe_left" : preload("res://animations/Sword_And_Shield_Strafe_Left.anim"),
+	"strafe_right" : preload("res://animations/Sword_And_Shield_Strafe_Right.anim"),
+	"death" : preload("res://animations/Sword_And_Shield_Death.anim"),
+	"cast" : preload("res://animations/Sword_And_Shield_Casting.anim"),
+	"attack" : preload("res://animations/Sword_And_Shield_Slash.anim"),
+	"jump" : preload("res://animations/Sword_And_Shield_Jump.anim")
+#	"fall" : preload("res://animations/Sword_And_Shield_Fall.anim")
+	
 }
 
 var resources : Dictionary = {
@@ -134,7 +138,7 @@ func finite_state_machine(delta: float) -> void:
 				state = STATE.DIE
 					
 		STATE.RUN:
-			anim_player.play("run")
+			anim_player.play("run_forward")
 			gravity_vec = (get_floor_normal() * -1) * gravity
 			velocity = velocity.linear_interpolate(direction * statistics.speed, statistics.acceleration * delta)
 			
@@ -167,10 +171,13 @@ func finite_state_machine(delta: float) -> void:
 				state = STATE.IDLE
 			
 		STATE.DIE:
-#			anim_player.play("die")
-			queue_free()
 			gravity_vec = Vector3.DOWN * gravity
-			velocity = velocity.linear_interpolate(Vector3.ZERO, statistics.deceleration * delta)
+			if velocity != Vector3.ZERO:
+				velocity = velocity.linear_interpolate(Vector3.ZERO, statistics.deceleration * delta)
+			else:
+				anim_player.play("death")
+				yield(anim_player,"animation_finished")
+				queue_free()
 			
 			
 	rotate_y(delta * sign(rot_direction) * turn_speed)
@@ -184,11 +191,13 @@ func conf():
 	for i in model.get_children():
 		if i is MeshInstance:
 			hide_from_minimap_camera(i)
+			i.set_layer_mask_bit(2, false)
 		else:
 			if i.get_child_count() > 0:
 				for l in i.get_children():
 					if l is MeshInstance:
 						hide_from_minimap_camera(l)
+						l.set_layer_mask_bit(2, false)
 	# CREATE BONE ATTACHMENT NODES
 	for i in equipment:
 		for s in equipment.get(i).bone: 
@@ -228,7 +237,7 @@ func equip_item(item) -> void:
 	
 func hide_from_minimap_camera(mesh):
 	mesh.set_layer_mask_bit(0, false)
-	mesh.set_layer_mask_bit(2, true)
+	mesh.set_layer_mask_bit(2, true) 
 	
 func show_indicator(yay_or_nay : bool):
 	if yay_or_nay:
@@ -262,10 +271,10 @@ func load_eq():
 			var item_model : Spatial = (load(model_path)).instance()
 			equipment.get(i).slot.add_child(item_model)
 #			print(equipment.get(i).slot)
-			item_model.scale = item_model.get_parent_spatial().scale # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-			item_model.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-			item_model.rotate_y(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-			item_model.transform.origin = Vector3(10, 0, 0) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+#			item_model.get_child(0).transform.origin = Vector3(5, 0, 0) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+#			item_model.scale = Vector3(0.1, 0.1, 0.1) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+#			item_model.rotate_x(deg2rad(-45)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+#			item_model.rotate_y(deg2rad(90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
 			for z in item_model.get_children():
 				if z is MeshInstance:
 					hide_from_minimap_camera(z)

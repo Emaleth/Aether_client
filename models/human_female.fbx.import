@@ -2,18 +2,18 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/00001.glb-fbe70c28ae32f3e15fe7645ff50fbe3f.scn"
+path="res://.import/human_female.fbx-a9b287120756054a8d5d7e696a727bb1.scn"
 
 [deps]
 
-source_file="res://models/00001.glb"
-dest_files=[ "res://.import/00001.glb-fbe70c28ae32f3e15fe7645ff50fbe3f.scn" ]
+source_file="res://models/human_female.fbx"
+dest_files=[ "res://.import/human_female.fbx-a9b287120756054a8d5d7e696a727bb1.scn" ]
 
 [params]
 
 nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
-nodes/root_scale=0.05
+nodes/root_scale=1.0
 nodes/custom_script=""
 nodes/storage=0
 nodes/use_legacy_names=true

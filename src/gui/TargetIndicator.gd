@@ -3,17 +3,17 @@ extends Spatial
 var types  = {
 	"friendly" : Color.green,
 	"enemy" : Color.red,
-	"npc" : Color.blue,
-	"neutral" : Color.whitesmoke,
+	"npc" : Color.blue
 }
 
 onready var tween : Tween = $Tween
 onready var target_indicator : Spatial = $TargetIndicator
-onready var minimap_indicator : MeshInstance = $MinimapIndicator
-var type
+onready var minimap_indicator : Spatial = $minimap_indicator
+var type = "enemy"
 
 func _ready() -> void:
-	type = "enemy"
+	target_indicator.get_node("Icosphere").get("material/0").set_albedo(types.get(type))
+	minimap_indicator.get_node("Plane").get("material/0").set_albedo(types.get(type))
 	target_indicator.transform.origin.y = 3.3
 	
 func bounce():

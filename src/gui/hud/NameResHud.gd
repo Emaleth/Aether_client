@@ -1,17 +1,18 @@
 extends Spatial
 
-onready var name_label = $Quat/Viewport/vbox/HBoxContainer/Name
-onready var level_label = $Quat/Viewport/vbox/HBoxContainer/Lvl
-onready var guild_label = $Quat/Viewport/vbox/Guild
-onready var title_lable = $Quat/Viewport/vbox/Title
-onready var class_label = $Quat/Viewport/vbox/HBoxContainer/Class
-onready var health_bar = $Quat/Viewport/vbox/MarginContainer/VBoxContainer/Heatlh
-onready var mana_bar = $Quat/Viewport/vbox/MarginContainer/VBoxContainer/Mana
-onready var stamina_bar = $Quat/Viewport/vbox/MarginContainer/VBoxContainer/Stamina
+onready var name_label = $name_plate/Plane/Viewport/vbox/HBoxContainer/Name
+onready var level_label = $name_plate/Plane/Viewport/vbox/HBoxContainer/Lvl
+onready var guild_label = $name_plate/Plane/Viewport/vbox/Guild
+onready var title_lable = $name_plate/Plane/Viewport/vbox/Title
+onready var class_label = $name_plate/Plane/Viewport/vbox/HBoxContainer/Class
+onready var health_bar = $name_plate/Plane/Viewport/vbox/MarginContainer/VBoxContainer/Heatlh
+onready var mana_bar = $name_plate/Plane/Viewport/vbox/MarginContainer/VBoxContainer/Mana
+onready var stamina_bar = $name_plate/Plane/Viewport/vbox/MarginContainer/VBoxContainer/Stamina
 
 
 func _ready() -> void:
-	$Quat.get("material/0").albedo_texture = $Quat/Viewport.get_texture()
+	$name_plate/Plane.get("material/0").albedo_texture = $name_plate/Plane/Viewport.get_texture()
+#	$Quat.get("material/0").albedo_texture = $Quat/Viewport.get_texture()
 
 func conf(stats = {}, res = {}) -> void:
 	if stats.name != "":
