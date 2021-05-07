@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://models/00003.glb" type="PackedScene" id=1]
+[ext_resource path="res://models/00001.glb" type="PackedScene" id=2]
+[ext_resource path="res://models/00002.glb" type="PackedScene" id=3]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+
+[node name="PrewievCreator" type="Spatial"]
+
+[node name="00001" parent="." instance=ExtResource( 2 )]
+transform = Transform( 0.0536231, 0.0449951, 0, -0.0449951, 0.0536231, 0, 0, 0, 0.07, 0, 0, 0 )
+
+[node name="00002" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="00003" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.31642 )
+environment = SubResource( 1 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="Camera"]
+transform = Transform( 0.914868, 0.26563, 0.304068, -0.403753, 0.601893, 0.688991, 0, -0.753104, 0.657901, 0, 0, 0 )

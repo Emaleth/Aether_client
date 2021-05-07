@@ -18,7 +18,7 @@ var statistics : Dictionary = {
 
 var animations : Dictionary = {
 	"idle" : preload("res://animations/2h_idle.anim"),
-	"run" : preload("res://animations/2h_run.anim"),
+	"run" : preload("res://animations/sword&shield_run.anim"),
 	"death" : preload("res://animations/2h_death.anim"),
 	"sheath" : preload("res://animations/2h_sheath.anim"),
 	"slash" : preload("res://animations/2h_slash.anim"),
@@ -44,7 +44,7 @@ var resources : Dictionary = {
 
 var equipment : Dictionary = {
 	"mainhand" : {
-		"bone" : ["RightHand"],
+		"bone" : ["mixamorigRightHand"],
 		"slot" : null,
 		"item" : "00001"
 	},
@@ -184,11 +184,16 @@ func conf():
 	for i in model.get_children():
 		if i is MeshInstance:
 			hide_from_minimap_camera(i)
+		else:
+			if i.get_child_count() > 0:
+				for l in i.get_children():
+					if l is MeshInstance:
+						hide_from_minimap_camera(l)
 	# CREATE BONE ATTACHMENT NODES
 	for i in equipment:
 		for s in equipment.get(i).bone: 
 			equipment.get(i).slot = BoneAttachment.new()
-			model.add_child(equipment.get(i).slot)
+			model.get_node("RootNode/Skeleton").add_child(equipment.get(i).slot)
 			equipment.get(i).slot.bone_name = s
 	# GET ANIMATION PLAYER
 	anim_player = model.find_node("AnimationPlayer")
@@ -254,10 +259,13 @@ func load_eq():
 	for i in equipment:
 		if equipment.get(i).item:
 			var model_path = "res://models/%s.glb" % equipment.get(i).item
-			var item_model = (load(model_path)).instance()
+			var item_model : Spatial = (load(model_path)).instance()
 			equipment.get(i).slot.add_child(item_model)
+			print(equipment.get(i).slot)
+			item_model.scale = item_model.get_parent_spatial().scale
 			item_model.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-			item_model.rotate_y(deg2rad(180)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+			item_model.rotate_y(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+			item_model.transform.origin = Vector3(10, 0, 0)
 			for z in item_model.get_children():
 				if z is MeshInstance:
 					hide_from_minimap_camera(z)

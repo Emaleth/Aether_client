@@ -8,7 +8,7 @@ var types  = {
 }
 
 onready var tween : Tween = $Tween
-onready var target_indicator : MeshInstance = $TargetIndicator
+onready var target_indicator : Spatial = $TargetIndicator
 onready var minimap_indicator : MeshInstance = $MinimapIndicator
 var type
 

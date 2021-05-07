@@ -2,18 +2,18 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/human.fbx-19bbd1020345c41fdb0352a1bd46a9f2.scn"
+path="res://.import/target_indicator.glb-3c11749e216630e993f0e96921184789.scn"
 
 [deps]
 
-source_file="res://models/human.fbx"
-dest_files=[ "res://.import/human.fbx-19bbd1020345c41fdb0352a1bd46a9f2.scn" ]
+source_file="res://models/target_indicator.glb"
+dest_files=[ "res://.import/target_indicator.glb-3c11749e216630e993f0e96921184789.scn" ]
 
 [params]
 
 nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
-nodes/root_scale=0.08
+nodes/root_scale=0.1
 nodes/custom_script=""
 nodes/storage=0
 nodes/use_legacy_names=true
