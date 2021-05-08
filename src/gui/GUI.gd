@@ -16,6 +16,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			$Inventory.show()
 		else:
 			$Inventory.hide()
+	if Input.is_action_just_pressed("character"):
+		if $Equipment.visible == false:
+			$Equipment.show()
+		else:
+			$Equipment.hide()
 
 func conf(resources, minimap_camera_remote_transform):
 	$Progress.health_bar.conf(tr("00006"), resources.health.maximum, resources.health.current, Color(1, 0, 0, 1))
@@ -49,3 +54,6 @@ func update_targe_info(res):
 
 func configure_inv(inv):
 	$Inventory.conf(inv)
+	
+func configure_eq(eq):
+	$Equipment.conf(eq)

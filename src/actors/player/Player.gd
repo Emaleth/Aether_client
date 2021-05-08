@@ -21,6 +21,7 @@ func _ready() -> void:
 	make_inv()
 	get_test_items()
 	$GUI.configure_inv(inventory)
+	$GUI.configure_eq(equipment)
 	
 func _process(delta: float) -> void:
 	get_input()
