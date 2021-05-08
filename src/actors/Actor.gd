@@ -53,9 +53,9 @@ var equipment : Dictionary = {
 		"item" : "00001"
 	},
 	"offhand" : {
-		"bone" : ["LeftHand"],
+		"bone" : ["mixamorigLeftHand"],
 		"slot" : null,
-		"item" : null
+		"item" : "00001"
 	},
 	"boots" : {
 		"bone" : ["LeftFoot", "RightFoot"],
@@ -191,13 +191,13 @@ func conf():
 	for i in model.get_children():
 		if i is MeshInstance:
 			hide_from_minimap_camera(i)
-			i.set_layer_mask_bit(2, false)
+			i.set_layer_mask_bit(0, false)
 		else:
 			if i.get_child_count() > 0:
 				for l in i.get_children():
 					if l is MeshInstance:
 						hide_from_minimap_camera(l)
-						l.set_layer_mask_bit(2, false)
+						l.set_layer_mask_bit(0, false)
 	# CREATE BONE ATTACHMENT NODES
 	for i in equipment:
 		for s in equipment.get(i).bone: 
@@ -236,8 +236,8 @@ func equip_item(item) -> void:
 			hide_from_minimap_camera(i)
 	
 func hide_from_minimap_camera(mesh):
-	mesh.set_layer_mask_bit(0, false)
-	mesh.set_layer_mask_bit(2, true) 
+	mesh.set_layer_mask_bit(1, false)
+	mesh.set_layer_mask_bit(2, false) 
 	
 func show_indicator(yay_or_nay : bool):
 	if yay_or_nay:

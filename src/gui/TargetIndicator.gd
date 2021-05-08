@@ -9,11 +9,14 @@ var types  = {
 onready var tween : Tween = $Tween
 onready var target_indicator : Spatial = $TargetIndicator
 onready var minimap_indicator : Spatial = $minimap_indicator
+onready var map_indicator : Spatial = $map_indicator
+
 var type = "enemy"
 
 func _ready() -> void:
 	target_indicator.get_node("Icosphere").get("material/0").set_albedo(types.get(type))
 	minimap_indicator.get_node("Plane").get("material/0").set_albedo(types.get(type))
+	map_indicator.get_node("Plane").get("material/0").set_albedo(types.get(type))
 	target_indicator.transform.origin.y = 3.3
 	
 func bounce():

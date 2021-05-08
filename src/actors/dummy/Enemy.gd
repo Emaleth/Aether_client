@@ -9,7 +9,7 @@ func _ready() -> void:
 	statistics.title = "virus"
 	
 	model = preload("res://models/human_male.fbx")
-	$Debug.queue_free()
+#	$Debug.queue_free()
 	conf()
 	load_eq()
 	for i in model.get_children():

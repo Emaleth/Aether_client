@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/gui/TargetIndicator.gd" type="Script" id=1]
 [ext_resource path="res://models/target_indicator.glb" type="PackedScene" id=2]
-[ext_resource path="res://textures/circle_05.png" type="Texture" id=3]
+[ext_resource path="res://textures/crosshair022.png" type="Texture" id=3]
 [ext_resource path="res://models/minimap_indicator.glb" type="PackedScene" id=4]
+[ext_resource path="res://textures/crosshair001.png" type="Texture" id=5]
+[ext_resource path="res://models/map_indicator.glb" type="PackedScene" id=6]
 
 [sub_resource type="SpatialMaterial" id=1]
 resource_local_to_scene = true
@@ -20,6 +22,14 @@ flags_do_not_receive_shadows = true
 flags_disable_ambient_light = true
 albedo_texture = ExtResource( 3 )
 
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+flags_unshaded = true
+flags_fixed_size = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+albedo_texture = ExtResource( 5 )
+
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
 
@@ -32,16 +42,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 visible = false
 
 [node name="Icosphere" parent="TargetIndicator" index="0"]
-layers = 4
 material/0 = SubResource( 1 )
 
 [node name="minimap_indicator" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+transform = Transform( 3, 0, 0, 0, 1, 0, 0, 0, 3, 0, 3, 0 )
 
 [node name="Plane" parent="minimap_indicator" index="0"]
 layers = 2
 cast_shadow = 0
 material/0 = SubResource( 2 )
 
+[node name="map_indicator" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
+
+[node name="Plane" parent="map_indicator" index="0"]
+transform = Transform( 1.5, 0, 0, 0, 1, 0, 0, 0, 1.5, 0, 0, 0 )
+layers = 4
+material/0 = SubResource( 3 )
+
 [editable path="TargetIndicator"]
 [editable path="minimap_indicator"]
+[editable path="map_indicator"]

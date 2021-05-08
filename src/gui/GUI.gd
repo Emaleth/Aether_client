@@ -1,5 +1,16 @@
 extends CanvasLayer
 
+var source_slot = {
+	"slot" : null,
+	"item" : "",
+	"quantity" : 0,
+}
+var target_slot = {
+	"slot" : null,
+	"item" : "",
+	"quantity" : 0,
+}
+
 onready var nesw : Control = $MiniMap/Compass
 
 
@@ -23,9 +34,9 @@ func _unhandled_input(event: InputEvent) -> void:
 			$Equipment.hide()
 
 func conf(resources, minimap_camera_remote_transform):
-	$Progress.health_bar.conf(tr("00006"), resources.health.maximum, resources.health.current, Color(1, 0, 0, 1))
-	$Progress.mana_bar.conf(tr("00008"), resources.mana.maximum, resources.mana.current, Color(0, 0, 1, 1))
-	$Progress.stamina_bar.conf(tr("00010"), resources.stamina.maximum, resources.stamina.current, Color(1, 1, 0, 1))
+	$Progress.health_bar.conf(tr("00006"), resources.health.maximum, resources.health.current, Color.red)
+	$Progress.mana_bar.conf(tr("00008"), resources.mana.maximum, resources.mana.current, Color.blue)
+	$Progress.stamina_bar.conf(tr("00010"), resources.stamina.maximum, resources.stamina.current, Color.orange)
 			
 	minimap_camera_remote_transform.remote_path = $MiniMap/MarginContainer/ViewportContainer/Viewport/MiniMapCamera.get_path()
 
@@ -42,9 +53,9 @@ func get_target_info(target, yay_or_nay):
 		$TargetProgress.lvl_label.text = target.statistics.level
 #		$TargetProgress.class_texture.texture = load("res://icon.png")
 		$TargetProgress.target_stuff.show()
-		$TargetProgress.health_bar.conf(tr("00006"), target.resources.health.maximum, target.resources.health.current, Color(1, 0, 0, 1))
-		$TargetProgress.mana_bar.conf(tr("00008"), target.resources.mana.maximum, target.resources.mana.current, Color(0, 0, 1, 1))
-		$TargetProgress.stamina_bar.conf(tr("00010"), target.resources.stamina.maximum, target.resources.stamina.current, Color(1, 1, 0, 1))
+		$TargetProgress.health_bar.conf(tr("00006"), target.resources.health.maximum, target.resources.health.current, Color.red)
+		$TargetProgress.mana_bar.conf(tr("00008"), target.resources.mana.maximum, target.resources.mana.current, Color.blue)
+		$TargetProgress.stamina_bar.conf(tr("00010"), target.resources.stamina.maximum, target.resources.stamina.current, Color.orange)
 		$TargetProgress.show()
 	
 func update_targe_info(res):

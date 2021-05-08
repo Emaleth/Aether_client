@@ -23,7 +23,6 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 
 [node name="Plane" parent="name_plate" index="0"]
-layers = 4
 material/0 = SubResource( 1 )
 
 [node name="Viewport" type="Viewport" parent="name_plate/Plane" index="0"]

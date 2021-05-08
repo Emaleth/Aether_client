@@ -25,8 +25,8 @@ __meta__ = {
 }
 
 [node name="Progress" type="PanelContainer" parent="VSplitContainer"]
-margin_right = 292.0
-margin_bottom = 88.0
+margin_right = 296.0
+margin_bottom = 92.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = SubResource( 1 )
@@ -35,8 +35,8 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="VSplitContainer/Progress"]
-margin_right = 292.0
-margin_bottom = 88.0
+margin_right = 296.0
+margin_bottom = 92.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_constants/margin_right = 5
@@ -50,8 +50,8 @@ __meta__ = {
 [node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Progress/MarginContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 287.0
-margin_bottom = 83.0
+margin_right = 291.0
+margin_bottom = 87.0
 size_flags_vertical = 4
 alignment = 1
 __meta__ = {
@@ -59,11 +59,13 @@ __meta__ = {
 }
 
 [node name="Portrait" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer" instance=ExtResource( 1 )]
+margin_right = 82.0
+margin_bottom = 82.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer"]
-margin_left = 82.0
-margin_right = 282.0
-margin_bottom = 78.0
+margin_left = 86.0
+margin_right = 286.0
+margin_bottom = 82.0
 rect_min_size = Vector2( 200, 50 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -119,24 +121,24 @@ valign = 1
 
 [node name="Health" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
 margin_right = 200.0
-margin_bottom = 34.0
+margin_bottom = 38.0
 size_flags_stretch_ratio = 4.0
 
 [node name="Mana" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 38.0
+margin_top = 42.0
 margin_right = 200.0
-margin_bottom = 56.0
+margin_bottom = 60.0
 size_flags_stretch_ratio = 0.5
 
 [node name="Stamina" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 60.0
+margin_top = 64.0
 margin_right = 200.0
-margin_bottom = 78.0
+margin_bottom = 82.0
 size_flags_stretch_ratio = 0.5
 
 [node name="MarginContainer" type="MarginContainer" parent="VSplitContainer"]
-margin_top = 88.0
-margin_right = 292.0
+margin_top = 92.0
+margin_right = 296.0
 margin_bottom = 149.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
@@ -144,10 +146,10 @@ custom_constants/margin_left = 5
 custom_constants/margin_bottom = 5
 
 [node name="StatusGrid" type="GridContainer" parent="VSplitContainer/MarginContainer"]
-margin_left = 28.0
+margin_left = 30.0
 margin_top = 5.0
-margin_right = 264.0
-margin_bottom = 56.0
+margin_right = 266.0
+margin_bottom = 52.0
 size_flags_horizontal = 4
 columns = 10
 

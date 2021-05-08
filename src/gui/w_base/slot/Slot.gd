@@ -4,6 +4,7 @@ var item_uid : String
 var quantity : int
 var inventory = null
 var place_in_actor = null
+var eq_slot = false
 
 onready var texture = $TextureRect
 onready var q_label = $Label
@@ -12,7 +13,9 @@ func _ready() -> void:
 	q_label.text = ""
 	disabled = true
 	
-func conf(inv = null, item = "", q = 1, pia : int = -1):
+func conf(inv = null, item = "", q = 1, pia : int = -1, eq : bool = false):
+	if eq:
+		eq_slot = true
 	if pia != -1:
 #		print(pia)
 		place_in_actor = pia
@@ -66,9 +69,11 @@ func drop_data(position: Vector2, data) -> void:
 	inventory.target_slot["slot"] = self
 	inventory.target_slot["item"] = item_uid
 	inventory.target_slot["quantity"] = quantity
-
-	swap()
-	
+	if not eq_slot:
+		swap()
+	elif eq_slot:
+		pass
+		
 func swap():
 	if inventory.target_slot["slot"] != inventory.source_slot["slot"]:
 		if inventory.target_slot["item"] == inventory.source_slot["item"]:
