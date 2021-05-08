@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/gui/TargetIndicator.gd" type="Script" id=1]
 [ext_resource path="res://models/target_indicator.glb" type="PackedScene" id=2]
-[ext_resource path="res://textures/E.png" type="Texture" id=3]
+[ext_resource path="res://textures/circle_05.png" type="Texture" id=3]
 [ext_resource path="res://models/minimap_indicator.glb" type="PackedScene" id=4]
 
 [sub_resource type="SpatialMaterial" id=1]
@@ -10,7 +10,6 @@ resource_local_to_scene = true
 flags_unshaded = true
 flags_do_not_receive_shadows = true
 flags_disable_ambient_light = true
-params_blend_mode = 1
 
 [sub_resource type="SpatialMaterial" id=2]
 resource_local_to_scene = true
@@ -41,6 +40,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 
 [node name="Plane" parent="minimap_indicator" index="0"]
 layers = 2
+cast_shadow = 0
 material/0 = SubResource( 2 )
 
 [editable path="TargetIndicator"]

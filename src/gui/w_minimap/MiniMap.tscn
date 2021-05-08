@@ -2,11 +2,11 @@
 
 [ext_resource path="res://shaders/circle_cut.shader" type="Shader" id=1]
 [ext_resource path="res://src/gui/w_minimap/MiniMap.gd" type="Script" id=2]
-[ext_resource path="res://textures/W.png" type="Texture" id=3]
-[ext_resource path="res://textures/N.png" type="Texture" id=4]
-[ext_resource path="res://textures/S.png" type="Texture" id=5]
-[ext_resource path="res://textures/E.png" type="Texture" id=6]
-[ext_resource path="res://textures/minimapMap_stoneRing.png" type="Texture" id=7]
+[ext_resource path="res://textures/tileW.png" type="Texture" id=3]
+[ext_resource path="res://textures/tileS.png" type="Texture" id=4]
+[ext_resource path="res://textures/tileN.png" type="Texture" id=5]
+[ext_resource path="res://textures/tileE.png" type="Texture" id=6]
+[ext_resource path="res://textures/circle_03.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -31,21 +31,21 @@ __meta__ = {
 margin_right = 200.0
 margin_bottom = 200.0
 mouse_filter = 2
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
+custom_constants/margin_right = 25
+custom_constants/margin_top = 25
+custom_constants/margin_left = 25
+custom_constants/margin_bottom = 25
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MarginContainer"]
 material = SubResource( 2 )
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 190.0
-margin_bottom = 190.0
+margin_left = 25.0
+margin_top = 25.0
+margin_right = 175.0
+margin_bottom = 175.0
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="MarginContainer/ViewportContainer"]
-size = Vector2( 180, 180 )
+size = Vector2( 150, 150 )
 handle_input_locally = false
 usage = 3
 render_target_update_mode = 3
@@ -55,8 +55,11 @@ cull_mask = 1048571
 projection = 1
 size = 20.0
 
-[node name="Border" type="TextureRect" parent="."]
-self_modulate = Color( 1, 0.419608, 0, 1 )
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+margin_right = 200.0
+margin_bottom = 200.0
+
+[node name="Border" type="TextureRect" parent="MarginContainer2"]
 margin_right = 200.0
 margin_bottom = 200.0
 mouse_filter = 2
@@ -76,16 +79,16 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="N" type="TextureRect" parent="Compass"]
-self_modulate = Color( 0.615686, 0.568627, 0.0392157, 1 )
 margin_left = 90.0
 margin_top = 90.0
 margin_right = 110.0
 margin_bottom = 110.0
-rect_min_size = Vector2( 20, 20 )
+rect_min_size = Vector2( 40, 40 )
+rect_pivot_offset = Vector2( 20, 20 )
 mouse_filter = 2
 size_flags_horizontal = 12
 size_flags_vertical = 12
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 expand = true
 stretch_mode = 1
 __meta__ = {
@@ -93,13 +96,12 @@ __meta__ = {
 }
 
 [node name="E" type="TextureRect" parent="Compass"]
-self_modulate = Color( 0.615686, 0.568627, 0.0392157, 1 )
 margin_left = 90.0
 margin_top = 90.0
 margin_right = 110.0
 margin_bottom = 110.0
-rect_min_size = Vector2( 20, 20 )
-rect_pivot_offset = Vector2( 10, 10 )
+rect_min_size = Vector2( 40, 40 )
+rect_pivot_offset = Vector2( 20, 20 )
 mouse_filter = 2
 size_flags_horizontal = 12
 size_flags_vertical = 12
@@ -108,28 +110,26 @@ expand = true
 stretch_mode = 1
 
 [node name="S" type="TextureRect" parent="Compass"]
-self_modulate = Color( 0.615686, 0.568627, 0.0392157, 1 )
 margin_left = 90.0
 margin_top = 90.0
 margin_right = 110.0
 margin_bottom = 110.0
-rect_min_size = Vector2( 20, 20 )
-rect_pivot_offset = Vector2( 10, 10 )
+rect_min_size = Vector2( 40, 40 )
+rect_pivot_offset = Vector2( 20, 20 )
 mouse_filter = 2
 size_flags_horizontal = 12
 size_flags_vertical = 12
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 expand = true
 stretch_mode = 1
 
 [node name="W" type="TextureRect" parent="Compass"]
-self_modulate = Color( 0.615686, 0.568627, 0.0392157, 1 )
 margin_left = 90.0
 margin_top = 90.0
 margin_right = 110.0
 margin_bottom = 110.0
-rect_min_size = Vector2( 20, 20 )
-rect_pivot_offset = Vector2( 10, 10 )
+rect_min_size = Vector2( 40, 40 )
+rect_pivot_offset = Vector2( 20, 20 )
 mouse_filter = 2
 size_flags_horizontal = 12
 size_flags_vertical = 12
