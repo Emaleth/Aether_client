@@ -2,6 +2,7 @@ extends "res://src/actors/Actor.gd"
 
 onready var minimap_camera_remote_transform : RemoteTransform = $MiniMapCameraRT
 var inv_slot_num = 20
+var skill_bar_slot_num = 10
 
 func _ready() -> void:
 	statistics.name = "Emaleth"
@@ -19,9 +20,14 @@ func _ready() -> void:
 	load_eq()
 	connect("target_lost", self, "loose_target_ui")
 	make_inv()
+	make_skillbar()
 	get_test_items()
-	$GUI.configure_inv(inventory)
-	$GUI.configure_eq(equipment)
+	$GUI.configure_inv(self)
+	connect("update_inventory", $GUI, "configure_inv", [self])
+	$GUI.configure_eq(self)
+	connect("update_equipment", $GUI, "configure_eq", [self])
+	$GUI.configure_skillbar(self)
+	connect("update_skillbar", $GUI, "configure_skillbar", [self])
 	
 func _process(delta: float) -> void:
 	get_input()
@@ -70,18 +76,27 @@ func loose_target_ui():
 
 func get_test_items():
 	inventory[0].item = "00001"
+	inventory[0].quantity = 1
 	inventory[2].item = "00002"
 	inventory[2].quantity = 50
 	inventory[3].item = "00001"
+	inventory[3].quantity = 1
 	inventory[9].item = "00003"
 	inventory[9].quantity = 10
+	inventory[10].item = "00003"
+	inventory[10].quantity = 5
 	
 
 func make_inv():
 	for i in inv_slot_num:
 #		print(i)
 		var slot_construct = {"item" : "",
-							"quantity" : 1,
-							"slot_node" : null}
+							"quantity" : 0}
 		inventory[i] = slot_construct
 							
+func make_skillbar():
+	for i in skill_bar_slot_num:
+#		print(i)
+		var slot_construct = {"item" : "",
+							"quantity" : 0}
+		skillbar[i] = slot_construct

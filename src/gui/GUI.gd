@@ -1,16 +1,5 @@
 extends CanvasLayer
 
-var source_slot = {
-	"slot" : null,
-	"item" : "",
-	"quantity" : 0,
-}
-var target_slot = {
-	"slot" : null,
-	"item" : "",
-	"quantity" : 0,
-}
-
 onready var nesw : Control = $MiniMap/Compass
 
 
@@ -63,8 +52,11 @@ func update_targe_info(res):
 	$TargetProgress.mana_bar.updt(res.mana.current)
 	$TargetProgress.stamina_bar.updt(res.stamina.current)
 
-func configure_inv(inv):
-	$Inventory.conf(inv)
+func configure_inv(actor):
+	$Inventory.conf(actor)
 	
-func configure_eq(eq):
-	$Equipment.conf(eq)
+func configure_eq(actor):
+	$Equipment.conf(actor)
+	
+func configure_skillbar(actor):
+	$SkillBar.conf(actor)

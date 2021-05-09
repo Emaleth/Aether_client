@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/gui/skillbar/SkillBar.gd" type="Script" id=1]
+
+[node name="SkillBar" type="Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+grow_horizontal = 2
+grow_vertical = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -5.0
+margin_top = -10.0
+margin_right = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+grow_horizontal = 2
+grow_vertical = 2
+columns = 20
+
+[connection signal="sort_children" from="MarginContainer" to="." method="_on_MarginContainer_sort_children"]

@@ -50,41 +50,49 @@ var equipment : Dictionary = {
 	"mainhand" : {
 		"bone" : ["mixamorigRightHand"],
 		"slot" : null,
-		"item" : "00001"
+		"item" : "00001",
+		"quantity" : 1
 	},
 	"offhand" : {
 		"bone" : ["mixamorigLeftHand"],
 		"slot" : null,
-		"item" : "00001"
+		"item" : "00001",
+		"quantity" : 1
 	},
 	"boots" : {
 		"bone" : ["LeftFoot", "RightFoot"],
 		"slot" : null,
-		"item" : null
+		"item" : null,
+		"quantity" : 0
 	},
 	"gloves" : {
 		"bone" : ["LeftHand", "RightHand"],
 		"slot" : null,
-		"item" : null
+		"item" : null,
+		"quantity" : 0
 	},
 	"torso" : {
 		"bone" : ["Spine2"],
 		"slot" : null,
-		"item" : null
+		"item" : null,
+		"quantity" : 0
 	},
 	"helmet" : {
 		"bone" : ["Head"],
 		"slot" : null,
-		"item" : null
+		"item" : null,
+		"quantity" : 0
 	},
 	"cape" : {
 		"bone" : ["Spine2"],
 		"slot" : null,
-		"item" : null
+		"item" : null,
+		"quantity" : 0
 	}
 }
 	
 var inventory : Dictionary = {}
+var skillbar : Dictionary = {}
 # INTERNAL WORKING STUFF
 var state = null
 var model
@@ -107,6 +115,9 @@ onready var hit_num = preload("res://src/hit_number/HitNumber.tscn")
 
 signal target_lost
 signal res_mod
+signal update_inventory
+signal update_equipment
+signal update_skillbar
 
 func _ready() -> void:
 	gcd.connect("timeout", self, "attack")
@@ -227,10 +238,10 @@ func hurt(amount) -> void:
 	h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
 	h.conf(amount)
 	
-func equip_item(item) -> void:
+func equip_item(item : Spatial) -> void:
 	equipment.mainhand.slot.add_child(item)
-	item.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-	item.rotate_y(deg2rad(180)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+#	item.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+#	item.rotate_y(deg2rad(180)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
 	for i in item.get_children():
 		if i is MeshInstance:
 			hide_from_minimap_camera(i)
@@ -279,3 +290,37 @@ func load_eq():
 				if z is MeshInstance:
 					hide_from_minimap_camera(z)
 #			print("ID: ",equipment.get(i).item, " >> DATA: ", DataLoader.item_db.get(equipment.get(i).item))
+
+func move_item(source = [], target = []):
+	var source_slot = source[0].get(source[1]).get(source[2])
+	var target_slot = get(target[1]).get(target[2])
+	
+	if source[1] == "skillbar":
+		if target[1] == "skillbar":
+			target[0].get(target[1])[target[2]] = source_slot
+			source[0].get(source[1])[source[2]] = target_slot
+		else:
+			source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0}
+			
+	if source[1] != "skillbar":
+		if target[1] == "skillbar":
+			target[0].get(target[1])[target[2]] = source_slot
+		else:
+			target[0].get(target[1])[target[2]] = source_slot
+			source[0].get(source[1])[source[2]] = target_slot
+	
+	if source[1] == "skillbar" || target[1] == "skillbar":
+		emit_signal("update_skillbar")
+	elif source[1] == "inventory" || target[1] == "inventory":
+		emit_signal("update_inventory")
+	elif source[1] == "equipment" || target[1] == "equipment":
+		emit_signal("update_equipment")
+
+func use_item(source):
+	source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)
+	if source[0].get(source[1])[source[2]].quantity < 0:
+		source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0}
+		
+	emit_signal("update_skillbar")
+	emit_signal("update_inventory")
+	emit_signal("update_equipment")

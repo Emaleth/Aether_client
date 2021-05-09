@@ -13,7 +13,7 @@ dest_files=[ "res://.import/00001.glb-fbe70c28ae32f3e15fe7645ff50fbe3f.scn" ]
 
 nodes/root_type="Spatial"
 nodes/root_name="Scene Root"
-nodes/root_scale=0.05
+nodes/root_scale=0.7
 nodes/custom_script=""
 nodes/storage=0
 nodes/use_legacy_names=true
