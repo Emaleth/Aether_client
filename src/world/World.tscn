@@ -54,19 +54,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36626, 1, -11.2284 )
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0 )
 
 [node name="Stairs" parent="." instance=ExtResource( 5 )]
-transform = Transform( -1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 0, -0.277709, 12.1827 )
+transform = Transform( 10, 0, 0, 0, 3, 0, 0, 0, 5, 0, -0.277709, -38.8173 )
 
 [node name="Stairs2" parent="." instance=ExtResource( 5 )]
-transform = Transform( -1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 2, -0.277709, 12.1827 )
-
-[node name="Stairs3" parent="." instance=ExtResource( 5 )]
-transform = Transform( -1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 4, -0.277709, 12.1827 )
-
-[node name="Stairs4" parent="." instance=ExtResource( 5 )]
-transform = Transform( -1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 4, 1.72229, 20.1827 )
-
-[node name="Stairs5" parent="." instance=ExtResource( 5 )]
-transform = Transform( -1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 2, 1.72229, 20.1827 )
-
-[node name="Stairs6" parent="." instance=ExtResource( 5 )]
-transform = Transform( -1.31134e-08, 0, 0.3, 0, 0.3, 0, -0.3, 0, -1.31134e-08, 0, 1.72229, 20.1827 )
+transform = Transform( -4.37114e-07, 0, -2, 0, 3, 0, 10, 0, -8.74228e-08, 25, -0.277709, -5.8173 )
