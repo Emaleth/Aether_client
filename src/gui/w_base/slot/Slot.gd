@@ -10,6 +10,8 @@ onready var quantity_label = $Label
 signal request_swap
 signal request_use
 
+var preview = preload("res://src/gui/drag/DragPreview.tscn")
+
 func _ready() -> void:
 	quantity_label.text = ""
 	disabled = true
@@ -60,11 +62,8 @@ func _on_Slot_pressed() -> void:
 		emit_signal("request_use", source)
 
 func make_preview():
-	var pw = TextureRect.new()
-	pw.expand = true
-	pw.texture = texture.texture
-	pw.rect_min_size = Vector2(40, 40)
-	pw.self_modulate = Color.cadetblue
+	var pw = preview.instance()
+	pw.get_node("CanvasLayer/TextureRect").texture = texture.texture
 	set_drag_preview(pw)
 
 func _make_custom_tooltip(for_text):
