@@ -15,7 +15,6 @@ var statistics : Dictionary = {
 	"deceleration" : 10
 }
 
-
 var animations : Dictionary = {
 	"idle" : preload("res://animations/Sword_And_Shield_Idle.anim"),
 	"run_forward" : preload("res://animations/Sword_And_Shield_Run.anim"),
@@ -28,7 +27,6 @@ var animations : Dictionary = {
 	"attack" : preload("res://animations/Sword_And_Shield_Slash.anim"),
 	"jump" : preload("res://animations/Sword_And_Shield_Jump.anim")
 #	"fall" : preload("res://animations/Sword_And_Shield_Fall.anim")
-	
 }
 
 var resources : Dictionary = {
@@ -45,52 +43,18 @@ var resources : Dictionary = {
 		"current" : 100
 	}
 }
-
-var equipment : Dictionary = {
-	"mainhand" : {
-		"bone" : ["mixamorigRightHand"],
-		"slot" : null,
-		"item" : "00001",
-		"quantity" : 1
-	},
-	"offhand" : {
-		"bone" : ["mixamorigLeftHand"],
-		"slot" : null,
-		"item" : "00001",
-		"quantity" : 1
-	},
-	"boots" : {
-		"bone" : ["LeftFoot", "RightFoot"],
-		"slot" : null,
-		"item" : null,
-		"quantity" : 0
-	},
-	"gloves" : {
-		"bone" : ["LeftHand", "RightHand"],
-		"slot" : null,
-		"item" : null,
-		"quantity" : 0
-	},
-	"torso" : {
-		"bone" : ["Spine2"],
-		"slot" : null,
-		"item" : null,
-		"quantity" : 0
-	},
-	"helmet" : {
-		"bone" : ["Head"],
-		"slot" : null,
-		"item" : null,
-		"quantity" : 0
-	},
-	"cape" : {
-		"bone" : ["Spine2"],
-		"slot" : null,
-		"item" : null,
-		"quantity" : 0
-	}
-}
 	
+var equipment_slots : Dictionary = {
+	"mainhand" : ["mixamorigRightHand"],
+	"offhand" : ["mixamorigLeftHand"],
+	"boots" : ["mixamorigLeftFoot", "mixamorigRightFoot"],
+	"gloves" : ["mixamorigLeftHand", "mixamorigRightHand"],
+	"torso" : ["mixamorigSpine2"],
+	"helmet" : ["mixamorigHead"],
+	"cape" : ["mixamorigSpine2"],
+}
+
+var equipment : Dictionary = {}
 var inventory : Dictionary = {}
 var skillbar : Dictionary = {}
 # INTERNAL WORKING STUFF
@@ -105,6 +69,9 @@ var rot_direction : int
 var turn_speed : float = 3.0
 var target = null
 var attacking = false
+
+var inv_slot_num = 20
+var skill_bar_slot_num = 10
 
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var anim_player : AnimationPlayer
@@ -195,6 +162,10 @@ func finite_state_machine(delta: float) -> void:
 	move_and_slide(velocity + gravity_vec, Vector3.UP, true)
 
 func conf():
+	make_inventory_construct()
+	make_skillbar_construct()
+	make_equipment_construct()
+	remake_equipment_slots_construct()
 	# GET 3D MODEL
 	model = model.instance()
 	add_child(model)
@@ -210,11 +181,12 @@ func conf():
 						hide_from_minimap_camera(l)
 						l.set_layer_mask_bit(0, false)
 	# CREATE BONE ATTACHMENT NODES
-	for i in equipment:
-		for s in equipment.get(i).bone: 
-			equipment.get(i).slot = BoneAttachment.new()
-			model.get_node("RootNode/Skeleton").add_child(equipment.get(i).slot)
-			equipment.get(i).slot.bone_name = s
+	for i in equipment_slots:
+		for bone in equipment_slots.get(i).bone:
+			var new_bone_attachment = BoneAttachment.new()
+			model.get_node("RootNode/Skeleton").add_child(new_bone_attachment)
+			new_bone_attachment.bone_name = bone
+			equipment_slots.get(i).slot.append(new_bone_attachment)
 	# GET ANIMATION PLAYER
 	anim_player = model.find_node("AnimationPlayer")
 	# LOAD ANIMATIONS
@@ -237,14 +209,6 @@ func hurt(amount) -> void:
 	get_tree().root.add_child(h)
 	h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
 	h.conf(amount)
-	
-func equip_item(item : Spatial) -> void:
-	equipment.mainhand.slot.add_child(item)
-#	item.rotate_x(deg2rad(-90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-#	item.rotate_y(deg2rad(180)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-	for i in item.get_children():
-		if i is MeshInstance:
-			hide_from_minimap_camera(i)
 	
 func hide_from_minimap_camera(mesh):
 	mesh.set_layer_mask_bit(1, false)
@@ -278,18 +242,47 @@ func attack():
 func load_eq():
 	for i in equipment:
 		if equipment.get(i).item:
-			var model_path = "res://models/%s.glb" % equipment.get(i).item
-			var item_model : Spatial = (load(model_path)).instance()
-			equipment.get(i).slot.add_child(item_model)
-#			print(equipment.get(i).slot)
-#			item_model.get_child(0).transform.origin = Vector3(5, 0, 0) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-#			item_model.scale = Vector3(0.1, 0.1, 0.1) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-#			item_model.rotate_x(deg2rad(-45)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-#			item_model.rotate_y(deg2rad(90)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-			for z in item_model.get_children():
-				if z is MeshInstance:
-					hide_from_minimap_camera(z)
-#			print("ID: ",equipment.get(i).item, " >> DATA: ", DataLoader.item_db.get(equipment.get(i).item))
+			for slot in equipment_slots.get(i).slot:
+				var model_path = "res://models/%s.glb" % equipment.get(i).item
+				var item_model : Spatial = (load(model_path)).instance()
+				item_model.rotate_x(deg2rad(-45)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+				slot.add_child(item_model)
+			
+				for z in item_model.get_children():
+					if z is MeshInstance:
+						hide_from_minimap_camera(z)
+		else:
+			# REMOVE OLD ITEMS FROM MODEL
+			for s in equipment_slots.get(i).slot.size():
+				if equipment_slots.get(i).slot[s].get_child_count() > 0:
+					for k in equipment_slots.get(i).slot[s].get_children():
+						var x = k
+						x.get_parent().remove_child(x)
+						x.queue_free()
+
+func make_inventory_construct():
+	for i in inv_slot_num:
+		var slot_construct = {"item" : "",
+							"quantity" : 0}
+		inventory[i] = slot_construct
+							
+func make_skillbar_construct():
+	for i in skill_bar_slot_num:
+		var slot_construct = {"item" : "",
+							"quantity" : 0}
+		skillbar[i] = slot_construct
+		
+func make_equipment_construct():
+	for i in equipment_slots:
+		var slot_construct = {"item" : "",
+							"quantity" : 0}
+		equipment[i] = slot_construct
+	
+func remake_equipment_slots_construct():
+	for i in equipment_slots:
+		var slot_construct = {"bone" : equipment_slots[i],
+							"slot" : []}
+		equipment_slots[i] = slot_construct
 
 func move_item(source = [], target = []):
 	var source_slot = source[0].get(source[1]).get(source[2])
@@ -311,10 +304,11 @@ func move_item(source = [], target = []):
 	
 	if source[1] == "skillbar" || target[1] == "skillbar":
 		emit_signal("update_skillbar")
-	elif source[1] == "inventory" || target[1] == "inventory":
+	if source[1] == "inventory" || target[1] == "inventory":
 		emit_signal("update_inventory")
-	elif source[1] == "equipment" || target[1] == "equipment":
+	if source[1] == "equipment" || target[1] == "equipment":
 		emit_signal("update_equipment")
+		load_eq()
 
 func use_item(source):
 	source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)

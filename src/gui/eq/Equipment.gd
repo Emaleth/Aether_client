@@ -10,7 +10,6 @@ var equipment : Dictionary = {
 	"cape" : null
 }
 
-
 func _ready() -> void:
 	window_title = tr("00013")
 	equipment.mainhand = $MarginContainer/GridContainer/MainHand
