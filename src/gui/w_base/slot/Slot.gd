@@ -16,7 +16,7 @@ func _ready() -> void:
 	quantity_label.text = ""
 	disabled = true
 	
-func conf(actor, slot, type):
+func conf(actor, slot, type, empty_icon = null):
 	aactor = actor
 	ttype = type
 	sslot = slot
@@ -39,7 +39,10 @@ func conf(actor, slot, type):
 			quantity_label.text = ""
 	else:
 		disabled = true
-		texture.texture = null
+		if empty_icon:
+			texture.texture = empty_icon
+		else:
+			texture.texture = null
 		hint_tooltip = ""
 		quantity_label.text = ""
 		
