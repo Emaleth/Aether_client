@@ -32,50 +32,194 @@ __meta__ = {
 [node name="GridContainer" type="GridContainer" parent="MarginContainer"]
 margin_left = 5.0
 margin_top = 5.0
-margin_right = 133.0
-margin_bottom = 177.0
-columns = 3
+margin_right = 221.0
+margin_bottom = 309.0
+columns = 5
+
+[node name="Necklace" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+
+[node name="Earring1" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 44.0
+margin_right = 84.0
+
+[node name="Earring2" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 88.0
+margin_right = 128.0
+
+[node name="Ring1" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 132.0
+margin_right = 172.0
+
+[node name="Ring2" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 176.0
+margin_right = 216.0
 
 [node name="Cape" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
-
-[node name="Helmet" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_right = 84.0
+margin_top = 44.0
+margin_bottom = 84.0
 
 [node name="NullSlot" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 88.0
-margin_right = 128.0
-
-[node name="Gloves" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 44.0
-margin_bottom = 84.0
-
-[node name="Torso" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 44.0
 margin_top = 44.0
 margin_right = 84.0
 margin_bottom = 84.0
+
+[node name="Head" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 88.0
+margin_top = 44.0
+margin_right = 128.0
+margin_bottom = 84.0
+
+[node name="NullSlot2" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_left = 132.0
+margin_top = 44.0
+margin_right = 172.0
+margin_bottom = 84.0
+
+[node name="Shoulders" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 176.0
+margin_top = 44.0
+margin_right = 216.0
+margin_bottom = 84.0
+
+[node name="Hands" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_top = 88.0
+margin_bottom = 128.0
+
+[node name="NullSlot4" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_left = 44.0
+margin_top = 88.0
+margin_right = 84.0
+margin_bottom = 128.0
+
+[node name="UpperBody" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 88.0
+margin_top = 88.0
+margin_right = 128.0
+margin_bottom = 128.0
+
+[node name="NullSlot5" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_left = 132.0
+margin_top = 88.0
+margin_right = 172.0
+margin_bottom = 128.0
 
 [node name="NullSlot3" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
-margin_left = 88.0
-margin_top = 44.0
-margin_right = 128.0
-margin_bottom = 84.0
+margin_left = 176.0
+margin_top = 88.0
+margin_right = 216.0
+margin_bottom = 128.0
 
 [node name="MainHand" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 88.0
-margin_bottom = 128.0
+margin_top = 132.0
+margin_bottom = 172.0
 
-[node name="Boots" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="NullSlot7" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 44.0
-margin_top = 88.0
+margin_top = 132.0
 margin_right = 84.0
-margin_bottom = 128.0
+margin_bottom = 172.0
+
+[node name="Belt" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 88.0
+margin_top = 132.0
+margin_right = 128.0
+margin_bottom = 172.0
+
+[node name="NullSlot8" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_left = 132.0
+margin_top = 132.0
+margin_right = 172.0
+margin_bottom = 172.0
 
 [node name="OffHand" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 176.0
+margin_top = 132.0
+margin_right = 216.0
+margin_bottom = 172.0
+
+[node name="RangedWeapon" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_top = 176.0
+margin_bottom = 216.0
+
+[node name="Ammunition" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 44.0
+margin_top = 176.0
+margin_right = 84.0
+margin_bottom = 216.0
+
+[node name="LowerBody" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
-margin_top = 88.0
+margin_top = 176.0
 margin_right = 128.0
-margin_bottom = 128.0
+margin_bottom = 216.0
+
+[node name="NullSlot12" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_left = 132.0
+margin_top = 176.0
+margin_right = 172.0
+margin_bottom = 216.0
+
+[node name="Back" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 176.0
+margin_top = 176.0
+margin_right = 216.0
+margin_bottom = 216.0
+
+[node name="NullSlot13" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_top = 220.0
+margin_bottom = 260.0
+
+[node name="NullSlot6" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_left = 44.0
+margin_top = 220.0
+margin_right = 84.0
+margin_bottom = 260.0
+
+[node name="Feet" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 88.0
+margin_top = 220.0
+margin_right = 128.0
+margin_bottom = 260.0
+
+[node name="NullSlot9" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_left = 132.0
+margin_top = 220.0
+margin_right = 172.0
+margin_bottom = 260.0
+
+[node name="GatheringTools" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 176.0
+margin_top = 220.0
+margin_right = 216.0
+margin_bottom = 260.0
+
+[node name="NullSlot10" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_top = 264.0
+margin_bottom = 304.0
+
+[node name="Amulet3" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 44.0
+margin_top = 264.0
+margin_right = 84.0
+margin_bottom = 304.0
+
+[node name="Amulet2" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 88.0
+margin_top = 264.0
+margin_right = 128.0
+margin_bottom = 304.0
+
+[node name="Amulet1" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 132.0
+margin_top = 264.0
+margin_right = 172.0
+margin_bottom = 304.0
+
+[node name="NullSlot11" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+margin_left = 176.0
+margin_top = 264.0
+margin_right = 216.0
+margin_bottom = 304.0
 
 [connection signal="sort_children" from="MarginContainer" to="." method="_on_MarginContainer_sort_children"]

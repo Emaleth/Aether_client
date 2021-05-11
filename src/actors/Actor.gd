@@ -45,13 +45,28 @@ var resources : Dictionary = {
 }
 	
 var equipment_slots : Dictionary = {
-	"mainhand" : ["mixamorigRightHand"],
-	"offhand" : ["mixamorigLeftHand"],
-	"boots" : ["mixamorigLeftFoot", "mixamorigRightFoot"],
-	"gloves" : ["mixamorigLeftHand", "mixamorigRightHand"],
-	"torso" : ["mixamorigSpine2"],
-	"helmet" : ["mixamorigHead"],
+	"head" : ["mixamorigHead"],
+	"hands" : ["mixamorigLeftHand", "mixamorigRightHand"],
+	"feet" : ["mixamorigLeftFoot", "mixamorigRightFoot"],
+	"upper_body" : ["mixamorigSpine2"],
+	"lower_body" : [],
 	"cape" : ["mixamorigSpine2"],
+	"belt" : [],
+	"shoulders" : [],
+	"necklace" : [],
+	"ammunition" : [],
+	"ranged_weapon" : [],
+	"ring_1" : [],
+	"ring_2" : [],
+	"earring_1" : [],
+	"earring_2" : [],
+	"main_hand" : ["mixamorigRightHand"],
+	"off_hand" : ["mixamorigLeftHand"],
+	"gathering_tools" : [],
+	"amulet_1" : [],
+	"amulet_2" : [],
+	"amulet_3" : [],
+	"back" : []
 }
 
 var equipment : Dictionary = {}
