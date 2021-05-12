@@ -5,6 +5,7 @@
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 64, 64 )
 
 [node name="Slot" type="Button"]
 margin_right = 40.0

@@ -9,12 +9,11 @@ func _ready() -> void:
 	statistics.level = "69"
 	statistics.title = "Ancient God"
 	
-#	Input.set_use_accumulated_input(false)
 	model = preload("res://models/human_female.fbx")
 #	$Debug.queue_free()
 	conf()
 	$GUI.conf(resources, minimap_camera_remote_transform)
-	connect("res_mod", $GUI, "update_gui", [resources])
+	connect("update_resources", $GUI, "update_gui", [resources])
 	load_eq()
 	connect("target_lost", self, "loose_target_ui")
 	get_test_items()
@@ -54,12 +53,12 @@ func get_next_target():
 	if new_target:
 		if target:
 			target.show_indicator(false)
-			target.disconnect("res_mod", $GUI, "update_targe_info")
+			target.disconnect("update_resources", $GUI, "update_targe_info")
 			$GUI.get_target_info(target, false)
 			if $AttackArea.overlaps_body(target): 
 				target_list.append(target)
 		target = new_target
-		target.connect("res_mod", $GUI, "update_targe_info", [target.resources])
+		target.connect("update_resources", $GUI, "update_targe_info", [target.resources])
 		target.show_indicator(true)
 		$GUI.get_target_info(target, true)
 		attack()
@@ -81,18 +80,4 @@ func get_test_items():
 	inventory[9].quantity = 10
 	inventory[10].item = "00003"
 	inventory[10].quantity = 5
-	
 
-#func make_inventory_construct():
-#	for i in inv_slot_num:
-##		print(i)
-#		var slot_construct = {"item" : "",
-#							"quantity" : 0}
-#		inventory[i] = slot_construct
-#
-#func make_skillbar_construct():
-#	for i in skill_bar_slot_num:
-##		print(i)
-#		var slot_construct = {"item" : "",
-#							"quantity" : 0}
-#		skillbar[i] = slot_construct

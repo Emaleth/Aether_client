@@ -1,10 +1,13 @@
 # Aether
 
 ## Assets:
-### 3d
+### >> 3d
  - human male model : VideroBoy @ https://opengameart.org/content/low-poly-human-male
  - human female model : VideroBoy @ https://opengameart.org/content/low-poly-human-female
  - elven/fey weapons : Clint Bellanger @ https://opengameart.org/content/elven-weapon-set
-### textures
+### >> textures:
+ - UI : KenneyNL
+### >> sound:
 
-### sound
+### >> fonts:
+ - KenneyNL

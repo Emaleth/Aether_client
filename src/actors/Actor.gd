@@ -96,7 +96,7 @@ onready var gcd : Timer = $GlobalCoolDown
 onready var hit_num = preload("res://src/hit_number/HitNumber.tscn")
 
 signal target_lost
-signal res_mod
+signal update_resources
 signal update_inventory
 signal update_equipment
 signal update_skillbar
@@ -210,20 +210,21 @@ func conf():
 	# CONF HUD
 	$NameResHud.conf(statistics, resources)
 	# RESTART PROCESSING
-	connect("res_mod", $NameResHud, "upd", [resources])
+	connect("update_resources", $NameResHud, "upd", [resources])
 	set_process(true)
 	set_physics_process(true)
 	
 func modify_resource(resource : String, amount : int) -> void:
 	resources[resource].current += amount
-	emit_signal("res_mod")
+	emit_signal("update_resources")
 
 func hurt(amount) -> void:
-	modify_resource("health", -amount)
-	var h = hit_num.instance()
-	get_tree().root.add_child(h)
-	h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
-	h.conf(amount)
+	if state != STATE.DIE:
+		modify_resource("health", -amount)
+		var h = hit_num.instance()
+		get_tree().root.add_child(h)
+		h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
+		h.conf(amount)
 	
 func hide_from_minimap_camera(mesh):
 	mesh.set_layer_mask_bit(1, false)
