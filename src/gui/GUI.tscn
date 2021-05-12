@@ -38,12 +38,13 @@ script = ExtResource( 1 )
 material = SubResource( 3 )
 
 [node name="Inventory" parent="." instance=ExtResource( 5 )]
+visible = true
 anchor_left = 1.0
 anchor_top = 1.0
-margin_left = -245.617
-margin_top = -243.554
-margin_right = -197.617
-margin_bottom = -242.554
+margin_left = -324.016
+margin_top = -239.99
+margin_right = -276.016
+margin_bottom = -238.99
 
 [node name="Map" parent="." instance=ExtResource( 6 )]
 visible = false

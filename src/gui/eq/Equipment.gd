@@ -1,92 +1,95 @@
 extends WindowDialog
 
+onready var grid = $MarginContainer/GridContainer
+onready var topbar = $TopBar
+
 onready var equipment : Dictionary = {
 	"head" : {
-		"slot" : $MarginContainer/GridContainer/Head,
+		"slot" : grid.get_node("Head"),
 		"empty_icon" : preload("res://textures/head_ghost.png")
 		},
 	"hands" : {
-		"slot" : $MarginContainer/GridContainer/Hands,
+		"slot" : grid.get_node("Hands"),
 		"empty_icon" : preload("res://textures/hands_ghost.png")
 		},
 	"feet" : {
-		"slot" : $MarginContainer/GridContainer/Feet,
+		"slot" : grid.get_node("Feet"),
 		"empty_icon" : preload("res://textures/feet_ghost.png")
 		},
 	"upper_body" : {
-		"slot" : $MarginContainer/GridContainer/UpperBody,
+		"slot" : grid.get_node("UpperBody"),
 		"empty_icon" : preload("res://textures/upper_body_ghost.png")
 		},
 	"lower_body" : {
-		"slot" : $MarginContainer/GridContainer/LowerBody,
+		"slot" : grid.get_node("LowerBody"),
 		"empty_icon" : preload("res://textures/lower_body_ghost.png")
 		},
 	"cape" : {
-		"slot" : $MarginContainer/GridContainer/Cape,
+		"slot" : grid.get_node("Cape"),
 		"empty_icon" : preload("res://textures/cape_ghost.png")
 		},
 	"belt" : {
-		"slot" : $MarginContainer/GridContainer/Belt,
+		"slot" : grid.get_node("Belt"),
 		"empty_icon" : preload("res://textures/belt_ghost.png")
 		},
 	"shoulders" : {
-		"slot" : $MarginContainer/GridContainer/Shoulders,
+		"slot" : grid.get_node("Shoulders"),
 		"empty_icon" : preload("res://textures/shoulders_ghost.png")
 		},
 	"necklace" : {
-		"slot" : $MarginContainer/GridContainer/Necklace,
+		"slot" : grid.get_node("Necklace"),
 		"empty_icon" : preload("res://textures/necklace_ghost.png")
 		},
 	"ammunition" : {
-		"slot" : $MarginContainer/GridContainer/Ammunition,
+		"slot" : grid.get_node("Ammunition"),
 		"empty_icon" : preload("res://textures/ammunition_ghost.png")
 		},
 	"ranged_weapon" : {
-		"slot" : $MarginContainer/GridContainer/RangedWeapon,
+		"slot" : grid.get_node("RangedWeapon"),
 		"empty_icon" : preload("res://textures/ranged_weapon_ghost.png")
 		},
 	"ring_1" : {
-		"slot" : $MarginContainer/GridContainer/Ring1,
+		"slot" : grid.get_node("Ring1"),
 		"empty_icon" : preload("res://textures/ring_ghost.png")
 		},
 	"ring_2" : {
-		"slot" : $MarginContainer/GridContainer/Ring2,
+		"slot" : grid.get_node("Ring2"),
 		"empty_icon" : preload("res://textures/ring_ghost.png")
 		},
 	"earring_1" : {
-		"slot" : $MarginContainer/GridContainer/Earring1,
+		"slot" : grid.get_node("Earring1"),
 		"empty_icon" : preload("res://textures/earring_ghost.png")
 		},
 	"earring_2" : {
-		"slot" : $MarginContainer/GridContainer/Earring2,
+		"slot" : grid.get_node("Earring2"),
 		"empty_icon" : preload("res://textures/earring_ghost.png")
 		},
 	"main_hand" : {
-		"slot" : $MarginContainer/GridContainer/MainHand,
+		"slot" : grid.get_node("MainHand"),
 		"empty_icon" : preload("res://textures/main_hand_ghost.png")
 		},
 	"off_hand" : {
-		"slot" : $MarginContainer/GridContainer/OffHand,
+		"slot" : grid.get_node("OffHand"),
 		"empty_icon" : preload("res://textures/off_hand_ghost.png")
 		},
 	"gathering_tools" : {
-		"slot" : $MarginContainer/GridContainer/GatheringTools,
+		"slot" : grid.get_node("GatheringTools"),
 		"empty_icon" : preload("res://textures/gathering_tools_ghost.png")
 		},
 	"amulet_1" : {
-		"slot" : $MarginContainer/GridContainer/Amulet1,
+		"slot" : grid.get_node("Amulet1"),
 		"empty_icon" : preload("res://textures/amulet_ghost.png")
 		},
 	"amulet_2" : {
-		"slot" : $MarginContainer/GridContainer/Amulet2,
+		"slot" : grid.get_node("Amulet2"),
 		"empty_icon" : preload("res://textures/amulet_ghost.png")
 		},
 	"amulet_3" : {
-		"slot" : $MarginContainer/GridContainer/Amulet3,
+		"slot" : grid.get_node("Amulet3"),
 		"empty_icon" : preload("res://textures/amulet_ghost.png")
 		},
 	"back" : {
-		"slot" : $MarginContainer/GridContainer/Back,
+		"slot" : grid.get_node("Back"),
 		"empty_icon" : preload("res://textures/back_ghost.png")
 		}
 	}
@@ -94,9 +97,10 @@ onready var equipment : Dictionary = {
 func _ready() -> void:
 	window_title = tr("00013")
 
-func _on_MarginContainer_sort_children() -> void:
-	rect_min_size = $MarginContainer.rect_min_size
+func _on_GridContainer_sort_children() -> void:
 	rect_size = $MarginContainer.rect_size
+	topbar.rect_size.x = rect_size.x
+	topbar.rect_position.y = -topbar.rect_size.y
 
 func conf(actor):
 	for i in actor.equipment:
@@ -105,5 +109,3 @@ func conf(actor):
 func can_drop_data(position: Vector2, data) -> bool:
 	return false
 		
-
-

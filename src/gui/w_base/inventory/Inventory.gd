@@ -1,5 +1,6 @@
 extends WindowDialog
 
+onready var topbar = $TopBar
 onready var slot_grid = $MarginContainer/grid
 onready var slot_path = preload("res://src/gui/w_base/slot/Slot.tscn")
 
@@ -8,8 +9,9 @@ func _ready() -> void:
 	window_title = tr("00012")
 
 func _on_MarginContainer_sort_children() -> void:
-	rect_min_size = $MarginContainer.rect_min_size
 	rect_size = $MarginContainer.rect_size
+	topbar.rect_size.x = rect_size.x
+	topbar.rect_position.y = -topbar.rect_size.y
 
 func conf(actor):
 	if slot_grid.get_child_count() < actor.inventory.size():

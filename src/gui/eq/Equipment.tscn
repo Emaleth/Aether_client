@@ -1,40 +1,79 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/gui/eq/Equipment.gd" type="Script" id=1]
 [ext_resource path="res://src/gui/w_base/slot/Slot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/gui/NullSlot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://textures/panel_woodDetail.png" type="Texture" id=4]
+[ext_resource path="res://textures/button_rectangleWood.png" type="Texture" id=5]
+[ext_resource path="res://fonts/ContentUI.tres" type="DynamicFont" id=6]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 4 )
+margin_left = 15.0
+margin_right = 15.0
+margin_top = 15.0
+margin_bottom = 15.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[sub_resource type="StyleBoxTexture" id=2]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 40, 20 )
+margin_left = 10.0
+margin_right = 10.0
+margin_top = 10.0
+margin_bottom = 10.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [node name="Equipment" type="WindowDialog"]
-visible = true
-margin_left = 317.5
-margin_top = 269.623
-margin_right = 365.5
-margin_bottom = 309.623
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -550.102
+margin_top = -150.237
+margin_right = -502.102
+margin_bottom = -149.237
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
+custom_styles/panel = SubResource( 3 )
+custom_fonts/title_font = ExtResource( 6 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
-mouse_filter = 2
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 5
-custom_constants/margin_bottom = 5
+margin_right = 236.0
+margin_bottom = 324.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 221.0
-margin_bottom = 309.0
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 226.0
+margin_bottom = 314.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 columns = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Necklace" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
 
@@ -222,4 +261,13 @@ margin_top = 264.0
 margin_right = 216.0
 margin_bottom = 304.0
 
-[connection signal="sort_children" from="MarginContainer" to="." method="_on_MarginContainer_sort_children"]
+[node name="TopBar" type="Panel" parent="."]
+show_behind_parent = true
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+rect_min_size = Vector2( 0, 20 )
+mouse_filter = 2
+custom_styles/panel = SubResource( 2 )
+
+[connection signal="sort_children" from="MarginContainer/GridContainer" to="." method="_on_GridContainer_sort_children"]

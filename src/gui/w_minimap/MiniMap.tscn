@@ -6,7 +6,7 @@
 [ext_resource path="res://textures/tileS.png" type="Texture" id=4]
 [ext_resource path="res://textures/tileN.png" type="Texture" id=5]
 [ext_resource path="res://textures/tileE.png" type="Texture" id=6]
-[ext_resource path="res://textures/crosshair131.png" type="Texture" id=7]
+[ext_resource path="res://textures/minimapMap_wood.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

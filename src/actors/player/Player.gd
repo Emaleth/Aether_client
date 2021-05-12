@@ -1,8 +1,6 @@
 extends "res://src/actors/Actor.gd"
 
 onready var minimap_camera_remote_transform : RemoteTransform = $MiniMapCameraRT
-#var inv_slot_num = 20
-#var skill_bar_slot_num = 10
 
 func _ready() -> void:
 	statistics.name = "Emaleth"

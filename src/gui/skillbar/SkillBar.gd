@@ -1,13 +1,8 @@
-extends Control
+extends PanelContainer
 
 var slot = preload("res://src/gui/w_base/slot/Slot.tscn")
 onready var grid = $MarginContainer/GridContainer
 
-
-func _on_MarginContainer_sort_children() -> void:
-	$Panel.rect_position = $MarginContainer.rect_position
-	$Panel.rect_min_size = $MarginContainer.rect_min_size
-	$Panel.rect_size = $MarginContainer.rect_size
 	
 func conf(actor):
 	if grid.get_child_count() < actor.skillbar.size():
@@ -25,3 +20,4 @@ func conf(actor):
 			
 func can_drop_data(position: Vector2, data) -> bool:
 	return false
+

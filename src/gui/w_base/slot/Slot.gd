@@ -4,7 +4,6 @@ var aactor
 var ttype
 var sslot
 
-onready var texture = $TextureRect
 onready var quantity_label = $Label
 
 signal request_swap
@@ -31,7 +30,7 @@ func conf(actor, slot, type, empty_icon = null):
 			disabled = true
 			if is_connected("request_use", actor, "use_item"):
 				disconnect("request_use", actor, "use_item")
-		texture.texture = load("res://previews/%s.png" % actor.get(type).get(slot).item)
+		icon = load("res://previews/%s.png" % actor.get(type).get(slot).item)
 		hint_tooltip = "wierd fuckery"
 		if actor.get(type).get(slot).quantity > 1:
 			quantity_label.text = str(actor.get(type).get(slot).quantity)
@@ -40,9 +39,9 @@ func conf(actor, slot, type, empty_icon = null):
 	else:
 		disabled = true
 		if empty_icon:
-			texture.texture = empty_icon
+			icon = empty_icon
 		else:
-			texture.texture = null
+			icon = null
 		hint_tooltip = ""
 		quantity_label.text = ""
 		
@@ -66,7 +65,7 @@ func _on_Slot_pressed() -> void:
 
 func make_preview():
 	var pw = preview.instance()
-	pw.get_node("CanvasLayer/TextureRect").texture = texture.texture
+	pw.conf(icon)
 	set_drag_preview(pw)
 
 func _make_custom_tooltip(for_text):
