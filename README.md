@@ -7,6 +7,7 @@
  - elven/fey weapons : Clint Bellanger @ https://opengameart.org/content/elven-weapon-set
 ### >> textures:
  - UI : KenneyNL
+ - Item Icons : https://iknowkingrabbit.itch.io/heroic-icon-pack/download/SpMI_HcGVBNgOEVw6MR5LQ2SrorhslTnMRsoBUCN
 ### >> sound:
 
 ### >> fonts:

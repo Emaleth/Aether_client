@@ -13,7 +13,6 @@ var preview = preload("res://src/gui/drag/DragPreview.tscn")
 
 func _ready() -> void:
 	quantity_label.text = ""
-#	disabled = true
 	
 func conf(actor, slot, type, empty_icon = null):
 	aactor = actor
@@ -22,12 +21,10 @@ func conf(actor, slot, type, empty_icon = null):
 	if not is_connected("request_swap", actor, "move_item"):
 		connect("request_swap", actor, "move_item")
 	if actor.get(type).get(slot).item && actor.get(type).get(slot).quantity > 0:
-		if DataLoader.item_db.get(actor.get(type).get(slot).item).CONSUMABLE == true:
-#			disabled = false
+		if DataLoader.item_db.get(actor.get(type).get(slot).item).USABLE == true:
 			if not is_connected("request_use", actor, "use_item"):
 				connect("request_use", actor, "use_item")
 		else:
-#			disabled = true
 			if is_connected("request_use", actor, "use_item"):
 				disconnect("request_use", actor, "use_item")
 		icon = load("res://previews/%s.png" % actor.get(type).get(slot).item)
@@ -37,7 +34,6 @@ func conf(actor, slot, type, empty_icon = null):
 		else:
 			quantity_label.text = ""
 	else:
-#		disabled = true
 		if empty_icon:
 			icon = empty_icon
 		else:
@@ -59,7 +55,7 @@ func drop_data(position: Vector2, data) -> void:
 	emit_signal("request_swap", source, target)
 
 func _on_Slot_pressed() -> void: 
-	if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).CONSUMABLE == true:
+	if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).USABLE == true:
 		var source = [aactor, ttype, sslot]
 		emit_signal("request_use", source)
 

@@ -41,10 +41,10 @@ material = SubResource( 3 )
 visible = true
 anchor_left = 1.0
 anchor_top = 1.0
-margin_left = -324.016
-margin_top = -239.99
-margin_right = -276.016
-margin_bottom = -238.99
+margin_left = -397.555
+margin_top = -412.524
+margin_right = -349.555
+margin_bottom = -411.524
 
 [node name="Map" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -56,11 +56,17 @@ visible = false
 visible = false
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -151.0
-margin_right = 151.0
-margin_bottom = 98.0
+grow_horizontal = 2
 rect_scale = Vector2( 0.8, 0.8 )
+
+[node name="VSplitContainer" parent="TargetProgress" index="0"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -110.0
+margin_right = 110.0
 
 [node name="Equipment" parent="." instance=ExtResource( 7 )]
 
 [node name="SkillBar" parent="." instance=ExtResource( 8 )]
+
+[editable path="TargetProgress"]

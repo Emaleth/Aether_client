@@ -2,13 +2,11 @@ extends HBoxContainer
 
 var step_time : float # time to modify progress by 1 
 
-onready var res_label : Label = $Label
 onready var res_bar : ProgressBar = $ProgressBar
 onready var res_tween : Tween = $Tween
 
 
-func conf(res_name : String, res_max : int, res_current : int, fg_color : Color, st : float = 0.01) -> void:
-	res_label.text = res_name
+func conf(res_max : int, res_current : int, fg_color : Color, st : float = 0.01) -> void:
 	res_bar.max_value = res_max
 	res_bar.value = res_current
 	step_time = st

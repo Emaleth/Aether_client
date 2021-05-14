@@ -69,6 +69,31 @@ var equipment_slots : Dictionary = {
 	"back" : []
 }
 
+var equipment_slot_type : Dictionary = {
+	"head" : ["helmet"],
+	"hands" : ["gloves"],
+	"feet" : ["boots"],
+	"upper_body" : ["armor"],
+	"lower_body" : ["legs"],
+	"cape" : ["cape"],
+	"belt" : ["belt"],
+	"shoulders" : ["shoulders"],
+	"necklace" : ["necklace"],
+	"ammunition" : ["arrow"],
+	"ranged_weapon" : ["bow"],
+	"ring_1" : ["ring"],
+	"ring_2" : ["ring"],
+	"earring_1" : ["earring"],
+	"earring_2" : ["earring"],
+	"main_hand" : ["sword", "longsword", "axe", "dagger", "staff"],
+	"off_hand" : ["sword", "longsword", "axe", "dagger", "shield"],
+	"gathering_tools" : ["pickaxe"],
+	"amulet_1" : ["orb"],
+	"amulet_2" : ["orb"],
+	"amulet_3" : ["orb"],
+	"back" : ["wings"]
+}
+
 var equipment : Dictionary = {}
 var inventory : Dictionary = {}
 var skillbar : Dictionary = {}
@@ -85,8 +110,8 @@ var turn_speed : float = 3.0
 var target = null
 var attacking = false
 
-var inv_slot_num = 20
-var skill_bar_slot_num = 10
+var inv_slot_num = 49
+var skill_bar_slot_num = 20
 
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var anim_player : AnimationPlayer
@@ -208,9 +233,9 @@ func conf():
 	for i in animations:
 		anim_player.add_animation(i, animations.get(i))
 	# CONF HUD
-	$NameResHud.conf(statistics, resources)
+	$NameResHud.conf(statistics, resources.health)
 	# RESTART PROCESSING
-	connect("update_resources", $NameResHud, "upd", [resources])
+	connect("update_resources", $NameResHud, "upd", [resources.health])
 	set_process(true)
 	set_physics_process(true)
 	
@@ -257,24 +282,27 @@ func attack():
 			
 func load_eq():
 	for i in equipment:
+	# REMOVE OLD ITEMS FROM MODEL
+		for s in equipment_slots.get(i).slot.size():
+			if equipment_slots.get(i).slot[s].get_child_count() > 0:
+				for k in equipment_slots.get(i).slot[s].get_children():
+					var x = k
+					x.get_parent().remove_child(x)
+					x.queue_free()
+		
 		if equipment.get(i).item:
 			for slot in equipment_slots.get(i).slot:
-				var model_path = "res://models/%s.glb" % equipment.get(i).item
-				var item_model : Spatial = (load(model_path)).instance()
-				item_model.rotate_x(deg2rad(-45)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-				slot.add_child(item_model)
+				var file2Check = File.new()
+				if file2Check.file_exists("res://models/%s.glb" % equipment.get(i).item):
+					var model_path = "res://models/%s.glb" % equipment.get(i).item
+					var item_model = load(model_path)
+					item_model = item_model.instance()
+					item_model.rotate_x(deg2rad(-45)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+					slot.add_child(item_model)
 			
-				for z in item_model.get_children():
-					if z is MeshInstance:
-						hide_from_minimap_camera(z)
-		else:
-			# REMOVE OLD ITEMS FROM MODEL
-			for s in equipment_slots.get(i).slot.size():
-				if equipment_slots.get(i).slot[s].get_child_count() > 0:
-					for k in equipment_slots.get(i).slot[s].get_children():
-						var x = k
-						x.get_parent().remove_child(x)
-						x.queue_free()
+					for z in item_model.get_children():
+						if z is MeshInstance:
+							hide_from_minimap_camera(z)
 
 func make_inventory_construct():
 	for i in inv_slot_num:
@@ -314,6 +342,10 @@ func move_item(source = [], target = []):
 	if source[1] != "skillbar":
 		if target[1] == "skillbar":
 			target[0].get(target[1])[target[2]] = source_slot
+		elif target[1] == "equipment":
+			if match_item_to_slot(target[2], source[0].get(source[1])[source[2]].item) == true:
+				target[0].get(target[1])[target[2]] = source_slot
+				source[0].get(source[1])[source[2]] = target_slot
 		else:
 			target[0].get(target[1])[target[2]] = source_slot
 			source[0].get(source[1])[source[2]] = target_slot
@@ -327,10 +359,20 @@ func move_item(source = [], target = []):
 		load_eq()
 
 func use_item(source):
-	source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)
-	if source[0].get(source[1])[source[2]].quantity < 0:
-		source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0}
+	if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).USABLE == true:
+		# do stuff here
+		if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CONSUMABLE == true:
+			source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)
+			if source[0].get(source[1])[source[2]].quantity < 0:
+				source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0}
+			
+		emit_signal("update_skillbar")
+		emit_signal("update_inventory")
+		emit_signal("update_equipment")
+
+func match_item_to_slot(slot, item) -> bool:
+	if DataLoader.item_db.get(item).SUBTYPE in equipment_slot_type[slot]:
+		return true
+	else:
+		return false
 		
-	emit_signal("update_skillbar")
-	emit_signal("update_inventory")
-	emit_signal("update_equipment")

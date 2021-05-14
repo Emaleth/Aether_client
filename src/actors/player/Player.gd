@@ -70,14 +70,80 @@ func loose_target_ui():
 		$GUI.get_target_info(target, false)
 
 func get_test_items():
-	inventory[0].item = "00001"
+	inventory[0].item = "ITEM_00000"
 	inventory[0].quantity = 1
-	inventory[2].item = "00002"
-	inventory[2].quantity = 50
-	inventory[3].item = "00001"
+	
+	inventory[1].item = "ITEM_00001"
+	inventory[1].quantity = 1
+	
+	inventory[2].item = "ITEM_00002"
+	inventory[2].quantity = 1
+	
+	inventory[3].item = "ITEM_00003"
 	inventory[3].quantity = 1
-	inventory[9].item = "00003"
-	inventory[9].quantity = 10
-	inventory[10].item = "00003"
-	inventory[10].quantity = 5
+	
+	inventory[4].item = "ITEM_00004"
+	inventory[4].quantity = 1
+	
+	inventory[5].item = "ITEM_00005"
+	inventory[5].quantity = 1
+	
+	inventory[6].item = "ITEM_00006"
+	inventory[6].quantity = 1
+	
+	inventory[7].item = "ITEM_00007"
+	inventory[7].quantity = 1
+	
+	inventory[8].item = "ITEM_00008"
+	inventory[8].quantity = 1
+	
+	inventory[9].item = "ITEM_00009"
+	inventory[9].quantity = 1
+	
+	inventory[10].item = "ITEM_00010"
+	inventory[10].quantity = 1
+	
+	inventory[11].item = "ITEM_00011"
+	inventory[11].quantity = 1
+	
+	inventory[12].item = "ITEM_00012"
+	inventory[12].quantity = 1
+	
+	inventory[13].item = "ITEM_00013"
+	inventory[13].quantity = 1
+	
+	inventory[14].item = "ITEM_00014"
+	inventory[14].quantity = 1
+	
+	inventory[15].item = "ITEM_00015"
+	inventory[15].quantity = 1
+	
+	inventory[16].item = "ITEM_00016"
+	inventory[16].quantity = 1
+	
+	inventory[17].item = "ITEM_00017"
+	inventory[17].quantity = 1
+	
+	inventory[18].item = "ITEM_00018"
+	inventory[18].quantity = 1
+	
+	inventory[19].item = "ITEM_00019"
+	inventory[19].quantity = 1
+	
+	inventory[20].item = "ITEM_00020"
+	inventory[20].quantity = 1
+	
+	inventory[21].item = "ITEM_00021"
+	inventory[21].quantity = 1
+	
+	inventory[22].item = "ITEM_00022"
+	inventory[22].quantity = 1
+	
+	inventory[23].item = "ITEM_00023"
+	inventory[23].quantity = 100
+	
+	inventory[24].item = "ITEM_00024"
+	inventory[24].quantity = 100
+	
+
 

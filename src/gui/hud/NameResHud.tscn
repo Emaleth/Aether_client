@@ -1,31 +1,19 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/gui/w_base/resource_bar/ResourceBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/gui/hud/NameResHud.gd" type="Script" id=2]
 [ext_resource path="res://fonts/TitleUI.tres" type="DynamicFont" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
-[ext_resource path="res://models/name_plate.glb" type="PackedScene" id=6]
-
-[sub_resource type="SpatialMaterial" id=1]
-resource_local_to_scene = true
-flags_transparent = true
-flags_unshaded = true
-flags_fixed_size = true
-flags_do_not_receive_shadows = true
-flags_disable_ambient_light = true
-params_billboard_mode = 1
-params_billboard_keep_scale = true
 
 [node name="NameResHud" type="Spatial"]
 script = ExtResource( 2 )
 
-[node name="name_plate" parent="." instance=ExtResource( 6 )]
+[node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
+pixel_size = 0.003
+billboard = 1
+double_sided = false
 
-[node name="Plane" parent="name_plate" index="0"]
-material/0 = SubResource( 1 )
-
-[node name="Viewport" type="Viewport" parent="name_plate/Plane" index="0"]
+[node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 500, 300 )
 transparent_bg = true
 handle_input_locally = false
@@ -34,7 +22,7 @@ usage = 0
 render_target_v_flip = true
 gui_disable_input = true
 
-[node name="vbox" type="VBoxContainer" parent="name_plate/Plane/Viewport"]
+[node name="vbox" type="VBoxContainer" parent="Viewport"]
 margin_right = 500.0
 margin_bottom = 300.0
 grow_horizontal = 2
@@ -48,9 +36,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Title" type="Label" parent="name_plate/Plane/Viewport/vbox"]
+[node name="Title" type="Label" parent="Viewport/vbox"]
 margin_right = 500.0
-margin_bottom = 85.0
+margin_bottom = 93.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -59,27 +47,10 @@ text = "<title>"
 align = 1
 valign = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="name_plate/Plane/Viewport/vbox"]
-margin_top = 85.0
+[node name="Name" type="Label" parent="Viewport/vbox"]
+margin_top = 93.0
 margin_right = 500.0
-margin_bottom = 171.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 1
-
-[node name="Class" type="TextureRect" parent="name_plate/Plane/Viewport/vbox/HBoxContainer"]
-margin_right = 113.0
-margin_bottom = 86.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 6
-
-[node name="Name" type="Label" parent="name_plate/Plane/Viewport/vbox/HBoxContainer"]
-margin_left = 117.0
-margin_right = 332.0
-margin_bottom = 86.0
+margin_bottom = 187.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -87,21 +58,10 @@ text = "<name>"
 align = 1
 valign = 1
 
-[node name="Lvl" type="Label" parent="name_plate/Plane/Viewport/vbox/HBoxContainer"]
-margin_left = 336.0
+[node name="Guild" type="Label" parent="Viewport/vbox"]
+margin_top = 187.0
 margin_right = 500.0
-margin_bottom = 86.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_fonts/font = ExtResource( 3 )
-text = "<lvl>"
-align = 1
-valign = 1
-
-[node name="Guild" type="Label" parent="name_plate/Plane/Viewport/vbox"]
-margin_top = 171.0
-margin_right = 500.0
-margin_bottom = 257.0
+margin_bottom = 281.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_fonts/font = ExtResource( 3 )
@@ -110,41 +70,10 @@ text = "<guild>"
 align = 1
 valign = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="name_plate/Plane/Viewport/vbox"]
-margin_top = 257.0
+[node name="Heatlh" parent="Viewport/vbox" instance=ExtResource( 1 )]
+margin_top = 281.0
 margin_right = 500.0
 margin_bottom = 300.0
 size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.5
-custom_constants/margin_right = 5
-custom_constants/margin_top = 5
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="name_plate/Plane/Viewport/vbox/MarginContainer"]
-margin_left = 10.0
-margin_top = 5.0
-margin_right = 495.0
-margin_bottom = 33.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Heatlh" parent="name_plate/Plane/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
-margin_right = 485.0
-margin_bottom = 28.0
-size_flags_horizontal = 3
-
-[node name="Mana" parent="name_plate/Plane/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
-visible = false
-margin_top = 22.0
-margin_right = 485.0
-size_flags_horizontal = 3
-
-[node name="Stamina" parent="name_plate/Plane/Viewport/vbox/MarginContainer/VBoxContainer" instance=ExtResource( 1 )]
-visible = false
-margin_top = 22.0
-margin_right = 485.0
-size_flags_horizontal = 3
-
-[editable path="name_plate"]
+size_flags_stretch_ratio = 0.2
+alignment = 1

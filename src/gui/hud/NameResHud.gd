@@ -1,18 +1,15 @@
 extends Spatial
 
-onready var name_label = $name_plate/Plane/Viewport/vbox/HBoxContainer/Name
-onready var level_label = $name_plate/Plane/Viewport/vbox/HBoxContainer/Lvl
-onready var guild_label = $name_plate/Plane/Viewport/vbox/Guild
-onready var title_lable = $name_plate/Plane/Viewport/vbox/Title
-onready var class_label = $name_plate/Plane/Viewport/vbox/HBoxContainer/Class
-onready var health_bar = $name_plate/Plane/Viewport/vbox/MarginContainer/VBoxContainer/Heatlh
-onready var mana_bar = $name_plate/Plane/Viewport/vbox/MarginContainer/VBoxContainer/Mana
-onready var stamina_bar = $name_plate/Plane/Viewport/vbox/MarginContainer/VBoxContainer/Stamina
+onready var name_label = $Viewport/vbox/Name
+onready var guild_label = $Viewport/vbox/Guild
+onready var title_lable = $Viewport/vbox/Title
+onready var health_bar = $Viewport/vbox/Heatlh
+onready var viewport = $Viewport
+onready var sprite3d = $Sprite3D
 
 
 func _ready() -> void:
-	$name_plate/Plane.get("material/0").albedo_texture = $name_plate/Plane/Viewport.get_texture()
-#	$Quat.get("material/0").albedo_texture = $Quat/Viewport.get_texture()
+	sprite3d.texture = viewport.get_texture()
 
 func conf(stats = {}, res = {}) -> void:
 	if stats.name != "":
@@ -29,39 +26,10 @@ func conf(stats = {}, res = {}) -> void:
 		guild_label.text = stats.guild
 	else:
 		guild_label.hide()
-	
-	if stats.level != "":
-		level_label.text = stats.level
-	else:
-		level_label.hide()
 
-	if res.health.maximum > 0:
-		health_bar.conf(tr("00006"), res.health.maximum, res.health.current, Color(1, 0, 0, 1))
-	else:
-		health_bar.hide()
-
-#	if res.mana.maximum > 0:
-#		mana_bar.conf(tr("00008"), res.mana.maximum, res.mana.current, Color(0, 0, 1, 1))
-#	else:
-#		mana_bar.hide()
-#
-#	if res.stamina.maximum > 0:
-#		stamina_bar.conf(tr("00010"), res.stamina.maximum, res.stamina.current, Color(1, 1, 0, 1))
-#	else:
-#		stamina_bar.hide()
-		
-		
+	health_bar.conf(res.maximum, res.current, Color(1, 0, 0, 1))
 	health_bar.get_node("ProgressBar").percent_visible = false
-#	mana_bar.get_node("ProgressBar").percent_visible = false
-#	stamina_bar.get_node("ProgressBar").percent_visible = false
-		
-	health_bar.get_node("Label").hide()
-#	mana_bar.get_node("Label").hide()
-#	stamina_bar.get_node("Label").hide()
 
-	mana_bar.hide()
-	stamina_bar.hide()
 func upd(res):
-	health_bar.updt(res.health.current)
-#	mana_bar.updt(res.mana.current)
-#	stamina_bar.updt(res.stamina.current)
+	health_bar.updt(res.current)
+

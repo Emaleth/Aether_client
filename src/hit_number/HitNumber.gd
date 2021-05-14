@@ -1,22 +1,22 @@
 extends Spatial
 
 onready var tween : Tween = $Tween
-onready var mesh = $MeshInstance
-onready var viewport = $MeshInstance/Viewport
-onready var label = $MeshInstance/Viewport/Label
+onready var sprite3d = $Sprite3D
+onready var viewport = $Viewport
+onready var label = $Viewport/Label
 
 func _ready() -> void:
 	conf(56)
 	
 func conf(value) -> void:
 	label.text = str(value)
-	mesh.get("material/0").albedo_texture = viewport.get_texture()
+	sprite3d.texture = viewport.get_texture()
 	tween.remove_all()
 	tween.interpolate_property(
-		mesh, 
+		sprite3d, 
 		"transform:origin:y", 
-		mesh.transform.origin.y, 
-		mesh.transform.origin.y + 1, 
+		sprite3d.transform.origin.y, 
+		sprite3d.transform.origin.y + 1, 
 		1, 
 		Tween.TRANS_LINEAR, 
 		Tween.EASE_IN

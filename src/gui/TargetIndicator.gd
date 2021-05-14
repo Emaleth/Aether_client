@@ -8,18 +8,18 @@ var types  = {
 
 onready var tween : Tween = $Tween
 onready var target_indicator : Spatial = $TargetIndicator
-onready var minimap_indicator : Spatial = $minimap_indicator
-onready var map_indicator : Spatial = $map_indicator
+onready var minimap_indicator : Spatial = $MinimapIndicator
+onready var map_indicator : Spatial = $MapIndicator
 
 var type = "enemy"
 
 func _ready() -> void:
-	target_indicator.get_node("Icosphere").get("material/0").set_albedo(types.get(type))
-	minimap_indicator.get_node("Plane").get("material/0").set_albedo(types.get(type))
-	map_indicator.get_node("Plane").get("material/0").set_albedo(types.get(type))
-	target_indicator.transform.origin.y = 3.3
+	target_indicator.modulate = types.get(type)
+	minimap_indicator.modulate = types.get(type)
+	map_indicator.modulate = types.get(type)
 	
 func bounce():
+	target_indicator.transform.origin.y = 3.3
 	target_indicator.show()
 	tween.remove_all()
 	tween.interpolate_property(target_indicator, "transform:origin:y", 3.3, 3, 0.7, Tween.TRANS_QUAD, Tween.EASE_IN)
@@ -29,5 +29,5 @@ func bounce():
 func halt():
 	target_indicator.hide()
 	tween.stop_all()
-	target_indicator.transform.origin.y = 3.3
+
 	

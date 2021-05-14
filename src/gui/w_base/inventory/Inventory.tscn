@@ -61,7 +61,7 @@ margin_top = 10.0
 margin_right = 10.0
 margin_bottom = 10.0
 mouse_filter = 2
-columns = 5
+columns = 7
 
 [node name="TopBar" type="Panel" parent="."]
 show_behind_parent = true
