@@ -2,11 +2,11 @@
 
 [ext_resource path="res://shaders/circle_cut.shader" type="Shader" id=1]
 [ext_resource path="res://src/gui/w_minimap/MiniMap.gd" type="Script" id=2]
-[ext_resource path="res://textures/tileW.png" type="Texture" id=3]
-[ext_resource path="res://textures/tileS.png" type="Texture" id=4]
-[ext_resource path="res://textures/tileN.png" type="Texture" id=5]
-[ext_resource path="res://textures/tileE.png" type="Texture" id=6]
-[ext_resource path="res://textures/minimapMap_wood.png" type="Texture" id=7]
+[ext_resource path="res://textures/ui_minimap_west.png" type="Texture" id=3]
+[ext_resource path="res://textures/ui_minimap_south.png" type="Texture" id=4]
+[ext_resource path="res://textures/ui_minimap_north.png" type="Texture" id=5]
+[ext_resource path="res://textures/ui_minimap_east.png" type="Texture" id=6]
+[ext_resource path="res://textures/ui_minimap_border.png" type="Texture" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

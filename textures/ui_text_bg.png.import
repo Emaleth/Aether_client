@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ranged_weapon_ghost.png-74001222d7fde046830d4ee3bc9bb06c.stex"
+path="res://.import/ui_text_bg.png-1bf70cb7089c527a2853d8944cca773a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/copy/ranged_weapon_ghost.png"
-dest_files=[ "res://.import/ranged_weapon_ghost.png-74001222d7fde046830d4ee3bc9bb06c.stex" ]
+source_file="res://textures/ui_text_bg.png"
+dest_files=[ "res://.import/ui_text_bg.png-1bf70cb7089c527a2853d8944cca773a.stex" ]
 
 [params]
 

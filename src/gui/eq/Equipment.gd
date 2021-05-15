@@ -1,7 +1,6 @@
-extends WindowDialog
+extends PanelContainer
 
 onready var grid = $MarginContainer/GridContainer
-onready var topbar = $TopBar
 
 onready var equipment : Dictionary = {
 	"head" : {
@@ -94,13 +93,6 @@ onready var equipment : Dictionary = {
 		}
 	}
 
-func _ready() -> void:
-	window_title = tr("00013")
-
-func _on_GridContainer_sort_children() -> void:
-	rect_size = $MarginContainer.rect_size
-	topbar.rect_size.x = rect_size.x
-	topbar.rect_position.y = -topbar.rect_size.y
 
 func conf(actor):
 	for i in actor.equipment:

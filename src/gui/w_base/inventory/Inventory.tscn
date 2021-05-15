@@ -1,51 +1,44 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/gui/w_base/inventory/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://textures/panel_woodDetail.png" type="Texture" id=2]
-[ext_resource path="res://textures/button_rectangleWood.png" type="Texture" id=3]
-[ext_resource path="res://fonts/ContentUI.tres" type="DynamicFont" id=4]
+[ext_resource path="res://textures/ui_panel_bg.png" type="Texture" id=2]
+
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 64, 64 )
-margin_left = 15.0
-margin_right = 15.0
-margin_top = 15.0
-margin_bottom = 15.0
+margin_left = 20.0
+margin_right = 20.0
+margin_top = 20.0
+margin_bottom = 20.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 40, 20 )
-margin_left = 10.0
-margin_right = 10.0
-margin_top = 10.0
-margin_bottom = 10.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="Inventory" type="WindowDialog"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 433.0
-margin_top = 272.0
-margin_right = -508.0
-margin_bottom = -258.0
+[node name="Inventory" type="PanelContainer"]
+margin_right = 34.0
+margin_bottom = 34.0
+grow_horizontal = 0
+grow_vertical = 0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-custom_styles/panel = SubResource( 1 )
-custom_fonts/title_font = ExtResource( 4 )
+custom_styles/panel = SubResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Panel" type="Panel" parent="."]
+margin_right = 34.0
+margin_bottom = 34.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="MarginContainer" type="MarginContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_right = -319.0
-margin_bottom = -170.0
+margin_right = 34.0
+margin_bottom = 34.0
 mouse_filter = 2
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -58,18 +51,7 @@ __meta__ = {
 [node name="grid" type="GridContainer" parent="MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 10.0
-margin_bottom = 10.0
+margin_right = 24.0
+margin_bottom = 24.0
 mouse_filter = 2
 columns = 7
-
-[node name="TopBar" type="Panel" parent="."]
-show_behind_parent = true
-margin_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 0
-rect_min_size = Vector2( 0, 20 )
-mouse_filter = 2
-custom_styles/panel = SubResource( 2 )
-
-[connection signal="sort_children" from="MarginContainer" to="." method="_on_MarginContainer_sort_children"]

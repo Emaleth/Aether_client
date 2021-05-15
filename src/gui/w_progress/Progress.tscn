@@ -4,17 +4,16 @@
 [ext_resource path="res://src/gui/w_base/resource_bar/ResourceBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://fonts/ContentUI.tres" type="DynamicFont" id=4]
 [ext_resource path="res://icon.png" type="Texture" id=5]
-[ext_resource path="res://textures/panel_woodDetail.png" type="Texture" id=6]
+[ext_resource path="res://textures/ui_panel_bg.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 6 )
-region_rect = Rect2( 0, 0, 64, 64 )
-margin_left = 15.0
-margin_right = 15.0
-margin_top = 15.0
-margin_bottom = 15.0
+margin_left = 20.0
+margin_right = 20.0
+margin_top = 20.0
+margin_bottom = 20.0
 
 [node name="Progress" type="Control"]
 script = ExtResource( 2 )
@@ -59,26 +58,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VSplitContainer/Progress/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer/Progress/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 210.0
 margin_bottom = 72.0
-size_flags_vertical = 4
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer"]
-margin_right = 200.0
-margin_bottom = 62.0
 rect_min_size = Vector2( 200, 50 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Name" type="Label" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="Name" type="Label" parent="VSplitContainer/Progress/MarginContainer/VBoxContainer"]
 visible = false
 margin_right = 200.0
 margin_bottom = 18.0
@@ -91,17 +81,17 @@ text = "<name>"
 align = 1
 valign = 1
 
-[node name="Health" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Health" parent="VSplitContainer/Progress/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
 margin_right = 200.0
 margin_bottom = 18.0
 size_flags_stretch_ratio = 4.0
 
-[node name="Mana" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Mana" parent="VSplitContainer/Progress/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
 margin_top = 22.0
 margin_right = 200.0
 size_flags_stretch_ratio = 0.5
 
-[node name="Stamina" parent="VSplitContainer/Progress/MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Stamina" parent="VSplitContainer/Progress/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
 margin_top = 44.0
 margin_right = 200.0
 margin_bottom = 62.0

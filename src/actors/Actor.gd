@@ -86,7 +86,7 @@ var equipment_slot_type : Dictionary = {
 	"earring_1" : ["earring"],
 	"earring_2" : ["earring"],
 	"main_hand" : ["sword", "longsword", "axe", "dagger", "staff"],
-	"off_hand" : ["sword", "longsword", "axe", "dagger", "shield"],
+	"off_hand" : ["sword", "axe", "dagger", "shield"],
 	"gathering_tools" : ["pickaxe"],
 	"amulet_1" : ["orb"],
 	"amulet_2" : ["orb"],

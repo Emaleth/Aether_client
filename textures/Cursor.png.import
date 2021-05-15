@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gathering_tools_ghost.png-be86c73561bdd030061e80e37504d826.stex"
+path="res://.import/Cursor.png-6954e23a9e219b414b5b73e3163aa793.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/copy/gathering_tools_ghost.png"
-dest_files=[ "res://.import/gathering_tools_ghost.png-be86c73561bdd030061e80e37504d826.stex" ]
+source_file="res://textures/Cursor.png"
+dest_files=[ "res://.import/Cursor.png-6954e23a9e219b414b5b73e3163aa793.stex" ]
 
 [params]
 

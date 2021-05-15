@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/panel_woodPaperDetail.png-4076b33fb378806e50e31f8da8ab1abf.stex"
+path="res://.import/ui_minimap_border.png-14ec7532a3690123767c64b5cafd5778.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/panel_woodPaperDetail.png"
-dest_files=[ "res://.import/panel_woodPaperDetail.png-4076b33fb378806e50e31f8da8ab1abf.stex" ]
+source_file="res://textures/ui_minimap_border.png"
+dest_files=[ "res://.import/ui_minimap_border.png-14ec7532a3690123767c64b5cafd5778.stex" ]
 
 [params]
 

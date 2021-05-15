@@ -39,7 +39,6 @@ func get_target_info(target, yay_or_nay):
 		$TargetProgress.hide()
 	else:
 		$TargetProgress.name_label.text = target.statistics.name
-#		$TargetProgress.lvl_label.text = target.statistics.level
 		$TargetProgress.name_label.show()
 		$TargetProgress.health_bar.conf(target.resources.health.maximum, target.resources.health.current, Color.red)
 		$TargetProgress.mana_bar.conf(target.resources.mana.maximum, target.resources.mana.current, Color.blue)

@@ -1,23 +1,26 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/gui/skillbar/SkillBar.gd" type="Script" id=1]
-[ext_resource path="res://textures/panel_woodDetail.png" type="Texture" id=2]
+[ext_resource path="res://textures/ui_panel_bg.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 0, 64, 64 )
-margin_left = 15.0
-margin_right = 15.0
-margin_top = 15.0
-margin_bottom = 15.0
+margin_left = 20.0
+margin_right = 20.0
+margin_top = 20.0
+margin_bottom = 20.0
 
 [node name="SkillBar" type="PanelContainer"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
+margin_left = -10.0
+margin_top = -30.0
+margin_right = 10.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
@@ -28,8 +31,9 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+margin_top = 5.0
 margin_right = 20.0
-margin_bottom = 20.0
+margin_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 0
 size_flags_horizontal = 4
@@ -54,6 +58,6 @@ columns = 20
 [node name="Panel" type="Panel" parent="."]
 show_behind_parent = true
 margin_right = 20.0
-margin_bottom = 20.0
+margin_bottom = 30.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 2 )

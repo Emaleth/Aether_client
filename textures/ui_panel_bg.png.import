@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/belt_ghost.png-ff50a266c2bb0803898cd376994e9952.stex"
+path="res://.import/ui_panel_bg.png-13c9a4e5bff58afe53a9d82a936e6e73.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/copy/belt_ghost.png"
-dest_files=[ "res://.import/belt_ghost.png-ff50a266c2bb0803898cd376994e9952.stex" ]
+source_file="res://textures/ui_panel_bg.png"
+dest_files=[ "res://.import/ui_panel_bg.png-13c9a4e5bff58afe53a9d82a936e6e73.stex" ]
 
 [params]
 

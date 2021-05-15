@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/panel_woodDetailArrows.png-f341ca4562b0e3d5926bacbcc358b1b2.stex"
+path="res://.import/ui_minimap_south.png-42592f9a1a14985b6d617eb1cbe07e68.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://textures/panel_woodDetailArrows.png"
-dest_files=[ "res://.import/panel_woodDetailArrows.png-f341ca4562b0e3d5926bacbcc358b1b2.stex" ]
+source_file="res://textures/ui_minimap_south.png"
+dest_files=[ "res://.import/ui_minimap_south.png-42592f9a1a14985b6d617eb1cbe07e68.stex" ]
 
 [params]
 
