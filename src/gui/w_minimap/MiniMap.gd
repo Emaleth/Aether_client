@@ -1,28 +1,36 @@
 extends PanelContainer
 
-onready var compass = $Compass
-onready var north = $Compass/N
-onready var east = $Compass/E
-onready var south = $Compass/S
-onready var west = $Compass/W
+var max_zoom = 70
+var min_zoom = 30
+var zoom_speed = 20
+var max_map_size = 300
+var default_map_size = 200
 
+onready var min_map_size = $ButtonList.rect_size.y
+onready var camera = $MarginContainer/ViewportContainer/Viewport/MiniMapCamera
+onready var zoom_in = $ButtonList/ZoomIn
+onready var zoom_out = $ButtonList/ZoomOut
+onready var resize = $ButtonList/Resize
 
 func _ready() -> void:
-	conf_compass()
+	rect_size = Vector2(default_map_size, default_map_size)
+	rect_position.x = OS.window_size.x - rect_size.x
 	
-func conf_compass() -> void:
-	north.rect_position = Vector2(compass.rect_size.x / 2 - 20, -5)
-	east.rect_position = Vector2(compass.rect_size.x - 35, compass.rect_size.y / 2 - 20)
-	south.rect_position = Vector2(compass.rect_size.x / 2 - 20, compass.rect_size.y - 35)
-	west.rect_position = Vector2(-5, compass.rect_size.y / 2 - 20)
-
-
-func _on_ViewportContainer_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == 1:
-			Input.action_press("map")
-			
 func _process(delta: float) -> void:
-	for i in compass.get_children():
-		$MarginContainer2/Border.rect_rotation = compass.rect_rotation
-		i.rect_rotation = -compass.rect_rotation
+	if zoom_in.pressed == true:
+		if camera.size > min_zoom:
+			camera.size -= zoom_speed * delta
+	if zoom_out.pressed == true:
+		if camera.size < max_zoom:
+			camera.size += zoom_speed * delta
+			
+	if resize.pressed == true:
+		var new_size_x = OS.window_size.x - (get_global_mouse_position().x - resize.rect_size.x / 2)
+		var new_size_y = get_global_mouse_position().y + resize.rect_size.y / 2
+		rect_size = Vector2(
+			max(clamp(new_size_x, min_map_size, max_map_size), clamp(new_size_y, min_map_size, max_map_size)),
+			max(clamp(new_size_x, min_map_size, max_map_size), clamp(new_size_y, min_map_size, max_map_size))
+			)
+		rect_position.x = OS.window_size.x - rect_size.x
+
+

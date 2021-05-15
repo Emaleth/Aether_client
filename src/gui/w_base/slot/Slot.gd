@@ -4,7 +4,7 @@ var aactor
 var ttype
 var sslot
 
-onready var quantity_label = $Label
+onready var quantity_label = $MarginContainer/Label
 
 signal request_swap
 signal request_use
@@ -67,8 +67,9 @@ func make_preview():
 func _make_custom_tooltip(for_text):
 	if aactor.get(ttype).get(sslot).item:
 		var tooltip = preload("res://src/gui/tooltip/Tooltip.tscn").instance()
-		tooltip.item_name = DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).NAME
-	#	tooltip.description = item_description
-	#	tooltip.stats = item_stats
+		tooltip.conf(DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).NAME)
+#		tooltip.item_name = DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).NAME
+	#	tooltip.item_description = item_description
+	#	tooltip.item_stats = item_stats
 		return tooltip
 		

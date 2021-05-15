@@ -26,7 +26,6 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	get_input()
-	$GUI.nesw.rect_rotation = rotation_degrees.y
 	
 func get_input():
 	direction = Vector3.ZERO

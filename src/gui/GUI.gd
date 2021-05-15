@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-onready var nesw : Control = $MiniMap/Compass
+#onready var minimap : Control = $MiniMap
 
 
 func _unhandled_input(event: InputEvent) -> void:
