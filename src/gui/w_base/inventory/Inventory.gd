@@ -6,55 +6,57 @@ var grid_v_separation = 4
 onready var buttons = {
 	"everything" : {
 		"button" : $MarginContainer/VBoxContainer/SlotSelector/Everything,
-		"on_icon" : preload("res://textures/icons/amulet_icon.png"), 
-		"off_icon" : null
+		"on_icon" : preload("res://textures/icons/black/inventory_50%.png"), 
+		"off_icon" : preload("res://textures/icons/grey/inventory_50%.png")
 		},
 	"weapon" : {
 		"button" : $MarginContainer/VBoxContainer/SlotSelector/Weapon,
-		"on_icon" : null, 
-		"off_icon" : null
+		"on_icon" : preload("res://textures/icons/black/sword_50%.png"), 
+		"off_icon" : preload("res://textures/icons/grey/sword_50%.png")
 		},
 	"armor" : {
 		"button" : $MarginContainer/VBoxContainer/SlotSelector/Armor,
-		"on_icon" : null, 
-		"off_icon" : null
+		"on_icon" : preload("res://textures/icons/black/armor_50%.png"), 
+		"off_icon" : preload("res://textures/icons/grey/armor_50%.png")
 		},
 	"jewelery" : {
 		"button" : $MarginContainer/VBoxContainer/SlotSelector/Jewelry,
-		"on_icon" : null, 
-		"off_icon" : null
+		"on_icon" : preload("res://textures/icons/black/necklace_50%.png"), 
+		"off_icon" : preload("res://textures/icons/grey/necklace_50%.png")
 		},
 	"ammunition" : {
 		"button" : $MarginContainer/VBoxContainer/SlotSelector/Ammunition,
-		"on_icon" : preload("res://textures/icons/ammunition_icon.png"), 
-		"off_icon" : null
+		"on_icon" : preload("res://textures/icons/black/arrows_50%.png"), 
+		"off_icon" : preload("res://textures/icons/grey/arrows_50%.png")
 		},
 	"consumable" : {
 		"button" : $MarginContainer/VBoxContainer/SlotSelector/Consumable,
-		"on_icon" : null, 
-		"off_icon" : null
+		"on_icon" : preload("res://textures/icons/black/potion_50%.png"), 
+		"off_icon" : preload("res://textures/icons/grey/potion_50%.png")
 		},
 	"tool" : {
 		"button" : $MarginContainer/VBoxContainer/SlotSelector/Tool,
-		"on_icon" : null, 
-		"off_icon" : null
+		"on_icon" : preload("res://textures/icons/black/tools_50%.png"), 
+		"off_icon" : preload("res://textures/icons/grey/tools_50%.png")
 		},
 	"material" : {
 		"button" : $MarginContainer/VBoxContainer/SlotSelector/Material,
-		"on_icon" : null, 
-		"off_icon" : null
+		"on_icon" : preload("res://textures/icons/black/material_50%.png"), 
+		"off_icon" : preload("res://textures/icons/grey/material_50%.png")
 		}
 	}
 	
 onready var slot_grid = $MarginContainer/VBoxContainer/ScrollContainer/grid
-onready var scroll = $MarginContainer/VBoxContainer/ScrollContainer
+onready var scroll : ScrollContainer = $MarginContainer/VBoxContainer/ScrollContainer
 onready var slot_selector = $MarginContainer/VBoxContainer/SlotSelector
 onready var slot_path = preload("res://src/gui/w_base/slot/Slot.tscn")
 
 
 func _ready() -> void:
+	scrollbar_theme()
 	scroll.rect_min_size.y = ((window_height_in_slots * 40) + ((window_height_in_slots -1) * grid_v_separation))
 	connect_button()
+	show_slot_type("everything")
 	
 func conf(actor):
 	if slot_grid.get_child_count() < actor.inventory.size():
@@ -92,3 +94,18 @@ func show_slot_type(slot_type : String = ""):
 func connect_button():
 	for i in buttons:
 		buttons.get(i).button.connect("pressed", self, "show_slot_type", [i])
+
+func scrollbar_theme():
+	var grabber = StyleBoxTexture.new()
+	grabber.texture = preload("res://textures/ui/scrollbar.png")
+	grabber.margin_top = 6
+	grabber.margin_bottom = 6
+	var grabber_bg = StyleBoxTexture.new()
+#	grabber_bg.texture = preload("res://textures/ui/ui_toggle_off.png")
+	grabber_bg.margin_right = 6
+	grabber_bg.margin_left = 6
+	scroll.get_v_scrollbar().add_stylebox_override("grabber_highlight", grabber)
+	scroll.get_v_scrollbar().add_stylebox_override("grabber", grabber)
+	scroll.get_v_scrollbar().add_stylebox_override("grabber_pressed", grabber)
+	scroll.get_v_scrollbar().add_stylebox_override("scroll", grabber_bg)
+	scroll.get_v_scrollbar().add_stylebox_override("scroll_focus", grabber_bg) 

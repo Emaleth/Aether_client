@@ -4,7 +4,7 @@
 [ext_resource path="res://src/gui/w_base/resource_bar/ResourceBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://fonts/ContentUI.tres" type="DynamicFont" id=4]
 [ext_resource path="res://icon.png" type="Texture" id=5]
-[ext_resource path="res://textures/ui_panel_bg.png" type="Texture" id=6]
+[ext_resource path="res://textures/ui/ui_panel_bg.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

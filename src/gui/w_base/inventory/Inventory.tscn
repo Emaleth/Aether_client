@@ -1,16 +1,8 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/gui/w_base/inventory/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://textures/ui_panel_bg.png" type="Texture" id=2]
-[ext_resource path="res://textures/ui_button_bg.png" type="Texture" id=3]
-[ext_resource path="res://textures/icons/weapon_icon.png" type="Texture" id=4]
-[ext_resource path="res://textures/icons/tool_icon.png" type="Texture" id=5]
-[ext_resource path="res://textures/icons/armor_icon.png" type="Texture" id=7]
-[ext_resource path="res://textures/icons/necklace_icon.png" type="Texture" id=8]
-[ext_resource path="res://textures/icons/mats_icon.png" type="Texture" id=9]
-[ext_resource path="res://textures/icons/potion_icon.png" type="Texture" id=10]
-[ext_resource path="res://textures/icons/ammunition_icon.png" type="Texture" id=11]
-[ext_resource path="res://textures/icons/amulet_icon.png" type="Texture" id=12]
+[ext_resource path="res://textures/ui/ui_panel_bg.png" type="Texture" id=2]
+[ext_resource path="res://textures/ui/ui_button_bg.png" type="Texture" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -87,7 +79,6 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 12 )
 expand_icon = true
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/SlotSelector"]
@@ -107,7 +98,6 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 4 )
 expand_icon = true
 
 [node name="Armor" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
@@ -120,7 +110,6 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 7 )
 expand_icon = true
 
 [node name="Jewelry" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
@@ -133,7 +122,6 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 8 )
 expand_icon = true
 
 [node name="Ammunition" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
@@ -146,7 +134,6 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 11 )
 expand_icon = true
 
 [node name="Consumable" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
@@ -159,7 +146,6 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 10 )
 expand_icon = true
 
 [node name="Tool" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
@@ -172,7 +158,6 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 5 )
 expand_icon = true
 
 [node name="Material" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
@@ -185,7 +170,6 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 9 )
 expand_icon = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
