@@ -1,27 +1,16 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/gui/w_base/inventory/Inventory.gd" type="Script" id=1]
 [ext_resource path="res://textures/ui_panel_bg.png" type="Texture" id=2]
 [ext_resource path="res://textures/ui_button_bg.png" type="Texture" id=3]
-[ext_resource path="res://textures/ui_all_toogle_on.png" type="Texture" id=4]
-[ext_resource path="res://textures/ui_weapon_toogle_off.png" type="Texture" id=5]
-[ext_resource path="res://src/gui/w_base/inventory/SlotSelector.gd" type="Script" id=6]
-[ext_resource path="res://textures/ui_potion_toogle_on.png" type="Texture" id=7]
-[ext_resource path="res://textures/ui_armor_toogle_on.png" type="Texture" id=8]
-[ext_resource path="res://textures/ui_jewelry_toogle_on.png" type="Texture" id=9]
-[ext_resource path="res://textures/ui_ammunition_toogle_off.png" type="Texture" id=10]
-[ext_resource path="res://textures/ui_ammunition_toogle_on.png" type="Texture" id=11]
-[ext_resource path="res://textures/ui_armor_toogle_off.png" type="Texture" id=12]
-[ext_resource path="res://textures/ui_weapon_toogle_on.png" type="Texture" id=13]
-[ext_resource path="res://textures/ui_jewelry_toogle_off.png" type="Texture" id=14]
-[ext_resource path="res://textures/ui_tool_toogle_off.png" type="Texture" id=15]
-[ext_resource path="res://textures/ui_tool_toogle_on.png" type="Texture" id=16]
-[ext_resource path="res://textures/ui_potion_toogle_off.png" type="Texture" id=17]
-[ext_resource path="res://textures/ui_all_toogle_off.png" type="Texture" id=18]
-[ext_resource path="res://textures/ui_rune_toogle_off.png" type="Texture" id=19]
-[ext_resource path="res://textures/ui_amulet_toogle_on.png" type="Texture" id=20]
-[ext_resource path="res://textures/ui_amulet_toogle_off.png" type="Texture" id=21]
-[ext_resource path="res://textures/ui_rune_toogle_on.png" type="Texture" id=22]
+[ext_resource path="res://textures/icons/weapon_icon.png" type="Texture" id=4]
+[ext_resource path="res://textures/icons/tool_icon.png" type="Texture" id=5]
+[ext_resource path="res://textures/icons/armor_icon.png" type="Texture" id=7]
+[ext_resource path="res://textures/icons/necklace_icon.png" type="Texture" id=8]
+[ext_resource path="res://textures/icons/mats_icon.png" type="Texture" id=9]
+[ext_resource path="res://textures/icons/potion_icon.png" type="Texture" id=10]
+[ext_resource path="res://textures/icons/ammunition_icon.png" type="Texture" id=11]
+[ext_resource path="res://textures/icons/amulet_icon.png" type="Texture" id=12]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -35,14 +24,17 @@ margin_bottom = 30.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[sub_resource type="StyleBoxTexture" id=4]
+[sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 40, 20 )
 
+[sub_resource type="StyleBoxEmpty" id=4]
+
 [node name="Inventory" type="PanelContainer"]
-margin_left = -120.0
-margin_right = 180.0
-margin_bottom = 300.0
+margin_left = -3448.0
+margin_top = -236.0
+margin_right = -3148.0
+margin_bottom = 64.0
 grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 4
@@ -54,7 +46,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 343.0
+margin_right = 300.0
 margin_bottom = 300.0
 custom_styles/panel = SubResource( 2 )
 __meta__ = {
@@ -62,7 +54,7 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 343.0
+margin_right = 300.0
 margin_bottom = 300.0
 mouse_filter = 2
 custom_constants/margin_right = 10
@@ -76,156 +68,132 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 333.0
+margin_right = 290.0
 margin_bottom = 290.0
 
 [node name="SlotSelector" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-margin_right = 323.0
-margin_bottom = 32.0
+margin_right = 280.0
+margin_bottom = 24.0
 mouse_filter = 2
 alignment = 1
-script = ExtResource( 6 )
 
-[node name="ShowAll" type="CheckButton" parent="MarginContainer/VBoxContainer/SlotSelector"]
-margin_left = 12.0
-margin_right = 39.0
-margin_bottom = 32.0
-custom_icons/off = ExtResource( 18 )
-custom_icons/on = ExtResource( 4 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
+[node name="Everything" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
+margin_left = 23.0
+margin_right = 47.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+icon = ExtResource( 12 )
+expand_icon = true
 
-[node name="WeaponToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/SlotSelector"]
-margin_left = 43.0
-margin_right = 75.0
-margin_bottom = 32.0
-custom_icons/off = ExtResource( 5 )
-custom_icons/on = ExtResource( 13 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-pressed = true
-align = 1
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/SlotSelector"]
+margin_left = 51.0
+margin_right = 61.0
+margin_bottom = 24.0
+custom_styles/separator = SubResource( 4 )
+custom_constants/separation = 10
 
-[node name="ArmorToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/SlotSelector"]
-margin_left = 79.0
-margin_right = 111.0
-margin_bottom = 32.0
-custom_icons/off = ExtResource( 12 )
-custom_icons/on = ExtResource( 8 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-pressed = true
-align = 1
+[node name="Weapon" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
+margin_left = 65.0
+margin_right = 89.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+icon = ExtResource( 4 )
+expand_icon = true
 
-[node name="JewelryToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/SlotSelector"]
-margin_left = 115.0
-margin_right = 147.0
-margin_bottom = 32.0
-custom_icons/off = ExtResource( 14 )
-custom_icons/on = ExtResource( 9 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-pressed = true
-align = 1
+[node name="Armor" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
+margin_left = 93.0
+margin_right = 117.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+icon = ExtResource( 7 )
+expand_icon = true
 
-[node name="AmmunitionToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/SlotSelector"]
-margin_left = 151.0
-margin_right = 183.0
-margin_bottom = 32.0
-custom_icons/off = ExtResource( 10 )
-custom_icons/on = ExtResource( 11 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-pressed = true
-align = 1
+[node name="Jewelry" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
+margin_left = 121.0
+margin_right = 145.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+icon = ExtResource( 8 )
+expand_icon = true
 
-[node name="ToolToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/SlotSelector"]
-margin_left = 187.0
-margin_right = 219.0
-margin_bottom = 32.0
-custom_icons/off = ExtResource( 15 )
-custom_icons/on = ExtResource( 16 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-pressed = true
-align = 1
+[node name="Ammunition" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
+margin_left = 149.0
+margin_right = 173.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+icon = ExtResource( 11 )
+expand_icon = true
 
-[node name="RuneToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/SlotSelector"]
-margin_left = 223.0
-margin_right = 247.0
-margin_bottom = 32.0
-custom_icons/off = ExtResource( 19 )
-custom_icons/on = ExtResource( 22 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-pressed = true
-align = 1
+[node name="Consumable" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
+margin_left = 177.0
+margin_right = 201.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+icon = ExtResource( 10 )
+expand_icon = true
 
-[node name="PotionToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/SlotSelector"]
-margin_left = 251.0
-margin_right = 275.0
-margin_bottom = 32.0
-custom_icons/off = ExtResource( 17 )
-custom_icons/on = ExtResource( 7 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-pressed = true
-align = 1
+[node name="Tool" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
+margin_left = 205.0
+margin_right = 229.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+icon = ExtResource( 5 )
+expand_icon = true
 
-[node name="AmuletToggle" type="CheckButton" parent="MarginContainer/VBoxContainer/SlotSelector"]
-margin_left = 279.0
-margin_right = 311.0
-margin_bottom = 32.0
-custom_icons/off = ExtResource( 21 )
-custom_icons/on = ExtResource( 20 )
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/focus = SubResource( 4 )
-custom_styles/disabled = SubResource( 4 )
-custom_styles/hover_pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-pressed = true
-align = 1
+[node name="Material" type="Button" parent="MarginContainer/VBoxContainer/SlotSelector"]
+margin_left = 233.0
+margin_right = 257.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+icon = ExtResource( 9 )
+expand_icon = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
-margin_top = 36.0
-margin_right = 323.0
-margin_bottom = 36.0
+margin_top = 28.0
+margin_right = 280.0
+margin_bottom = 28.0
 scroll_horizontal_enabled = false
 
 [node name="grid" type="GridContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 mouse_filter = 2
 columns = 7
-
-[connection signal="pressed" from="MarginContainer/VBoxContainer/SlotSelector/ShowAll" to="MarginContainer/VBoxContainer/SlotSelector" method="_on_ShowAll_pressed"]
