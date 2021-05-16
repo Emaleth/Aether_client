@@ -110,7 +110,7 @@ var turn_speed : float = 3.0
 var target = null
 var attacking = false
 
-var inv_slot_num = 49
+var inv_slot_num = 70
 var skill_bar_slot_num = 20
 
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
