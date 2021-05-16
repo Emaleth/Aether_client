@@ -27,7 +27,7 @@ ObjectPool="*res://scripts/ObjectPool.gd"
 
 window/size/width=1280
 window/size/height=720
-mouse_cursor/custom_image="res://textures/Cursor.png"
+mouse_cursor/custom_image="res://textures/ui_cursor.png"
 
 [gui]
 

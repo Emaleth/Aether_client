@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/gui/TargetIndicator.gd" type="Script" id=1]
-[ext_resource path="res://textures/crosshair022.png" type="Texture" id=3]
-[ext_resource path="res://textures/crosshair001.png" type="Texture" id=5]
+[ext_resource path="res://textures/ui_target_indicator.png" type="Texture" id=2]
+[ext_resource path="res://textures/ui_minimap_indicator.png" type="Texture" id=3]
+[ext_resource path="res://textures/ui_map_indicator.png" type="Texture" id=5]
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
@@ -17,7 +18,7 @@ visible = false
 flip_v = true
 billboard = 1
 double_sided = false
-texture = ExtResource( 3 )
+texture = ExtResource( 2 )
 
 [node name="MinimapIndicator" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
