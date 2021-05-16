@@ -5,6 +5,7 @@ var xxx
 
 onready var weapon_toggle = $WeaponToggle
 onready var armor_toggle = $ArmorToggle
+onready var amulet_toggle = $AmuletToggle
 onready var jewelry_toggle = $JewelryToggle
 onready var ammunition_toggle = $AmmunitionToggle
 onready var tool_toggle = $ToolToggle
@@ -22,6 +23,7 @@ func show_all_slots():
 	tool_toggle.pressed = true
 	rune_toggle.pressed = true
 	potion_toggle.pressed = true
+	amulet_toggle.pressed = true
 	xxx.show_slots(["weapon", "armor", "jewelry", "ammunition", "tool", "rune", "potion", "amulet"])
 	
 func hide_all_slots():
@@ -34,6 +36,7 @@ func hide_all_slots():
 	tool_toggle.pressed = false
 	rune_toggle.pressed = false
 	potion_toggle.pressed = false
+	amulet_toggle.pressed = false
 	xxx.hide_slots(["weapon", "armor", "jewelry", "ammunition", "tool", "rune", "potion", "amulet"])
 	
 func _on_ShowAll_pressed() -> void:
