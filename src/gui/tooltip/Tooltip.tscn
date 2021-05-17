@@ -1,17 +1,17 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/gui/tooltip/Tooltip.gd" type="Script" id=1]
-[ext_resource path="res://textures/ui/ui_text_bg.png" type="Texture" id=2]
+[ext_resource path="res://textures/new_ui/Text Box.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 64, 64 )
-margin_left = 30.0
-margin_right = 30.0
-margin_top = 30.0
-margin_bottom = 30.0
+region_rect = Rect2( 0, 0, 766, 203 )
+margin_left = 36.0
+margin_right = 36.0
+margin_top = 36.0
+margin_bottom = 36.0
 
 [node name="Tooltip" type="PanelContainer"]
 anchor_right = 1.0
@@ -46,5 +46,5 @@ margin_left = 10.0
 margin_top = 10.0
 margin_right = 51.0
 margin_bottom = 24.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"

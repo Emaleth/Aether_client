@@ -18,6 +18,3 @@ func conf(actor):
 			var new_slot = grid.get_child(i)
 			new_slot.conf(actor, i, "skillbar")
 			
-func can_drop_data(position: Vector2, data) -> bool:
-	return false
-

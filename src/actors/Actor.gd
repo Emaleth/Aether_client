@@ -107,7 +107,7 @@ var jumping = false
 var falling = false
 var rot_direction : int
 var turn_speed : float = 3.0
-var target = null
+var enemy = null
 var attacking = false
 
 var inv_slot_num = 70
@@ -268,16 +268,16 @@ func _on_AttackArea_body_entered(body: Node) -> void:
 
 func _on_AttackArea_body_exited(body: Node) -> void:
 	if body is KinematicBody:
-		if body == target:
+		if body == enemy:
 			emit_signal("target_lost")
-			target = null
+			enemy = null
 		target_list.erase(body)
 
 func attack():
 	if attacking == true:
-		if target:
+		if enemy:
 			gcd.start(1)
-			target.hurt(10)
+			enemy.hurt(10)
 			modify_resource("mana", -5)
 			
 func load_eq():

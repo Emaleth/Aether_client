@@ -24,7 +24,7 @@ func _ready() -> void:
 	$GUI.configure_skillbar(self)
 	connect("update_skillbar", $GUI, "configure_skillbar", [self])
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	get_input()
 	
 func get_input():
@@ -50,23 +50,23 @@ func _unhandled_input(event: InputEvent) -> void:
 func get_next_target():
 	var new_target = target_list.pop_front()
 	if new_target:
-		if target:
-			target.show_indicator(false)
-			target.disconnect("update_resources", $GUI, "update_targe_info")
-			$GUI.get_target_info(target, false)
-			if $AttackArea.overlaps_body(target): 
-				target_list.append(target)
-		target = new_target
-		target.connect("update_resources", $GUI, "update_targe_info", [target.resources])
-		target.show_indicator(true)
-		$GUI.get_target_info(target, true)
+		if enemy:
+			enemy.show_indicator(false)
+			enemy.disconnect("update_resources", $GUI, "update_targe_info")
+			$GUI.get_target_info(enemy, false)
+			if $AttackArea.overlaps_body(enemy): 
+				target_list.append(enemy)
+		enemy = new_target
+		enemy.connect("update_resources", $GUI, "update_targe_info", [enemy.resources])
+		enemy.show_indicator(true)
+		$GUI.get_target_info(enemy, true)
 		attack()
-		look_at(target.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS
+		look_at(enemy.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS
 
 func loose_target_ui():
-	if target:
-		target.show_indicator(false)
-		$GUI.get_target_info(target, false)
+	if enemy:
+		enemy.show_indicator(false)
+		$GUI.get_target_info(enemy, false)
 
 func get_test_items():
 	inventory[0].item = "ITEM_00000"

@@ -1,19 +1,15 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/gui/map/Map.gd" type="Script" id=1]
-[ext_resource path="res://textures/ui/ui_panel_bg.png" type="Texture" id=2]
-[ext_resource path="res://textures/ui/ui_minimap_west.png" type="Texture" id=3]
-[ext_resource path="res://textures/ui/ui_minimap_south.png" type="Texture" id=4]
-[ext_resource path="res://textures/ui/ui_minimap_north.png" type="Texture" id=5]
-[ext_resource path="res://textures/ui/ui_minimap_east.png" type="Texture" id=6]
+[ext_resource path="res://textures/new_ui/Text Box.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 64, 64 )
-margin_left = 20.0
-margin_right = 20.0
-margin_top = 20.0
-margin_bottom = 20.0
+region_rect = Rect2( 0, 0, 766, 203 )
+margin_left = 36.0
+margin_right = 36.0
+margin_top = 36.0
+margin_bottom = 36.0
 
 [node name="Map" type="MarginContainer"]
 anchor_right = 1.0
@@ -71,83 +67,3 @@ cull_mask = 4
 projection = 1
 size = 100.0
 far = 1000.0
-
-[node name="Compass" type="Control" parent="."]
-margin_left = 100.0
-margin_top = 100.0
-margin_right = 1180.0
-margin_bottom = 620.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="N" type="TextureRect" parent="Compass"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 40, 40 )
-rect_pivot_offset = Vector2( 20, 20 )
-mouse_filter = 2
-size_flags_horizontal = 12
-size_flags_vertical = 12
-texture = ExtResource( 5 )
-expand = true
-stretch_mode = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="E" type="TextureRect" parent="Compass"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 40, 40 )
-rect_pivot_offset = Vector2( 20, 20 )
-mouse_filter = 2
-size_flags_horizontal = 12
-size_flags_vertical = 12
-texture = ExtResource( 6 )
-expand = true
-stretch_mode = 1
-
-[node name="S" type="TextureRect" parent="Compass"]
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 40, 40 )
-rect_pivot_offset = Vector2( 20, 20 )
-mouse_filter = 2
-size_flags_horizontal = 12
-size_flags_vertical = 12
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 1
-
-[node name="W" type="TextureRect" parent="Compass"]
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_left = -20.0
-margin_top = -20.0
-margin_right = 20.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 40, 40 )
-rect_pivot_offset = Vector2( 20, 20 )
-mouse_filter = 2
-size_flags_horizontal = 12
-size_flags_vertical = 12
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 1

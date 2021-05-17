@@ -3,17 +3,17 @@
 [ext_resource path="res://src/gui/eq/Equipment.gd" type="Script" id=1]
 [ext_resource path="res://src/gui/w_base/slot/Slot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/gui/NullSlot.tscn" type="PackedScene" id=3]
-[ext_resource path="res://textures/ui/ui_panel_bg.png" type="Texture" id=4]
+[ext_resource path="res://textures/new_ui/Text Box.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 4 )
-region_rect = Rect2( 0, 0, 64, 64 )
-margin_left = 30.0
-margin_right = 30.0
-margin_top = 30.0
-margin_bottom = 30.0
+region_rect = Rect2( 0, 0, 766, 203 )
+margin_left = 36.0
+margin_right = 36.0
+margin_top = 36.0
+margin_bottom = 36.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 

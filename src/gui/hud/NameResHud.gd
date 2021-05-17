@@ -27,8 +27,7 @@ func conf(stats = {}, res = {}) -> void:
 	else:
 		guild_label.hide()
 
-	health_bar.conf(res.maximum, res.current, Color(1, 0, 0, 1))
-	health_bar.get_node("ProgressBar").percent_visible = false
+	health_bar.conf(res.maximum, res.current, Color.red)
 
 func upd(res):
 	health_bar.updt(res.current)
