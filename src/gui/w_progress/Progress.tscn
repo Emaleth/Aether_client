@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://textures/new_ui/Text Box.png" type="Texture" id=1]
+[ext_resource path="res://textures/ui/panel_bg.png" type="Texture" id=1]
 [ext_resource path="res://src/gui/w_progress/Progress.gd" type="Script" id=2]
 [ext_resource path="res://src/gui/w_base/resource_bar/ResourceBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://fonts/ContentUI.tres" type="DynamicFont" id=4]
@@ -32,8 +32,8 @@ __meta__ = {
 }
 
 [node name="Progress" type="PanelContainer" parent="VSplitContainer"]
-margin_right = 32.0
-margin_bottom = 118.0
+margin_right = 220.0
+margin_bottom = 70.0
 size_flags_horizontal = 4
 custom_styles/panel = SubResource( 1 )
 __meta__ = {
@@ -41,13 +41,13 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="VSplitContainer/Progress"]
-margin_right = 32.0
-margin_bottom = 118.0
+margin_right = 220.0
+margin_bottom = 70.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="MarginContainer" type="MarginContainer" parent="VSplitContainer/Progress"]
-margin_right = 32.0
-margin_bottom = 118.0
+margin_right = 220.0
+margin_bottom = 70.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
@@ -59,8 +59,8 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer/Progress/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 22.0
-margin_bottom = 108.0
+margin_right = 210.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -79,24 +79,22 @@ align = 1
 valign = 1
 
 [node name="Health" parent="VSplitContainer/Progress/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_right = 12.0
+margin_bottom = 14.0
 size_flags_stretch_ratio = 4.0
 
 [node name="Mana" parent="VSplitContainer/Progress/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 34.0
-margin_right = 12.0
-margin_bottom = 64.0
+margin_top = 18.0
+margin_bottom = 32.0
 size_flags_stretch_ratio = 0.5
 
 [node name="Stamina" parent="VSplitContainer/Progress/MarginContainer/VBoxContainer" instance=ExtResource( 3 )]
-margin_top = 68.0
-margin_right = 12.0
-margin_bottom = 98.0
+margin_top = 36.0
+margin_bottom = 50.0
 size_flags_stretch_ratio = 0.5
 
 [node name="MarginContainer" type="MarginContainer" parent="VSplitContainer"]
-margin_top = 118.0
-margin_right = 32.0
+margin_top = 70.0
+margin_right = 220.0
 margin_bottom = 128.0
 custom_constants/margin_right = 5
 custom_constants/margin_top = 5
@@ -105,10 +103,10 @@ custom_constants/margin_bottom = 5
 
 [node name="StatusGrid" type="GridContainer" parent="VSplitContainer/MarginContainer"]
 visible = false
-margin_left = -102.0
+margin_left = -8.0
 margin_top = 5.0
-margin_right = 134.0
-margin_bottom = 49.0
+margin_right = 228.0
+margin_bottom = 53.0
 size_flags_horizontal = 4
 columns = 10
 

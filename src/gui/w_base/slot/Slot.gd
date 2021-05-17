@@ -61,7 +61,7 @@ func drop_data(_position: Vector2, data) -> void:
 	emit_signal("request_swap", source, target)
 
 func _on_Slot_pressed() -> void: 
-	if cooldown == 0:
+	if cooldown == 0 && aactor.get(ttype).get(sslot).item:
 		if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).USABLE == true:
 			var source = [aactor, ttype, sslot]
 			emit_signal("request_use", source)

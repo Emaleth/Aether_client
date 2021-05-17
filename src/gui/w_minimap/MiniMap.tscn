@@ -1,16 +1,17 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://textures/new_ui/Text Box.png" type="Texture" id=1]
+[ext_resource path="res://textures/ui/panel_bg.png" type="Texture" id=1]
 [ext_resource path="res://src/gui/w_minimap/MiniMap.gd" type="Script" id=2]
-[ext_resource path="res://textures/ui/ui_icon_resize.png" type="Texture" id=3]
-[ext_resource path="res://textures/new_ui/button_round.png" type="Texture" id=4]
-[ext_resource path="res://textures/ui/ui_icon_minus.png" type="Texture" id=5]
-[ext_resource path="res://textures/ui/ui_icon_plus.png" type="Texture" id=6]
+[ext_resource path="res://textures/icons/ui_icon_resize.png" type="Texture" id=3]
+[ext_resource path="res://textures/ui/button_round.png" type="Texture" id=4]
+[ext_resource path="res://textures/icons/ui_icon_minus.png" type="Texture" id=5]
+[ext_resource path="res://textures/icons/ui_icon_plus.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxTexture" id=2]
 texture = ExtResource( 1 )
+region_rect = Rect2( 0, 0, 766, 203 )
 margin_left = 36.0
 margin_right = 36.0
 margin_top = 36.0
@@ -67,11 +68,12 @@ projection = 1
 size = 50.0
 
 [node name="ButtonList" type="VBoxContainer" parent="."]
-margin_top = 120.0
-margin_right = 24.0
-margin_bottom = 200.0
+margin_left = -7.0
+margin_top = 127.0
+margin_right = 17.0
+margin_bottom = 207.0
 size_flags_horizontal = 0
-size_flags_vertical = 8
+size_flags_vertical = 0
 
 [node name="ZoomIn" type="Button" parent="ButtonList"]
 margin_right = 24.0
@@ -98,9 +100,12 @@ icon = ExtResource( 5 )
 margin_top = 56.0
 margin_right = 24.0
 margin_bottom = 80.0
+rect_min_size = Vector2( 24, 24 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
 icon = ExtResource( 3 )
+
+[connection signal="sort_children" from="." to="." method="_on_MiniMap_sort_children"]

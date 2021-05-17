@@ -11,43 +11,43 @@ onready var slot_path = preload("res://src/gui/w_base/slot/Slot.tscn")
 onready var buttons = {
 	"everything" : {
 		"button" : slot_selector.get_node("Everything"),
-		"on_icon" : preload("res://textures/icons/white/inventory_100%.png"), 
-		"off_icon" : preload("res://textures/icons/grey/inventory_100%.png")
+		"on_icon" : preload("res://textures/icons/white/inventory.png"), 
+		"off_icon" : preload("res://textures/icons/grey/inventory.png")
 		},
 	"weapon" : {
 		"button" : slot_selector.get_node("Weapon"),
-		"on_icon" : preload("res://textures/icons/white/sword_100%.png"), 
-		"off_icon" : preload("res://textures/icons/grey/sword_100%.png")
+		"on_icon" : preload("res://textures/icons/white/sword.png"), 
+		"off_icon" : preload("res://textures/icons/grey/sword.png")
 		},
 	"armor" : {
 		"button" : slot_selector.get_node("Armor"),
-		"on_icon" : preload("res://textures/icons/white/armor_100%.png"), 
-		"off_icon" : preload("res://textures/icons/grey/armor_100%.png")
+		"on_icon" : preload("res://textures/icons/white/armor.png"), 
+		"off_icon" : preload("res://textures/icons/grey/armor.png")
 		},
 	"jewelery" : {
 		"button" : slot_selector.get_node("Jewelry"),
-		"on_icon" : preload("res://textures/icons/white/necklace_100%.png"), 
-		"off_icon" : preload("res://textures/icons/grey/necklace_100%.png")
+		"on_icon" : preload("res://textures/icons/white/necklace.png"), 
+		"off_icon" : preload("res://textures/icons/grey/necklace.png")
 		},
 	"ammunition" : {
 		"button" : slot_selector.get_node("Ammunition"),
-		"on_icon" : preload("res://textures/icons/white/arrows_100%.png"), 
-		"off_icon" : preload("res://textures/icons/grey/arrows_100%.png")
+		"on_icon" : preload("res://textures/icons/white/arrows.png"), 
+		"off_icon" : preload("res://textures/icons/grey/arrows.png")
 		},
 	"consumable" : {
 		"button" : slot_selector.get_node("Consumable"),
-		"on_icon" : preload("res://textures/icons/white/potion_100%.png"), 
-		"off_icon" : preload("res://textures/icons/grey/potion_100%.png")
+		"on_icon" : preload("res://textures/icons/white/potion.png"), 
+		"off_icon" : preload("res://textures/icons/grey/potion.png")
 		},
 	"tool" : {
 		"button" : slot_selector.get_node("Tool"),
-		"on_icon" : preload("res://textures/icons/white/tools_100%.png"), 
-		"off_icon" : preload("res://textures/icons/grey/tools_100%.png")
+		"on_icon" : preload("res://textures/icons/white/tools.png"), 
+		"off_icon" : preload("res://textures/icons/grey/tools.png")
 		},
 	"material" : {
 		"button" : slot_selector.get_node("Material"),
-		"on_icon" : preload("res://textures/icons/white/material_100%.png"), 
-		"off_icon" : preload("res://textures/icons/grey/material_100%.png")
+		"on_icon" : preload("res://textures/icons/white/material.png"), 
+		"off_icon" : preload("res://textures/icons/grey/material.png")
 		}
 	}
 	
@@ -93,12 +93,13 @@ func connect_button():
 
 func scrollbar_theme():
 	var grabber = StyleBoxTexture.new()
-	grabber.texture = preload("res://textures/new_ui/grabber2.png")
+	grabber.texture = preload("res://textures/ui/grabber.png")
 	grabber.margin_top = 6
 	grabber.margin_bottom = 6
 	var grabber_bg = StyleBoxTexture.new()
-	grabber_bg.margin_right = 6
-	grabber_bg.margin_left = 6
+	grabber_bg.texture = preload("res://textures/ui/scrollbar_bg.png")
+#	grabber_bg.margin_right = 6
+#	grabber_bg.margin_left = 6
 	scroll.get_v_scrollbar().add_stylebox_override("grabber_highlight", grabber)
 	scroll.get_v_scrollbar().add_stylebox_override("grabber", grabber)
 	scroll.get_v_scrollbar().add_stylebox_override("grabber_pressed", grabber)

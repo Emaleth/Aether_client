@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://src/gui/w_base/inventory/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://textures/new_ui/Text Box.png" type="Texture" id=2]
-[ext_resource path="res://textures/new_ui/grabber2.png" type="Texture" id=3]
+[ext_resource path="res://textures/ui/panel_bg.png" type="Texture" id=2]
+[ext_resource path="res://textures/ui/button.png" type="Texture" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -13,12 +13,10 @@ margin_left = 36.0
 margin_right = 36.0
 margin_top = 36.0
 margin_bottom = 36.0
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
 
 [sub_resource type="StyleBoxTexture" id=3]
 texture = ExtResource( 3 )
-region_rect = Rect2( 0, 0, 65, 65 )
+region_rect = Rect2( 0, 0, 506, 55 )
 margin_left = 6.0
 margin_right = 6.0
 margin_top = 6.0

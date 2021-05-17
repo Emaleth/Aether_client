@@ -8,6 +8,7 @@ var default_map_size = 200
 
 onready var min_map_size = $ButtonList.rect_size.y
 onready var camera = $MarginContainer/ViewportContainer/Viewport/MiniMapCamera
+onready var button_container = $ButtonList
 onready var zoom_in = $ButtonList/ZoomIn
 onready var zoom_out = $ButtonList/ZoomOut
 onready var resize = $ButtonList/Resize
@@ -33,4 +34,6 @@ func _process(delta: float) -> void:
 			)
 		rect_position.x = OS.window_size.x - rect_size.x
 
-
+func _on_MiniMap_sort_children() -> void:
+	var offset = (button_container.rect_size.x / 2) - ($MarginContainer.get("custom_constants/margin_right") / 2)
+	button_container.rect_position = Vector2(-offset, rect_size.y - button_container.rect_size.y + offset)

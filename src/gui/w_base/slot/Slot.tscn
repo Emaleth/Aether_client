@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/gui/w_base/slot/Slot.gd" type="Script" id=1]
-[ext_resource path="res://textures/new_ui/grabber2.png" type="Texture" id=2]
-[ext_resource path="res://textures/new_ui/grabber.png" type="Texture" id=3]
+[ext_resource path="res://textures/ui/slot_bg.png" type="Texture" id=2]
+[ext_resource path="res://textures/ui/grabber.png" type="Texture" id=3]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )

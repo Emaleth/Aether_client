@@ -1,11 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://src/gui/map/Map.gd" type="Script" id=1]
-[ext_resource path="res://textures/new_ui/Text Box.png" type="Texture" id=2]
+[ext_resource path="res://textures/ui/panel_bg.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxTexture" id=1]
 texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 766, 203 )
 margin_left = 36.0
 margin_right = 36.0
 margin_top = 36.0
@@ -40,23 +39,23 @@ margin_bottom = 620.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
+custom_constants/margin_right = 15
+custom_constants/margin_top = 15
+custom_constants/margin_left = 15
+custom_constants/margin_bottom = 15
 
 [node name="ViewportContainer" type="ViewportContainer" parent="MarginContainer"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1070.0
-margin_bottom = 510.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 1065.0
+margin_bottom = 505.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="MarginContainer/ViewportContainer"]
-size = Vector2( 1060, 500 )
+size = Vector2( 1050, 490 )
 handle_input_locally = false
 usage = 3
 render_target_update_mode = 3
