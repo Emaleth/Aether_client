@@ -33,6 +33,7 @@ func conf(actor, slot, type, empty_icon = null):
 			if is_connected("request_use", actor, "use_item"):
 				disconnect("request_use", actor, "use_item")
 		icon = load("res://previews/%s.png" % actor.get(type).get(slot).item)
+		$MarginContainer2/Ghost.hide()
 		hint_tooltip = "wierd fuckery"
 		if actor.get(type).get(slot).quantity > 1:
 			quantity_label.text = str(actor.get(type).get(slot).quantity)
@@ -40,7 +41,10 @@ func conf(actor, slot, type, empty_icon = null):
 			quantity_label.text = ""
 	else:
 		if empty_icon:
-			icon = empty_icon
+			$MarginContainer2/Ghost.texture = empty_icon
+			$MarginContainer2/Ghost.self_modulate = Global.item_ghost
+			$MarginContainer2/Ghost.show()
+			icon = null
 		else:
 			icon = null
 		hint_tooltip = ""

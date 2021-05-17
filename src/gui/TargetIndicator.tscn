@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://src/gui/TargetIndicator.gd" type="Script" id=1]
-[ext_resource path="res://textures/icons/map_unit.png" type="Texture" id=2]
-[ext_resource path="res://textures/icons/target.png" type="Texture" id=3]
-[ext_resource path="res://textures/icons/minimap_unit.png" type="Texture" id=4]
+[ext_resource path="res://textures/icons/position_marker.png" type="Texture" id=2]
+[ext_resource path="res://textures/icons/target_marker.png" type="Texture" id=3]
+[ext_resource path="res://textures/icons/direction_marker.png" type="Texture" id=4]
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 1 )
@@ -22,9 +22,9 @@ double_sided = false
 texture = ExtResource( 3 )
 
 [node name="MinimapIndicator" type="Sprite3D" parent="."]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 layers = 2
-pixel_size = 0.005
+flip_v = true
 axis = 1
 double_sided = false
 texture = ExtResource( 4 )
@@ -32,6 +32,5 @@ texture = ExtResource( 4 )
 [node name="MapIndicator" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 layers = 4
-pixel_size = 0.003
 axis = 1
 texture = ExtResource( 2 )

@@ -9,46 +9,14 @@ onready var slot_selector = $MarginContainer/VBoxContainer/MarginContainer/Margi
 onready var slot_path = preload("res://src/gui/w_base/slot/Slot.tscn")
 
 onready var buttons = {
-	"everything" : {
-		"button" : slot_selector.get_node("Everything"),
-		"on_icon" : preload("res://textures/icons/white/inventory.png"), 
-		"off_icon" : preload("res://textures/icons/grey/inventory.png")
-		},
-	"weapon" : {
-		"button" : slot_selector.get_node("Weapon"),
-		"on_icon" : preload("res://textures/icons/white/sword.png"), 
-		"off_icon" : preload("res://textures/icons/grey/sword.png")
-		},
-	"armor" : {
-		"button" : slot_selector.get_node("Armor"),
-		"on_icon" : preload("res://textures/icons/white/armor.png"), 
-		"off_icon" : preload("res://textures/icons/grey/armor.png")
-		},
-	"jewelery" : {
-		"button" : slot_selector.get_node("Jewelry"),
-		"on_icon" : preload("res://textures/icons/white/necklace.png"), 
-		"off_icon" : preload("res://textures/icons/grey/necklace.png")
-		},
-	"ammunition" : {
-		"button" : slot_selector.get_node("Ammunition"),
-		"on_icon" : preload("res://textures/icons/white/arrows.png"), 
-		"off_icon" : preload("res://textures/icons/grey/arrows.png")
-		},
-	"consumable" : {
-		"button" : slot_selector.get_node("Consumable"),
-		"on_icon" : preload("res://textures/icons/white/potion.png"), 
-		"off_icon" : preload("res://textures/icons/grey/potion.png")
-		},
-	"tool" : {
-		"button" : slot_selector.get_node("Tool"),
-		"on_icon" : preload("res://textures/icons/white/tools.png"), 
-		"off_icon" : preload("res://textures/icons/grey/tools.png")
-		},
-	"material" : {
-		"button" : slot_selector.get_node("Material"),
-		"on_icon" : preload("res://textures/icons/white/material.png"), 
-		"off_icon" : preload("res://textures/icons/grey/material.png")
-		}
+	"everything" : slot_selector.get_node("Inventory"),
+	"weapon" : slot_selector.get_node("Weapon"),
+	"armor" : slot_selector.get_node("Armor"),
+	"jewelery" : slot_selector.get_node("Jewelry"),
+	"ammunition" : slot_selector.get_node("Ammunition"),
+	"consumable" : slot_selector.get_node("Consumable"),
+	"tool" : slot_selector.get_node("Tool"),
+	"material" : slot_selector.get_node("Material")
 	}
 	
 func _ready() -> void:
@@ -83,13 +51,13 @@ func show_slot_type(slot_type : String = ""):
 					slot.hide()
 	for i in buttons:
 		if i == slot_type:
-			buttons.get(i).button.icon = buttons.get(i).on_icon
+			buttons.get(i).self_modulate = Global.toggle_on
 		else:
-			buttons.get(i).button.icon = buttons.get(i).off_icon
+			buttons.get(i).self_modulate = Global.toggle_off
 			
 func connect_button():
 	for i in buttons:
-		buttons.get(i).button.connect("pressed", self, "show_slot_type", [i])
+		buttons.get(i).connect("pressed", self, "show_slot_type", [i])
 
 func scrollbar_theme():
 	var grabber = StyleBoxTexture.new()
@@ -98,8 +66,6 @@ func scrollbar_theme():
 	grabber.margin_bottom = 6
 	var grabber_bg = StyleBoxTexture.new()
 	grabber_bg.texture = preload("res://textures/ui/scrollbar_bg.png")
-#	grabber_bg.margin_right = 6
-#	grabber_bg.margin_left = 6
 	scroll.get_v_scrollbar().add_stylebox_override("grabber_highlight", grabber)
 	scroll.get_v_scrollbar().add_stylebox_override("grabber", grabber)
 	scroll.get_v_scrollbar().add_stylebox_override("grabber_pressed", grabber)

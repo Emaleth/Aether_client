@@ -2,10 +2,10 @@
 
 [ext_resource path="res://textures/ui/panel_bg.png" type="Texture" id=1]
 [ext_resource path="res://src/gui/w_minimap/MiniMap.gd" type="Script" id=2]
-[ext_resource path="res://textures/icons/ui_icon_resize.png" type="Texture" id=3]
+[ext_resource path="res://textures/icons/resize.png" type="Texture" id=3]
 [ext_resource path="res://textures/ui/button_round.png" type="Texture" id=4]
-[ext_resource path="res://textures/icons/ui_icon_minus.png" type="Texture" id=5]
-[ext_resource path="res://textures/icons/ui_icon_plus.png" type="Texture" id=6]
+[ext_resource path="res://textures/icons/plus.png" type="Texture" id=5]
+[ext_resource path="res://textures/icons/minus.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -68,33 +68,79 @@ projection = 1
 size = 50.0
 
 [node name="ButtonList" type="VBoxContainer" parent="."]
-margin_left = -7.0
-margin_top = 127.0
-margin_right = 17.0
-margin_bottom = 207.0
+margin_right = 24.0
+margin_bottom = 80.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="ZoomIn" type="Button" parent="ButtonList"]
 margin_right = 24.0
 margin_bottom = 24.0
+rect_min_size = Vector2( 24, 24 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 6 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ButtonList/ZoomIn"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 3
+custom_constants/margin_top = 3
+custom_constants/margin_left = 3
+custom_constants/margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="image" type="TextureRect" parent="ButtonList/ZoomIn/MarginContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 21.0
+margin_bottom = 21.0
+mouse_filter = 2
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ZoomOut" type="Button" parent="ButtonList"]
 margin_top = 28.0
 margin_right = 24.0
 margin_bottom = 52.0
+rect_min_size = Vector2( 24, 24 )
 custom_styles/hover = SubResource( 3 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 5 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ButtonList/ZoomOut"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 3
+custom_constants/margin_top = 3
+custom_constants/margin_left = 3
+custom_constants/margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="image" type="TextureRect" parent="ButtonList/ZoomOut/MarginContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 21.0
+margin_bottom = 21.0
+mouse_filter = 2
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Resize" type="Button" parent="ButtonList"]
 margin_top = 56.0
@@ -106,6 +152,29 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
-icon = ExtResource( 3 )
+
+[node name="MarginContainer" type="MarginContainer" parent="ButtonList/Resize"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 3
+custom_constants/margin_top = 3
+custom_constants/margin_left = 3
+custom_constants/margin_bottom = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="image" type="TextureRect" parent="ButtonList/Resize/MarginContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 21.0
+margin_bottom = 21.0
+mouse_filter = 2
+texture = ExtResource( 3 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="sort_children" from="." to="." method="_on_MiniMap_sort_children"]
