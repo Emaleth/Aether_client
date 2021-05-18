@@ -82,24 +82,11 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
+custom_constants/hseparation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="ButtonList/ZoomIn"]
+[node name="image" type="TextureRect" parent="ButtonList/ZoomIn"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="image" type="TextureRect" parent="ButtonList/ZoomIn/MarginContainer"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 21.0
-margin_bottom = 21.0
 mouse_filter = 2
 texture = ExtResource( 5 )
 expand = true
@@ -117,24 +104,11 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
+custom_constants/hseparation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="ButtonList/ZoomOut"]
+[node name="image" type="TextureRect" parent="ButtonList/ZoomOut"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="image" type="TextureRect" parent="ButtonList/ZoomOut/MarginContainer"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 21.0
-margin_bottom = 21.0
 mouse_filter = 2
 texture = ExtResource( 6 )
 expand = true
@@ -152,24 +126,11 @@ custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 3 )
 custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 3 )
+custom_constants/hseparation = 0
 
-[node name="MarginContainer" type="MarginContainer" parent="ButtonList/Resize"]
+[node name="image" type="TextureRect" parent="ButtonList/Resize"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
-custom_constants/margin_right = 3
-custom_constants/margin_top = 3
-custom_constants/margin_left = 3
-custom_constants/margin_bottom = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="image" type="TextureRect" parent="ButtonList/Resize/MarginContainer"]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 21.0
-margin_bottom = 21.0
 mouse_filter = 2
 texture = ExtResource( 3 )
 expand = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/gui/GUI.gd" type="Script" id=1]
 [ext_resource path="res://src/gui/w_progress/Progress.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://src/gui/map/Map.tscn" type="PackedScene" id=6]
 [ext_resource path="res://src/gui/eq/Equipment.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/gui/skillbar/SkillBar.tscn" type="PackedScene" id=8]
+[ext_resource path="res://src/gui/qpanel/QuantityPanel.tscn" type="PackedScene" id=9]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -77,5 +78,15 @@ margin_bottom = 192.204
 
 [node name="MiniMap" parent="." instance=ExtResource( 3 )]
 material = SubResource( 3 )
+
+[node name="QuantityPanel" parent="." instance=ExtResource( 9 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -68.0
+margin_top = -38.0
+margin_right = 68.0
+margin_bottom = 38.0
 
 [editable path="TargetProgress"]

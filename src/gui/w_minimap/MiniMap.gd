@@ -16,9 +16,9 @@ onready var resize = $ButtonList/Resize
 func _ready() -> void:
 	rect_size = Vector2(default_map_size, default_map_size)
 	rect_position.x = OS.window_size.x - rect_size.x
-	$ButtonList/ZoomIn/MarginContainer/image.self_modulate = Global.toggle_off
-	$ButtonList/ZoomOut/MarginContainer/image.self_modulate = Global.toggle_off
-	$ButtonList/Resize/MarginContainer/image.self_modulate = Global.toggle_off
+	$ButtonList/ZoomIn/image.self_modulate = Global.toggle_off
+	$ButtonList/ZoomOut/image.self_modulate = Global.toggle_off
+	$ButtonList/Resize/image.self_modulate = Global.toggle_off
 	
 func _process(delta: float) -> void:
 	if zoom_in.pressed == true:
