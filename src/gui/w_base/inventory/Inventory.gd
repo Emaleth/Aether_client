@@ -5,25 +5,14 @@ var grid_v_separation = 4
 
 onready var slot_grid = $MarginContainer/VBoxContainer/ScrollContainer/grid
 onready var scroll : ScrollContainer = $MarginContainer/VBoxContainer/ScrollContainer
-onready var slot_selector = $MarginContainer/VBoxContainer/MarginContainer/MarginContainer/SlotSelector
+onready var button_list = $MarginContainer/VBoxContainer/MarginContainer/MarginContainer/SlotSelector
 onready var slot_path = preload("res://src/gui/w_base/slot/Slot.tscn")
-
-onready var buttons = {
-	"everything" : slot_selector.get_node("Inventory"),
-	"weapon" : slot_selector.get_node("Weapon"),
-	"armor" : slot_selector.get_node("Armor"),
-	"jewelery" : slot_selector.get_node("Jewelry"),
-	"ammunition" : slot_selector.get_node("Ammunition"),
-	"consumable" : slot_selector.get_node("Consumable"),
-	"tool" : slot_selector.get_node("Tool"),
-	"material" : slot_selector.get_node("Material")
-	}
 	
 func _ready() -> void:
 	scrollbar_theme()
 	scroll.rect_min_size.y = ((window_height_in_slots * 40) + ((window_height_in_slots -1) * grid_v_separation))
 	connect_button()
-	show_slot_type("everything")
+	show_slot_type("inventory")
 	
 func conf(actor):
 	if slot_grid.get_child_count() < actor.inventory.size():
@@ -41,7 +30,7 @@ func conf(actor):
 		
 func show_slot_type(slot_type : String = ""):
 	for slot in slot_grid.get_children():
-		if slot_type == "everything":
+		if slot_type == "inventory":
 			slot.show()
 		else:
 			if slot.aactor.get(slot.ttype).get(slot.sslot).item:
@@ -49,15 +38,17 @@ func show_slot_type(slot_type : String = ""):
 					slot.show()
 				else:
 					slot.hide()
-	for i in buttons:
-		if i == slot_type:
-			buttons.get(i).self_modulate = Global.toggle_on
-		else:
-			buttons.get(i).self_modulate = Global.toggle_off
-			
+	for i in button_list.get_children():
+		if i is Button:
+			if str(i.name).to_lower() == slot_type:
+				i.self_modulate = Global.toggle_on
+			else:
+				i.self_modulate = Global.toggle_off
+
 func connect_button():
-	for i in buttons:
-		buttons.get(i).connect("pressed", self, "show_slot_type", [i])
+	for i in button_list.get_children():
+		if i is Button:
+			i.connect("pressed", self, "show_slot_type", [str(i.name).to_lower()])
 
 func scrollbar_theme():
 	var grabber = StyleBoxTexture.new()

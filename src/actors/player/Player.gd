@@ -144,5 +144,7 @@ func get_test_items():
 	inventory[24].item = "ITEM_00024"
 	inventory[24].quantity = 100
 	
+	inventory[25].item = "ITEM_00024"
+	inventory[25].quantity = 72
 
 

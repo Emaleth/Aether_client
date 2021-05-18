@@ -27,11 +27,16 @@ func conf(actor, slot, type, empty_icon = null):
 		connect("request_swap", actor, "move_item")
 	if actor.get(type).get(slot).item && actor.get(type).get(slot).quantity > 0:
 		if DataLoader.item_db.get(actor.get(type).get(slot).item).USABLE == true:
+			if not actor.is_connected("start_cooldown", self, "cooldown_animation"):
+				actor.connect("start_cooldown", self, "cooldown_animation")
 			if not is_connected("request_use", actor, "use_item"):
 				connect("request_use", actor, "use_item")
 		else:
 			if is_connected("request_use", actor, "use_item"):
 				disconnect("request_use", actor, "use_item")
+			if actor.is_connected("start_cooldown", self, "cooldown_animation"):
+				actor.disconnect("start_cooldown", self, "cooldown_animation")
+				
 		icon = load("res://previews/%s.png" % actor.get(type).get(slot).item)
 		$MarginContainer2/Ghost.hide()
 		hint_tooltip = "wierd fuckery"
@@ -51,25 +56,25 @@ func conf(actor, slot, type, empty_icon = null):
 		quantity_label.text = ""
 		
 func get_drag_data(_position: Vector2):
-	if aactor.get(ttype).get(sslot).item:
+	if aactor.get(ttype).get(sslot).item && cooldown == 0:
 		var my_data = [aactor, ttype, sslot]
 		make_preview()
 		return my_data
 
 func can_drop_data(_position: Vector2, _data) -> bool:
 	return true
-	
+
 func drop_data(_position: Vector2, data) -> void:
-	var source = data
-	var target = [aactor, ttype, sslot]
-	emit_signal("request_swap", source, target)
+	if cooldown == 0:
+		var source = data
+		var target = [aactor, ttype, sslot]
+		emit_signal("request_swap", source, target)
 
 func _on_Slot_pressed() -> void: 
 	if cooldown == 0 && aactor.get(ttype).get(sslot).item:
 		if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).USABLE == true:
 			var source = [aactor, ttype, sslot]
 			emit_signal("request_use", source)
-			cooldown_animation(1) # DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).CD
 
 func make_preview():
 	var pw = preview.instance()
@@ -82,34 +87,42 @@ func _make_custom_tooltip(_for_text):
 		tooltip.conf(DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).NAME)
 		return tooltip
 		
-func cooldown_animation(time):
-	cooldown = time
-	cd_progress.show()
-	timer_label.show()
-	cd_progress.value = 100
-	tween.remove_all()
-	tween.interpolate_property(
-		cd_progress, 
-		"value", 
-		100, 
-		0, 
-		time, 
-		Tween.TRANS_LINEAR, 
-		Tween.EASE_IN
-		)
-	tween.interpolate_property(
-		self, 
-		"cooldown", 
-		time, 
-		0, 
-		time, 
-		Tween.TRANS_LINEAR, 
-		Tween.EASE_IN
-		)
-	tween.start()
-	yield(tween, "tween_all_completed")
-	cd_progress.hide()
-	timer_label.hide()
+func cooldown_animation(cd_item, time):
+	if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).USABLE == true:
+		if aactor.get(ttype).get(sslot).item == cd_item:
+			cooldown = time
+		else:
+			if cooldown < Global.cd:
+				cooldown = Global.cd
+			else:
+				return
+			
+		cd_progress.show()
+		timer_label.show()
+		cd_progress.value = 100
+		tween.remove_all()
+		tween.interpolate_property(
+			cd_progress, 
+			"value", 
+			100, 
+			0, 
+			cooldown, 
+			Tween.TRANS_LINEAR, 
+			Tween.EASE_IN
+			)
+		tween.interpolate_property(
+			self, 
+			"cooldown", 
+			cooldown, 
+			0, 
+			cooldown, 
+			Tween.TRANS_LINEAR, 
+			Tween.EASE_IN
+			)
+		tween.start()
+		yield(tween, "tween_all_completed")
+		cd_progress.hide()
+		timer_label.hide()
 
 func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	var cd = stepify(cooldown, 0.1)

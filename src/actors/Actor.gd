@@ -125,6 +125,7 @@ signal update_resources
 signal update_inventory
 signal update_equipment
 signal update_skillbar
+signal start_cooldown
 
 func _ready() -> void:
 	gcd.connect("timeout", self, "attack")
@@ -276,9 +277,9 @@ func _on_AttackArea_body_exited(body: Node) -> void:
 func attack():
 	if attacking == true:
 		if enemy:
-			gcd.start(1)
-			enemy.hurt(10)
-			modify_resource("mana", -5)
+			gcd.start(.2)
+			enemy.hurt(1)
+			modify_resource("mana", -1)
 			
 func load_eq():
 	for i in equipment:
@@ -369,6 +370,7 @@ func use_item(source):
 		emit_signal("update_skillbar")
 		emit_signal("update_inventory")
 		emit_signal("update_equipment")
+		emit_signal("start_cooldown", source[0].get(source[1])[source[2]].item, float(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CD))
 
 func match_item_to_slot(slot, item) -> bool:
 	if DataLoader.item_db.get(item).SUBTYPE in equipment_slot_type[slot]:

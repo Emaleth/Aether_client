@@ -4,9 +4,6 @@ onready var tween : Tween = $Tween
 onready var sprite3d = $Sprite3D
 onready var viewport = $Viewport
 onready var label = $Viewport/Label
-
-func _ready() -> void:
-	conf(56)
 	
 func conf(value) -> void:
 	label.text = str(value)
