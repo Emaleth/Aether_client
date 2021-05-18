@@ -308,19 +308,22 @@ func load_eq():
 func make_inventory_construct():
 	for i in inv_slot_num:
 		var slot_construct = {"item" : "",
-							"quantity" : 0}
+							"quantity" : 0,
+							"use_time" : 0}
 		inventory[i] = slot_construct
 							
 func make_skillbar_construct():
 	for i in skill_bar_slot_num:
 		var slot_construct = {"item" : "",
-							"quantity" : 0}
+							"quantity" : 0,
+							"use_time" : 0}
 		skillbar[i] = slot_construct
 		
 func make_equipment_construct():
 	for i in equipment_slots:
 		var slot_construct = {"item" : "",
-							"quantity" : 0}
+							"quantity" : 0,
+							"use_time" : 0}
 		equipment[i] = slot_construct
 	
 func remake_equipment_slots_construct():
@@ -338,39 +341,58 @@ func move_item(source = [], target = []):
 			target[0].get(target[1])[target[2]] = source_slot
 			source[0].get(source[1])[source[2]] = target_slot
 		else:
-			source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0}
+			source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
 			
 	if source[1] != "skillbar":
 		if target[1] == "skillbar":
 			target[0].get(target[1])[target[2]] = source_slot
 		elif target[1] == "equipment":
 			if match_item_to_slot(target[2], source[0].get(source[1])[source[2]].item) == true:
+#				target[0].get(target[1])[target[2]] = source_slot
+#				source[0].get(source[1])[source[2]] = target_slot
+				if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
+					if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
+						target[0].get(target[1])[target[2]].quantity += source[0].get(source[1])[source[2]].quantity
+						source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+					else:
+						target[0].get(target[1])[target[2]] = source_slot
+						source[0].get(source[1])[source[2]] = target_slot
+				else:
+					target[0].get(target[1])[target[2]] = source_slot
+					source[0].get(source[1])[source[2]] = target_slot
+		else:
+			if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
+				if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
+					target[0].get(target[1])[target[2]].quantity += source[0].get(source[1])[source[2]].quantity
+					source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+				else:
+					target[0].get(target[1])[target[2]] = source_slot
+					source[0].get(source[1])[source[2]] = target_slot
+			else:
 				target[0].get(target[1])[target[2]] = source_slot
 				source[0].get(source[1])[source[2]] = target_slot
-		else:
-			target[0].get(target[1])[target[2]] = source_slot
-			source[0].get(source[1])[source[2]] = target_slot
 	
-	if source[1] == "skillbar" || target[1] == "skillbar":
-		emit_signal("update_skillbar")
 	if source[1] == "inventory" || target[1] == "inventory":
 		emit_signal("update_inventory")
 	if source[1] == "equipment" || target[1] == "equipment":
 		emit_signal("update_equipment")
 		load_eq()
+	emit_signal("update_skillbar")
 
 func use_item(source):
 	if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).USABLE == true:
-		# do stuff here
-		if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CONSUMABLE == true:
-			source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)
-			if source[0].get(source[1])[source[2]].quantity < 0:
-				source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0}
-			
-		emit_signal("update_skillbar")
-		emit_signal("update_inventory")
-		emit_signal("update_equipment")
-		emit_signal("start_cooldown", source[0].get(source[1])[source[2]].item, float(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CD))
+		if OS.get_ticks_msec() - source[0].get(source[1])[source[2]].use_time >= float(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CD):
+			source[0].get(source[1])[source[2]].use_time = OS.get_ticks_msec()
+			# do stuff here
+			if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CONSUMABLE == true:
+				source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)
+				if source[0].get(source[1])[source[2]].quantity <= 0:
+					source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+				
+			emit_signal("update_skillbar")
+			emit_signal("update_inventory")
+			emit_signal("update_equipment")
+			emit_signal("start_cooldown", source[0].get(source[1])[source[2]].item)
 
 func match_item_to_slot(slot, item) -> bool:
 	if DataLoader.item_db.get(item).SUBTYPE in equipment_slot_type[slot]:
@@ -378,3 +400,4 @@ func match_item_to_slot(slot, item) -> bool:
 	else:
 		return false
 		
+	

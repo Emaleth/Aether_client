@@ -16,8 +16,6 @@ signal request_use
 
 var preview = preload("res://src/gui/drag/DragPreview.tscn")
 
-func _ready() -> void:
-	quantity_label.text = ""
 	
 func conf(actor, slot, type, empty_icon = null):
 	aactor = actor
@@ -25,7 +23,7 @@ func conf(actor, slot, type, empty_icon = null):
 	sslot = slot
 	if not is_connected("request_swap", actor, "move_item"):
 		connect("request_swap", actor, "move_item")
-	if actor.get(type).get(slot).item && actor.get(type).get(slot).quantity > 0:
+	if actor.get(type).get(slot).item:
 		if DataLoader.item_db.get(actor.get(type).get(slot).item).USABLE == true:
 			if not actor.is_connected("start_cooldown", self, "cooldown_animation"):
 				actor.connect("start_cooldown", self, "cooldown_animation")
@@ -45,6 +43,10 @@ func conf(actor, slot, type, empty_icon = null):
 		else:
 			quantity_label.text = ""
 	else:
+		if is_connected("request_use", actor, "use_item"):
+			disconnect("request_use", actor, "use_item")
+		if actor.is_connected("start_cooldown", self, "cooldown_animation"):
+			actor.disconnect("start_cooldown", self, "cooldown_animation")
 		if empty_icon:
 			$MarginContainer2/Ghost.texture = empty_icon
 			$MarginContainer2/Ghost.self_modulate = Global.item_ghost
@@ -87,10 +89,10 @@ func _make_custom_tooltip(_for_text):
 		tooltip.conf(DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).NAME)
 		return tooltip
 		
-func cooldown_animation(cd_item, time):
+func cooldown_animation(cd_item):#, time):
 	if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).USABLE == true:
 		if aactor.get(ttype).get(sslot).item == cd_item:
-			cooldown = time
+			cooldown = float(DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).CD)
 		else:
 			if cooldown < Global.cd:
 				cooldown = Global.cd
