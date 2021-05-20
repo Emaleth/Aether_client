@@ -94,8 +94,8 @@ onready var equipment : Dictionary = {
 	}
 
 
-func conf(actor):
+func conf(actor, quantity_panel):
 	for i in actor.equipment:
-		equipment.get(i).slot.conf(actor, i, "equipment", equipment.get(i).empty_icon)
+		equipment.get(i).slot.conf(actor, i, "equipment", quantity_panel, equipment.get(i).empty_icon)
 
 		

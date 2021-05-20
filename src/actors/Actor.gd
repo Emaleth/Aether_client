@@ -332,7 +332,8 @@ func remake_equipment_slots_construct():
 							"slot" : []}
 		equipment_slots[i] = slot_construct
 
-func move_item(source = [], target = []):
+func move_item(source = [], target = [], q = null):
+	print(q)
 	var source_slot = source[0].get(source[1]).get(source[2])
 	var target_slot = get(target[1]).get(target[2])
 	
@@ -348,8 +349,6 @@ func move_item(source = [], target = []):
 			target[0].get(target[1])[target[2]] = source_slot
 		elif target[1] == "equipment":
 			if match_item_to_slot(target[2], source[0].get(source[1])[source[2]].item) == true:
-#				target[0].get(target[1])[target[2]] = source_slot
-#				source[0].get(source[1])[source[2]] = target_slot
 				if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
 					if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
 						target[0].get(target[1])[target[2]].quantity += source[0].get(source[1])[source[2]].quantity
@@ -369,8 +368,21 @@ func move_item(source = [], target = []):
 					target[0].get(target[1])[target[2]] = source_slot
 					source[0].get(source[1])[source[2]] = target_slot
 			else:
-				target[0].get(target[1])[target[2]] = source_slot
-				source[0].get(source[1])[source[2]] = target_slot
+				if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
+					if q != null:
+						if target[0].get(target[1])[target[2]].item == "":
+							target[0].get(target[1])[target[2]] = source_slot.duplicate()
+							target[0].get(target[1])[target[2]].quantity = q
+							source[0].get(source[1])[source[2]].quantity -= q
+						else:
+							target[0].get(target[1])[target[2]].quantity += q
+							source[0].get(source[1])[source[2]].quantity -= q
+					else:
+						target[0].get(target[1])[target[2]] = source_slot
+						source[0].get(source[1])[source[2]] = target_slot
+				else:
+					target[0].get(target[1])[target[2]] = source_slot
+					source[0].get(source[1])[source[2]] = target_slot
 	
 	if source[1] == "inventory" || target[1] == "inventory":
 		emit_signal("update_inventory")
@@ -400,4 +412,3 @@ func match_item_to_slot(slot, item) -> bool:
 	else:
 		return false
 		
-	

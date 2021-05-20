@@ -13,16 +13,19 @@ onready var timer_label = $TimerLabel
 
 signal request_swap
 signal request_use
+signal request_quantity
 
 var preview = preload("res://src/gui/drag/DragPreview.tscn")
 
 	
-func conf(actor, slot, type, empty_icon = null):
+func conf(actor, slot, type, quantity_panel, empty_icon = null):
 	aactor = actor
 	ttype = type
 	sslot = slot
 	if not is_connected("request_swap", actor, "move_item"):
 		connect("request_swap", actor, "move_item")
+	if not is_connected("request_quantity", quantity_panel, "conf"):
+		connect("request_quantity", quantity_panel, "conf")
 	if actor.get(type).get(slot).item:
 		if DataLoader.item_db.get(actor.get(type).get(slot).item).USABLE == true:
 			if not actor.is_connected("start_cooldown", self, "cooldown_animation"):
@@ -70,7 +73,10 @@ func drop_data(_position: Vector2, data) -> void:
 	if cooldown == 0:
 		var source = data
 		var target = [aactor, ttype, sslot]
-		emit_signal("request_swap", source, target)
+		if Input.is_action_pressed("split"):
+			emit_signal("request_quantity", self, source, target)
+		else:
+			emit_signal("request_swap", source, target)
 
 func _on_Slot_pressed() -> void: 
 	if cooldown == 0 && aactor.get(ttype).get(sslot).item:
@@ -129,3 +135,8 @@ func cooldown_animation(cd_item):#, time):
 func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	var cd = stepify(cooldown, 0.1)
 	timer_label.text = str(cd)
+
+func split(panel, source, target, q):
+	emit_signal("request_swap", source, target, q)
+	panel.disconnect("send_quantity", self, "split")
+	

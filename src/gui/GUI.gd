@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-#onready var minimap : Control = $MiniMap
+onready var quantity_panel = $QuantityPanel
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -51,10 +51,10 @@ func update_targe_info(res):
 	$TargetProgress.stamina_bar.updt(res.stamina.current)
 
 func configure_inv(actor):
-	$Inventory.conf(actor)
+	$Inventory.conf(actor, quantity_panel)
 	
 func configure_eq(actor):
-	$Equipment.conf(actor)
+	$Equipment.conf(actor, quantity_panel)
 	
 func configure_skillbar(actor):
-	$SkillBar.conf(actor)
+	$SkillBar.conf(actor, quantity_panel)
