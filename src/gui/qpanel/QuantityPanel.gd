@@ -46,5 +46,9 @@ func _on_Accept_pressed() -> void:
 	hide()
 
 func _on_Cancel_pressed() -> void:
-	emit_signal("send_quantity", self, s, t, quantity)
+	emit_signal("send_quantity", self, s, t, 0)
+	hide()
+
+func _on_QuantityPanel_modal_closed() -> void:
+	emit_signal("send_quantity", self, s, t, 0)
 	hide()

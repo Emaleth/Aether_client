@@ -14,6 +14,7 @@ onready var timer_label = $TimerLabel
 signal request_swap
 signal request_use
 signal request_quantity
+signal request_split
 
 var preview = preload("res://src/gui/drag/DragPreview.tscn")
 
@@ -24,6 +25,8 @@ func conf(actor, slot, type, quantity_panel, empty_icon = null):
 	sslot = slot
 	if not is_connected("request_swap", actor, "move_item"):
 		connect("request_swap", actor, "move_item")
+	if not is_connected("request_split", actor, "split_item"):
+		connect("request_split", actor, "split_item")
 	if not is_connected("request_quantity", quantity_panel, "conf"):
 		connect("request_quantity", quantity_panel, "conf")
 	if actor.get(type).get(slot).item:
@@ -73,7 +76,7 @@ func drop_data(_position: Vector2, data) -> void:
 	if cooldown == 0:
 		var source = data
 		var target = [aactor, ttype, sslot]
-		if Input.is_action_pressed("split"):
+		if Input.is_action_pressed("split") && source[0].get(source[1])[source[2]].quantity > 1:
 			emit_signal("request_quantity", self, source, target)
 		else:
 			emit_signal("request_swap", source, target)
@@ -95,48 +98,47 @@ func _make_custom_tooltip(_for_text):
 		tooltip.conf(DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).NAME)
 		return tooltip
 		
-func cooldown_animation(cd_item):#, time):
-	if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).USABLE == true:
-		if aactor.get(ttype).get(sslot).item == cd_item:
-			cooldown = float(DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).CD)
+func cooldown_animation(cd_item, cur_step = null):
+	if aactor.get(ttype).get(sslot).item == cd_item:
+		cooldown = float(DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).CD)
+	elif DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).USABLE == true:
+		if cooldown < Global.cd:
+			cooldown = Global.cd
 		else:
-			if cooldown < Global.cd:
-				cooldown = Global.cd
-			else:
-				return
-			
-		cd_progress.show()
-		timer_label.show()
-		cd_progress.value = 100
-		tween.remove_all()
-		tween.interpolate_property(
-			cd_progress, 
-			"value", 
-			100, 
-			0, 
-			cooldown, 
-			Tween.TRANS_LINEAR, 
-			Tween.EASE_IN
-			)
-		tween.interpolate_property(
-			self, 
-			"cooldown", 
-			cooldown, 
-			0, 
-			cooldown, 
-			Tween.TRANS_LINEAR, 
-			Tween.EASE_IN
-			)
-		tween.start()
-		yield(tween, "tween_all_completed")
-		cd_progress.hide()
-		timer_label.hide()
+			return
+	cd_progress.show()
+	timer_label.show()
+	cd_progress.value = 100
+	
+	tween.remove_all()
+	tween.interpolate_property(
+		cd_progress, 
+		"value", 
+		100, 
+		0, 
+		cooldown, 
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN
+		)
+	tween.interpolate_property(
+		self, 
+		"cooldown", 
+		cooldown, 
+		0, 
+		cooldown, 
+		Tween.TRANS_LINEAR, 
+		Tween.EASE_IN
+		)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	cd_progress.hide()
+	timer_label.hide()
 
 func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	var cd = stepify(cooldown, 0.1)
 	timer_label.text = str(cd)
 
 func split(panel, source, target, q):
-	emit_signal("request_swap", source, target, q)
+	emit_signal("request_split", source, target, q)
 	panel.disconnect("send_quantity", self, "split")
 	

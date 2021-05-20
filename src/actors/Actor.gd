@@ -332,8 +332,7 @@ func remake_equipment_slots_construct():
 							"slot" : []}
 		equipment_slots[i] = slot_construct
 
-func move_item(source = [], target = [], q = null):
-	print(q)
+func move_item(source = [], target = []):
 	var source_slot = source[0].get(source[1]).get(source[2])
 	var target_slot = get(target[1]).get(target[2])
 	
@@ -368,21 +367,8 @@ func move_item(source = [], target = [], q = null):
 					target[0].get(target[1])[target[2]] = source_slot
 					source[0].get(source[1])[source[2]] = target_slot
 			else:
-				if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
-					if q != null:
-						if target[0].get(target[1])[target[2]].item == "":
-							target[0].get(target[1])[target[2]] = source_slot.duplicate()
-							target[0].get(target[1])[target[2]].quantity = q
-							source[0].get(source[1])[source[2]].quantity -= q
-						else:
-							target[0].get(target[1])[target[2]].quantity += q
-							source[0].get(source[1])[source[2]].quantity -= q
-					else:
-						target[0].get(target[1])[target[2]] = source_slot
-						source[0].get(source[1])[source[2]] = target_slot
-				else:
-					target[0].get(target[1])[target[2]] = source_slot
-					source[0].get(source[1])[source[2]] = target_slot
+				target[0].get(target[1])[target[2]] = source_slot
+				source[0].get(source[1])[source[2]] = target_slot
 	
 	if source[1] == "inventory" || target[1] == "inventory":
 		emit_signal("update_inventory")
@@ -412,3 +398,62 @@ func match_item_to_slot(slot, item) -> bool:
 	else:
 		return false
 		
+func split_item(source = [], target = [], q = 0):
+	if q == 0:
+		return
+	var source_slot = source[0].get(source[1]).get(source[2])
+	var target_slot = get(target[1]).get(target[2])
+	
+	if source[1] == "skillbar":
+		move_item(source, target)
+	if source[1] != "skillbar":
+		if target[1] == "skillbar":
+			move_item(source, target)
+		elif target[1] == "equipment":
+			if match_item_to_slot(target[2], source[0].get(source[1])[source[2]].item) == true:
+				if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
+					if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
+						target[0].get(target[1])[target[2]].quantity += q
+						if source[0].get(source[1])[source[2]].quantity - q > 0:
+							source[0].get(source[1])[source[2]].quantity -= q
+						else:
+							source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+					else:
+						move_item(source, target)
+				elif target[0].get(target[1])[target[2]].item == "":
+					if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
+						target[0].get(target[1])[target[2]] = source[0].get(source[1])[source[2]].duplicate()
+						target[0].get(target[1])[target[2]].quantity = q
+						if source[0].get(source[1])[source[2]].quantity - q > 0:
+							source[0].get(source[1])[source[2]].quantity -= q
+						else:
+							source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+					else:
+						move_item(source, target)
+		else:
+			if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
+				if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
+					target[0].get(target[1])[target[2]].quantity += q
+					if source[0].get(source[1])[source[2]].quantity - q > 0:
+						source[0].get(source[1])[source[2]].quantity -= q
+					else:
+						source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+				else:
+					move_item(source, target)
+			elif target[0].get(target[1])[target[2]].item == "":
+				if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
+					target[0].get(target[1])[target[2]] = source[0].get(source[1])[source[2]].duplicate()
+					target[0].get(target[1])[target[2]].quantity = q
+					if source[0].get(source[1])[source[2]].quantity - q > 0:
+						source[0].get(source[1])[source[2]].quantity -= q
+					else:
+						source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+				else:
+					move_item(source, target)
+	
+	if source[1] == "inventory" || target[1] == "inventory":
+		emit_signal("update_inventory")
+	if source[1] == "equipment" || target[1] == "equipment":
+		emit_signal("update_equipment")
+		load_eq()
+	emit_signal("update_skillbar")

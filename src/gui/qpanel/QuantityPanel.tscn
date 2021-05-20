@@ -162,7 +162,7 @@ custom_styles/disabled = SubResource( 4 )
 custom_styles/normal = SubResource( 4 )
 text = "Cancel"
 
-[connection signal="popup_hide" from="." to="." method="_on_QuantityPanel_popup_hide"]
+[connection signal="modal_closed" from="." to="." method="_on_QuantityPanel_modal_closed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Less" to="." method="_on_Less_pressed"]
 [connection signal="text_changed" from="MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
 [connection signal="text_entered" from="MarginContainer/VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
