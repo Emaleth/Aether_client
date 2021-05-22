@@ -36,7 +36,7 @@ func _on_LineEdit_text_entered(_new_text: String) -> void:
 	emit_signal("send_quantity", self, s, t, quantity)
 	hide()
 
-func _unhandled_key_input(event: InputEventKey) -> void:
+func _unhandled_key_input(_event: InputEventKey) -> void:
 	if Input.is_action_just_pressed("ui_accept"):
 		emit_signal("send_quantity", self, s, t, quantity)
 		hide()

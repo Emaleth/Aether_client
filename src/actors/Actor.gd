@@ -112,6 +112,7 @@ var attacking = false
 
 var inv_slot_num = 70
 var skill_bar_slot_num = 20
+var gcd_used = 0
 
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var anim_player : AnimationPlayer
@@ -125,7 +126,7 @@ signal update_resources
 signal update_inventory
 signal update_equipment
 signal update_skillbar
-signal start_cooldown
+
 
 func _ready() -> void:
 	gcd.connect("timeout", self, "attack")
@@ -379,8 +380,12 @@ func move_item(source = [], target = []):
 
 func use_item(source):
 	if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).USABLE == true:
-		if OS.get_ticks_msec() - source[0].get(source[1])[source[2]].use_time >= float(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CD):
-			source[0].get(source[1])[source[2]].use_time = OS.get_ticks_msec()
+		var current_time_msec = OS.get_ticks_msec()
+		if current_time_msec - source[0].get(source[1])[source[2]].use_time >= float(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CD) * 1000 || source[0].get(source[1])[source[2]].use_time == 0:
+#			print("Current Time: %s" % current_time_msec,
+#				" | " + "Last Used Time: %s" % source[0].get(source[1])[source[2]].use_time,
+#				" | " + "CD: %s" % (float(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CD) * 1000))
+			update_usage(source[0].get(source[1])[source[2]].item, current_time_msec)
 			# do stuff here
 			if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CONSUMABLE == true:
 				source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)
@@ -390,7 +395,6 @@ func use_item(source):
 			emit_signal("update_skillbar")
 			emit_signal("update_inventory")
 			emit_signal("update_equipment")
-			emit_signal("start_cooldown", source[0].get(source[1])[source[2]].item)
 
 func match_item_to_slot(slot, item) -> bool:
 	if DataLoader.item_db.get(item).SUBTYPE in equipment_slot_type[slot]:
@@ -457,3 +461,13 @@ func split_item(source = [], target = [], q = 0):
 		emit_signal("update_equipment")
 		load_eq()
 	emit_signal("update_skillbar")
+
+func update_usage(used_item, usage_time):
+	gcd_used = usage_time
+	for e in equipment:
+		if equipment.get(e).item == used_item:
+			equipment.get(e).use_time = usage_time
+	for i in inventory:
+		if inventory.get(i).item == used_item:
+			inventory.get(i).use_time = usage_time
+
