@@ -1,9 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://src/gui/eq/Equipment.gd" type="Script" id=1]
 [ext_resource path="res://src/gui/w_base/slot/Slot.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/gui/NullSlot.tscn" type="PackedScene" id=3]
 [ext_resource path="res://textures/ui/panel_bg.png" type="Texture" id=4]
+[ext_resource path="res://textures/ui/button_round.png" type="Texture" id=5]
+[ext_resource path="res://textures/icons/plus.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -17,9 +19,13 @@ margin_bottom = 36.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 67, 67 )
+
 [node name="Equipment" type="PanelContainer"]
-margin_right = 236.0
-margin_bottom = 324.0
+margin_right = 458.0
+margin_bottom = 344.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = SubResource( 1 )
@@ -29,8 +35,8 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 236.0
-margin_bottom = 324.0
+margin_right = 458.0
+margin_bottom = 344.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
@@ -40,25 +46,313 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 236.0
+margin_right = 458.0
+margin_bottom = 344.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 438.0
 margin_bottom = 324.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 134.0
+margin_bottom = 304.0
+
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 134.0
+margin_bottom = 14.0
+text = "Emaleth"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+self_modulate = Color( 0.74902, 0.545098, 0, 1 )
+margin_top = 18.0
+margin_right = 134.0
+margin_bottom = 22.0
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 26.0
+margin_right = 134.0
+margin_bottom = 150.0
+size_flags_vertical = 3
+text = "some texct here, ameybe secriprion or something"
+autowrap = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 154.0
+margin_right = 134.0
+margin_bottom = 304.0
+size_flags_vertical = 3
+alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+self_modulate = Color( 0.74902, 0.545098, 0, 1 )
+margin_right = 134.0
+margin_bottom = 4.0
+
+[node name="Strenght" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+margin_top = 8.0
+margin_right = 134.0
+margin_bottom = 28.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Strenght"]
+margin_right = 82.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "<stat_name>"
+valign = 1
+
+[node name="Q" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Strenght"]
+margin_left = 86.0
+margin_right = 110.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+text = "000"
+align = 2
+valign = 1
+
+[node name="Add" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Strenght"]
+margin_left = 114.0
+margin_right = 134.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Strenght/Add"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dexterity" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+margin_top = 32.0
+margin_right = 134.0
+margin_bottom = 52.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Dexterity"]
+margin_right = 82.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "<stat_name>"
+valign = 1
+
+[node name="Q" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Dexterity"]
+margin_left = 86.0
+margin_right = 110.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+text = "000"
+align = 2
+valign = 1
+
+[node name="Add" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Dexterity"]
+margin_left = 114.0
+margin_right = 134.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Dexterity/Add"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Constitution" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+margin_top = 56.0
+margin_right = 134.0
+margin_bottom = 76.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Constitution"]
+margin_right = 82.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "<stat_name>"
+valign = 1
+
+[node name="Q" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Constitution"]
+margin_left = 86.0
+margin_right = 110.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+text = "000"
+align = 2
+valign = 1
+
+[node name="Add" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Constitution"]
+margin_left = 114.0
+margin_right = 134.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Constitution/Add"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Intelligence" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 134.0
+margin_bottom = 100.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Intelligence"]
+margin_right = 82.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "<stat_name>"
+valign = 1
+
+[node name="Q" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Intelligence"]
+margin_left = 86.0
+margin_right = 110.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+text = "000"
+align = 2
+valign = 1
+
+[node name="Add" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Intelligence"]
+margin_left = 114.0
+margin_right = 134.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Intelligence/Add"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Wisdom" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+margin_top = 104.0
+margin_right = 134.0
+margin_bottom = 124.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Wisdom"]
+margin_right = 82.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "<stat_name>"
+valign = 1
+
+[node name="Q" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Wisdom"]
+margin_left = 86.0
+margin_right = 110.0
+margin_bottom = 20.0
+size_flags_vertical = 1
+text = "000"
+align = 2
+valign = 1
+
+[node name="Add" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Wisdom"]
+margin_left = 114.0
+margin_right = 134.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 3 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 3 )
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/Wisdom/Add"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
+self_modulate = Color( 0.74902, 0.545098, 0, 1 )
+margin_top = 128.0
+margin_right = 134.0
+margin_bottom = 132.0
+
+[node name="PointsLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer"]
 margin_left = 10.0
-margin_top = 10.0
-margin_right = 226.0
-margin_bottom = 314.0
+margin_top = 136.0
+margin_right = 134.0
+margin_bottom = 150.0
+size_flags_horizontal = 8
+text = "remaining points: 5"
+align = 2
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/HBoxContainer"]
+self_modulate = Color( 0.74902, 0.545098, 0, 1 )
+margin_left = 138.0
+margin_right = 178.0
+margin_bottom = 304.0
+custom_constants/separation = 40
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer"]
+margin_left = 182.0
+margin_right = 398.0
+margin_bottom = 304.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -67,187 +361,187 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Necklace" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Necklace" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 
-[node name="Earring1" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Earring1" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 44.0
 margin_right = 84.0
 
-[node name="Earring2" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Earring2" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_right = 128.0
 
-[node name="Ring1" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Ring1" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 132.0
 margin_right = 172.0
 
-[node name="Ring2" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Ring2" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 176.0
 margin_right = 216.0
 
-[node name="Cape" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Cape" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_top = 44.0
 margin_bottom = 84.0
 
-[node name="NullSlot" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 44.0
 margin_top = 44.0
 margin_right = 84.0
 margin_bottom = 84.0
 
-[node name="Head" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Head" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_top = 44.0
 margin_right = 128.0
 margin_bottom = 84.0
 
-[node name="NullSlot2" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot2" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
 margin_top = 44.0
 margin_right = 172.0
 margin_bottom = 84.0
 
-[node name="Shoulders" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Shoulders" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 176.0
 margin_top = 44.0
 margin_right = 216.0
 margin_bottom = 84.0
 
-[node name="Hands" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Hands" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_top = 88.0
 margin_bottom = 128.0
 
-[node name="NullSlot4" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot4" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 44.0
 margin_top = 88.0
 margin_right = 84.0
 margin_bottom = 128.0
 
-[node name="UpperBody" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="UpperBody" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_top = 88.0
 margin_right = 128.0
 margin_bottom = 128.0
 
-[node name="NullSlot5" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot5" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
 margin_top = 88.0
 margin_right = 172.0
 margin_bottom = 128.0
 
-[node name="NullSlot3" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot3" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 176.0
 margin_top = 88.0
 margin_right = 216.0
 margin_bottom = 128.0
 
-[node name="MainHand" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="MainHand" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_top = 132.0
 margin_bottom = 172.0
 
-[node name="NullSlot7" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot7" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 44.0
 margin_top = 132.0
 margin_right = 84.0
 margin_bottom = 172.0
 
-[node name="Belt" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Belt" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_top = 132.0
 margin_right = 128.0
 margin_bottom = 172.0
 
-[node name="NullSlot8" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot8" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
 margin_top = 132.0
 margin_right = 172.0
 margin_bottom = 172.0
 
-[node name="OffHand" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="OffHand" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 176.0
 margin_top = 132.0
 margin_right = 216.0
 margin_bottom = 172.0
 
-[node name="RangedWeapon" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="RangedWeapon" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_top = 176.0
 margin_bottom = 216.0
 
-[node name="Ammunition" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Ammunition" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 44.0
 margin_top = 176.0
 margin_right = 84.0
 margin_bottom = 216.0
 
-[node name="LowerBody" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="LowerBody" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_top = 176.0
 margin_right = 128.0
 margin_bottom = 216.0
 
-[node name="NullSlot12" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot12" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
 margin_top = 176.0
 margin_right = 172.0
 margin_bottom = 216.0
 
-[node name="Back" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Back" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 176.0
 margin_top = 176.0
 margin_right = 216.0
 margin_bottom = 216.0
 
-[node name="NullSlot13" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot13" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_top = 220.0
 margin_bottom = 260.0
 
-[node name="NullSlot6" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot6" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 44.0
 margin_top = 220.0
 margin_right = 84.0
 margin_bottom = 260.0
 
-[node name="Feet" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Feet" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_top = 220.0
 margin_right = 128.0
 margin_bottom = 260.0
 
-[node name="NullSlot9" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot9" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
 margin_top = 220.0
 margin_right = 172.0
 margin_bottom = 260.0
 
-[node name="GatheringTools" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="GatheringTools" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 176.0
 margin_top = 220.0
 margin_right = 216.0
 margin_bottom = 260.0
 
-[node name="NullSlot10" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot10" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_top = 264.0
 margin_bottom = 304.0
 
-[node name="Amulet3" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Amulet3" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 44.0
 margin_top = 264.0
 margin_right = 84.0
 margin_bottom = 304.0
 
-[node name="Amulet2" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Amulet2" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_top = 264.0
 margin_right = 128.0
 margin_bottom = 304.0
 
-[node name="Amulet1" parent="MarginContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Amulet1" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 132.0
 margin_top = 264.0
 margin_right = 172.0
 margin_bottom = 304.0
 
-[node name="NullSlot11" parent="MarginContainer/GridContainer" instance=ExtResource( 3 )]
+[node name="NullSlot11" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 176.0
 margin_top = 264.0
 margin_right = 216.0

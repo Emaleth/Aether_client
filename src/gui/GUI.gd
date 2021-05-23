@@ -30,9 +30,9 @@ func conf(resources, minimap_camera_remote_transform):
 	minimap_camera_remote_transform.remote_path = $MiniMap/MarginContainer/ViewportContainer/Viewport/MiniMapCamera.get_path()
 
 func update_gui(res):
-	$Progress.health_bar.updt(res.health.current)
-	$Progress.mana_bar.updt(res.mana.current)
-	$Progress.stamina_bar.updt(res.stamina.current)
+	$Progress.health_bar.updt(res.health.current, res.health.maximum)
+	$Progress.mana_bar.updt(res.mana.current, res.mana.maximum)
+	$Progress.stamina_bar.updt(res.stamina.current, res.stamina.maximum)
 	
 func get_target_info(target, yay_or_nay):
 	if yay_or_nay == false:
@@ -46,9 +46,9 @@ func get_target_info(target, yay_or_nay):
 		$TargetProgress.show()
 	
 func update_targe_info(res):
-	$TargetProgress.health_bar.updt(res.health.current)
-	$TargetProgress.mana_bar.updt(res.mana.current)
-	$TargetProgress.stamina_bar.updt(res.stamina.current)
+	$TargetProgress.health_bar.updt(res.health.current, res.health.maximum)
+	$TargetProgress.mana_bar.updt(res.mana.current, res.mana.maximum)
+	$TargetProgress.stamina_bar.updt(res.stamina.current, res.stamina.maximum)
 
 func configure_inv(actor):
 	$Inventory.conf(actor, quantity_panel)

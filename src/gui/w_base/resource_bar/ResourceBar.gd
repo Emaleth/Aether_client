@@ -15,7 +15,8 @@ func conf(res_max : int, res_current : int, fg_color : Color, st : float = 0.01)
 	fg.bg_color = fg_color
 	res_bar.set("custom_styles/fg", fg)
 	
-func updt(res_current : int) -> void:
+func updt(res_current : int, res_maximum : int) -> void:
+	res_bar.max_value = res_maximum
 	res_tween.remove_all()
 	res_tween.interpolate_property(
 		res_bar, 

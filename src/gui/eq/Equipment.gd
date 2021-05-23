@@ -1,6 +1,8 @@
 extends PanelContainer
 
-onready var grid = $MarginContainer/GridContainer
+onready var grid = $MarginContainer/HBoxContainer/GridContainer
+onready var stat_container = $MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer
+onready var points_label = $MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/PointsLabel
 
 onready var equipment : Dictionary = {
 	"head" : {
@@ -92,10 +94,61 @@ onready var equipment : Dictionary = {
 		"empty_icon" : preload("res://textures/icons/wing.png")
 		}
 	}
-
+	
+onready var stats = {
+	"strenght" : {
+		"name" : stat_container.get_node("Strenght/Label"),
+		"number" : stat_container.get_node("Strenght/Q"),
+		"button" : stat_container.get_node("Strenght/Add")
+	},
+	"dexterity" : {
+		"name" : stat_container.get_node("Dexterity/Label"),
+		"number" : stat_container.get_node("Dexterity/Q"),
+		"button" : stat_container.get_node("Dexterity/Add")
+	},
+	"constitution" : {
+		"name" : stat_container.get_node("Constitution/Label"),
+		"number" : stat_container.get_node("Constitution/Q"),
+		"button" : stat_container.get_node("Constitution/Add")
+	},
+	"intelligence" : {
+		"name" : stat_container.get_node("Intelligence/Label"),
+		"number" : stat_container.get_node("Intelligence/Q"),
+		"button" : stat_container.get_node("Intelligence/Add")
+	},
+	"wisdom" : {
+		"name" : stat_container.get_node("Wisdom/Label"),
+		"number" : stat_container.get_node("Wisdom/Q"),
+		"button" : stat_container.get_node("Wisdom/Add")
+	}
+}
 
 func conf(actor, quantity_panel):
 	for i in actor.equipment:
 		equipment.get(i).slot.conf(actor, i, "equipment", quantity_panel, equipment.get(i).empty_icon)
 
+	for i in stats:
+		if not stats.get(i).button.is_connected("pressed", actor, "increase_stat"):
+			stats.get(i).name.text = str(i).capitalize()
+			stats.get(i).number.rect_min_size = stats.get(i).number.rect_size
+			stat_container.rect_min_size = stat_container.rect_size
+			update_stats(actor.s, actor.free_points)
+			stats.get(i).button.connect("pressed", actor, "increase_stat", [i])
+			stats.get(i).button.get_child(0).self_modulate = Global.toggle_off
+	if not actor.is_connected("update_stats", self, "update_stats"):
+		actor.connect("update_stats", self, "update_stats")
+		
+func update_stats(s, points):
+	for i in stats:
+		stats.get(i).number.text = str(s.get(i))
+	if points > 0:
+		for i in stats:
+			stats.get(i).button.show()
+			stats.get(i).button.disabled = false
+		points_label.text = "Remaining points: %s" % points
+	else:
+		for i in stats:
+			stats.get(i).button.hide()
+			stats.get(i).button.disabled = true
+		points_label.text = ""
 		

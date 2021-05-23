@@ -14,6 +14,14 @@ var statistics : Dictionary = {
 	"acceleration" : 15,
 	"deceleration" : 10
 }
+var free_points = 10
+var s = {
+	"strenght" : 10,
+	"dexterity" : 10,
+	"constitution" : 10,
+	"intelligence" : 10,
+	"wisdom" : 10
+}
 
 var animations : Dictionary = {
 	"idle" : preload("res://animations/Sword_And_Shield_Idle.anim"),
@@ -31,16 +39,16 @@ var animations : Dictionary = {
 
 var resources : Dictionary = {
 	"health" : {
-		"maximum" : 100,
-		"current" : 100
+		"maximum" : s.constitution * 5,
+		"current" : s.constitution * 5
 	},
 	"mana" : {
-		"maximum" : 100,
-		"current" : 100
+		"maximum" : s.wisdom * 5,
+		"current" : s.wisdom * 5
 	},
 	"stamina" : {
-		"maximum" : 100,
-		"current" : 100
+		"maximum" : s.intelligence * 5,
+		"current" : s.intelligence * 5
 	}
 }
 	
@@ -126,6 +134,7 @@ signal update_resources
 signal update_inventory
 signal update_equipment
 signal update_skillbar
+signal update_stats
 
 
 func _ready() -> void:
@@ -241,7 +250,9 @@ func conf():
 	set_process(true)
 	set_physics_process(true)
 	
-func modify_resource(resource : String, amount : int) -> void:
+func modify_resource(resource : String, amount : int, new_max = null) -> void:
+	if new_max != null:
+		resources[resource].maximum = new_max
 	resources[resource].current += amount
 	emit_signal("update_resources")
 
@@ -470,4 +481,13 @@ func update_usage(used_item, usage_time):
 	for i in inventory:
 		if inventory.get(i).item == used_item:
 			inventory.get(i).use_time = usage_time
+
+func increase_stat(stat):
+	if free_points > 0:
+		s[stat] += 1
+		free_points -= 1
+		emit_signal("update_stats", s, free_points)
+		modify_resource("health", 0, s.constitution * 5)
+		modify_resource("mana", 0, s.wisdom * 5)
+		modify_resource("stamina", 0, s.dexterity * 5)
 

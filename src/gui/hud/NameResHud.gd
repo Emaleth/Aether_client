@@ -30,5 +30,5 @@ func conf(stats = {}, res = {}) -> void:
 	health_bar.conf(res.maximum, res.current, Color.red)
 
 func upd(res):
-	health_bar.updt(res.current)
+	health_bar.updt(res.current, res.maximum)
 
