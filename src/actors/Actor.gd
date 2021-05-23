@@ -397,7 +397,7 @@ func use_item(source):
 #				" | " + "Last Used Time: %s" % source[0].get(source[1])[source[2]].use_time,
 #				" | " + "CD: %s" % (float(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CD) * 1000))
 			update_usage(source[0].get(source[1])[source[2]].item, current_time_msec)
-			# do stuff here
+			cast_spell(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).SKILL)
 			if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CONSUMABLE == true:
 				source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)
 				if source[0].get(source[1])[source[2]].quantity <= 0:
@@ -491,3 +491,25 @@ func increase_stat(stat):
 		modify_resource("mana", 0, s.wisdom * 5)
 		modify_resource("stamina", 0, s.dexterity * 5)
 
+func cast_spell(spell):
+	if DataLoader.spell_db.get(spell).TYPE == "target":
+		if not enemy:
+			get_target()
+		if enemy:
+			enemy.hurt(float(DataLoader.spell_db.get(spell).DAMAGE))
+			modify_resource(DataLoader.spell_db.get(spell).RESOURCE, -float(DataLoader.spell_db.get(spell).COST))
+
+func get_target():
+	var new_target = target_list.pop_front()
+	if new_target:
+		if enemy:
+#			enemy.show_indicator(false)
+#			enemy.disconnect("update_resources", $GUI, "update_targe_info")
+#			$GUI.get_target_info(enemy, false)
+			if $AttackArea.overlaps_body(enemy): 
+				target_list.append(enemy)
+		enemy = new_target
+#		enemy.connect("update_resources", $GUI, "update_targe_info", [enemy.resources])
+#		enemy.show_indicator(true)
+#		$GUI.get_target_info(enemy, true)
+		look_at(enemy.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS

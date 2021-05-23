@@ -60,7 +60,6 @@ func get_next_target():
 		enemy.connect("update_resources", $GUI, "update_targe_info", [enemy.resources])
 		enemy.show_indicator(true)
 		$GUI.get_target_info(enemy, true)
-		attack()
 		look_at(enemy.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS
 
 func loose_target_ui():
