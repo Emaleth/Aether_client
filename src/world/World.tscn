@@ -18,7 +18,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.91768 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.76634 )
 
 [node name="Enemy3" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.56263, 0, -5.91768 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.56263, 0, -5.91768 )
 
 [node name="Crate" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 0 )

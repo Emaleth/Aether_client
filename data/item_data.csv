@@ -1,26 +1,26 @@
-"UID","NAME","TYPE","SUBTYPE","USABLE","CONSUMABLE","STACKABLE","STR","DEX","CONST","INT","WIS","SKILL","CD"
-"ITEM_00000","Training Sword","weapon","sword","false","false","false","1","1","1","1","1",,
-"ITEM_00001","Training Long Sword","weapon","longsword","false","false","false","1","1","1","1","1",,
-"ITEM_00002","Training Axe","weapon","axe","false","false","false","1","1","1","1","1",,
-"ITEM_00003"," Training Bow","weapon","bow","false","false","false","1","1","1","1","1",,
-"ITEM_00004"," Training Dagger","weapon","dagger","false","false","false","1","1","1","1","1",,
-"ITEM_00005","Training Staff","weapon","staff","false","false","false","1","1","1","1","1",,
-"ITEM_00006","Training Shield","armor","shield","false","false","false","1","1","1","1","1",,
-"ITEM_00007","Training Ring","jewelry","ring","false","false","false","1","1","1","1","1",,
-"ITEM_00008","Training Earring","jewelry","earring","false","false","false","1","1","1","1","1",,
-"ITEM_00009","Training Helmet","armor","helmet","false","false","false","1","1","1","1","1",,
-"ITEM_00010","Training Gloves","armor","gloves","false","false","false","1","1","1","1","1",,
-"ITEM_00011","Training Boots","armor","boots","false","false","false","1","1","1","1","1",,
-"ITEM_00012","Training Armour","armor","armor","false","false","false","1","1","1","1","1",,
-"ITEM_00013","Training Legs","armor","legs","false","false","false","1","1","1","1","1",,
-"ITEM_00014","Training Cape","armor","cape","false","false","false","1","1","1","1","1",,
-"ITEM_00015","Training Belt","armor","belt","false","false","false","1","1","1","1","1",,
-"ITEM_00016"," Training Shoulders","armor","shoulders","false","false","false","1","1","1","1","1",,
-"ITEM_00017","Training Pendant","jewelry","necklace","false","false","false","1","1","1","1","1",,
-"ITEM_00018","Training Arrow","ammunition","arrow","false","false","false","1","1","1","1","1",,
-"ITEM_00019","Training Orb","amulet","orb","false","false","false","1","1","1","1","1",,
-"ITEM_00020","Training Wings","armor","wings","false","false","false","1","1","1","1","1",,
-"ITEM_00021","Training Pickaxe","tool","pickaxe","false","false","false",,,,,,,
-"ITEM_00022","Infinite Rune","consumable","rune","true","false","false",,,,,,"lesser_light","1"
-"ITEM_00023","Lesser Health Elixir","consumable","potion","true","true","true",,,,,,"lesser_heal","5"
-"ITEM_00024","Lesser Mana Elixir","consumable","potion","true","true","true",,,,,,"lesser_mana","10"
+UUID,NAME,TYPE,SUBTYPE,CONSUMABLE,STACKABLE,STR,DEX,CONST,INT,WIS,SKILL
+ITEM_00000,Training Sword,weapon,sword,false,false,1,1,1,1,1,null
+ITEM_00001,Training Long Sword,weapon,longsword,false,false,1,1,1,1,1,null
+ITEM_00002,Training Axe,weapon,axe,false,false,1,1,1,1,1,null
+ITEM_00003, Training Bow,weapon,bow,false,false,1,1,4,1,1,null
+ITEM_00004, Training Dagger,weapon,dagger,false,false,-5,1,1,1,1,null
+ITEM_00005,Training Staff,weapon,staff,false,false,1,1,1,1,1,null
+ITEM_00006,Training Shield,armor,shield,false,false,1,null,1,1,1,null
+ITEM_00007,Training Ring,jewelry,ring,false,false,1,1,1,1,1,null
+ITEM_00008,Training Earring,jewelry,earring,false,false,1,1,9,-2,1,null
+ITEM_00009,Training Helmet,armor,helmet,false,false,1,1,1,1,1,null
+ITEM_00010,Training Gloves,armor,gloves,false,false,1,1,1,1,1,null
+ITEM_00011,Training Boots,armor,boots,false,false,1,1,1,1,1,null
+ITEM_00012,Training Armour,armor,armor,false,false,1,1,1,1,1,null
+ITEM_00013,Training Legs,armor,legs,false,false,1,-8,1,1,1,null
+ITEM_00014,Training Cape,armor,cape,false,false,1,1,1,1,null,null
+ITEM_00015,Training Belt,armor,belt,false,false,1,1,null,1,1,null
+ITEM_00016, Training Shoulders,armor,shoulders,false,false,1,1,1,1,1,null
+ITEM_00017,Training Pendant,jewelry,necklace,false,false,1,1,1,1,1,null
+ITEM_00018,Training Arrow,ammunition,arrow,false,false,1,1,1,1,1,null
+ITEM_00019,Training Orb,amulet,orb,false,false,1,1,1,1,1,null
+ITEM_00020,Training Wings,armor,wings,false,false,1,1,1,1,1,null
+ITEM_00021,Training Pickaxe,tool,pickaxe,false,false,,,,,,null
+ITEM_00022,Infinite Rune,consumable,rune,false,false,,,,,,lesser_light
+ITEM_00023,Lesser Health Elixir,consumable,potion,true,true,,,,,,lesser_heal
+ITEM_00024,Lesser Mana Elixir,consumable,potion,true,true,,,,,,lesser_mana

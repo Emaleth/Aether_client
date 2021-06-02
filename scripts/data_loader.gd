@@ -32,6 +32,8 @@ func convert_csv_data_to_dictionary(data):
 							data.get(row)[k] = true
 						elif data.get(row)[k] == "false":
 							data.get(row)[k] = false
+						elif data.get(row)[k] == "null":
+							data.get(row)[k] = null
 						entry[str(keys[k])] = data.get(row)[k]
 				db_dict[data.get(row)[0]] = entry
 

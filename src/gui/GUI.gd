@@ -56,5 +56,5 @@ func configure_inv(actor):
 func configure_eq(actor):
 	$Equipment.conf(actor, quantity_panel)
 	
-func configure_skillbar(actor):
-	$SkillBar.conf(actor, quantity_panel)
+func configure_quickbar(actor):
+	$Quickbar.conf(actor, quantity_panel)

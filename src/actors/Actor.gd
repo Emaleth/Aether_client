@@ -15,12 +15,14 @@ var statistics : Dictionary = {
 	"deceleration" : 10
 }
 var free_points = 10
-var s = {
+
+var attributes = {
 	"strenght" : 10,
 	"dexterity" : 10,
 	"constitution" : 10,
 	"intelligence" : 10,
-	"wisdom" : 10
+	"wisdom" : 10,
+	"charisma" : 10
 }
 
 var animations : Dictionary = {
@@ -39,16 +41,16 @@ var animations : Dictionary = {
 
 var resources : Dictionary = {
 	"health" : {
-		"maximum" : s.constitution * 5,
-		"current" : s.constitution * 5
+		"maximum" : attributes.constitution * 5,
+		"current" : attributes.constitution * 5
 	},
 	"mana" : {
-		"maximum" : s.wisdom * 5,
-		"current" : s.wisdom * 5
+		"maximum" : attributes.wisdom * 5,
+		"current" : attributes.wisdom * 5
 	},
 	"stamina" : {
-		"maximum" : s.intelligence * 5,
-		"current" : s.intelligence * 5
+		"maximum" : attributes.intelligence * 5,
+		"current" : attributes.intelligence * 5
 	}
 }
 	
@@ -104,7 +106,9 @@ var equipment_slot_type : Dictionary = {
 
 var equipment : Dictionary = {}
 var inventory : Dictionary = {}
-var skillbar : Dictionary = {}
+var quickbar : Dictionary = {}
+var lootable : Dictionary = {}
+
 # INTERNAL WORKING STUFF
 var state = null
 var model
@@ -113,7 +117,7 @@ var gravity_vec = Vector3()
 var direction = Vector3()
 var jumping = false
 var falling = false
-var rot_direction : int
+var rot_direction : float
 var turn_speed : float = 3.0
 var enemy = null
 var attacking = false
@@ -133,7 +137,7 @@ signal target_lost
 signal update_resources
 signal update_inventory
 signal update_equipment
-signal update_skillbar
+signal update_quickbar
 signal update_stats
 
 
@@ -214,7 +218,7 @@ func finite_state_machine(delta: float) -> void:
 
 func conf():
 	make_inventory_construct()
-	make_skillbar_construct()
+	make_quickbar_construct()
 	make_equipment_construct()
 	remake_equipment_slots_construct()
 	# GET 3D MODEL
@@ -250,14 +254,19 @@ func conf():
 	set_process(true)
 	set_physics_process(true)
 	
-func modify_resource(resource : String, amount : int, new_max = null) -> void:
-	if new_max != null:
-		resources[resource].maximum = new_max
-	resources[resource].current += amount
-	emit_signal("update_resources")
+func modify_resource(resource : String, amount : float, new_max = null) -> void:
+	if state != STATE.DIE:
+		if new_max != null:
+			resources[resource].maximum = new_max
+		resources[resource].current += amount
+		emit_signal("update_resources")
+		
+		var h = hit_num.instance()
+		get_tree().root.add_child(h)
+		h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
+		h.conf(amount)
 
 func hurt(amount) -> void:
-	if state != STATE.DIE:
 		modify_resource("health", -amount)
 		var h = hit_num.instance()
 		get_tree().root.add_child(h)
@@ -324,12 +333,12 @@ func make_inventory_construct():
 							"use_time" : 0}
 		inventory[i] = slot_construct
 							
-func make_skillbar_construct():
+func make_quickbar_construct():
 	for i in skill_bar_slot_num:
 		var slot_construct = {"item" : "",
 							"quantity" : 0,
 							"use_time" : 0}
-		skillbar[i] = slot_construct
+		quickbar[i] = slot_construct
 		
 func make_equipment_construct():
 	for i in equipment_slots:
@@ -348,15 +357,15 @@ func move_item(source = [], target = []):
 	var source_slot = source[0].get(source[1]).get(source[2])
 	var target_slot = get(target[1]).get(target[2])
 	
-	if source[1] == "skillbar":
-		if target[1] == "skillbar":
+	if source[1] == "quickbar":
+		if target[1] == "quickbar":
 			target[0].get(target[1])[target[2]] = source_slot
 			source[0].get(source[1])[source[2]] = target_slot
 		else:
 			source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
 			
-	if source[1] != "skillbar":
-		if target[1] == "skillbar":
+	if source[1] != "quickbar":
+		if target[1] == "quickbar":
 			target[0].get(target[1])[target[2]] = source_slot
 		elif target[1] == "equipment":
 			if match_item_to_slot(target[2], source[0].get(source[1])[source[2]].item) == true:
@@ -385,14 +394,15 @@ func move_item(source = [], target = []):
 	if source[1] == "inventory" || target[1] == "inventory":
 		emit_signal("update_inventory")
 	if source[1] == "equipment" || target[1] == "equipment":
+		get_eq_stats()
 		emit_signal("update_equipment")
 		load_eq()
-	emit_signal("update_skillbar")
+	emit_signal("update_quickbar")
 
 func use_item(source):
-	if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).USABLE == true:
+	if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).SKILL:
 		var current_time_msec = OS.get_ticks_msec()
-		if current_time_msec - source[0].get(source[1])[source[2]].use_time >= float(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CD) * 1000 || source[0].get(source[1])[source[2]].use_time == 0:
+		if current_time_msec - source[0].get(source[1])[source[2]].use_time >= float(DataLoader.spell_db.get(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).SKILL).COOLDOWN) * 1000 || source[0].get(source[1])[source[2]].use_time == 0:
 #			print("Current Time: %s" % current_time_msec,
 #				" | " + "Last Used Time: %s" % source[0].get(source[1])[source[2]].use_time,
 #				" | " + "CD: %s" % (float(DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CD) * 1000))
@@ -403,7 +413,7 @@ func use_item(source):
 				if source[0].get(source[1])[source[2]].quantity <= 0:
 					source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
 				
-			emit_signal("update_skillbar")
+			emit_signal("update_quickbar")
 			emit_signal("update_inventory")
 			emit_signal("update_equipment")
 
@@ -416,13 +426,13 @@ func match_item_to_slot(slot, item) -> bool:
 func split_item(source = [], target = [], q = 0):
 	if q == 0:
 		return
-	var source_slot = source[0].get(source[1]).get(source[2])
-	var target_slot = get(target[1]).get(target[2])
+#	var source_slot = source[0].get(source[1]).get(source[2])
+#	var target_slot = get(target[1]).get(target[2])
 	
-	if source[1] == "skillbar":
+	if source[1] == "quickbar":
 		move_item(source, target)
-	if source[1] != "skillbar":
-		if target[1] == "skillbar":
+	if source[1] != "quickbar":
+		if target[1] == "quickbar":
 			move_item(source, target)
 		elif target[1] == "equipment":
 			if match_item_to_slot(target[2], source[0].get(source[1])[source[2]].item) == true:
@@ -471,7 +481,7 @@ func split_item(source = [], target = [], q = 0):
 	if source[1] == "equipment" || target[1] == "equipment":
 		emit_signal("update_equipment")
 		load_eq()
-	emit_signal("update_skillbar")
+	emit_signal("update_quickbar")
 
 func update_usage(used_item, usage_time):
 	gcd_used = usage_time
@@ -484,21 +494,49 @@ func update_usage(used_item, usage_time):
 
 func increase_stat(stat):
 	if free_points > 0:
-		s[stat] += 1
+		attributes[stat] += 1
 		free_points -= 1
-		emit_signal("update_stats", s, free_points)
-		modify_resource("health", 0, s.constitution * 5)
-		modify_resource("mana", 0, s.wisdom * 5)
-		modify_resource("stamina", 0, s.dexterity * 5)
+		emit_signal("update_stats", attributes, free_points)
+		modify_resource("health", 0, attributes.constitution * 5)
+		modify_resource("mana", 0, attributes.wisdom * 5)
+		modify_resource("stamina", 0, attributes.dexterity * 5)
 
 func cast_spell(spell):
-	if DataLoader.spell_db.get(spell).TYPE == "target":
+	if DataLoader.spell_db.get(spell).TARGET_TYPE == "enemy":
 		if not enemy:
 			get_target()
-		if enemy:
-			enemy.hurt(float(DataLoader.spell_db.get(spell).DAMAGE))
-			modify_resource(DataLoader.spell_db.get(spell).RESOURCE, -float(DataLoader.spell_db.get(spell).COST))
-
+			
+		if not enemy:
+			return
+			
+		if global_transform.origin.distance_to(enemy.global_transform.origin) > float(DataLoader.spell_db.get(spell).RANGE):
+			return
+			
+		if DataLoader.spell_db.get(spell).HEALTH_COST:
+			if resources.health.current > float(DataLoader.spell_db.get(spell).HEALTH_COST):
+				modify_resource("health", -float(DataLoader.spell_db.get(spell).HEALTH_COST))
+			else:
+				return
+				
+		if DataLoader.spell_db.get(spell).MANA_COST:
+			if resources.mana.current > float(DataLoader.spell_db.get(spell).MANA_COST):
+				modify_resource("mana", -float(DataLoader.spell_db.get(spell).MANA_COST))
+			else:
+				return
+				
+		if DataLoader.spell_db.get(spell).STAMINA_COST:
+			if resources.stamina.current > float(DataLoader.spell_db.get(spell).STAMINA_COST):
+				modify_resource("stamina", -float(DataLoader.spell_db.get(spell).STAMINA_COST))
+			else:
+				return
+				
+		if DataLoader.spell_db.get(spell).TARGET_HEALTH:
+			enemy.modify_resource("health", float(DataLoader.spell_db.get(spell).TARGET_HEALTH))
+		if DataLoader.spell_db.get(spell).TARGET_MANA:
+			enemy.modify_resource("mana", float(DataLoader.spell_db.get(spell).TARGET_MANA))
+		if DataLoader.spell_db.get(spell).TARGET_STAMINA:
+			enemy.modify_resource("stamina", float(DataLoader.spell_db.get(spell).TARGET_STAMINA))
+			
 func get_target():
 	var new_target = target_list.pop_front()
 	if new_target:
@@ -513,3 +551,24 @@ func get_target():
 #		enemy.show_indicator(true)
 #		$GUI.get_target_info(enemy, true)
 		look_at(enemy.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS
+
+func add_lootable(creature_id, loot):
+	lootable[creature_id] = loot
+
+func get_eq_stats():
+	for piece in equipment:
+		if equipment.get(piece).item != "":
+			if DataLoader.item_db.get(equipment.get(piece).item).STR != null:
+				attributes.strenght += int(DataLoader.item_db.get(equipment.get(piece).item).STR)
+			if DataLoader.item_db.get(equipment.get(piece).item).DEX != null:
+				attributes.dexterity += int(DataLoader.item_db.get(equipment.get(piece).item).DEX)
+			if DataLoader.item_db.get(equipment.get(piece).item).INT != null:
+				attributes.intelligence += int(DataLoader.item_db.get(equipment.get(piece).item).INT)
+			if DataLoader.item_db.get(equipment.get(piece).item).CONST != null:
+				attributes.constitution += int(DataLoader.item_db.get(equipment.get(piece).item).CONST)
+			if DataLoader.item_db.get(equipment.get(piece).item).WIS != null:
+				attributes.wisdom += int(DataLoader.item_db.get(equipment.get(piece).item).WIS)
+	emit_signal("update_stats", attributes, free_points)
+	modify_resource("health", 0, attributes.constitution * 5)
+	modify_resource("mana", 0, attributes.wisdom * 5)
+	modify_resource("stamina", 0, attributes.dexterity * 5)

@@ -21,8 +21,8 @@ func _ready() -> void:
 	connect("update_inventory", $GUI, "configure_inv", [self])
 	$GUI.configure_eq(self)
 	connect("update_equipment", $GUI, "configure_eq", [self])
-	$GUI.configure_skillbar(self)
-	connect("update_skillbar", $GUI, "configure_skillbar", [self])
+	$GUI.configure_quickbar(self)
+	connect("update_quickbar", $GUI, "configure_quickbar", [self])
 	
 func _process(_delta: float) -> void:
 	get_input()

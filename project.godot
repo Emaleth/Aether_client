@@ -24,6 +24,10 @@ DataLoader="*res://scripts/data_loader.gd"
 ObjectPool="*res://scripts/ObjectPool.gd"
 Global="*res://global.gd"
 
+[debug]
+
+gdscript/warnings/return_value_discarded=false
+
 [display]
 
 window/size/width=1280

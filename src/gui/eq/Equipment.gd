@@ -120,9 +120,17 @@ onready var stats = {
 		"name" : stat_container.get_node("Wisdom/Label"),
 		"number" : stat_container.get_node("Wisdom/Q"),
 		"button" : stat_container.get_node("Wisdom/Add")
+	},
+	"charisma" : {
+		"name" : stat_container.get_node("Charisma/Label"),
+		"number" : stat_container.get_node("Charisma/Q"),
+		"button" : stat_container.get_node("Charisma/Add")
 	}
 }
 
+func _ready() -> void:
+	$Close/TextureRect.self_modulate = Global.close_button
+	
 func conf(actor, quantity_panel):
 	for i in actor.equipment:
 		equipment.get(i).slot.conf(actor, i, "equipment", quantity_panel, equipment.get(i).empty_icon)
@@ -132,9 +140,9 @@ func conf(actor, quantity_panel):
 			stats.get(i).name.text = str(i).capitalize()
 			stats.get(i).number.rect_min_size = stats.get(i).number.rect_size
 			stat_container.rect_min_size = stat_container.rect_size
-			update_stats(actor.s, actor.free_points)
+			update_stats(actor.attributes, actor.free_points)
 			stats.get(i).button.connect("pressed", actor, "increase_stat", [i])
-			stats.get(i).button.get_child(0).self_modulate = Global.toggle_off
+			stats.get(i).button.get_child(0).self_modulate = Global.button_normal
 	if not actor.is_connected("update_stats", self, "update_stats"):
 		actor.connect("update_stats", self, "update_stats")
 		
@@ -152,3 +160,9 @@ func update_stats(s, points):
 			stats.get(i).button.disabled = true
 		points_label.text = ""
 		
+func _on_Equipment_sort_children() -> void:
+	var offset = ($MarginContainer.get("custom_constants/margin_right") / 2)
+	$Close.rect_position = Vector2(rect_size.x - $Close.rect_size.x / 2 - offset, -$Close.rect_size.y / 2 + offset) 
+
+func _on_Close_pressed() -> void:
+	hide()

@@ -29,8 +29,8 @@ func conf(actor, slot, type, quantity_panel, empty_icon = null):
 	if not is_connected("request_quantity", quantity_panel, "conf"):
 		connect("request_quantity", quantity_panel, "conf")
 	if actor.get(type).get(slot).item:
-		if DataLoader.item_db.get(actor.get(type).get(slot).item).USABLE == true:
-			cooldown_animation(true, (float(DataLoader.item_db.get(actor.get(type).get(slot).item).CD) * 1000), actor.get(type).get(slot).use_time)
+		if DataLoader.item_db.get(actor.get(type).get(slot).item).SKILL:
+			cooldown_animation(true, (float(DataLoader.spell_db.get(DataLoader.item_db.get(actor.get(type).get(slot).item).SKILL).COOLDOWN) * 1000), actor.get(type).get(slot).use_time)
 			if not is_connected("request_use", actor, "use_item"):
 				connect("request_use", actor, "use_item")
 		else:
@@ -78,7 +78,7 @@ func drop_data(_position: Vector2, data) -> void:
 
 func _on_Slot_pressed() -> void: 
 	if aactor.get(ttype).get(sslot).item:
-		if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).USABLE == true:
+		if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
 			var source = [aactor, ttype, sslot]
 			emit_signal("request_use", source)
 

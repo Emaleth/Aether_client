@@ -16,9 +16,9 @@ onready var resize = $ButtonList/Resize
 func _ready() -> void:
 	rect_size = Vector2(default_map_size, default_map_size)
 	rect_position.x = OS.window_size.x - rect_size.x
-	$ButtonList/ZoomIn/image.self_modulate = Global.toggle_off
-	$ButtonList/ZoomOut/image.self_modulate = Global.toggle_off
-	$ButtonList/Resize/image.self_modulate = Global.toggle_off
+	$ButtonList/ZoomIn/image.self_modulate = Global.button_normal
+	$ButtonList/ZoomOut/image.self_modulate = Global.button_normal
+	$ButtonList/Resize/image.self_modulate = Global.button_normal
 	
 func _process(delta: float) -> void:
 	if zoom_in.pressed == true:
@@ -38,5 +38,5 @@ func _process(delta: float) -> void:
 		rect_position.x = OS.window_size.x - rect_size.x
 
 func _on_MiniMap_sort_children() -> void:
-	var offset = (button_container.rect_size.x / 2) - ($MarginContainer.get("custom_constants/margin_right") / 2)
+	var offset = ($MarginContainer.get("custom_constants/margin_right") / 2)
 	button_container.rect_position = Vector2(-offset, rect_size.y - button_container.rect_size.y + offset)
