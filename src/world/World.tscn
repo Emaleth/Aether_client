@@ -11,43 +11,45 @@
 [node name="Environment" type="Node" parent="."]
 
 [node name="Crate" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 0 )
+transform = Transform( 1, 0, 0, 0, 4.23265, 0, 0, 0, 1, -14.3008, 0.99471, -1.07989 )
 
 [node name="Crate6" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.3008, 1, 0 )
+transform = Transform( 0.993459, 0.108726, 0.0349059, -0.114192, 0.945907, 0.303679, 0, -0.305679, 0.952135, -22.4675, 2.23738, -0.646869 )
 
 [node name="Crate7" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3008, 1, 2 )
+transform = Transform( -0.098336, 3.02378, 0, -1.58229, 3.07175, 0, 0, 0, 1, -17.9132, 2.44292, 0.0591412 )
 
 [node name="Crate8" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 2 )
+transform = Transform( 1, 0, 0, 0, 0.982871, -0.511439, 0, 0.184294, 2.72759, -14.3008, 5.96574, 1.57957 )
 
 [node name="Crate9" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 4 )
+transform = Transform( 1, 0, 0, 0, 3.50418, 0, 0, 0, 1, -14.3008, 0.99622, 4 )
 
 [node name="Crate10" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3008, 1, 4 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3008, 0.995249, 4 )
+
+[node name="Crate11" parent="Environment" instance=ExtResource( 4 )]
+transform = Transform( 1.73829, 0, 0, 0, 2.17002, 0, 0, 0, 2.71291, -5.49472, 2.21573, 27.8683 )
 
 [node name="Crate2" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, -5.71904 )
+transform = Transform( 0.991912, 0.126236, -0.0132189, -0.126926, 0.986518, -0.103304, 0, 0.104147, 0.994562, -14.3008, 1.08376, -5.71904 )
 
 [node name="Crate3" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8457, 1, -7.71904 )
+transform = Transform( 0.939112, 0.343611, 0, -0.32751, 0.895108, 0.30252, 0.103949, -0.2841, 0.953143, 10.8457, -0.293109, -7.71904 )
 
 [node name="Crate4" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8457, 1, 2.498 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8457, 5.7084, 5.30548 )
 
 [node name="Crate5" parent="Environment" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36626, 1, -11.2284 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36626, 0.979168, -11.2284 )
 
 [node name="Ground" parent="Environment" instance=ExtResource( 2 )]
-transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0 )
 
 [node name="Stairs" parent="Environment" instance=ExtResource( 5 )]
-transform = Transform( 1.68, 0, 0, 0, 2.1, 0, 0, 0, 1, 0, -1.19209e-07, -22.8173 )
+transform = Transform( -1.83206, 0, 0.219153, 0, 2.1, 0, -0.47539, 0, -1.40807, -4.69516, -0.0024296, 18.5697 )
 
 [node name="Stairs2" parent="Environment" instance=ExtResource( 5 )]
-transform = Transform( -5.24537e-08, 0, -1.2, 0, 1.4, 0, 1.9, 0, -8.30516e-08, 16, 1.19209e-07, -3.8173 )
+transform = Transform( -1.35674, 0.0158822, 0.839976, 0.0153924, 1.39991, -0.00952963, -1.33005, 0, -0.856942, -10.2613, -0.00326872, 11.5549 )
 
 [node name="Actors" type="Node" parent="."]
 

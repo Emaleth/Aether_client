@@ -1,8 +1,8 @@
 extends SpringArm
 
-var max_zoom : int = 10
+var max_zoom : int = 20
 var min_zoom : int = 1
-var def_zoom : int = 8
+var def_zoom : int = 10
 var zoom_sensibility : float = 0.2
 var pan_sensibility : float = 0.002
 var pan_deadzone : float = 0.1
