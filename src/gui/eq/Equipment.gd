@@ -140,7 +140,7 @@ func conf(actor, quantity_panel):
 			stats.get(i).name.text = str(i).capitalize()
 			stats.get(i).number.rect_min_size = stats.get(i).number.rect_size
 			stat_container.rect_min_size = stat_container.rect_size
-			update_stats(actor.attributes, actor.free_points)
+			update_stats(actor.attributes.total, actor.attributes.points)
 			stats.get(i).button.connect("pressed", actor, "increase_stat", [i])
 			stats.get(i).button.get_child(0).self_modulate = Global.button_normal
 	if not actor.is_connected("update_stats", self, "update_stats"):

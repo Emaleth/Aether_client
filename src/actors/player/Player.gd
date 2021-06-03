@@ -15,7 +15,7 @@ func _ready() -> void:
 	$GUI.conf(resources, minimap_camera_remote_transform)
 	connect("update_resources", $GUI, "update_gui", [resources])
 	load_eq()
-	connect("target_lost", self, "loose_target_ui")
+	connect("target_lost", self, "target_ui")
 	get_test_items()
 	$GUI.configure_inv(self)
 	connect("update_inventory", $GUI, "configure_inv", [self])
@@ -58,14 +58,15 @@ func get_next_target():
 				target_list.append(enemy)
 		enemy = new_target
 		enemy.connect("update_resources", $GUI, "update_targe_info", [enemy.resources])
-		enemy.show_indicator(true)
-		$GUI.get_target_info(enemy, true)
+		target_ui(true)
 		look_at(enemy.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS
 
-func loose_target_ui():
+func target_ui(show : bool):
 	if enemy:
-		enemy.show_indicator(false)
-		$GUI.get_target_info(enemy, false)
+		enemy.show_indicator(show)
+		$GUI.get_target_info(enemy, show)
+		if show == false:
+			enemy.disconnect("update_resources", $GUI, "update_targe_info")
 
 func get_test_items():
 	inventory[0].item = "ITEM_00000"

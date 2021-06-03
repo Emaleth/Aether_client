@@ -8,7 +8,7 @@
 radius = 0.4
 
 [sub_resource type="SphereShape" id=2]
-radius = 100.0
+radius = 10.0
 
 [node name="Actor" type="KinematicBody"]
 script = ExtResource( 1 )

@@ -5,7 +5,6 @@ enum STATE {IDLE, RUN, JUMP, FALL, DIE}
 var target_list = []
 var statistics : Dictionary = {
 	"name" : "",
-	"race" : "",
 	"guild" : "",
 	"title" : "",
 	"level" : "",
@@ -14,53 +13,73 @@ var statistics : Dictionary = {
 	"acceleration" : 15,
 	"deceleration" : 10
 }
-var free_points = 10
 
 var attributes = {
-	"strenght" : 10,
-	"dexterity" : 10,
-	"constitution" : 10,
-	"intelligence" : 10,
-	"wisdom" : 10,
-	"charisma" : 10
-}
-
-var animations : Dictionary = {
-	"idle" : preload("res://animations/Sword_And_Shield_Idle.anim"),
-	"run_forward" : preload("res://animations/Sword_And_Shield_Run.anim"),
-	"walk_backwards" : preload("res://animations/Sword_And_Shield_Walk_Backwards.anim"),
-	"walk_forward" : preload("res://animations/Sword_And_Shield_Walk_Forward.anim"),
-	"strafe_left" : preload("res://animations/Sword_And_Shield_Strafe_Left.anim"),
-	"strafe_right" : preload("res://animations/Sword_And_Shield_Strafe_Right.anim"),
-	"death" : preload("res://animations/Sword_And_Shield_Death.anim"),
-	"cast" : preload("res://animations/Sword_And_Shield_Casting.anim"),
-	"attack" : preload("res://animations/Sword_And_Shield_Slash.anim"),
-	"jump" : preload("res://animations/Sword_And_Shield_Jump.anim")
-#	"fall" : preload("res://animations/Sword_And_Shield_Fall.anim")
+	"points" : 20,
+	"base" : {
+		"strenght" : 10,
+		"dexterity" : 10,
+		"constitution" : 10,
+		"intelligence" : 10,
+		"wisdom" : 10,
+		"charisma" : 10
+	},
+	"player" : {
+		"strenght" : 0,
+		"dexterity" : 0,
+		"constitution" : 0,
+		"intelligence" : 0,
+		"wisdom" : 0,
+		"charisma" : 0
+	},
+	"equipment" : {
+		"strenght" : 0,
+		"dexterity" : 0,
+		"constitution" : 0,
+		"intelligence" : 0,
+		"wisdom" : 0,
+		"charisma" : 0
+	},
+	"effects" : {
+		"strenght" : 0,
+		"dexterity" : 0,
+		"constitution" : 0,
+		"intelligence" : 0,
+		"wisdom" : 0,
+		"charisma" : 0
+	},
+	"total" : {
+		"strenght" : 0,
+		"dexterity" : 0,
+		"constitution" : 0,
+		"intelligence" : 0,
+		"wisdom" : 0,
+		"charisma" : 0
+	}
 }
 
 var resources : Dictionary = {
 	"health" : {
-		"maximum" : attributes.constitution * 5,
-		"current" : attributes.constitution * 5
+		"maximum" : 100,#attributes.constitution * 5,
+		"current" : 100#attributes.constitution * 5
 	},
 	"mana" : {
-		"maximum" : attributes.wisdom * 5,
-		"current" : attributes.wisdom * 5
+		"maximum" : 100,#attributes.wisdom * 5,
+		"current" : 100#attributes.wisdom * 5
 	},
 	"stamina" : {
-		"maximum" : attributes.intelligence * 5,
-		"current" : attributes.intelligence * 5
+		"maximum" : 100,#attributes.intelligence * 5,
+		"current" : 100#attributes.intelligence * 5
 	}
 }
 	
 var equipment_slots : Dictionary = {
-	"head" : ["mixamorigHead"],
-	"hands" : ["mixamorigLeftHand", "mixamorigRightHand"],
-	"feet" : ["mixamorigLeftFoot", "mixamorigRightFoot"],
-	"upper_body" : ["mixamorigSpine2"],
+	"head" : [],
+	"hands" : [],
+	"feet" : [],
+	"upper_body" : [],
 	"lower_body" : [],
-	"cape" : ["mixamorigSpine2"],
+	"cape" : [],
 	"belt" : [],
 	"shoulders" : [],
 	"necklace" : [],
@@ -70,8 +89,8 @@ var equipment_slots : Dictionary = {
 	"ring_2" : [],
 	"earring_1" : [],
 	"earring_2" : [],
-	"main_hand" : ["mixamorigRightHand"],
-	"off_hand" : ["mixamorigLeftHand"],
+	"main_hand" : [],
+	"off_hand" : [],
 	"gathering_tools" : [],
 	"amulet_1" : [],
 	"amulet_2" : [],
@@ -150,6 +169,8 @@ func _ready() -> void:
 	# SET INITIAL STATE
 	state = STATE.IDLE
 	attacking = true
+#	calculate_total_attributes()
+	
 	
 func _physics_process(delta: float) -> void:
 	finite_state_machine(delta)
@@ -157,7 +178,7 @@ func _physics_process(delta: float) -> void:
 func finite_state_machine(delta: float) -> void:
 	match state:
 		STATE.IDLE:
-			anim_player.play("idle")
+#			anim_player.play("idle")
 			gravity_vec = (get_floor_normal() * -1) * gravity
 			velocity = velocity.linear_interpolate(Vector3.ZERO, statistics.deceleration * delta)
 			
@@ -171,7 +192,7 @@ func finite_state_machine(delta: float) -> void:
 				state = STATE.DIE
 					
 		STATE.RUN:
-			anim_player.play("run_forward")
+#			anim_player.play("run_forward")
 			gravity_vec = (get_floor_normal() * -1) * gravity
 			velocity = velocity.linear_interpolate(direction * statistics.speed, statistics.acceleration * delta)
 			
@@ -185,7 +206,7 @@ func finite_state_machine(delta: float) -> void:
 				state = STATE.DIE
 			
 		STATE.JUMP:
-			anim_player.play("jump")
+#			anim_player.play("jump")
 			velocity = velocity.linear_interpolate(direction * statistics.speed, statistics.deceleration * delta)
 			if jumping == true:
 				gravity_vec = Vector3.UP * statistics.jump_force
@@ -197,7 +218,7 @@ func finite_state_machine(delta: float) -> void:
 				state = STATE.FALL
 			
 		STATE.FALL:
-			anim_player.play("idle")
+#			anim_player.play("idle")
 			gravity_vec += Vector3.DOWN * gravity * delta
 			velocity = velocity.linear_interpolate(direction * statistics.speed, statistics.deceleration * delta)
 			if is_on_floor():
@@ -208,8 +229,8 @@ func finite_state_machine(delta: float) -> void:
 			if velocity != Vector3.ZERO:
 				velocity = velocity.linear_interpolate(Vector3.ZERO, statistics.deceleration * delta)
 			else:
-				anim_player.play("death")
-				yield(anim_player,"animation_finished")
+#				anim_player.play("death")
+#				yield(anim_player,"animation_finished")
 				queue_free()
 			
 			
@@ -220,39 +241,16 @@ func conf():
 	make_inventory_construct()
 	make_quickbar_construct()
 	make_equipment_construct()
+	make_attributes_construct()
 	remake_equipment_slots_construct()
-	# GET 3D MODEL
-	model = model.instance()
-	add_child(model)
-	model.rotate_y(deg2rad(180))
-	for i in model.get_children():
-		if i is MeshInstance:
-			hide_from_minimap_camera(i)
-			i.set_layer_mask_bit(0, false)
-		else:
-			if i.get_child_count() > 0:
-				for l in i.get_children():
-					if l is MeshInstance:
-						hide_from_minimap_camera(l)
-						l.set_layer_mask_bit(0, false)
-	# CREATE BONE ATTACHMENT NODES
-	for i in equipment_slots:
-		for bone in equipment_slots.get(i).bone:
-			var new_bone_attachment = BoneAttachment.new()
-			model.get_node("RootNode/Skeleton").add_child(new_bone_attachment)
-			new_bone_attachment.bone_name = bone
-			equipment_slots.get(i).slot.append(new_bone_attachment)
-	# GET ANIMATION PLAYER
-	anim_player = model.find_node("AnimationPlayer")
-	# LOAD ANIMATIONS
-	for i in animations:
-		anim_player.add_animation(i, animations.get(i))
-	# CONF HUD
-	$NameResHud.conf(statistics, resources.health)
 	# RESTART PROCESSING
-	connect("update_resources", $NameResHud, "upd", [resources.health])
 	set_process(true)
 	set_physics_process(true)
+	# CALCULATE ATTRIBUTES
+	calculate_total_attributes()
+	# CONF HUD
+	$NameResHud.conf(statistics, resources.health)
+	connect("update_resources", $NameResHud, "upd", [resources.health])
 	
 func modify_resource(resource : String, amount : float, new_max = null) -> void:
 	if state != STATE.DIE:
@@ -260,18 +258,20 @@ func modify_resource(resource : String, amount : float, new_max = null) -> void:
 			resources[resource].maximum = new_max
 		resources[resource].current += amount
 		emit_signal("update_resources")
-		
-		var h = hit_num.instance()
-		get_tree().root.add_child(h)
-		h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
-		h.conf(amount)
+		if resource == "health":
+			if amount == 0:
+				return
+			var h = hit_num.instance()
+			get_tree().root.add_child(h)
+			h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
+			h.conf(amount, Color.red)
 
-func hurt(amount) -> void:
-		modify_resource("health", -amount)
-		var h = hit_num.instance()
-		get_tree().root.add_child(h)
-		h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
-		h.conf(amount)
+#func hurt(amount) -> void:
+#		modify_resource("health", -amount)
+#		var h = hit_num.instance()
+#		get_tree().root.add_child(h)
+#		h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
+#		h.conf(amount)
 	
 func hide_from_minimap_camera(mesh):
 	mesh.set_layer_mask_bit(1, false)
@@ -291,7 +291,7 @@ func _on_AttackArea_body_entered(body: Node) -> void:
 func _on_AttackArea_body_exited(body: Node) -> void:
 	if body is KinematicBody:
 		if body == enemy:
-			emit_signal("target_lost")
+			emit_signal("target_lost", false)
 			enemy = null
 		target_list.erase(body)
 
@@ -328,21 +328,21 @@ func load_eq():
 
 func make_inventory_construct():
 	for i in inv_slot_num:
-		var slot_construct = {"item" : "",
+		var slot_construct = {"item" : null,
 							"quantity" : 0,
 							"use_time" : 0}
 		inventory[i] = slot_construct
 							
 func make_quickbar_construct():
 	for i in skill_bar_slot_num:
-		var slot_construct = {"item" : "",
+		var slot_construct = {"item" : null,
 							"quantity" : 0,
 							"use_time" : 0}
 		quickbar[i] = slot_construct
 		
 func make_equipment_construct():
 	for i in equipment_slots:
-		var slot_construct = {"item" : "",
+		var slot_construct = {"item" : null,
 							"quantity" : 0,
 							"use_time" : 0}
 		equipment[i] = slot_construct
@@ -353,6 +353,9 @@ func remake_equipment_slots_construct():
 							"slot" : []}
 		equipment_slots[i] = slot_construct
 
+func make_attributes_construct():
+	pass
+	
 func move_item(source = [], target = []):
 	var source_slot = source[0].get(source[1]).get(source[2])
 	var target_slot = get(target[1]).get(target[2])
@@ -362,7 +365,7 @@ func move_item(source = [], target = []):
 			target[0].get(target[1])[target[2]] = source_slot
 			source[0].get(source[1])[source[2]] = target_slot
 		else:
-			source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+			source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 			
 	if source[1] != "quickbar":
 		if target[1] == "quickbar":
@@ -372,7 +375,7 @@ func move_item(source = [], target = []):
 				if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
 					if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
 						target[0].get(target[1])[target[2]].quantity += source[0].get(source[1])[source[2]].quantity
-						source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+						source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 					else:
 						target[0].get(target[1])[target[2]] = source_slot
 						source[0].get(source[1])[source[2]] = target_slot
@@ -383,7 +386,7 @@ func move_item(source = [], target = []):
 			if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
 				if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
 					target[0].get(target[1])[target[2]].quantity += source[0].get(source[1])[source[2]].quantity
-					source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+					source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 				else:
 					target[0].get(target[1])[target[2]] = source_slot
 					source[0].get(source[1])[source[2]] = target_slot
@@ -411,7 +414,7 @@ func use_item(source):
 			if DataLoader.item_db.get(source[0].get(source[1])[source[2]].item).CONSUMABLE == true:
 				source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)
 				if source[0].get(source[1])[source[2]].quantity <= 0:
-					source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+					source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 				
 			emit_signal("update_quickbar")
 			emit_signal("update_inventory")
@@ -442,7 +445,7 @@ func split_item(source = [], target = [], q = 0):
 						if source[0].get(source[1])[source[2]].quantity - q > 0:
 							source[0].get(source[1])[source[2]].quantity -= q
 						else:
-							source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+							source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 					else:
 						move_item(source, target)
 				elif target[0].get(target[1])[target[2]].item == "":
@@ -452,7 +455,7 @@ func split_item(source = [], target = [], q = 0):
 						if source[0].get(source[1])[source[2]].quantity - q > 0:
 							source[0].get(source[1])[source[2]].quantity -= q
 						else:
-							source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+							source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 					else:
 						move_item(source, target)
 		else:
@@ -462,7 +465,7 @@ func split_item(source = [], target = [], q = 0):
 					if source[0].get(source[1])[source[2]].quantity - q > 0:
 						source[0].get(source[1])[source[2]].quantity -= q
 					else:
-						source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+						source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 				else:
 					move_item(source, target)
 			elif target[0].get(target[1])[target[2]].item == "":
@@ -472,7 +475,7 @@ func split_item(source = [], target = [], q = 0):
 					if source[0].get(source[1])[source[2]].quantity - q > 0:
 						source[0].get(source[1])[source[2]].quantity -= q
 					else:
-						source[0].get(source[1])[source[2]] = {"item" : "", "quantity" : 0, "use_time" : 0}
+						source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 				else:
 					move_item(source, target)
 	
@@ -493,43 +496,34 @@ func update_usage(used_item, usage_time):
 			inventory.get(i).use_time = usage_time
 
 func increase_stat(stat):
-	if free_points > 0:
-		attributes[stat] += 1
-		free_points -= 1
-		emit_signal("update_stats", attributes, free_points)
-		modify_resource("health", 0, attributes.constitution * 5)
-		modify_resource("mana", 0, attributes.wisdom * 5)
-		modify_resource("stamina", 0, attributes.dexterity * 5)
+	if attributes.points > 0:
+		attributes.player[stat] += 1
+		attributes.points -= 1
+		calculate_total_attributes()
 
 func cast_spell(spell):
 	if DataLoader.spell_db.get(spell).TARGET_TYPE == "enemy":
 		if not enemy:
 			get_target()
-			
 		if not enemy:
 			return
-			
 		if global_transform.origin.distance_to(enemy.global_transform.origin) > float(DataLoader.spell_db.get(spell).RANGE):
 			return
-			
 		if DataLoader.spell_db.get(spell).HEALTH_COST:
 			if resources.health.current > float(DataLoader.spell_db.get(spell).HEALTH_COST):
 				modify_resource("health", -float(DataLoader.spell_db.get(spell).HEALTH_COST))
 			else:
 				return
-				
 		if DataLoader.spell_db.get(spell).MANA_COST:
 			if resources.mana.current > float(DataLoader.spell_db.get(spell).MANA_COST):
 				modify_resource("mana", -float(DataLoader.spell_db.get(spell).MANA_COST))
 			else:
 				return
-				
 		if DataLoader.spell_db.get(spell).STAMINA_COST:
 			if resources.stamina.current > float(DataLoader.spell_db.get(spell).STAMINA_COST):
 				modify_resource("stamina", -float(DataLoader.spell_db.get(spell).STAMINA_COST))
 			else:
 				return
-				
 		if DataLoader.spell_db.get(spell).TARGET_HEALTH:
 			enemy.modify_resource("health", float(DataLoader.spell_db.get(spell).TARGET_HEALTH))
 		if DataLoader.spell_db.get(spell).TARGET_MANA:
@@ -556,19 +550,30 @@ func add_lootable(creature_id, loot):
 	lootable[creature_id] = loot
 
 func get_eq_stats():
+	for i in attributes.equipment:
+		attributes.equipment[i] = 0
 	for piece in equipment:
-		if equipment.get(piece).item != "":
+		if equipment.get(piece).item:
 			if DataLoader.item_db.get(equipment.get(piece).item).STR != null:
-				attributes.strenght += int(DataLoader.item_db.get(equipment.get(piece).item).STR)
+				attributes.equipment.strenght += int(DataLoader.item_db.get(equipment.get(piece).item).STR)
 			if DataLoader.item_db.get(equipment.get(piece).item).DEX != null:
-				attributes.dexterity += int(DataLoader.item_db.get(equipment.get(piece).item).DEX)
+				attributes.equipment.dexterity += int(DataLoader.item_db.get(equipment.get(piece).item).DEX)
 			if DataLoader.item_db.get(equipment.get(piece).item).INT != null:
-				attributes.intelligence += int(DataLoader.item_db.get(equipment.get(piece).item).INT)
+				attributes.equipment.intelligence += int(DataLoader.item_db.get(equipment.get(piece).item).INT)
 			if DataLoader.item_db.get(equipment.get(piece).item).CONST != null:
-				attributes.constitution += int(DataLoader.item_db.get(equipment.get(piece).item).CONST)
+				attributes.equipment.constitution += int(DataLoader.item_db.get(equipment.get(piece).item).CONST)
 			if DataLoader.item_db.get(equipment.get(piece).item).WIS != null:
-				attributes.wisdom += int(DataLoader.item_db.get(equipment.get(piece).item).WIS)
-	emit_signal("update_stats", attributes, free_points)
-	modify_resource("health", 0, attributes.constitution * 5)
-	modify_resource("mana", 0, attributes.wisdom * 5)
-	modify_resource("stamina", 0, attributes.dexterity * 5)
+				attributes.equipment.wisdom += int(DataLoader.item_db.get(equipment.get(piece).item).WIS)
+	calculate_total_attributes()
+
+func calculate_total_attributes():
+	for i in attributes.total:
+		attributes.total[i] = 0
+	for type in attributes:
+		if type != "total" and type != "points":
+			for one in attributes.get(type):
+				attributes.total[one] += attributes.get(type).get(one)
+	modify_resource("health", 0, attributes.total.constitution * 5)
+	modify_resource("mana", 0, attributes.total.wisdom * 5)
+	modify_resource("stamina", 0, attributes.total.dexterity * 5)
+	emit_signal("update_stats", attributes.total, attributes.points)
