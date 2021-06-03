@@ -8,14 +8,13 @@ func _ready() -> void:
 	statistics.guild = "Empire"
 	statistics.level = "69"
 	statistics.title = "Ancient God"
-	
-	model = preload("res://models/human_female.fbx")
-#	$Debug.queue_free()
+
 	conf()
 	$GUI.conf(resources, minimap_camera_remote_transform)
 	connect("update_resources", $GUI, "update_gui", [resources])
 	load_eq()
 	connect("target_lost", self, "target_ui")
+	anim_player = $DEBUG_AnimationPlayer
 	get_test_items()
 	$GUI.configure_inv(self)
 	connect("update_inventory", $GUI, "configure_inv", [self])

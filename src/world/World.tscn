@@ -6,55 +6,59 @@
 [ext_resource path="res://scenes/Crate.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/Stairs.tscn" type="PackedScene" id=5]
 
-[node name="World" type="Spatial"]
+[node name="World" type="Node"]
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
+[node name="Environment" type="Node" parent="."]
 
-[node name="Enemy" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.91768 )
-
-[node name="Enemy2" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.76634 )
-
-[node name="Enemy3" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.56263, 0, -5.91768 )
-
-[node name="Crate" parent="." instance=ExtResource( 4 )]
+[node name="Crate" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 0 )
 
-[node name="Crate6" parent="." instance=ExtResource( 4 )]
+[node name="Crate6" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -22.3008, 1, 0 )
 
-[node name="Crate7" parent="." instance=ExtResource( 4 )]
+[node name="Crate7" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -18.3008, 1, 2 )
 
-[node name="Crate8" parent="." instance=ExtResource( 4 )]
+[node name="Crate8" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 2 )
 
-[node name="Crate9" parent="." instance=ExtResource( 4 )]
+[node name="Crate9" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, 4 )
 
-[node name="Crate10" parent="." instance=ExtResource( 4 )]
+[node name="Crate10" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -12.3008, 1, 4 )
 
-[node name="Crate2" parent="." instance=ExtResource( 4 )]
+[node name="Crate2" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3008, 1, -5.71904 )
 
-[node name="Crate3" parent="." instance=ExtResource( 4 )]
+[node name="Crate3" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8457, 1, -7.71904 )
 
-[node name="Crate4" parent="." instance=ExtResource( 4 )]
+[node name="Crate4" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8457, 1, 2.498 )
 
-[node name="Crate5" parent="." instance=ExtResource( 4 )]
+[node name="Crate5" parent="Environment" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.36626, 1, -11.2284 )
 
-[node name="Ground" parent="." instance=ExtResource( 2 )]
+[node name="Ground" parent="Environment" instance=ExtResource( 2 )]
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -1, 0 )
 
-[node name="Stairs" parent="." instance=ExtResource( 5 )]
-transform = Transform( 10, 0, 0, 0, 3, 0, 0, 0, 5, 0, -0.277709, -38.8173 )
+[node name="Stairs" parent="Environment" instance=ExtResource( 5 )]
+transform = Transform( 1.68, 0, 0, 0, 2.1, 0, 0, 0, 1, 0, -1.19209e-07, -22.8173 )
 
-[node name="Stairs2" parent="." instance=ExtResource( 5 )]
-transform = Transform( -4.37114e-07, 0, -2, 0, 3, 0, 10, 0, -8.74228e-08, 25, -0.277709, -5.8173 )
+[node name="Stairs2" parent="Environment" instance=ExtResource( 5 )]
+transform = Transform( -5.24537e-08, 0, -1.2, 0, 1.4, 0, 1.9, 0, -8.30516e-08, 16, 1.19209e-07, -3.8173 )
+
+[node name="Actors" type="Node" parent="."]
+
+[node name="Player" parent="Actors" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
+
+[node name="Enemy" parent="Actors" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.91768 )
+
+[node name="Enemy2" parent="Actors" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.76634 )
+
+[node name="Enemy3" parent="Actors" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.56263, 0, -5.91768 )

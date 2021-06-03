@@ -3,6 +3,7 @@ extends KinematicBody
 enum STATE {IDLE, RUN, JUMP, FALL, DIE}
 
 var target_list = []
+
 var statistics : Dictionary = {
 	"name" : "",
 	"guild" : "",
@@ -24,52 +25,24 @@ var attributes = {
 		"wisdom" : 10,
 		"charisma" : 10
 	},
-	"player" : {
-		"strenght" : 0,
-		"dexterity" : 0,
-		"constitution" : 0,
-		"intelligence" : 0,
-		"wisdom" : 0,
-		"charisma" : 0
-	},
-	"equipment" : {
-		"strenght" : 0,
-		"dexterity" : 0,
-		"constitution" : 0,
-		"intelligence" : 0,
-		"wisdom" : 0,
-		"charisma" : 0
-	},
-	"effects" : {
-		"strenght" : 0,
-		"dexterity" : 0,
-		"constitution" : 0,
-		"intelligence" : 0,
-		"wisdom" : 0,
-		"charisma" : 0
-	},
-	"total" : {
-		"strenght" : 0,
-		"dexterity" : 0,
-		"constitution" : 0,
-		"intelligence" : 0,
-		"wisdom" : 0,
-		"charisma" : 0
-	}
+	"player" : {},
+	"equipment" : {},
+	"effects" : {},
+	"total" : {}
 }
 
 var resources : Dictionary = {
 	"health" : {
-		"maximum" : 100,#attributes.constitution * 5,
-		"current" : 100#attributes.constitution * 5
+		"maximum" : 100,
+		"current" : 100
 	},
 	"mana" : {
-		"maximum" : 100,#attributes.wisdom * 5,
-		"current" : 100#attributes.wisdom * 5
+		"maximum" : 100,
+		"current" : 100
 	},
 	"stamina" : {
-		"maximum" : 100,#attributes.intelligence * 5,
-		"current" : 100#attributes.intelligence * 5
+		"maximum" : 100,
+		"current" : 100
 	}
 }
 	
@@ -149,8 +122,9 @@ onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var anim_player : AnimationPlayer
 onready var attack_area = $AttackArea
 onready var attack_ray = $AttackRay
-onready var gcd : Timer = $GlobalCoolDown 
 onready var hit_num = preload("res://src/hit_number/HitNumber.tscn")
+onready var name_plate = $NamePlate
+
 
 signal target_lost
 signal update_resources
@@ -161,7 +135,6 @@ signal update_stats
 
 
 func _ready() -> void:
-	gcd.connect("timeout", self, "attack")
 	gravity *= 3 # gravity multiplier
 	# HALT PROCESSING 
 	set_process(false)
@@ -249,8 +222,8 @@ func conf():
 	# CALCULATE ATTRIBUTES
 	calculate_total_attributes()
 	# CONF HUD
-	$NameResHud.conf(statistics, resources.health)
-	connect("update_resources", $NameResHud, "upd", [resources.health])
+	name_plate.conf(statistics, resources.health)
+	connect("update_resources", name_plate, "upd", [resources.health])
 	
 func modify_resource(resource : String, amount : float, new_max = null) -> void:
 	if state != STATE.DIE:
@@ -265,13 +238,6 @@ func modify_resource(resource : String, amount : float, new_max = null) -> void:
 			get_tree().root.add_child(h)
 			h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
 			h.conf(amount, Color.red)
-
-#func hurt(amount) -> void:
-#		modify_resource("health", -amount)
-#		var h = hit_num.instance()
-#		get_tree().root.add_child(h)
-#		h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
-#		h.conf(amount)
 	
 func hide_from_minimap_camera(mesh):
 	mesh.set_layer_mask_bit(1, false)
@@ -295,13 +261,6 @@ func _on_AttackArea_body_exited(body: Node) -> void:
 			enemy = null
 		target_list.erase(body)
 
-func attack():
-	if attacking == true:
-		if enemy:
-			gcd.start(.2)
-			enemy.hurt(1)
-			modify_resource("mana", -1)
-			
 func load_eq():
 	for i in equipment:
 	# REMOVE OLD ITEMS FROM MODEL
@@ -354,7 +313,11 @@ func remake_equipment_slots_construct():
 		equipment_slots[i] = slot_construct
 
 func make_attributes_construct():
-	pass
+	for a in attributes.base:
+		for t in attributes:
+			if t != "points" and t != "base":
+				attributes.get(t)[a] = 0 
+#	print(attributes)
 	
 func move_item(source = [], target = []):
 	var source_slot = source[0].get(source[1]).get(source[2])
