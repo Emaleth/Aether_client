@@ -15,14 +15,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Aether - Client"
-run/main_scene="res://src/world/World.tscn"
+run/main_scene="res://world/World.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-DataLoader="*res://scripts/data_loader.gd"
-ObjectPool="*res://scripts/ObjectPool.gd"
-Global="*res://global.gd"
+DB="*res://singletons/DBLoader.gd"
+ObjectPool="*res://singletons/ObjectPool.gd"
+Global="*res://singletons/Global.gd"
 
 [debug]
 
@@ -1253,4 +1253,4 @@ locale_filter=[ 0, [  ] ]
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_environment="res://default_env.tres"
+environment/default_environment="res://environment.tres"

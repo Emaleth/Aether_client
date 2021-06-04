@@ -9,6 +9,7 @@ onready var timer = $Timer
 onready var cd_progress = $TextureProgress
 onready var tween = $Tween
 onready var timer_label = $TimerLabel
+onready var ghost_image = $MarginContainer2/Ghost
 
 signal request_swap
 signal request_use
@@ -17,8 +18,12 @@ signal request_split
 
 var preview = preload("res://src/gui/drag/DragPreview.tscn")
 
+func _ready() -> void:
+	ghost_image.texture = icon
+	ghost_image.self_modulate = Global.item_ghost
+	icon = null
 	
-func conf(actor, slot, type, quantity_panel, empty_icon = null):
+func conf(actor, slot, type, quantity_panel):
 	aactor = actor
 	ttype = type
 	sslot = slot
@@ -29,8 +34,8 @@ func conf(actor, slot, type, quantity_panel, empty_icon = null):
 	if not is_connected("request_quantity", quantity_panel, "conf"):
 		connect("request_quantity", quantity_panel, "conf")
 	if actor.get(type).get(slot).item:
-		if DataLoader.item_db.get(actor.get(type).get(slot).item).SKILL:
-			cooldown_animation(true, (float(DataLoader.spell_db.get(DataLoader.item_db.get(actor.get(type).get(slot).item).SKILL).COOLDOWN) * 1000), actor.get(type).get(slot).use_time)
+		if DB.item_db.get(actor.get(type).get(slot).item).SKILL:
+			cooldown_animation(true, (float(DB.spell_db.get(DB.item_db.get(actor.get(type).get(slot).item).SKILL).COOLDOWN) * 1000), actor.get(type).get(slot).use_time)
 			if not is_connected("request_use", actor, "use_item"):
 				connect("request_use", actor, "use_item")
 		else:
@@ -39,7 +44,7 @@ func conf(actor, slot, type, quantity_panel, empty_icon = null):
 				disconnect("request_use", actor, "use_item")
 				
 		icon = load("res://previews/%s.png" % actor.get(type).get(slot).item)
-		$MarginContainer2/Ghost.hide()
+		ghost_image.hide()
 		hint_tooltip = "wierd fuckery"
 		if actor.get(type).get(slot).quantity > 1:
 			quantity_label.text = str(actor.get(type).get(slot).quantity)
@@ -49,13 +54,8 @@ func conf(actor, slot, type, quantity_panel, empty_icon = null):
 		cooldown_animation(false)
 		if is_connected("request_use", actor, "use_item"):
 			disconnect("request_use", actor, "use_item")
-		if empty_icon:
-			$MarginContainer2/Ghost.texture = empty_icon
-			$MarginContainer2/Ghost.self_modulate = Global.item_ghost
-			$MarginContainer2/Ghost.show()
-			icon = null
-		else:
-			icon = null
+		ghost_image.show()
+		icon = null
 		hint_tooltip = ""
 		quantity_label.text = ""
 		
@@ -78,7 +78,7 @@ func drop_data(_position: Vector2, data) -> void:
 
 func _on_Slot_pressed() -> void: 
 	if aactor.get(ttype).get(sslot).item:
-		if DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
+		if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
 			var source = [aactor, ttype, sslot]
 			emit_signal("request_use", source)
 
@@ -90,7 +90,7 @@ func make_preview():
 func _make_custom_tooltip(_for_text):
 	if aactor.get(ttype).get(sslot).item:
 		var tooltip = preload("res://src/gui/tooltip/Tooltip.tscn").instance()
-		tooltip.conf(DataLoader.item_db.get(aactor.get(ttype).get(sslot).item).NAME)
+		tooltip.conf(DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME)
 		return tooltip
 		
 var cd_text = 0

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://actors/Actor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://actors/Player.gd" type="Script" id=2]
+[ext_resource path="res://src/camera/CameraRig.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/gui/GUI.tscn" type="PackedScene" id=4]
+
+[sub_resource type="CapsuleMesh" id=1]
+radius = 0.3
+mid_height = 1.2
+
+[sub_resource type="CylinderMesh" id=2]
+top_radius = 0.1
+bottom_radius = 0.2
+height = 0.2
+
+[node name="Player" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="GUI" parent="." index="0" instance=ExtResource( 4 )]
+
+[node name="CameraRig" parent="." index="1" instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68352, 0 )
+
+[node name="MiniMapCameraRT" type="RemoteTransform" parent="." index="3"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 20, 0 )
+update_scale = false
+
+[node name="DEBUG_Body" type="MeshInstance" parent="." index="8"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.9, 0 )
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="DEBUG_Head" type="MeshInstance" parent="." index="9"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0158766, 1.4802, -0.266441 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="DEBUG_AnimationPlayer" type="AnimationPlayer" parent="." index="10"]

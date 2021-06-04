@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://src/gui/eq/Equipment.gd" type="Script" id=1]
 [ext_resource path="res://src/gui/w_base/slot/Slot.tscn" type="PackedScene" id=2]
@@ -13,6 +13,24 @@
 [ext_resource path="res://textures/icons/agility.png" type="Texture" id=11]
 [ext_resource path="res://src/gui/close_button/Close.tscn" type="PackedScene" id=12]
 [ext_resource path="res://textures/icons/scroll.png" type="Texture" id=13]
+[ext_resource path="res://textures/icons/helmet.png" type="Texture" id=14]
+[ext_resource path="res://textures/icons/gauntlet.png" type="Texture" id=15]
+[ext_resource path="res://textures/icons/breeches.png" type="Texture" id=16]
+[ext_resource path="res://textures/icons/boots.png" type="Texture" id=17]
+[ext_resource path="res://textures/icons/armor.png" type="Texture" id=18]
+[ext_resource path="res://textures/icons/shoulders.png" type="Texture" id=19]
+[ext_resource path="res://textures/icons/cape.png" type="Texture" id=20]
+[ext_resource path="res://textures/icons/belt.png" type="Texture" id=21]
+[ext_resource path="res://textures/icons/necklace.png" type="Texture" id=22]
+[ext_resource path="res://textures/icons/crossbow.png" type="Texture" id=23]
+[ext_resource path="res://textures/icons/arrows.png" type="Texture" id=24]
+[ext_resource path="res://textures/icons/earrings.png" type="Texture" id=25]
+[ext_resource path="res://textures/icons/ring.png" type="Texture" id=26]
+[ext_resource path="res://textures/icons/tool.png" type="Texture" id=27]
+[ext_resource path="res://textures/icons/amulet.png" type="Texture" id=28]
+[ext_resource path="res://textures/icons/sword.png" type="Texture" id=29]
+[ext_resource path="res://textures/icons/shield.png" type="Texture" id=30]
+[ext_resource path="res://textures/icons/wing.png" type="Texture" id=31]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -42,7 +60,7 @@ __meta__ = {
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 533.0
+margin_right = 458.0
 margin_bottom = 344.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -53,7 +71,7 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_right = 533.0
+margin_right = 458.0
 margin_bottom = 344.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
@@ -63,7 +81,7 @@ custom_constants/margin_bottom = 10
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 523.0
+margin_right = 448.0
 margin_bottom = 334.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
@@ -528,26 +546,32 @@ __meta__ = {
 }
 
 [node name="Necklace" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
+icon = ExtResource( 22 )
 
 [node name="Earring1" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 44.0
 margin_right = 84.0
+icon = ExtResource( 25 )
 
 [node name="Earring2" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_right = 128.0
+icon = ExtResource( 25 )
 
 [node name="Ring1" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 132.0
 margin_right = 172.0
+icon = ExtResource( 26 )
 
 [node name="Ring2" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 176.0
 margin_right = 216.0
+icon = ExtResource( 26 )
 
 [node name="Cape" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_top = 44.0
 margin_bottom = 84.0
+icon = ExtResource( 20 )
 
 [node name="NullSlot" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 44.0
@@ -560,6 +584,7 @@ margin_left = 88.0
 margin_top = 44.0
 margin_right = 128.0
 margin_bottom = 84.0
+icon = ExtResource( 14 )
 
 [node name="NullSlot2" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
@@ -572,10 +597,12 @@ margin_left = 176.0
 margin_top = 44.0
 margin_right = 216.0
 margin_bottom = 84.0
+icon = ExtResource( 19 )
 
 [node name="Hands" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_top = 88.0
 margin_bottom = 128.0
+icon = ExtResource( 15 )
 
 [node name="NullSlot4" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 44.0
@@ -588,6 +615,7 @@ margin_left = 88.0
 margin_top = 88.0
 margin_right = 128.0
 margin_bottom = 128.0
+icon = ExtResource( 18 )
 
 [node name="NullSlot5" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
@@ -604,6 +632,7 @@ margin_bottom = 128.0
 [node name="MainHand" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_top = 132.0
 margin_bottom = 172.0
+icon = ExtResource( 29 )
 
 [node name="NullSlot7" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 44.0
@@ -616,6 +645,7 @@ margin_left = 88.0
 margin_top = 132.0
 margin_right = 128.0
 margin_bottom = 172.0
+icon = ExtResource( 21 )
 
 [node name="NullSlot8" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
@@ -628,22 +658,26 @@ margin_left = 176.0
 margin_top = 132.0
 margin_right = 216.0
 margin_bottom = 172.0
+icon = ExtResource( 30 )
 
 [node name="RangedWeapon" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_top = 176.0
 margin_bottom = 216.0
+icon = ExtResource( 23 )
 
 [node name="Ammunition" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 44.0
 margin_top = 176.0
 margin_right = 84.0
 margin_bottom = 216.0
+icon = ExtResource( 24 )
 
 [node name="LowerBody" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_top = 176.0
 margin_right = 128.0
 margin_bottom = 216.0
+icon = ExtResource( 16 )
 
 [node name="NullSlot12" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
@@ -656,6 +690,7 @@ margin_left = 176.0
 margin_top = 176.0
 margin_right = 216.0
 margin_bottom = 216.0
+icon = ExtResource( 31 )
 
 [node name="NullSlot13" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_top = 220.0
@@ -672,6 +707,7 @@ margin_left = 88.0
 margin_top = 220.0
 margin_right = 128.0
 margin_bottom = 260.0
+icon = ExtResource( 17 )
 
 [node name="NullSlot9" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 132.0
@@ -684,6 +720,7 @@ margin_left = 176.0
 margin_top = 220.0
 margin_right = 216.0
 margin_bottom = 260.0
+icon = ExtResource( 27 )
 
 [node name="NullSlot10" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_top = 264.0
@@ -694,18 +731,21 @@ margin_left = 44.0
 margin_top = 264.0
 margin_right = 84.0
 margin_bottom = 304.0
+icon = ExtResource( 28 )
 
 [node name="Amulet2" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 88.0
 margin_top = 264.0
 margin_right = 128.0
 margin_bottom = 304.0
+icon = ExtResource( 28 )
 
 [node name="Amulet1" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 2 )]
 margin_left = 132.0
 margin_top = 264.0
 margin_right = 172.0
 margin_bottom = 304.0
+icon = ExtResource( 28 )
 
 [node name="NullSlot11" parent="MarginContainer/HBoxContainer/GridContainer" instance=ExtResource( 3 )]
 margin_left = 176.0
@@ -714,8 +754,8 @@ margin_right = 216.0
 margin_bottom = 304.0
 
 [node name="Close" parent="." instance=ExtResource( 12 )]
-margin_left = 513.0
-margin_right = 533.0
+margin_left = 438.0
+margin_right = 458.0
 
 [connection signal="sort_children" from="." to="." method="_on_Equipment_sort_children"]
 [connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]

@@ -35,7 +35,7 @@ func show_slot_type(slot_type : String = ""):
 			slot.show()
 		else:
 			if slot.aactor.get(slot.ttype).get(slot.sslot).item:
-				if DataLoader.item_db.get(slot.aactor.get(slot.ttype).get(slot.sslot).item).TYPE == slot_type:
+				if DB.item_db.get(slot.aactor.get(slot.ttype).get(slot.sslot).item).TYPE == slot_type:
 					slot.show()
 				else:
 					slot.hide()

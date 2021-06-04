@@ -96,5 +96,6 @@ margin_bottom = 38.0
 [node name="ExperienceBar" parent="." instance=ExtResource( 10 )]
 
 [node name="LootPanel" parent="." instance=ExtResource( 11 )]
+visible = false
 
 [editable path="TargetProgress"]
