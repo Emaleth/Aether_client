@@ -33,16 +33,16 @@ var attributes = {
 
 var resources : Dictionary = {
 	"health" : {
-		"maximum" : 100,
-		"current" : 100
+		"maximum" : null,
+		"current" : null
 	},
 	"mana" : {
-		"maximum" : 100,
-		"current" : 100
+		"maximum" : null,
+		"current" : null
 	},
 	"stamina" : {
-		"maximum" : 100,
-		"current" : 100
+		"maximum" : null,
+		"current" : null
 	}
 }
 	
@@ -217,11 +217,11 @@ func conf():
 	make_equipment_construct()
 	make_attributes_construct()
 	remake_equipment_slots_construct()
+	# CALCULATE ATTRIBUTES
+	calculate_total_attributes()
 	# RESTART PROCESSING
 	set_process(true)
 	set_physics_process(true)
-	# CALCULATE ATTRIBUTES
-	calculate_total_attributes()
 	# CONF HUD
 	name_plate.conf(statistics, resources.health)
 	connect("update_resources", name_plate, "upd", [resources.health])
@@ -230,7 +230,7 @@ func modify_resource(resource : String, amount : float, new_max = null) -> void:
 	if state != STATE.DIE:
 		if new_max != null:
 			resources[resource].maximum = new_max
-			if resources[resource].current > new_max:
+			if resources[resource].current == null or resources[resource].current > new_max:
 				resources[resource].current = new_max
 		resources[resource].current += amount
 		emit_signal("update_resources")
@@ -477,7 +477,7 @@ func cast_spell(spell):
 	if DB.spell_db.get(spell).CAST_TIME:
 		emit_signal("update_casting_bar", float(DB.spell_db.get(spell).CAST_TIME))
 		yield(get_tree().create_timer(float(DB.spell_db.get(spell).CAST_TIME)),"timeout")
-		emit_signal("finished_casting", true)
+	emit_signal("finished_casting", true)
 			
 	if DB.spell_db.get(spell).HEALTH_COST:
 		modify_resource("health", -float(DB.spell_db.get(spell).HEALTH_COST))

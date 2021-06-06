@@ -15,7 +15,6 @@ playback/repeat = true
 [node name="TargetIndicator" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 visible = false
-flip_v = true
 pixel_size = 0.001
 billboard = 1
 double_sided = false
@@ -33,4 +32,5 @@ texture = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0 )
 layers = 4
 axis = 1
+double_sided = false
 texture = ExtResource( 4 )

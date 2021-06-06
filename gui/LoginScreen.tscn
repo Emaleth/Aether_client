@@ -1,0 +1,291 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://gui/LoginScreen.gd" type="Script" id=1]
+[ext_resource path="res://textures/skyboxes/vz_dusk_back.png" type="Texture" id=2]
+
+[node name="AuthenticationScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -94.0
+margin_top = -89.0
+margin_right = 94.0
+margin_bottom = 89.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 199.0
+margin_bottom = 369.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Login" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_left = 9.0
+margin_right = 183.0
+margin_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AccountLabel" type="Label" parent="PanelContainer/VBoxContainer/Login"]
+margin_right = 174.0
+margin_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Account:"
+align = 1
+valign = 1
+
+[node name="AccountLine" type="LineEdit" parent="PanelContainer/VBoxContainer/Login"]
+margin_top = 18.0
+margin_right = 174.0
+margin_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/Login"]
+margin_top = 46.0
+margin_right = 174.0
+margin_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PasswordLabel" type="Label" parent="PanelContainer/VBoxContainer/Login"]
+margin_top = 54.0
+margin_right = 174.0
+margin_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Password:"
+align = 1
+valign = 1
+
+[node name="PasswordLine" type="LineEdit" parent="PanelContainer/VBoxContainer/Login"]
+margin_top = 72.0
+margin_right = 174.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+secret = true
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer/Login"]
+margin_top = 100.0
+margin_right = 174.0
+margin_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Login"]
+margin_top = 108.0
+margin_right = 174.0
+margin_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Remember" type="Label" parent="PanelContainer/VBoxContainer/Login/HBoxContainer"]
+margin_top = 5.0
+margin_right = 146.0
+margin_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Remember credentials"
+
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/VBoxContainer/Login/HBoxContainer"]
+margin_left = 150.0
+margin_right = 174.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer/Login"]
+margin_top = 136.0
+margin_right = 174.0
+margin_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Register" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 144.0
+margin_right = 192.0
+margin_bottom = 338.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="EmailLabel" type="Label" parent="PanelContainer/VBoxContainer/Register"]
+margin_right = 192.0
+margin_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Account:"
+align = 1
+valign = 1
+
+[node name="EmailLine" type="LineEdit" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 18.0
+margin_right = 192.0
+margin_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 46.0
+margin_right = 192.0
+margin_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PasswordLabel" type="Label" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 54.0
+margin_right = 192.0
+margin_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Password:"
+align = 1
+valign = 1
+
+[node name="PasswordLine" type="LineEdit" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 72.0
+margin_right = 192.0
+margin_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+secret = true
+
+[node name="HSeparator2" type="HSeparator" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 100.0
+margin_right = 192.0
+margin_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PasswordRepeatLabel" type="Label" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 108.0
+margin_right = 192.0
+margin_bottom = 122.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Repeat Password:"
+align = 1
+valign = 1
+
+[node name="PasswordRepeatLine" type="LineEdit" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 126.0
+margin_right = 192.0
+margin_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+align = 1
+secret = true
+
+[node name="HSeparator4" type="HSeparator" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 154.0
+margin_right = 192.0
+margin_bottom = 158.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 162.0
+margin_right = 192.0
+margin_bottom = 186.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Remember" type="Label" parent="PanelContainer/VBoxContainer/Register/HBoxContainer"]
+margin_top = 5.0
+margin_right = 164.0
+margin_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Agree to Terms of Servise"
+
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/VBoxContainer/Register/HBoxContainer"]
+margin_left = 168.0
+margin_right = 192.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HSeparator3" type="HSeparator" parent="PanelContainer/VBoxContainer/Register"]
+margin_top = 190.0
+margin_right = 192.0
+margin_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 342.0
+margin_right = 192.0
+margin_bottom = 362.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+
+[node name="Login" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
+margin_right = 94.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "Login"
+
+[node name="Register" type="Button" parent="PanelContainer/VBoxContainer/Buttons"]
+margin_left = 98.0
+margin_right = 192.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+text = "Register"
+
+[node name="Version" type="Label" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 8
+text = "Version: 0.0.0"
+valign = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="sort_children" from="PanelContainer/VBoxContainer" to="." method="_on_VBoxContainer_sort_children"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/Login" to="." method="_on_Login_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Buttons/Register" to="." method="_on_Register_pressed"]
