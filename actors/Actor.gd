@@ -124,7 +124,7 @@ onready var target_area : Area = $TargetArea
 onready var vision_ray = $VisionRay
 onready var hit_num = preload("res://gui/HitNumber.tscn")
 onready var name_plate = $NamePlate
-
+onready var rotation_tween : Tween = $RotationTween
 
 signal target_lost
 signal update_resources
@@ -230,6 +230,8 @@ func modify_resource(resource : String, amount : float, new_max = null) -> void:
 	if state != STATE.DIE:
 		if new_max != null:
 			resources[resource].maximum = new_max
+			if resources[resource].current > new_max:
+				resources[resource].current = new_max
 		resources[resource].current += amount
 		emit_signal("update_resources")
 		if resource == "health":
@@ -367,8 +369,7 @@ func move_item(source_slot = [], target_slot = []):
 
 func use_item(source_slot):
 	if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL:
-		var current_time_msec = OS.get_ticks_msec()
-		if current_time_msec - source_slot[0].get(source_slot[1])[source_slot[2]].use_time >= float(DB.spell_db.get(DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL).COOLDOWN) * 1000 || source_slot[0].get(source_slot[1])[source_slot[2]].use_time == 0:
+		if OS.get_ticks_msec() - source_slot[0].get(source_slot[1])[source_slot[2]].use_time >= float(DB.spell_db.get(DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL).COOLDOWN) * 1000 || source_slot[0].get(source_slot[1])[source_slot[2]].use_time == 0:
 			cast_spell(DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL)
 			if yield(self, "finished_casting") == true:
 				if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).CONSUMABLE == true:
@@ -461,26 +462,30 @@ func increase_stat(stat):
 
 func cast_spell(spell):
 	if DB.spell_db.get(spell).HEALTH_COST:
-		if resources.health.current > float(DB.spell_db.get(spell).HEALTH_COST):
-			modify_resource("health", -float(DB.spell_db.get(spell).HEALTH_COST))
-		else:
+		if resources.health.current < float(DB.spell_db.get(spell).HEALTH_COST):
 			return
 	if DB.spell_db.get(spell).MANA_COST:
-		if resources.mana.current > float(DB.spell_db.get(spell).MANA_COST):
-			modify_resource("mana", -float(DB.spell_db.get(spell).MANA_COST))
-		else:
+		if resources.mana.current < float(DB.spell_db.get(spell).MANA_COST):
 			return
 	if DB.spell_db.get(spell).STAMINA_COST:
-		if resources.stamina.current > float(DB.spell_db.get(spell).STAMINA_COST):
-			modify_resource("stamina", -float(DB.spell_db.get(spell).STAMINA_COST))
-		else:
+		if resources.stamina.current < float(DB.spell_db.get(spell).STAMINA_COST):
 			return
 			
+	if enemy && DB.spell_db.get(spell).TYPE == "TARGET":
+		lerped_rotation()
+	
 	if DB.spell_db.get(spell).CAST_TIME:
 		emit_signal("update_casting_bar", float(DB.spell_db.get(spell).CAST_TIME))
 		yield(get_tree().create_timer(float(DB.spell_db.get(spell).CAST_TIME)),"timeout")
 		emit_signal("finished_casting", true)
-	
+			
+	if DB.spell_db.get(spell).HEALTH_COST:
+		modify_resource("health", -float(DB.spell_db.get(spell).HEALTH_COST))
+	if DB.spell_db.get(spell).MANA_COST:
+		modify_resource("mana", -float(DB.spell_db.get(spell).MANA_COST))
+	if DB.spell_db.get(spell).STAMINA_COST:
+		modify_resource("stamina", -float(DB.spell_db.get(spell).STAMINA_COST))
+
 	var spell_recivers = []
 	match DB.spell_db.get(spell).TYPE:
 		"TARGET":
@@ -521,7 +526,6 @@ func get_target():
 			if target_area.overlaps_body(enemy): 
 				target_list.append(enemy)
 		enemy = new_target
-		look_at(enemy.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS
 		emit_signal("target_ui", true)
 		
 func add_lootable(creature_id, loot):
@@ -555,3 +559,20 @@ func calculate_total_attributes():
 	modify_resource("mana", 0, attributes.total.wisdom * 5)
 	modify_resource("stamina", 0, attributes.total.dexterity * 5)
 	emit_signal("update_stats", attributes.total, attributes.points)
+
+func lerped_rotation():
+	look_at(enemy.global_transform.origin, Vector3.UP)
+	rotation.x = 0
+#	var new_basis = (global_transform.looking_at(enemy.global_transform.origin, Vector3.UP)).basis
+#
+#	rotation_tween.remove_all()
+#	rotation_tween.interpolate_property(
+#		self, 
+#		"global_transform:basis", 
+#		global_transform.basis, 
+#		new_basis,
+#		0.1, 
+#		Tween.TRANS_LINEAR, 
+#		Tween.EASE_IN
+#		)
+#	rotation_tween.start()

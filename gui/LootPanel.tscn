@@ -1,19 +1,24 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://gui/NullSlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/LootPanel.gd" type="Script" id=2]
 [ext_resource path="res://textures/ui/panel_bg.png" type="Texture" id=3]
-[ext_resource path="res://gui/Close.tscn" type="PackedScene" id=4]
+[ext_resource path="res://textures/ui/button_round.png" type="Texture" id=4]
+[ext_resource path="res://textures/icons/close.png" type="Texture" id=5]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxEmpty" id=5]
 
-[sub_resource type="StyleBoxTexture" id=2]
+[sub_resource type="StyleBoxTexture" id=6]
 texture = ExtResource( 3 )
 region_rect = Rect2( 0, 0, 766, 203 )
 margin_left = 36.0
 margin_right = 36.0
 margin_top = 36.0
 margin_bottom = 36.0
+
+[sub_resource type="StyleBoxTexture" id=4]
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 67, 67 )
 
 [node name="LootPanel" type="PanelContainer"]
 anchor_left = 0.5
@@ -24,7 +29,7 @@ margin_left = -118.0
 margin_top = -81.0
 margin_right = 118.0
 margin_bottom = 81.0
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 5 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -33,7 +38,7 @@ __meta__ = {
 [node name="Panel" type="Panel" parent="."]
 margin_right = 236.0
 margin_bottom = 162.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 6 )
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_right = 236.0
@@ -103,9 +108,31 @@ margin_top = 44.0
 margin_right = 216.0
 margin_bottom = 84.0
 
-[node name="Close" parent="." instance=ExtResource( 4 )]
+[node name="Close" type="Button" parent="."]
 margin_left = 216.0
 margin_right = 236.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 20 )
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/disabled = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
+expand_icon = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="Close"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="sort_children" from="." to="." method="_on_LootPanel_sort_children"]
 [connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]

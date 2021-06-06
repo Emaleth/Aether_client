@@ -28,7 +28,7 @@ func conf(resources, minimap_camera_remote_transform):
 	$Progress.stamina_bar.conf(resources.stamina.maximum, resources.stamina.current, Color.orange)
 			
 	minimap_camera_remote_transform.remote_path = $MiniMap/MarginContainer/ViewportContainer/Viewport/MiniMapCamera.get_path()
-
+	
 func update_gui(res):
 	$Progress.health_bar.updt(res.health.current, res.health.maximum)
 	$Progress.mana_bar.updt(res.mana.current, res.mana.maximum)
