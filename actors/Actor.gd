@@ -120,9 +120,9 @@ var gcd_used = 0
 
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var anim_player : AnimationPlayer
-onready var attack_area = $AttackArea
-onready var attack_ray = $AttackRay
-onready var hit_num = preload("res://src/hit_number/HitNumber.tscn")
+onready var target_area : Area = $TargetArea
+onready var vision_ray = $VisionRay
+onready var hit_num = preload("res://gui/HitNumber.tscn")
 onready var name_plate = $NamePlate
 
 
@@ -133,6 +133,8 @@ signal update_equipment
 signal update_quickbar
 signal update_stats
 signal target_ui
+signal update_casting_bar
+signal finished_casting
 
 
 func _ready() -> void:
@@ -142,9 +144,7 @@ func _ready() -> void:
 	set_physics_process(false)
 	# SET INITIAL STATE
 	state = STATE.IDLE
-	attacking = true
-#	calculate_total_attributes()
-	
+	attacking = true	
 	
 func _physics_process(delta: float) -> void:
 	finite_state_machine(delta)
@@ -318,134 +318,124 @@ func make_attributes_construct():
 		for t in attributes:
 			if t != "points" and t != "base":
 				attributes.get(t)[a] = 0 
-#	print(attributes)
 	
-func move_item(source = [], target = []):
-	var source_slot = source[0].get(source[1]).get(source[2])
-	var target_slot = get(target[1]).get(target[2])
+func move_item(source_slot = [], target_slot = []):
+	var temp_source_slot = source_slot[0].get(source_slot[1]).get(source_slot[2])
+	var temp_target_slot = get(target_slot[1]).get(target_slot[2])
 	
-	if source[1] == "quickbar":
-		if target[1] == "quickbar":
-			target[0].get(target[1])[target[2]] = source_slot
-			source[0].get(source[1])[source[2]] = target_slot
+	if source_slot[1] == "quickbar":
+		if target_slot[1] == "quickbar":
+			target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+			source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
 		else:
-			source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+			source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 			
-	if source[1] != "quickbar":
-		if target[1] == "quickbar":
-			target[0].get(target[1])[target[2]] = source_slot
-		elif target[1] == "equipment":
-			if match_item_to_slot(target[2], source[0].get(source[1])[source[2]].item) == true:
-				if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
-					if DB.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
-						target[0].get(target[1])[target[2]].quantity += source[0].get(source[1])[source[2]].quantity
-						source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+	if source_slot[1] != "quickbar":
+		if target_slot[1] == "quickbar":
+			target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+		elif target_slot[1] == "equipment":
+			if match_item_to_slot(target_slot[2], source_slot[0].get(source_slot[1])[source_slot[2]].item) == true:
+				if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
+					if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+						target_slot[0].get(target_slot[1])[target_slot[2]].quantity += source_slot[0].get(source_slot[1])[source_slot[2]].quantity
+						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 					else:
-						target[0].get(target[1])[target[2]] = source_slot
-						source[0].get(source[1])[source[2]] = target_slot
+						target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+						source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
 				else:
-					target[0].get(target[1])[target[2]] = source_slot
-					source[0].get(source[1])[source[2]] = target_slot
+					target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+					source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
 		else:
-			if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
-				if DB.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
-					target[0].get(target[1])[target[2]].quantity += source[0].get(source[1])[source[2]].quantity
-					source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+			if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
+				if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+					target_slot[0].get(target_slot[1])[target_slot[2]].quantity += source_slot[0].get(source_slot[1])[source_slot[2]].quantity
+					source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 				else:
-					target[0].get(target[1])[target[2]] = source_slot
-					source[0].get(source[1])[source[2]] = target_slot
+					target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+					source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
 			else:
-				target[0].get(target[1])[target[2]] = source_slot
-				source[0].get(source[1])[source[2]] = target_slot
+				target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+				source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
 	
-	if source[1] == "inventory" || target[1] == "inventory":
+	if source_slot[1] == "inventory" || target_slot[1] == "inventory":
 		emit_signal("update_inventory")
-	if source[1] == "equipment" || target[1] == "equipment":
+	if source_slot[1] == "equipment" || target_slot[1] == "equipment":
 		get_eq_stats()
 		emit_signal("update_equipment")
 		load_eq()
 	emit_signal("update_quickbar")
 
-func use_item(source):
-	if DB.item_db.get(source[0].get(source[1])[source[2]].item).SKILL:
+func use_item(source_slot):
+	if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL:
 		var current_time_msec = OS.get_ticks_msec()
-		if current_time_msec - source[0].get(source[1])[source[2]].use_time >= float(DB.spell_db.get(DB.item_db.get(source[0].get(source[1])[source[2]].item).SKILL).COOLDOWN) * 1000 || source[0].get(source[1])[source[2]].use_time == 0:
-#			print("Current Time: %s" % current_time_msec,
-#				" | " + "Last Used Time: %s" % source[0].get(source[1])[source[2]].use_time,
-#				" | " + "CD: %s" % (float(DB.item_db.get(source[0].get(source[1])[source[2]].item).CD) * 1000))
-			update_usage(source[0].get(source[1])[source[2]].item, current_time_msec)
-			cast_spell(DB.item_db.get(source[0].get(source[1])[source[2]].item).SKILL)
-			if DB.item_db.get(source[0].get(source[1])[source[2]].item).CONSUMABLE == true:
-				source[0].get(source[1])[source[2]].quantity = (source[0].get(source[1])[source[2]].quantity - 1)
-				if source[0].get(source[1])[source[2]].quantity <= 0:
-					source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+		if current_time_msec - source_slot[0].get(source_slot[1])[source_slot[2]].use_time >= float(DB.spell_db.get(DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL).COOLDOWN) * 1000 || source_slot[0].get(source_slot[1])[source_slot[2]].use_time == 0:
+			cast_spell(DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL)
+			if yield(self, "finished_casting") == true:
+				if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).CONSUMABLE == true:
+					source_slot[0].get(source_slot[1])[source_slot[2]].quantity = (source_slot[0].get(source_slot[1])[source_slot[2]].quantity - 1)
+					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity <= 0:
+						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+				update_usage(source_slot[0].get(source_slot[1])[source_slot[2]].item, OS.get_ticks_msec())
 				
-			emit_signal("update_quickbar")
-			emit_signal("update_inventory")
-			emit_signal("update_equipment")
-
 func match_item_to_slot(slot, item) -> bool:
 	if DB.item_db.get(item).SUBTYPE in equipment_slot_type[slot]:
 		return true
 	else:
 		return false
 		
-func split_item(source = [], target = [], q = 0):
+func split_item(source_slot = [], target_slot = [], q = 0):
 	if q == 0:
 		return
-#	var source_slot = source[0].get(source[1]).get(source[2])
-#	var target_slot = get(target[1]).get(target[2])
-	
-	if source[1] == "quickbar":
-		move_item(source, target)
-	if source[1] != "quickbar":
-		if target[1] == "quickbar":
-			move_item(source, target)
-		elif target[1] == "equipment":
-			if match_item_to_slot(target[2], source[0].get(source[1])[source[2]].item) == true:
-				if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
-					if DB.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
-						target[0].get(target[1])[target[2]].quantity += q
-						if source[0].get(source[1])[source[2]].quantity - q > 0:
-							source[0].get(source[1])[source[2]].quantity -= q
+	if source_slot[1] == "quickbar":
+		move_item(source_slot, target_slot)
+	if source_slot[1] != "quickbar":
+		if target_slot[1] == "quickbar":
+			move_item(source_slot, target_slot)
+		elif target_slot[1] == "equipment":
+			if match_item_to_slot(target_slot[2], source_slot[0].get(source_slot[1])[source_slot[2]].item) == true:
+				if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
+					if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+						target_slot[0].get(target_slot[1])[target_slot[2]].quantity += q
+						if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
+							source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
 						else:
-							source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+							source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 					else:
-						move_item(source, target)
-				elif target[0].get(target[1])[target[2]].item == "":
-					if DB.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
-						target[0].get(target[1])[target[2]] = source[0].get(source[1])[source[2]].duplicate()
-						target[0].get(target[1])[target[2]].quantity = q
-						if source[0].get(source[1])[source[2]].quantity - q > 0:
-							source[0].get(source[1])[source[2]].quantity -= q
+						move_item(source_slot, target_slot)
+				elif target_slot[0].get(target_slot[1])[target_slot[2]].item == "":
+					if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+						target_slot[0].get(target_slot[1])[target_slot[2]] = source_slot[0].get(source_slot[1])[source_slot[2]].duplicate()
+						target_slot[0].get(target_slot[1])[target_slot[2]].quantity = q
+						if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
+							source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
 						else:
-							source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+							source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 					else:
-						move_item(source, target)
+						move_item(source_slot, target_slot)
 		else:
-			if source[0].get(source[1])[source[2]].item == target[0].get(target[1])[target[2]].item:
-				if DB.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
-					target[0].get(target[1])[target[2]].quantity += q
-					if source[0].get(source[1])[source[2]].quantity - q > 0:
-						source[0].get(source[1])[source[2]].quantity -= q
+			if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
+				if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+					target_slot[0].get(target_slot[1])[target_slot[2]].quantity += q
+					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
+						source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
 					else:
-						source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 				else:
-					move_item(source, target)
-			elif target[0].get(target[1])[target[2]].item == "":
-				if DB.item_db.get(source[0].get(source[1])[source[2]].item).STACKABLE:
-					target[0].get(target[1])[target[2]] = source[0].get(source[1])[source[2]].duplicate()
-					target[0].get(target[1])[target[2]].quantity = q
-					if source[0].get(source[1])[source[2]].quantity - q > 0:
-						source[0].get(source[1])[source[2]].quantity -= q
+					move_item(source_slot, target_slot)
+			elif target_slot[0].get(target_slot[1])[target_slot[2]].item == null:
+				if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+					target_slot[0].get(target_slot[1])[target_slot[2]] = source_slot[0].get(source_slot[1])[source_slot[2]].duplicate()
+					target_slot[0].get(target_slot[1])[target_slot[2]].quantity = q
+					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
+						source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
 					else:
-						source[0].get(source[1])[source[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 				else:
-					move_item(source, target)
+					move_item(source_slot, target_slot)
 	
-	if source[1] == "inventory" || target[1] == "inventory":
+	if source_slot[1] == "inventory" || target_slot[1] == "inventory":
 		emit_signal("update_inventory")
-	if source[1] == "equipment" || target[1] == "equipment":
+	if source_slot[1] == "equipment" || target_slot[1] == "equipment":
 		emit_signal("update_equipment")
 		load_eq()
 	emit_signal("update_quickbar")
@@ -458,7 +448,11 @@ func update_usage(used_item, usage_time):
 	for i in inventory:
 		if inventory.get(i).item == used_item:
 			inventory.get(i).use_time = usage_time
-
+			
+	emit_signal("update_quickbar")
+	emit_signal("update_inventory")
+	emit_signal("update_equipment")
+	
 func increase_stat(stat):
 	if attributes.points > 0:
 		attributes.player[stat] += 1
@@ -466,12 +460,6 @@ func increase_stat(stat):
 		calculate_total_attributes()
 
 func cast_spell(spell):
-	if not enemy:
-		get_target()
-	if not enemy:
-		return
-	if global_transform.origin.distance_to(enemy.global_transform.origin) > float(DB.spell_db.get(spell).RANGE):
-		return
 	if DB.spell_db.get(spell).HEALTH_COST:
 		if resources.health.current > float(DB.spell_db.get(spell).HEALTH_COST):
 			modify_resource("health", -float(DB.spell_db.get(spell).HEALTH_COST))
@@ -487,19 +475,50 @@ func cast_spell(spell):
 			modify_resource("stamina", -float(DB.spell_db.get(spell).STAMINA_COST))
 		else:
 			return
-	if DB.spell_db.get(spell).TARGET_HEALTH:
-		enemy.modify_resource("health", float(DB.spell_db.get(spell).TARGET_HEALTH))
-	if DB.spell_db.get(spell).TARGET_MANA:
-		enemy.modify_resource("mana", float(DB.spell_db.get(spell).TARGET_MANA))
-	if DB.spell_db.get(spell).TARGET_STAMINA:
-		enemy.modify_resource("stamina", float(DB.spell_db.get(spell).TARGET_STAMINA))
-		
+			
+	if DB.spell_db.get(spell).CAST_TIME:
+		emit_signal("update_casting_bar", float(DB.spell_db.get(spell).CAST_TIME))
+		yield(get_tree().create_timer(float(DB.spell_db.get(spell).CAST_TIME)),"timeout")
+		emit_signal("finished_casting", true)
+	
+	var spell_recivers = []
+	match DB.spell_db.get(spell).TYPE:
+		"TARGET":
+			if not enemy:
+				get_target()
+			if enemy:
+				if global_transform.origin.distance_to(enemy.global_transform.origin) <= float(DB.spell_db.get(spell).RANGE):
+					spell_recivers.append(enemy)
+			
+		"AOE":
+			for i in target_area.get_overlapping_bodies():
+				if not i in target_list:
+					continue
+				if global_transform.origin.distance_to(i.global_transform.origin) > float(DB.spell_db.get(spell).RANGE):
+					continue
+				vision_ray.cast_to = Vector3(0, 0, -float(DB.spell_db.get(spell).RANGE))
+				vision_ray.look_at(i.global_transform.origin + Vector3(0, 0.9, 0), Vector3.UP)
+				vision_ray.force_raycast_update()
+				if vision_ray.get_collider() != i:
+					continue
+				spell_recivers.append(i)
+			if enemy:
+				spell_recivers.append(enemy)
+				
+	for i in spell_recivers:
+		if DB.spell_db.get(spell).TARGET_HEALTH:
+			i.modify_resource("health", float(DB.spell_db.get(spell).TARGET_HEALTH))
+		if DB.spell_db.get(spell).TARGET_MANA:
+			i.modify_resource("mana", float(DB.spell_db.get(spell).TARGET_MANA))
+		if DB.spell_db.get(spell).TARGET_STAMINA:
+			i.modify_resource("stamina", float(DB.spell_db.get(spell).TARGET_STAMINA))
+#
 func get_target():
 	var new_target = target_list.pop_front()
 	if new_target:
 		if enemy:
 			emit_signal("target_ui", false)
-			if $AttackArea.overlaps_body(enemy): 
+			if target_area.overlaps_body(enemy): 
 				target_list.append(enemy)
 		enemy = new_target
 		look_at(enemy.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS

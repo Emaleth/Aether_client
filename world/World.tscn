@@ -16,7 +16,7 @@
 [node name="Environment" type="Node" parent="."]
 
 [node name="Crate8" parent="Environment" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 2.77512, -14.3008, 10.8245, 1.57957 )
+transform = Transform( 1, 0, 0, 0, 0.874662, 2.27178, 0, -0.484733, 4.09925, -14.1511, 9.24685, -0.132329 )
 
 [node name="Crate11" parent="Environment" instance=ExtResource( 2 )]
 transform = Transform( 1.73829, 0, 0, 0, 2.17002, 0, 0, 0, 2.71291, -5.49472, 2.21573, 27.8683 )
@@ -51,7 +51,7 @@ transform = Transform( 0.995384, 0.0959674, 0, -0.0953884, 0.989379, -0.109682, 
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2841, 4.90168, 4.06599 )
 
 [node name="Column2" parent="Environment" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2841, 4.83985, -1.12273 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.881, 5.83939, -17.2774 )
 
 [node name="BoulderBig" parent="Environment" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 0.957627, 0.288012, 0, -0.288012, 0.957627, 0, 1.35727, -10.9051 )
@@ -60,7 +60,7 @@ transform = Transform( 1, 0, 0, 0, 0.957627, 0.288012, 0, -0.288012, 0.957627, 0
 transform = Transform( 1, 0, 0, 0, 0.882447, 0.470411, 0, -0.470411, 0.882447, 10.0093, 2.1539, 0 )
 
 [node name="ColumnBroken" parent="Environment" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.1479, 4.85277, -8.10901 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3432, 4.85277, -3.22986 )
 
 [node name="ColumnBroken2" parent="Environment" instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.87132, 9.77739, 8.35067 )

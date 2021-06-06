@@ -12,6 +12,7 @@ func _ready() -> void:
 	conf()
 	connect("target_ui", self, "target_ui")
 	$GUI.conf(resources, minimap_camera_remote_transform)
+	connect("update_casting_bar", $GUI/CastingBar, "conf")
 	connect("update_resources", $GUI, "update_gui", [resources])
 	load_eq()
 	connect("target_lost", self, "target_ui")
@@ -46,18 +47,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			if abs(event.relative.x) > .1: 
 				rotate_y(-event.relative.x * 0.005)
-		
-#func get_next_target():
-#	var new_target = target_list.pop_front()
-#	if new_target:
-#		if enemy:
-#			target_ui(false)
-#			if $AttackArea.overlaps_body(enemy): 
-#				target_list.append(enemy)
-#		enemy = new_target
-#		enemy.connect("update_resources", $GUI, "update_targe_info", [enemy.resources])
-#		target_ui(true)
-#		look_at(enemy.global_transform.origin, Vector3.UP) # MAKE IT A LERPED ROTATION AROUND Y AXIS
 
 func target_ui(show : bool):
 	if enemy:
@@ -66,6 +55,8 @@ func target_ui(show : bool):
 		if show == false:
 			if enemy.is_connected("update_resources", $GUI, "update_targe_info"):
 				enemy.disconnect("update_resources", $GUI, "update_targe_info")
+		else:
+			enemy.connect("update_resources", $GUI, "update_targe_info", [enemy.resources])
 
 func get_test_items():
 	inventory[0].item = "ITEM_00000"
