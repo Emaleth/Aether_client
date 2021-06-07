@@ -1,13 +1,13 @@
 extends PanelContainer
 
-onready var name_label = $MarginContainer/VBoxContainer/Name
-onready var description_label = $MarginContainer/VBoxContainer/Description
-onready var strenght = $MarginContainer/VBoxContainer/Stats/Strenght
-onready var dexterity = $MarginContainer/VBoxContainer/Stats/Dexterity
-onready var constitution = $MarginContainer/VBoxContainer/Stats/Constitution
-onready var intelligence = $MarginContainer/VBoxContainer/Stats/Intelligence
-onready var wisdome = $MarginContainer/VBoxContainer/Stats/Wisdome
-onready var stat_container = $MarginContainer/VBoxContainer/Stats
+onready var name_label = $VBoxContainer/Name
+onready var description_label = $VBoxContainer/Description
+onready var strenght = $VBoxContainer/Stats/Strenght
+onready var dexterity = $VBoxContainer/Stats/Dexterity
+onready var constitution = $VBoxContainer/Stats/Constitution
+onready var intelligence = $VBoxContainer/Stats/Intelligence
+onready var wisdome = $VBoxContainer/Stats/Wisdome
+onready var stat_container = $VBoxContainer/Stats
 
 func conf(name : String = "", description : String = "", stats : Dictionary = {}):
 	yield(self, "ready")

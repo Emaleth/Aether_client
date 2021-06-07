@@ -17,10 +17,7 @@ ITEM_00014,Training Cape,armor,cape,false,false,1,1,1,1,null,null
 ITEM_00015,Training Belt,armor,belt,false,false,1,1,null,1,1,null
 ITEM_00016, Training Shoulders,armor,shoulders,false,false,1,1,1,1,1,null
 ITEM_00017,Training Pendant,jewelry,necklace,false,false,1,1,1,1,1,null
-ITEM_00018,Training Arrow,ammunition,arrow,false,false,1,1,1,1,1,null
 ITEM_00019,Training Orb,amulet,orb,false,false,1,1,1,1,1,null
-ITEM_00020,Training Wings,armor,wings,false,false,1,1,1,1,1,null
-ITEM_00021,Training Pickaxe,tool,pickaxe,false,false,,,,,,null
 ITEM_00022,Infinite Rune,consumable,rune,false,false,,,,,,lesser_light
 ITEM_00023,Lesser Health Elixir,consumable,potion,true,true,,,,,,lesser_heal
 ITEM_00024,Lesser Mana Elixir,consumable,potion,true,true,,,,,,lesser_mana

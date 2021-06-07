@@ -1,7 +1,7 @@
 extends Control
 
-onready var health_bar = $VSplitContainer/Progress/MarginContainer/VBoxContainer/Health
-onready var mana_bar = $VSplitContainer/Progress/MarginContainer/VBoxContainer/Mana
-onready var stamina_bar = $VSplitContainer/Progress/MarginContainer/VBoxContainer/Stamina
-onready var name_label = $VSplitContainer/Progress/MarginContainer/VBoxContainer/Name
+onready var health_bar = $VBoxContainer/Health
+onready var mana_bar = $VBoxContainer/Mana
+onready var stamina_bar = $VBoxContainer/Stamina
+onready var name_label = $VBoxContainer/Name
 

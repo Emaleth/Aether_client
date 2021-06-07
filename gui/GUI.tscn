@@ -58,12 +58,6 @@ anchor_right = 0.5
 grow_horizontal = 2
 rect_scale = Vector2( 0.8, 0.8 )
 
-[node name="VSplitContainer" parent="TargetProgress" index="0"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -110.0
-margin_right = 110.0
-
 [node name="Equipment" parent="." instance=ExtResource( 8 )]
 visible = false
 anchor_top = 0.5
@@ -81,6 +75,7 @@ margin_bottom = -14.0
 material = SubResource( 3 )
 
 [node name="QuantityPanel" parent="." instance=ExtResource( 11 )]
+visible = false
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

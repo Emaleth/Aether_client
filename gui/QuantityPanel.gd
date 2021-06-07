@@ -1,11 +1,11 @@
-extends Popup
+extends PanelContainer
 
 var quantity = 1
 var max_q = 0
 var s
 var t
 
-onready var line = $MarginContainer/VBoxContainer/HBoxContainer/LineEdit
+onready var line = $VBoxContainer/HBoxContainer/LineEdit
 
 signal send_quantity
 
@@ -16,7 +16,7 @@ func conf(slot, source, target):
 	max_q = source[0].get(source[1])[source[2]].quantity
 	connect("send_quantity", slot, "split")
 	line.text = str(quantity)
-	show_modal()
+	show()
 	
 func _on_More_pressed() -> void:
 	quantity = min(quantity +1, max_q)
@@ -45,10 +45,10 @@ func _on_Accept_pressed() -> void:
 	emit_signal("send_quantity", self, s, t, quantity)
 	hide()
 
-func _on_Cancel_pressed() -> void:
-	emit_signal("send_quantity", self, s, t, 0)
-	hide()
+func _on_VBoxContainer_sort_children() -> void:
+	var offset = 4
+	$Close.rect_position = Vector2(rect_size.x - $Close.rect_size.x / 2 - offset, -$Close.rect_size.y / 2 + offset) 
 
-func _on_QuantityPanel_modal_closed() -> void:
+func _on_Close_pressed() -> void:
 	emit_signal("send_quantity", self, s, t, 0)
 	hide()

@@ -1,32 +1,30 @@
 extends PanelContainer
 
-onready var grid = $MarginContainer/HBoxContainer/GridContainer
-onready var stat_container = $MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer
-onready var points_label = $MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer/PointsLabel
+onready var main_grid = $HBoxContainer/Eq/EquipmentSlots/Main
+onready var jewellry_grid = $HBoxContainer/Eq/EquipmentSlots/Jewellry
+onready var amulet_grid = $HBoxContainer/Eq/EquipmentSlots/Amulets
+onready var stat_container = $HBoxContainer/Stats/VBoxContainer/VBoxContainer/
+onready var points_label = $HBoxContainer/Stats/VBoxContainer/VBoxContainer/PointsLabel
 
 onready var equipment : Dictionary = {
-	"head" :  grid.get_node("Head"),
-	"hands" : grid.get_node("Hands"),
-	"feet" : grid.get_node("Feet"),
-	"upper_body" : grid.get_node("UpperBody"),
-	"lower_body" : grid.get_node("LowerBody"),
-	"cape" : grid.get_node("Cape"),
-	"belt" : grid.get_node("Belt"),
-	"shoulders" : grid.get_node("Shoulders"),
-	"necklace" : grid.get_node("Necklace"),
-	"ammunition" : grid.get_node("Ammunition"),
-	"ranged_weapon" : grid.get_node("RangedWeapon"),
-	"ring_1" : grid.get_node("Ring1"),
-	"ring_2" : grid.get_node("Ring2"),
-	"earring_1" : grid.get_node("Earring1"),
-	"earring_2" : grid.get_node("Earring2"),
-	"main_hand" : grid.get_node("MainHand"),
-	"off_hand" : grid.get_node("OffHand"),
-	"gathering_tools" : grid.get_node("GatheringTools"),
-	"amulet_1" : grid.get_node("Amulet1"),
-	"amulet_2" : grid.get_node("Amulet2"),
-	"amulet_3" : grid.get_node("Amulet3"),
-	"back" : grid.get_node("Back")
+	"head" :  main_grid.get_node("Head"),
+	"hands" : main_grid.get_node("Hands"),
+	"feet" : main_grid.get_node("Feet"),
+	"upper_body" : main_grid.get_node("UpperBody"),
+	"lower_body" : main_grid.get_node("LowerBody"),
+	"cape" : main_grid.get_node("Cape"),
+	"belt" : main_grid.get_node("Belt"),
+	"shoulders" : main_grid.get_node("Shoulders"),
+	"necklace" : jewellry_grid.get_node("Necklace"),
+	"ring_1" : jewellry_grid.get_node("Ring1"),
+	"ring_2" : jewellry_grid.get_node("Ring2"),
+	"earring_1" : jewellry_grid.get_node("Earring1"),
+	"earring_2" : jewellry_grid.get_node("Earring2"),
+	"main_hand" : main_grid.get_node("MainHand"),
+	"off_hand" : main_grid.get_node("OffHand"),
+	"amulet_1" : amulet_grid.get_node("Amulet1"),
+	"amulet_2" : amulet_grid.get_node("Amulet2"),
+	"amulet_3" : amulet_grid.get_node("Amulet3")
 	}
 	
 onready var stats = {
@@ -54,17 +52,16 @@ onready var stats = {
 		"name" : stat_container.get_node("Wisdom/Label"),
 		"number" : stat_container.get_node("Wisdom/Q"),
 		"button" : stat_container.get_node("Wisdom/Add")
-	},
-	"charisma" : {
-		"name" : stat_container.get_node("Charisma/Label"),
-		"number" : stat_container.get_node("Charisma/Q"),
-		"button" : stat_container.get_node("Charisma/Add")
 	}
 }
 
 func _ready() -> void:
 	$Close/TextureRect.self_modulate = Global.close_button
-	
+	for i in jewellry_grid.get_children():
+		i.small()
+	for i in amulet_grid.get_children():
+		i.small()
+		
 func conf(actor, quantity_panel):
 	for i in actor.equipment:
 		equipment.get(i).conf(actor, i, "equipment", quantity_panel)
@@ -95,7 +92,9 @@ func update_stats(s, points):
 		points_label.text = ""
 		
 func _on_Equipment_sort_children() -> void:
-	var offset = ($MarginContainer.get("custom_constants/margin_right") / 2)
+	rect_size = $HBoxContainer.rect_size
+	yield(get_tree(),"idle_frame")
+	var offset = 4
 	$Close.rect_position = Vector2(rect_size.x - $Close.rect_size.x / 2 - offset, -$Close.rect_size.y / 2 + offset) 
 
 func _on_Close_pressed() -> void:

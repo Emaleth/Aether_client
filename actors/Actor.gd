@@ -22,8 +22,7 @@ var attributes = {
 		"dexterity" : 10,
 		"constitution" : 10,
 		"intelligence" : 10,
-		"wisdom" : 10,
-		"charisma" : 10
+		"wisdom" : 10
 	},
 	"player" : {},
 	"equipment" : {},
@@ -56,19 +55,15 @@ var equipment_slots : Dictionary = {
 	"belt" : [],
 	"shoulders" : [],
 	"necklace" : [],
-	"ammunition" : [],
-	"ranged_weapon" : [],
 	"ring_1" : [],
 	"ring_2" : [],
 	"earring_1" : [],
 	"earring_2" : [],
 	"main_hand" : [],
 	"off_hand" : [],
-	"gathering_tools" : [],
 	"amulet_1" : [],
 	"amulet_2" : [],
-	"amulet_3" : [],
-	"back" : []
+	"amulet_3" : []
 }
 
 var equipment_slot_type : Dictionary = {
@@ -81,19 +76,15 @@ var equipment_slot_type : Dictionary = {
 	"belt" : ["belt"],
 	"shoulders" : ["shoulders"],
 	"necklace" : ["necklace"],
-	"ammunition" : ["arrow"],
-	"ranged_weapon" : ["bow"],
 	"ring_1" : ["ring"],
 	"ring_2" : ["ring"],
 	"earring_1" : ["earring"],
 	"earring_2" : ["earring"],
-	"main_hand" : ["sword", "longsword", "axe", "dagger", "staff"],
+	"main_hand" : ["sword", "longsword", "axe", "dagger", "staff", "bow"],
 	"off_hand" : ["sword", "axe", "dagger", "shield"],
-	"gathering_tools" : ["pickaxe"],
 	"amulet_1" : ["orb"],
 	"amulet_2" : ["orb"],
 	"amulet_3" : ["orb"],
-	"back" : ["wings"]
 }
 
 var equipment : Dictionary = {}

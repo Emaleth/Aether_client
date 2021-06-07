@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://gui/CastingBar.gd" type="Script" id=1]
-[ext_resource path="res://textures/ui/progressbar_bg.png" type="Texture" id=2]
 
 [sub_resource type="StyleBoxFlat" id=1]
 border_width_left = 3
@@ -13,10 +12,6 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxTexture" id=2]
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 506, 55 )
 
 [node name="CastingBar" type="Control"]
 visible = false
@@ -39,7 +34,6 @@ margin_right = 100.0
 margin_bottom = 155.0
 mouse_filter = 2
 custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
 percent_visible = false
 __meta__ = {
 "_edit_use_anchors_": false

@@ -83,58 +83,61 @@ func get_test_items():
 	inventory[7].item = "ITEM_00007"
 	inventory[7].quantity = 1
 	
-	inventory[8].item = "ITEM_00008"
+	inventory[8].item = "ITEM_00007"
 	inventory[8].quantity = 1
 	
-	inventory[9].item = "ITEM_00009"
+	inventory[9].item = "ITEM_00008"
 	inventory[9].quantity = 1
 	
-	inventory[10].item = "ITEM_00010"
+	inventory[10].item = "ITEM_00008"
 	inventory[10].quantity = 1
 	
-	inventory[11].item = "ITEM_00011"
+	inventory[11].item = "ITEM_00009"
 	inventory[11].quantity = 1
 	
-	inventory[12].item = "ITEM_00012"
+	inventory[12].item = "ITEM_00010"
 	inventory[12].quantity = 1
 	
-	inventory[13].item = "ITEM_00013"
+	inventory[13].item = "ITEM_00011"
 	inventory[13].quantity = 1
 	
-	inventory[14].item = "ITEM_00014"
+	inventory[14].item = "ITEM_00012"
 	inventory[14].quantity = 1
 	
-	inventory[15].item = "ITEM_00015"
+	inventory[15].item = "ITEM_00013"
 	inventory[15].quantity = 1
 	
-	inventory[16].item = "ITEM_00016"
+	inventory[16].item = "ITEM_00014"
 	inventory[16].quantity = 1
 	
-	inventory[17].item = "ITEM_00017"
+	inventory[17].item = "ITEM_00015"
 	inventory[17].quantity = 1
 	
-	inventory[18].item = "ITEM_00018"
+	inventory[18].item = "ITEM_00016"
 	inventory[18].quantity = 1
 	
-	inventory[19].item = "ITEM_00019"
+	inventory[19].item = "ITEM_00017"
 	inventory[19].quantity = 1
 	
-	inventory[20].item = "ITEM_00020"
+	inventory[20].item = "ITEM_00019"
 	inventory[20].quantity = 1
 	
-	inventory[21].item = "ITEM_00021"
+	inventory[21].item = "ITEM_00019"
 	inventory[21].quantity = 1
-	
-	inventory[22].item = "ITEM_00022"
+
+	inventory[22].item = "ITEM_00019"
 	inventory[22].quantity = 1
 	
-	inventory[23].item = "ITEM_00023"
-	inventory[23].quantity = 100
+	inventory[23].item = "ITEM_00022"
+	inventory[23].quantity = 1
 	
-	inventory[24].item = "ITEM_00024"
+	inventory[24].item = "ITEM_00023"
 	inventory[24].quantity = 100
 	
-	inventory[25].item = "ITEM_00023"
-	inventory[25].quantity = 2
+	inventory[25].item = "ITEM_00024"
+	inventory[25].quantity = 100
+	
+	inventory[26].item = "ITEM_00023"
+	inventory[26].quantity = 2
 
 

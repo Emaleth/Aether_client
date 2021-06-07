@@ -22,7 +22,7 @@ func _ready() -> void:
 	ghost_image.texture = icon
 	ghost_image.self_modulate = Global.item_ghost
 	icon = null
-	
+
 func conf(actor, slot, type, quantity_panel):
 	aactor = actor
 	ttype = type
@@ -184,3 +184,16 @@ func split(panel, source, target, q):
 	emit_signal("request_split", source, target, q)
 	panel.disconnect("send_quantity", self, "split")
 	
+func small():
+	rect_min_size = Vector2(20, 20)
+	rect_size = Vector2(20, 20)
+	$MarginContainer2.set("custom_constants/margin_bottom", 0) 
+	$MarginContainer2.set("custom_constants/margin_left", 0) 
+	$MarginContainer2.set("custom_constants/margin_right", 0) 
+	$MarginContainer2.set("custom_constants/margin_top", 0) 
+	$MarginContainer2/Ghost.margin_top = 0
+	$MarginContainer2/Ghost.margin_left = 0
+	$MarginContainer2/Ghost.margin_bottom = 20
+	$MarginContainer2/Ghost.margin_right = 20
+
+

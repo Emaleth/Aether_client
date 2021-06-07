@@ -1,7 +1,7 @@
 extends PanelContainer
 
 var slot = preload("res://gui/Slot.tscn")
-onready var grid = $MarginContainer/GridContainer
+onready var grid = $GridContainer
 
 	
 func conf(actor, quantity_panel):

@@ -1,6 +1,6 @@
 extends PanelContainer
 
-onready var slot_grid = $MarginContainer/VBoxContainer/GridContainer
+onready var slot_grid = $VBoxContainer/GridContainer
 onready var slot_path = preload("res://gui/Slot.tscn")
 	
 func _ready() -> void:
@@ -21,7 +21,7 @@ func conf(actor, quantity_panel):
 			new_slot.conf(actor, i, "lootable", quantity_panel)
 
 func _on_LootPanel_sort_children() -> void:
-	var offset = ($MarginContainer.get("custom_constants/margin_right") / 2)
+	var offset = 4
 	$Close.rect_position = Vector2(rect_size.x - $Close.rect_size.x / 2 - offset, -$Close.rect_size.y / 2 + offset) 
 
 func _on_Close_pressed() -> void:

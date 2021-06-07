@@ -3,13 +3,13 @@ extends PanelContainer
 var window_height_in_slots = 5
 var grid_v_separation = 4
 
-onready var slot_grid = $MarginContainer/VBoxContainer/ScrollContainer/grid
-onready var scroll : ScrollContainer = $MarginContainer/VBoxContainer/ScrollContainer
-onready var button_list = $MarginContainer/VBoxContainer/MarginContainer/MarginContainer/SlotSelector
+onready var slot_grid = $VBoxContainer/Slots/ScrollContainer/grid
+onready var scroll : ScrollContainer = $VBoxContainer/Slots/ScrollContainer
+onready var button_list = $VBoxContainer/Buttons/SlotSelector
 onready var slot_path = preload("res://gui/Slot.tscn")
 	
 func _ready() -> void:
-	scrollbar_theme()
+#	scrollbar_theme()
 	scroll.rect_min_size.y = ((window_height_in_slots * 40) + ((window_height_in_slots -1) * grid_v_separation))
 	connect_button()
 	show_slot_type("inventory")
@@ -51,21 +51,21 @@ func connect_button():
 		if i is Button:
 			i.connect("pressed", self, "show_slot_type", [str(i.name).to_lower()])
 
-func scrollbar_theme():
-	var grabber = StyleBoxTexture.new()
-	grabber.texture = preload("res://textures/ui/grabber.png")
-	grabber.margin_top = 6
-	grabber.margin_bottom = 6
-	var grabber_bg = StyleBoxTexture.new()
-	grabber_bg.texture = preload("res://textures/ui/scrollbar_bg.png")
-	scroll.get_v_scrollbar().add_stylebox_override("grabber_highlight", grabber)
-	scroll.get_v_scrollbar().add_stylebox_override("grabber", grabber)
-	scroll.get_v_scrollbar().add_stylebox_override("grabber_pressed", grabber)
-	scroll.get_v_scrollbar().add_stylebox_override("scroll", grabber_bg)
-	scroll.get_v_scrollbar().add_stylebox_override("scroll_focus", grabber_bg) 
+#func scrollbar_theme():
+#	var grabber = StyleBoxTexture.new()
+#	grabber.texture = preload("res://textures/ui/grabber.png")
+#	grabber.margin_top = 6
+#	grabber.margin_bottom = 6
+#	var grabber_bg = StyleBoxTexture.new()
+#	grabber_bg.texture = preload("res://textures/ui/scrollbar_bg.png")
+#	scroll.get_v_scrollbar().add_stylebox_override("grabber_highlight", grabber)
+#	scroll.get_v_scrollbar().add_stylebox_override("grabber", grabber)
+#	scroll.get_v_scrollbar().add_stylebox_override("grabber_pressed", grabber)
+#	scroll.get_v_scrollbar().add_stylebox_override("scroll", grabber_bg)
+#	scroll.get_v_scrollbar().add_stylebox_override("scroll_focus", grabber_bg) 
 
 func _on_Inventory_sort_children() -> void:
-	var offset = ($MarginContainer.get("custom_constants/margin_right") / 2)
+	var offset = 4
 	$Close.rect_position = Vector2(rect_size.x - $Close.rect_size.x / 2 - offset, -$Close.rect_size.y / 2 + offset) 
 
 func _on_Close_pressed() -> void:
