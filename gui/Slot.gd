@@ -4,12 +4,15 @@ var aactor
 var ttype
 var sslot
 
-onready var quantity_label = $MarginContainer/Label
+onready var quantity_label = $Margin/Label
 onready var timer = $Timer
 onready var cd_progress = $TextureProgress
 onready var tween = $Tween
 onready var timer_label = $TimerLabel
-onready var ghost_image = $MarginContainer2/Ghost
+
+onready var item_icon_margin = $Margin
+onready var item_icon = $Margin/Icon
+var ghost_image = null
 
 signal request_swap
 signal request_use
@@ -19,8 +22,7 @@ signal request_split
 var preview = preload("res://gui/DragPreview.tscn")
 
 func _ready() -> void:
-	ghost_image.texture = icon
-	ghost_image.self_modulate = Global.item_ghost
+	ghost_image = icon
 	icon = null
 
 func conf(actor, slot, type, quantity_panel):
@@ -43,8 +45,8 @@ func conf(actor, slot, type, quantity_panel):
 			if is_connected("request_use", actor, "use_item"):
 				disconnect("request_use", actor, "use_item")
 				
-		icon = load("res://previews/%s.png" % actor.get(type).get(slot).item)
-		ghost_image.hide()
+		item_icon.texture = load("res://previews/%s.png" % actor.get(type).get(slot).item)
+		item_icon.self_modulate = Color.white
 		hint_tooltip = "wierd fuckery"
 		if actor.get(type).get(slot).quantity > 1:
 			quantity_label.text = str(actor.get(type).get(slot).quantity)
@@ -54,8 +56,8 @@ func conf(actor, slot, type, quantity_panel):
 		cooldown_animation(false)
 		if is_connected("request_use", actor, "use_item"):
 			disconnect("request_use", actor, "use_item")
-		ghost_image.show()
-		icon = null
+		item_icon.texture = ghost_image
+		item_icon.self_modulate = Global.item_ghost
 		hint_tooltip = ""
 		quantity_label.text = ""
 		
@@ -84,7 +86,7 @@ func _on_Slot_pressed() -> void:
 
 func make_preview():
 	var pw = preview.instance()
-	pw.conf(icon)
+	pw.conf(item_icon.texture)
 	set_drag_preview(pw)
 
 func _make_custom_tooltip(_for_text):
@@ -187,13 +189,18 @@ func split(panel, source, target, q):
 func small():
 	rect_min_size = Vector2(20, 20)
 	rect_size = Vector2(20, 20)
-	$MarginContainer2.set("custom_constants/margin_bottom", 0) 
-	$MarginContainer2.set("custom_constants/margin_left", 0) 
-	$MarginContainer2.set("custom_constants/margin_right", 0) 
-	$MarginContainer2.set("custom_constants/margin_top", 0) 
-	$MarginContainer2/Ghost.margin_top = 0
-	$MarginContainer2/Ghost.margin_left = 0
-	$MarginContainer2/Ghost.margin_bottom = 20
-	$MarginContainer2/Ghost.margin_right = 20
+	item_icon_margin.set("custom_constants/margin_bottom", 0) 
+	item_icon_margin.set("custom_constants/margin_left", 0) 
+	item_icon_margin.set("custom_constants/margin_right", 0) 
+	item_icon_margin.set("custom_constants/margin_top", 0) 
+	item_icon.margin_top = 0
+	item_icon.margin_left = 0
+	item_icon.margin_bottom = 20
+	item_icon.margin_right = 20
+	quantity_label.margin_top = 0
+	quantity_label.margin_left = 0
+	quantity_label.margin_bottom = 20
+	quantity_label.margin_right = 20
+	
 
 
