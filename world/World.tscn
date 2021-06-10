@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://environment/BoulderBig.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/Crate.tscn" type="PackedScene" id=2]
@@ -11,6 +11,13 @@
 [ext_resource path="res://environment/BoulderMedium.tscn" type="PackedScene" id=9]
 [ext_resource path="res://actors/Player.tscn" type="PackedScene" id=10]
 
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 20, 20 )
+
+[sub_resource type="SpatialMaterial" id=2]
+flags_transparent = true
+albedo_color = Color( 0.054902, 0.619608, 0.894118, 0.74902 )
+
 [node name="World" type="Node"]
 
 [node name="Environment" type="Node" parent="."]
@@ -22,6 +29,12 @@ transform = Transform( 1, 0, 0, 0, 0.874662, 2.27178, 0, -0.484733, 4.09925, -14
 transform = Transform( 1.73829, 0, 0, 0, 2.17002, 0, 0, 0, 2.71291, -5.49472, 2.21573, 27.8683 )
 
 [node name="Ground" parent="Environment" instance=ExtResource( 6 )]
+
+[node name="WaterTest" type="MeshInstance" parent="Environment"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8677, -3.10271, -16.2899 )
+layers = 7
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="Stairs" parent="Environment" instance=ExtResource( 3 )]
 transform = Transform( -1.83206, 0, 0.219153, 0, 2.1, 0, -0.47539, 0, -1.40807, -4.69516, -0.0024296, 18.5697 )

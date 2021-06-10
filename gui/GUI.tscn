@@ -50,9 +50,9 @@ margin_right = 1280.0
 margin_bottom = 178.0
 mouse_filter = 2
 size_flags_vertical = 3
-alignment = 1
 
 [node name="Progress" parent="VBoxContainer/Top" instance=ExtResource( 4 )]
+size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="TargetProgress" parent="VBoxContainer/Top" instance=ExtResource( 4 )]

@@ -26,11 +26,9 @@ onready var casting_bar = $MarginFree/CastingBar
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("map"):
-		if minimap_panel.visible == true:
-			minimap_panel.hide()
+		if map.visible == false:
 			map.show()
 		else:
-			minimap_panel.show()
 			map.hide()
 	if Input.is_action_just_pressed("inventory"):
 		if inventory_panel.visible == false:

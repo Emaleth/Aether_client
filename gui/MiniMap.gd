@@ -31,11 +31,12 @@ func _process(delta: float) -> void:
 	if resize.pressed == true:
 		var new_size_x = OS.window_size.x - (get_global_mouse_position().x - resize.rect_size.x / 2)
 		var new_size_y = get_global_mouse_position().y + resize.rect_size.y / 2
-		rect_size = Vector2(
+		rect_min_size = Vector2(
 			max(clamp(new_size_x, min_map_size, max_map_size), clamp(new_size_y, min_map_size, max_map_size)),
 			max(clamp(new_size_x, min_map_size, max_map_size), clamp(new_size_y, min_map_size, max_map_size))
 			)
 		rect_position.x = OS.window_size.x - rect_size.x
+	rect_size = rect_min_size
 
 func _on_MiniMap_sort_children() -> void:
 	var offset = 4
