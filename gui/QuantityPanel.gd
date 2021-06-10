@@ -52,3 +52,7 @@ func _on_VBoxContainer_sort_children() -> void:
 func _on_Close_pressed() -> void:
 	emit_signal("send_quantity", self, s, t, 0)
 	hide()
+
+func _on_QuantityPanel_modal_closed() -> void:
+	emit_signal("send_quantity", self, s, t, 0)
+

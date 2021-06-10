@@ -19,9 +19,9 @@ onready var quickbar_panel = $VBoxContainer/Bottom/Quickbar
 onready var experience_bar = $VBoxContainer/ExperienceBar
 # FULL 
 onready var map = $Map
-onready var quantity_panel = $MarginContainer/CenterContainer2/QuantityPanel
-onready var loot_panel = $MarginContainer/CenterContainer/LootPanel
-onready var casting_bar = $MarginContainer/Center/CastingBar
+onready var quantity_panel = $MarginFree/QuantityPanel
+onready var loot_panel = $MarginFree/LootPanel
+onready var casting_bar = $MarginFree/CastingBar
 
 
 func _unhandled_input(_event: InputEvent) -> void:

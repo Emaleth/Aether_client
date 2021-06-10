@@ -105,7 +105,7 @@ var turn_speed : float = 3.0
 var enemy = null
 var attacking = false
 
-var inv_slot_num = 70
+var inv_slot_num = 80
 var skill_bar_slot_num = 20
 var gcd_used = 0
 
@@ -357,8 +357,10 @@ func move_item(source_slot = [], target_slot = []):
 		emit_signal("update_equipment")
 		load_eq()
 	emit_signal("update_quickbar")
-
+var using_item = false
 func use_item(source_slot):
+	if using_item == true:
+		return
 	if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL:
 		if OS.get_ticks_msec() - source_slot[0].get(source_slot[1])[source_slot[2]].use_time >= float(DB.spell_db.get(DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL).COOLDOWN) * 1000 || source_slot[0].get(source_slot[1])[source_slot[2]].use_time == 0:
 			cast_spell(DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL)
@@ -452,6 +454,7 @@ func increase_stat(stat):
 		calculate_total_attributes()
 
 func cast_spell(spell):
+	using_item = true
 	if DB.spell_db.get(spell).HEALTH_COST:
 		if resources.health.current < float(DB.spell_db.get(spell).HEALTH_COST):
 			return
@@ -508,7 +511,8 @@ func cast_spell(spell):
 			i.modify_resource("mana", float(DB.spell_db.get(spell).TARGET_MANA))
 		if DB.spell_db.get(spell).TARGET_STAMINA:
 			i.modify_resource("stamina", float(DB.spell_db.get(spell).TARGET_STAMINA))
-#
+	using_item = false
+	
 func get_target():
 	var new_target = target_list.pop_front()
 	if new_target:

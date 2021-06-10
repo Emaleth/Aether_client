@@ -112,6 +112,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[connection signal="modal_closed" from="." to="." method="_on_QuantityPanel_modal_closed"]
 [connection signal="sort_children" from="VBoxContainer" to="." method="_on_VBoxContainer_sort_children"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Less" to="." method="_on_Less_pressed"]
 [connection signal="text_changed" from="VBoxContainer/HBoxContainer/LineEdit" to="." method="_on_LineEdit_text_changed"]
