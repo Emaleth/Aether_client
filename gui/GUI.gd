@@ -1,60 +1,86 @@
 extends CanvasLayer
 
-onready var quantity_panel = $QuantityPanel
+# TOP-RIGHT
+onready var progress_panel = $VBoxContainer/Top/Progress
+# TOP-CENTER
+onready var target_progress_panel = $VBoxContainer/Top/TargetProgress
+# TOP-LEFT
+onready var minimap_panel = $VBoxContainer/Top/MiniMap
+onready var minimap_camera = $VBoxContainer/Top/MiniMap/ViewportContainer/Viewport/MiniMapCamera
+# MIDDLE-LEFT
+onready var equipment_panel = $VBoxContainer/Center/Center/Equipment
+# MIDDLE-CENTER
+onready var skill_panel = $VBoxContainer/Center/Left/SkillPanel
+# MIDDLE-RIGHT
+onready var inventory_panel = $VBoxContainer/Center/Right/Inventory
+# BOTTOM-CENTER
+onready var quickbar_panel = $VBoxContainer/Bottom/Quickbar
+# BOTTOM-FULL
+onready var experience_bar = $VBoxContainer/ExperienceBar
+# FULL 
+onready var map = $Map
+onready var quantity_panel = $MarginContainer/CenterContainer2/QuantityPanel
+onready var loot_panel = $MarginContainer/CenterContainer/LootPanel
+onready var casting_bar = $MarginContainer/Center/CastingBar
 
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("map"):
-		if $MiniMap.visible == true:
-			$MiniMap.hide()
-			$Map.show()
+		if minimap_panel.visible == true:
+			minimap_panel.hide()
+			map.show()
 		else:
-			$MiniMap.show()
-			$Map.hide()
+			minimap_panel.show()
+			map.hide()
 	if Input.is_action_just_pressed("inventory"):
-		if $Inventory.visible == false:
-			$Inventory.show()
+		if inventory_panel.visible == false:
+			inventory_panel.show()
 		else:
-			$Inventory.hide()
+			inventory_panel.hide()
 	if Input.is_action_just_pressed("character"):
-		if $Equipment.visible == false:
-			$Equipment.show()
+		if equipment_panel.visible == false:
+			equipment_panel.show()
 		else:
-			$Equipment.hide()
+			equipment_panel.hide()
+	if Input.is_action_just_pressed("skills"):
+		if skill_panel.visible == false:
+			skill_panel.show()
+		else:
+			skill_panel.hide()
 
 func conf(resources, minimap_camera_remote_transform):
-	$Progress.health_bar.conf(resources.health.maximum, resources.health.current, Color.red)
-	$Progress.mana_bar.conf(resources.mana.maximum, resources.mana.current, Color.blue)
-	$Progress.stamina_bar.conf(resources.stamina.maximum, resources.stamina.current, Color.orange)
+	progress_panel.health_bar.conf(resources.health.maximum, resources.health.current, Color.red)
+	progress_panel.mana_bar.conf(resources.mana.maximum, resources.mana.current, Color.blue)
+	progress_panel.stamina_bar.conf(resources.stamina.maximum, resources.stamina.current, Color.orange)
 			
-	minimap_camera_remote_transform.remote_path = $MiniMap/ViewportContainer/Viewport/MiniMapCamera.get_path()
+	minimap_camera_remote_transform.remote_path = minimap_camera.get_path()
 	
 func update_gui(res):
-	$Progress.health_bar.updt(res.health.current, res.health.maximum)
-	$Progress.mana_bar.updt(res.mana.current, res.mana.maximum)
-	$Progress.stamina_bar.updt(res.stamina.current, res.stamina.maximum)
+	progress_panel.health_bar.updt(res.health.current, res.health.maximum)
+	progress_panel.mana_bar.updt(res.mana.current, res.mana.maximum)
+	progress_panel.stamina_bar.updt(res.stamina.current, res.stamina.maximum)
 	
 func get_target_info(target, yay_or_nay):
 	if yay_or_nay == false:
-		$TargetProgress.hide()
+		target_progress_panel.hide()
 	else:
-		$TargetProgress.name_label.text = target.statistics.name
-		$TargetProgress.name_label.show()
-		$TargetProgress.health_bar.conf(target.resources.health.maximum, target.resources.health.current, Color.red)
-		$TargetProgress.mana_bar.conf(target.resources.mana.maximum, target.resources.mana.current, Color.blue)
-		$TargetProgress.stamina_bar.conf(target.resources.stamina.maximum, target.resources.stamina.current, Color.orange)
-		$TargetProgress.show()
+		target_progress_panel.name_label.text = target.statistics.name
+		target_progress_panel.name_label.show()
+		target_progress_panel.health_bar.conf(target.resources.health.maximum, target.resources.health.current, Color.red)
+		target_progress_panel.mana_bar.conf(target.resources.mana.maximum, target.resources.mana.current, Color.blue)
+		target_progress_panel.stamina_bar.conf(target.resources.stamina.maximum, target.resources.stamina.current, Color.orange)
+		target_progress_panel.show()
 	
 func update_targe_info(res):
-	$TargetProgress.health_bar.updt(res.health.current, res.health.maximum)
-	$TargetProgress.mana_bar.updt(res.mana.current, res.mana.maximum)
-	$TargetProgress.stamina_bar.updt(res.stamina.current, res.stamina.maximum)
+	target_progress_panel.health_bar.updt(res.health.current, res.health.maximum)
+	target_progress_panel.mana_bar.updt(res.mana.current, res.mana.maximum)
+	target_progress_panel.stamina_bar.updt(res.stamina.current, res.stamina.maximum)
 
 func configure_inv(actor):
-	$Inventory.conf(actor, quantity_panel)
+	inventory_panel.conf(actor, quantity_panel)
 	
 func configure_eq(actor):
-	$Equipment.conf(actor, quantity_panel)
+	equipment_panel.conf(actor, quantity_panel)
 	
 func configure_quickbar(actor):
-	$Quickbar.conf(actor, quantity_panel)
+	quickbar_panel.conf(actor, quantity_panel)

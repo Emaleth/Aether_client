@@ -6,3 +6,5 @@ var item_ghost = Color.dimgray
 var button_normal = Color.whitesmoke
 var close_button = Color.red
 var cd = 0.5
+
+

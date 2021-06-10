@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://gui/ResourceBar.tscn" type="PackedScene" id=1]
-[ext_resource path="res://fonts/ContentUI.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/Lack_18.tres" type="DynamicFont" id=2]
 [ext_resource path="res://gui/Progress.gd" type="Script" id=4]
 
 [node name="Progress" type="PanelContainer"]

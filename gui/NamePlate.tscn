@@ -2,7 +2,7 @@
 
 [ext_resource path="res://gui/ResourceBar.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/NamePlate.gd" type="Script" id=2]
-[ext_resource path="res://fonts/TitleUI.tres" type="DynamicFont" id=3]
+[ext_resource path="res://fonts/Lack_60.tres" type="DynamicFont" id=3]
 
 [node name="NamePlate" type="Spatial"]
 script = ExtResource( 2 )

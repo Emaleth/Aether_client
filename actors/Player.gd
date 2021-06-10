@@ -12,7 +12,7 @@ func _ready() -> void:
 	conf()
 	connect("target_ui", self, "target_ui")
 	$GUI.conf(resources, minimap_camera_remote_transform)
-	connect("update_casting_bar", $GUI/CastingBar, "conf")
+	connect("update_casting_bar", $GUI.casting_bar, "conf")
 	connect("update_resources", $GUI, "update_gui", [resources])
 	load_eq()
 	connect("target_lost", self, "target_ui")

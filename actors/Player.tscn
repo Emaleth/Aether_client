@@ -17,23 +17,23 @@ height = 0.2
 [node name="Player" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="GUI" parent="." index="0" instance=ExtResource( 4 )]
-
-[node name="CameraRig" parent="." index="1" instance=ExtResource( 3 )]
+[node name="CameraRig" parent="." index="0" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.68352, 0 )
 
-[node name="MiniMapCameraRT" type="RemoteTransform" parent="." index="3"]
+[node name="MiniMapCameraRT" type="RemoteTransform" parent="." index="2"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 20, 0 )
 update_scale = false
 
-[node name="DEBUG_Body" type="MeshInstance" parent="." index="8"]
+[node name="DEBUG_Body" type="MeshInstance" parent="." index="7"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.9, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="DEBUG_Head" type="MeshInstance" parent="." index="9"]
+[node name="DEBUG_Head" type="MeshInstance" parent="." index="8"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.0158766, 1.4802, -0.266441 )
 mesh = SubResource( 2 )
 material/0 = null
 
-[node name="DEBUG_AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+[node name="DEBUG_AnimationPlayer" type="AnimationPlayer" parent="." index="9"]
+
+[node name="GUI" parent="." index="13" instance=ExtResource( 4 )]

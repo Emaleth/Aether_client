@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://gui/HitNumber.gd" type="Script" id=1]
-[ext_resource path="res://fonts/ContentUI.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/Lack_60.tres" type="DynamicFont" id=2]
 
 [node name="HitNumber" type="Spatial"]
 script = ExtResource( 1 )
@@ -9,7 +9,6 @@ script = ExtResource( 1 )
 [node name="Tween" type="Tween" parent="."]
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
-pixel_size = 0.02
 billboard = 1
 double_sided = false
 

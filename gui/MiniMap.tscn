@@ -11,6 +11,7 @@ anchor_right = 1.0
 margin_left = -200.0
 margin_bottom = 200.0
 grow_horizontal = 0
+rect_min_size = Vector2( 150, 150 )
 mouse_filter = 2
 script = ExtResource( 2 )
 __meta__ = {

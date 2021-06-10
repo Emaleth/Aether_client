@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://gui/Tooltip.gd" type="Script" id=1]
+[ext_resource path="res://fonts/Lack_12.tres" type="DynamicFont" id=2]
 
 [node name="Tooltip" type="PanelContainer"]
 anchor_right = 1.0
@@ -17,49 +18,53 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 113.0
-margin_bottom = 149.0
+margin_right = 99.0
+margin_bottom = 150.0
 
 [node name="Name" type="Label" parent="VBoxContainer"]
-margin_right = 106.0
-margin_bottom = 14.0
+margin_right = 92.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 1
 valign = 1
 
 [node name="Description" type="Label" parent="VBoxContainer"]
-margin_top = 18.0
-margin_right = 106.0
-margin_bottom = 32.0
+margin_top = 16.0
+margin_right = 92.0
+margin_bottom = 28.0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 1
 valign = 1
 
 [node name="Stats" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 36.0
-margin_right = 106.0
-margin_bottom = 122.0
+margin_top = 32.0
+margin_right = 92.0
+margin_bottom = 108.0
 
 [node name="Strenght" type="HBoxContainer" parent="VBoxContainer/Stats"]
-margin_right = 106.0
-margin_bottom = 14.0
+margin_right = 92.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
 
 [node name="Name" type="Label" parent="VBoxContainer/Stats/Strenght"]
-margin_right = 51.0
-margin_bottom = 14.0
+margin_right = 44.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 valign = 1
 
 [node name="Value" type="Label" parent="VBoxContainer/Stats/Strenght"]
-margin_left = 55.0
-margin_right = 106.0
-margin_bottom = 14.0
+margin_left = 48.0
+margin_right = 92.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 1
@@ -71,30 +76,33 @@ margin_left = 90.0
 margin_right = 131.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 2
 valign = 1
 
 [node name="Dexterity" type="HBoxContainer" parent="VBoxContainer/Stats"]
-margin_top = 18.0
-margin_right = 106.0
-margin_bottom = 32.0
+margin_top = 16.0
+margin_right = 92.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="Name" type="Label" parent="VBoxContainer/Stats/Dexterity"]
-margin_right = 51.0
-margin_bottom = 14.0
+margin_right = 44.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 valign = 1
 
 [node name="Value" type="Label" parent="VBoxContainer/Stats/Dexterity"]
-margin_left = 55.0
-margin_right = 106.0
-margin_bottom = 14.0
+margin_left = 48.0
+margin_right = 92.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 1
@@ -106,30 +114,33 @@ margin_left = 90.0
 margin_right = 131.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 2
 valign = 1
 
 [node name="Constitution" type="HBoxContainer" parent="VBoxContainer/Stats"]
-margin_top = 36.0
-margin_right = 106.0
-margin_bottom = 50.0
+margin_top = 32.0
+margin_right = 92.0
+margin_bottom = 44.0
 size_flags_horizontal = 3
 
 [node name="Name" type="Label" parent="VBoxContainer/Stats/Constitution"]
-margin_right = 51.0
-margin_bottom = 14.0
+margin_right = 44.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 valign = 1
 
 [node name="Value" type="Label" parent="VBoxContainer/Stats/Constitution"]
-margin_left = 55.0
-margin_right = 106.0
-margin_bottom = 14.0
+margin_left = 48.0
+margin_right = 92.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 1
@@ -141,30 +152,33 @@ margin_left = 90.0
 margin_right = 131.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 2
 valign = 1
 
 [node name="Intelligence" type="HBoxContainer" parent="VBoxContainer/Stats"]
-margin_top = 54.0
-margin_right = 106.0
-margin_bottom = 68.0
+margin_top = 48.0
+margin_right = 92.0
+margin_bottom = 60.0
 size_flags_horizontal = 3
 
 [node name="Name" type="Label" parent="VBoxContainer/Stats/Intelligence"]
-margin_right = 51.0
-margin_bottom = 14.0
+margin_right = 44.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 valign = 1
 
 [node name="Value" type="Label" parent="VBoxContainer/Stats/Intelligence"]
-margin_left = 55.0
-margin_right = 106.0
-margin_bottom = 14.0
+margin_left = 48.0
+margin_right = 92.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 1
@@ -176,30 +190,33 @@ margin_left = 90.0
 margin_right = 131.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 2
 valign = 1
 
 [node name="Wisdome" type="HBoxContainer" parent="VBoxContainer/Stats"]
-margin_top = 72.0
-margin_right = 106.0
-margin_bottom = 86.0
+margin_top = 64.0
+margin_right = 92.0
+margin_bottom = 76.0
 size_flags_horizontal = 3
 
 [node name="Name" type="Label" parent="VBoxContainer/Stats/Wisdome"]
-margin_right = 51.0
-margin_bottom = 14.0
+margin_right = 44.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 valign = 1
 
 [node name="Value" type="Label" parent="VBoxContainer/Stats/Wisdome"]
-margin_left = 55.0
-margin_right = 106.0
-margin_bottom = 14.0
+margin_left = 48.0
+margin_right = 92.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 1
@@ -211,6 +228,7 @@ margin_left = 90.0
 margin_right = 131.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 text = "<text>"
 align = 2
