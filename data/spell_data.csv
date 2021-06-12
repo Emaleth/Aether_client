@@ -1,4 +1,5 @@
-UUID,TYPE,TARGET,RANGE,COOLDOWN,CAST_TIME,MANA_COST,HEALTH_COST,STAMINA_COST,TARGET_HEALTH,TARGET_MANA,TARGET_STAMINA
-lesser_light,AOE,enemy,10.000,0.100,1.000,1.000,null,null,-1.000,null,null
-lesser_heal,TARGET,enemy,20.000,0.200,2.000,1.000,null,null,-2.000,null,null
-lesser_mana,TARGET,enemy,30.000,0.300,3.000,1.000,null,null,-3.000,null,null
+UUID,NAME,TYPE,TARGET,RANGE,COOLDOWN,CAST_TIME,MANA_COST,HEALTH_COST,STAMINA_COST,TARGET_HEALTH,TARGET_MANA,TARGET_STAMINA
+SPELL_00000,health potion,ITEM,self,null,5.000,null,null,null,null,10.000,null,null
+SPELL_00001,mana potion,ITEM,self,null,5.000,null,null,null,null,null,10.000,null
+SPELL_00002,gram,TARGET,enemy,30.000,null,1.000,1.000,null,null,-5.000,null,null
+SPELL_00003,immolation,AOE,enemy,5.000,10.000,null,1.000,null,null,-1.000,null,null

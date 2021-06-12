@@ -357,20 +357,35 @@ func move_item(source_slot = [], target_slot = []):
 		emit_signal("update_equipment")
 		load_eq()
 	emit_signal("update_quickbar")
+	
 var using_item = false
 func use_item(source_slot):
+	var item_of_interest = source_slot[0].get(source_slot[1])[source_slot[2]].item
+	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
 	if using_item == true:
 		return
-	if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL:
-		if OS.get_ticks_msec() - source_slot[0].get(source_slot[1])[source_slot[2]].use_time >= float(DB.spell_db.get(DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL).COOLDOWN) * 1000 || source_slot[0].get(source_slot[1])[source_slot[2]].use_time == 0:
-			cast_spell(DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).SKILL)
-			if yield(self, "finished_casting") == true:
-				if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).CONSUMABLE == true:
-					source_slot[0].get(source_slot[1])[source_slot[2]].quantity = (source_slot[0].get(source_slot[1])[source_slot[2]].quantity - 1)
-					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity <= 0:
-						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
-				update_usage(source_slot[0].get(source_slot[1])[source_slot[2]].item, OS.get_ticks_msec())
-				
+	if not DB.item_db.get(item_of_interest).SKILL:
+		return
+	if DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COOLDOWN:
+		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COOLDOWN) * 1000 && last_time_used != 0:
+			return
+		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
+			return
+	else:
+		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
+			return
+			
+	cast_spell(DB.item_db.get(item_of_interest).SKILL)
+	if DB.item_db.get(item_of_interest).CONSUMABLE == true:
+		source_slot[0].get(source_slot[1])[source_slot[2]].quantity = (source_slot[0].get(source_slot[1])[source_slot[2]].quantity - 1)
+		if source_slot[0].get(source_slot[1])[source_slot[2]].quantity <= 0:
+			source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+	yield(get_tree(),"idle_frame")
+	update_usage(item_of_interest, OS.get_ticks_msec())
+	
+func use_skill(source_slot):
+	pass
+	
 func match_item_to_slot(slot, item) -> bool:
 	if DB.item_db.get(item).SUBTYPE in equipment_slot_type[slot]:
 		return true
@@ -454,7 +469,6 @@ func increase_stat(stat):
 		calculate_total_attributes()
 
 func cast_spell(spell):
-	using_item = true
 	if DB.spell_db.get(spell).HEALTH_COST:
 		if resources.health.current < float(DB.spell_db.get(spell).HEALTH_COST):
 			return
@@ -464,10 +478,8 @@ func cast_spell(spell):
 	if DB.spell_db.get(spell).STAMINA_COST:
 		if resources.stamina.current < float(DB.spell_db.get(spell).STAMINA_COST):
 			return
-			
-	if enemy && DB.spell_db.get(spell).TYPE == "TARGET":
-		lerped_rotation()
 	
+	using_item = true
 	if DB.spell_db.get(spell).CAST_TIME:
 		emit_signal("update_casting_bar", float(DB.spell_db.get(spell).CAST_TIME))
 		yield(get_tree().create_timer(float(DB.spell_db.get(spell).CAST_TIME)),"timeout")
@@ -503,7 +515,9 @@ func cast_spell(spell):
 				spell_recivers.append(i)
 			if enemy:
 				spell_recivers.append(enemy)
-				
+		"ITEM":
+			spell_recivers.append(self)
+			
 	for i in spell_recivers:
 		if DB.spell_db.get(spell).TARGET_HEALTH:
 			i.modify_resource("health", float(DB.spell_db.get(spell).TARGET_HEALTH))

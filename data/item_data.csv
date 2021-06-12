@@ -18,6 +18,6 @@ ITEM_00015,Training Belt,armor,belt,false,false,1,1,null,1,1,null
 ITEM_00016, Training Shoulders,armor,shoulders,false,false,1,1,1,1,1,null
 ITEM_00017,Training Pendant,jewelry,necklace,false,false,1,1,1,1,1,null
 ITEM_00019,Training Orb,amulet,orb,false,false,1,1,1,1,1,null
-ITEM_00022,Infinite Rune,consumable,rune,false,false,,,,,,lesser_light
-ITEM_00023,Lesser Health Elixir,consumable,potion,true,true,,,,,,lesser_heal
-ITEM_00024,Lesser Mana Elixir,consumable,potion,true,true,,,,,,lesser_mana
+ITEM_00022,Infinite Rune,consumable,rune,false,false,,,,,,SPELL_00002
+ITEM_00023,Lesser Health Elixir,consumable,potion,true,true,,,,,,SPELL_00000
+ITEM_00024,Lesser Mana Elixir,consumable,potion,true,true,,,,,,SPELL_00001

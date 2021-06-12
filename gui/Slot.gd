@@ -37,13 +37,17 @@ func conf(actor, slot, type, quantity_panel):
 		connect("request_quantity", quantity_panel, "conf")
 	if actor.get(type).get(slot).item:
 		if DB.item_db.get(actor.get(type).get(slot).item).SKILL:
-			cooldown_animation(true, (float(DB.spell_db.get(DB.item_db.get(actor.get(type).get(slot).item).SKILL).COOLDOWN) * 1000), actor.get(type).get(slot).use_time)
 			if not is_connected("request_use", actor, "use_item"):
 				connect("request_use", actor, "use_item")
+			cooldown_animation(
+				true, 
+				DB.spell_db.get(DB.item_db.get(actor.get(type).get(slot).item).SKILL).COOLDOWN,
+				actor.get(type).get(slot).use_time
+				)
 		else:
-			cooldown_animation(false)
 			if is_connected("request_use", actor, "use_item"):
 				disconnect("request_use", actor, "use_item")
+			cooldown_animation(false)
 				
 		item_icon.texture = load("res://previews/%s.png" % actor.get(type).get(slot).item)
 		item_icon.self_modulate = Color.white
@@ -98,7 +102,7 @@ func _make_custom_tooltip(_for_text):
 		if DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME:
 			n = DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME
 		if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
-			d = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).TYPE
+			d = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).NAME
 		if DB.item_db.get(aactor.get(ttype).get(sslot).item).STR:
 			s["strenght"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).STR)
 		else:
@@ -123,21 +127,27 @@ func _make_custom_tooltip(_for_text):
 		return tooltip
 		
 var cd_text = 0
-func cooldown_animation(animate : bool, cd : float = 0.0, last_cd : float = 0.0, gcd : float = Global.cd * 1000, last_gcd : float = aactor.gcd_used):
+func cooldown_animation(animate : bool, cd = null, last_cd = 0):
 	if animate == true:
 		var current_time = OS.get_ticks_msec()
 		var cd_from = 0
 		var cd_now = 0
+		var global_cd = Global.cd * 1000
+		last_cd = float(last_cd)
+		if cd != null:
+			cd = (float(cd) * 1000)
+		else:
+			cd = 0.0
 		if current_time - last_cd < cd && last_cd != 0:
-			cd_from = cd
-			cd_now = (cd - (current_time - last_cd))
-			if cd_now < (gcd - (current_time - last_gcd)):
-				if current_time - last_gcd < gcd:
-					cd_from = gcd
-					cd_now = (gcd - (current_time - last_gcd))
-		elif current_time - last_gcd < gcd:
-			cd_from = gcd
-			cd_now = (gcd - (current_time - last_gcd))
+				cd_from = cd
+				cd_now = (cd - (current_time - last_cd))
+				if cd_now < (global_cd - (current_time - aactor.gcd_used)):
+					if current_time - aactor.gcd_used < global_cd:
+						cd_from = global_cd
+						cd_now = (global_cd - (current_time - aactor.gcd_used))
+		elif current_time - aactor.gcd_used < global_cd:
+			cd_from = global_cd
+			cd_now = (global_cd - (current_time - aactor.gcd_used))
 		
 		else:
 			tween.stop_all()
