@@ -24,6 +24,8 @@ func _ready() -> void:
 	connect("update_equipment", $GUI, "configure_eq", [self])
 	$GUI.configure_quickbar(self)
 	connect("update_quickbar", $GUI, "configure_quickbar", [self])
+	$GUI.configure_spellbook(self)
+	connect("update_spellbook", $GUI, "configure_spellbook", [self])
 	
 func _process(_delta: float) -> void:
 	get_input()

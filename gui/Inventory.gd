@@ -16,18 +16,13 @@ func _ready() -> void:
 	$Close/TextureRect.self_modulate = Global.close_button
 	
 func conf(actor, quantity_panel):
-	if slot_grid.get_child_count() < actor.inventory.size():
-		for old_slot in slot_grid.get_children():
-			slot_grid.remove_child(old_slot)
-			old_slot.queue_free()
-		for i in actor.inventory:
-			var new_slot = slot_path.instance()
-			slot_grid.add_child(new_slot)
-			new_slot.conf(actor, i, "inventory", quantity_panel)
-	else:
-		for i in actor.inventory:
-			var new_slot = slot_grid.get_child(i)
-			new_slot.conf(actor, i, "inventory", quantity_panel)
+	for old_slot in slot_grid.get_children():
+		slot_grid.remove_child(old_slot)
+		old_slot.queue_free()
+	for i in actor.inventory:
+		var new_slot = slot_path.instance()
+		slot_grid.add_child(new_slot)
+		new_slot.conf(actor, i, "inventory", quantity_panel)
 		
 func show_slot_type(slot_type : String = ""):
 	for slot in slot_grid.get_children():

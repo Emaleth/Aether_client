@@ -2,7 +2,7 @@
 
 [ext_resource path="res://gui/NullSlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://gui/LootPanel.gd" type="Script" id=2]
-[ext_resource path="res://textures/icons/close.png" type="Texture" id=5]
+[ext_resource path="res://textures/ui_icons/close.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

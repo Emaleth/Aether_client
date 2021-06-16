@@ -82,3 +82,6 @@ func configure_eq(actor):
 	
 func configure_quickbar(actor):
 	quickbar_panel.conf(actor, quantity_panel)
+
+func configure_spellbook(actor):
+	skill_panel.conf(actor)

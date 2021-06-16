@@ -91,6 +91,7 @@ var equipment : Dictionary = {}
 var inventory : Dictionary = {}
 var quickbar : Dictionary = {}
 var lootable : Dictionary = {}
+var spellbook : Dictionary = {}
 
 # INTERNAL WORKING STUFF
 var state = null
@@ -122,6 +123,7 @@ signal update_resources
 signal update_inventory
 signal update_equipment
 signal update_quickbar
+signal update_spellbook
 signal update_stats
 signal target_ui
 signal update_casting_bar
@@ -207,6 +209,7 @@ func conf():
 	make_quickbar_construct()
 	make_equipment_construct()
 	make_attributes_construct()
+	make_spellbook_construct()
 	remake_equipment_slots_construct()
 	# CALCULATE ATTRIBUTES
 	calculate_total_attributes()
@@ -293,6 +296,15 @@ func make_quickbar_construct():
 							"use_time" : 0}
 		quickbar[i] = slot_construct
 		
+func make_spellbook_construct():
+	var index = 0
+	for i in DB.spell_db:
+		if DB.spell_db.get(i).TYPE != "ITEM":
+			spellbook[index] = {"item" : i,
+							"quantity" : 1,
+							"use_time" : 0}
+			index += 1
+		
 func make_equipment_construct():
 	for i in equipment_slots:
 		var slot_construct = {"item" : null,
@@ -316,6 +328,10 @@ func move_item(source_slot = [], target_slot = []):
 	var temp_source_slot = source_slot[0].get(source_slot[1]).get(source_slot[2])
 	var temp_target_slot = get(target_slot[1]).get(target_slot[2])
 	
+	if target_slot[1] == "spellbook":
+		return
+	if source_slot[1] == "spellbook" and target_slot[1] != "quickbar":
+		return
 	if source_slot[1] == "quickbar":
 		if target_slot[1] == "quickbar":
 			target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
@@ -360,6 +376,8 @@ func move_item(source_slot = [], target_slot = []):
 	
 var using_item = false
 func use_item(source_slot):
+#	if source_slot[1] != "quickbar":
+#		return
 	var item_of_interest = source_slot[0].get(source_slot[1])[source_slot[2]].item
 	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
 	if using_item == true:
@@ -378,13 +396,27 @@ func use_item(source_slot):
 	cast_spell(DB.item_db.get(item_of_interest).SKILL)
 	if DB.item_db.get(item_of_interest).CONSUMABLE == true:
 		source_slot[0].get(source_slot[1])[source_slot[2]].quantity = (source_slot[0].get(source_slot[1])[source_slot[2]].quantity - 1)
-		if source_slot[0].get(source_slot[1])[source_slot[2]].quantity <= 0:
-			source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
-	yield(get_tree(),"idle_frame")
 	update_usage(item_of_interest, OS.get_ticks_msec())
 	
-func use_skill(source_slot):
-	pass
+func use_spell(source_slot):
+#	if source_slot[1] != "quickbar":
+#		return
+	var item_of_interest = source_slot[0].get(source_slot[1])[source_slot[2]].item
+	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
+	if using_item == true:
+		return
+	if DB.spell_db.get(item_of_interest).COOLDOWN:
+		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(item_of_interest).COOLDOWN) * 1000 && last_time_used != 0:
+			return
+		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
+			return
+	else:
+		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
+			return
+			
+	cast_spell(item_of_interest)
+	yield(get_tree(),"idle_frame")
+	update_usage(item_of_interest, OS.get_ticks_msec())
 	
 func match_item_to_slot(slot, item) -> bool:
 	if DB.item_db.get(item).SUBTYPE in equipment_slot_type[slot]:
@@ -452,15 +484,30 @@ func split_item(source_slot = [], target_slot = [], q = 0):
 func update_usage(used_item, usage_time):
 	gcd_used = usage_time
 	for e in equipment:
-		if equipment.get(e).item == used_item:
+		if equipment.get(e).quantity < 1:
+			equipment[e] = {"item" : null, "quantity" : 0, "use_time" : 0}
+		elif equipment.get(e).item == used_item:
 			equipment.get(e).use_time = usage_time
 	for i in inventory:
-		if inventory.get(i).item == used_item:
+		if inventory.get(i).quantity < 1:
+			inventory[i] = {"item" : null, "quantity" : 0, "use_time" : 0}
+		elif inventory.get(i).item == used_item:
 			inventory.get(i).use_time = usage_time
-			
+	for q in quickbar:
+		if quickbar.get(q).quantity < 1:
+			quickbar[q] = {"item" : null, "quantity" : 0, "use_time" : 0}
+		elif quickbar.get(q).item == used_item:
+			quickbar.get(q).use_time = usage_time
+	for s in spellbook:
+		if spellbook.get(s).quantity < 1:
+			spellbook[s] = {"item" : null, "quantity" : 0, "use_time" : 0}
+		elif spellbook.get(s).item == used_item:
+			spellbook.get(s).use_time = usage_time
+	yield(get_tree(), "idle_frame")
 	emit_signal("update_quickbar")
 	emit_signal("update_inventory")
 	emit_signal("update_equipment")
+	emit_signal("update_spellbook")
 	
 func increase_stat(stat):
 	if attributes.points > 0:

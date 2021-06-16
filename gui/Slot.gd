@@ -25,7 +25,7 @@ func _ready() -> void:
 	ghost_image = icon
 	icon = null
 
-func conf(actor, slot, type, quantity_panel):
+func conf(actor, slot, type, quantity_panel = null):
 	aactor = actor
 	ttype = type
 	sslot = slot
@@ -33,23 +33,40 @@ func conf(actor, slot, type, quantity_panel):
 		connect("request_swap", actor, "move_item")
 	if not is_connected("request_split", actor, "split_item"):
 		connect("request_split", actor, "split_item")
-	if not is_connected("request_quantity", quantity_panel, "conf"):
-		connect("request_quantity", quantity_panel, "conf")
+	if quantity_panel:
+		if not is_connected("request_quantity", quantity_panel, "conf"):
+			connect("request_quantity", quantity_panel, "conf")
 	if actor.get(type).get(slot).item:
-		if DB.item_db.get(actor.get(type).get(slot).item).SKILL:
-			if not is_connected("request_use", actor, "use_item"):
-				connect("request_use", actor, "use_item")
+		if "ITEM" in actor.get(type).get(slot).item:
+			if DB.item_db.get(actor.get(type).get(slot).item).SKILL:
+				disabled = false
+				if not is_connected("request_use", actor, "use_item"):
+					connect("request_use", actor, "use_item")
+				cooldown_animation(
+					true, 
+					DB.spell_db.get(DB.item_db.get(actor.get(type).get(slot).item).SKILL).COOLDOWN,
+					actor.get(type).get(slot).use_time
+					)
+			else:
+				disabled = true
+				if is_connected("request_use", actor, "use_item"):
+					disconnect("request_use", actor, "use_item")
+				cooldown_animation(false)
+				
+			item_icon.texture = load("res://textures/item_icons/%s.png" % actor.get(type).get(slot).item)
+				
+		elif "SPELL" in actor.get(type).get(slot).item:
+			disabled = false
+			if not is_connected("request_use", actor, "use_spell"):
+				connect("request_use", actor, "use_spell")
 			cooldown_animation(
 				true, 
-				DB.spell_db.get(DB.item_db.get(actor.get(type).get(slot).item).SKILL).COOLDOWN,
+				DB.spell_db.get(actor.get(type).get(slot).item).COOLDOWN,
 				actor.get(type).get(slot).use_time
 				)
-		else:
-			if is_connected("request_use", actor, "use_item"):
-				disconnect("request_use", actor, "use_item")
-			cooldown_animation(false)
 				
-		item_icon.texture = load("res://previews/%s.png" % actor.get(type).get(slot).item)
+			item_icon.texture = load("res://textures/spell_icons/%s.png" % actor.get(type).get(slot).item)
+		
 		item_icon.self_modulate = Color.white
 		hint_tooltip = "wierd fuckery"
 		if actor.get(type).get(slot).quantity > 1:
@@ -83,10 +100,8 @@ func drop_data(_position: Vector2, data) -> void:
 		emit_signal("request_swap", source, target)
 
 func _on_Slot_pressed() -> void: 
-	if aactor.get(ttype).get(sslot).item:
-		if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
-			var source = [aactor, ttype, sslot]
-			emit_signal("request_use", source)
+	var source = [aactor, ttype, sslot]
+	emit_signal("request_use", source)
 
 func make_preview():
 	var pw = preview.instance()
@@ -97,33 +112,13 @@ func _make_custom_tooltip(_for_text):
 	if aactor.get(ttype).get(sslot).item:
 		var tooltip = preload("res://gui/Tooltip.tscn").instance()
 		var n = ""
+		var i = null
 		var d = ""
 		var s = {}
-		if DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME:
-			n = DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME
-		if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
-			d = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).NAME
-		if DB.item_db.get(aactor.get(ttype).get(sslot).item).STR:
-			s["strenght"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).STR)
-		else:
-			s["strenght"] = null
-		if DB.item_db.get(aactor.get(ttype).get(sslot).item).DEX:
-			s["dexterity"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).DEX)
-		else:
-			s["dexterity"] = null
-		if DB.item_db.get(aactor.get(ttype).get(sslot).item).CONST:
-			s["constitution"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).CONST)
-		else:
-			s["constitution"] = null
-		if DB.item_db.get(aactor.get(ttype).get(sslot).item).INT:
-			s["intelligence"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).INT)
-		else:
-			s["intelligence"] = null
-		if DB.item_db.get(aactor.get(ttype).get(sslot).item).WIS:
-			s["wisdome"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).WIS)
-		else:
-			s["wisdome"] = null
-		tooltip.conf(n, d, s)
+		if "ITEM" in aactor.get(ttype).get(sslot).item:
+			make_item_ttp(tooltip, n, i, d, s)
+		elif "SPELL" in aactor.get(ttype).get(sslot).item:
+			make_spell_ttp(tooltip, n, i, d, s)
 		return tooltip
 		
 var cd_text = 0
@@ -212,5 +207,38 @@ func small():
 	quantity_label.margin_bottom = 20
 	quantity_label.margin_right = 20
 	
+func make_item_ttp(tooltip, n, i, d, s):
+	i = item_icon.texture
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME:
+		n = DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
+		d = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).NAME
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).STR:
+		s["strenght"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).STR)
+	else:
+		s["strenght"] = null
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).DEX:
+		s["dexterity"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).DEX)
+	else:
+		s["dexterity"] = null
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).CONST:
+		s["constitution"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).CONST)
+	else:
+		s["constitution"] = null
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).INT:
+		s["intelligence"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).INT)
+	else:
+		s["intelligence"] = null
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).WIS:
+		s["wisdome"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).WIS)
+	else:
+		s["wisdome"] = null
+		
+	tooltip.conf(n, i, d, s)
+	
+func make_spell_ttp(tooltip, n, i, d, s):
+	i = item_icon.texture
+	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME:
+		n = DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME
 
-
+	tooltip.conf(n, i, d, s)

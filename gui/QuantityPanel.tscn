@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://textures/icons/less.png" type="Texture" id=1]
-[ext_resource path="res://textures/icons/close.png" type="Texture" id=2]
+[ext_resource path="res://textures/ui_icons/less.png" type="Texture" id=1]
+[ext_resource path="res://textures/ui_icons/close.png" type="Texture" id=2]
 [ext_resource path="res://gui/QuantityPanel.gd" type="Script" id=3]
 [ext_resource path="res://fonts/Lack_12.tres" type="DynamicFont" id=4]
-[ext_resource path="res://textures/icons/more.png" type="Texture" id=6]
+[ext_resource path="res://textures/ui_icons/more.png" type="Texture" id=6]
 
 [node name="QuantityPanel" type="PanelContainer"]
 margin_right = 128.0

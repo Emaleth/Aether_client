@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://gui/SkillPanel.gd" type="Script" id=1]
-[ext_resource path="res://gui/Slot.tscn" type="PackedScene" id=2]
-[ext_resource path="res://textures/icons/close.png" type="Texture" id=3]
+[ext_resource path="res://textures/ui_icons/close.png" type="Texture" id=3]
 
 [node name="SkillPanel" type="PanelContainer"]
 margin_left = 606.0
@@ -19,408 +18,62 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 249.0
+margin_right = 149.0
 margin_bottom = 211.0
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
-margin_right = 242.0
+margin_right = 142.0
 margin_bottom = 34.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 235.0
+margin_right = 135.0
 margin_bottom = 27.0
 alignment = 1
 
 [node name="Button" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
-margin_left = 92.0
-margin_right = 104.0
+margin_left = 42.0
+margin_right = 54.0
 margin_bottom = 20.0
 
 [node name="Button2" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
-margin_left = 108.0
-margin_right = 120.0
+margin_left = 58.0
+margin_right = 70.0
 margin_bottom = 20.0
 
 [node name="Button3" type="Button" parent="VBoxContainer/PanelContainer/HBoxContainer"]
-margin_left = 124.0
-margin_right = 136.0
+margin_left = 74.0
+margin_right = 86.0
 margin_bottom = 20.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_left = 46.0
 margin_top = 38.0
-margin_right = 242.0
+margin_right = 96.0
 margin_bottom = 88.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Magic" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
-margin_right = 242.0
+margin_right = 50.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 50, 50 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/HBoxContainer/Magic"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 235.0
+margin_right = 43.0
 margin_bottom = 43.0
 scroll_horizontal_enabled = false
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer"]
-margin_right = 216.0
-margin_bottom = 480.0
 columns = 5
 
-[node name="Slot" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-
-[node name="Slot2" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_right = 84.0
-focus_mode = 2
-
-[node name="Slot3" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_right = 128.0
-focus_mode = 2
-
-[node name="Slot4" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_right = 172.0
-focus_mode = 2
-
-[node name="Slot5" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_right = 216.0
-focus_mode = 2
-
-[node name="Slot6" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 44.0
-margin_bottom = 84.0
-focus_mode = 2
-
-[node name="Slot7" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 44.0
-margin_right = 84.0
-margin_bottom = 84.0
-focus_mode = 2
-
-[node name="Slot8" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 44.0
-margin_right = 128.0
-margin_bottom = 84.0
-focus_mode = 2
-
-[node name="Slot9" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 44.0
-margin_right = 172.0
-margin_bottom = 84.0
-focus_mode = 2
-
-[node name="Slot10" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 44.0
-margin_right = 216.0
-margin_bottom = 84.0
-focus_mode = 2
-
-[node name="Slot11" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 88.0
-margin_bottom = 128.0
-focus_mode = 2
-
-[node name="Slot12" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 88.0
-margin_right = 84.0
-margin_bottom = 128.0
-focus_mode = 2
-
-[node name="Slot13" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 88.0
-margin_right = 128.0
-margin_bottom = 128.0
-focus_mode = 2
-
-[node name="Slot14" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 88.0
-margin_right = 172.0
-margin_bottom = 128.0
-focus_mode = 2
-
-[node name="Slot15" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 88.0
-margin_right = 216.0
-margin_bottom = 128.0
-focus_mode = 2
-
-[node name="Slot16" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 132.0
-margin_bottom = 172.0
-focus_mode = 2
-
-[node name="Slot17" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 132.0
-margin_right = 84.0
-margin_bottom = 172.0
-focus_mode = 2
-
-[node name="Slot18" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 132.0
-margin_right = 128.0
-margin_bottom = 172.0
-focus_mode = 2
-
-[node name="Slot19" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 132.0
-margin_right = 172.0
-margin_bottom = 172.0
-focus_mode = 2
-
-[node name="Slot20" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 132.0
-margin_right = 216.0
-margin_bottom = 172.0
-focus_mode = 2
-
-[node name="Slot21" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 176.0
-margin_bottom = 216.0
-focus_mode = 2
-
-[node name="Slot22" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 176.0
-margin_right = 84.0
-margin_bottom = 216.0
-focus_mode = 2
-
-[node name="Slot23" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 176.0
-margin_right = 128.0
-margin_bottom = 216.0
-focus_mode = 2
-
-[node name="Slot24" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 176.0
-margin_right = 172.0
-margin_bottom = 216.0
-focus_mode = 2
-
-[node name="Slot25" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 176.0
-margin_right = 216.0
-margin_bottom = 216.0
-focus_mode = 2
-
-[node name="Slot26" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 220.0
-margin_bottom = 260.0
-focus_mode = 2
-
-[node name="Slot27" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 220.0
-margin_right = 84.0
-margin_bottom = 260.0
-focus_mode = 2
-
-[node name="Slot28" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 220.0
-margin_right = 128.0
-margin_bottom = 260.0
-focus_mode = 2
-
-[node name="Slot29" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 220.0
-margin_right = 172.0
-margin_bottom = 260.0
-focus_mode = 2
-
-[node name="Slot30" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 220.0
-margin_right = 216.0
-margin_bottom = 260.0
-focus_mode = 2
-
-[node name="Slot31" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 264.0
-margin_bottom = 304.0
-focus_mode = 2
-
-[node name="Slot32" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 264.0
-margin_right = 84.0
-margin_bottom = 304.0
-focus_mode = 2
-
-[node name="Slot33" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 264.0
-margin_right = 128.0
-margin_bottom = 304.0
-focus_mode = 2
-
-[node name="Slot34" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 264.0
-margin_right = 172.0
-margin_bottom = 304.0
-focus_mode = 2
-
-[node name="Slot35" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 264.0
-margin_right = 216.0
-margin_bottom = 304.0
-focus_mode = 2
-
-[node name="Slot36" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 308.0
-margin_bottom = 348.0
-focus_mode = 2
-
-[node name="Slot37" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 308.0
-margin_right = 84.0
-margin_bottom = 348.0
-focus_mode = 2
-
-[node name="Slot38" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 308.0
-margin_right = 128.0
-margin_bottom = 348.0
-focus_mode = 2
-
-[node name="Slot39" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 308.0
-margin_right = 172.0
-margin_bottom = 348.0
-focus_mode = 2
-
-[node name="Slot40" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 308.0
-margin_right = 216.0
-margin_bottom = 348.0
-focus_mode = 2
-
-[node name="Slot41" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 352.0
-margin_bottom = 392.0
-focus_mode = 2
-
-[node name="Slot42" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 352.0
-margin_right = 84.0
-margin_bottom = 392.0
-focus_mode = 2
-
-[node name="Slot43" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 352.0
-margin_right = 128.0
-margin_bottom = 392.0
-focus_mode = 2
-
-[node name="Slot44" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 352.0
-margin_right = 172.0
-margin_bottom = 392.0
-focus_mode = 2
-
-[node name="Slot45" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 352.0
-margin_right = 216.0
-margin_bottom = 392.0
-focus_mode = 2
-
-[node name="Slot46" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 396.0
-margin_bottom = 436.0
-focus_mode = 2
-
-[node name="Slot47" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 396.0
-margin_right = 84.0
-margin_bottom = 436.0
-focus_mode = 2
-
-[node name="Slot48" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 396.0
-margin_right = 128.0
-margin_bottom = 436.0
-focus_mode = 2
-
-[node name="Slot49" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 396.0
-margin_right = 172.0
-margin_bottom = 436.0
-focus_mode = 2
-
-[node name="Slot50" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 176.0
-margin_top = 396.0
-margin_right = 216.0
-margin_bottom = 436.0
-focus_mode = 2
-
-[node name="Slot51" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_top = 440.0
-margin_bottom = 480.0
-focus_mode = 2
-
-[node name="Slot52" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 44.0
-margin_top = 440.0
-margin_right = 84.0
-margin_bottom = 480.0
-focus_mode = 2
-
-[node name="Slot53" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 88.0
-margin_top = 440.0
-margin_right = 128.0
-margin_bottom = 480.0
-focus_mode = 2
-
-[node name="Slot54" parent="VBoxContainer/HBoxContainer/Magic/ScrollContainer/GridContainer" instance=ExtResource( 2 )]
-margin_left = 132.0
-margin_top = 440.0
-margin_right = 172.0
-margin_bottom = 480.0
-focus_mode = 2
-
 [node name="Close" type="Button" parent="."]
-margin_left = 229.0
+margin_left = 129.0
 margin_top = 7.0
-margin_right = 249.0
+margin_right = 149.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 20, 20 )
 size_flags_horizontal = 12

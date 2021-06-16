@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://gui/MiniMap.gd" type="Script" id=2]
-[ext_resource path="res://textures/icons/resize.png" type="Texture" id=4]
-[ext_resource path="res://textures/icons/plus.png" type="Texture" id=5]
-[ext_resource path="res://textures/icons/minus.png" type="Texture" id=6]
+[ext_resource path="res://textures/ui_icons/resize.png" type="Texture" id=4]
+[ext_resource path="res://textures/ui_icons/plus.png" type="Texture" id=5]
+[ext_resource path="res://textures/ui_icons/minus.png" type="Texture" id=6]
 
 [node name="MiniMap" type="PanelContainer"]
 anchor_left = 1.0

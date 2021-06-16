@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://gui/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://textures/icons/material.png" type="Texture" id=5]
-[ext_resource path="res://textures/icons/necklace.png" type="Texture" id=7]
-[ext_resource path="res://textures/icons/potion.png" type="Texture" id=8]
-[ext_resource path="res://textures/icons/sword.png" type="Texture" id=9]
-[ext_resource path="res://textures/icons/armor.png" type="Texture" id=10]
-[ext_resource path="res://textures/icons/inventory.png" type="Texture" id=11]
-[ext_resource path="res://textures/icons/close.png" type="Texture" id=13]
+[ext_resource path="res://textures/ui_icons/material.png" type="Texture" id=5]
+[ext_resource path="res://textures/ui_icons/necklace.png" type="Texture" id=7]
+[ext_resource path="res://textures/ui_icons/potion.png" type="Texture" id=8]
+[ext_resource path="res://textures/ui_icons/sword.png" type="Texture" id=9]
+[ext_resource path="res://textures/ui_icons/armor.png" type="Texture" id=10]
+[ext_resource path="res://textures/ui_icons/inventory.png" type="Texture" id=11]
+[ext_resource path="res://textures/ui_icons/close.png" type="Texture" id=13]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
