@@ -28,27 +28,27 @@ onready var equipment : Dictionary = {
 	}
 	
 onready var stats = {
-	"strenght" : {
+	"STR" : {
 		"name" : stat_container.get_node("Strenght/Label"),
 		"number" : stat_container.get_node("Strenght/Q"),
 		"button" : stat_container.get_node("Strenght/Add")
 	},
-	"dexterity" : {
+	"DEX" : {
 		"name" : stat_container.get_node("Dexterity/Label"),
 		"number" : stat_container.get_node("Dexterity/Q"),
 		"button" : stat_container.get_node("Dexterity/Add")
 	},
-	"constitution" : {
+	"CONST" : {
 		"name" : stat_container.get_node("Constitution/Label"),
 		"number" : stat_container.get_node("Constitution/Q"),
 		"button" : stat_container.get_node("Constitution/Add")
 	},
-	"intelligence" : {
+	"INT" : {
 		"name" : stat_container.get_node("Intelligence/Label"),
 		"number" : stat_container.get_node("Intelligence/Q"),
 		"button" : stat_container.get_node("Intelligence/Add")
 	},
-	"wisdom" : {
+	"WIS" : {
 		"name" : stat_container.get_node("Wisdom/Label"),
 		"number" : stat_container.get_node("Wisdom/Q"),
 		"button" : stat_container.get_node("Wisdom/Add")

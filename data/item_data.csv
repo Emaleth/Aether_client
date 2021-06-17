@@ -1,23 +1,99 @@
-UUID,NAME,TYPE,SUBTYPE,CONSUMABLE,STACKABLE,STR,DEX,CONST,INT,WIS,SKILL
-ITEM_00000,Training Sword,weapon,sword,false,false,1,1,1,1,1,null
-ITEM_00001,Training Long Sword,weapon,longsword,false,false,1,1,1,1,1,null
-ITEM_00002,Training Axe,weapon,axe,false,false,1,1,1,1,1,null
-ITEM_00003, Training Bow,weapon,bow,false,false,1,1,4,1,1,null
-ITEM_00004, Training Dagger,weapon,dagger,false,false,-5,1,1,1,1,null
-ITEM_00005,Training Staff,weapon,staff,false,false,1,1,1,1,1,null
-ITEM_00006,Training Shield,armor,shield,false,false,1,null,1,1,1,null
-ITEM_00007,Training Ring,jewelry,ring,false,false,1,1,1,1,1,null
-ITEM_00008,Training Earring,jewelry,earring,false,false,1,1,9,-2,1,null
-ITEM_00009,Training Helmet,armor,helmet,false,false,1,1,1,1,1,null
-ITEM_00010,Training Gloves,armor,gloves,false,false,1,1,1,1,1,null
-ITEM_00011,Training Boots,armor,boots,false,false,1,1,1,1,1,null
-ITEM_00012,Training Armour,armor,armor,false,false,1,1,1,1,1,null
-ITEM_00013,Training Legs,armor,legs,false,false,1,-8,1,1,1,null
-ITEM_00014,Training Cape,armor,cape,false,false,1,1,1,1,null,null
-ITEM_00015,Training Belt,armor,belt,false,false,1,1,null,1,1,null
-ITEM_00016, Training Shoulders,armor,shoulders,false,false,1,1,1,1,1,null
-ITEM_00017,Training Pendant,jewelry,necklace,false,false,1,1,1,1,1,null
-ITEM_00019,Training Orb,amulet,orb,false,false,1,1,1,1,1,null
-ITEM_00022,Infinite Rune,consumable,rune,false,false,,,,,,SPELL_00002
-ITEM_00023,Lesser Health Elixir,consumable,potion,true,true,,,,,,SPELL_00000
-ITEM_00024,Lesser Mana Elixir,consumable,potion,true,true,,,,,,SPELL_00001
+UUID,NAME,TYPE,SUBTYPE,CONSUMABLE,STACKABLE,STATS,SKILL
+ITEM_00000,Training Sword,weapon,sword,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00001,Training Long Sword,weapon,longsword,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",SPELL_00000
+ITEM_00002,Training Axe,weapon,axe,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00003, Training Bow,weapon,bow,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00004, Training Dagger,weapon,dagger,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00005,Training Staff,weapon,staff,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00006,Training Shield,armor,shield,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00007,Training Ring,jewelry,ring,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00008,Training Earring,jewelry,earring,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00009,Training Helmet,armor,helmet,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00010,Training Gloves,armor,gloves,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00011,Training Boots,armor,boots,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00012,Training Armour,armor,armor,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00013,Training Legs,armor,legs,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00014,Training Cape,armor,cape,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00015,Training Belt,armor,belt,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00016, Training Shoulders,armor,shoulders,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00017,Training Pendant,jewelry,necklace,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00019,Training Orb,amulet,orb,false,false,"{""STR"":1,
+""DEX"":1,
+""CONST"":1,
+""INT"":1,
+""WIS"":1}",null
+ITEM_00022,Infinite Rune,consumable,rune,false,false,null,SPELL_00002
+ITEM_00023,Lesser Health Elixir,consumable,potion,true,true,null,SPELL_00000
+ITEM_00024,Lesser Mana Elixir,consumable,potion,true,true,null,SPELL_00001

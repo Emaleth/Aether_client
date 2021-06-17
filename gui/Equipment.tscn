@@ -38,9 +38,9 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 100.0
+margin_left = 7.0
 margin_top = 7.0
-margin_right = 500.0
+margin_right = 407.0
 margin_bottom = 341.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -592,9 +592,9 @@ margin_right = 128.0
 icon = ExtResource( 30 )
 
 [node name="Close" type="Button" parent="."]
-margin_left = 573.0
+margin_left = 387.0
 margin_top = 7.0
-margin_right = 593.0
+margin_right = 407.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 20, 20 )
 size_flags_horizontal = 8

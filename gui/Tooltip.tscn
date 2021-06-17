@@ -7,8 +7,8 @@
 [node name="Tooltip" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1219.0
-margin_bottom = -686.0
+margin_right = -1234.0
+margin_bottom = -620.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource( 1 )
@@ -18,234 +18,118 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
-margin_top = 7.0
-margin_right = 63.0
-margin_bottom = 154.0
+margin_top = 8.0
+margin_right = 39.0
+margin_bottom = 91.0
+size_flags_vertical = 4
 
-[node name="Name" type="Label" parent="VBoxContainer"]
-self_modulate = Color( 0.854902, 0.945098, 0.0470588, 1 )
-margin_right = 56.0
-margin_bottom = 15.0
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-align = 1
-valign = 1
+[node name="Title" type="RichTextLabel" parent="VBoxContainer"]
+margin_right = 32.0
+margin_bottom = 13.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_fonts/bold_font = ExtResource( 3 )
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+fit_content_height = true
+scroll_active = false
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer"]
-margin_top = 19.0
-margin_right = 56.0
-margin_bottom = 51.0
+margin_top = 17.0
+margin_right = 32.0
+margin_bottom = 49.0
 rect_min_size = Vector2( 32, 32 )
 expand = true
 stretch_mode = 6
 
-[node name="Description" type="Label" parent="VBoxContainer"]
-self_modulate = Color( 0.482353, 0.482353, 0.482353, 1 )
-margin_top = 55.0
-margin_right = 56.0
-margin_bottom = 67.0
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-align = 1
-valign = 1
-
-[node name="Stats" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 71.0
-margin_right = 56.0
-margin_bottom = 147.0
-
-[node name="Strenght" type="HBoxContainer" parent="VBoxContainer/Stats"]
-margin_right = 56.0
-margin_bottom = 12.0
+[node name="Body" type="RichTextLabel" parent="VBoxContainer"]
+margin_top = 53.0
+margin_right = 32.0
+margin_bottom = 66.0
 size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_fonts/bold_font = ExtResource( 3 )
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+fit_content_height = true
 
-[node name="Name" type="Label" parent="VBoxContainer/Stats/Strenght"]
-self_modulate = Color( 0.172549, 0.458824, 0.647059, 1 )
-margin_right = 26.0
-margin_bottom = 12.0
+[node name="Stats" type="RichTextLabel" parent="VBoxContainer"]
+margin_top = 70.0
+margin_right = 32.0
+margin_bottom = 83.0
 size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-valign = 1
+size_flags_vertical = 2
+custom_fonts/bold_font = ExtResource( 3 )
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+fit_content_height = true
 
-[node name="Value" type="Label" parent="VBoxContainer/Stats/Strenght"]
-margin_left = 30.0
-margin_right = 56.0
-margin_bottom = 12.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-align = 1
-valign = 1
-
-[node name="Difference" type="Label" parent="VBoxContainer/Stats/Strenght"]
+[node name="Footnote" type="RichTextLabel" parent="VBoxContainer"]
 visible = false
-margin_left = 60.0
-margin_right = 86.0
-margin_bottom = 12.0
+margin_top = 87.0
+margin_right = 32.0
+margin_bottom = 100.0
 size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_fonts/bold_font = ExtResource( 3 )
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode_enabled = true
+fit_content_height = true
+
+[node name="SizeFix" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 10.0
+margin_right = 39.0
+margin_bottom = 90.0
+size_flags_vertical = 4
+
+[node name="Title" type="Label" parent="SizeFix"]
+margin_left = 16.0
+margin_right = 16.0
+margin_bottom = 12.0
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-align = 2
+align = 1
 valign = 1
 
-[node name="Dexterity" type="HBoxContainer" parent="VBoxContainer/Stats"]
+[node name="Icon" type="TextureRect" parent="SizeFix"]
 margin_top = 16.0
-margin_right = 56.0
-margin_bottom = 28.0
-size_flags_horizontal = 3
+margin_right = 32.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 32, 32 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+expand = true
+stretch_mode = 6
 
-[node name="Name" type="Label" parent="VBoxContainer/Stats/Dexterity"]
-self_modulate = Color( 0.172549, 0.458824, 0.647059, 1 )
-margin_right = 26.0
-margin_bottom = 12.0
-size_flags_horizontal = 3
+[node name="Body" type="Label" parent="SizeFix"]
+margin_left = 16.0
+margin_top = 52.0
+margin_right = 16.0
+margin_bottom = 64.0
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-valign = 1
-
-[node name="Value" type="Label" parent="VBoxContainer/Stats/Dexterity"]
-margin_left = 30.0
-margin_right = 56.0
-margin_bottom = 12.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
 align = 1
 valign = 1
 
-[node name="Difference" type="Label" parent="VBoxContainer/Stats/Dexterity"]
-visible = false
-margin_left = 90.0
-margin_right = 131.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
+[node name="Stats" type="Label" parent="SizeFix"]
+margin_left = 16.0
+margin_top = 68.0
+margin_right = 16.0
+margin_bottom = 80.0
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-align = 2
-valign = 1
-
-[node name="Constitution" type="HBoxContainer" parent="VBoxContainer/Stats"]
-margin_top = 32.0
-margin_right = 56.0
-margin_bottom = 44.0
-size_flags_horizontal = 3
-
-[node name="Name" type="Label" parent="VBoxContainer/Stats/Constitution"]
-self_modulate = Color( 0.172549, 0.458824, 0.647059, 1 )
-margin_right = 26.0
-margin_bottom = 12.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-valign = 1
-
-[node name="Value" type="Label" parent="VBoxContainer/Stats/Constitution"]
-margin_left = 30.0
-margin_right = 56.0
-margin_bottom = 12.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
 align = 1
 valign = 1
 
-[node name="Difference" type="Label" parent="VBoxContainer/Stats/Constitution"]
+[node name="Footnote" type="Label" parent="SizeFix"]
 visible = false
-margin_left = 90.0
-margin_right = 131.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
+margin_top = 90.0
+margin_right = 32.0
+margin_bottom = 104.0
+size_flags_horizontal = 4
 custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-align = 2
-valign = 1
-
-[node name="Intelligence" type="HBoxContainer" parent="VBoxContainer/Stats"]
-margin_top = 48.0
-margin_right = 56.0
-margin_bottom = 60.0
-size_flags_horizontal = 3
-
-[node name="Name" type="Label" parent="VBoxContainer/Stats/Intelligence"]
-self_modulate = Color( 0.172549, 0.458824, 0.647059, 1 )
-margin_right = 26.0
-margin_bottom = 12.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-valign = 1
-
-[node name="Value" type="Label" parent="VBoxContainer/Stats/Intelligence"]
-margin_left = 30.0
-margin_right = 56.0
-margin_bottom = 12.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
 align = 1
 valign = 1
 
-[node name="Difference" type="Label" parent="VBoxContainer/Stats/Intelligence"]
-visible = false
-margin_left = 90.0
-margin_right = 131.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-align = 2
-valign = 1
-
-[node name="Wisdome" type="HBoxContainer" parent="VBoxContainer/Stats"]
-margin_top = 64.0
-margin_right = 56.0
-margin_bottom = 76.0
-size_flags_horizontal = 3
-
-[node name="Name" type="Label" parent="VBoxContainer/Stats/Wisdome"]
-self_modulate = Color( 0.172549, 0.458824, 0.647059, 1 )
-margin_right = 26.0
-margin_bottom = 12.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-valign = 1
-
-[node name="Value" type="Label" parent="VBoxContainer/Stats/Wisdome"]
-margin_left = 30.0
-margin_right = 56.0
-margin_bottom = 12.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-align = 1
-valign = 1
-
-[node name="Difference" type="Label" parent="VBoxContainer/Stats/Wisdome"]
-visible = false
-margin_left = 90.0
-margin_right = 131.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-text = "<text>"
-align = 2
-valign = 1
+[connection signal="sort_children" from="VBoxContainer" to="." method="_on_VBoxContainer_sort_children"]

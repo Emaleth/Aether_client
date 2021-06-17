@@ -18,11 +18,11 @@ var statistics : Dictionary = {
 var attributes = {
 	"points" : 20,
 	"base" : {
-		"strenght" : 10,
-		"dexterity" : 10,
-		"constitution" : 10,
-		"intelligence" : 10,
-		"wisdom" : 10
+		"STR" : 10,
+		"DEX" : 10,
+		"CONST" : 10,
+		"INT" : 10,
+		"WIS" : 10
 	},
 	"player" : {},
 	"equipment" : {},
@@ -592,16 +592,10 @@ func get_eq_stats():
 		attributes.equipment[i] = 0
 	for piece in equipment:
 		if equipment.get(piece).item:
-			if DB.item_db.get(equipment.get(piece).item).STR != null:
-				attributes.equipment.strenght += int(DB.item_db.get(equipment.get(piece).item).STR)
-			if DB.item_db.get(equipment.get(piece).item).DEX != null:
-				attributes.equipment.dexterity += int(DB.item_db.get(equipment.get(piece).item).DEX)
-			if DB.item_db.get(equipment.get(piece).item).INT != null:
-				attributes.equipment.intelligence += int(DB.item_db.get(equipment.get(piece).item).INT)
-			if DB.item_db.get(equipment.get(piece).item).CONST != null:
-				attributes.equipment.constitution += int(DB.item_db.get(equipment.get(piece).item).CONST)
-			if DB.item_db.get(equipment.get(piece).item).WIS != null:
-				attributes.equipment.wisdom += int(DB.item_db.get(equipment.get(piece).item).WIS)
+			if DB.item_db.get(equipment.get(piece).item).STATS == null:
+				continue
+			for i in DB.item_db.get(equipment.get(piece).item).STATS:
+				attributes.equipment[i] += DB.item_db.get(equipment.get(piece).item).STATS.get(i)
 	calculate_total_attributes()
 
 func calculate_total_attributes():
@@ -611,9 +605,9 @@ func calculate_total_attributes():
 		if type != "total" and type != "points":
 			for one in attributes.get(type):
 				attributes.total[one] += attributes.get(type).get(one)
-	modify_resource("health", 0, attributes.total.constitution * 5)
-	modify_resource("mana", 0, attributes.total.wisdom * 5)
-	modify_resource("stamina", 0, attributes.total.dexterity * 5)
+	modify_resource("health", 0, attributes.total.CONST * 5)
+	modify_resource("mana", 0, attributes.total.WIS * 5)
+	modify_resource("stamina", 0, attributes.total.DEX * 5)
 	emit_signal("update_stats", attributes.total, attributes.points)
 
 func lerped_rotation():

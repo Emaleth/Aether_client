@@ -208,36 +208,18 @@ func small():
 	quantity_label.margin_right = 20
 	
 func make_item_ttp(tooltip, n, i, d, s):
-	i = item_icon.texture
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
+		i = load("res://textures/spell_icons/%s.png" % DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL)
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME:
 		n = DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
 		d = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).NAME
-	if DB.item_db.get(aactor.get(ttype).get(sslot).item).STR:
-		s["strenght"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).STR)
-	else:
-		s["strenght"] = null
-	if DB.item_db.get(aactor.get(ttype).get(sslot).item).DEX:
-		s["dexterity"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).DEX)
-	else:
-		s["dexterity"] = null
-	if DB.item_db.get(aactor.get(ttype).get(sslot).item).CONST:
-		s["constitution"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).CONST)
-	else:
-		s["constitution"] = null
-	if DB.item_db.get(aactor.get(ttype).get(sslot).item).INT:
-		s["intelligence"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).INT)
-	else:
-		s["intelligence"] = null
-	if DB.item_db.get(aactor.get(ttype).get(sslot).item).WIS:
-		s["wisdome"] = str(DB.item_db.get(aactor.get(ttype).get(sslot).item).WIS)
-	else:
-		s["wisdome"] = null
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS:
+		s = DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS
 		
 	tooltip.conf(n, i, d, s)
 	
 func make_spell_ttp(tooltip, n, i, d, s):
-	i = item_icon.texture
 	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME:
 		n = DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME
 

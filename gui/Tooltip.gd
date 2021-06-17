@@ -1,58 +1,57 @@
 extends PanelContainer
 
-onready var name_label = $VBoxContainer/Name
+onready var container = $VBoxContainer
+onready var title_label = $VBoxContainer/Title
 onready var icon_rect = $VBoxContainer/Icon
-onready var description_label = $VBoxContainer/Description
-onready var strenght = $VBoxContainer/Stats/Strenght
-onready var dexterity = $VBoxContainer/Stats/Dexterity
-onready var constitution = $VBoxContainer/Stats/Constitution
-onready var intelligence = $VBoxContainer/Stats/Intelligence
-onready var wisdome = $VBoxContainer/Stats/Wisdome
-onready var stat_container = $VBoxContainer/Stats
+onready var body_label = $VBoxContainer/Body
+onready var stats_label = $VBoxContainer/Stats
+onready var footnote_label = $VBoxContainer/Footnote
+
+onready var size_fix = $SizeFix
+onready var fix_title_label = $SizeFix/Title
+onready var fix_icon_rect = $SizeFix/Icon
+onready var fix_body_label = $SizeFix/Body
+onready var fix_stats_label = $SizeFix/Stats
+onready var fix_footnote_label = $SizeFix/Footnote
+
 
 func conf(name : String = "", icon : Texture = null, description : String = "", stats : Dictionary = {}):
 	yield(self, "ready")
 	if name == "":
-		name_label.hide()
+		title_label.hide()
+		fix_title_label.hide()
 	else:
-		name_label.text = name
+		title_label.bbcode_text = name
+		fix_title_label.text = name
+		
 	if icon == null:
 		icon_rect.hide()
+		fix_icon_rect.hide()
 	else:
 		icon_rect.texture = icon
+		fix_icon_rect.texture = icon
+		
 	if description == "":
-		description_label.hide()
+		body_label.hide()
+		fix_body_label.hide()
 	else:
-		description_label.text = description
+		body_label.bbcode_text = description
+		fix_body_label.text = description
+		
 	if stats.size() == 0:
-		stat_container.hide()
+		stats_label.hide()
+		fix_stats_label.hide()
 	else:
-		if stats.strenght != null:
-			strenght.get_node("Name").text = "STR"
-			strenght.get_node("Value").text = stats.strenght
-		else:
-			strenght.hide()
-		if stats.dexterity != null:
-			dexterity.get_node("Name").text = "DEX"
-			dexterity.get_node("Value").text = stats.dexterity
-		else:
-			dexterity.hide()
-	
-		if stats.constitution != null:
-			constitution.get_node("Name").text = "CONST"
-			constitution.get_node("Value").text = stats.constitution
-		else:
-			constitution.hide()
+		for i in stats:
+			if stats_label.bbcode_text != "":
+				stats_label.bbcode_text += "\n"
+			if fix_stats_label.text != "":
+				fix_stats_label.text += "\n"
+			stats_label.bbcode_text += (str(i) + " : " + str(stats.get(i))) 
+			fix_stats_label.text += (str(i) + " : " + str(stats.get(i))) 
 		
-		if stats.intelligence != null:
-			intelligence.get_node("Name").text = "INT"
-			intelligence.get_node("Value").text = stats.intelligence
-		else:
-			intelligence.hide()
-		
-		if stats.wisdome != null:
-			wisdome.get_node("Name").text = "WIS"
-			wisdome.get_node("Value").text = stats.wisdome
-		else:
-			wisdome.hide()
-		
+	size_fix.modulate.a = 0
+
+func _on_VBoxContainer_sort_children() -> void:
+	rect_size = container.rect_size
+
