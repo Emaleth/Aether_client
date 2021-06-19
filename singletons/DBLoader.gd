@@ -7,7 +7,7 @@ func _ready():
 	item_db = convert_csv_data_to_dictionary(get_data_from_csv(item_db))
 	spell_db = convert_csv_data_to_dictionary(get_data_from_csv(spell_db))
 	
-func get_data_from_csv(data_file_path):
+func get_data_from_csv(data_file_path) -> Dictionary:
 	var maindata = {}
 	var file = File.new()
 	file.open(data_file_path, file.READ)
@@ -17,14 +17,14 @@ func get_data_from_csv(data_file_path):
 	file.close()
 	return maindata
 
-func convert_csv_data_to_dictionary(data):
+func convert_csv_data_to_dictionary(data) -> Dictionary:
 	var db_dict = {}
 	var keys = []
 	for row in data:
 		if row == 0:
 			keys = data.get(row)
 		else:
-			if data.get(row)[0]: # UID
+			if data.get(row)[0]: # UUID
 				var entry = {}
 				for k in keys.size():
 					if k != 0:

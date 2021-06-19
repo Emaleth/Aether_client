@@ -61,30 +61,10 @@ var equipment_slots : Dictionary = {
 	"earring_2" : [],
 	"main_hand" : [],
 	"off_hand" : [],
+#	"ranged_weapon" : [],
 	"amulet_1" : [],
 	"amulet_2" : [],
 	"amulet_3" : []
-}
-
-var equipment_slot_type : Dictionary = {
-	"head" : ["head"],
-	"hands" : ["hands"],
-	"feet" : ["boots"],
-	"upper_body" : ["chest"],
-	"lower_body" : ["legs"],
-	"cape" : ["cape"],
-	"belt" : ["belt"],
-	"shoulders" : ["shoulders"],
-	"necklace" : ["necklace"],
-	"ring_1" : ["ring"],
-	"ring_2" : ["ring"],
-	"earring_1" : ["earring"],
-	"earring_2" : ["earring"],
-	"main_hand" : ["one_handed", "two_handed"],
-	"off_hand" : ["one_handed", "off_hand"],
-	"amulet_1" : ["amulet"],
-	"amulet_2" : ["amulet"],
-	"amulet_3" : ["amulet"],
 }
 
 var equipment : Dictionary = {}
@@ -418,12 +398,26 @@ func use_spell(source_slot):
 	yield(get_tree(),"idle_frame")
 	update_usage(item_of_interest, OS.get_ticks_msec())
 	
-func match_item_to_slot(slot, item) -> bool:
-	for i in equipment_slot_type[slot]:
-		if i in DB.item_db.get(item).TYPE:
+func match_item_to_slot(slot : String, item) -> bool:
+#	var slot_name = stripper(slot)
+#	if slot_name in DB.item_db.get(item).TYPE:
+	for i in DB.item_db.get(item).TYPE:
+		if slot.begins_with(i):
 			return true
 	return false
-		
+
+func stripper(hot : String) -> String:
+	for num in range(0, 9):
+		if hot.find_last(str(num)) != -1:
+			hot.erase(hot.find(str(num)), 1)
+			
+	if hot.ends_with("_"):
+		if hot.find_last("_") != -1:
+			hot.erase(hot.find_last("_"), 1)
+			
+	return hot
+	
+	
 func split_item(source_slot = [], target_slot = [], q = 0):
 	if q == 0:
 		return
@@ -595,8 +589,8 @@ func add_item_to_inventory(new_item, quantity = 1):
 					inventory.get(i).item = new_item
 					inventory.get(i).quantity = 1
 					break
-					
-#				print("not enaught inventory space")
+				elif i == inventory.size() - 1:
+					print("not enaught inventory space")
 					
 	else:
 		for i in inventory:
@@ -604,7 +598,8 @@ func add_item_to_inventory(new_item, quantity = 1):
 				inventory.get(i).item = new_item
 				inventory.get(i).quantity = quantity
 				break
-#			print("not enaught inventory space")
+			elif i == inventory.size() - 1:
+				print("not enaught inventory space for stackable")
 			
 func get_eq_stats():
 	for i in attributes.equipment:
