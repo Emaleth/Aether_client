@@ -2,6 +2,13 @@ extends "res://actors/Actor.gd"
 
 onready var minimap_camera_remote_transform : RemoteTransform = $MiniMapCameraRT
 
+var test_items = {
+		"ITEM_00000" : 1, "ITEM_00001" : 1, "ITEM_00002" : 1, "ITEM_00003" : 1, "ITEM_00004" : 1,
+		"ITEM_00005" : 1, "ITEM_00006" : 1, "ITEM_00007" : 2, "ITEM_00008" : 2, "ITEM_00009" : 1, 
+		"ITEM_00010" : 1, "ITEM_00011" : 1, "ITEM_00012" : 1, "ITEM_00013" : 1, "ITEM_00014" : 1, 
+		"ITEM_00015" : 1, "ITEM_00016" : 1, "ITEM_00017" : 1, "ITEM_00018" : 3, "ITEM_00019" : 1, 
+		"ITEM_00020" : 999, "ITEM_00021" : 999}
+		
 func _ready() -> void:
 	statistics.name = "Emaleth"
 	statistics.race = "Necromorph"
@@ -14,10 +21,11 @@ func _ready() -> void:
 	$GUI.conf(resources, minimap_camera_remote_transform)
 	connect("update_casting_bar", $GUI.casting_bar, "conf")
 	connect("update_resources", $GUI, "update_gui", [resources])
-	load_eq()
+#	load_eq()
 	connect("target_lost", self, "target_ui")
 	anim_player = $DEBUG_AnimationPlayer
-	get_test_items()
+	for i in test_items:
+		add_item_to_inventory(i, test_items.get(i))
 	$GUI.configure_inv(self)
 	connect("update_inventory", $GUI, "configure_inv", [self])
 	$GUI.configure_eq(self)
@@ -60,86 +68,5 @@ func target_ui(show : bool):
 		else:
 			enemy.connect("update_resources", $GUI, "update_targe_info", [enemy.resources])
 
-func get_test_items():
-	inventory[0].item = "ITEM_00000"
-	inventory[0].quantity = 1
-	
-	inventory[1].item = "ITEM_00001"
-	inventory[1].quantity = 1
-	
-	inventory[2].item = "ITEM_00002"
-	inventory[2].quantity = 1
-	
-	inventory[3].item = "ITEM_00003"
-	inventory[3].quantity = 1
-	
-	inventory[4].item = "ITEM_00004"
-	inventory[4].quantity = 1
-	
-	inventory[5].item = "ITEM_00005"
-	inventory[5].quantity = 1
-	
-	inventory[6].item = "ITEM_00006"
-	inventory[6].quantity = 1
-	
-	inventory[7].item = "ITEM_00007"
-	inventory[7].quantity = 1
-	
-	inventory[8].item = "ITEM_00007"
-	inventory[8].quantity = 1
-	
-	inventory[9].item = "ITEM_00008"
-	inventory[9].quantity = 1
-	
-	inventory[10].item = "ITEM_00008"
-	inventory[10].quantity = 1
-	
-	inventory[11].item = "ITEM_00009"
-	inventory[11].quantity = 1
-	
-	inventory[12].item = "ITEM_00010"
-	inventory[12].quantity = 1
-	
-	inventory[13].item = "ITEM_00011"
-	inventory[13].quantity = 1
-	
-	inventory[14].item = "ITEM_00012"
-	inventory[14].quantity = 1
-	
-	inventory[15].item = "ITEM_00013"
-	inventory[15].quantity = 1
-	
-	inventory[16].item = "ITEM_00014"
-	inventory[16].quantity = 1
-	
-	inventory[17].item = "ITEM_00015"
-	inventory[17].quantity = 1
-	
-	inventory[18].item = "ITEM_00016"
-	inventory[18].quantity = 1
-	
-	inventory[19].item = "ITEM_00017"
-	inventory[19].quantity = 1
-	
-	inventory[20].item = "ITEM_00019"
-	inventory[20].quantity = 1
-	
-	inventory[21].item = "ITEM_00019"
-	inventory[21].quantity = 1
-
-	inventory[22].item = "ITEM_00019"
-	inventory[22].quantity = 1
-	
-	inventory[23].item = "ITEM_00022"
-	inventory[23].quantity = 1
-	
-	inventory[24].item = "ITEM_00023"
-	inventory[24].quantity = 100
-	
-	inventory[25].item = "ITEM_00024"
-	inventory[25].quantity = 100
-	
-	inventory[26].item = "ITEM_00023"
-	inventory[26].quantity = 2
 
 

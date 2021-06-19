@@ -5,6 +5,7 @@ onready var title_label = $VBoxContainer/Title
 onready var icon_rect = $VBoxContainer/Icon
 onready var body_label = $VBoxContainer/Body
 onready var stats_label = $VBoxContainer/Stats
+onready var attributes_label = $VBoxContainer/Attributes
 onready var footnote_label = $VBoxContainer/Footnote
 
 onready var size_fix = $SizeFix
@@ -12,10 +13,11 @@ onready var fix_title_label = $SizeFix/Title
 onready var fix_icon_rect = $SizeFix/Icon
 onready var fix_body_label = $SizeFix/Body
 onready var fix_stats_label = $SizeFix/Stats
+onready var fix_attributes_label = $SizeFix/Attributes
 onready var fix_footnote_label = $SizeFix/Footnote
 
 
-func conf(name : String = "", icon : Texture = null, description : String = "", stats : Dictionary = {}):
+func conf(name : String = "", icon : Texture = null, description : String = "", stats : Dictionary = {}, attributes : Dictionary = {}):
 	yield(self, "ready")
 	if name == "":
 		title_label.hide()
@@ -49,6 +51,18 @@ func conf(name : String = "", icon : Texture = null, description : String = "", 
 				fix_stats_label.text += "\n"
 			stats_label.bbcode_text += (str(i) + " : " + str(stats.get(i))) 
 			fix_stats_label.text += (str(i) + " : " + str(stats.get(i))) 
+		
+	if attributes.size() == 0:
+		attributes_label.hide()
+		fix_attributes_label.hide()
+	else:
+		for i in attributes:
+			if attributes_label.bbcode_text != "":
+				attributes_label.bbcode_text += "\n"
+			if fix_attributes_label.text != "":
+				fix_attributes_label.text += "\n"
+			attributes_label.bbcode_text += (str(i) + " : " + str(attributes.get(i))) 
+			fix_attributes_label.text += (str(i) + " : " + str(attributes.get(i))) 
 		
 	size_fix.modulate.a = 0
 

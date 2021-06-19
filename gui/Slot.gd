@@ -115,10 +115,11 @@ func _make_custom_tooltip(_for_text):
 		var i = null
 		var d = ""
 		var s = {}
+		var a = {}
 		if "ITEM" in aactor.get(ttype).get(sslot).item:
-			make_item_ttp(tooltip, n, i, d, s)
+			make_item_ttp(tooltip, n, i, d, s, a)
 		elif "SPELL" in aactor.get(ttype).get(sslot).item:
-			make_spell_ttp(tooltip, n, i, d, s)
+			make_spell_ttp(tooltip, n, i, d, s, a)
 		return tooltip
 		
 var cd_text = 0
@@ -207,7 +208,7 @@ func small():
 	quantity_label.margin_bottom = 20
 	quantity_label.margin_right = 20
 	
-func make_item_ttp(tooltip, n, i, d, s):
+func make_item_ttp(tooltip, n, i, d, s, a):
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
 		i = load("res://textures/spell_icons/%s.png" % DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL)
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME:
@@ -216,11 +217,12 @@ func make_item_ttp(tooltip, n, i, d, s):
 		d = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).NAME
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS:
 		s = DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS
-		
-	tooltip.conf(n, i, d, s)
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).ATTRIBUTES:
+		a = DB.item_db.get(aactor.get(ttype).get(sslot).item).ATTRIBUTES
+	tooltip.conf(n, i, d, s, a)
 	
-func make_spell_ttp(tooltip, n, i, d, s):
+func make_spell_ttp(tooltip, n, i, d, s, a):
 	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME:
 		n = DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME
 
-	tooltip.conf(n, i, d, s)
+	tooltip.conf(n, i, d, s, a)

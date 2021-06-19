@@ -67,10 +67,10 @@ var equipment_slots : Dictionary = {
 }
 
 var equipment_slot_type : Dictionary = {
-	"head" : ["helmet"],
-	"hands" : ["gloves"],
+	"head" : ["head"],
+	"hands" : ["hands"],
 	"feet" : ["boots"],
-	"upper_body" : ["armor"],
+	"upper_body" : ["chest"],
 	"lower_body" : ["legs"],
 	"cape" : ["cape"],
 	"belt" : ["belt"],
@@ -80,11 +80,11 @@ var equipment_slot_type : Dictionary = {
 	"ring_2" : ["ring"],
 	"earring_1" : ["earring"],
 	"earring_2" : ["earring"],
-	"main_hand" : ["sword", "longsword", "axe", "dagger", "staff", "bow"],
-	"off_hand" : ["sword", "axe", "dagger", "shield"],
-	"amulet_1" : ["orb"],
-	"amulet_2" : ["orb"],
-	"amulet_3" : ["orb"],
+	"main_hand" : ["one_handed", "two_handed"],
+	"off_hand" : ["one_handed", "off_hand"],
+	"amulet_1" : ["amulet"],
+	"amulet_2" : ["amulet"],
+	"amulet_3" : ["amulet"],
 }
 
 var equipment : Dictionary = {}
@@ -258,29 +258,29 @@ func _on_AttackArea_body_exited(body: Node) -> void:
 			enemy = null
 		target_list.erase(body)
 
-func load_eq():
-	for i in equipment:
-	# REMOVE OLD ITEMS FROM MODEL
-		for s in equipment_slots.get(i).slot.size():
-			if equipment_slots.get(i).slot[s].get_child_count() > 0:
-				for k in equipment_slots.get(i).slot[s].get_children():
-					var x = k
-					x.get_parent().remove_child(x)
-					x.queue_free()
-		
-		if equipment.get(i).item:
-			for slot in equipment_slots.get(i).slot:
-				var file2Check = File.new()
-				if file2Check.file_exists("res://models/%s.glb" % equipment.get(i).item):
-					var model_path = "res://models/%s.glb" % equipment.get(i).item
-					var item_model = load(model_path)
-					item_model = item_model.instance()
-					item_model.rotate_x(deg2rad(-45)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
-					slot.add_child(item_model)
-			
-					for z in item_model.get_children():
-						if z is MeshInstance:
-							hide_from_minimap_camera(z)
+#func load_eq():
+#	for i in equipment:
+#	# REMOVE OLD ITEMS FROM MODEL
+#		for s in equipment_slots.get(i).slot.size():
+#			if equipment_slots.get(i).slot[s].get_child_count() > 0:
+#				for k in equipment_slots.get(i).slot[s].get_children():
+#					var x = k
+#					x.get_parent().remove_child(x)
+#					x.queue_free()
+#
+#		if equipment.get(i).item:
+#			for slot in equipment_slots.get(i).slot:
+#				var file2Check = File.new()
+#				if file2Check.file_exists("res://models/%s.glb" % equipment.get(i).item):
+#					var model_path = "res://models/%s.glb" % equipment.get(i).item
+#					var item_model = load(model_path)
+#					item_model = item_model.instance()
+#					item_model.rotate_x(deg2rad(-45)) # DEBUG SWORD SPECIFIC, NOT NEEDED OTHERWISE
+#					slot.add_child(item_model)
+#
+#					for z in item_model.get_children():
+#						if z is MeshInstance:
+#							hide_from_minimap_camera(z)
 
 func make_inventory_construct():
 	for i in inv_slot_num:
@@ -345,7 +345,7 @@ func move_item(source_slot = [], target_slot = []):
 		elif target_slot[1] == "equipment":
 			if match_item_to_slot(target_slot[2], source_slot[0].get(source_slot[1])[source_slot[2]].item) == true:
 				if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
-					if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+					if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
 						target_slot[0].get(target_slot[1])[target_slot[2]].quantity += source_slot[0].get(source_slot[1])[source_slot[2]].quantity
 						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 					else:
@@ -356,7 +356,7 @@ func move_item(source_slot = [], target_slot = []):
 					source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
 		else:
 			if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
-				if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+				if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
 					target_slot[0].get(target_slot[1])[target_slot[2]].quantity += source_slot[0].get(source_slot[1])[source_slot[2]].quantity
 					source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
 				else:
@@ -371,13 +371,13 @@ func move_item(source_slot = [], target_slot = []):
 	if source_slot[1] == "equipment" || target_slot[1] == "equipment":
 		get_eq_stats()
 		emit_signal("update_equipment")
-		load_eq()
+#		load_eq()
 	emit_signal("update_quickbar")
 	
 var using_item = false
 func use_item(source_slot):
-#	if source_slot[1] != "quickbar":
-#		return
+	if source_slot[1] != "quickbar":
+		return
 	var item_of_interest = source_slot[0].get(source_slot[1])[source_slot[2]].item
 	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
 	if using_item == true:
@@ -394,13 +394,13 @@ func use_item(source_slot):
 			return
 			
 	cast_spell(DB.item_db.get(item_of_interest).SKILL)
-	if DB.item_db.get(item_of_interest).CONSUMABLE == true:
+	if "consumable" in DB.item_db.get(item_of_interest).TYPE:
 		source_slot[0].get(source_slot[1])[source_slot[2]].quantity = (source_slot[0].get(source_slot[1])[source_slot[2]].quantity - 1)
 	update_usage(item_of_interest, OS.get_ticks_msec())
 	
 func use_spell(source_slot):
-#	if source_slot[1] != "quickbar":
-#		return
+	if source_slot[1] != "quickbar":
+		return
 	var item_of_interest = source_slot[0].get(source_slot[1])[source_slot[2]].item
 	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
 	if using_item == true:
@@ -419,10 +419,10 @@ func use_spell(source_slot):
 	update_usage(item_of_interest, OS.get_ticks_msec())
 	
 func match_item_to_slot(slot, item) -> bool:
-	if DB.item_db.get(item).SUBTYPE in equipment_slot_type[slot]:
-		return true
-	else:
-		return false
+	for i in equipment_slot_type[slot]:
+		if i in DB.item_db.get(item).TYPE:
+			return true
+	return false
 		
 func split_item(source_slot = [], target_slot = [], q = 0):
 	if q == 0:
@@ -435,7 +435,7 @@ func split_item(source_slot = [], target_slot = [], q = 0):
 		elif target_slot[1] == "equipment":
 			if match_item_to_slot(target_slot[2], source_slot[0].get(source_slot[1])[source_slot[2]].item) == true:
 				if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
-					if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+					if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
 						target_slot[0].get(target_slot[1])[target_slot[2]].quantity += q
 						if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
 							source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
@@ -444,7 +444,7 @@ func split_item(source_slot = [], target_slot = [], q = 0):
 					else:
 						move_item(source_slot, target_slot)
 				elif target_slot[0].get(target_slot[1])[target_slot[2]].item == "":
-					if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+					if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
 						target_slot[0].get(target_slot[1])[target_slot[2]] = source_slot[0].get(source_slot[1])[source_slot[2]].duplicate()
 						target_slot[0].get(target_slot[1])[target_slot[2]].quantity = q
 						if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
@@ -455,7 +455,7 @@ func split_item(source_slot = [], target_slot = [], q = 0):
 						move_item(source_slot, target_slot)
 		else:
 			if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
-				if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+				if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
 					target_slot[0].get(target_slot[1])[target_slot[2]].quantity += q
 					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
 						source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
@@ -464,7 +464,7 @@ func split_item(source_slot = [], target_slot = [], q = 0):
 				else:
 					move_item(source_slot, target_slot)
 			elif target_slot[0].get(target_slot[1])[target_slot[2]].item == null:
-				if DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).STACKABLE:
+				if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
 					target_slot[0].get(target_slot[1])[target_slot[2]] = source_slot[0].get(source_slot[1])[source_slot[2]].duplicate()
 					target_slot[0].get(target_slot[1])[target_slot[2]].quantity = q
 					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
@@ -478,7 +478,7 @@ func split_item(source_slot = [], target_slot = [], q = 0):
 		emit_signal("update_inventory")
 	if source_slot[1] == "equipment" || target_slot[1] == "equipment":
 		emit_signal("update_equipment")
-		load_eq()
+#		load_eq()
 	emit_signal("update_quickbar")
 
 func update_usage(used_item, usage_time):
@@ -587,15 +587,34 @@ func get_target():
 func add_lootable(creature_id, loot):
 	lootable[creature_id] = loot
 
+func add_item_to_inventory(new_item, quantity = 1):
+	if quantity > 1 and not "stackable" in DB.item_db.get(new_item).TYPE:
+		for q in quantity:
+			for i in inventory:
+				if inventory.get(i).item == null:
+					inventory.get(i).item = new_item
+					inventory.get(i).quantity = 1
+					break
+					
+#				print("not enaught inventory space")
+					
+	else:
+		for i in inventory:
+			if inventory.get(i).item == null:
+				inventory.get(i).item = new_item
+				inventory.get(i).quantity = quantity
+				break
+#			print("not enaught inventory space")
+			
 func get_eq_stats():
 	for i in attributes.equipment:
 		attributes.equipment[i] = 0
 	for piece in equipment:
 		if equipment.get(piece).item:
-			if DB.item_db.get(equipment.get(piece).item).STATS == null:
+			if DB.item_db.get(equipment.get(piece).item).ATTRIBUTES == null:
 				continue
-			for i in DB.item_db.get(equipment.get(piece).item).STATS:
-				attributes.equipment[i] += DB.item_db.get(equipment.get(piece).item).STATS.get(i)
+			for i in DB.item_db.get(equipment.get(piece).item).ATTRIBUTES:
+				attributes.equipment[i] += DB.item_db.get(equipment.get(piece).item).ATTRIBUTES.get(i)
 	calculate_total_attributes()
 
 func calculate_total_attributes():
