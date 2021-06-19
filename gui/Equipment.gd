@@ -20,8 +20,9 @@ onready var equipment : Dictionary = {
 	"ring_2" : jewellry_grid.get_node("Ring2"),
 	"earring_1" : jewellry_grid.get_node("Earring1"),
 	"earring_2" : jewellry_grid.get_node("Earring2"),
-	"main_hand" : main_grid.get_node("MainHand"),
-	"off_hand" : main_grid.get_node("OffHand"),
+	"melee_weapon_1" : main_grid.get_node("MainHand"),
+	"melee_weapon_2" : main_grid.get_node("OffHand"),
+	"ranged_weapon" : main_grid.get_node("RangedWeapon"),
 	"amulet_1" : amulet_grid.get_node("Amulet1"),
 	"amulet_2" : amulet_grid.get_node("Amulet2"),
 	"amulet_3" : amulet_grid.get_node("Amulet3")

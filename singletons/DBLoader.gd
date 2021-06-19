@@ -36,6 +36,8 @@ func convert_csv_data_to_dictionary(data) -> Dictionary:
 							data.get(row)[k] = null
 						elif "{" in data.get(row)[k] and "}" in data.get(row)[k]:
 							data.get(row)[k] = JSON.parse(data.get(row)[k]).result
+						elif "[" in data.get(row)[k] and "]" in data.get(row)[k]:
+							data.get(row)[k] = Array((data.get(row)[k]).trim_prefix("[").trim_suffix("]").replacen(" ", "").replacen("\n", "").split(",", false))
 						entry[str(keys[k])] = data.get(row)[k]
 				db_dict[data.get(row)[0]] = entry
 

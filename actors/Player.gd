@@ -4,7 +4,7 @@ onready var minimap_camera_remote_transform : RemoteTransform = $MiniMapCameraRT
 
 var test_items = {
 		"ITEM_00000" : 1, "ITEM_00001" : 1, "ITEM_00002" : 1, "ITEM_00003" : 1, "ITEM_00004" : 1,
-		"ITEM_00005" : 1, "ITEM_00006" : 1, "ITEM_00007" : 2, "ITEM_00008" : 2, "ITEM_00009" : 1, 
+		"ITEM_00005" : 2, "ITEM_00006" : 2, "ITEM_00007" : 2, "ITEM_00008" : 2, "ITEM_00009" : 1, 
 		"ITEM_00010" : 1, "ITEM_00011" : 1, "ITEM_00012" : 1, "ITEM_00013" : 1, "ITEM_00014" : 1, 
 		"ITEM_00015" : 1, "ITEM_00016" : 1, "ITEM_00017" : 1, "ITEM_00018" : 3, "ITEM_00019" : 1, 
 		"ITEM_00020" : 999, "ITEM_00021" : 999}
@@ -24,8 +24,6 @@ func _ready() -> void:
 #	load_eq()
 	connect("target_lost", self, "target_ui")
 	anim_player = $DEBUG_AnimationPlayer
-	for i in test_items:
-		add_item_to_inventory(i, test_items.get(i))
 	$GUI.configure_inv(self)
 	connect("update_inventory", $GUI, "configure_inv", [self])
 	$GUI.configure_eq(self)
@@ -34,6 +32,8 @@ func _ready() -> void:
 	connect("update_quickbar", $GUI, "configure_quickbar", [self])
 	$GUI.configure_spellbook(self)
 	connect("update_spellbook", $GUI, "configure_spellbook", [self])
+	for i in test_items:
+		add_item_to_inventory(i, test_items.get(i))
 	
 func _process(_delta: float) -> void:
 	get_input()

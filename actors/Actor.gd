@@ -59,9 +59,9 @@ var equipment_slots : Dictionary = {
 	"ring_2" : [],
 	"earring_1" : [],
 	"earring_2" : [],
-	"main_hand" : [],
-	"off_hand" : [],
-#	"ranged_weapon" : [],
+	"melee_weapon_1" : [],
+	"melee_weapon_2" : [],
+	"ranged_weapon" : [],
 	"amulet_1" : [],
 	"amulet_2" : [],
 	"amulet_3" : []
@@ -399,12 +399,14 @@ func use_spell(source_slot):
 	update_usage(item_of_interest, OS.get_ticks_msec())
 	
 func match_item_to_slot(slot : String, item) -> bool:
-#	var slot_name = stripper(slot)
-#	if slot_name in DB.item_db.get(item).TYPE:
-	for i in DB.item_db.get(item).TYPE:
-		if slot.begins_with(i):
-			return true
-	return false
+	var slot_name = stripper(slot)
+#	print(slot)
+#	print(slot_name)
+#	print(DB.item_db.get(item).TYPE)
+	if slot_name in DB.item_db.get(item).TYPE:
+		return true
+	else:
+		return false
 
 func stripper(hot : String) -> String:
 	for num in range(0, 9):
@@ -582,6 +584,8 @@ func add_lootable(creature_id, loot):
 	lootable[creature_id] = loot
 
 func add_item_to_inventory(new_item, quantity = 1):
+#	for i in DB.item_db.get(new_item).TYPE:
+#		print(i)
 	if quantity > 1 and not "stackable" in DB.item_db.get(new_item).TYPE:
 		for q in quantity:
 			for i in inventory:
@@ -600,7 +604,9 @@ func add_item_to_inventory(new_item, quantity = 1):
 				break
 			elif i == inventory.size() - 1:
 				print("not enaught inventory space for stackable")
-			
+
+	emit_signal("update_inventory")
+	
 func get_eq_stats():
 	for i in attributes.equipment:
 		attributes.equipment[i] = 0
