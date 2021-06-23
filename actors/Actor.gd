@@ -94,7 +94,7 @@ onready var gravity = ProjectSettings.get("physics/3d/default_gravity")
 onready var anim_player : AnimationPlayer
 onready var target_area : Area = $TargetArea
 onready var vision_ray = $VisionRay
-onready var hit_num = preload("res://gui/HitNumber.tscn")
+onready var hit_num = preload("res://gui/floating_text/FloatingText.tscn")
 onready var name_plate = $NamePlate
 onready var rotation_tween : Tween = $RotationTween
 
