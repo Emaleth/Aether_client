@@ -98,14 +98,13 @@ onready var hit_num = preload("res://gui/floating_text/FloatingText.tscn")
 onready var name_plate = $NamePlate
 onready var rotation_tween : Tween = $RotationTween
 
-signal target_lost
+signal update_target_ui
 signal update_resources
 signal update_inventory
 signal update_equipment
 signal update_quickbar
 signal update_spellbook
 signal update_stats
-signal target_ui
 signal update_casting_bar
 signal finished_casting
 
@@ -198,7 +197,7 @@ func conf():
 	set_physics_process(true)
 	# CONF HUD
 	name_plate.conf(statistics, resources.health)
-	connect("update_resources", name_plate, "upd", [resources.health])
+	connect("update_resources", name_plate, "upd")
 	
 func modify_resource(resource : String, amount : float, new_max = null) -> void:
 	if state != STATE.DIE:
@@ -207,7 +206,7 @@ func modify_resource(resource : String, amount : float, new_max = null) -> void:
 			if resources[resource].current == null or resources[resource].current > new_max:
 				resources[resource].current = new_max
 		resources[resource].current += amount
-		emit_signal("update_resources")
+		emit_signal("update_resources", resources)
 		if resource == "health":
 			if amount == 0:
 				return
@@ -219,12 +218,6 @@ func modify_resource(resource : String, amount : float, new_max = null) -> void:
 func hide_from_minimap_camera(mesh):
 	mesh.set_layer_mask_bit(1, false)
 	mesh.set_layer_mask_bit(2, false) 
-	
-func show_indicator(yay_or_nay : bool):
-	if yay_or_nay:
-		$TargetIndicator.bounce()
-	else:
-		$TargetIndicator.halt()
 
 func _on_AttackArea_body_entered(body: Node) -> void:
 	if body is KinematicBody:
@@ -234,8 +227,8 @@ func _on_AttackArea_body_entered(body: Node) -> void:
 func _on_AttackArea_body_exited(body: Node) -> void:
 	if body is KinematicBody:
 		if body == enemy:
-			emit_signal("target_lost", false)
 			enemy = null
+			emit_signal("update_target_ui", enemy)
 		target_list.erase(body)
 
 #func load_eq():
@@ -574,18 +567,15 @@ func get_target():
 	var new_target = target_list.pop_front()
 	if new_target:
 		if enemy:
-			emit_signal("target_ui", false)
 			if target_area.overlaps_body(enemy): 
 				target_list.append(enemy)
 		enemy = new_target
-		emit_signal("target_ui", true)
+	emit_signal("update_target_ui", enemy)
 		
 func add_lootable(creature_id, loot):
 	lootable[creature_id] = loot
 
 func add_item_to_inventory(new_item, quantity = 1):
-#	for i in DB.item_db.get(new_item).TYPE:
-#		print(i)
 	if quantity > 1 and not "stackable" in DB.item_db.get(new_item).TYPE:
 		for q in quantity:
 			for i in inventory:

@@ -17,12 +17,11 @@ func _ready() -> void:
 	statistics.title = "Ancient God"
 
 	conf()
-	connect("target_ui", self, "target_ui")
 	$GUI.conf(resources, minimap_camera_remote_transform)
-	connect("update_casting_bar", $GUI.casting_bar, "conf")
-	connect("update_resources", $GUI, "update_gui", [resources])
+	connect("update_casting_bar", $GUI, "configure_casting_bar")
+	connect("update_resources", $GUI, "update_gui")
+	connect("update_target_ui", $GUI, "configure_target_resources")
 #	load_eq()
-	connect("target_lost", self, "target_ui")
 	anim_player = $DEBUG_AnimationPlayer
 	$GUI.configure_inv(self)
 	connect("update_inventory", $GUI, "configure_inv", [self])
@@ -58,15 +57,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if abs(event.relative.x) > .1: 
 				rotate_y(-event.relative.x * 0.005)
 
-func target_ui(show : bool):
-	if enemy:
-		enemy.show_indicator(show)
-		$GUI.get_target_info(enemy, show)
-		if show == false:
-			if enemy.is_connected("update_resources", $GUI, "update_targe_info"):
-				enemy.disconnect("update_resources", $GUI, "update_targe_info")
-		else:
-			enemy.connect("update_resources", $GUI, "update_targe_info", [enemy.resources])
+
 
 
 
