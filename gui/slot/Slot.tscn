@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://fonts/Lack_12.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/NotoSansJP-Regular_12.tres" type="DynamicFont" id=1]
 [ext_resource path="res://gui/slot/Slot.gd" type="Script" id=2]
 
 [sub_resource type="Gradient" id=1]

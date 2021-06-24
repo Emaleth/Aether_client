@@ -1,16 +1,29 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://gui/floating_text/FloatingText.gd" type="Script" id=1]
-[ext_resource path="res://fonts/Lack_60.tres" type="DynamicFont" id=2]
+[ext_resource path="res://fonts/NotoSansJP-Regular_14.tres" type="DynamicFont" id=2]
+
+[sub_resource type="QuadMesh" id=1]
+size = Vector2( 0.1, 0.05 )
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("Viewport")
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_local_to_scene = true
+flags_transparent = true
+flags_unshaded = true
+flags_fixed_size = true
+albedo_texture = SubResource( 2 )
 
 [node name="HitNumber" type="Spatial"]
 script = ExtResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-billboard = 1
-double_sided = false
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 45, 14 )

@@ -1,20 +1,19 @@
 extends Spatial
 
 onready var tween : Tween = $Tween
-onready var sprite3d = $Sprite3D
+onready var mesh = $MeshInstance
 onready var viewport = $Viewport
 onready var label = $Viewport/Label
 	
 func conf(value, color) -> void:
 	label.text = str(value)
 	label.self_modulate = color
-	sprite3d.texture = viewport.get_texture()
 	tween.remove_all()
 	tween.interpolate_property(
-		sprite3d, 
+		mesh, 
 		"transform:origin:y", 
-		sprite3d.transform.origin.y, 
-		sprite3d.transform.origin.y + 1, 
+		mesh.transform.origin.y, 
+		mesh.transform.origin.y + 1, 
 		1, 
 		Tween.TRANS_LINEAR, 
 		Tween.EASE_IN

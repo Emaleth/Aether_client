@@ -23,10 +23,28 @@ onready var footnote_panel = $VBoxContainer/FootnoteContainer
 
 func conf(name : String = "", icon : Texture = null, description : String = "", stats : Dictionary = {}, attributes : Dictionary = {}, rarity = null, footnote = ""):
 	yield(self, "ready")
+	var star_num = 0
+	if rarity:
+		match rarity:
+			"COMMON":
+				title_label.self_modulate = Color.whitesmoke
+				star_num = 1
+			"UNCOMMON":
+				title_label.self_modulate = Color.green
+				star_num = 2
+			"RARE":
+				title_label.self_modulate = Color.blue
+				star_num = 3
+			"EPIC":
+				title_label.self_modulate = Color.purple
+				star_num = 4
+			"LEGENDARY":
+				title_label.self_modulate = Color.yellow
+				star_num = 5
 	if name == "":
 		title_panel.hide()
 	else:
-		title_label.text = name
+		title_label.text = ("★".repeat(star_num) + " %s " + "★".repeat(star_num)) % name
 		
 	if icon == null:
 		skill_panel.hide()
@@ -77,6 +95,7 @@ func conf(name : String = "", icon : Texture = null, description : String = "", 
 	else:
 		footnote_label.text = footnote
 
+			
 func _on_VBoxContainer_sort_children() -> void:
 	rect_size = container.rect_size
 

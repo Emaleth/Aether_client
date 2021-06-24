@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://fonts/Lack_18.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/NotoSansJP-Regular_18.tres" type="DynamicFont" id=1]
 [ext_resource path="res://gui/resource_bar/ResourceBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://gui/target_resource_panel/TargetResourcesPanel.gd" type="Script" id=3]
 

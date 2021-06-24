@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://fonts/Lack_12.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/NotoSansJP-Regular_12.tres" type="DynamicFont" id=1]
 [ext_resource path="res://textures/ui_icons/more.png" type="Texture" id=2]
 [ext_resource path="res://textures/ui_icons/close.png" type="Texture" id=3]
 [ext_resource path="res://textures/ui_icons/less.png" type="Texture" id=4]

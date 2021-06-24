@@ -15,11 +15,16 @@ onready var timer_label = $TimerLabel
 onready var item_icon_margin = $Margin
 onready var item_icon = $Margin/Icon
 
-onready var common_item_slot_bg = preload("res://styleboxes/normal_slot.tres")
-onready var uncommon_item_slot_bg = preload("res://styleboxes/epic_slot.tres")
-onready var rare_item_slot_bg = preload("res://styleboxes/normal_slot.tres")
-onready var epic_item_slot_bg = preload("res://styleboxes/epic_slot.tres")
-onready var legendary_item_slot_bg = preload("res://styleboxes/legendary_slot.tres")
+onready var common_item_slot = preload("res://styleboxes/common_item_slot.tres")
+onready var uncommon_item_slot = preload("res://styleboxes/uncommon_item_slot.tres")
+onready var rare_item_slot = preload("res://styleboxes/rare_item_slot.tres")
+onready var epic_item_slot = preload("res://styleboxes/epic_item_slot.tres")
+onready var legendary_item_slot = preload("res://styleboxes/legendary_item_slot.tres")
+
+onready var healing_target_skill_slot = preload("res://styleboxes/healing_target_skill_slot.tres")
+onready var healing_aoe_skill_slot = preload("res://styleboxes/healing_aoe_skill_slot.tres")
+onready var damage_target_skill_slot = preload("res://styleboxes/damage_target_skill_slot.tres")
+onready var damage_aoe_skill_slot = preload("res://styleboxes/damage_aoe_skill_slot.tres")
 
 signal request_swap
 signal request_use
@@ -228,6 +233,7 @@ func make_item_ttp(tooltip, item_name, skill_image, item_description, item_stats
 		item_stats = DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).ATTRIBUTES:
 		item_attributes = DB.item_db.get(aactor.get(ttype).get(sslot).item).ATTRIBUTES
+	item_rarity = DB.item_db.get(aactor.get(ttype).get(sslot).item).RARITY
 	tooltip.conf(item_name, skill_image, item_description, item_stats, item_attributes, item_rarity)
 	
 func make_spell_ttp(tooltip, skill_name, skill_image, skill_description, skill_stats, skill_attributes, skill_type):
@@ -236,49 +242,49 @@ func make_spell_ttp(tooltip, skill_name, skill_image, skill_description, skill_s
 	tooltip.conf(skill_name, skill_image, skill_description, skill_stats, skill_attributes, skill_type)
 
 func set_item_rarity_bg(item):
-	match (DB.item_db.get(item).RARITY).to_upper():
+	match DB.item_db.get(item).RARITY:
 		"COMMON":
-			set("custom_styles/hover", common_item_slot_bg)
-			set("custom_styles/pressed", common_item_slot_bg)
-			set("custom_styles/focus", common_item_slot_bg)
-			set("custom_styles/disabled", common_item_slot_bg)
-			set("custom_styles/normal", common_item_slot_bg)
+			set("custom_styles/hover", common_item_slot)
+			set("custom_styles/pressed", common_item_slot)
+			set("custom_styles/focus", common_item_slot)
+			set("custom_styles/disabled", common_item_slot)
+			set("custom_styles/normal", common_item_slot)
 		"UNCOMMON":
-			set("custom_styles/hover", uncommon_item_slot_bg)
-			set("custom_styles/pressed", uncommon_item_slot_bg)
-			set("custom_styles/focus", uncommon_item_slot_bg)
-			set("custom_styles/disabled", uncommon_item_slot_bg)
-			set("custom_styles/normal", uncommon_item_slot_bg)
+			set("custom_styles/hover", uncommon_item_slot)
+			set("custom_styles/pressed", uncommon_item_slot)
+			set("custom_styles/focus", uncommon_item_slot)
+			set("custom_styles/disabled", uncommon_item_slot)
+			set("custom_styles/normal", uncommon_item_slot)
 		"RARE":
-			set("custom_styles/hover", rare_item_slot_bg)
-			set("custom_styles/pressed", rare_item_slot_bg)
-			set("custom_styles/focus", rare_item_slot_bg)
-			set("custom_styles/disabled", rare_item_slot_bg)
-			set("custom_styles/normal", rare_item_slot_bg)
+			set("custom_styles/hover", rare_item_slot)
+			set("custom_styles/pressed", rare_item_slot)
+			set("custom_styles/focus", rare_item_slot)
+			set("custom_styles/disabled", rare_item_slot)
+			set("custom_styles/normal", rare_item_slot)
 		"EPIC":
-			set("custom_styles/hover", epic_item_slot_bg)
-			set("custom_styles/pressed", epic_item_slot_bg)
-			set("custom_styles/focus", epic_item_slot_bg)
-			set("custom_styles/disabled", epic_item_slot_bg)
-			set("custom_styles/normal", epic_item_slot_bg)
+			set("custom_styles/hover", epic_item_slot)
+			set("custom_styles/pressed", epic_item_slot)
+			set("custom_styles/focus", epic_item_slot)
+			set("custom_styles/disabled", epic_item_slot)
+			set("custom_styles/normal", epic_item_slot)
 		"LEGENDARY":
-			set("custom_styles/hover", legendary_item_slot_bg)
-			set("custom_styles/pressed", legendary_item_slot_bg)
-			set("custom_styles/focus", legendary_item_slot_bg)
-			set("custom_styles/disabled", legendary_item_slot_bg)
-			set("custom_styles/normal", legendary_item_slot_bg)
+			set("custom_styles/hover", legendary_item_slot)
+			set("custom_styles/pressed", legendary_item_slot)
+			set("custom_styles/focus", legendary_item_slot)
+			set("custom_styles/disabled", legendary_item_slot)
+			set("custom_styles/normal", legendary_item_slot)
 			
 func set_skill_type_bg(skill):
-	match (DB.spell_db.get(skill).TYPE).to_upper():
+	match DB.spell_db.get(skill).TYPE:
 		"AOE":
-			set("custom_styles/hover", common_item_slot_bg)
-			set("custom_styles/pressed", common_item_slot_bg)
-			set("custom_styles/focus", common_item_slot_bg)
-			set("custom_styles/disabled", common_item_slot_bg)
-			set("custom_styles/normal", common_item_slot_bg)
+			set("custom_styles/hover", common_item_slot)
+			set("custom_styles/pressed", common_item_slot)
+			set("custom_styles/focus", common_item_slot)
+			set("custom_styles/disabled", common_item_slot)
+			set("custom_styles/normal", common_item_slot)
 		"TARGET":
-			set("custom_styles/hover", legendary_item_slot_bg)
-			set("custom_styles/pressed", legendary_item_slot_bg)
-			set("custom_styles/focus", legendary_item_slot_bg)
-			set("custom_styles/disabled", legendary_item_slot_bg)
-			set("custom_styles/normal", legendary_item_slot_bg)
+			set("custom_styles/hover", legendary_item_slot)
+			set("custom_styles/pressed", legendary_item_slot)
+			set("custom_styles/focus", legendary_item_slot)
+			set("custom_styles/disabled", legendary_item_slot)
+			set("custom_styles/normal", legendary_item_slot)

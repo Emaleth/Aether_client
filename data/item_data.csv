@@ -1,138 +1,138 @@
-UUID,NAME,TYPE,STATS,ATTRIBUTES,SKILL,RARITY
+UUID,NAME,TYPE,RARITY,STATS,ATTRIBUTES,SKILL
 ITEM_00000,Training Sword,"[weapon,
-melee_weapon]","{""ATK"":1,
+melee_weapon]",COMMON,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00001,Training Long Sword,"[weapon,
-melee_weapon]","{""ATK"":1,
+melee_weapon]",UNCOMMON,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,epic
+""WIS"":1}",null
 ITEM_00002,Training Axe,"[weapon,
-melee_weapon]","{""ATK"":1,
+melee_weapon]",RARE,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00003, Training Bow,"[weapon,
-ranged_weapon]","{""ATK"":1,
+ranged_weapon]",EPIC,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,legendary
+""WIS"":1}",null
 ITEM_00004, Training Dagger,"[weapon,
-melee_weapon]","{""ATK"":1,
+melee_weapon]",LEGENDARY,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00005,Training Staff,"[weapon,
-melee_weapon]","{""ATK"":1,
+melee_weapon]",COMMON,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00006,Training Shield,"[weapon,
-melee_weapon]","{""ATK"":1,
+melee_weapon]",UNCOMMON,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00007,Training Ring,"[jewelry,
-ring]","{""ATK"":1,
+ring]",RARE,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00008,Training Earring,"[jewelry,
-earring]","{""ATK"":1,
+earring]",EPIC,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00009,Training Helmet,"[armor,
-head]","{""ATK"":1,
+head]",LEGENDARY,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00010,Training Gloves,"[armor,
-hands]","{""ATK"":1,
+hands]",COMMON,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00011,Training Boots,"[armor,
-feet]","{""ATK"":1,
+feet]",UNCOMMON,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00012,Training Armour,"[armor,
-upper_body]","{""ATK"":1,
+upper_body]",RARE,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00013,Training Legs,"[armor,
-lower_body]","{""ATK"":1,
+lower_body]",EPIC,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00014,Training Cape,"[armor,
-cape]","{""ATK"":1,
+cape]",LEGENDARY,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00015,Training Belt,"[armor,
-belt]","{""ATK"":1,
+belt]",COMMON,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00016, Training Shoulders,"[armor,
-shoulders]","{""ATK"":1,
+shoulders]",UNCOMMON,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
+""WIS"":1}",null
 ITEM_00017,Training Pendant,"[jewelry,
-necklace]","{""ATK"":1,
+necklace]",RARE,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
-ITEM_00018,Training Orb,[amulet],"{""ATK"":1,
+""WIS"":1}",null
+ITEM_00018,Training Orb,[amulet],EPIC,"{""ATK"":1,
 ""DEF"":1}","{""STR"":1,
 ""DEX"":1,
 ""CONST"":1,
 ""INT"":1,
-""WIS"":1}",null,normal
-ITEM_00019,Infinite Rune,[stackable],null,null,SPELL_00002,normal
+""WIS"":1}",null
+ITEM_00019,Infinite Rune,[stackable],LEGENDARY,null,null,SPELL_00002
 ITEM_00020,Lesser Health Elixir,"[consumable,
-stackable]",null,null,SPELL_00000,normal
+stackable]",COMMON,null,null,SPELL_00000
 ITEM_00021,Lesser Mana Elixir,"[consumable,
-stackable]",null,null,SPELL_00001,normal
+stackable]",UNCOMMON,null,null,SPELL_00001

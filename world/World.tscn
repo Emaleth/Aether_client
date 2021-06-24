@@ -30,6 +30,8 @@ transform = Transform( 1.73829, 0, 0, 0, 2.17002, 0, 0, 0, 2.71291, -5.49472, 2.
 
 [node name="Ground" parent="Environment" instance=ExtResource( 6 )]
 
+[node name="Ground2" parent="Environment" instance=ExtResource( 6 )]
+
 [node name="WaterTest" type="MeshInstance" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8677, -3.10271, -16.2899 )
 layers = 7
@@ -37,10 +39,10 @@ mesh = SubResource( 1 )
 material/0 = SubResource( 2 )
 
 [node name="Stairs" parent="Environment" instance=ExtResource( 3 )]
-transform = Transform( -1.83206, 0, 0.219153, 0, 2.1, 0, -0.47539, 0, -1.40807, -4.69516, -0.0024296, 18.5697 )
+transform = Transform( -1.83206, 0, 0.219153, 0, 2.1, 0, -0.47539, 0, -1.40807, -4.69516, -0.140125, 18.5697 )
 
 [node name="Stairs2" parent="Environment" instance=ExtResource( 3 )]
-transform = Transform( -1.35674, 0.0158822, 0.839976, 0.0153924, 1.39991, -0.00952963, -1.33005, 0, -0.856942, -10.2613, -0.00326872, 11.5549 )
+transform = Transform( -1.35674, 0.0158822, 0.839976, 0.0153924, 1.39991, -0.00952963, -1.33005, 0, -0.856942, -10.2613, -0.0593143, 11.5549 )
 
 [node name="BoulderSmall" parent="Environment" instance=ExtResource( 8 )]
 transform = Transform( 0.995384, 0.0959674, 0, -0.0953884, 0.989379, -0.109682, -0.0105259, 0.109176, 0.993967, -14.0648, 0.404179, -5.76545 )
