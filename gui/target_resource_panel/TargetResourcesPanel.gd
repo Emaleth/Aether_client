@@ -16,7 +16,7 @@ func conf(target):
 				current_enemy.get_node("TargetIndicator").halt()
 					
 	else:
-		if current_enemy != null:
+		if current_enemy != null and is_instance_valid(current_enemy):
 			if current_enemy.is_connected("update_resources", self, "update_resources"):
 				current_enemy.disconnect("update_resources", self, "update_resources")
 			current_enemy.get_node("TargetIndicator").halt()

@@ -4,22 +4,28 @@ var aactor
 var ttype
 var sslot
 
+var ghost_image = null
+var preview = preload("res://gui/drag_preview/DragPreview.tscn")
+
 onready var quantity_label = $Margin/Label
 onready var timer = $Timer
 onready var cd_progress = $TextureProgress
 onready var tween = $Tween
 onready var timer_label = $TimerLabel
-
 onready var item_icon_margin = $Margin
 onready var item_icon = $Margin/Icon
-var ghost_image = null
+
+onready var common_item_slot_bg = preload("res://styleboxes/normal_slot.tres")
+onready var uncommon_item_slot_bg = preload("res://styleboxes/epic_slot.tres")
+onready var rare_item_slot_bg = preload("res://styleboxes/normal_slot.tres")
+onready var epic_item_slot_bg = preload("res://styleboxes/epic_slot.tres")
+onready var legendary_item_slot_bg = preload("res://styleboxes/legendary_slot.tres")
 
 signal request_swap
 signal request_use
 signal request_quantity
 signal request_split
 
-var preview = preload("res://gui/drag_preview/DragPreview.tscn")
 
 func _ready() -> void:
 	ghost_image = icon
@@ -38,6 +44,7 @@ func conf(actor, slot, type, quantity_panel = null):
 			connect("request_quantity", quantity_panel, "conf")
 	if actor.get(type).get(slot).item:
 		if "ITEM" in actor.get(type).get(slot).item:
+			set_item_rarity_bg(actor.get(type).get(slot).item)
 			if DB.item_db.get(actor.get(type).get(slot).item).SKILL:
 				disabled = false
 				if not is_connected("request_use", actor, "use_item"):
@@ -56,6 +63,7 @@ func conf(actor, slot, type, quantity_panel = null):
 			item_icon.texture = load("res://textures/item_icons/%s.png" % actor.get(type).get(slot).item)
 				
 		elif "SPELL" in actor.get(type).get(slot).item:
+			set_skill_type_bg(actor.get(type).get(slot).item)
 			disabled = false
 			if not is_connected("request_use", actor, "use_spell"):
 				connect("request_use", actor, "use_spell")
@@ -116,10 +124,11 @@ func _make_custom_tooltip(_for_text):
 		var d = ""
 		var s = {}
 		var a = {}
+		var r = null
 		if "ITEM" in aactor.get(ttype).get(sslot).item:
-			make_item_ttp(tooltip, n, i, d, s, a)
+			make_item_ttp(tooltip, n, i, d, s, a, r)
 		elif "SPELL" in aactor.get(ttype).get(sslot).item:
-			make_spell_ttp(tooltip, n, i, d, s, a)
+			make_spell_ttp(tooltip, n, i, d, s, a, r)
 		return tooltip
 		
 var cd_text = 0
@@ -208,21 +217,68 @@ func small():
 	quantity_label.margin_bottom = 20
 	quantity_label.margin_right = 20
 	
-func make_item_ttp(tooltip, n, i, d, s, a):
+func make_item_ttp(tooltip, item_name, skill_image, item_description, item_stats, item_attributes, item_rarity):
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
-		i = load("res://textures/spell_icons/%s.png" % DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL)
+		skill_image = load("res://textures/spell_icons/%s.png" % DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL)
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME:
-		n = DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME
+		item_name = DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
-		d = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).NAME
+		item_description = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).NAME
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS:
-		s = DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS
+		item_stats = DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).ATTRIBUTES:
-		a = DB.item_db.get(aactor.get(ttype).get(sslot).item).ATTRIBUTES
-	tooltip.conf(n, i, d, s, a)
+		item_attributes = DB.item_db.get(aactor.get(ttype).get(sslot).item).ATTRIBUTES
+	tooltip.conf(item_name, skill_image, item_description, item_stats, item_attributes, item_rarity)
 	
-func make_spell_ttp(tooltip, n, i, d, s, a):
+func make_spell_ttp(tooltip, skill_name, skill_image, skill_description, skill_stats, skill_attributes, skill_type):
 	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME:
-		n = DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME
+		skill_name = DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME
+	tooltip.conf(skill_name, skill_image, skill_description, skill_stats, skill_attributes, skill_type)
 
-	tooltip.conf(n, i, d, s, a)
+func set_item_rarity_bg(item):
+	match (DB.item_db.get(item).RARITY).to_upper():
+		"COMMON":
+			set("custom_styles/hover", common_item_slot_bg)
+			set("custom_styles/pressed", common_item_slot_bg)
+			set("custom_styles/focus", common_item_slot_bg)
+			set("custom_styles/disabled", common_item_slot_bg)
+			set("custom_styles/normal", common_item_slot_bg)
+		"UNCOMMON":
+			set("custom_styles/hover", uncommon_item_slot_bg)
+			set("custom_styles/pressed", uncommon_item_slot_bg)
+			set("custom_styles/focus", uncommon_item_slot_bg)
+			set("custom_styles/disabled", uncommon_item_slot_bg)
+			set("custom_styles/normal", uncommon_item_slot_bg)
+		"RARE":
+			set("custom_styles/hover", rare_item_slot_bg)
+			set("custom_styles/pressed", rare_item_slot_bg)
+			set("custom_styles/focus", rare_item_slot_bg)
+			set("custom_styles/disabled", rare_item_slot_bg)
+			set("custom_styles/normal", rare_item_slot_bg)
+		"EPIC":
+			set("custom_styles/hover", epic_item_slot_bg)
+			set("custom_styles/pressed", epic_item_slot_bg)
+			set("custom_styles/focus", epic_item_slot_bg)
+			set("custom_styles/disabled", epic_item_slot_bg)
+			set("custom_styles/normal", epic_item_slot_bg)
+		"LEGENDARY":
+			set("custom_styles/hover", legendary_item_slot_bg)
+			set("custom_styles/pressed", legendary_item_slot_bg)
+			set("custom_styles/focus", legendary_item_slot_bg)
+			set("custom_styles/disabled", legendary_item_slot_bg)
+			set("custom_styles/normal", legendary_item_slot_bg)
+			
+func set_skill_type_bg(skill):
+	match (DB.spell_db.get(skill).TYPE).to_upper():
+		"AOE":
+			set("custom_styles/hover", common_item_slot_bg)
+			set("custom_styles/pressed", common_item_slot_bg)
+			set("custom_styles/focus", common_item_slot_bg)
+			set("custom_styles/disabled", common_item_slot_bg)
+			set("custom_styles/normal", common_item_slot_bg)
+		"TARGET":
+			set("custom_styles/hover", legendary_item_slot_bg)
+			set("custom_styles/pressed", legendary_item_slot_bg)
+			set("custom_styles/focus", legendary_item_slot_bg)
+			set("custom_styles/disabled", legendary_item_slot_bg)
+			set("custom_styles/normal", legendary_item_slot_bg)

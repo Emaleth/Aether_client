@@ -21,7 +21,7 @@ onready var attributes_panel = $VBoxContainer/AttributesContainer
 onready var footnote_panel = $VBoxContainer/FootnoteContainer
 
 
-func conf(name : String = "", icon : Texture = null, description : String = "", stats : Dictionary = {}, attributes : Dictionary = {}, footnote = ""):
+func conf(name : String = "", icon : Texture = null, description : String = "", stats : Dictionary = {}, attributes : Dictionary = {}, rarity = null, footnote = ""):
 	yield(self, "ready")
 	if name == "":
 		title_panel.hide()

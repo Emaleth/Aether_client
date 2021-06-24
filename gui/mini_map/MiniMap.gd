@@ -21,3 +21,5 @@ func _process(delta: float) -> void:
 		if camera.size < max_zoom:
 			camera.size += zoom_speed * delta
 			
+func conf(remote_transform):
+	remote_transform.remote_path = camera.get_path()

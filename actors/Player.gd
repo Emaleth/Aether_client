@@ -17,10 +17,11 @@ func _ready() -> void:
 	statistics.title = "Ancient God"
 
 	conf()
-	$GUI.conf(resources, minimap_camera_remote_transform)
-	connect("update_casting_bar", $GUI, "configure_casting_bar")
-	connect("update_resources", $GUI, "update_gui")
+	$GUI.configure_minimap(minimap_camera_remote_transform)
 	connect("update_target_ui", $GUI, "configure_target_resources")
+	connect("update_casting_bar", $GUI, "configure_casting_bar")
+	$GUI.configure_resources_panel(resources)
+	connect("update_resources", $GUI, "update_resources_panel")
 #	load_eq()
 	anim_player = $DEBUG_AnimationPlayer
 	$GUI.configure_inv(self)
