@@ -1,0 +1,166 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://fonts/NotoSansJP-Regular_14.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/NotoSansJP-Regular_12.tres" type="DynamicFont" id=2]
+[ext_resource path="res://gui/item_tooltip/ItemTooltip.gd" type="Script" id=3]
+[ext_resource path="res://gui/skill_tooltip/SkillTooltip.tscn" type="PackedScene" id=4]
+
+[node name="ItemTooltip" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1234.0
+margin_bottom = -620.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 39.0
+margin_bottom = 241.0
+size_flags_vertical = 4
+
+[node name="ItemNameContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 32.0
+margin_bottom = 36.0
+
+[node name="ItemName" type="Label" parent="VBoxContainer/ItemNameContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_fonts/font = ExtResource( 1 )
+align = 1
+valign = 1
+
+[node name="ItemDescriptionContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 40.0
+margin_right = 32.0
+margin_bottom = 72.0
+
+[node name="ItemDescription" type="Label" parent="VBoxContainer/ItemDescriptionContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+size_flags_vertical = 2
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+
+[node name="ItemStatsContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 76.0
+margin_right = 32.0
+margin_bottom = 90.0
+
+[node name="ItemStats" type="HBoxContainer" parent="VBoxContainer/ItemStatsContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 7.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="name" type="VBoxContainer" parent="VBoxContainer/ItemStatsContainer/ItemStats"]
+margin_right = 5.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="template" type="Label" parent="VBoxContainer/ItemStatsContainer/ItemStats/name"]
+visible = false
+margin_right = 14.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
+valign = 1
+
+[node name="value" type="VBoxContainer" parent="VBoxContainer/ItemStatsContainer/ItemStats"]
+margin_left = 9.0
+margin_right = 11.0
+size_flags_horizontal = 3
+
+[node name="template" type="Label" parent="VBoxContainer/ItemStatsContainer/ItemStats/value"]
+visible = false
+margin_right = 14.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+
+[node name="delta" type="VBoxContainer" parent="VBoxContainer/ItemStatsContainer/ItemStats"]
+margin_left = 15.0
+margin_right = 18.0
+size_flags_horizontal = 3
+
+[node name="template" type="Label" parent="VBoxContainer/ItemStatsContainer/ItemStats/delta"]
+visible = false
+margin_right = 14.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
+align = 2
+valign = 1
+
+[node name="ItemAttributesContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 94.0
+margin_right = 32.0
+margin_bottom = 108.0
+
+[node name="ItemAttributes" type="HBoxContainer" parent="VBoxContainer/ItemAttributesContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 7.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="name" type="VBoxContainer" parent="VBoxContainer/ItemAttributesContainer/ItemAttributes"]
+margin_right = 5.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="template" type="Label" parent="VBoxContainer/ItemAttributesContainer/ItemAttributes/name"]
+visible = false
+margin_right = 14.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
+valign = 1
+
+[node name="value" type="VBoxContainer" parent="VBoxContainer/ItemAttributesContainer/ItemAttributes"]
+margin_left = 9.0
+margin_right = 11.0
+size_flags_horizontal = 3
+
+[node name="template" type="Label" parent="VBoxContainer/ItemAttributesContainer/ItemAttributes/value"]
+visible = false
+margin_right = 14.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+
+[node name="delta" type="VBoxContainer" parent="VBoxContainer/ItemAttributesContainer/ItemAttributes"]
+margin_left = 15.0
+margin_right = 18.0
+size_flags_horizontal = 3
+
+[node name="template" type="Label" parent="VBoxContainer/ItemAttributesContainer/ItemAttributes/delta"]
+visible = false
+margin_right = 14.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
+align = 2
+valign = 1
+
+[node name="SkillTooltip" parent="VBoxContainer" instance=ExtResource( 4 )]
+margin_top = 112.0
+margin_right = 32.0
+margin_bottom = 234.0
+size_flags_horizontal = 3
+
+[connection signal="sort_children" from="VBoxContainer" to="." method="_on_VBoxContainer_sort_children"]

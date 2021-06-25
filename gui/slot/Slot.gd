@@ -123,17 +123,23 @@ func make_preview():
 
 func _make_custom_tooltip(_for_text):
 	if aactor.get(ttype).get(sslot).item:
-		var tooltip = preload("res://gui/tooltip/Tooltip.tscn").instance()
-		var n = ""
-		var i = null
-		var d = ""
-		var s = {}
-		var a = {}
-		var r = null
+		var tooltip = null
 		if "ITEM" in aactor.get(ttype).get(sslot).item:
-			make_item_ttp(tooltip, n, i, d, s, a, r)
+			tooltip = preload("res://gui/item_tooltip/ItemTooltip.tscn").instance()
+			var item_name : String = ""
+			var item_description : String = ""
+			var item_stats : Dictionary = {}
+			var item_attributes : Dictionary = {}
+			var item_rarity : String = ""
+			var item_skill : Dictionary = {}
+			make_item_ttp(tooltip, item_name, item_description, item_stats, item_attributes, item_rarity, item_skill)
 		elif "SPELL" in aactor.get(ttype).get(sslot).item:
-			make_spell_ttp(tooltip, n, i, d, s, a, r)
+			tooltip = preload("res://gui/skill_tooltip/SkillTooltip.tscn").instance()
+			var skill_name : String = ""
+			var skill_description : String = ""
+			var skill_cost : Dictionary = {}
+			var skill_params : Dictionary = {}
+			make_spell_ttp(tooltip, skill_name, skill_description, skill_cost, skill_params)
 		return tooltip
 		
 var cd_text = 0
@@ -222,24 +228,33 @@ func small():
 	quantity_label.margin_bottom = 20
 	quantity_label.margin_right = 20
 	
-func make_item_ttp(tooltip, item_name, skill_image, item_description, item_stats, item_attributes, item_rarity):
-	if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
-		skill_image = load("res://textures/spell_icons/%s.png" % DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL)
+func make_item_ttp(tooltip, item_name, item_description, item_stats, item_attributes, item_rarity, item_skill):
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME:
 		item_name = DB.item_db.get(aactor.get(ttype).get(sslot).item).NAME
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
-		item_description = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).NAME
+		item_description = "item description"
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS:
 		item_stats = DB.item_db.get(aactor.get(ttype).get(sslot).item).STATS
 	if DB.item_db.get(aactor.get(ttype).get(sslot).item).ATTRIBUTES:
 		item_attributes = DB.item_db.get(aactor.get(ttype).get(sslot).item).ATTRIBUTES
-	item_rarity = DB.item_db.get(aactor.get(ttype).get(sslot).item).RARITY
-	tooltip.conf(item_name, skill_image, item_description, item_stats, item_attributes, item_rarity)
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).RARITY:
+		item_rarity = DB.item_db.get(aactor.get(ttype).get(sslot).item).RARITY
+	if DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL:
+		item_skill["skill_name"] = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).NAME
+		item_skill["skill_description"] = "skill description"
+		item_skill["skill_cost"] = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).COST
+		item_skill["skill_params"] = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).PARAMS
+	tooltip.conf(item_name, item_description, item_stats, item_attributes, item_rarity, item_skill)
 	
-func make_spell_ttp(tooltip, skill_name, skill_image, skill_description, skill_stats, skill_attributes, skill_type):
+func make_spell_ttp(tooltip, skill_name, skill_cost, skill_description, skill_params):
 	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME:
 		skill_name = DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME
-	tooltip.conf(skill_name, skill_image, skill_description, skill_stats, skill_attributes, skill_type)
+	skill_description = "dsgfksdfhgkjhds"
+	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).COST:
+		skill_cost = DB.spell_db.get(aactor.get(ttype).get(sslot).item).COST
+	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).PARAMS:
+		skill_params = DB.spell_db.get(aactor.get(ttype).get(sslot).item).PARAMS
+	tooltip.conf(skill_name, skill_description, skill_cost, skill_params)
 
 func set_item_rarity_bg(item):
 	match DB.item_db.get(item).RARITY:

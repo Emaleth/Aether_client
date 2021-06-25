@@ -2,10 +2,11 @@ extends Spatial
 
 onready var tween : Tween = $Tween
 onready var mesh = $MeshInstance
-onready var viewport = $Viewport
 onready var label = $Viewport/Label
+onready var viewport = $Viewport
 	
 func conf(value, color) -> void:
+	mesh.get_surface_material(0).albedo_texture = viewport.get_texture()
 	label.text = str(value)
 	label.self_modulate = color
 	tween.remove_all()

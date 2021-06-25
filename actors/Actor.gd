@@ -521,21 +521,19 @@ func cast_spell(spell):
 			resources.get((i).to_lower()).current += float(DB.spell_db.get(spell).COST.get(i))
 
 	var spell_recivers = []
-	match DB.spell_db.get(spell).TYPE:
-		"TARGET":
-			if not enemy:
-				get_target()
-			if enemy:
-				if global_transform.origin.distance_to(enemy.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RANGE):
-					spell_recivers.append(enemy)
-			
-		"AOE":
+#	match DB.spell_db.get(spell).TYPE:
+	if DB.spell_db.get(spell).PARAMS.RANGE == null:
+		# SELF
+		if DB.spell_db.get(spell).PARAMS.RADIUS == null:
+			spell_recivers.append(self)
+		# AOE
+		else:
 			for i in target_area.get_overlapping_bodies():
 				if not i in target_list:
 					continue
-				if global_transform.origin.distance_to(i.global_transform.origin) > float(DB.spell_db.get(spell).PARAMS.RANGE):
+				if global_transform.origin.distance_to(i.global_transform.origin) > float(DB.spell_db.get(spell).PARAMS.RADIUS):
 					continue
-				vision_ray.cast_to = Vector3(0, 0, -float(DB.spell_db.get(spell).PARAMS.RANGE))
+				vision_ray.cast_to = Vector3(0, 0, -float(DB.spell_db.get(spell).PARAMS.RADIUS))
 				vision_ray.look_at(i.global_transform.origin + Vector3(0, 0.9, 0), Vector3.UP)
 				vision_ray.force_raycast_update()
 				if vision_ray.get_collider() != i:
@@ -543,8 +541,17 @@ func cast_spell(spell):
 				spell_recivers.append(i)
 			if enemy:
 				spell_recivers.append(enemy)
-		"ITEM":
-			spell_recivers.append(self)
+	else:
+		# TARGETED
+		if DB.spell_db.get(spell).PARAMS.RADIUS == null:
+			if not enemy:
+				get_target()
+			if enemy:
+				if global_transform.origin.distance_to(enemy.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RANGE):
+					spell_recivers.append(enemy)
+		else:
+			# TARGETED AOE
+			print("targeted aoe")
 			
 	for i in spell_recivers:
 		for f in DB.spell_db.get(spell).TARGET:
