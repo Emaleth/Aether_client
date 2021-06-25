@@ -357,8 +357,8 @@ func use_item(source_slot):
 		return
 	if not DB.item_db.get(item_of_interest).SKILL:
 		return
-	if DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COOLDOWN:
-		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COOLDOWN) * 1000 && last_time_used != 0:
+	if DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).PARAMS.COOLDOWN:
+		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).PARAMS.COOLDOWN) * 1000 && last_time_used != 0:
 			return
 		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
 			return
@@ -378,8 +378,8 @@ func use_spell(source_slot):
 	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
 	if using_item == true:
 		return
-	if DB.spell_db.get(item_of_interest).COOLDOWN:
-		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(item_of_interest).COOLDOWN) * 1000 && last_time_used != 0:
+	if DB.spell_db.get(item_of_interest).PARAMS.COOLDOWN:
+		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(item_of_interest).PARAMS.COOLDOWN) * 1000 && last_time_used != 0:
 			return
 		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
 			return
@@ -505,28 +505,20 @@ func increase_stat(stat):
 		calculate_total_attributes()
 
 func cast_spell(spell):
-	if DB.spell_db.get(spell).HEALTH_COST:
-		if resources.health.current < float(DB.spell_db.get(spell).HEALTH_COST):
-			return
-	if DB.spell_db.get(spell).MANA_COST:
-		if resources.mana.current < float(DB.spell_db.get(spell).MANA_COST):
-			return
-	if DB.spell_db.get(spell).STAMINA_COST:
-		if resources.stamina.current < float(DB.spell_db.get(spell).STAMINA_COST):
-			return
-	
+	for i in DB.spell_db.get(spell).COST:
+		if DB.spell_db.get(spell).COST.get(i):
+			if resources.get((i).to_lower()).current < float(DB.spell_db.get(spell).COST.get(i)):
+				return
+
 	using_item = true
-	if DB.spell_db.get(spell).CAST_TIME:
-		emit_signal("update_casting_bar", float(DB.spell_db.get(spell).CAST_TIME))
-		yield(get_tree().create_timer(float(DB.spell_db.get(spell).CAST_TIME)),"timeout")
+	if DB.spell_db.get(spell).PARAMS.CAST_TIME:
+		emit_signal("update_casting_bar", float(DB.spell_db.get(spell).PARAMS.CAST_TIME))
+		yield(get_tree().create_timer(float(DB.spell_db.get(spell).PARAMS.CAST_TIME)),"timeout")
 	emit_signal("finished_casting", true)
 			
-	if DB.spell_db.get(spell).HEALTH_COST:
-		modify_resource("health", -float(DB.spell_db.get(spell).HEALTH_COST))
-	if DB.spell_db.get(spell).MANA_COST:
-		modify_resource("mana", -float(DB.spell_db.get(spell).MANA_COST))
-	if DB.spell_db.get(spell).STAMINA_COST:
-		modify_resource("stamina", -float(DB.spell_db.get(spell).STAMINA_COST))
+	for i in DB.spell_db.get(spell).COST:
+		if DB.spell_db.get(spell).COST.get(i):
+			resources.get((i).to_lower()).current += float(DB.spell_db.get(spell).COST.get(i))
 
 	var spell_recivers = []
 	match DB.spell_db.get(spell).TYPE:
@@ -534,16 +526,16 @@ func cast_spell(spell):
 			if not enemy:
 				get_target()
 			if enemy:
-				if global_transform.origin.distance_to(enemy.global_transform.origin) <= float(DB.spell_db.get(spell).RANGE):
+				if global_transform.origin.distance_to(enemy.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RANGE):
 					spell_recivers.append(enemy)
 			
 		"AOE":
 			for i in target_area.get_overlapping_bodies():
 				if not i in target_list:
 					continue
-				if global_transform.origin.distance_to(i.global_transform.origin) > float(DB.spell_db.get(spell).RANGE):
+				if global_transform.origin.distance_to(i.global_transform.origin) > float(DB.spell_db.get(spell).PARAMS.RANGE):
 					continue
-				vision_ray.cast_to = Vector3(0, 0, -float(DB.spell_db.get(spell).RANGE))
+				vision_ray.cast_to = Vector3(0, 0, -float(DB.spell_db.get(spell).PARAMS.RANGE))
 				vision_ray.look_at(i.global_transform.origin + Vector3(0, 0.9, 0), Vector3.UP)
 				vision_ray.force_raycast_update()
 				if vision_ray.get_collider() != i:
@@ -555,12 +547,10 @@ func cast_spell(spell):
 			spell_recivers.append(self)
 			
 	for i in spell_recivers:
-		if DB.spell_db.get(spell).TARGET_HEALTH:
-			i.modify_resource("health", float(DB.spell_db.get(spell).TARGET_HEALTH))
-		if DB.spell_db.get(spell).TARGET_MANA:
-			i.modify_resource("mana", float(DB.spell_db.get(spell).TARGET_MANA))
-		if DB.spell_db.get(spell).TARGET_STAMINA:
-			i.modify_resource("stamina", float(DB.spell_db.get(spell).TARGET_STAMINA))
+		for f in DB.spell_db.get(spell).TARGET:
+			if DB.spell_db.get(spell).TARGET.get(f):
+				i.modify_resource((f).to_lower(), float(DB.spell_db.get(spell).TARGET.get(f)))
+
 	using_item = false
 	
 func get_target():

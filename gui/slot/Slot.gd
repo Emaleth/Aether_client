@@ -56,7 +56,7 @@ func conf(actor, slot, type, quantity_panel = null):
 					connect("request_use", actor, "use_item")
 				cooldown_animation(
 					true, 
-					DB.spell_db.get(DB.item_db.get(actor.get(type).get(slot).item).SKILL).COOLDOWN,
+					DB.spell_db.get(DB.item_db.get(actor.get(type).get(slot).item).SKILL).PARAMS.COOLDOWN,
 					actor.get(type).get(slot).use_time
 					)
 			else:
@@ -74,7 +74,7 @@ func conf(actor, slot, type, quantity_panel = null):
 				connect("request_use", actor, "use_spell")
 			cooldown_animation(
 				true, 
-				DB.spell_db.get(actor.get(type).get(slot).item).COOLDOWN,
+				DB.spell_db.get(actor.get(type).get(slot).item).PARAMS.COOLDOWN,
 				actor.get(type).get(slot).use_time
 				)
 				
