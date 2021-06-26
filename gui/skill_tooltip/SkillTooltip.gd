@@ -58,3 +58,5 @@ func conf(skill_name : String = "", skill_description : String = "", skill_param
 
 func _on_VBoxContainer_sort_children() -> void:
 	rect_min_size = container.rect_size
+	rect_position.x = min(rect_position.x, OS.get_screen_size().x - rect_size.x)
+	rect_position.y = min(rect_position.y, OS.get_screen_size().y - rect_size.y)

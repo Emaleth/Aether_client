@@ -1,54 +1,26 @@
 extends SpringArm
 
-var max_zoom : int = 20
-var min_zoom : int = 1
-var def_zoom : int = 10
-var zoom_sensibility : float = 0.2
-var pan_sensibility : float = 0.002
-var pan_deadzone : float = 0.1
-var pan_return_speed : float = 10
-var cur_rot_x : float
-var def_rot_x : float = deg2rad(-30)
+var sensibility : float = 0.002
+var deadzone : float = 0.1
+var default_rotation_x : float = deg2rad(-15)
+
+onready var timer = $Timer
+onready var tween = $Tween
 
 
 func _ready() -> void:
-	cur_rot_x = def_rot_x
-	spring_length = def_zoom
+	rotation.x = default_rotation_x
 	
 func _unhandled_input(event: InputEvent) -> void:
-### ZOOM ###
-	if Input.is_action_just_pressed("zoom_in"):
-		spring_length -= zoom_sensibility
-	elif Input.is_action_just_pressed("zoom_out"):
-		spring_length += zoom_sensibility
-	spring_length = clamp(spring_length, min_zoom, max_zoom)
-		
-### PAN ###
-	if Input.is_action_pressed("pan") && not Input.is_action_pressed("secondary_action"):
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
-			if abs(event.relative.y) > pan_deadzone:
-				rotation.x -= event.relative.y * pan_sensibility
+			tween.stop_all()
+			if abs(event.relative.y) > deadzone:
+				rotation.x -= event.relative.y * sensibility
 				rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(80))
-			if abs(event.relative.x) > pan_deadzone:
-				rotation.y -= event.relative.x * pan_sensibility
-### MOVE ###
-	else:
-		if Input.is_action_pressed("secondary_action"):
-			if event is InputEventMouseMotion:
-				if abs(event.relative.y) > pan_deadzone:
-					rotation.x -= event.relative.y * pan_sensibility
-					rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(80))
-					cur_rot_x = rotation.x
+				timer.start(1)
 
-				
-func _process(delta: float) -> void:
-	if Input.is_action_pressed("pan") || Input.is_action_pressed("secondary_action"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		
-	if Input.is_action_pressed("pan"):
-		return
-	else:
-		rotation.x = lerp_angle(rotation.x, cur_rot_x, pan_return_speed * delta)
-		rotation.y = lerp_angle(rotation.y, 0, pan_return_speed * delta)
+func _on_Timer_timeout() -> void:
+	tween.remove_all()
+	tween.interpolate_property(self, "rotation:x", rotation.x, default_rotation_x, 1.0/abs(rotation.x - default_rotation_x), Tween.TRANS_CUBIC, Tween.EASE_IN)
+	tween.start()

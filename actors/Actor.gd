@@ -87,7 +87,7 @@ var enemy = null
 var attacking = false
 
 var inv_slot_num = 80
-var skill_bar_slot_num = 20
+var skill_bar_slot_num = 10
 var gcd_used = 0
 
 onready var gravity = ProjectSettings.get("physics/3d/default_gravity")

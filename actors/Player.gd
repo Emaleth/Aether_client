@@ -44,16 +44,11 @@ func get_input():
 	direction += (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * transform.basis.x
 	direction = direction.normalized()
 	
-	rot_direction = (Input.get_action_strength("turn_left") - Input.get_action_strength("turn_right"))
-	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jumping = true
-
-	if Input.is_action_just_pressed("next_target"):
-		get_target()
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_pressed("secondary_action"):
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			if abs(event.relative.x) > .1: 
 				rotate_y(-event.relative.x * 0.005)

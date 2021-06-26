@@ -30,8 +30,6 @@ transform = Transform( 1.73829, 0, 0, 0, 2.17002, 0, 0, 0, 2.71291, -5.49472, 2.
 
 [node name="Ground" parent="Environment" instance=ExtResource( 6 )]
 
-[node name="Ground2" parent="Environment" instance=ExtResource( 6 )]
-
 [node name="WaterTest" type="MeshInstance" parent="Environment"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8677, -3.10271, -16.2899 )
 layers = 7

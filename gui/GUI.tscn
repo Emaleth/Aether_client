@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://gui/GUI.gd" type="Script" id=1]
 [ext_resource path="res://gui/inventory/Inventory.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://gui/skillbook/Skillbook.tscn" type="PackedScene" id=12]
 [ext_resource path="res://gui/chatbox/ChatBox.tscn" type="PackedScene" id=13]
 [ext_resource path="res://gui/target_resource_panel/TargetResourcesPanel.tscn" type="PackedScene" id=14]
+[ext_resource path="res://textures/ui_icons/position_marker.png" type="Texture" id=15]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -194,7 +195,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 custom_constants/margin_top = 150
-custom_constants/margin_bottom = 150
+custom_constants/margin_bottom = 170
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -202,9 +203,9 @@ __meta__ = {
 [node name="QuantityPanel" parent="MarginContainer" instance=ExtResource( 11 )]
 visible = false
 margin_left = 633.0
-margin_top = 353.0
+margin_top = 343.0
 margin_right = 647.0
-margin_bottom = 367.0
+margin_bottom = 357.0
 
 [node name="CastingBar" parent="MarginContainer" instance=ExtResource( 5 )]
 visible = false
@@ -213,9 +214,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 540.0
-margin_top = 550.0
+margin_top = 530.0
 margin_right = 740.0
-margin_bottom = 570.0
+margin_bottom = 550.0
 rect_min_size = Vector2( 200, 20 )
 size_flags_horizontal = 4
 size_flags_vertical = 10
@@ -227,8 +228,29 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 640.0
-margin_top = 360.0
+margin_top = 350.0
 margin_right = 640.0
-margin_bottom = 360.0
+margin_bottom = 350.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Crosshair" type="TextureRect" parent="CenterContainer"]
+margin_left = 630.0
+margin_top = 350.0
+margin_right = 650.0
+margin_bottom = 370.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 20, 20 )
+mouse_filter = 2
+texture = ExtResource( 15 )
+expand = true
+stretch_mode = 6

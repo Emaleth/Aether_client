@@ -23,28 +23,29 @@ onready var skill_tooltip = $VBoxContainer/SkillTooltip
 func conf(item_name : String = "", item_description : String = "", item_stats : Dictionary = {}, item_attributes : Dictionary = {}, item_rarity : String = "", item_skill : Dictionary = {}):
 	if not is_inside_tree():
 		yield(self, "ready")
-	var star_num = 0
+#	var star_num = 0
 	if item_rarity:
 		match item_rarity:
 			"COMMON":
 				item_name_label.self_modulate = Color.whitesmoke
-				star_num = 1
+#				star_num = 1
 			"UNCOMMON":
 				item_name_label.self_modulate = Color.green
-				star_num = 2
+#				star_num = 2
 			"RARE":
 				item_name_label.self_modulate = Color.blue
-				star_num = 3
+#				star_num = 3
 			"EPIC":
 				item_name_label.self_modulate = Color.purple
-				star_num = 4
+#				star_num = 4
 			"LEGENDARY":
 				item_name_label.self_modulate = Color.yellow
-				star_num = 5
+#				star_num = 5
 	if item_name == "":
 		item_name_panel.hide()
 	else:
-		item_name_label.text = ("★".repeat(star_num) + " %s " + "★".repeat(star_num)) % item_name
+#		item_name_label.text = ("★".repeat(star_num) + " %s " + "★".repeat(star_num)) % item_name
+		item_name_label.text = item_name
 		
 	if item_skill.size() == 0:
 		skill_tooltip.hide()
@@ -94,4 +95,5 @@ func conf(item_name : String = "", item_description : String = "", item_stats : 
 			
 func _on_VBoxContainer_sort_children() -> void:
 	rect_min_size = container.rect_size
-
+	rect_position.x = min(rect_position.x, OS.get_screen_size().x - rect_size.x)
+	rect_position.y = min(rect_position.y, OS.get_screen_size().y - rect_size.y)
