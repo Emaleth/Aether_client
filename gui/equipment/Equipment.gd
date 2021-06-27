@@ -57,7 +57,6 @@ onready var stats = {
 }
 
 func _ready() -> void:
-	$Close/TextureRect.self_modulate = Global.close_button
 	for i in jewellry_grid.get_children():
 		i.small()
 	for i in amulet_grid.get_children():
@@ -94,9 +93,4 @@ func update_stats(s, points):
 		
 func _on_Equipment_sort_children() -> void:
 	rect_size = $HBoxContainer.rect_size
-	yield(get_tree(),"idle_frame")
-	var offset = 4
-	$Close.rect_position = Vector2(rect_size.x - $Close.rect_size.x / 2 - offset, -$Close.rect_size.y / 2 + offset) 
 
-func _on_Close_pressed() -> void:
-	hide()

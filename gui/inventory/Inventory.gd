@@ -13,7 +13,6 @@ func _ready() -> void:
 	scroll.rect_min_size.y = ((window_height_in_slots * 40) + ((window_height_in_slots -1) * grid_v_separation))
 	connect_button()
 	show_slot_type("inventory")
-	$Close/TextureRect.self_modulate = Global.close_button
 	
 func conf(actor, quantity_panel):
 	for old_slot in slot_grid.get_children():
@@ -59,9 +58,4 @@ func connect_button():
 #	scroll.get_v_scrollbar().add_stylebox_override("scroll", grabber_bg)
 #	scroll.get_v_scrollbar().add_stylebox_override("scroll_focus", grabber_bg) 
 
-func _on_Inventory_sort_children() -> void:
-	var offset = 4
-	$Close.rect_position = Vector2(rect_size.x - $Close.rect_size.x / 2 - offset, -$Close.rect_size.y / 2 + offset) 
 
-func _on_Close_pressed() -> void:
-	hide()

@@ -1,6 +1,7 @@
 extends "res://actors/Actor.gd"
 
 onready var minimap_camera_remote_transform : RemoteTransform = $MiniMapCameraRT
+onready var camera_rig = $CameraRig
 
 var test_items = {
 		"ITEM_00000" : 1, "ITEM_00001" : 1, "ITEM_00002" : 1, "ITEM_00003" : 1, "ITEM_00004" : 1,
@@ -18,7 +19,6 @@ func _ready() -> void:
 
 	conf()
 	$GUI.configure_minimap(minimap_camera_remote_transform)
-	connect("update_target_ui", $GUI, "configure_target_resources")
 	connect("update_casting_bar", $GUI, "configure_casting_bar")
 	$GUI.configure_resources_panel(resources)
 	connect("update_resources", $GUI, "update_resources_panel")
@@ -37,7 +37,7 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 	get_input()
-	
+
 func get_input():
 	direction = Vector3.ZERO
 	direction += (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")) * transform.basis.z
@@ -52,8 +52,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			if abs(event.relative.x) > .1: 
 				rotate_y(-event.relative.x * 0.005)
+		
+		if Input.is_action_just_pressed("primary_action"):
+			cast_spell("SPELL_00002", camera_rig.get_point())
 
-
-
+		if Input.is_action_just_pressed("secondary_action"):
+			get_target(camera_rig.get_point())
 
 

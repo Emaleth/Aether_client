@@ -6,6 +6,7 @@ var default_rotation_x : float = deg2rad(-15)
 
 onready var timer = $Timer
 onready var tween = $Tween
+onready var raycast = $Camera/RayCast
 
 
 func _ready() -> void:
@@ -19,6 +20,11 @@ func _unhandled_input(event: InputEvent) -> void:
 				rotation.x -= event.relative.y * sensibility
 				rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(80))
 				timer.start(1)
+
+func get_point():
+	raycast.force_raycast_update()
+#	print(raycast.get_collider().name)
+	return raycast.get_collision_point()
 
 func _on_Timer_timeout() -> void:
 	tween.remove_all()

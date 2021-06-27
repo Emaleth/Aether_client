@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://textures/ui_icons/boots.png" type="Texture" id=1]
 [ext_resource path="res://textures/ui_icons/breeches.png" type="Texture" id=2]
@@ -12,7 +12,6 @@
 [ext_resource path="res://textures/ui_icons/wisdom.png" type="Texture" id=10]
 [ext_resource path="res://textures/ui_icons/strenght.png" type="Texture" id=11]
 [ext_resource path="res://textures/ui_icons/constitytion.png" type="Texture" id=12]
-[ext_resource path="res://textures/ui_icons/close.png" type="Texture" id=13]
 [ext_resource path="res://fonts/NotoSansJP-Regular_18.tres" type="DynamicFont" id=14]
 [ext_resource path="res://gui/placeholder_slot/NullSlot.tscn" type="PackedScene" id=15]
 [ext_resource path="res://textures/ui_icons/agility.png" type="Texture" id=16]
@@ -40,25 +39,25 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
-margin_top = 29.0
-margin_right = 407.0
-margin_bottom = 363.0
+margin_top = 7.0
+margin_right = 412.0
+margin_bottom = 341.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Stats" type="PanelContainer" parent="HBoxContainer"]
-margin_right = 158.0
+margin_right = 163.0
 margin_bottom = 334.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Stats"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 151.0
+margin_right = 156.0
 margin_bottom = 327.0
 
 [node name="Name" type="Label" parent="HBoxContainer/Stats/VBoxContainer"]
-margin_right = 144.0
-margin_bottom = 19.0
+margin_right = 149.0
+margin_bottom = 27.0
 custom_fonts/font = ExtResource( 14 )
 text = "Emaleth"
 align = 1
@@ -66,32 +65,32 @@ valign = 1
 uppercase = true
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/Stats/VBoxContainer"]
-margin_top = 23.0
-margin_right = 144.0
-margin_bottom = 27.0
+margin_top = 31.0
+margin_right = 149.0
+margin_bottom = 35.0
 
 [node name="Label" type="Label" parent="HBoxContainer/Stats/VBoxContainer"]
-margin_top = 31.0
-margin_right = 144.0
-margin_bottom = 73.0
+margin_top = 39.0
+margin_right = 149.0
+margin_bottom = 78.0
 custom_fonts/font = ExtResource( 7 )
 text = "some texct here, ameybe secriprion or something"
 autowrap = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Stats/VBoxContainer"]
-margin_top = 172.0
-margin_right = 144.0
+margin_top = 166.0
+margin_right = 149.0
 margin_bottom = 320.0
 size_flags_vertical = 10
 alignment = 2
 
 [node name="HSeparator2" type="HSeparator" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer"]
-margin_right = 144.0
+margin_right = 149.0
 margin_bottom = 4.0
 
 [node name="Strenght" type="HBoxContainer" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer"]
 margin_top = 8.0
-margin_right = 144.0
+margin_right = 149.0
 margin_bottom = 28.0
 size_flags_vertical = 4
 __meta__ = {
@@ -118,7 +117,7 @@ expand = true
 
 [node name="Label" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Strenght"]
 margin_left = 24.0
-margin_right = 92.0
+margin_right = 100.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -127,8 +126,8 @@ text = "<stat_name>"
 valign = 1
 
 [node name="Q" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Strenght"]
-margin_left = 96.0
-margin_right = 120.0
+margin_left = 104.0
+margin_right = 125.0
 margin_bottom = 20.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 7 )
@@ -137,8 +136,8 @@ align = 2
 valign = 1
 
 [node name="Add" type="Button" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Strenght"]
-margin_left = 124.0
-margin_right = 144.0
+margin_left = 129.0
+margin_right = 149.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
 expand_icon = true
@@ -154,7 +153,7 @@ __meta__ = {
 
 [node name="Dexterity" type="HBoxContainer" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer"]
 margin_top = 32.0
-margin_right = 144.0
+margin_right = 149.0
 margin_bottom = 52.0
 size_flags_vertical = 4
 __meta__ = {
@@ -181,7 +180,7 @@ expand = true
 
 [node name="Label" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Dexterity"]
 margin_left = 24.0
-margin_right = 92.0
+margin_right = 100.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -190,8 +189,8 @@ text = "<stat_name>"
 valign = 1
 
 [node name="Q" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Dexterity"]
-margin_left = 96.0
-margin_right = 120.0
+margin_left = 104.0
+margin_right = 125.0
 margin_bottom = 20.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 7 )
@@ -200,8 +199,8 @@ align = 2
 valign = 1
 
 [node name="Add" type="Button" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Dexterity"]
-margin_left = 124.0
-margin_right = 144.0
+margin_left = 129.0
+margin_right = 149.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
 expand_icon = true
@@ -217,7 +216,7 @@ __meta__ = {
 
 [node name="Constitution" type="HBoxContainer" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer"]
 margin_top = 56.0
-margin_right = 144.0
+margin_right = 149.0
 margin_bottom = 76.0
 size_flags_vertical = 4
 __meta__ = {
@@ -244,7 +243,7 @@ expand = true
 
 [node name="Label" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Constitution"]
 margin_left = 24.0
-margin_right = 92.0
+margin_right = 100.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -253,8 +252,8 @@ text = "<stat_name>"
 valign = 1
 
 [node name="Q" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Constitution"]
-margin_left = 96.0
-margin_right = 120.0
+margin_left = 104.0
+margin_right = 125.0
 margin_bottom = 20.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 7 )
@@ -263,8 +262,8 @@ align = 2
 valign = 1
 
 [node name="Add" type="Button" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Constitution"]
-margin_left = 124.0
-margin_right = 144.0
+margin_left = 129.0
+margin_right = 149.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
 expand_icon = true
@@ -280,7 +279,7 @@ __meta__ = {
 
 [node name="Intelligence" type="HBoxContainer" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer"]
 margin_top = 80.0
-margin_right = 144.0
+margin_right = 149.0
 margin_bottom = 100.0
 size_flags_vertical = 4
 __meta__ = {
@@ -307,7 +306,7 @@ expand = true
 
 [node name="Label" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Intelligence"]
 margin_left = 24.0
-margin_right = 92.0
+margin_right = 100.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -316,8 +315,8 @@ text = "<stat_name>"
 valign = 1
 
 [node name="Q" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Intelligence"]
-margin_left = 96.0
-margin_right = 120.0
+margin_left = 104.0
+margin_right = 125.0
 margin_bottom = 20.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 7 )
@@ -326,8 +325,8 @@ align = 2
 valign = 1
 
 [node name="Add" type="Button" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Intelligence"]
-margin_left = 124.0
-margin_right = 144.0
+margin_left = 129.0
+margin_right = 149.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
 expand_icon = true
@@ -343,7 +342,7 @@ __meta__ = {
 
 [node name="Wisdom" type="HBoxContainer" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer"]
 margin_top = 104.0
-margin_right = 144.0
+margin_right = 149.0
 margin_bottom = 124.0
 size_flags_vertical = 4
 __meta__ = {
@@ -370,7 +369,7 @@ expand = true
 
 [node name="Label" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Wisdom"]
 margin_left = 24.0
-margin_right = 92.0
+margin_right = 100.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -379,8 +378,8 @@ text = "<stat_name>"
 valign = 1
 
 [node name="Q" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Wisdom"]
-margin_left = 96.0
-margin_right = 120.0
+margin_left = 104.0
+margin_right = 125.0
 margin_bottom = 20.0
 size_flags_vertical = 1
 custom_fonts/font = ExtResource( 7 )
@@ -389,8 +388,8 @@ align = 2
 valign = 1
 
 [node name="Add" type="Button" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer/Wisdom"]
-margin_left = 124.0
-margin_right = 144.0
+margin_left = 129.0
+margin_right = 149.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 20, 20 )
 expand_icon = true
@@ -406,26 +405,26 @@ __meta__ = {
 
 [node name="HSeparator" type="HSeparator" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer"]
 margin_top = 128.0
-margin_right = 144.0
+margin_right = 149.0
 margin_bottom = 132.0
 
 [node name="PointsLabel" type="Label" parent="HBoxContainer/Stats/VBoxContainer/VBoxContainer"]
 margin_top = 136.0
-margin_right = 144.0
-margin_bottom = 148.0
+margin_right = 149.0
+margin_bottom = 154.0
 size_flags_vertical = 0
 custom_fonts/font = ExtResource( 7 )
 text = "remaining points: 5"
 align = 2
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
-margin_left = 162.0
-margin_right = 166.0
+margin_left = 167.0
+margin_right = 171.0
 margin_bottom = 334.0
 
 [node name="Eq" type="PanelContainer" parent="HBoxContainer"]
-margin_left = 170.0
-margin_right = 400.0
+margin_left = 175.0
+margin_right = 405.0
 margin_bottom = 334.0
 
 [node name="EquipmentSlots" type="VBoxContainer" parent="HBoxContainer/Eq"]
@@ -594,27 +593,4 @@ margin_left = 88.0
 margin_right = 128.0
 icon = ExtResource( 24 )
 
-[node name="Close" type="Button" parent="."]
-margin_left = 387.0
-margin_top = 7.0
-margin_right = 407.0
-margin_bottom = 27.0
-rect_min_size = Vector2( 20, 20 )
-size_flags_horizontal = 8
-size_flags_vertical = 0
-expand_icon = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TextureRect" type="TextureRect" parent="Close"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = ExtResource( 13 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [connection signal="sort_children" from="." to="." method="_on_Equipment_sort_children"]
-[connection signal="pressed" from="Close" to="." method="_on_Close_pressed"]

@@ -11,7 +11,6 @@ onready var map = $Map
 # BOTTOM LAYER
 onready var minimap = $VBoxContainer/Bottom/MiniMap
 onready var resource_panel = $VBoxContainer/Bottom/VBoxContainer/ResourcePanel
-onready var target_resource_panel = $VBoxContainer/HBoxContainer/TargetResourcePanel
 onready var minimap_panel = $VBoxContainer/Bottom/MiniMap
 onready var skill_panel = $VBoxContainer/Center/Left/SkillPanel
 onready var inventory_panel = $VBoxContainer/Center/Right/Inventory
@@ -92,9 +91,6 @@ func update_resources_panel(res):
 	
 func configure_minimap(minimap_camera_remote_transform):
 	minimap.conf(minimap_camera_remote_transform)
-	
-func configure_target_resources(target):
-	target_resource_panel.conf(target)
 	
 func configure_casting_bar(time):
 	 casting_bar.conf(time)
