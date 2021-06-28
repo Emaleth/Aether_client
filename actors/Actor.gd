@@ -2,7 +2,6 @@ extends KinematicBody
 
 enum STATE {IDLE, RUN, JUMP, FALL, DIE}
 
-var target_list = []
 var enemy_pos = Vector3.ZERO
 var statistics : Dictionary = {
 	"name" : "",
@@ -83,7 +82,7 @@ var jumping = false
 var falling = false
 var rot_direction : float
 var turn_speed : float = 3.0
-var attacking = false
+#var attacking = false
 
 var inv_slot_num = 80
 var skill_bar_slot_num = 10
@@ -114,7 +113,7 @@ func _ready() -> void:
 	set_physics_process(false)
 	# SET INITIAL STATE
 	state = STATE.IDLE
-	attacking = true	
+#	attacking = true	
 	
 func _physics_process(delta: float) -> void:
 	finite_state_machine(delta)
@@ -211,7 +210,10 @@ func modify_resource(resource : String, amount : float, new_max = null) -> void:
 			var h = hit_num.instance()
 			get_tree().root.add_child(h)
 			h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
-			h.conf(amount, Color.red)
+			if amount > 0:
+				h.conf(amount, Color.green)
+			else:
+				h.conf(amount, Color.red)
 	
 func hide_from_minimap_camera(mesh):
 	mesh.set_layer_mask_bit(1, false)
@@ -352,7 +354,7 @@ func use_item(source_slot):
 		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
 			return
 			
-	cast_spell(DB.item_db.get(item_of_interest).SKILL, enemy_pos)
+	cast_spell(DB.item_db.get(item_of_interest).SKILL)
 	if "consumable" in DB.item_db.get(item_of_interest).TYPE:
 		source_slot[0].get(source_slot[1])[source_slot[2]].quantity = (source_slot[0].get(source_slot[1])[source_slot[2]].quantity - 1)
 	update_usage(item_of_interest, OS.get_ticks_msec())
@@ -373,15 +375,12 @@ func use_spell(source_slot):
 		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
 			return
 			
-	cast_spell(item_of_interest, enemy_pos)
+	cast_spell(item_of_interest)
 	yield(get_tree(),"idle_frame")
 	update_usage(item_of_interest, OS.get_ticks_msec())
 	
 func match_item_to_slot(slot : String, item) -> bool:
 	var slot_name = stripper(slot)
-#	print(slot)
-#	print(slot_name)
-#	print(DB.item_db.get(item).TYPE)
 	if slot_name in DB.item_db.get(item).TYPE:
 		return true
 	else:
@@ -490,7 +489,7 @@ func increase_stat(stat):
 		attributes.points -= 1
 		calculate_total_attributes()
 
-func cast_spell(spell, pos):
+func cast_spell(spell):
 	for i in DB.spell_db.get(spell).COST:
 		if DB.spell_db.get(spell).COST.get(i):
 			if resources.get((i).to_lower()).current < float(DB.spell_db.get(spell).COST.get(i)):
@@ -504,7 +503,7 @@ func cast_spell(spell, pos):
 			
 	for i in DB.spell_db.get(spell).COST:
 		if DB.spell_db.get(spell).COST.get(i):
-			resources.get((i).to_lower()).current += float(DB.spell_db.get(spell).COST.get(i))
+			modify_resource((i).to_lower(), float(DB.spell_db.get(spell).COST.get(i)))
 
 	var spell_recivers = []
 	if DB.spell_db.get(spell).PARAMS.RANGE == null:
@@ -513,21 +512,20 @@ func cast_spell(spell, pos):
 			spell_recivers.append(self)
 		# AOE
 		else:
-			for i in target_area.get_overlapping_bodies():
-				if global_transform.origin.distance_to(i.global_transform.origin) > float(DB.spell_db.get(spell).PARAMS.RADIUS):
+			spell_recivers = get_group_target()
+			for i in spell_recivers:
+				if global_transform.origin.distance_to(i.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RADIUS):
 					continue
-				vision_ray.cast_to = Vector3(0, 0, -float(DB.spell_db.get(spell).PARAMS.RADIUS))
-				vision_ray.look_at(i.global_transform.origin + Vector3(0, 0.9, 0), Vector3.UP)
-				vision_ray.force_raycast_update()
-				if vision_ray.get_collider() != i:
-					continue
-				spell_recivers.append(i)
+				else:
+					spell_recivers.remove(spell_recivers.find(i))
+				
 	else:
 		# TARGETED
 		if DB.spell_db.get(spell).PARAMS.RADIUS == null:
-			var enemy = get_target(pos)
-			if global_transform.origin.distance_to(enemy.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RANGE):
-				spell_recivers.append(enemy)
+			var enemy = get_single_target()
+			if enemy:
+				if global_transform.origin.distance_to(enemy.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RANGE):
+					spell_recivers.append(enemy)
 		else:
 			# TARGETED AOE
 			print("targeted aoe")
@@ -539,12 +537,20 @@ func cast_spell(spell, pos):
 
 	using_item = false
 	
-func get_target(pos):
-	vision_ray.look_at(pos, Vector3.UP)
-	vision_ray.force_raycast_update()
-	var enemy = vision_ray.get_collider()
-	return enemy
-		
+func get_single_target():
+	# FUNCTION DEFINED IN CHILD 
+	pass
+	
+func get_group_target():
+	var target_list = []
+	for i in target_area.get_overlapping_bodies():
+		if i is KinematicBody:
+			vision_ray.look_at(i.global_transform.origin + Vector3(0, 0.9, 0), Vector3.UP)
+			vision_ray.force_raycast_update()
+			if vision_ray.get_collider() == i:
+				target_list.append(i)
+	return target_list
+#
 func add_lootable(creature_id, loot):
 	lootable[creature_id] = loot
 
@@ -593,19 +599,3 @@ func calculate_total_attributes():
 	modify_resource("stamina", 0, attributes.total.DEX * 5)
 	emit_signal("update_stats", attributes.total, attributes.points)
 
-#func lerped_rotation():
-#	look_at(enemy.global_transform.origin, Vector3.UP)
-#	rotation.x = 0
-#	var new_basis = (global_transform.looking_at(enemy.global_transform.origin, Vector3.UP)).basis
-#
-#	rotation_tween.remove_all()
-#	rotation_tween.interpolate_property(
-#		self, 
-#		"global_transform:basis", 
-#		global_transform.basis, 
-#		new_basis,
-#		0.1, 
-#		Tween.TRANS_LINEAR, 
-#		Tween.EASE_IN
-#		)
-#	rotation_tween.start()

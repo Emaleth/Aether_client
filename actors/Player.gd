@@ -53,10 +53,12 @@ func _unhandled_input(event: InputEvent) -> void:
 			if abs(event.relative.x) > .1: 
 				rotate_y(-event.relative.x * 0.005)
 		
-		if Input.is_action_just_pressed("primary_action"):
-			cast_spell("SPELL_00002", camera_rig.get_point())
-
-		if Input.is_action_just_pressed("secondary_action"):
-			get_target(camera_rig.get_point())
-
-
+func get_single_target():
+	var enemy
+	vision_ray.look_at(camera_rig.get_point(), Vector3.UP)
+	vision_ray.force_raycast_update()
+	if vision_ray.get_collider() is KinematicBody:
+		enemy = vision_ray.get_collider()
+	else:
+		enemy = null
+	return enemy

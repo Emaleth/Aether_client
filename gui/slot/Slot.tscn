@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/NotoSansJP-Regular_12.tres" type="DynamicFont" id=1]
 [ext_resource path="res://gui/slot/Slot.gd" type="Script" id=2]
+[ext_resource path="res://textures/ui_icons/position_marker.png" type="Texture" id=3]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0, 0, 0, 1, 0, 0, 0, 1 )
@@ -85,6 +86,13 @@ custom_fonts/font = ExtResource( 1 )
 custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 align = 1
 valign = 1
+
+[node name="Selector" type="TextureRect" parent="."]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 3 )
+expand = true
 
 [connection signal="pressed" from="." to="." method="_on_Slot_pressed"]
 [connection signal="tween_step" from="Tween" to="." method="_on_Tween_tween_step"]
