@@ -353,7 +353,10 @@ func use_item(source_slot):
 	else:
 		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
 			return
-			
+	for i in DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COST:
+		if DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COST.get(i):
+			if resources.get((i).to_lower()).current < abs(float(DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COST.get(i))):
+				return
 	cast_spell(DB.item_db.get(item_of_interest).SKILL)
 	if "consumable" in DB.item_db.get(item_of_interest).TYPE:
 		source_slot[0].get(source_slot[1])[source_slot[2]].quantity = (source_slot[0].get(source_slot[1])[source_slot[2]].quantity - 1)
@@ -374,7 +377,10 @@ func use_spell(source_slot):
 	else:
 		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
 			return
-			
+	for i in DB.spell_db.get(item_of_interest).COST:
+		if DB.spell_db.get(item_of_interest).COST.get(i):
+			if resources.get((i).to_lower()).current < abs(float(DB.spell_db.get(item_of_interest).COST.get(i))):
+				return
 	cast_spell(item_of_interest)
 	yield(get_tree(),"idle_frame")
 	update_usage(item_of_interest, OS.get_ticks_msec())
@@ -490,11 +496,6 @@ func increase_stat(stat):
 		calculate_total_attributes()
 
 func cast_spell(spell):
-	for i in DB.spell_db.get(spell).COST:
-		if DB.spell_db.get(spell).COST.get(i):
-			if resources.get((i).to_lower()).current < float(DB.spell_db.get(spell).COST.get(i)):
-				return
-
 	using_item = true
 	if DB.spell_db.get(spell).PARAMS.CAST_TIME:
 		emit_signal("update_casting_bar", float(DB.spell_db.get(spell).PARAMS.CAST_TIME))
@@ -544,7 +545,7 @@ func get_single_target():
 func get_group_target():
 	var target_list = []
 	for i in target_area.get_overlapping_bodies():
-		if i is KinematicBody:
+		if i is KinematicBody and i != self:
 			vision_ray.look_at(i.global_transform.origin + Vector3(0, 0.9, 0), Vector3.UP)
 			vision_ray.force_raycast_update()
 			if vision_ray.get_collider() == i:
