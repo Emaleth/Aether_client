@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Aether - Client"
-run/main_scene="res://main/Main.tscn"
+run/main_scene="res://menu/Menu.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -30,6 +30,7 @@ Global="*res://singletons/Global.gd"
 AudioManager="*res://singletons/AudioManager.tscn"
 Server="*res://singletons/Server.gd"
 Gateway="*res://singletons/Gateway.gd"
+Main="*res://main/Main.gd"
 
 [debug]
 

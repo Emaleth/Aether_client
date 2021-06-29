@@ -17,7 +17,6 @@ func _ready() -> void:
 	statistics.guild = "Empire"
 	statistics.level = "69"
 	statistics.title = "Ancient God"
-
 	conf()
 	gui.configure_minimap(minimap_camera_remote_transform)
 	connect("update_casting_bar", gui, "configure_casting_bar")

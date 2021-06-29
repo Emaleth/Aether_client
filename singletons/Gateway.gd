@@ -44,7 +44,6 @@ func request_login():
 remote func return_login_request(results):
 	if results == true:
 		Server.connect_to_server()
-		get_tree().get_node("Main").get_game()
 		print("logged in")
 	else:
 		print("loggin failed")
