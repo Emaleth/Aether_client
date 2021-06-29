@@ -95,7 +95,7 @@ onready var vision_ray : RayCast = $VisionRay
 onready var hit_num = preload("res://gui/floating_text/FloatingText.tscn")
 onready var name_plate = $NamePlate
 onready var rotation_tween : Tween = $RotationTween
-
+var gui = null
 signal update_resources
 signal update_inventory
 signal update_equipment
@@ -380,6 +380,8 @@ func use_spell(source_slot):
 	for i in DB.spell_db.get(item_of_interest).COST:
 		if DB.spell_db.get(item_of_interest).COST.get(i):
 			if resources.get((i).to_lower()).current < abs(float(DB.spell_db.get(item_of_interest).COST.get(i))):
+				if gui:
+					gui.chat_box.new_msg("system", "not enaught " + str(i).to_lower() + ".")
 				return
 	cast_spell(item_of_interest)
 	yield(get_tree(),"idle_frame")

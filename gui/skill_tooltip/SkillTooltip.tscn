@@ -17,7 +17,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 39.0
-margin_bottom = 115.0
+margin_bottom = 133.0
 
 [node name="SkillNameContainer" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 32.0
@@ -114,6 +114,44 @@ margin_right = 18.0
 size_flags_horizontal = 3
 
 [node name="template" type="Label" parent="VBoxContainer/SkillParamsContainer/SkillParams/value"]
+visible = false
+margin_right = 14.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
+align = 2
+valign = 1
+
+[node name="SkillTargetContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 112.0
+margin_right = 32.0
+margin_bottom = 126.0
+
+[node name="SkillTarget" type="HBoxContainer" parent="VBoxContainer/SkillTargetContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 25.0
+margin_bottom = 7.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="name" type="VBoxContainer" parent="VBoxContainer/SkillTargetContainer/SkillTarget"]
+margin_right = 9.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="template" type="Label" parent="VBoxContainer/SkillTargetContainer/SkillTarget/name"]
+visible = false
+margin_right = 14.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 2 )
+valign = 1
+
+[node name="value" type="VBoxContainer" parent="VBoxContainer/SkillTargetContainer/SkillTarget"]
+margin_left = 13.0
+margin_right = 18.0
+size_flags_horizontal = 3
+
+[node name="template" type="Label" parent="VBoxContainer/SkillTargetContainer/SkillTarget/value"]
 visible = false
 margin_right = 14.0
 margin_bottom = 12.0

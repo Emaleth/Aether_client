@@ -3,8 +3,7 @@ extends Node
 var network = NetworkedMultiplayerENet.new()
 var ip = "127.0.0.1"
 var port = 1909
-func _ready() -> void:
-	connect_to_server()
+
 	
 func connect_to_server():
 	network.create_client(ip, port)

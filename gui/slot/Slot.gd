@@ -139,7 +139,8 @@ func _make_custom_tooltip(_for_text):
 			var skill_description : String = ""
 			var skill_cost : Dictionary = {}
 			var skill_params : Dictionary = {}
-			make_spell_ttp(tooltip, skill_name, skill_description, skill_cost, skill_params)
+			var skill_target : Dictionary = {}
+			make_spell_ttp(tooltip, skill_name, skill_description, skill_cost, skill_params, skill_target)
 		return tooltip
 		
 var cd_text = 0
@@ -244,9 +245,10 @@ func make_item_ttp(tooltip, item_name, item_description, item_stats, item_attrib
 		item_skill["skill_description"] = "skill description"
 		item_skill["skill_cost"] = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).COST
 		item_skill["skill_params"] = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).PARAMS
+		item_skill["skill_target"] = DB.spell_db.get(DB.item_db.get(aactor.get(ttype).get(sslot).item).SKILL).TARGET
 	tooltip.conf(item_name, item_description, item_stats, item_attributes, item_rarity, item_skill)
 	
-func make_spell_ttp(tooltip, skill_name, skill_cost, skill_description, skill_params):
+func make_spell_ttp(tooltip, skill_name, skill_cost, skill_description, skill_params, skill_target):
 	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME:
 		skill_name = DB.spell_db.get(aactor.get(ttype).get(sslot).item).NAME
 	skill_description = "dsgfksdfhgkjhds"
@@ -254,7 +256,9 @@ func make_spell_ttp(tooltip, skill_name, skill_cost, skill_description, skill_pa
 		skill_cost = DB.spell_db.get(aactor.get(ttype).get(sslot).item).COST
 	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).PARAMS:
 		skill_params = DB.spell_db.get(aactor.get(ttype).get(sslot).item).PARAMS
-	tooltip.conf(skill_name, skill_description, skill_cost, skill_params)
+	if DB.spell_db.get(aactor.get(ttype).get(sslot).item).TARGET:
+		skill_target = DB.spell_db.get(aactor.get(ttype).get(sslot).item).TARGET
+	tooltip.conf(skill_name, skill_description, skill_cost, skill_params, skill_target)
 
 func set_item_rarity_bg(item):
 	match DB.item_db.get(item).RARITY:

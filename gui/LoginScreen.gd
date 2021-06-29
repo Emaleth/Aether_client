@@ -3,6 +3,7 @@ extends Control
 onready var login_account = $Login/VBoxContainer/AccountLine
 onready var login_password = $Login/VBoxContainer/PasswordLine
 onready var login_remember = $Login/VBoxContainer/HBoxContainer/CheckBox
+onready var login_button = $Login/VBoxContainer/Login
 
 onready var register_email = $Register/VBoxContainer/EmailLine
 onready var register_password = $Login/VBoxContainer/PasswordLine
@@ -21,7 +22,13 @@ func _on_Register_pressed() -> void:
 	register()
 
 func login():
-	print("logging in...")
+	if login_account.text == "" or login_password.text == "":
+		return
+	else:
+		login_button.disabled = true
+		var username = login_account.get_text()
+		var password = login_password.get_text()
+		Gateway.connect_to_server(username, password)
 	
 func register():
 	print("registering...")

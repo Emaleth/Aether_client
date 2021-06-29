@@ -15,7 +15,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Aether - Client"
-run/main_scene="res://world/World.tscn"
+run/main_scene="res://main/Main.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -29,6 +29,7 @@ ObjectPool="*res://singletons/ObjectPool.gd"
 Global="*res://singletons/Global.gd"
 AudioManager="*res://singletons/AudioManager.tscn"
 Server="*res://singletons/Server.gd"
+Gateway="*res://singletons/Gateway.gd"
 
 [debug]
 
@@ -1213,6 +1214,11 @@ split={
 ui_mode={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777218,"unicode":0,"echo":false,"script":null)
+ ]
+}
+chat={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777221,"unicode":0,"echo":false,"script":null)
  ]
 }
 

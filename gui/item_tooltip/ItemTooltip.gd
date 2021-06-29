@@ -50,7 +50,7 @@ func conf(item_name : String = "", item_description : String = "", item_stats : 
 	if item_skill.size() == 0:
 		skill_tooltip.hide()
 	else:
-		skill_tooltip.conf(item_skill.skill_name, item_skill.skill_description, item_skill.skill_cost, item_skill.skill_params)
+		skill_tooltip.conf(item_skill.skill_name, item_skill.skill_description, item_skill.skill_cost, item_skill.skill_params, item_skill.skill_target)
 		
 	if item_description == "":
 		item_description_panel.hide()

@@ -11,6 +11,7 @@ var test_items = {
 		"ITEM_00020" : 999, "ITEM_00021" : 999}
 		
 func _ready() -> void:
+	gui = $GUI
 	statistics.name = "Emaleth"
 	statistics.race = "Necromorph"
 	statistics.guild = "Empire"
@@ -18,20 +19,20 @@ func _ready() -> void:
 	statistics.title = "Ancient God"
 
 	conf()
-	$GUI.configure_minimap(minimap_camera_remote_transform)
-	connect("update_casting_bar", $GUI, "configure_casting_bar")
-	$GUI.configure_resources_panel(resources)
-	connect("update_resources", $GUI, "update_resources_panel")
+	gui.configure_minimap(minimap_camera_remote_transform)
+	connect("update_casting_bar", gui, "configure_casting_bar")
+	gui.configure_resources_panel(resources)
+	connect("update_resources", gui, "update_resources_panel")
 #	load_eq()
 	anim_player = $DEBUG_AnimationPlayer
-	$GUI.configure_inv(self)
-	connect("update_inventory", $GUI, "configure_inv", [self])
-	$GUI.configure_eq(self)
-	connect("update_equipment", $GUI, "configure_eq", [self])
-	$GUI.configure_quickbar(self)
-	connect("update_quickbar", $GUI, "configure_quickbar", [self])
-	$GUI.configure_spellbook(self)
-	connect("update_spellbook", $GUI, "configure_spellbook", [self])
+	gui.configure_inv(self)
+	connect("update_inventory", gui, "configure_inv", [self])
+	gui.configure_eq(self)
+	connect("update_equipment", gui, "configure_eq", [self])
+	gui.configure_quickbar(self)
+	connect("update_quickbar", gui, "configure_quickbar", [self])
+	gui.configure_spellbook(self)
+	connect("update_spellbook", gui, "configure_spellbook", [self])
 	for i in test_items:
 		add_item_to_inventory(i, test_items.get(i))
 	
