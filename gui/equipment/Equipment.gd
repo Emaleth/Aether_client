@@ -64,7 +64,7 @@ func _ready() -> void:
 		
 func conf(eq, quantity_panel):
 	for i in eq:
-		equipment.get(i).conf(eq, i, quantity_panel)
+		equipment.get(i).conf("equipment", eq, i, quantity_panel)
 #func conf_stats(stats):
 #	for i in stats:
 #		if not stats.get(i).button.is_connected("pressed", actor, "increase_stat"):

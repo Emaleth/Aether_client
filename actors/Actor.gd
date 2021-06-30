@@ -113,7 +113,7 @@ func _ready() -> void:
 	set_physics_process(false)
 	# SET INITIAL STATE
 	state = STATE.IDLE
-#	attacking = true	
+#	attacking = true
 	
 func _physics_process(delta: float) -> void:
 	finite_state_machine(delta)

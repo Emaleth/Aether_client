@@ -112,3 +112,16 @@ func fetch_player_statistics():
 remote func return_player_statistics(data):
 	emit_signal("player_statistics_returned", data)
 	
+# SLOT MANAGEMENT
+	
+func request_slot_swap(source_slot = [], target_slot = []):
+	rpc_id(1, "request_slot_swap", source_slot, target_slot)
+	
+func request_stack_split(source_slot = [], target_slot = [], quantity = 0):
+	rpc_id(1, "request_stack_split")
+func request_item_use(source_slot = []):
+	rpc_id(1, "request_item_use")
+func request_spell_use(source_slot = []):
+	rpc_id(1, "request_spell_use")
+func request_attribute_increase(attribute):
+	rpc_id(1, "request_attribute_increase")

@@ -18,4 +18,4 @@ func conf(spellbook):
 	for i in spellbook:
 		var new_slot = slot_path.instance()
 		slot_grid.add_child(new_slot)
-		new_slot.conf(spellbook, i)
+		new_slot.conf("spellbook", spellbook, i)

@@ -6,15 +6,15 @@ onready var camera_rig = $CameraRig
 
 func _ready() -> void:
 	
-	gui = $GUI
+#	gui = $GUI
 #	statistics.name = "Emaleth"
 #	statistics.race = "Necromorph"
 #	statistics.guild = "Empire"
 #	statistics.level = "69"
 #	statistics.title = "Ancient God"
 #	conf()
-	gui.configure_minimap(minimap_camera_remote_transform)
-	connect("update_casting_bar", gui, "configure_casting_bar")
+	$GUI.configure_minimap(minimap_camera_remote_transform)
+	connect("update_casting_bar", $GUI, "configure_casting_bar")
 #	gui.configure_resources_panel(resources)
 #	connect("update_resources", gui, "update_resources_panel")
 #	load_eq()

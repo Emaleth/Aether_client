@@ -11,7 +11,7 @@ func conf(quickbar, quantity_panel):
 	for i in quickbar:
 		var new_slot = slot.instance()
 		grid.add_child(new_slot)
-		new_slot.conf(quickbar, i, quantity_panel)
+		new_slot.conf("quickbar", quickbar, i, quantity_panel)
 		
 	grid.get_child(selected_slot).get_node("Selector").show()
 	

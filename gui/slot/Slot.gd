@@ -1,5 +1,6 @@
 extends Button
 
+var data_contaier_id
 var data_contaier
 var slot_index
 
@@ -25,7 +26,6 @@ onready var healing_aoe_skill_slot = preload("res://styleboxes/healing_aoe_skill
 onready var damage_target_skill_slot = preload("res://styleboxes/damage_target_skill_slot.tres")
 onready var damage_aoe_skill_slot = preload("res://styleboxes/damage_aoe_skill_slot.tres")
 
-signal request_swap
 signal request_use
 signal request_quantity
 signal request_split
@@ -35,11 +35,10 @@ func _ready() -> void:
 	ghost_image = icon
 	icon = null
 
-func conf(_data_container, _slot_index, quantity_panel = null):
+func conf(_data_container_id : String, _data_container : Dictionary, _slot_index, quantity_panel = null):
+	data_contaier_id = _data_container_id
 	data_contaier = _data_container
 	slot_index = _slot_index
-#	if not is_connected("request_swap", actor, "move_item"):
-#		connect("request_swap", actor, "move_item")
 #	if not is_connected("request_split", actor, "split_item"):
 #		connect("request_split", actor, "split_item")
 #	if quantity_panel:
@@ -95,7 +94,7 @@ func conf(_data_container, _slot_index, quantity_panel = null):
 		
 func get_drag_data(_position: Vector2):
 	if data_contaier.get(slot_index).item:
-		var my_data = [data_contaier, slot_index]
+		var my_data = [data_contaier_id, slot_index]
 		make_preview()
 		return my_data
 
@@ -104,11 +103,11 @@ func can_drop_data(_position: Vector2, _data) -> bool:
 
 func drop_data(_position: Vector2, data) -> void:
 	var source = data
-	var target = [data_contaier, slot_index]
+	var target = [data_contaier_id, slot_index]
 	if Input.is_action_pressed("split") && source[0].get(source[1]).quantity > 1:
 		emit_signal("request_quantity", self, source, target)
 	else:
-		emit_signal("request_swap", source, target)
+		Server.request_slot_swap(source, target)
 
 func _on_Slot_pressed() -> void: 
 	var source = [data_contaier, slot_index]

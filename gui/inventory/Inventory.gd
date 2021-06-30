@@ -21,7 +21,7 @@ func conf(inventory, quantity_panel):
 	for i in inventory:
 		var new_slot = slot_path.instance()
 		slot_grid.add_child(new_slot)
-		new_slot.conf(inventory, i, quantity_panel)
+		new_slot.conf("inventory", inventory, i, quantity_panel)
 		
 func show_slot_type(slot_type : String = ""):
 	for slot in slot_grid.get_children():
