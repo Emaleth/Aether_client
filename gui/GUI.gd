@@ -23,7 +23,19 @@ onready var crosshair = $CenterContainer/Crosshair
 
 func _ready() -> void:
 	switch_ui_mode(COMBAT)
-
+	Server.connect("player_resources_returned", self, "configure_resources_panel")
+	Server.connect("player_spellbook_returned", self, "configure_spellbook")
+	Server.connect("player_quickbar_returned", self, "configure_quickbar")
+	Server.connect("player_equipment_returned", self, "configure_eq")
+	Server.connect("player_inventory_returned", self, "configure_inv")
+	Server.connect("player_attributes_returned", self, "configure_attributes")
+	Server.fetch_player_inventory()
+	Server.fetch_player_equipment()
+	Server.fetch_player_spellbook()
+	Server.fetch_player_resources()
+	Server.fetch_player_quickbar()
+	Server.fetch_player_attributes()
+	
 func _unhandled_input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_mode"):
 		match mode:
@@ -93,13 +105,17 @@ func configure_minimap(minimap_camera_remote_transform):
 	minimap.conf(minimap_camera_remote_transform)
 	
 func configure_casting_bar(time):
-	 casting_bar.conf(time)
+	casting_bar.conf(time)
 	
 func configure_inv(actor):
 	inventory_panel.conf(actor, quantity_panel)
 	
 func configure_eq(actor):
 	equipment_panel.conf(actor, quantity_panel)
+	
+func configure_attributes(actor):
+	pass
+#	equipment_panel.conf_stats(actor)
 	
 func configure_quickbar(actor):
 	quickbar_panel.conf(actor, quantity_panel)

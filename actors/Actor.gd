@@ -2,47 +2,47 @@ extends KinematicBody
 
 enum STATE {IDLE, RUN, JUMP, FALL, DIE}
 
-var enemy_pos = Vector3.ZERO
+#var enemy_pos = Vector3.ZERO
 var statistics : Dictionary = {
-	"name" : "",
-	"guild" : "",
-	"title" : "",
-	"level" : "",
+#	"name" : "",
+#	"guild" : "",
+#	"title" : "",
+#	"level" : "",
 	"speed" : 7,
 	"jump_force" : 12, 
 	"acceleration" : 15,
 	"deceleration" : 10
 }
 
-var attributes = {
-	"points" : 20,
-	"base" : {
-		"STR" : 10,
-		"DEX" : 10,
-		"CONST" : 10,
-		"INT" : 10,
-		"WIS" : 10
-	},
-	"player" : {},
-	"equipment" : {},
-	"effects" : {},
-	"total" : {}
-}
+#var attributes = {
+#	"points" : 20,
+#	"base" : {
+#		"STR" : 10,
+#		"DEX" : 10,
+#		"CONST" : 10,
+#		"INT" : 10,
+#		"WIS" : 10
+#	},
+#	"player" : {},
+#	"equipment" : {},
+#	"effects" : {},
+#	"total" : {}
+#}
 
-var resources : Dictionary = {
-	"health" : {
-		"maximum" : null,
-		"current" : null
-	},
-	"mana" : {
-		"maximum" : null,
-		"current" : null
-	},
-	"stamina" : {
-		"maximum" : null,
-		"current" : null
-	}
-}
+#var resources : Dictionary = {
+#	"health" : {
+#		"maximum" : null,
+#		"current" : null
+#	},
+#	"mana" : {
+#		"maximum" : null,
+#		"current" : null
+#	},
+#	"stamina" : {
+#		"maximum" : null,
+#		"current" : null
+#	}
+#}
 	
 var equipment_slots : Dictionary = {
 	"head" : [],
@@ -66,11 +66,11 @@ var equipment_slots : Dictionary = {
 	"amulet_3" : []
 }
 
-var equipment : Dictionary = {}
-var inventory : Dictionary = {}
-var quickbar : Dictionary = {}
-var lootable : Dictionary = {}
-var spellbook : Dictionary = {}
+#var equipment : Dictionary = {}
+#var inventory : Dictionary = {}
+#var quickbar : Dictionary = {}
+#var lootable : Dictionary = {}
+#var spellbook : Dictionary = {}
 
 # INTERNAL WORKING STUFF
 var state = null
@@ -95,15 +95,15 @@ onready var vision_ray : RayCast = $VisionRay
 onready var hit_num = preload("res://gui/floating_text/FloatingText.tscn")
 onready var name_plate = $NamePlate
 onready var rotation_tween : Tween = $RotationTween
-var gui = null
-signal update_resources
-signal update_inventory
-signal update_equipment
-signal update_quickbar
-signal update_spellbook
-signal update_stats
-signal update_casting_bar
-signal finished_casting
+#var gui = null
+#signal update_resources
+#signal update_inventory
+#signal update_equipment
+#signal update_quickbar
+#signal update_spellbook
+#signal update_stats
+#signal update_casting_bar
+#signal finished_casting
 
 
 func _ready() -> void:
@@ -131,9 +131,9 @@ func finite_state_machine(delta: float) -> void:
 				state = STATE.JUMP
 			if  not is_on_floor():
 				state = STATE.FALL
-			if resources.health.current <= 0:
-				state = STATE.DIE
-					
+#			if resources.health.current <= 0:
+#				state = STATE.DIE
+#
 		STATE.RUN:
 #			anim_player.play("run_forward")
 			gravity_vec = (get_floor_normal() * -1) * gravity
@@ -145,8 +145,8 @@ func finite_state_machine(delta: float) -> void:
 				state = STATE.JUMP
 			if not is_on_floor():
 				state = STATE.FALL
-			if resources.health.current <= 0:
-				state = STATE.DIE
+#			if resources.health.current <= 0:
+#				state = STATE.DIE
 			
 		STATE.JUMP:
 #			anim_player.play("jump")
@@ -181,40 +181,40 @@ func finite_state_machine(delta: float) -> void:
 	move_and_slide(velocity + gravity_vec, Vector3.UP, true)
 
 func conf():
-	make_inventory_construct()
-	make_quickbar_construct()
-	make_equipment_construct()
-	make_attributes_construct()
-	make_spellbook_construct()
+#	make_inventory_construct()
+#	make_quickbar_construct()
+#	make_equipment_construct()
+#	make_attributes_construct()
+#	make_spellbook_construct()
 	remake_equipment_slots_construct()
 	# CALCULATE ATTRIBUTES
-	calculate_total_attributes()
+#	calculate_total_attributes()
 	# RESTART PROCESSING
 	set_process(true)
 	set_physics_process(true)
 	# CONF HUD
-	name_plate.conf(statistics, resources.health)
-	connect("update_resources", name_plate, "upd")
+#	name_plate.conf(statistics, resources.health)
+#	connect("update_resources", name_plate, "upd")
 	
-func modify_resource(resource : String, amount : float, new_max = null) -> void:
-	if state != STATE.DIE:
-		if new_max != null:
-			resources[resource].maximum = new_max
-			if resources[resource].current == null or resources[resource].current > new_max:
-				resources[resource].current = new_max
-		resources[resource].current += amount
-		emit_signal("update_resources", resources)
-		if resource == "health":
-			if amount == 0:
-				return
-			var h = hit_num.instance()
-			get_tree().root.add_child(h)
-			h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
-			if amount > 0:
-				h.conf(amount, Color.green)
-			else:
-				h.conf(amount, Color.red)
-	
+#func modify_resource(resource : String, amount : float, new_max = null) -> void:
+#	if state != STATE.DIE:
+#		if new_max != null:
+#			resources[resource].maximum = new_max
+#			if resources[resource].current == null or resources[resource].current > new_max:
+#				resources[resource].current = new_max
+#		resources[resource].current += amount
+#		emit_signal("update_resources", resources)
+#		if resource == "health":
+#			if amount == 0:
+#				return
+#			var h = hit_num.instance()
+#			get_tree().root.add_child(h)
+#			h.global_transform.origin = global_transform.origin + Vector3(0, 2.5, 0)
+#			if amount > 0:
+#				h.conf(amount, Color.green)
+#			else:
+#				h.conf(amount, Color.red)
+#
 func hide_from_minimap_camera(mesh):
 	mesh.set_layer_mask_bit(1, false)
 	mesh.set_layer_mask_bit(2, false) 
@@ -243,302 +243,301 @@ func hide_from_minimap_camera(mesh):
 #						if z is MeshInstance:
 #							hide_from_minimap_camera(z)
 
-func make_inventory_construct():
-	for i in inv_slot_num:
-		var slot_construct = {"item" : null,
-							"quantity" : 0,
-							"use_time" : 0}
-		inventory[i] = slot_construct
-							
-func make_quickbar_construct():
-	for i in skill_bar_slot_num:
-		var slot_construct = {"item" : null,
-							"quantity" : 0,
-							"use_time" : 0}
-		quickbar[i] = slot_construct
-		
-func make_spellbook_construct():
-	var index = 0
-	for i in DB.spell_db:
-		if DB.spell_db.get(i).TYPE != "ITEM":
-			spellbook[index] = {"item" : i,
-							"quantity" : 1,
-							"use_time" : 0}
-			index += 1
-		
-func make_equipment_construct():
-	for i in equipment_slots:
-		var slot_construct = {"item" : null,
-							"quantity" : 0,
-							"use_time" : 0}
-		equipment[i] = slot_construct
-	
+#func make_inventory_construct():
+#	for i in inv_slot_num:
+#		var slot_construct = {"item" : null,
+#							"quantity" : 0,
+#							"use_time" : 0}
+#		inventory[i] = slot_construct
+#
+#func make_quickbar_construct():
+#	for i in skill_bar_slot_num:
+#		var slot_construct = {"item" : null,
+#							"quantity" : 0,
+#							"use_time" : 0}
+#		quickbar[i] = slot_construct
+#
+#func make_spellbook_construct():
+#	var index = 0
+#	for i in DB.spell_db:
+#		if DB.spell_db.get(i).TYPE != "ITEM":
+#			spellbook[index] = {"item" : i,
+#							"quantity" : 1,
+#							"use_time" : 0}
+#			index += 1
+#
+#func make_equipment_construct():
+#	for i in equipment_slots:
+#		var slot_construct = {"item" : null,
+#							"quantity" : 0,
+#							"use_time" : 0}
+#		equipment[i] = slot_construct
+#
 func remake_equipment_slots_construct():
 	for i in equipment_slots:
 		var slot_construct = {"bone" : equipment_slots[i],
 							"slot" : []}
 		equipment_slots[i] = slot_construct
+#
+#func make_attributes_construct():
+#	for a in attributes.base:
+#		for t in attributes:
+#			if t != "points" and t != "base":
+#				attributes.get(t)[a] = 0 
+#
+#func move_item(source_slot = [], target_slot = []):
+#	var temp_source_slot = source_slot[0].get(source_slot[1]).get(source_slot[2])
+#	var temp_target_slot = get(target_slot[1]).get(target_slot[2])
+#
+#	if target_slot[1] == "spellbook":
+#		return
+#	if source_slot[1] == "spellbook" and target_slot[1] != "quickbar":
+#		return
+#	if source_slot[1] == "quickbar":
+#		if target_slot[1] == "quickbar":
+#			target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+#			source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
+#		else:
+#			source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#
+#	if source_slot[1] != "quickbar":
+#		if target_slot[1] == "quickbar":
+#			target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+#		elif target_slot[1] == "equipment":
+#			if match_item_to_slot(target_slot[2], source_slot[0].get(source_slot[1])[source_slot[2]].item) == true:
+#				if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
+#					if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
+#						target_slot[0].get(target_slot[1])[target_slot[2]].quantity += source_slot[0].get(source_slot[1])[source_slot[2]].quantity
+#						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#					else:
+#						target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+#						source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
+#				else:
+#					target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+#					source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
+#		else:
+#			if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
+#				if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
+#					target_slot[0].get(target_slot[1])[target_slot[2]].quantity += source_slot[0].get(source_slot[1])[source_slot[2]].quantity
+#					source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#				else:
+#					target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+#					source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
+#			else:
+#				target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
+#				source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
+#
+#	if source_slot[1] == "inventory" || target_slot[1] == "inventory":
+#		emit_signal("update_inventory")
+#	if source_slot[1] == "equipment" || target_slot[1] == "equipment":
+#		get_eq_stats()
+#		emit_signal("update_equipment")
+##		load_eq()
+#	emit_signal("update_quickbar")
+	
+#var using_item = false
+#func use_item(source_slot):
+#	if source_slot[1] != "quickbar":
+#		return
+#	var item_of_interest = source_slot[0].get(source_slot[1])[source_slot[2]].item
+#	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
+#	if using_item == true:
+#		return
+#	if not DB.item_db.get(item_of_interest).SKILL:
+#		return
+#	if DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).PARAMS.COOLDOWN:
+#		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).PARAMS.COOLDOWN) * 1000 && last_time_used != 0:
+#			return
+#		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
+#			return
+#	else:
+#		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
+#			return
+#	for i in DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COST:
+#		if DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COST.get(i):
+#			if resources.get((i).to_lower()).current < abs(float(DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COST.get(i))):
+#				return
+#	cast_spell(DB.item_db.get(item_of_interest).SKILL)
+#	if "consumable" in DB.item_db.get(item_of_interest).TYPE:
+#		source_slot[0].get(source_slot[1])[source_slot[2]].quantity = (source_slot[0].get(source_slot[1])[source_slot[2]].quantity - 1)
+#	update_usage(item_of_interest, OS.get_ticks_msec())
+#
+#func use_spell(source_slot):
+#	if source_slot[1] != "quickbar":
+#		return
+#	var item_of_interest = source_slot[0].get(source_slot[1])[source_slot[2]].item
+#	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
+#	if using_item == true:
+#		return
+#	if DB.spell_db.get(item_of_interest).PARAMS.COOLDOWN:
+#		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(item_of_interest).PARAMS.COOLDOWN) * 1000 && last_time_used != 0:
+#			return
+#		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
+#			return
+#	else:
+#		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
+#			return
+#	for i in DB.spell_db.get(item_of_interest).COST:
+#		if DB.spell_db.get(item_of_interest).COST.get(i):
+#			if resources.get((i).to_lower()).current < abs(float(DB.spell_db.get(item_of_interest).COST.get(i))):
+#				if gui:
+#					gui.chat_box.new_msg("system", "not enaught " + str(i).to_lower() + ".")
+#				return
+#	cast_spell(item_of_interest)
+#	yield(get_tree(),"idle_frame")
+#	update_usage(item_of_interest, OS.get_ticks_msec())
+#
+#func match_item_to_slot(slot : String, item) -> bool:
+#	var slot_name = stripper(slot)
+#	if slot_name in DB.item_db.get(item).TYPE:
+#		return true
+#	else:
+#		return false
+#
+#func stripper(hot : String) -> String:
+#	for num in range(0, 9):
+#		if hot.find_last(str(num)) != -1:
+#			hot.erase(hot.find(str(num)), 1)
+#
+#	if hot.ends_with("_"):
+#		if hot.find_last("_") != -1:
+#			hot.erase(hot.find_last("_"), 1)
+#
+#	return hot
+#
+#func split_item(source_slot = [], target_slot = [], q = 0):
+#	if q == 0:
+#		return
+#	if source_slot[1] == "quickbar":
+#		move_item(source_slot, target_slot)
+#	if source_slot[1] != "quickbar":
+#		if target_slot[1] == "quickbar":
+#			move_item(source_slot, target_slot)
+#		elif target_slot[1] == "equipment":
+#			if match_item_to_slot(target_slot[2], source_slot[0].get(source_slot[1])[source_slot[2]].item) == true:
+#				if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
+#					if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
+#						target_slot[0].get(target_slot[1])[target_slot[2]].quantity += q
+#						if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
+#							source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
+#						else:
+#							source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#					else:
+#						move_item(source_slot, target_slot)
+#				elif target_slot[0].get(target_slot[1])[target_slot[2]].item == "":
+#					if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
+#						target_slot[0].get(target_slot[1])[target_slot[2]] = source_slot[0].get(source_slot[1])[source_slot[2]].duplicate()
+#						target_slot[0].get(target_slot[1])[target_slot[2]].quantity = q
+#						if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
+#							source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
+#						else:
+#							source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#					else:
+#						move_item(source_slot, target_slot)
+#		else:
+#			if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
+#				if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
+#					target_slot[0].get(target_slot[1])[target_slot[2]].quantity += q
+#					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
+#						source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
+#					else:
+#						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#				else:
+#					move_item(source_slot, target_slot)
+#			elif target_slot[0].get(target_slot[1])[target_slot[2]].item == null:
+#				if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
+#					target_slot[0].get(target_slot[1])[target_slot[2]] = source_slot[0].get(source_slot[1])[source_slot[2]].duplicate()
+#					target_slot[0].get(target_slot[1])[target_slot[2]].quantity = q
+#					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
+#						source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
+#					else:
+#						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#				else:
+#					move_item(source_slot, target_slot)
+#
+#	if source_slot[1] == "inventory" || target_slot[1] == "inventory":
+#		emit_signal("update_inventory")
+#	if source_slot[1] == "equipment" || target_slot[1] == "equipment":
+#		emit_signal("update_equipment")
+##		load_eq()
+#	emit_signal("update_quickbar")
 
-func make_attributes_construct():
-	for a in attributes.base:
-		for t in attributes:
-			if t != "points" and t != "base":
-				attributes.get(t)[a] = 0 
+#func update_usage(used_item, usage_time):
+#	gcd_used = usage_time
+#	for e in equipment:
+#		if equipment.get(e).quantity < 1:
+#			equipment[e] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#		elif equipment.get(e).item == used_item:
+#			equipment.get(e).use_time = usage_time
+#	for i in inventory:
+#		if inventory.get(i).quantity < 1:
+#			inventory[i] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#		elif inventory.get(i).item == used_item:
+#			inventory.get(i).use_time = usage_time
+#	for q in quickbar:
+#		if quickbar.get(q).quantity < 1:
+#			quickbar[q] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#		elif quickbar.get(q).item == used_item:
+#			quickbar.get(q).use_time = usage_time
+#	for s in spellbook:
+#		if spellbook.get(s).quantity < 1:
+#			spellbook[s] = {"item" : null, "quantity" : 0, "use_time" : 0}
+#		elif spellbook.get(s).item == used_item:
+#			spellbook.get(s).use_time = usage_time
+#	yield(get_tree(), "idle_frame")
+#	emit_signal("update_quickbar")
+#	emit_signal("update_inventory")
+#	emit_signal("update_equipment")
+#	emit_signal("update_spellbook")
 	
-func move_item(source_slot = [], target_slot = []):
-	var temp_source_slot = source_slot[0].get(source_slot[1]).get(source_slot[2])
-	var temp_target_slot = get(target_slot[1]).get(target_slot[2])
-	
-	if target_slot[1] == "spellbook":
-		return
-	if source_slot[1] == "spellbook" and target_slot[1] != "quickbar":
-		return
-	if source_slot[1] == "quickbar":
-		if target_slot[1] == "quickbar":
-			target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
-			source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
-		else:
-			source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
-			
-	if source_slot[1] != "quickbar":
-		if target_slot[1] == "quickbar":
-			target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
-		elif target_slot[1] == "equipment":
-			if match_item_to_slot(target_slot[2], source_slot[0].get(source_slot[1])[source_slot[2]].item) == true:
-				if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
-					if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
-						target_slot[0].get(target_slot[1])[target_slot[2]].quantity += source_slot[0].get(source_slot[1])[source_slot[2]].quantity
-						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
-					else:
-						target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
-						source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
-				else:
-					target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
-					source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
-		else:
-			if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
-				if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
-					target_slot[0].get(target_slot[1])[target_slot[2]].quantity += source_slot[0].get(source_slot[1])[source_slot[2]].quantity
-					source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
-				else:
-					target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
-					source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
-			else:
-				target_slot[0].get(target_slot[1])[target_slot[2]] = temp_source_slot
-				source_slot[0].get(source_slot[1])[source_slot[2]] = temp_target_slot
-	
-	if source_slot[1] == "inventory" || target_slot[1] == "inventory":
-		emit_signal("update_inventory")
-	if source_slot[1] == "equipment" || target_slot[1] == "equipment":
-		get_eq_stats()
-		emit_signal("update_equipment")
-#		load_eq()
-	emit_signal("update_quickbar")
-	
-var using_item = false
-func use_item(source_slot):
-	if source_slot[1] != "quickbar":
-		return
-	var item_of_interest = source_slot[0].get(source_slot[1])[source_slot[2]].item
-	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
-	if using_item == true:
-		return
-	if not DB.item_db.get(item_of_interest).SKILL:
-		return
-	if DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).PARAMS.COOLDOWN:
-		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).PARAMS.COOLDOWN) * 1000 && last_time_used != 0:
-			return
-		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
-			return
-	else:
-		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
-			return
-	for i in DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COST:
-		if DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COST.get(i):
-			if resources.get((i).to_lower()).current < abs(float(DB.spell_db.get(DB.item_db.get(item_of_interest).SKILL).COST.get(i))):
-				return
-	cast_spell(DB.item_db.get(item_of_interest).SKILL)
-	if "consumable" in DB.item_db.get(item_of_interest).TYPE:
-		source_slot[0].get(source_slot[1])[source_slot[2]].quantity = (source_slot[0].get(source_slot[1])[source_slot[2]].quantity - 1)
-	update_usage(item_of_interest, OS.get_ticks_msec())
-	
-func use_spell(source_slot):
-	if source_slot[1] != "quickbar":
-		return
-	var item_of_interest = source_slot[0].get(source_slot[1])[source_slot[2]].item
-	var last_time_used = source_slot[0].get(source_slot[1])[source_slot[2]].use_time
-	if using_item == true:
-		return
-	if DB.spell_db.get(item_of_interest).PARAMS.COOLDOWN:
-		if OS.get_ticks_msec() - last_time_used < float(DB.spell_db.get(item_of_interest).PARAMS.COOLDOWN) * 1000 && last_time_used != 0:
-			return
-		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
-			return
-	else:
-		if OS.get_ticks_msec() - last_time_used < float(Global.cd):
-			return
-	for i in DB.spell_db.get(item_of_interest).COST:
-		if DB.spell_db.get(item_of_interest).COST.get(i):
-			if resources.get((i).to_lower()).current < abs(float(DB.spell_db.get(item_of_interest).COST.get(i))):
-				if gui:
-					gui.chat_box.new_msg("system", "not enaught " + str(i).to_lower() + ".")
-				return
-	cast_spell(item_of_interest)
-	yield(get_tree(),"idle_frame")
-	update_usage(item_of_interest, OS.get_ticks_msec())
-	
-func match_item_to_slot(slot : String, item) -> bool:
-	var slot_name = stripper(slot)
-	if slot_name in DB.item_db.get(item).TYPE:
-		return true
-	else:
-		return false
+#func increase_stat(stat):
+#	if attributes.points > 0:
+#		attributes.player[stat] += 1
+#		attributes.points -= 1
+#		calculate_total_attributes()
 
-func stripper(hot : String) -> String:
-	for num in range(0, 9):
-		if hot.find_last(str(num)) != -1:
-			hot.erase(hot.find(str(num)), 1)
-			
-	if hot.ends_with("_"):
-		if hot.find_last("_") != -1:
-			hot.erase(hot.find_last("_"), 1)
-			
-	return hot
-	
-	
-func split_item(source_slot = [], target_slot = [], q = 0):
-	if q == 0:
-		return
-	if source_slot[1] == "quickbar":
-		move_item(source_slot, target_slot)
-	if source_slot[1] != "quickbar":
-		if target_slot[1] == "quickbar":
-			move_item(source_slot, target_slot)
-		elif target_slot[1] == "equipment":
-			if match_item_to_slot(target_slot[2], source_slot[0].get(source_slot[1])[source_slot[2]].item) == true:
-				if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
-					if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
-						target_slot[0].get(target_slot[1])[target_slot[2]].quantity += q
-						if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
-							source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
-						else:
-							source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
-					else:
-						move_item(source_slot, target_slot)
-				elif target_slot[0].get(target_slot[1])[target_slot[2]].item == "":
-					if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
-						target_slot[0].get(target_slot[1])[target_slot[2]] = source_slot[0].get(source_slot[1])[source_slot[2]].duplicate()
-						target_slot[0].get(target_slot[1])[target_slot[2]].quantity = q
-						if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
-							source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
-						else:
-							source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
-					else:
-						move_item(source_slot, target_slot)
-		else:
-			if source_slot[0].get(source_slot[1])[source_slot[2]].item == target_slot[0].get(target_slot[1])[target_slot[2]].item:
-				if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
-					target_slot[0].get(target_slot[1])[target_slot[2]].quantity += q
-					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
-						source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
-					else:
-						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
-				else:
-					move_item(source_slot, target_slot)
-			elif target_slot[0].get(target_slot[1])[target_slot[2]].item == null:
-				if "stackable" in DB.item_db.get(source_slot[0].get(source_slot[1])[source_slot[2]].item).TYPE:
-					target_slot[0].get(target_slot[1])[target_slot[2]] = source_slot[0].get(source_slot[1])[source_slot[2]].duplicate()
-					target_slot[0].get(target_slot[1])[target_slot[2]].quantity = q
-					if source_slot[0].get(source_slot[1])[source_slot[2]].quantity - q > 0:
-						source_slot[0].get(source_slot[1])[source_slot[2]].quantity -= q
-					else:
-						source_slot[0].get(source_slot[1])[source_slot[2]] = {"item" : null, "quantity" : 0, "use_time" : 0}
-				else:
-					move_item(source_slot, target_slot)
-	
-	if source_slot[1] == "inventory" || target_slot[1] == "inventory":
-		emit_signal("update_inventory")
-	if source_slot[1] == "equipment" || target_slot[1] == "equipment":
-		emit_signal("update_equipment")
-#		load_eq()
-	emit_signal("update_quickbar")
-
-func update_usage(used_item, usage_time):
-	gcd_used = usage_time
-	for e in equipment:
-		if equipment.get(e).quantity < 1:
-			equipment[e] = {"item" : null, "quantity" : 0, "use_time" : 0}
-		elif equipment.get(e).item == used_item:
-			equipment.get(e).use_time = usage_time
-	for i in inventory:
-		if inventory.get(i).quantity < 1:
-			inventory[i] = {"item" : null, "quantity" : 0, "use_time" : 0}
-		elif inventory.get(i).item == used_item:
-			inventory.get(i).use_time = usage_time
-	for q in quickbar:
-		if quickbar.get(q).quantity < 1:
-			quickbar[q] = {"item" : null, "quantity" : 0, "use_time" : 0}
-		elif quickbar.get(q).item == used_item:
-			quickbar.get(q).use_time = usage_time
-	for s in spellbook:
-		if spellbook.get(s).quantity < 1:
-			spellbook[s] = {"item" : null, "quantity" : 0, "use_time" : 0}
-		elif spellbook.get(s).item == used_item:
-			spellbook.get(s).use_time = usage_time
-	yield(get_tree(), "idle_frame")
-	emit_signal("update_quickbar")
-	emit_signal("update_inventory")
-	emit_signal("update_equipment")
-	emit_signal("update_spellbook")
-	
-func increase_stat(stat):
-	if attributes.points > 0:
-		attributes.player[stat] += 1
-		attributes.points -= 1
-		calculate_total_attributes()
-
-func cast_spell(spell):
-	using_item = true
-	if DB.spell_db.get(spell).PARAMS.CAST_TIME:
-		emit_signal("update_casting_bar", float(DB.spell_db.get(spell).PARAMS.CAST_TIME))
-		yield(get_tree().create_timer(float(DB.spell_db.get(spell).PARAMS.CAST_TIME)),"timeout")
-	emit_signal("finished_casting", true)
-			
-	for i in DB.spell_db.get(spell).COST:
-		if DB.spell_db.get(spell).COST.get(i):
-			modify_resource((i).to_lower(), float(DB.spell_db.get(spell).COST.get(i)))
-
-	var spell_recivers = []
-	if DB.spell_db.get(spell).PARAMS.RANGE == null:
-		# SELF
-		if DB.spell_db.get(spell).PARAMS.RADIUS == null:
-			spell_recivers.append(self)
-		# AOE
-		else:
-			spell_recivers = get_group_target()
-			for i in spell_recivers:
-				if global_transform.origin.distance_to(i.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RADIUS):
-					continue
-				else:
-					spell_recivers.remove(spell_recivers.find(i))
-				
-	else:
-		# TARGETED
-		if DB.spell_db.get(spell).PARAMS.RADIUS == null:
-			var enemy = get_single_target()
-			if enemy:
-				if global_transform.origin.distance_to(enemy.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RANGE):
-					spell_recivers.append(enemy)
-		else:
-			# TARGETED AOE
-			print("targeted aoe")
-			
-	for i in spell_recivers:
-		for f in DB.spell_db.get(spell).TARGET:
-			if DB.spell_db.get(spell).TARGET.get(f):
-				i.modify_resource((f).to_lower(), float(DB.spell_db.get(spell).TARGET.get(f)))
-
-	using_item = false
+#func cast_spell(spell):
+#	using_item = true
+#	if DB.spell_db.get(spell).PARAMS.CAST_TIME:
+#		emit_signal("update_casting_bar", float(DB.spell_db.get(spell).PARAMS.CAST_TIME))
+#		yield(get_tree().create_timer(float(DB.spell_db.get(spell).PARAMS.CAST_TIME)),"timeout")
+#	emit_signal("finished_casting", true)
+#
+#	for i in DB.spell_db.get(spell).COST:
+#		if DB.spell_db.get(spell).COST.get(i):
+#			modify_resource((i).to_lower(), float(DB.spell_db.get(spell).COST.get(i)))
+#
+#	var spell_recivers = []
+#	if DB.spell_db.get(spell).PARAMS.RANGE == null:
+#		# SELF
+#		if DB.spell_db.get(spell).PARAMS.RADIUS == null:
+#			spell_recivers.append(self)
+#		# AOE
+#		else:
+#			spell_recivers = get_group_target()
+#			for i in spell_recivers:
+#				if global_transform.origin.distance_to(i.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RADIUS):
+#					continue
+#				else:
+#					spell_recivers.remove(spell_recivers.find(i))
+#
+#	else:
+#		# TARGETED
+#		if DB.spell_db.get(spell).PARAMS.RADIUS == null:
+#			var enemy = get_single_target()
+#			if enemy:
+#				if global_transform.origin.distance_to(enemy.global_transform.origin) <= float(DB.spell_db.get(spell).PARAMS.RANGE):
+#					spell_recivers.append(enemy)
+#		else:
+#			# TARGETED AOE
+#			print("targeted aoe")
+#
+#	for i in spell_recivers:
+#		for f in DB.spell_db.get(spell).TARGET:
+#			if DB.spell_db.get(spell).TARGET.get(f):
+#				i.modify_resource((f).to_lower(), float(DB.spell_db.get(spell).TARGET.get(f)))
+#
+#	using_item = false
 	
 func get_single_target():
 	# FUNCTION DEFINED IN CHILD 
@@ -554,51 +553,51 @@ func get_group_target():
 				target_list.append(i)
 	return target_list
 #
-func add_lootable(creature_id, loot):
-	lootable[creature_id] = loot
+#func add_lootable(creature_id, loot):
+#	lootable[creature_id] = loot
 
-func add_item_to_inventory(new_item, quantity = 1):
-	if quantity > 1 and not "stackable" in DB.item_db.get(new_item).TYPE:
-		for q in quantity:
-			for i in inventory:
-				if inventory.get(i).item == null:
-					inventory.get(i).item = new_item
-					inventory.get(i).quantity = 1
-					break
-				elif i == inventory.size() - 1:
-					print("not enaught inventory space")
-					
-	else:
-		for i in inventory:
-			if inventory.get(i).item == null:
-				inventory.get(i).item = new_item
-				inventory.get(i).quantity = quantity
-				break
-			elif i == inventory.size() - 1:
-				print("not enaught inventory space for stackable")
-
-	emit_signal("update_inventory")
+#func add_item_to_inventory(new_item, quantity = 1):
+#	if quantity > 1 and not "stackable" in DB.item_db.get(new_item).TYPE:
+#		for q in quantity:
+#			for i in inventory:
+#				if inventory.get(i).item == null:
+#					inventory.get(i).item = new_item
+#					inventory.get(i).quantity = 1
+#					break
+#				elif i == inventory.size() - 1:
+#					print("not enaught inventory space")
+#
+#	else:
+#		for i in inventory:
+#			if inventory.get(i).item == null:
+#				inventory.get(i).item = new_item
+#				inventory.get(i).quantity = quantity
+#				break
+#			elif i == inventory.size() - 1:
+#				print("not enaught inventory space for stackable")
+#
+#	emit_signal("update_inventory")
 	
-func get_eq_stats():
-	for i in attributes.equipment:
-		attributes.equipment[i] = 0
-	for piece in equipment:
-		if equipment.get(piece).item:
-			if DB.item_db.get(equipment.get(piece).item).ATTRIBUTES == null:
-				continue
-			for i in DB.item_db.get(equipment.get(piece).item).ATTRIBUTES:
-				attributes.equipment[i] += DB.item_db.get(equipment.get(piece).item).ATTRIBUTES.get(i)
-	calculate_total_attributes()
-
-func calculate_total_attributes():
-	for i in attributes.total:
-		attributes.total[i] = 0
-	for type in attributes:
-		if type != "total" and type != "points":
-			for one in attributes.get(type):
-				attributes.total[one] += attributes.get(type).get(one)
-	modify_resource("health", 0, attributes.total.CONST * 5)
-	modify_resource("mana", 0, attributes.total.WIS * 5)
-	modify_resource("stamina", 0, attributes.total.DEX * 5)
-	emit_signal("update_stats", attributes.total, attributes.points)
+#func get_eq_stats():
+#	for i in attributes.equipment:
+#		attributes.equipment[i] = 0
+#	for piece in equipment:
+#		if equipment.get(piece).item:
+#			if DB.item_db.get(equipment.get(piece).item).ATTRIBUTES == null:
+#				continue
+#			for i in DB.item_db.get(equipment.get(piece).item).ATTRIBUTES:
+#				attributes.equipment[i] += DB.item_db.get(equipment.get(piece).item).ATTRIBUTES.get(i)
+#	calculate_total_attributes()
+#
+#func calculate_total_attributes():
+#	for i in attributes.total:
+#		attributes.total[i] = 0
+#	for type in attributes:
+#		if type != "total" and type != "points":
+#			for one in attributes.get(type):
+#				attributes.total[one] += attributes.get(type).get(one)
+#	modify_resource("health", 0, attributes.total.CONST * 5)
+#	modify_resource("mana", 0, attributes.total.WIS * 5)
+#	modify_resource("stamina", 0, attributes.total.DEX * 5)
+#	emit_signal("update_stats", attributes.total, attributes.points)
 

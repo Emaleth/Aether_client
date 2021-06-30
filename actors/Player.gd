@@ -3,37 +3,31 @@ extends "res://actors/Actor.gd"
 onready var minimap_camera_remote_transform : RemoteTransform = $MiniMapCameraRT
 onready var camera_rig = $CameraRig
 
-var test_items = {
-		"ITEM_00000" : 1, "ITEM_00001" : 1, "ITEM_00002" : 1, "ITEM_00003" : 1, "ITEM_00004" : 1,
-		"ITEM_00005" : 2, "ITEM_00006" : 2, "ITEM_00007" : 2, "ITEM_00008" : 2, "ITEM_00009" : 1, 
-		"ITEM_00010" : 1, "ITEM_00011" : 1, "ITEM_00012" : 1, "ITEM_00013" : 1, "ITEM_00014" : 1, 
-		"ITEM_00015" : 1, "ITEM_00016" : 1, "ITEM_00017" : 1, "ITEM_00018" : 3, "ITEM_00019" : 1, 
-		"ITEM_00020" : 999, "ITEM_00021" : 999}
-		
+
 func _ready() -> void:
+	
 	gui = $GUI
-	statistics.name = "Emaleth"
-	statistics.race = "Necromorph"
-	statistics.guild = "Empire"
-	statistics.level = "69"
-	statistics.title = "Ancient God"
-	conf()
+#	statistics.name = "Emaleth"
+#	statistics.race = "Necromorph"
+#	statistics.guild = "Empire"
+#	statistics.level = "69"
+#	statistics.title = "Ancient God"
+#	conf()
 	gui.configure_minimap(minimap_camera_remote_transform)
 	connect("update_casting_bar", gui, "configure_casting_bar")
-	gui.configure_resources_panel(resources)
-	connect("update_resources", gui, "update_resources_panel")
+#	gui.configure_resources_panel(resources)
+#	connect("update_resources", gui, "update_resources_panel")
 #	load_eq()
 	anim_player = $DEBUG_AnimationPlayer
-	gui.configure_inv(self)
-	connect("update_inventory", gui, "configure_inv", [self])
-	gui.configure_eq(self)
-	connect("update_equipment", gui, "configure_eq", [self])
-	gui.configure_quickbar(self)
-	connect("update_quickbar", gui, "configure_quickbar", [self])
-	gui.configure_spellbook(self)
-	connect("update_spellbook", gui, "configure_spellbook", [self])
-	for i in test_items:
-		add_item_to_inventory(i, test_items.get(i))
+#	gui.configure_inv(self)
+#	Server.connect("player_inventory_returned", gui, "configure_inv")
+#	Server.fetch_player_inventory()
+#	gui.configure_eq(self)
+#	connect("update_equipment", gui, "configure_eq", [self])
+#	gui.configure_quickbar(self)
+#	connect("update_quickbar", gui, "configure_quickbar", [self])
+#	gui.configure_spellbook(self)
+#	connect("update_spellbook", gui, "configure_spellbook", [self])
 	
 func _process(_delta: float) -> void:
 	get_input()
@@ -62,3 +56,7 @@ func get_single_target():
 	else:
 		enemy = null
 	return enemy
+
+#func get_invetory(data):
+#	inventory = data
+#	emit_signal("update_inventory")

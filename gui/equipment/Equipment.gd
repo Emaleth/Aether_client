@@ -62,20 +62,20 @@ func _ready() -> void:
 	for i in amulet_grid.get_children():
 		i.small()
 		
-func conf(actor, quantity_panel):
-	for i in actor.equipment:
-		equipment.get(i).conf(actor, i, "equipment", quantity_panel)
-
-	for i in stats:
-		if not stats.get(i).button.is_connected("pressed", actor, "increase_stat"):
-			stats.get(i).name.text = str(i).capitalize()
-			stats.get(i).number.rect_min_size = stats.get(i).number.rect_size
-			stat_container.rect_min_size = stat_container.rect_size
-			update_stats(actor.attributes.total, actor.attributes.points)
-			stats.get(i).button.connect("pressed", actor, "increase_stat", [i])
-			stats.get(i).button.get_child(0).self_modulate = Global.button_normal
-	if not actor.is_connected("update_stats", self, "update_stats"):
-		actor.connect("update_stats", self, "update_stats")
+func conf(eq, quantity_panel):
+	for i in eq:
+		equipment.get(i).conf(eq, i, quantity_panel)
+#func conf_stats(stats):
+#	for i in stats:
+#		if not stats.get(i).button.is_connected("pressed", actor, "increase_stat"):
+#			stats.get(i).name.text = str(i).capitalize()
+#			stats.get(i).number.rect_min_size = stats.get(i).number.rect_size
+#			stat_container.rect_min_size = stat_container.rect_size
+#			update_stats(actor.attributes.total, actor.attributes.points)
+#			stats.get(i).button.connect("pressed", actor, "increase_stat", [i])
+#			stats.get(i).button.get_child(0).self_modulate = Global.button_normal
+#	if not actor.is_connected("update_stats", self, "update_stats"):
+#		actor.connect("update_stats", self, "update_stats")
 		
 func update_stats(s, points):
 	for i in stats:
