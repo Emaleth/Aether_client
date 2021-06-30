@@ -118,10 +118,12 @@ func request_slot_swap(source_slot = [], target_slot = []):
 	rpc_id(1, "request_slot_swap", source_slot, target_slot)
 	
 func request_stack_split(source_slot = [], target_slot = [], quantity = 0):
-	rpc_id(1, "request_stack_split")
+	rpc_id(1, "request_stack_split")# todo
 func request_item_use(source_slot = []):
-	rpc_id(1, "request_item_use")
+	rpc_id(1, "request_item_use", source_slot)
+	
 func request_spell_use(source_slot = []):
-	rpc_id(1, "request_spell_use")
+	rpc_id(1, "request_spell_use", source_slot)
+	
 func request_attribute_increase(attribute):
-	rpc_id(1, "request_attribute_increase")
+	rpc_id(1, "request_attribute_increase", attribute)

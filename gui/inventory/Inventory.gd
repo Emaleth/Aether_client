@@ -28,8 +28,8 @@ func show_slot_type(slot_type : String = ""):
 		if slot_type == "inventory":
 			slot.show()
 		else:
-			if slot.aactor.get(slot.ttype).get(slot.sslot).item:
-				if slot_type in DB.item_db.get(slot.aactor.get(slot.ttype).get(slot.sslot).item).TYPE:
+			if slot.data_contaier.get(slot.slot_index).item:
+				if slot_type in DB.item_db.get(slot.data_contaier.get(slot.slot_index).item).TYPE:
 					slot.show()
 				else:
 					slot.hide()

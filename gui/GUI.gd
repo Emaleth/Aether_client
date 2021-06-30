@@ -14,7 +14,7 @@ onready var resource_panel = $VBoxContainer/Bottom/VBoxContainer/ResourcePanel
 onready var minimap_panel = $VBoxContainer/Bottom/MiniMap
 onready var skill_panel = $VBoxContainer/Center/Left/SkillPanel
 onready var inventory_panel = $VBoxContainer/Center/Right/Inventory
-onready var equipment_panel = $VBoxContainer/Center/Center/Equipment
+onready var character_sheet_panel = $VBoxContainer/Center/Center/Equipment
 onready var quickbar_panel = $VBoxContainer/Bottom/VBoxContainer/Quickbar
 onready var experience_bar = $VBoxContainer/ExperienceBar
 onready var chat_box = $VBoxContainer/Bottom/ChatBox
@@ -69,14 +69,14 @@ func switch_ui_mode(new_mode):
 		COMBAT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			inventory_panel.hide()
-			equipment_panel.hide()
+			character_sheet_panel.hide()
 			skill_panel.hide()
 			map.hide()
 			crosshair.show()
 		MANAGEMNET:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			inventory_panel.show()
-			equipment_panel.show()
+			character_sheet_panel.show()
 			skill_panel.show()
 			map.hide()
 			crosshair.hide()
@@ -89,17 +89,17 @@ func switch_ui_mode(new_mode):
 		MAP:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			inventory_panel.hide()
-			equipment_panel.hide()
+			character_sheet_panel.hide()
 			skill_panel.hide()
 			crosshair.hide()
 			map.show()
 			
 			
-func configure_resources_panel(res):
-	resource_panel.conf(res)
+func configure_resources_panel(data):
+	resource_panel.conf(data)
 	
-func update_resources_panel(res):
-	resource_panel.update_resources(res)
+func update_resources_panel(data):
+	resource_panel.update_resources(data)
 	
 func configure_minimap(minimap_camera_remote_transform):
 	minimap.conf(minimap_camera_remote_transform)
@@ -107,18 +107,17 @@ func configure_minimap(minimap_camera_remote_transform):
 func configure_casting_bar(time):
 	casting_bar.conf(time)
 	
-func configure_inv(actor):
-	inventory_panel.conf(actor, quantity_panel)
+func configure_inv(data):
+	inventory_panel.conf(data, quantity_panel)
 	
-func configure_eq(actor):
-	equipment_panel.conf(actor, quantity_panel)
+func configure_eq(data):
+	character_sheet_panel.conf(data, quantity_panel)
 	
-func configure_attributes(actor):
-	pass
-#	equipment_panel.conf_stats(actor)
-	
-func configure_quickbar(actor):
-	quickbar_panel.conf(actor, quantity_panel)
+func configure_attributes(data):
+	character_sheet_panel.conf_attributes(data.total, data.points)
+#
+func configure_quickbar(data):
+	quickbar_panel.conf(data, quantity_panel)
 
-func configure_spellbook(actor):
-	skill_panel.conf(actor)
+func configure_spellbook(data):
+	skill_panel.conf(data)

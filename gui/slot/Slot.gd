@@ -15,6 +15,8 @@ onready var timer_label = $TimerLabel
 onready var item_icon_margin = $Margin
 onready var item_icon = $Margin/Icon
 
+onready var empty_item_slot = preload("res://styleboxes/common_item_slot.tres")
+
 onready var common_item_slot = preload("res://styleboxes/common_item_slot.tres")
 onready var uncommon_item_slot = preload("res://styleboxes/uncommon_item_slot.tres")
 onready var rare_item_slot = preload("res://styleboxes/rare_item_slot.tres")
@@ -49,8 +51,6 @@ func conf(_data_container_id : String, _data_container : Dictionary, _slot_index
 			set_item_rarity_bg(data_contaier.get(slot_index).item)
 			if DB.item_db.get(data_contaier.get(slot_index).item).SKILL:
 				disabled = false
-#				if not is_connected("request_use", actor, "use_item"):
-#					connect("request_use", actor, "use_item")
 				cooldown_animation(
 					true, 
 					DB.spell_db.get(DB.item_db.get(data_contaier.get(slot_index).item).SKILL).PARAMS.COOLDOWN,
@@ -58,8 +58,6 @@ func conf(_data_container_id : String, _data_container : Dictionary, _slot_index
 					)
 			else:
 				disabled = true
-#				if is_connected("request_use", actor, "use_item"):
-#					disconnect("request_use", actor, "use_item")
 				cooldown_animation(false)
 				
 			item_icon.texture = load("res://textures/item_icons/%s.png" % data_contaier.get(slot_index).item)
@@ -67,8 +65,6 @@ func conf(_data_container_id : String, _data_container : Dictionary, _slot_index
 		elif "SPELL" in data_contaier.get(slot_index).item:
 			set_skill_type_bg(data_contaier.get(slot_index).item)
 			disabled = false
-#			if not is_connected("request_use", actor, "use_spell"):
-#				connect("request_use", actor, "use_spell")
 			cooldown_animation(
 				true, 
 				DB.spell_db.get(data_contaier.get(slot_index).item).PARAMS.COOLDOWN,
@@ -84,9 +80,8 @@ func conf(_data_container_id : String, _data_container : Dictionary, _slot_index
 		else:
 			quantity_label.text = ""
 	else:
+		set_empty_bg()
 		cooldown_animation(false)
-#		if is_connected("request_use", actor, "use_item"):
-#			disconnect("request_use", actor, "use_item")
 		item_icon.texture = ghost_image
 		item_icon.self_modulate = Global.item_ghost
 		hint_tooltip = ""
@@ -110,8 +105,11 @@ func drop_data(_position: Vector2, data) -> void:
 		Server.request_slot_swap(source, target)
 
 func _on_Slot_pressed() -> void: 
-	var source = [data_contaier, slot_index]
-	emit_signal("request_use", source)
+	var source = [data_contaier_id, slot_index]
+	if "ITEM" in data_contaier.get(slot_index).item:
+		Server.request_item_use(source)
+	elif "SPELL" in data_contaier.get(slot_index).item:
+		Server.request_spell_use(source)
 
 func make_preview():
 	var pw = preview.instance()
@@ -155,13 +153,13 @@ func cooldown_animation(animate : bool, cd = null, last_cd = 0):
 		if current_time - last_cd < cd && last_cd != 0:
 				cd_from = cd
 				cd_now = (cd - (current_time - last_cd))
-#				if cd_now < (global_cd - (current_time - aactor.gcd_used)):
-#					if current_time - aactor.gcd_used < global_cd:
-#						cd_from = global_cd
-#						cd_now = (global_cd - (current_time - aactor.gcd_used))
-#		elif current_time - aactor.gcd_used < global_cd:
-#			cd_from = global_cd
-#			cd_now = (global_cd - (current_time - aactor.gcd_used))
+				if cd_now < (global_cd - (current_time - Global.gcd_used)):
+					if current_time - Global.gcd_used < global_cd:
+						cd_from = global_cd
+						cd_now = (global_cd - (current_time - Global.gcd_used))
+		elif current_time - Global.gcd_used < global_cd:
+			cd_from = global_cd
+			cd_now = (global_cd - (current_time - Global.gcd_used))
 		
 		else:
 			tween.stop_all()
@@ -304,3 +302,10 @@ func set_skill_type_bg(skill):
 			set("custom_styles/focus", legendary_item_slot)
 			set("custom_styles/disabled", legendary_item_slot)
 			set("custom_styles/normal", legendary_item_slot)
+
+func set_empty_bg():
+	set("custom_styles/hover", empty_item_slot)
+	set("custom_styles/pressed", empty_item_slot)
+	set("custom_styles/focus", empty_item_slot)
+	set("custom_styles/disabled", empty_item_slot)
+	set("custom_styles/normal", empty_item_slot)

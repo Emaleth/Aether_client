@@ -5,30 +5,8 @@ onready var camera_rig = $CameraRig
 
 
 func _ready() -> void:
-	
-#	gui = $GUI
-#	statistics.name = "Emaleth"
-#	statistics.race = "Necromorph"
-#	statistics.guild = "Empire"
-#	statistics.level = "69"
-#	statistics.title = "Ancient God"
-#	conf()
-	$GUI.configure_minimap(minimap_camera_remote_transform)
-	connect("update_casting_bar", $GUI, "configure_casting_bar")
-#	gui.configure_resources_panel(resources)
-#	connect("update_resources", gui, "update_resources_panel")
-#	load_eq()
 	anim_player = $DEBUG_AnimationPlayer
-#	gui.configure_inv(self)
-#	Server.connect("player_inventory_returned", gui, "configure_inv")
-#	Server.fetch_player_inventory()
-#	gui.configure_eq(self)
-#	connect("update_equipment", gui, "configure_eq", [self])
-#	gui.configure_quickbar(self)
-#	connect("update_quickbar", gui, "configure_quickbar", [self])
-#	gui.configure_spellbook(self)
-#	connect("update_spellbook", gui, "configure_spellbook", [self])
-	
+
 func _process(_delta: float) -> void:
 	get_input()
 
@@ -57,6 +35,3 @@ func get_single_target():
 		enemy = null
 	return enemy
 
-#func get_invetory(data):
-#	inventory = data
-#	emit_signal("update_inventory")

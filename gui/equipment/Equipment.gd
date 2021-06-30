@@ -65,21 +65,18 @@ func _ready() -> void:
 func conf(eq, quantity_panel):
 	for i in eq:
 		equipment.get(i).conf("equipment", eq, i, quantity_panel)
-#func conf_stats(stats):
-#	for i in stats:
-#		if not stats.get(i).button.is_connected("pressed", actor, "increase_stat"):
-#			stats.get(i).name.text = str(i).capitalize()
-#			stats.get(i).number.rect_min_size = stats.get(i).number.rect_size
-#			stat_container.rect_min_size = stat_container.rect_size
-#			update_stats(actor.attributes.total, actor.attributes.points)
-#			stats.get(i).button.connect("pressed", actor, "increase_stat", [i])
-#			stats.get(i).button.get_child(0).self_modulate = Global.button_normal
-#	if not actor.is_connected("update_stats", self, "update_stats"):
-#		actor.connect("update_stats", self, "update_stats")
 		
-func update_stats(s, points):
+func conf_attributes(attributes, points):
+	for i in attributes:
+		if not stats.get(i).button.is_connected("pressed", Server, "request_attribute_increase"):
+			stats.get(i).name.text = str(i).capitalize()
+			stats.get(i).number.rect_min_size = stats.get(i).number.rect_size
+			stat_container.rect_min_size = stat_container.rect_size
+			stats.get(i).button.connect("pressed", Server, "request_attribute_increase", [i])
+			stats.get(i).button.get_child(0).self_modulate = Global.button_normal
+
 	for i in stats:
-		stats.get(i).number.text = str(s.get(i))
+		stats.get(i).number.text = str(attributes.get(i))
 	if points > 0:
 		for i in stats:
 			stats.get(i).button.show()
