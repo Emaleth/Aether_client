@@ -6,6 +6,8 @@ var port = 1909
 
 var msg_sys = null
 
+var token
+
 signal item_data_returned
 signal spell_data_returned
 
@@ -30,16 +32,22 @@ func _on_connection_failed():
 	
 func _on_connection_succeeded():
 	print("Succesfully connected")
-	fetch_item_data()
-	msg_sys.update_text("fetching item database")
-	yield(self, "item_data_returned")
-	
-	fetch_spell_data()
-	msg_sys.update_text("fetching spell database")
-	yield(self, "spell_data_returned")
-	
-	Main.get_game()
 
+remote func fetch_toke():
+	rpc_id(1, "return_token", token)
+	
+remote func return_token_verification_results(result):
+	if result == true:
+		fetch_item_data()
+		msg_sys.update_text("fetching item database")
+		yield(self, "item_data_returned")
+		fetch_spell_data()
+		msg_sys.update_text("fetching spell database")
+		yield(self, "spell_data_returned")
+		Main.get_game()
+	else:
+		print("login failed")
+		
 # ITEM DB
 func fetch_item_data():
 	rpc_id(1, "fetch_item_data")

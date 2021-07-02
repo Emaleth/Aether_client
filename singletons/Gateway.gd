@@ -41,8 +41,9 @@ func request_login():
 	username = ""
 	password = ""
 	
-remote func return_login_request(results):
+remote func return_login_request(results, token):
 	if results == true:
+		Server.token = token
 		Server.connect_to_server()
 		print("logged in")
 	else:
