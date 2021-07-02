@@ -4,6 +4,7 @@ var network : NetworkedMultiplayerENet = NetworkedMultiplayerENet.new()
 var gateway_api : MultiplayerAPI = MultiplayerAPI.new()
 var ip : String = "127.0.0.1"
 var port : int = 1910
+var cert = load("res://X509_Certificate.crt")
 
 var username
 var password
@@ -19,6 +20,9 @@ func _process(delta: float) -> void:
 func connect_to_server(_username, _password):
 	network = NetworkedMultiplayerENet.new()
 	gateway_api = MultiplayerAPI.new()
+	network.set_dtls_enabled(true)
+	network.set_dtls_verify_enabled(false)
+	network.set_dtls_certificate(cert)
 	username = _username
 	password = _password
 	network.create_client(ip, port)
