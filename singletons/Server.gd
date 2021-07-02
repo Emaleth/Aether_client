@@ -28,12 +28,12 @@ func connect_to_server():
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 	
 func _on_connection_failed():
-	print("Failed to  connect")
+	pass
 	
 func _on_connection_succeeded():
-	print("Succesfully connected")
-
-remote func fetch_toke():
+	pass
+	
+remote func fetch_token():
 	rpc_id(1, "return_token", token)
 	
 remote func return_token_verification_results(result):
@@ -46,7 +46,7 @@ remote func return_token_verification_results(result):
 		yield(self, "spell_data_returned")
 		Main.get_game()
 	else:
-		print("login failed")
+		pass
 		
 # ITEM DB
 func fetch_item_data():

@@ -29,14 +29,12 @@ func connect_to_server(_username, _password):
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 	
 func _on_connection_failed():
-	print("Failed to connect to Authentication server")
+	pass
 	
 func _on_connection_succeeded():
-	print("Succesfully connected to Authentication server")
 	request_login()
 	
 func request_login():
-	print("requesting login")
 	rpc_id(1, "login_request", username, password)
 	username = ""
 	password = ""
