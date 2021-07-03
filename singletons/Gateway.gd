@@ -8,6 +8,7 @@ var cert = load("res://X509_Certificate.crt")
 
 var username
 var password
+var new_account
 
 
 func _process(delta: float) -> void:
@@ -17,7 +18,7 @@ func _process(delta: float) -> void:
 		return
 	custom_multiplayer.poll()
 	
-func connect_to_server(_username, _password):
+func connect_to_server(_username, _password, _new_account):
 	network = NetworkedMultiplayerENet.new()
 	gateway_api = MultiplayerAPI.new()
 	network.set_dtls_enabled(true)
@@ -25,6 +26,7 @@ func connect_to_server(_username, _password):
 	network.set_dtls_certificate(cert)
 	username = _username
 	password = _password
+	new_account = _new_account
 	network.create_client(ip, port)
 	set_custom_multiplayer(gateway_api)
 	custom_multiplayer.set_root_node(self)
@@ -36,10 +38,18 @@ func _on_connection_failed():
 	pass
 	
 func _on_connection_succeeded():
-	request_login()
+	if new_account == true:
+		request_create_account()
+	else:
+		request_login()
 	
 func request_login():
 	rpc_id(1, "login_request", username, password)
+	username = ""
+	password = ""
+	
+func request_create_account():
+	rpc_id(1, "create_account_request", username, password)
 	username = ""
 	password = ""
 	
@@ -53,4 +63,13 @@ remote func return_login_request(results, token):
 	network.disconnect("connection_failed", self, "_on_connection_failed")
 	network.disconnect("connection_succeeded", self, "_on_connection_succeeded")
 	
-	
+remote func return_create_account_request(results, message):
+	if results == true:
+		print("account created, please log in")
+	else:
+		if message == 1:
+			print("couldnt create an account, please try again")
+		if message == 2:
+			print("username already exists")
+	network.disconnect("connection_failed", self, "_on_connection_failed")
+	network.disconnect("connection_succeeded", self, "_on_connection_succeeded")
