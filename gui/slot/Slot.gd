@@ -141,7 +141,7 @@ func _make_custom_tooltip(_for_text):
 var cd_text = 0
 func cooldown_animation(animate : bool, cd = null, last_cd = 0):
 	if animate == true:
-		var current_time = OS.get_ticks_msec()
+		var current_time = Server.client_clock
 		var cd_from = 0
 		var cd_now = 0
 		var global_cd = Global.cd * 1000
