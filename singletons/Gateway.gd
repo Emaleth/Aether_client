@@ -44,12 +44,12 @@ func _on_connection_succeeded():
 		request_login()
 	
 func request_login():
-	rpc_id(1, "login_request", username, password)
+	rpc_id(1, "login_request", username, password.sha256_text())
 	username = ""
 	password = ""
 	
 func request_create_account():
-	rpc_id(1, "create_account_request", username, password)
+	rpc_id(1, "create_account_request", username, password.sha256_text())
 	username = ""
 	password = ""
 	
