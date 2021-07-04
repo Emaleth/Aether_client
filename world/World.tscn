@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://environment/BoulderBig.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/Crate.tscn" type="PackedScene" id=2]
 [ext_resource path="res://environment/Stairs.tscn" type="PackedScene" id=3]
-[ext_resource path="res://actors/Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://environment/ColumnBroken.tscn" type="PackedScene" id=5]
 [ext_resource path="res://environment/Ground.tscn" type="PackedScene" id=6]
 [ext_resource path="res://environment/Column.tscn" type="PackedScene" id=7]
@@ -80,14 +79,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.87132, 9.77739, 8.35067 )
 
 [node name="Actors" type="Node" parent="."]
 
-[node name="Player" parent="Actors" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0 )
-
-[node name="Enemy" parent="Actors" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.46791, -5.91768 )
-
-[node name="Enemy2" parent="Actors" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.76634 )
-
-[node name="Enemy3" parent="Actors" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.56263, 0, -8.19566 )
+[node name="Actor" parent="Actors" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.864389, 0 )

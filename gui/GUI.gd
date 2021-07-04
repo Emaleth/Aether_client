@@ -101,8 +101,9 @@ func configure_resources_panel(data):
 func update_resources_panel(data):
 	resource_panel.update_resources(data)
 	
-func configure_minimap(minimap_camera_remote_transform):
-	minimap.conf(minimap_camera_remote_transform)
+func get_minimap_camera_path():
+	var cam_path = minimap.camera.get_path()
+	return cam_path
 	
 func configure_casting_bar(time):
 	casting_bar.conf(time)

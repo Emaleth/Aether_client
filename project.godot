@@ -1228,7 +1228,9 @@ chat={
 3d_render/layer_1="main"
 3d_physics/layer_1="environment"
 3d_render/layer_2="minimap"
+3d_physics/layer_2="players"
 3d_render/layer_3="map"
+3d_physics/layer_3="mobs"
 
 [locale]
 
