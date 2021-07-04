@@ -24,6 +24,7 @@ signal player_spellbook_returned
 signal player_statistics_returned
 signal player_general_returned
 signal player_attributes_returned
+signal received_casting_time
 
 
 func _physics_process(delta: float) -> void:
@@ -196,3 +197,7 @@ func request_spell_use(source_slot = []):
 	
 func request_attribute_increase(attribute):
 	rpc_id(1, "request_attribute_increase", attribute)
+
+remote func received_casting_time(_time):
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("received_casting_time", _time)

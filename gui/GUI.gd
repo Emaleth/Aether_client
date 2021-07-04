@@ -29,7 +29,8 @@ func _ready() -> void:
 	Server.connect("player_equipment_returned", self, "configure_eq")
 	Server.connect("player_inventory_returned", self, "configure_inv")
 	Server.connect("player_attributes_returned", self, "configure_attributes")
-	
+	Server.connect("received_casting_time", self, "configure_casting_bar")
+
 	Server.fetch_player_inventory()
 	Server.fetch_player_equipment()
 	Server.fetch_player_spellbook()
@@ -99,9 +100,6 @@ func switch_ui_mode(new_mode):
 func configure_resources_panel(data):
 	resource_panel.conf(data)
 	
-func update_resources_panel(data):
-	resource_panel.update_resources(data)
-	
 func get_minimap_camera_path():
 	var cam_path = minimap.camera.get_path()
 	return cam_path
@@ -124,3 +122,5 @@ func configure_quickbar(data):
 func configure_spellbook(data):
 	skill_panel.conf(data)
 
+func add_message_to_chat(time, player, msg):
+	pass
