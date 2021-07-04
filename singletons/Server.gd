@@ -53,118 +53,132 @@ func _on_connection_succeeded():
 	self.add_child(timer)
 	
 remote func return_server_time(server_time, client_time):
-	latency = (OS.get_system_time_msecs() - client_time) / 2
-	client_clock = server_time + latency
+	if get_tree().get_rpc_sender_id() == 1:
+		latency = (OS.get_system_time_msecs() - client_time) / 2
+		client_clock = server_time + latency
 	
 func determine_latency():
 	rpc_id(1, "determine_latency", OS.get_system_time_msecs())
 	
 remote func return_latency(client_time):
-	latency_array.append((OS.get_system_time_msecs() - client_time) / 2)
-	if latency_array.size() == 9:
-		var total_latency = 0
-		latency_array.sort()
-		var mid_point = latency_array[4]
-		for i in range(latency_array.size() -1, -1, -1):
-			if latency_array[i] > (2 * mid_point) and latency_array[i] > 20:
-				latency_array.remove(i)
-			else:
-				total_latency += latency_array[i]
-		delta_latency = (total_latency / latency_array.size()) - latency
-		latency = total_latency / latency_array.size()
-		print("New latency: ", latency)
-		print("New delta latency: ", delta_latency)
-		latency_array.clear()
+	if get_tree().get_rpc_sender_id() == 1:
+		latency_array.append((OS.get_system_time_msecs() - client_time) / 2)
+		if latency_array.size() == 9:
+			var total_latency = 0
+			latency_array.sort()
+			var mid_point = latency_array[4]
+			for i in range(latency_array.size() -1, -1, -1):
+				if latency_array[i] > (2 * mid_point) and latency_array[i] > 20:
+					latency_array.remove(i)
+				else:
+					total_latency += latency_array[i]
+			delta_latency = (total_latency / latency_array.size()) - latency
+			latency = total_latency / latency_array.size()
+#			print("New latency: ", latency)
+#			print("New delta latency: ", delta_latency)
+			latency_array.clear()
 		
 		
 		
 		
 remote func fetch_token():
-	rpc_id(1, "return_token", token)
+	if get_tree().get_rpc_sender_id() == 1:
+		rpc_id(1, "return_token", token)
 	
 remote func return_token_verification_results(result):
-	if result == true:
-		fetch_item_data()
-		msg_sys.update_text("fetching item database")
-		yield(self, "item_data_returned")
-		fetch_spell_data()
-		msg_sys.update_text("fetching spell database")
-		yield(self, "spell_data_returned")
-		Main.get_game()
-	else:
-		pass
+	if get_tree().get_rpc_sender_id() == 1:
+		if result == true:
+			fetch_item_data()
+			msg_sys.update_text("fetching item database")
+			yield(self, "item_data_returned")
+			fetch_spell_data()
+			msg_sys.update_text("fetching spell database")
+			yield(self, "spell_data_returned")
+			Main.get_game()
+		else:
+			pass
 		
 # ITEM DB
 func fetch_item_data():
 	rpc_id(1, "fetch_item_data")
 	
 remote func return_item_data(data):
-	DB.item_db = data
-	emit_signal("item_data_returned")
+	if get_tree().get_rpc_sender_id() == 1:
+		DB.item_db = data
+		emit_signal("item_data_returned")
 
 # SPELL DB
 func fetch_spell_data():
 	rpc_id(1, "fetch_spell_data")
 	
 remote func return_spell_data(data):
-	DB.spell_db = data
-	emit_signal("spell_data_returned")
+	if get_tree().get_rpc_sender_id() == 1:
+		DB.spell_db = data
+		emit_signal("spell_data_returned")
 	
 # INVENTORY
 func fetch_player_inventory():
 	rpc_id(1, "fetch_player_inventory")
 	
 remote func return_player_inventory(data):
-	emit_signal("player_inventory_returned", data)
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("player_inventory_returned", data)
 
 # EQUIPMENT
 func fetch_player_equipment():
 	rpc_id(1, "fetch_player_equipment")
 	
 remote func return_player_equipment(data):
-	emit_signal("player_equipment_returned", data)
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("player_equipment_returned", data)
 
 # SPELLBOOK
 func fetch_player_spellbook():
 	rpc_id(1, "fetch_player_spellbook")
 	
 remote func return_player_spellbook(data):
-	emit_signal("player_spellbook_returned", data)
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("player_spellbook_returned", data)
 
 # RESOURCES
 func fetch_player_resources():
 	rpc_id(1, "fetch_player_resources")
 	
 remote func return_player_resources(data):
-	emit_signal("player_resources_returned", data)
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("player_resources_returned", data)
 
 # QUICKBAR
 func fetch_player_quickbar():
 	rpc_id(1, "fetch_player_quickbar")
 	
 remote func return_player_quickbar(data):
-	emit_signal("player_quickbar_returned", data)
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("player_quickbar_returned", data)
 
 # ATTRIBUTES
 func fetch_player_attributes():
 	rpc_id(1, "fetch_player_attributes")
 	
 remote func return_player_attributes(data):
-	emit_signal("player_attributes_returned", data)
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("player_attributes_returned", data)
 
 # GENERAL
 func fetch_player_general():
 	rpc_id(1, "fetch_player_general")
 	
 remote func return_player_general(data):
-	emit_signal("player_general_returned", data)
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("player_general_returned", data)
 	
 # STATISTICS
 func fetch_player_statistics():
 	rpc_id(1, "fetch_player_statistics")
 	
 remote func return_player_statistics(data):
-	emit_signal("player_statistics_returned", data)
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("player_statistics_returned", data)
 	
 # SLOT MANAGEMENT
 	
@@ -172,7 +186,8 @@ func request_slot_swap(source_slot = [], target_slot = []):
 	rpc_id(1, "request_slot_swap", source_slot, target_slot)
 	
 func request_stack_split(source_slot = [], target_slot = [], quantity = 0):
-	rpc_id(1, "request_stack_split")# todo
+	rpc_id(1, "request_stack_split", source_slot, target_slot, quantity)
+	
 func request_item_use(source_slot = []):
 	rpc_id(1, "request_item_use", source_slot)
 	

@@ -62,9 +62,9 @@ func _ready() -> void:
 	for i in amulet_grid.get_children():
 		i.small()
 		
-func conf(eq, quantity_panel):
+func conf(eq, q_panel):
 	for i in eq:
-		equipment.get(i).conf("equipment", eq, i, quantity_panel)
+		equipment.get(i).conf("equipment", eq, i, q_panel)
 		
 func conf_attributes(attributes, points):
 	for i in attributes:

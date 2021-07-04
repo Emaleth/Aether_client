@@ -4,14 +4,14 @@ var slot = preload("res://gui/slot/Slot.tscn")
 onready var grid = $GridContainer
 var selected_slot = 0
 	
-func conf(quickbar, quantity_panel):
+func conf(quickbar):
 	for old_slot in grid.get_children():
 		grid.remove_child(old_slot)
 		old_slot.queue_free()
 	for i in quickbar:
 		var new_slot = slot.instance()
 		grid.add_child(new_slot)
-		new_slot.conf("quickbar", quickbar, i, quantity_panel)
+		new_slot.conf("quickbar", quickbar, i)
 		
 	grid.get_child(selected_slot).get_node("Selector").show()
 	

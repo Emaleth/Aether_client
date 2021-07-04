@@ -3,6 +3,7 @@ extends Button
 var data_contaier_id
 var data_contaier
 var slot_index
+var item_quantity
 
 var ghost_image = null
 var preview = preload("res://gui/drag_preview/DragPreview.tscn")
@@ -28,24 +29,19 @@ onready var healing_aoe_skill_slot = preload("res://styleboxes/healing_aoe_skill
 onready var damage_target_skill_slot = preload("res://styleboxes/damage_target_skill_slot.tres")
 onready var damage_aoe_skill_slot = preload("res://styleboxes/damage_aoe_skill_slot.tres")
 
-signal request_use
 signal request_quantity
-signal request_split
-
 
 func _ready() -> void:
 	ghost_image = icon
 	icon = null
 
-func conf(_data_container_id : String, _data_container : Dictionary, _slot_index, quantity_panel = null):
+func conf(_data_container_id : String, _data_container : Dictionary, _slot_index, q_panel = null):
 	data_contaier_id = _data_container_id
 	data_contaier = _data_container
 	slot_index = _slot_index
-#	if not is_connected("request_split", actor, "split_item"):
-#		connect("request_split", actor, "split_item")
-#	if quantity_panel:
-#		if not is_connected("request_quantity", quantity_panel, "conf"):
-#			connect("request_quantity", quantity_panel, "conf")
+	if q_panel:
+		if not is_connected("request_quantity", q_panel, "conf"):
+			connect("request_quantity", q_panel, "conf")
 	if data_contaier.get(slot_index).item:
 		if "ITEM" in data_contaier.get(slot_index).item:
 			set_item_rarity_bg(data_contaier.get(slot_index).item)
@@ -75,6 +71,7 @@ func conf(_data_container_id : String, _data_container : Dictionary, _slot_index
 		
 		item_icon.self_modulate = Color.white
 		hint_tooltip = "wierd fuckery"
+		item_quantity = data_contaier.get(slot_index).quantity
 		if data_contaier.get(slot_index).quantity > 1:
 			quantity_label.text = str(data_contaier.get(slot_index).quantity)
 		else:
@@ -85,11 +82,12 @@ func conf(_data_container_id : String, _data_container : Dictionary, _slot_index
 		item_icon.texture = ghost_image
 		item_icon.self_modulate = Global.item_ghost
 		hint_tooltip = ""
+		item_quantity = 0
 		quantity_label.text = ""
 		
 func get_drag_data(_position: Vector2):
 	if data_contaier.get(slot_index).item:
-		var my_data = [data_contaier_id, slot_index]
+		var my_data = [data_contaier_id, slot_index, item_quantity]
 		make_preview()
 		return my_data
 
@@ -98,9 +96,9 @@ func can_drop_data(_position: Vector2, _data) -> bool:
 
 func drop_data(_position: Vector2, data) -> void:
 	var source = data
-	var target = [data_contaier_id, slot_index]
-	if Input.is_action_pressed("split") && source[0].get(source[1]).quantity > 1:
-		emit_signal("request_quantity", self, source, target)
+	var target = [data_contaier_id, slot_index, item_quantity]
+	if Input.is_action_pressed("split"):
+		emit_signal("request_quantity", source, target)
 	else:
 		Server.request_slot_swap(source, target)
 
@@ -204,10 +202,6 @@ func cooldown_animation(animate : bool, cd = null, last_cd = 0):
 func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	timer_label.text = str(stepify(cd_text, 0.1))
 
-func split(panel, source, target, q):
-	emit_signal("request_split", source, target, q)
-	panel.disconnect("send_quantity", self, "split")
-	
 func small():
 	rect_min_size = Vector2(20, 20)
 	rect_size = Vector2(20, 20)

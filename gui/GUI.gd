@@ -29,6 +29,7 @@ func _ready() -> void:
 	Server.connect("player_equipment_returned", self, "configure_eq")
 	Server.connect("player_inventory_returned", self, "configure_inv")
 	Server.connect("player_attributes_returned", self, "configure_attributes")
+	
 	Server.fetch_player_inventory()
 	Server.fetch_player_equipment()
 	Server.fetch_player_spellbook()
@@ -118,7 +119,8 @@ func configure_attributes(data):
 	character_sheet_panel.conf_attributes(data.total, data.points)
 #
 func configure_quickbar(data):
-	quickbar_panel.conf(data, quantity_panel)
+	quickbar_panel.conf(data)
 
 func configure_spellbook(data):
 	skill_panel.conf(data)
+
