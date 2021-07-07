@@ -2,12 +2,13 @@ extends KinematicBody
 
 enum {IDLE, RUN, JUMP, FALL, DEAD}
 
-var speed = 10
+var speed = 8
 var acceleration = 10
 var state = null
 var velocity = Vector3()
-var gravity = (9.8 * Vector3.DOWN)
+var gravity = (30 * Vector3.DOWN)
 var jumping = false
+var mouse_sensitivity = 0.002
 
 onready var gui = preload("res://gui/GUI.tscn")
 onready var indicator = preload("res://gui/actor_indicator/ActorIndicator.tscn")
@@ -35,8 +36,13 @@ func conf():
 	state = IDLE
 	
 func finite_state_machine(delta: float, direction) -> void:
-	var velocity_vector = Vector3.ZERO
-	var gravity_vector = Vector3.ZERO
+	velocity = get_direction() * speed
+	if is_on_floor():
+		velocity.y = gravity * delta
+	else:
+		velocity.y += gravity * delta
+
+
 	match state:
 		IDLE:
 			pass
@@ -53,12 +59,13 @@ func finite_state_machine(delta: float, direction) -> void:
 		DEAD:
 			pass
 			
+			
 	velocity = move_and_slide(velocity, Vector3.UP, true)
 
 func get_direction():
 	var direction = Vector3.ZERO
-	direction += (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")) * transform.basis.z
-	direction += (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * transform.basis.x
+	direction += (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")) * global_transform.basis.z
+	direction += (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * global_transform.basis.x
 	direction = direction.normalized()
 	
 	return direction
@@ -70,5 +77,5 @@ func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
 			if abs(event.relative.x) > .1: 
-				rotate_y(-event.relative.x * 0.005)
+				rotate_y(-event.relative.x * mouse_sensitivity)
 
