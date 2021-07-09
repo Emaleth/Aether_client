@@ -98,6 +98,7 @@ func switch_ui_mode(new_mode):
 			
 			
 func configure_resources_panel(data):
+	PlayerData.resources = data
 	resource_panel.conf(data)
 	
 func get_minimap_camera_path():
@@ -108,18 +109,23 @@ func configure_casting_bar(time):
 	casting_bar.conf(time)
 	
 func configure_inv(data):
+	PlayerData.inventory = data
 	inventory_panel.conf(data, quantity_panel)
 	
 func configure_eq(data):
+	PlayerData.equipment = data
 	character_sheet_panel.conf(data, quantity_panel)
 	
 func configure_attributes(data):
+	PlayerData.attributes = data
 	character_sheet_panel.conf_attributes(data.total, data.points)
 #
 func configure_quickbar(data):
+	PlayerData.quickbar = data
 	quickbar_panel.conf(data)
 
 func configure_spellbook(data):
+	PlayerData.spellbook = data
 	skill_panel.conf(data)
 
 func add_message_to_chat(time, player, msg):
