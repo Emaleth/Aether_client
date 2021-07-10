@@ -104,10 +104,11 @@ func drop_data(_position: Vector2, data) -> void:
 
 func _on_Slot_pressed() -> void: 
 	var source = [data_contaier_id, slot_index]
-	if "ITEM" in data_contaier.get(slot_index).item:
-		Server.request_item_use(source)
-	elif "SPELL" in data_contaier.get(slot_index).item:
-		Server.request_spell_use(source)
+	if data_contaier.get(slot_index).item:
+		if "ITEM" in data_contaier.get(slot_index).item:
+			Server.request_item_use(source)
+		elif "SPELL" in data_contaier.get(slot_index).item:
+			Server.request_spell_use(source)
 
 func make_preview():
 	var pw = preview.instance()

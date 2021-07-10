@@ -31,7 +31,6 @@ AudioManager="*res://singletons/AudioManager.tscn"
 Server="*res://singletons/Server.gd"
 Gateway="*res://singletons/Gateway.gd"
 Main="*res://main/Main.gd"
-PlayerData="*res://singletons/PlayerData.gd"
 
 [debug]
 
@@ -1243,3 +1242,4 @@ locale_filter=[ 0, [  ] ]
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
+environment/default_environment="res://environment.tres"

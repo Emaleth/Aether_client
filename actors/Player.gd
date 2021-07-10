@@ -2,11 +2,11 @@ extends KinematicBody
 
 enum {IDLE, RUN, JUMP, FALL, DEAD}
 
-var speed = 8
+var speed = 10
 var acceleration = 10
 var state = null
-var velocity = Vector3()
-var gravity = (30 * Vector3.DOWN)
+var velocity = Vector3.ZERO
+var gravity = -100
 var jumping = false
 var mouse_sensitivity = 0.002
 
@@ -36,12 +36,14 @@ func conf():
 	state = IDLE
 	
 func finite_state_machine(delta: float, direction) -> void:
-	velocity = get_direction() * speed
+	velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
+	velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
 	if is_on_floor():
 		velocity.y = gravity * delta
 	else:
 		velocity.y += gravity * delta
-
+#	if jumping == true:
+#		velocity.y = JUMP
 
 	match state:
 		IDLE:
@@ -60,7 +62,7 @@ func finite_state_machine(delta: float, direction) -> void:
 			pass
 			
 			
-	velocity = move_and_slide(velocity, Vector3.UP, true)
+	move_and_slide(velocity, Vector3.UP, true)
 
 func get_direction():
 	var direction = Vector3.ZERO
