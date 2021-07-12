@@ -8,17 +8,20 @@ var deceleration = 30
 var jump_force = 20
 # game / environment variable
 var mouse_sensitivity = 0.005
-var gravity = -50
+var gravity_force = 50
 # internal variables
 var state = null
+var snap = Vector3.ZERO
 var velocity = Vector3.ZERO
-var gravity_vec = Vector3.ZERO
+var gravity = Vector3.ZERO
+var movement = Vector3.ZERO
 var jumping = false
 
 onready var gui = preload("res://gui/GUI.tscn")
 onready var indicator = preload("res://gui/actor_indicator/ActorIndicator.tscn")
 onready var camera_rig = preload("res://actors/CameraRig.tscn")
 onready var minimap_camera_anchor = preload("res://actors/MinimapCameraAnchor.tscn")
+
 
 func _ready() -> void:
 	conf()
@@ -43,49 +46,45 @@ func conf():
 func finite_state_machine(delta: float, direction) -> void:
 	match state:
 		IDLE:
-			velocity.x = lerp(velocity.x, 0, deceleration * delta)
-			velocity.z = lerp(velocity.z, 0, deceleration * delta)
-			gravity_vec = gravity * get_floor_normal() * delta
-#			velocity += gravity * get_floor_normal() * delta
-#			velocity.y = gravity * delta
+			snap = -get_floor_normal()
+			velocity = velocity.linear_interpolate(Vector3.ZERO, deceleration * delta)
+			gravity = Vector3.ZERO
 			
 			if get_direction() != Vector3.ZERO:
 				state = RUN
-			if is_on_floor() and jumping == true:
+			if jumping == true:
 				state = JUMP
 			if not is_on_floor() and velocity.y < 0:
 				state = FALL
-	
+
 		RUN:
-			velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
-			velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
-			gravity_vec = gravity * get_floor_normal() * delta
-#			velocity.y = gravity * delta
+			snap = -get_floor_normal()
+			velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
+			gravity = Vector3.ZERO
 			
-			if is_on_floor() and jumping == true:
+			if jumping == true:
 				state = JUMP
-			if not is_on_floor() and velocity.y < 0:
+			if not is_on_floor():
 				state = FALL
 			if get_direction() == Vector3.ZERO:
 				state = IDLE
 	
 		JUMP:
-			velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
-			velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
-			gravity_vec += gravity * Vector3.DOWN * delta
-#			velocity.y += gravity * delta
+			snap = Vector3.DOWN
+			velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
+			gravity += Vector3.DOWN * gravity_force * delta
 			if jumping == true:
-				velocity.y = jump_force
+				snap = Vector3.ZERO
+				gravity = Vector3.UP * jump_force
 				jumping = false
 			
-			if not is_on_floor() and velocity.y < 0:
+			if gravity.y < 0:
 				state = FALL
 			
 		FALL:
-			velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
-			velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
-			gravity_vec += gravity * Vector3.DOWN * delta
-#			velocity.y += gravity * delta
+			snap = Vector3.DOWN
+			velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
+			gravity += Vector3.DOWN * gravity_force * delta
 			
 			if is_on_floor():
 				state = IDLE
@@ -93,7 +92,8 @@ func finite_state_machine(delta: float, direction) -> void:
 		DEAD:
 			pass
 			
-	velocity = move_and_slide(velocity + gravity_vec, Vector3.UP, true)
+	movement = velocity + gravity
+	move_and_slide_with_snap(movement, snap, Vector3.UP)
 	
 func get_direction():
 	var direction = Vector3.ZERO
