@@ -4,13 +4,15 @@ enum {IDLE, RUN, JUMP, FALL, DEAD}
 # player variables
 var speed = 10
 var acceleration = 10
-var deceleration = 20
+var deceleration = 30
+var jump_force = 20
 # game / environment variable
-var mouse_sensitivity = 0.002
-var gravity = -100
+var mouse_sensitivity = 0.005
+var gravity = -50
 # internal variables
 var state = null
 var velocity = Vector3.ZERO
+var gravity_vec = Vector3.ZERO
 var jumping = false
 
 onready var gui = preload("res://gui/GUI.tscn")
@@ -43,7 +45,9 @@ func finite_state_machine(delta: float, direction) -> void:
 		IDLE:
 			velocity.x = lerp(velocity.x, 0, deceleration * delta)
 			velocity.z = lerp(velocity.z, 0, deceleration * delta)
-			velocity.y = gravity * delta
+			gravity_vec = gravity * get_floor_normal() * delta
+#			velocity += gravity * get_floor_normal() * delta
+#			velocity.y = gravity * delta
 			
 			if get_direction() != Vector3.ZERO:
 				state = RUN
@@ -55,7 +59,8 @@ func finite_state_machine(delta: float, direction) -> void:
 		RUN:
 			velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
 			velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
-			velocity.y = gravity * delta
+			gravity_vec = gravity * get_floor_normal() * delta
+#			velocity.y = gravity * delta
 			
 			if is_on_floor() and jumping == true:
 				state = JUMP
@@ -67,9 +72,10 @@ func finite_state_machine(delta: float, direction) -> void:
 		JUMP:
 			velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
 			velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
-			velocity.y += gravity * delta
+			gravity_vec += gravity * Vector3.DOWN * delta
+#			velocity.y += gravity * delta
 			if jumping == true:
-				velocity.y = JUMP
+				velocity.y = jump_force
 				jumping = false
 			
 			if not is_on_floor() and velocity.y < 0:
@@ -78,7 +84,8 @@ func finite_state_machine(delta: float, direction) -> void:
 		FALL:
 			velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
 			velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
-			velocity.y += gravity * delta
+			gravity_vec += gravity * Vector3.DOWN * delta
+#			velocity.y += gravity * delta
 			
 			if is_on_floor():
 				state = IDLE
@@ -86,8 +93,8 @@ func finite_state_machine(delta: float, direction) -> void:
 		DEAD:
 			pass
 			
-	move_and_slide(velocity, Vector3.UP, true)
-
+	velocity = move_and_slide(velocity + gravity_vec, Vector3.UP, true)
+	
 func get_direction():
 	var direction = Vector3.ZERO
 	direction += (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")) * global_transform.basis.z
