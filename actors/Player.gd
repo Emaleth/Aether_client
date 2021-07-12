@@ -1,14 +1,17 @@
 extends KinematicBody
 
 enum {IDLE, RUN, JUMP, FALL, DEAD}
-
+# player variables
 var speed = 10
 var acceleration = 10
+var deceleration = 20
+# game / environment variable
+var mouse_sensitivity = 0.002
+var gravity = -100
+# internal variables
 var state = null
 var velocity = Vector3.ZERO
-var gravity = -100
 var jumping = false
-var mouse_sensitivity = 0.002
 
 onready var gui = preload("res://gui/GUI.tscn")
 onready var indicator = preload("res://gui/actor_indicator/ActorIndicator.tscn")
@@ -36,31 +39,52 @@ func conf():
 	state = IDLE
 	
 func finite_state_machine(delta: float, direction) -> void:
-	velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
-	velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
-	if is_on_floor():
-		velocity.y = gravity * delta
-	else:
-		velocity.y += gravity * delta
-#	if jumping == true:
-#		velocity.y = JUMP
-
 	match state:
 		IDLE:
-			pass
-#
-		RUN:
-			pass
+			velocity.x = lerp(velocity.x, 0, deceleration * delta)
+			velocity.z = lerp(velocity.z, 0, deceleration * delta)
+			velocity.y = gravity * delta
 			
+			if get_direction() != Vector3.ZERO:
+				state = RUN
+			if is_on_floor() and jumping == true:
+				state = JUMP
+			if not is_on_floor() and velocity.y < 0:
+				state = FALL
+	
+		RUN:
+			velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
+			velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
+			velocity.y = gravity * delta
+			
+			if is_on_floor() and jumping == true:
+				state = JUMP
+			if not is_on_floor() and velocity.y < 0:
+				state = FALL
+			if get_direction() == Vector3.ZERO:
+				state = IDLE
+	
 		JUMP:
-			pass
+			velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
+			velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
+			velocity.y += gravity * delta
+			if jumping == true:
+				velocity.y = JUMP
+				jumping = false
+			
+			if not is_on_floor() and velocity.y < 0:
+				state = FALL
 			
 		FALL:
-			pass
+			velocity.x = lerp(velocity.x, get_direction().x * speed, acceleration * delta)
+			velocity.z = lerp(velocity.z, get_direction().z * speed, acceleration * delta)
+			velocity.y += gravity * delta
 			
+			if is_on_floor():
+				state = IDLE
+				
 		DEAD:
 			pass
-			
 			
 	move_and_slide(velocity, Vector3.UP, true)
 
