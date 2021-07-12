@@ -19,7 +19,6 @@ onready var quickbar_panel = $VBoxContainer/Bottom/VBoxContainer/Quickbar
 onready var experience_bar = $VBoxContainer/ExperienceBar
 onready var chat_box = $VBoxContainer/Bottom/ChatBox
 
-onready var crosshair = $CenterContainer/Crosshair
 
 func _ready() -> void:
 	switch_ui_mode(COMBAT)
@@ -74,14 +73,12 @@ func switch_ui_mode(new_mode):
 			character_sheet_panel.hide()
 			skill_panel.hide()
 			map.hide()
-			crosshair.show()
 		MANAGEMNET:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			inventory_panel.show()
 			character_sheet_panel.show()
 			skill_panel.show()
 			map.hide()
-			crosshair.hide()
 		LOOT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			pass 
@@ -93,7 +90,6 @@ func switch_ui_mode(new_mode):
 			inventory_panel.hide()
 			character_sheet_panel.hide()
 			skill_panel.hide()
-			crosshair.hide()
 			map.show()
 			
 			
