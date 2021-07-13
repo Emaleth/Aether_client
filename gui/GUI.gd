@@ -29,6 +29,7 @@ func _ready() -> void:
 	Server.connect("player_inventory_returned", self, "configure_inv")
 	Server.connect("player_attributes_returned", self, "configure_attributes")
 	Server.connect("received_casting_time", self, "configure_casting_bar")
+	Server.connect("received_chat", self, "add_messages_to_chat")
 
 	Server.fetch_player_inventory()
 	Server.fetch_player_equipment()
@@ -118,5 +119,6 @@ func configure_quickbar(data):
 func configure_spellbook(data):
 	skill_panel.conf(data)
 
-func add_message_to_chat(time, player, msg):
-	pass
+func add_messages_to_chat(msgs):
+	chat_box.add_msgs(msgs)
+

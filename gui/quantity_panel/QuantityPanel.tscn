@@ -21,7 +21,7 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 121.0
-margin_bottom = 55.0
+margin_bottom = 63.0
 mouse_filter = 2
 alignment = 1
 __meta__ = {
@@ -29,14 +29,13 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 1.0
 margin_right = 114.0
-margin_bottom = 25.0
+margin_bottom = 28.0
 mouse_filter = 2
 
 [node name="Less" type="Button" parent="VBoxContainer/HBoxContainer"]
 margin_right = 24.0
-margin_bottom = 24.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 24, 24 )
 custom_constants/hseparation = 0
 text = "<"
@@ -54,8 +53,8 @@ __meta__ = {
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
 margin_left = 28.0
-margin_right = 86.0
-margin_bottom = 24.0
+margin_right = 74.0
+margin_bottom = 28.0
 custom_fonts/font = ExtResource( 1 )
 align = 1
 max_length = 3
@@ -63,9 +62,9 @@ caret_blink = true
 caret_blink_speed = 0.5
 
 [node name="More" type="Button" parent="VBoxContainer/HBoxContainer"]
-margin_left = 90.0
-margin_right = 114.0
-margin_bottom = 24.0
+margin_left = 78.0
+margin_right = 102.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 24, 24 )
 custom_constants/hseparation = 0
 text = ">"
@@ -81,10 +80,10 @@ __meta__ = {
 }
 
 [node name="Accept" type="Button" parent="VBoxContainer"]
-margin_left = 28.0
-margin_top = 29.0
-margin_right = 85.0
-margin_bottom = 47.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = 82.0
+margin_bottom = 56.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 1 )

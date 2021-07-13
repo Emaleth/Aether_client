@@ -25,6 +25,7 @@ signal player_statistics_returned
 signal player_general_returned
 signal player_attributes_returned
 signal received_casting_time
+signal received_chat
 
 
 func _physics_process(delta: float) -> void:
@@ -201,3 +202,10 @@ func request_attribute_increase(attribute):
 remote func received_casting_time(_time):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("received_casting_time", _time)
+
+func send_chat_msg(_text):
+	rpc_id(1, "send_chat_msg", _text)
+	
+remote func receive_chat_msg(_array):
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("received_chat", _array)

@@ -34,9 +34,10 @@ func _on_LineEdit_text_entered(_new_text: String) -> void:
 	hide()
 
 func _unhandled_key_input(_event: InputEventKey) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		Server.request_stack_split(source_slot, target_slot, quantity)
-		hide()
+	if visible:
+		if Input.is_action_just_pressed("ui_accept"):
+			Server.request_stack_split(source_slot, target_slot, quantity)
+			hide()
 		
 func _on_Accept_pressed() -> void:
 	Server.request_stack_split(source_slot, target_slot, quantity)
