@@ -26,6 +26,8 @@ signal player_general_returned
 signal player_attributes_returned
 signal received_casting_time
 signal received_chat
+signal spawn_player
+signal despawn_player
 
 
 func _physics_process(delta: float) -> void:
@@ -209,3 +211,11 @@ func send_chat_msg(_text):
 remote func receive_chat_msg(_array):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("received_chat", _array)
+
+remote func spawn_new_player(player_id, position):
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("spawn_player", player_id, position)
+		
+remote func despawn_new_player(player_id):
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("despawn_player", player_id)
