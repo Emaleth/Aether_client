@@ -21,6 +21,7 @@ var movement = Vector3.ZERO
 var jumping = false
 var walking = false
 var sprinting = false
+var player_state # collection of player data to send to the server
 
 onready var gui = preload("res://gui/GUI.tscn")
 onready var indicator = preload("res://gui/actor_indicator/ActorIndicator.tscn")
@@ -29,6 +30,7 @@ onready var minimap_camera_anchor = preload("res://actors/MinimapCameraAnchor.ts
 
 
 func _ready() -> void:
+	set_physics_process(false)
 	conf()
 	
 func _physics_process(delta: float) -> void:

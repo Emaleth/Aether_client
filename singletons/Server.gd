@@ -99,6 +99,8 @@ remote func return_token_verification_results(result):
 			msg_sys.update_text("fetching spell database")
 			yield(self, "spell_data_returned")
 			Main.get_game()
+			yield(get_tree().create_timer(1),"timeout")
+			get_node("../World/Actors/Actor").set_physics_process(true)
 		else:
 			pass
 		
