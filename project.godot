@@ -26,8 +26,6 @@ default_bus_layout="res://audio_bus_layout.tres"
 
 DB="*res://singletons/DBLoader.gd"
 ObjectPool="*res://singletons/ObjectPool.gd"
-Global="*res://singletons/Global.gd"
-AudioManager="*res://singletons/AudioManager.tscn"
 Server="*res://singletons/Server.gd"
 Gateway="*res://singletons/Gateway.gd"
 Main="*res://main/Main.gd"

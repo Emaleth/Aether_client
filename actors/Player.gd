@@ -23,33 +23,14 @@ var walking = false
 var sprinting = false
 var player_state # collection of player data to send to the server
 
-onready var gui = preload("res://gui/GUI.tscn")
-onready var indicator = preload("res://gui/actor_indicator/ActorIndicator.tscn")
-onready var camera_rig = preload("res://actors/CameraRig.tscn")
-onready var minimap_camera_anchor = preload("res://actors/MinimapCameraAnchor.tscn")
-
 
 func _ready() -> void:
 	set_physics_process(false)
-	conf()
+	state = IDLE
 	
 func _physics_process(delta: float) -> void:
 	get_input()
 	finite_state_machine(delta, get_direction())
-		
-func conf():
-	# ADD GUI, INDICATOR, CAMERA RIG AND MINIMAP CAMERA ANCHOR
-	gui = gui.instance()
-	add_child(gui)
-	indicator = indicator.instance()
-	add_child(indicator)
-	camera_rig = camera_rig.instance()
-	add_child(camera_rig)
-	minimap_camera_anchor = minimap_camera_anchor.instance()
-	add_child(minimap_camera_anchor)
-	minimap_camera_anchor.conf(gui.get_minimap_camera_path())
-	# SET INITIAL STATE AS IDLE
-	state = IDLE
 	
 func finite_state_machine(delta: float, direction) -> void:
 	match state:
