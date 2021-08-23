@@ -1,11 +1,10 @@
 extends Control
 
+onready var game = preload("res://world/World.tscn")
 
-
-onready var loading_label = $MarginContainer/LoadingProgress
-
-func _ready() -> void:
-	Server.msg_sys = self
-
-func update_text(text):
-	loading_label.text = text
+func _ready():
+	Server.connect("logged_in",self, "enter_world")
+	
+func enter_world():
+	get_tree().change_scene_to(game)
+	

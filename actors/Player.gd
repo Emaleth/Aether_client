@@ -25,7 +25,6 @@ var player_state # collection of player data to send to the server
 
 
 func _ready() -> void:
-	set_physics_process(false)
 	state = IDLE
 	
 func _physics_process(delta: float) -> void:

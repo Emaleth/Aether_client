@@ -11,7 +11,7 @@ var password
 var new_account
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not get_custom_multiplayer():
 		return
 	if not custom_multiplayer.has_network_peer():

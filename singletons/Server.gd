@@ -4,7 +4,6 @@ var network = NetworkedMultiplayerENet.new()
 var ip = "127.0.0.1"
 var port = 1909
 
-var msg_sys = null
 
 var token
 var latency = 0
@@ -13,6 +12,7 @@ var delta_latency = 0
 var latency_array = []
 var decimal_collector : float = 0
 
+signal logged_in
 signal spawn_player
 signal despawn_player
 
@@ -77,9 +77,7 @@ remote func fetch_token():
 remote func return_token_verification_results(result):
 	if get_tree().get_rpc_sender_id() == 1:
 		if result == true:
-			Main.get_game()
-			yield(get_tree().create_timer(1),"timeout")
-			get_node("../World/Actors/Actor").set_physics_process(true)
+			emit_signal("logged_in")
 		else:
 			pass
 
