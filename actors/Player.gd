@@ -25,7 +25,9 @@ var player_state # collection of player data to send to the server
 
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	state = IDLE
+	
 	
 func _physics_process(delta: float) -> void:
 	get_input()
