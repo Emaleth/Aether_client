@@ -12,7 +12,8 @@ var delta_latency = 0
 var latency_array = []
 var decimal_collector : float = 0
 
-signal logged_in
+signal token_verification_success
+signal token_verification_failure
 signal spawn_player
 signal despawn_player
 
@@ -77,9 +78,9 @@ remote func fetch_token():
 remote func return_token_verification_results(result):
 	if get_tree().get_rpc_sender_id() == 1:
 		if result == true:
-			emit_signal("logged_in")
+			emit_signal("token_verification_success")
 		else:
-			pass
+			emit_signal("token_verification_failure")
 
 
 remote func spawn_new_player(player_id, position):

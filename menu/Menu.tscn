@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://menu/login/LoginScreen.tscn" type="PackedScene" id=2]
+[ext_resource path="res://fonts/Button.tres" type="DynamicFont" id=1]
+[ext_resource path="res://fonts/Header.tres" type="DynamicFont" id=3]
 [ext_resource path="res://menu/Menu.gd" type="Script" id=4]
+[ext_resource path="res://fonts/Content.tres" type="DynamicFont" id=5]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -10,6 +12,43 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 100
+custom_constants/margin_top = 100
+custom_constants/margin_left = 100
+custom_constants/margin_bottom = 100
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 100.0
+margin_top = 588.0
+margin_right = 1180.0
+margin_bottom = 620.0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+margin_right = 1080.0
+margin_bottom = 14.0
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+margin_top = 18.0
+margin_right = 1080.0
+margin_bottom = 32.0
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_right = 1.0
@@ -20,10 +59,258 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AuthenticationScreen" parent="CenterContainer" instance=ExtResource( 2 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 542.0
-margin_top = 253.0
-margin_right = 738.0
-margin_bottom = 467.0
+[node name="AuthenticationScreen" type="TabContainer" parent="CenterContainer"]
+margin_left = 543.0
+margin_top = 254.0
+margin_right = 737.0
+margin_bottom = 466.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Login" type="PanelContainer" parent="CenterContainer/AuthenticationScreen"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 39.0
+margin_right = -4.0
+margin_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/AuthenticationScreen/Login"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 179.0
+margin_bottom = 162.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="AccountLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
+margin_right = 172.0
+margin_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+text = "Email:"
+align = 1
+valign = 1
+
+[node name="AccountLine" type="LineEdit" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
+margin_top = 21.0
+margin_right = 172.0
+margin_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+text = "Emaleth@protonmail.com"
+align = 1
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="PasswordLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
+margin_top = 52.0
+margin_right = 172.0
+margin_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+text = "Password:"
+align = 1
+valign = 1
+
+[node name="PasswordLine" type="LineEdit" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
+margin_top = 73.0
+margin_right = 172.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+text = "12345678"
+align = 1
+secret = true
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
+margin_top = 104.0
+margin_right = 172.0
+margin_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Remember" type="Label" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 144.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+text = "Remember credentials"
+
+[node name="CheckBox" type="CheckBox" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer/HBoxContainer"]
+margin_left = 148.0
+margin_right = 172.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Login" type="Button" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
+margin_top = 132.0
+margin_right = 172.0
+margin_bottom = 155.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Login"
+
+[node name="Register" type="PanelContainer" parent="CenterContainer/AuthenticationScreen"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 39.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/AuthenticationScreen/Register"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 196.0
+margin_bottom = 214.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="EmailLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer"]
+margin_right = 189.0
+margin_bottom = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+text = "Email:"
+align = 1
+valign = 1
+
+[node name="EmailLine" type="LineEdit" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer"]
+margin_top = 21.0
+margin_right = 189.0
+margin_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+align = 1
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="PasswordLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer"]
+margin_top = 52.0
+margin_right = 189.0
+margin_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+text = "Password:"
+align = 1
+valign = 1
+
+[node name="PasswordLine" type="LineEdit" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer"]
+margin_top = 73.0
+margin_right = 189.0
+margin_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+align = 1
+secret = true
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="PasswordRepeatLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer"]
+margin_top = 104.0
+margin_right = 189.0
+margin_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+text = "Repeat Password:"
+align = 1
+valign = 1
+
+[node name="PasswordRepeatLine" type="LineEdit" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer"]
+margin_top = 125.0
+margin_right = 189.0
+margin_bottom = 152.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+align = 1
+secret = true
+caret_blink = true
+caret_blink_speed = 0.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer"]
+margin_top = 156.0
+margin_right = 189.0
+margin_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Remember" type="Label" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer/HBoxContainer"]
+margin_top = 3.0
+margin_right = 161.0
+margin_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 5 )
+text = "Agree to Terms of Servise"
+
+[node name="CheckBox" type="CheckBox" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer/HBoxContainer"]
+margin_left = 165.0
+margin_right = 189.0
+margin_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Register" type="Button" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer"]
+margin_top = 184.0
+margin_right = 189.0
+margin_bottom = 207.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+custom_fonts/font = ExtResource( 1 )
+text = "Register"
+
+[node name="Quit" type="Button" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 50.0
+margin_top = -70.0
+margin_right = 90.0
+margin_bottom = -50.0
+custom_fonts/font = ExtResource( 1 )
+text = "Quit"
+
+[connection signal="tab_changed" from="CenterContainer/AuthenticationScreen" to="." method="_on_AuthenticationScreen_tab_changed"]
+[connection signal="pressed" from="CenterContainer/AuthenticationScreen/Login/VBoxContainer/Login" to="." method="_on_Login_pressed"]
+[connection signal="pressed" from="CenterContainer/AuthenticationScreen/Register/VBoxContainer/Register" to="." method="_on_Register_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

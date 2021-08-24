@@ -10,6 +10,11 @@ var username
 var password
 var new_account
 
+signal login_success
+signal login_failure
+signal registration_success
+signal registration_failure
+
 
 func _process(_delta: float) -> void:
 	if not get_custom_multiplayer():
@@ -57,19 +62,19 @@ remote func return_login_request(results, token):
 	if results == true:
 		Server.token = token
 		Server.connect_to_server()
-		print("logged in")
+		emit_signal("login_success")
 	else:
-		print("loggin failed")
+		emit_signal("login_failure")
 	network.disconnect("connection_failed", self, "_on_connection_failed")
 	network.disconnect("connection_succeeded", self, "_on_connection_succeeded")
 	
 remote func return_create_account_request(results, message):
 	if results == true:
-		print("account created, please log in")
+		emit_signal("registration_success")
 	else:
 		if message == 1:
-			print("couldnt create an account, please try again")
+			emit_signal("registration_failure")
 		if message == 2:
-			print("username already exists")
+			emit_signal("registration_failure", 2)
 	network.disconnect("connection_failed", self, "_on_connection_failed")
 	network.disconnect("connection_succeeded", self, "_on_connection_succeeded")
