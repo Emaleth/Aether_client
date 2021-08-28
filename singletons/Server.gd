@@ -13,10 +13,10 @@ var delta_latency = 0
 var latency_array = []
 var decimal_collector : float = 0
 # signals
-signal token_verification_success
-signal token_verification_failure
-signal spawn_player
-signal despawn_player
+signal sig_token_verification_success
+signal sig_token_verification_failure
+signal sig_spawn_player
+signal sig_despawn_player
 signal sig_update_world_state
 
 func _physics_process(delta: float) -> void:
@@ -67,10 +67,7 @@ remote func return_latency(client_time):
 					total_latency += latency_array[i]
 			delta_latency = (total_latency / latency_array.size()) - latency
 			latency = total_latency / latency_array.size()
-#			print("New latency: ", latency)
-#			print("New delta latency: ", delta_latency)
 			latency_array.clear()
-	
 	
 remote func fetch_token():
 	if get_tree().get_rpc_sender_id() == 1:
@@ -79,21 +76,21 @@ remote func fetch_token():
 remote func return_token_verification_results(result):
 	if get_tree().get_rpc_sender_id() == 1:
 		if result == true:
-			emit_signal("token_verification_success")
+			emit_signal("sig_token_verification_success")
 		else:
-			emit_signal("token_verification_failure")
-
+			emit_signal("sig_token_verification_failure")
 
 remote func spawn_new_player(player_id, position):
 	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("spawn_player", player_id, position)
+		emit_signal("sig_spawn_player", player_id, position)
 		
 remote func despawn_player(player_id):
 	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("despawn_player", player_id)
+		emit_signal("sig_despawn_player", player_id)
 
 func send_player_state(player_state):
 	rpc_unreliable_id(1, "recive_player_state", player_state)
 	
 remote func recive_world_state(world_state):
-	emit_signal("sig_update_world_state", world_state)
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("sig_update_world_state", world_state)
