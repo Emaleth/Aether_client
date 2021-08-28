@@ -4,14 +4,15 @@ var network = NetworkedMultiplayerENet.new()
 var ip = "127.0.0.1"
 var port = 1909
 
-
+# verification token
 var token
+# clock sync
 var latency = 0
 var client_clock = 0
 var delta_latency = 0
 var latency_array = []
 var decimal_collector : float = 0
-
+# signals
 signal token_verification_success
 signal token_verification_failure
 signal spawn_player
