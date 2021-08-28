@@ -155,7 +155,7 @@ func _unhandled_input(event: InputEvent) -> void:
 				rotate_y(-event.relative.x * mouse_sensitivity)
 
 func define_player_state():
-	player_state = {"T" : OS.get_system_time_msecs(), "P" : global_transform}
+	player_state = {"T" : OS.get_system_time_msecs(), "P" : global_transform.origin}
 	Server.send_player_state(player_state)
 	
 	
