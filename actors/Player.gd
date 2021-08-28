@@ -21,6 +21,7 @@ var movement = Vector3.ZERO
 var jumping = false
 var walking = false
 var sprinting = false
+
 var player_state # collection of player data to send to the server
 
 
@@ -28,10 +29,11 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	state = IDLE
 	
-	
 func _physics_process(delta: float) -> void:
 	get_input()
 	finite_state_machine(delta, get_direction())
+	define_player_state()
+	
 	
 func finite_state_machine(delta: float, direction) -> void:
 	match state:
@@ -152,3 +154,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			if abs(event.relative.x) > .1: 
 				rotate_y(-event.relative.x * mouse_sensitivity)
 
+func define_player_state():
+	player_state = {"T" : OS.get_system_time_msecs(), "P" : global_transform}
+	Server.send_player_state(player_state)
+	
+	
+	
+	
+	

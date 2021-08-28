@@ -16,7 +16,7 @@ signal token_verification_success
 signal token_verification_failure
 signal spawn_player
 signal despawn_player
-
+signal sig_update_world_state
 
 func _physics_process(delta: float) -> void:
 	client_clock += int(delta * 1000) + delta_latency
@@ -87,6 +87,12 @@ remote func spawn_new_player(player_id, position):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("spawn_player", player_id, position)
 		
-remote func despawn_new_player(player_id):
+remote func despawn_player(player_id):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("despawn_player", player_id)
+
+func send_player_state(player_state):
+	rpc_unreliable_id(1, "recive_player_state", player_state)
+	
+remote func recive_world_state(world_state):
+	emit_signal("sig_update_world_state", world_state)
