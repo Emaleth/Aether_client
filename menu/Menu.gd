@@ -20,10 +20,15 @@ onready var register_password_repeat = $CenterContainer/AuthenticationScreen/Reg
 onready var register_agreement = $CenterContainer/AuthenticationScreen/Register/VBoxContainer/HBoxContainer/CheckBox
 onready var register_button = $CenterContainer/AuthenticationScreen/Register/VBoxContainer/Register
 
+onready var quit_button = $Quit
+
 
 func _ready():
 	Server.connect("sig_token_verification_success", self, "enter_world")
 	Server.connect("sig_token_verification_failure", self, "set_menu_state", [LOGIN])
+	login_button.self_modulate = Color.green
+	register_button.self_modulate = Color.green
+	quit_button.self_modulate = Color.red
 	set_menu_state(LOGIN)
 	
 func set_menu_state(state):
@@ -50,10 +55,10 @@ func set_menu_state(state):
 func enter_world():
 	get_tree().change_scene_to(game)
 	
-func _on_Quit_pressed():
+func quit() -> void:
 	get_tree().quit()
 
-func _on_AuthenticationScreen_tab_changed(tab):
+func tab_changed(tab):
 	tab_container.rect_size = tab_container.get_child(tab).rect_size
 	yield(get_tree(), "idle_frame")
 	match tab:
@@ -62,7 +67,7 @@ func _on_AuthenticationScreen_tab_changed(tab):
 		1:
 			set_menu_state(REGISTER)
 
-func _on_Login_pressed() -> void:
+func login() -> void:
 	if login_account.text == "" or login_password.text == "":
 		return
 	else:
@@ -71,7 +76,7 @@ func _on_Login_pressed() -> void:
 		var password = login_password.get_text()
 		Gateway.connect_to_server(username, password, false)
 
-func _on_Register_pressed() -> void:
+func register() -> void:
 	if register_email.text == "" or register_password.text == "" or register_password_repeat.text == "":
 		return
 	elif not register_agreement.pressed:
@@ -85,3 +90,4 @@ func _on_Register_pressed() -> void:
 		var username = register_email.get_text()
 		var password = register_password.get_text()
 		Gateway.connect_to_server(username, password, true)
+

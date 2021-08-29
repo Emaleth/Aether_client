@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://fonts/Button.tres" type="DynamicFont" id=1]
-[ext_resource path="res://animated_button.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Header.tres" type="DynamicFont" id=3]
 [ext_resource path="res://menu/Menu.gd" type="Script" id=4]
 [ext_resource path="res://fonts/Content.tres" type="DynamicFont" id=5]
@@ -179,8 +178,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
 text = "Login"
-script = ExtResource( 2 )
-button_type = 1
 
 [node name="Register" type="PanelContainer" parent="CenterContainer/AuthenticationScreen"]
 visible = false
@@ -302,8 +299,6 @@ grow_vertical = 2
 size_flags_horizontal = 3
 custom_fonts/font = ExtResource( 1 )
 text = "Register"
-script = ExtResource( 2 )
-button_type = 1
 
 [node name="Quit" type="Button" parent="."]
 anchor_top = 1.0
@@ -314,13 +309,11 @@ margin_right = 90.0
 margin_bottom = -50.0
 custom_fonts/font = ExtResource( 1 )
 text = "Quit"
-script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-button_type = 2
 
-[connection signal="tab_changed" from="CenterContainer/AuthenticationScreen" to="." method="_on_AuthenticationScreen_tab_changed"]
-[connection signal="pressed" from="CenterContainer/AuthenticationScreen/Login/VBoxContainer/Login" to="." method="_on_Login_pressed"]
-[connection signal="pressed" from="CenterContainer/AuthenticationScreen/Register/VBoxContainer/Register" to="." method="_on_Register_pressed"]
-[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]
+[connection signal="tab_changed" from="CenterContainer/AuthenticationScreen" to="." method="tab_changed"]
+[connection signal="pressed" from="CenterContainer/AuthenticationScreen/Login/VBoxContainer/Login" to="." method="login"]
+[connection signal="pressed" from="CenterContainer/AuthenticationScreen/Register/VBoxContainer/Register" to="." method="register"]
+[connection signal="pressed" from="Quit" to="." method="quit"]
