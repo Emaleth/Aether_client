@@ -8,8 +8,14 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Button",
+"class": "animated_button",
+"language": "GDScript",
+"path": "res://animated_button.gd"
+} ]
 _global_script_class_icons={
+"animated_button": ""
 }
 
 [application]

@@ -22,8 +22,8 @@ onready var register_button = $CenterContainer/AuthenticationScreen/Register/VBo
 
 
 func _ready():
-	Server.connect("token_verification_success", self, "enter_world")
-	Server.connect("token_verification_failure", self, "set_menu_state", [LOGIN])
+	Server.connect("sig_token_verification_success", self, "enter_world")
+	Server.connect("sig_token_verification_failure", self, "set_menu_state", [LOGIN])
 	set_menu_state(LOGIN)
 	
 func set_menu_state(state):
