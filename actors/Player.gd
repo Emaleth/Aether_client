@@ -24,6 +24,11 @@ var sprinting = false
 
 var player_state # collection of player data to send to the server
 
+onready var bullet_origin = $Position3D
+onready var bullet = preload("res://bullet/Bullet.tscn")
+onready var ray = $CameraRig/Camera/RayCast
+onready var anim = $Male_Casual/AnimationPlayer
+
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -38,6 +43,7 @@ func _physics_process(delta: float) -> void:
 func finite_state_machine(delta: float, direction) -> void:
 	match state:
 		IDLE:
+			anim.play("Man_Idle")
 			snap = -get_floor_normal()
 			velocity = velocity.linear_interpolate(Vector3.ZERO, deceleration * delta)
 			gravity = Vector3.ZERO
@@ -55,6 +61,7 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = FALL
 				
 		WALK:
+			anim.play("Man_Walk")
 			snap = -get_floor_normal()
 			velocity = velocity.linear_interpolate(direction * walk_speed, acceleration * delta)
 			gravity = Vector3.ZERO
@@ -70,6 +77,7 @@ func finite_state_machine(delta: float, direction) -> void:
 					state = RUN
 			
 		RUN:
+			anim.play("Man_Run")
 			snap = -get_floor_normal()
 			velocity = velocity.linear_interpolate(direction * run_speed, acceleration * delta)
 			gravity = Vector3.ZERO
@@ -86,6 +94,7 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = IDLE
 				
 		SPRINT:
+			anim.play("Man_Run")
 			snap = -get_floor_normal()
 			velocity = velocity.linear_interpolate(direction * sprint_speed, acceleration * delta)
 			gravity = Vector3.ZERO
@@ -101,6 +110,7 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = FALL
 			
 		JUMP:
+			anim.play("Man_Jump")
 			snap = Vector3.DOWN
 			velocity = velocity.linear_interpolate(direction * air_speed, acceleration * delta)
 			gravity += Vector3.DOWN * gravity_force * delta
@@ -111,6 +121,7 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = FALL
 			
 		FALL:
+			anim.play("Man_Run")
 			snap = Vector3.DOWN
 			velocity = velocity.linear_interpolate(direction * air_speed, acceleration * delta)
 			gravity += Vector3.DOWN * gravity_force * delta
@@ -119,6 +130,7 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = IDLE
 				
 		DEAD:
+			anim.play("Man_Run")
 			pass
 			
 	movement = velocity + gravity
@@ -153,12 +165,27 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			if abs(event.relative.x) > .1: 
 				rotate_y(-event.relative.x * mouse_sensitivity)
-
+				
+		if Input.is_action_just_pressed("primary_action"):
+			if ray.is_colliding():
+				print_debug(ray.get_collider().name + "_PrimaryA")
+			else:
+				print_debug("no ray collision")
+		if Input.is_action_just_pressed("secondary_action"):
+			shoot()
+#			if ray.is_colliding():
+#				print_debug(ray.get_collider().name + "_SecondaryA")
+			
 func define_player_state():
-	player_state = {"T" : OS.get_system_time_msecs(), "P" : global_transform.origin}
+	player_state = {"T" : OS.get_system_time_msecs(), "P" : global_transform.origin, "R" : global_transform.basis}
 	Server.send_player_state(player_state)
 	
-	
-	
+func shoot():
+	if not ray.is_colliding():
+		return
+	bullet_origin.look_at(ray.get_collision_point(), Vector3.UP)
+	var b = bullet.instance()
+	b.global_transform = bullet_origin.global_transform
+	get_tree().root.add_child(b)
 	
 	

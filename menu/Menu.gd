@@ -7,7 +7,6 @@ onready var game = preload("res://world/World.tscn")
 onready var tab_container = $CenterContainer/AuthenticationScreen
 # loading info / animation nodes
 onready var loading_label = $MarginContainer/VBoxContainer/Label
-onready var loading_bar = $MarginContainer/VBoxContainer/ProgressBar
 # login window
 onready var login_account = $CenterContainer/AuthenticationScreen/Login/VBoxContainer/AccountLine
 onready var login_password = $CenterContainer/AuthenticationScreen/Login/VBoxContainer/PasswordLine
@@ -19,7 +18,7 @@ onready var register_password = $CenterContainer/AuthenticationScreen/Login/VBox
 onready var register_password_repeat = $CenterContainer/AuthenticationScreen/Register/VBoxContainer/PasswordRepeatLine
 onready var register_agreement = $CenterContainer/AuthenticationScreen/Register/VBoxContainer/HBoxContainer/CheckBox
 onready var register_button = $CenterContainer/AuthenticationScreen/Register/VBoxContainer/Register
-
+# else
 onready var quit_button = $Quit
 
 
@@ -35,20 +34,18 @@ func set_menu_state(state):
 	match state:
 		LOGIN:
 			tab_container.show()
-			loading_bar.hide()
 			loading_label.hide()
 			login_button.disabled = false
 			register_button.disabled = true
 		REGISTER:
 			tab_container.show()
-			loading_bar.hide()
 			loading_label.hide()
 			login_button.disabled = true
 			register_button.disabled = false
 		LOADING:
 			tab_container.hide()
-			loading_bar.show()
 			loading_label.show()
+			loading_label.text = "Logging in..."
 			login_button.disabled = true
 			register_button.disabled = true
 		
@@ -71,6 +68,7 @@ func login() -> void:
 	if login_account.text == "" or login_password.text == "":
 		return
 	else:
+		set_menu_state(LOADING)
 		login_button.disabled = true
 		var username = login_account.get_text()
 		var password = login_password.get_text()
@@ -90,4 +88,5 @@ func register() -> void:
 		var username = register_email.get_text()
 		var password = register_password.get_text()
 		Gateway.connect_to_server(username, password, true)
+
 
