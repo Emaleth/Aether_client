@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://environment/Ground.tscn" type="PackedScene" id=1]
+[ext_resource path="res://environment/wall.tscn" type="PackedScene" id=2]
 [ext_resource path="res://world/World.gd" type="Script" id=4]
 
 [node name="World" type="Node"]
@@ -34,10 +35,44 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100 )
 [node name="Ground9" parent="Environment" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -100 )
 
-[node name="Players" type="Node" parent="."]
+[node name="wall" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 150 )
+
+[node name="wall2" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 150 )
+
+[node name="wall3" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 150, 0, 100 )
+
+[node name="wall4" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 150, 0, 0 )
+
+[node name="wall5" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 150, 0, -100 )
+
+[node name="wall6" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -150 )
+
+[node name="wall7" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -150 )
+
+[node name="wall8" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, -150 )
+
+[node name="wall9" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -150, 0, -100 )
+
+[node name="wall10" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -150, 0, 0 )
+
+[node name="wall11" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -150, 0, 100 )
+
+[node name="wall12" parent="Environment" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 150 )
+
+[node name="Character" type="Node" parent="."]
+
+[node name="Dummies" type="Node" parent="."]
 
 [node name="NPCs" type="Node" parent="."]
-
-[node name="Loot" type="Node" parent="."]
-
-[node name="ResourceNodes" type="Node" parent="."]

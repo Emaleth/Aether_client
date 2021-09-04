@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/panorama_image.png-e1e836c79d89b0b5228b87a966ec68c8.stex"
+path="res://.import/crosshair8.png-976a671781671fe01452ab1d538730d3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://not_used_textures/panorama_image.png"
-dest_files=[ "res://.import/panorama_image.png-e1e836c79d89b0b5228b87a966ec68c8.stex" ]
+source_file="res://ui/gui/crosshair8.png"
+dest_files=[ "res://.import/crosshair8.png-976a671781671fe01452ab1d538730d3.stex" ]
 
 [params]
 

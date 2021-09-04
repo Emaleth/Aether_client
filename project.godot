@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Aether - Client"
-run/main_scene="res://menu/Menu.tscn"
+run/main_scene="res://ui/menu/Menu.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -21,8 +21,8 @@ default_bus_layout="res://audio_bus_layout.tres"
 [autoload]
 
 ObjectPool="*res://singletons/ObjectPool.gd"
-Server="*res://singletons/Server.gd"
-Gateway="*res://singletons/Gateway.gd"
+Server="*res://networking/Server.gd"
+Gateway="*res://networking/Gateway.gd"
 
 [debug]
 
@@ -1232,4 +1232,4 @@ locale_filter=[ 0, [  ] ]
 quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_environment="res://environment.tres"
+environment/default_environment="res://world/environment.tres"

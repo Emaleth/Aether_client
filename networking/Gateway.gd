@@ -4,7 +4,7 @@ var network : NetworkedMultiplayerENet = NetworkedMultiplayerENet.new()
 var gateway_api : MultiplayerAPI = MultiplayerAPI.new()
 var ip : String = "127.0.0.1"
 var port : int = 1910
-var cert = load("res://X509_Certificate.crt")
+var cert = load("res://networking/X509_Certificate.crt")
 
 var username
 var password

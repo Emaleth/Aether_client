@@ -10,6 +10,7 @@ data = PoolVector3Array( -50, 0, 50, 50, 0, -50, 50, 0, 50, -50, 0, 50, -50, 0, 
 flags_unshaded = true
 flags_world_triplanar = true
 albedo_texture = ExtResource( 2 )
+uv1_scale = Vector3( 0.1, 0.1, 0.1 )
 uv1_triplanar = true
 
 [node name="Ground" type="StaticBody"]

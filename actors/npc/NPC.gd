@@ -5,8 +5,6 @@ var current_hp
 var type
 var state
 
-onready var anim = $Male_Casual/AnimationPlayer
-
 
 func move_player(new_position, new_rotation):
 	transform.origin = new_position

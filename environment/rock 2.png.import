@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/rock 5.png-95ded1fe123e48c3825b62d2bec5c9e3.s3tc.stex"
-path.etc="res://.import/rock 5.png-95ded1fe123e48c3825b62d2bec5c9e3.etc.stex"
+path.s3tc="res://.import/rock 2.png-2890f17ce6b095365725921281a08334.s3tc.stex"
+path.etc="res://.import/rock 2.png-2890f17ce6b095365725921281a08334.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://not_used_textures/seemless/rock 5.png"
-dest_files=[ "res://.import/rock 5.png-95ded1fe123e48c3825b62d2bec5c9e3.s3tc.stex", "res://.import/rock 5.png-95ded1fe123e48c3825b62d2bec5c9e3.etc.stex" ]
+source_file="res://environment/rock 2.png"
+dest_files=[ "res://.import/rock 2.png-2890f17ce6b095365725921281a08334.s3tc.stex", "res://.import/rock 2.png-2890f17ce6b095365725921281a08334.etc.stex" ]
 
 [params]
 

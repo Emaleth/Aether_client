@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rock 2.png-2dc211e7ecc12951cad7e9c17bc4effe.stex"
+path="res://.import/panorama_image.png-8fe943d09dc71edfc93e647a96d05ef5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://not_used_textures/seemless/rock 2.png"
-dest_files=[ "res://.import/rock 2.png-2dc211e7ecc12951cad7e9c17bc4effe.stex" ]
+source_file="res://world/panorama_image.png"
+dest_files=[ "res://.import/panorama_image.png-8fe943d09dc71edfc93e647a96d05ef5.stex" ]
 
 [params]
 
