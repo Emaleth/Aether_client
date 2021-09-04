@@ -24,10 +24,10 @@ var sprinting = false
 
 var player_state # collection of player data to send to the server
 
-onready var bullet_origin = $Position3D
-onready var bullet = preload("res://bullet/Bullet.tscn")
-onready var ray = $CameraRig/Camera/RayCast
-onready var anim = $Male_Casual/AnimationPlayer
+onready var bullet_origin : Position3D = $Position3D
+onready var bullet : PackedScene = preload("res://bullet/Bullet.tscn")
+onready var ray : RayCast = $CameraRig/Camera/RayCast
+onready var anim : AnimationPlayer = $Male_Casual/AnimationPlayer
 
 
 func _ready() -> void:
@@ -177,7 +177,7 @@ func _unhandled_input(event: InputEvent) -> void:
 #				print_debug(ray.get_collider().name + "_SecondaryA")
 			
 func define_player_state():
-	player_state = {"T" : OS.get_system_time_msecs(), "P" : global_transform.origin, "R" : global_transform.basis}
+	player_state = {"T" : Server.client_clock, "P" : global_transform.origin, "R" : global_transform.basis, "A" : [anim.current_animation, anim.current_animation_position]}
 	Server.send_player_state(player_state)
 	
 func shoot():

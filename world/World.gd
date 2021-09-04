@@ -33,7 +33,7 @@ func despawn_player(id):
 func spawn_enemy(id, dict):
 	var new_enemy = enemy_scene.instance()
 	new_enemy.transform.origin = dict["pos"]
-#	new_enemy.transform.rotation = dict["rot"]
+	new_enemy.transform.basis = dict["rot"]
 	new_enemy.max_hp = dict["max_hp"]
 	new_enemy.current_hp = dict["hp"]
 	new_enemy.type = dict["type"]
@@ -78,7 +78,8 @@ func interpolate(render_time):
 			var current_rot = Quat(world_state_buffer[1][player]["R"])
 			var target_rot = Quat(world_state_buffer[2][player]["R"])
 			var new_rotation = Basis(current_rot.slerp(target_rot, interpolation_factor))
-			$Actors.get_node(str(player)).move_player(new_position, new_rotation)
+			var new_animation = world_state_buffer[2][player]["A"]
+			$Actors.get_node(str(player)).move_player(new_position, new_rotation, new_animation)
 		else:
 			spawn_player(player, world_state_buffer[2][player]["P"], world_state_buffer[2][player]["R"])
 			
@@ -89,10 +90,10 @@ func interpolate(render_time):
 			# pos
 			var new_position = lerp(world_state_buffer[1]["E"][enemy]["pos"], world_state_buffer[2]["E"][enemy]["pos"], interpolation_factor)
 			# rot
-#			var current_rot = Quat(world_state_buffer[1]["E"][enemy]["rot"])
-#			var target_rot = Quat(world_state_buffer[2]["E"][enemy]["rot"])
-#			var new_rotation = Basis(current_rot.slerp(target_rot, interpolation_factor))
-			$Actors.get_node(str(enemy)).move_player(new_position)#, new_rotation)
+			var current_rot = Quat(world_state_buffer[1]["E"][enemy]["rot"])
+			var target_rot = Quat(world_state_buffer[2]["E"][enemy]["rot"])
+			var new_rotation = Basis(current_rot.slerp(target_rot, interpolation_factor))
+			$Actors.get_node(str(enemy)).move_player(new_position, new_rotation)
 			$Actors.get_node(str(enemy)).set_health(world_state_buffer[1]["E"][enemy]["hp"])
 		else:
 			spawn_enemy(enemy, world_state_buffer[2]["E"][enemy])
@@ -127,9 +128,9 @@ func extrapolate(render_time):
 			var position_delta = (world_state_buffer[1]["E"][enemy]["pos"] - world_state_buffer[0]["E"][enemy]["pos"]) 
 			var new_position = world_state_buffer[1]["E"][enemy]["pos"] + (position_delta * extrapolation_factor)
 			# rot
-#			var current_rot = Quat(world_state_buffer[1]["E"][enemy]["rot"])
-#			var target_rot = Quat(world_state_buffer[0]["E"][enemy]["rot"])
-#			var rotation_delta = (current_rot - target_rot) 
-#			var new_rotation = Basis(current_rot + (rotation_delta * extrapolation_factor))
-			$Actors.get_node(str(enemy)).move_player(new_position)#, new_rotation)
+			var current_rot = Quat(world_state_buffer[1]["E"][enemy]["rot"])
+			var target_rot = Quat(world_state_buffer[0]["E"][enemy]["rot"])
+			var rotation_delta = (current_rot - target_rot) 
+			var new_rotation = Basis(current_rot + (rotation_delta * extrapolation_factor))
+			$Actors.get_node(str(enemy)).move_player(new_position, new_rotation)
 
