@@ -1,7 +1,11 @@
 extends Node
 
+onready var player_scene = preload("res://actors/Player.tscn")
 onready var dummy_scene = preload("res://actors/Dummy.tscn")
 onready var enemy_scene = preload("res://actors/Enemy.tscn")
+
+onready var player_container = $Actors
+onready var enemy_container = $Enemies
 
 var last_world_state = 0
 var world_state_buffer = []
@@ -9,6 +13,9 @@ const interpolation_offset = 100
 
 
 func _ready():
+	var p = player_scene.instance()
+	player_container.add_child(p)
+	p.global_transform.origin = Vector3(0, 1, 0)
 	Server.connect("sig_spawn_player", self, "spawn_player")
 	Server.connect("sig_despawn_player", self, "despawn_player")
 	Server.connect("sig_update_world_state", self, "update_world_state")
@@ -24,11 +31,11 @@ func spawn_player(id, pos, rot):
 		new_player.transform.origin = pos
 		new_player.transform.basis = rot
 		new_player.name = str(id)
-		$Actors.add_child(new_player)
+		player_container.add_child(new_player)
 
 func despawn_player(id):
 	yield(get_tree().create_timer(0.2), "timeout")
-	$Actors.get_node(str(id)).queue_free()
+	player_container.get_node(str(id)).queue_free()
 
 func spawn_enemy(id, dict):
 	var new_enemy = enemy_scene.instance()
@@ -39,10 +46,10 @@ func spawn_enemy(id, dict):
 	new_enemy.type = dict["type"]
 	new_enemy.state = dict["state"]
 	new_enemy.name = str(id)
-	$Actors.add_child(new_enemy, true)
+	enemy_container.add_child(new_enemy, true)
 	pass
 	
-func despawn_enemy(id):
+func despawn_enemy(_id):
 	pass
 	
 func update_world_state(world_state):
@@ -62,68 +69,62 @@ func interpolate_or_extrapolate():
 	
 func interpolate(render_time):
 	var interpolation_factor = float(render_time - world_state_buffer[1]["T"]) / float(world_state_buffer[2]["T"] - world_state_buffer[1]["T"])
-	for player in world_state_buffer[2].keys():
-		if str(player) == "T":
-			continue
-		if str(player) == "E":
-			continue
+	# PLAYERS
+	for player in world_state_buffer[2]["P"].keys():
 		if player == get_tree().get_network_unique_id():
 			continue
-		if not world_state_buffer[1].has(player):
+		if not world_state_buffer[1]["P"].has(player):
 			continue
-		if $Actors.has_node(str(player)):
+		if player_container.has_node(str(player)):
 			# pos
-			var new_position = lerp(world_state_buffer[1][player]["P"], world_state_buffer[2][player]["P"], interpolation_factor)
+			var new_position = lerp(world_state_buffer[1]["P"][player]["pos"], world_state_buffer[2]["P"][player]["pos"], interpolation_factor)
 			# rot
-			var current_rot = Quat(world_state_buffer[1][player]["R"])
-			var target_rot = Quat(world_state_buffer[2][player]["R"])
+			var current_rot = Quat(world_state_buffer[1]["P"][player]["rot"])
+			var target_rot = Quat(world_state_buffer[2]["P"][player]["rot"])
 			var new_rotation = Basis(current_rot.slerp(target_rot, interpolation_factor))
-			var new_animation = world_state_buffer[2][player]["A"]
-			$Actors.get_node(str(player)).move_player(new_position, new_rotation, new_animation)
+			var new_animation = world_state_buffer[2]["P"][player]["anim"]
+			player_container.get_node(str(player)).move_player(new_position, new_rotation, new_animation)
 		else:
-			spawn_player(player, world_state_buffer[2][player]["P"], world_state_buffer[2][player]["R"])
-			
+			spawn_player(player, world_state_buffer[2]["P"][player]["pos"], world_state_buffer[2]["P"][player]["rot"])
+	# ENEMIES
 	for enemy in world_state_buffer[2]["E"].keys():
 		if not world_state_buffer[1]["E"].has(enemy):
 			continue
-		if $Actors.has_node(str(enemy)):
+		if enemy_container.has_node(str(enemy)):
 			# pos
 			var new_position = lerp(world_state_buffer[1]["E"][enemy]["pos"], world_state_buffer[2]["E"][enemy]["pos"], interpolation_factor)
 			# rot
 			var current_rot = Quat(world_state_buffer[1]["E"][enemy]["rot"])
 			var target_rot = Quat(world_state_buffer[2]["E"][enemy]["rot"])
 			var new_rotation = Basis(current_rot.slerp(target_rot, interpolation_factor))
-			$Actors.get_node(str(enemy)).move_player(new_position, new_rotation)
-			$Actors.get_node(str(enemy)).set_health(world_state_buffer[1]["E"][enemy]["hp"])
+			enemy_container.get_node(str(enemy)).move_player(new_position, new_rotation)
+			enemy_container.get_node(str(enemy)).set_health(world_state_buffer[1]["E"][enemy]["hp"])
 		else:
 			spawn_enemy(enemy, world_state_buffer[2]["E"][enemy])
 			
 func extrapolate(render_time):
 	var extrapolation_factor = float(render_time - world_state_buffer[0]["T"]) / float(world_state_buffer[1]["T"] - world_state_buffer[0]["T"]) - 1.00
-	for player in world_state_buffer[1].keys():
-		if str(player) == "T":
-			continue
-		if str(player) == "E":
-			continue
+	# PLAYERS
+	for player in world_state_buffer[1]["P"].keys():
 		if player == get_tree().get_network_unique_id():
 			continue
-		if not world_state_buffer[0].has(player):
+		if not world_state_buffer[0]["P"].has(player):
 			continue
-		if $Actors.has_node(str(player)):
+		if player_container.has_node(str(player)):
 			# pos
-			var position_delta = (world_state_buffer[1][player]["P"] - world_state_buffer[0][player]["P"]) 
-			var new_position = world_state_buffer[1][player]["P"] + (position_delta * extrapolation_factor)
+			var position_delta = (world_state_buffer[1]["P"][player]["pos"] - world_state_buffer[0]["P"][player]["pos"]) 
+			var new_position = world_state_buffer[1]["P"][player]["pos"] + (position_delta * extrapolation_factor)
 			# rot
-			var current_rot = Quat(world_state_buffer[1][player]["R"])
-			var target_rot = Quat(world_state_buffer[0][player]["R"])
+			var current_rot = Quat(world_state_buffer[1]["P"][player]["rot"])
+			var target_rot = Quat(world_state_buffer[0]["P"][player]["rot"])
 			var rotation_delta = (current_rot - target_rot) 
 			var new_rotation = Basis(current_rot + (rotation_delta * extrapolation_factor))
-			$Actors.get_node(str(player)).move_player(new_position, new_rotation)
-	# TODO: ENMY EXTRAPOLATION ADN ROTATION
+			player_container.get_node(str(player)).move_player(new_position, new_rotation)
+	# ENEMIES
 	for enemy in world_state_buffer[1]["E"].keys():
 		if not world_state_buffer[0]["E"].has(enemy):
 			continue
-		if $Actors.has_node(str(enemy)):
+		if enemy_container.has_node(str(enemy)):
 			# pos
 			var position_delta = (world_state_buffer[1]["E"][enemy]["pos"] - world_state_buffer[0]["E"][enemy]["pos"]) 
 			var new_position = world_state_buffer[1]["E"][enemy]["pos"] + (position_delta * extrapolation_factor)
@@ -132,5 +133,5 @@ func extrapolate(render_time):
 			var target_rot = Quat(world_state_buffer[0]["E"][enemy]["rot"])
 			var rotation_delta = (current_rot - target_rot) 
 			var new_rotation = Basis(current_rot + (rotation_delta * extrapolation_factor))
-			$Actors.get_node(str(enemy)).move_player(new_position, new_rotation)
+			enemy_container.get_node(str(enemy)).move_player(new_position, new_rotation)
 

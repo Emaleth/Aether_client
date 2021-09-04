@@ -1,85 +1,39 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://environment/BoulderBig.tscn" type="PackedScene" id=1]
-[ext_resource path="res://environment/Crate.tscn" type="PackedScene" id=2]
-[ext_resource path="res://environment/Stairs.tscn" type="PackedScene" id=3]
+[ext_resource path="res://environment/Ground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/World.gd" type="Script" id=4]
-[ext_resource path="res://environment/ColumnBroken.tscn" type="PackedScene" id=5]
-[ext_resource path="res://environment/Ground.tscn" type="PackedScene" id=6]
-[ext_resource path="res://environment/Column.tscn" type="PackedScene" id=7]
-[ext_resource path="res://environment/BoulderSmall.tscn" type="PackedScene" id=8]
-[ext_resource path="res://environment/BoulderMedium.tscn" type="PackedScene" id=9]
-[ext_resource path="res://actors/Player.tscn" type="PackedScene" id=10]
-
-[sub_resource type="PlaneMesh" id=1]
-size = Vector2( 20, 20 )
-
-[sub_resource type="SpatialMaterial" id=2]
-flags_transparent = true
-albedo_color = Color( 0.054902, 0.619608, 0.894118, 0.74902 )
 
 [node name="World" type="Node"]
 script = ExtResource( 4 )
 
 [node name="Environment" type="Node" parent="."]
 
-[node name="Crate8" parent="Environment" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 0.874662, 2.27178, 0, -0.484733, 4.09925, -14.1511, 9.24685, -0.132329 )
+[node name="Ground" parent="Environment" instance=ExtResource( 1 )]
 
-[node name="Crate11" parent="Environment" instance=ExtResource( 2 )]
-transform = Transform( 1.73829, 0, 0, 0, 2.17002, 0, 0, 0, 2.71291, -5.49472, 2.21573, 27.8683 )
+[node name="Ground2" parent="Environment" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 0 )
 
-[node name="Ground" parent="Environment" instance=ExtResource( 6 )]
+[node name="Ground3" parent="Environment" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, 100 )
 
-[node name="WaterTest" type="MeshInstance" parent="Environment"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8677, -3.10271, -16.2899 )
-layers = 7
-mesh = SubResource( 1 )
-material/0 = SubResource( 2 )
+[node name="Ground4" parent="Environment" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 100 )
 
-[node name="Stairs" parent="Environment" instance=ExtResource( 3 )]
-transform = Transform( -1.83206, 0, 0.219153, 0, 2.1, 0, -0.47539, 0, -1.40807, -4.69516, -0.140125, 18.5697 )
+[node name="Ground5" parent="Environment" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 100 )
 
-[node name="Stairs2" parent="Environment" instance=ExtResource( 3 )]
-transform = Transform( -1.35674, 0.0158822, 0.839976, 0.0153924, 1.39991, -0.00952963, -1.33005, 0, -0.856942, -10.2613, -0.0593143, 11.5549 )
+[node name="Ground6" parent="Environment" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, 0 )
 
-[node name="BoulderSmall" parent="Environment" instance=ExtResource( 8 )]
-transform = Transform( 0.995384, 0.0959674, 0, -0.0953884, 0.989379, -0.109682, -0.0105259, 0.109176, 0.993967, -14.0648, 0.404179, -5.76545 )
+[node name="Ground7" parent="Environment" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -100, 0, -100 )
 
-[node name="BoulderSmall2" parent="Environment" instance=ExtResource( 8 )]
-transform = Transform( 0.995384, 0.0959674, 0, -0.0953884, 0.989379, -0.109682, -0.0105259, 0.109176, 0.993967, -14.0648, 0.5404, -16.263 )
+[node name="Ground8" parent="Environment" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100 )
 
-[node name="BoulderSmall3" parent="Environment" instance=ExtResource( 8 )]
-transform = Transform( 0.995384, 0.0959674, 0, -0.0953884, 0.989379, -0.109682, -0.0105259, 0.109176, 0.993967, 7.84671, -1.88702, -16.263 )
-
-[node name="BoulderSmall4" parent="Environment" instance=ExtResource( 8 )]
-transform = Transform( 0.995384, 0.0959674, 0, -0.0953884, 0.989379, -0.109682, -0.0105259, 0.109176, 0.993967, 7.84671, 0.0843573, -4.96422 )
-
-[node name="BoulderSmall5" parent="Environment" instance=ExtResource( 8 )]
-transform = Transform( 0.995384, 0.0959674, 0, -0.0953884, 0.989379, -0.109682, -0.0105259, 0.109176, 0.993967, 21.3895, -0.438994, -4.96422 )
-
-[node name="BoulderSmall6" parent="Environment" instance=ExtResource( 8 )]
-transform = Transform( 0.995384, 0.0959674, 0, -0.0953884, 0.989379, -0.109682, -0.0105259, 0.109176, 0.993967, -5.13898, 0.94818, -11.3497 )
-
-[node name="Column" parent="Environment" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.2841, 4.90168, 4.06599 )
-
-[node name="Column2" parent="Environment" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.881, 5.83939, -17.2774 )
-
-[node name="BoulderBig" parent="Environment" instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 0.957627, 0.288012, 0, -0.288012, 0.957627, 0, 1.35727, -10.9051 )
-
-[node name="BoulderMedium" parent="Environment" instance=ExtResource( 9 )]
-transform = Transform( 1, 0, 0, 0, 0.882447, 0.470411, 0, -0.470411, 0.882447, 10.0093, 2.1539, 0 )
-
-[node name="ColumnBroken" parent="Environment" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -14.3432, 4.85277, -3.22986 )
-
-[node name="ColumnBroken2" parent="Environment" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.87132, 9.77739, 8.35067 )
+[node name="Ground9" parent="Environment" instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -100 )
 
 [node name="Actors" type="Node" parent="."]
 
-[node name="Actor" parent="Actors" instance=ExtResource( 10 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.864389, 0 )
+[node name="Enemies" type="Node" parent="."]

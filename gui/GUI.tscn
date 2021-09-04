@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://crosshair8.png" type="Texture" id=1]
+[ext_resource path="res://gui/crosshair8.png" type="Texture" id=1]
 [ext_resource path="res://gui/GUI.gd" type="Script" id=2]
 [ext_resource path="res://fonts/Content.tres" type="DynamicFont" id=3]
 

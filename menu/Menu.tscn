@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://fonts/Button.tres" type="DynamicFont" id=1]
-[ext_resource path="res://textures/panorama_image.png" type="Texture" id=2]
+[ext_resource path="res://not_used_textures/panorama_image.png" type="Texture" id=2]
 [ext_resource path="res://fonts/Header.tres" type="DynamicFont" id=3]
 [ext_resource path="res://menu/Menu.gd" type="Script" id=4]
 [ext_resource path="res://fonts/Content.tres" type="DynamicFont" id=5]

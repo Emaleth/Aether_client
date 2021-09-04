@@ -177,7 +177,7 @@ func _unhandled_input(event: InputEvent) -> void:
 #				print_debug(ray.get_collider().name + "_SecondaryA")
 			
 func define_player_state():
-	player_state = {"T" : Server.client_clock, "P" : global_transform.origin, "R" : global_transform.basis, "A" : [anim.current_animation, anim.current_animation_position]}
+	player_state = {"T" : Server.client_clock, "pos" : global_transform.origin, "rot" : global_transform.basis, "anim" : [anim.current_animation, anim.current_animation_position]}
 	Server.send_player_state(player_state)
 	
 func shoot():

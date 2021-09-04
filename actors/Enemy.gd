@@ -14,5 +14,5 @@ func move_player(new_position, new_rotation):
 	 # SET ANIMAION AND ANIMATION FRAME
 
 
-func set_health(num):
+func set_health(_num):
 	pass

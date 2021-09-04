@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://actors/Enemy.gd" type="Script" id=1]
-[ext_resource path="res://models/Male_Casual.tscn" type="PackedScene" id=2]
+[ext_resource path="res://actors/Male_Casual.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.3
