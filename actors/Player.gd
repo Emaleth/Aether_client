@@ -23,15 +23,21 @@ var walking = false
 var sprinting = false
 
 var player_state # collection of player data to send to the server
-
+# CAMERA BEGIN
+var sensibility : float = 0.002
+var deadzone : float = 0.1
+var default_rotation_x : float = deg2rad(-15)
+# CAMERA END
 onready var bullet_origin : Position3D = $Position3D
 onready var bullet : PackedScene = preload("res://bullet/Bullet.tscn")
 onready var ray : RayCast = $CameraRig/Camera/RayCast
 onready var anim : AnimationPlayer = $Male_Casual/AnimationPlayer
+onready var camera_rig = $CameraRig
 
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	camera_rig.rotation.x = default_rotation_x
 	state = IDLE
 	
 func _physics_process(delta: float) -> void:
@@ -163,6 +169,11 @@ func get_input():
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if event is InputEventMouseMotion:
+			if abs(event.relative.y) > deadzone:
+				camera_rig.rotation.x -= event.relative.y * sensibility
+				camera_rig.rotation.x = clamp(camera_rig.rotation.x, deg2rad(-80), deg2rad(80))
+
+		if event is InputEventMouseMotion:
 			if abs(event.relative.x) > .1: 
 				rotate_y(-event.relative.x * mouse_sensitivity)
 				
@@ -187,5 +198,4 @@ func shoot():
 	var b = bullet.instance()
 	b.global_transform = bullet_origin.global_transform
 	get_tree().root.add_child(b)
-	
 	

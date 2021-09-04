@@ -4,8 +4,9 @@ onready var player_scene = preload("res://actors/Player.tscn")
 onready var dummy_scene = preload("res://actors/Dummy.tscn")
 onready var enemy_scene = preload("res://actors/Enemy.tscn")
 
-onready var player_container = $Actors
-onready var enemy_container = $Enemies
+onready var player_container = $Players
+onready var npc_container = $NPCs
+onready var resource_nodes_container = $ResourceNodes
 
 var last_world_state = 0
 var world_state_buffer = []
@@ -46,7 +47,7 @@ func spawn_enemy(id, dict):
 	new_enemy.type = dict["type"]
 	new_enemy.state = dict["state"]
 	new_enemy.name = str(id)
-	enemy_container.add_child(new_enemy, true)
+	npc_container.add_child(new_enemy, true)
 	pass
 	
 func despawn_enemy(_id):
@@ -90,15 +91,15 @@ func interpolate(render_time):
 	for enemy in world_state_buffer[2]["E"].keys():
 		if not world_state_buffer[1]["E"].has(enemy):
 			continue
-		if enemy_container.has_node(str(enemy)):
+		if npc_container.has_node(str(enemy)):
 			# pos
 			var new_position = lerp(world_state_buffer[1]["E"][enemy]["pos"], world_state_buffer[2]["E"][enemy]["pos"], interpolation_factor)
 			# rot
 			var current_rot = Quat(world_state_buffer[1]["E"][enemy]["rot"])
 			var target_rot = Quat(world_state_buffer[2]["E"][enemy]["rot"])
 			var new_rotation = Basis(current_rot.slerp(target_rot, interpolation_factor))
-			enemy_container.get_node(str(enemy)).move_player(new_position, new_rotation)
-			enemy_container.get_node(str(enemy)).set_health(world_state_buffer[1]["E"][enemy]["hp"])
+			npc_container.get_node(str(enemy)).move_player(new_position, new_rotation)
+			npc_container.get_node(str(enemy)).set_health(world_state_buffer[1]["E"][enemy]["hp"])
 		else:
 			spawn_enemy(enemy, world_state_buffer[2]["E"][enemy])
 			
@@ -124,7 +125,7 @@ func extrapolate(render_time):
 	for enemy in world_state_buffer[1]["E"].keys():
 		if not world_state_buffer[0]["E"].has(enemy):
 			continue
-		if enemy_container.has_node(str(enemy)):
+		if npc_container.has_node(str(enemy)):
 			# pos
 			var position_delta = (world_state_buffer[1]["E"][enemy]["pos"] - world_state_buffer[0]["E"][enemy]["pos"]) 
 			var new_position = world_state_buffer[1]["E"][enemy]["pos"] + (position_delta * extrapolation_factor)
@@ -133,5 +134,5 @@ func extrapolate(render_time):
 			var target_rot = Quat(world_state_buffer[0]["E"][enemy]["rot"])
 			var rotation_delta = (current_rot - target_rot) 
 			var new_rotation = Basis(current_rot + (rotation_delta * extrapolation_factor))
-			enemy_container.get_node(str(enemy)).move_player(new_position, new_rotation)
+			npc_container.get_node(str(enemy)).move_player(new_position, new_rotation)
 

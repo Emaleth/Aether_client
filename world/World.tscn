@@ -34,6 +34,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -100 )
 [node name="Ground9" parent="Environment" instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 0, -100 )
 
-[node name="Actors" type="Node" parent="."]
+[node name="Players" type="Node" parent="."]
 
-[node name="Enemies" type="Node" parent="."]
+[node name="NPCs" type="Node" parent="."]
+
+[node name="Loot" type="Node" parent="."]
+
+[node name="ResourceNodes" type="Node" parent="."]

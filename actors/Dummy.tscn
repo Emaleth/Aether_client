@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://actors/Dummy.gd" type="Script" id=1]
 [ext_resource path="res://actors/Male_Casual.tscn" type="PackedScene" id=2]
@@ -11,18 +11,13 @@ height = 1.2
 radius = 0.3
 height = 0.1
 
-[sub_resource type="CapsuleMesh" id=3]
-radius = 0.3
-mid_height = 1.2
-
-[sub_resource type="CylinderMesh" id=4]
-top_radius = 0.1
-bottom_radius = 0.2
+[sub_resource type="SphereMesh" id=3]
+radius = 0.1
 height = 0.2
 
-[sub_resource type="SpatialMaterial" id=5]
+[sub_resource type="SpatialMaterial" id=4]
 flags_unshaded = true
-albedo_color = Color( 0.933333, 0.0901961, 0.0901961, 1 )
+albedo_color = Color( 0.188235, 0.92549, 0.0431373, 1 )
 
 [node name="Dummy" type="KinematicBody"]
 collision_layer = 2
@@ -37,16 +32,10 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8, 0 )
 shape = SubResource( 2 )
 
-[node name="DEBUG_Body" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
-visible = false
-mesh = SubResource( 3 )
-material/0 = null
-
-[node name="DEBUG_Head" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.016, 1.26169, -0.0834615 )
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
-
 [node name="Male_Casual" parent="." instance=ExtResource( 2 )]
 transform = Transform( -0.4, 0, -3.49691e-08, 0, 0.4, 0, 3.49691e-08, 0, -0.4, 0, -0.899707, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4715, 0 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
