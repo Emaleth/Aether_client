@@ -63,12 +63,13 @@ __meta__ = {
 }
 
 [node name="AuthenticationScreen" type="TabContainer" parent="CenterContainer"]
-margin_left = 543.0
-margin_top = 254.0
-margin_right = 737.0
-margin_bottom = 466.0
+margin_left = 535.0
+margin_top = 225.0
+margin_right = 745.0
+margin_bottom = 495.0
 grow_horizontal = 2
 grow_vertical = 2
+rect_min_size = Vector2( 210, 270 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 3 )
@@ -85,8 +86,6 @@ margin_right = -4.0
 margin_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -94,15 +93,13 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/AuthenticationScreen/Login"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 179.0
-margin_bottom = 162.0
+margin_right = 195.0
+margin_bottom = 220.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="AccountLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
-margin_right = 172.0
+margin_right = 188.0
 margin_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -113,7 +110,7 @@ valign = 1
 
 [node name="AccountLine" type="LineEdit" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
 margin_top = 21.0
-margin_right = 172.0
+margin_right = 188.0
 margin_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -125,7 +122,7 @@ caret_blink_speed = 0.5
 
 [node name="PasswordLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
 margin_top = 52.0
-margin_right = 172.0
+margin_right = 188.0
 margin_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -136,7 +133,7 @@ valign = 1
 
 [node name="PasswordLine" type="LineEdit" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
 margin_top = 73.0
-margin_right = 172.0
+margin_right = 188.0
 margin_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -148,8 +145,9 @@ caret_blink = true
 caret_blink_speed = 0.5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
+margin_left = 8.0
 margin_top = 104.0
-margin_right = 172.0
+margin_right = 180.0
 margin_bottom = 128.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -173,12 +171,13 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Login" type="Button" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
-margin_top = 132.0
-margin_right = 172.0
-margin_bottom = 155.0
+margin_top = 190.0
+margin_right = 188.0
+margin_bottom = 213.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+size_flags_vertical = 10
 custom_fonts/font = ExtResource( 4 )
 text = "Login"
 
@@ -190,18 +189,14 @@ margin_left = 4.0
 margin_top = 39.0
 margin_right = -4.0
 margin_bottom = -4.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/AuthenticationScreen/Register"]
 margin_left = 7.0
-margin_top = 7.0
+margin_top = 10.0
 margin_right = 196.0
-margin_bottom = 214.0
+margin_bottom = 217.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="EmailLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer"]
 margin_right = 189.0
@@ -300,6 +295,7 @@ margin_bottom = 207.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+size_flags_vertical = 10
 custom_fonts/font = ExtResource( 4 )
 text = "Register"
 

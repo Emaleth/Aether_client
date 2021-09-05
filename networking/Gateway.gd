@@ -40,20 +40,23 @@ func connect_to_server(_username, _password, _new_account):
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 	
 func _on_connection_failed():
-	pass
+	print("Could not connect to the Gateway!")
 	
 func _on_connection_succeeded():
+	print("Connected to the Gateway!")
 	if new_account == true:
 		request_create_account()
 	else:
 		request_login()
 	
 func request_login():
+	print("Requesting Login!")
 	rpc_id(1, "login_request", username, password.sha256_text())
 	username = ""
 	password = ""
 	
 func request_create_account():
+	print("Requesting New Account Registration!")
 	rpc_id(1, "create_account_request", username, password.sha256_text())
 	username = ""
 	password = ""

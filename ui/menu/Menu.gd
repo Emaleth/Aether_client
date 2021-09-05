@@ -23,8 +23,8 @@ onready var quit_button = $Quit
 
 
 func _ready():
-	Server.connect("sig_token_verification_success", self, "enter_world")
-	Server.connect("sig_token_verification_failure", self, "set_menu_state", [LOGIN])
+	Server.connect("s_token_verification_success", self, "enter_world")
+	Server.connect("s_token_verification_failure", self, "set_menu_state", [LOGIN])
 	login_button.self_modulate = Color.green
 	register_button.self_modulate = Color.green
 	quit_button.self_modulate = Color.red

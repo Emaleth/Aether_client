@@ -13,11 +13,12 @@ var delta_latency = 0
 var latency_array = []
 var decimal_collector : float = 0
 # signals
-signal sig_token_verification_success
-signal sig_token_verification_failure
-signal sig_spawn_player
-signal sig_despawn_player
-signal sig_update_world_state
+signal s_token_verification_success
+signal s_token_verification_failure
+signal s_spawn_player
+signal s_despawn_player
+signal s_update_world_state
+signal s_update_chat_state
 
 func _physics_process(delta: float) -> void:
 	client_clock += int(delta * 1000) + delta_latency
@@ -35,7 +36,7 @@ func connect_to_server():
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 	
 func _on_connection_failed():
-	pass
+	print("Could not connect to the Server!")
 	
 func _on_connection_succeeded():
 	rpc_id(1, "fetch_server_time", OS.get_system_time_msecs())
@@ -76,21 +77,30 @@ remote func fetch_token():
 remote func return_token_verification_results(result):
 	if get_tree().get_rpc_sender_id() == 1:
 		if result == true:
-			emit_signal("sig_token_verification_success")
+			emit_signal("s_token_verification_success")
 		else:
-			emit_signal("sig_token_verification_failure")
+			emit_signal("s_token_verification_failure")
 
 remote func spawn_new_player(player_id, position):
 	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("sig_spawn_player", player_id, position)
+		emit_signal("s_spawn_player", player_id, position)
 		
 remote func despawn_player(player_id):
 	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("sig_despawn_player", player_id)
+		emit_signal("s_despawn_player", player_id)
 
 func send_player_state(player_state):
 	rpc_unreliable_id(1, "recive_player_state", player_state)
 	
 remote func recive_world_state(world_state):
 	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("sig_update_world_state", world_state)
+		emit_signal("s_update_world_state", world_state)
+# not on server
+func send_chat_msg(msg):
+	rpc_unreliable_id(1, "recive_chat_msg", msg)
+	
+remote func recive_chat_state(chat_state):
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("s_update_chat_state", chat_state)
+	
+	

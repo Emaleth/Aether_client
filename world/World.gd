@@ -14,9 +14,9 @@ const interpolation_offset = 100
 
 
 func _ready():
-	Server.connect("sig_spawn_player", self, "spawn_player")
-	Server.connect("sig_despawn_player", self, "despawn_player")
-	Server.connect("sig_update_world_state", self, "update_world_state")
+	Server.connect("s_spawn_player", self, "spawn_player")
+	Server.connect("s_despawn_player", self, "despawn_player")
+	Server.connect("s_update_world_state", self, "update_world_state")
 	spawn_character()
 	
 func spawn_character():
