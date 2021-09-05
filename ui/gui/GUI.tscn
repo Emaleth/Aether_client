@@ -118,12 +118,14 @@ margin_bottom = 14.0
 mouse_filter = 2
 
 [node name="Timestamp" type="Label" parent="ChatBox/VBoxContainer/PanelContainer/MsgList/Template"]
+self_modulate = Color( 0.47451, 0.470588, 0.470588, 1 )
 margin_right = 55.0
 margin_bottom = 14.0
 mouse_filter = 0
 size_flags_horizontal = 3
 
 [node name="Sender" type="Label" parent="ChatBox/VBoxContainer/PanelContainer/MsgList/Template"]
+self_modulate = Color( 0.278431, 0.87451, 0.145098, 1 )
 margin_left = 59.0
 margin_right = 115.0
 margin_bottom = 14.0

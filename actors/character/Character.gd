@@ -33,6 +33,7 @@ onready var bullet : PackedScene = preload("res://bullet/Bullet.tscn")
 onready var ray : RayCast = $CameraRig/Camera/RayCast
 onready var anim : AnimationPlayer = $Male_Casual/AnimationPlayer
 onready var camera_rig = $CameraRig
+onready var gui = $GUI
 
 
 func _ready() -> void:
@@ -144,48 +145,50 @@ func finite_state_machine(delta: float, direction) -> void:
 	
 func get_direction():
 	var direction = Vector3.ZERO
-	direction += (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")) * global_transform.basis.z
-	direction += (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * global_transform.basis.x
+	if gui.chat == false:
+		direction += (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")) * global_transform.basis.z
+		direction += (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * global_transform.basis.x
 	direction = direction.normalized()
 	
 	return direction
 	
 func get_input():
-	if Input.is_action_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and gui.chat == false:
 		jumping = true
 	else:
 		jumping = false
 
-	if Input.is_action_pressed("walk"):
+	if Input.is_action_pressed("walk") and gui.chat == false:
 		walking = true
 	else:
 		walking = false
 		
-	if Input.is_action_pressed("sprint"):
+	if Input.is_action_pressed("sprint") and gui.chat == false:
 		sprinting = true
 	else:
 		sprinting = false
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		if event is InputEventMouseMotion:
-			if abs(event.relative.y) > deadzone:
-				camera_rig.rotation.x -= event.relative.y * sensibility
-				camera_rig.rotation.x = clamp(camera_rig.rotation.x, deg2rad(-80), deg2rad(80))
+	if gui.chat == false:
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+			if event is InputEventMouseMotion:
+				if abs(event.relative.y) > deadzone:
+					camera_rig.rotation.x -= event.relative.y * sensibility
+					camera_rig.rotation.x = clamp(camera_rig.rotation.x, deg2rad(-80), deg2rad(80))
 
-		if event is InputEventMouseMotion:
-			if abs(event.relative.x) > .1: 
-				rotate_y(-event.relative.x * mouse_sensitivity)
-				
-		if Input.is_action_just_pressed("primary_action"):
-			if ray.is_colliding():
-				print_debug(ray.get_collider().name + "_PrimaryA")
-			else:
-				print_debug("no ray collision")
-		if Input.is_action_just_pressed("secondary_action"):
-			shoot()
-#			if ray.is_colliding():
-#				print_debug(ray.get_collider().name + "_SecondaryA")
+			if event is InputEventMouseMotion:
+				if abs(event.relative.x) > .1: 
+					rotate_y(-event.relative.x * mouse_sensitivity)
+					
+			if Input.is_action_just_pressed("primary_action"):
+				if ray.is_colliding():
+					print_debug(ray.get_collider().name + "_PrimaryA")
+				else:
+					print_debug("no ray collision")
+			if Input.is_action_just_pressed("secondary_action"):
+				shoot()
+	#			if ray.is_colliding():
+	#				print_debug(ray.get_collider().name + "_SecondaryA")
 			
 func define_player_state():
 	player_state = {"T" : Server.client_clock, "pos" : global_transform.origin, "rot" : global_transform.basis, "anim" : [anim.current_animation, anim.current_animation_position]}

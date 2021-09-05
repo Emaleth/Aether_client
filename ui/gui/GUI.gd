@@ -10,7 +10,7 @@ onready var chat_box = $ChatBox
 onready var msg_list = $ChatBox/VBoxContainer/PanelContainer/MsgList
 onready var template_chat_line = $ChatBox/VBoxContainer/PanelContainer/MsgList/Template
 onready var input_line = $ChatBox/VBoxContainer/LineEdit
-
+var chat = false
 
 func _ready() -> void:
 	Server.connect("s_update_chat_state", self, "update_chat_box")
@@ -23,6 +23,7 @@ func _physics_process(_delta: float) -> void:
 func _unhandled_key_input(event: InputEventKey) -> void:
 	if Input.is_action_just_pressed("chat"):
 		if not input_line.has_focus():
+			chat = true
 			input_line.grab_focus()
 		
 func update_health_bar(hp, max_hp = null):
@@ -42,8 +43,8 @@ func update_chat_box(chat_state):
 		var message = i[2]
 		var new_line = template_chat_line.duplicate()
 		var date_dict = OS.get_datetime_from_unix_time(timestamp / 1000)
-		new_line.get_node("Timestamp").text = str("%s:%s:%s" % [date_dict["hour"], date_dict["minute"], date_dict["second"]])
-		new_line.get_node("Sender").text = str(sender)
+		new_line.get_node("Timestamp").text = str("[%s:%s:%s]" % [date_dict["hour"], date_dict["minute"], date_dict["second"]])
+		new_line.get_node("Sender").text = "[%s]" % str(sender)
 		new_line.get_node("Message").text = str(message)
 		msg_list.add_child(new_line)
 		new_line.show()
@@ -52,3 +53,4 @@ func _on_LineEdit_text_entered(new_text: String) -> void:
 	Server.send_chat_msg(new_text)
 	input_line.clear()
 	input_line.release_focus()
+	chat = false
