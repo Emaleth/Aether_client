@@ -97,7 +97,7 @@ remote func recive_world_state(world_state):
 		emit_signal("s_update_world_state", world_state)
 # not on server
 func send_chat_msg(msg):
-	rpc_unreliable_id(1, "recive_chat_msg", msg)
+	rpc_unreliable_id(1, "recive_chat_msg", client_clock, msg)
 	
 remote func recive_chat_state(chat_state):
 	if get_tree().get_rpc_sender_id() == 1:
