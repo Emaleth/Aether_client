@@ -34,12 +34,13 @@ onready var ray : RayCast = $CameraRig/Camera/RayCast
 onready var anim : AnimationPlayer = $Male_Casual/AnimationPlayer
 onready var camera_rig = $CameraRig
 onready var gui = $GUI
+onready var minimap_camera = $Viewport/Spatial/MinimapCamera
 
 
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_rig.rotation.x = default_rotation_x
 	state = IDLE
+	gui.minimap.get_node("TextureRect").texture = minimap_camera.get_viewport().get_texture()
 	
 func _physics_process(delta: float) -> void:
 	get_input()
@@ -169,26 +170,25 @@ func get_input():
 		sprinting = false
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if gui.chat == false:
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			if event is InputEventMouseMotion:
-				if abs(event.relative.y) > deadzone:
-					camera_rig.rotation.x -= event.relative.y * sensibility
-					camera_rig.rotation.x = clamp(camera_rig.rotation.x, deg2rad(-80), deg2rad(80))
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and gui.chat == false:
+		if event is InputEventMouseMotion:
+			if abs(event.relative.y) > deadzone:
+				camera_rig.rotation.x -= event.relative.y * sensibility
+				camera_rig.rotation.x = clamp(camera_rig.rotation.x, deg2rad(-80), deg2rad(80))
 
-			if event is InputEventMouseMotion:
-				if abs(event.relative.x) > .1: 
-					rotate_y(-event.relative.x * mouse_sensitivity)
-					
-			if Input.is_action_just_pressed("primary_action"):
-				if ray.is_colliding():
-					print_debug(ray.get_collider().name + "_PrimaryA")
-				else:
-					print_debug("no ray collision")
-			if Input.is_action_just_pressed("secondary_action"):
-				shoot()
-	#			if ray.is_colliding():
-	#				print_debug(ray.get_collider().name + "_SecondaryA")
+		if event is InputEventMouseMotion:
+			if abs(event.relative.x) > .1: 
+				rotate_y(-event.relative.x * mouse_sensitivity)
+				
+		if Input.is_action_just_pressed("primary_action"):
+			if ray.is_colliding():
+				print_debug(ray.get_collider().name + "_PrimaryA")
+			else:
+				print_debug("no ray collision")
+		if Input.is_action_just_pressed("secondary_action"):
+			shoot()
+#			if ray.is_colliding():
+#				print_debug(ray.get_collider().name + "_SecondaryA")
 			
 func define_player_state():
 	player_state = {"T" : Server.client_clock, "pos" : global_transform.origin, "rot" : global_transform.basis, "anim" : [anim.current_animation, anim.current_animation_position]}

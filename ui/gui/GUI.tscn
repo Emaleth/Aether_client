@@ -1,33 +1,41 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://ui/gui/GUI.gd" type="Script" id=1]
 [ext_resource path="res://ui/gui/crosshair8.png" type="Texture" id=2]
-
-[sub_resource type="DynamicFontData" id=1]
-font_path = "res://fonts/Ubuntu-Regular.ttf"
-
-[sub_resource type="DynamicFont" id=2]
-size = 14
-font_data = SubResource( 1 )
+[ext_resource path="res://ui/fonts/Content.tres" type="DynamicFont" id=3]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource( 1 )
 
-[node name="CrosshairContainer" type="CenterContainer" parent="."]
+[node name="Normal" type="MarginContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CrosshairContainer" type="CenterContainer" parent="Normal"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 710.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="Crosshair" type="TextureRect" parent="CrosshairContainer"]
-margin_left = 608.0
-margin_top = 328.0
-margin_right = 672.0
-margin_bottom = 392.0
+[node name="Crosshair" type="TextureRect" parent="Normal/CrosshairContainer"]
+margin_left = 598.0
+margin_top = 318.0
+margin_right = 662.0
+margin_bottom = 382.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -35,75 +43,82 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 2 )
 
-[node name="ServerClock" type="PanelContainer" parent="."]
-margin_right = 14.0
-margin_bottom = 14.0
+[node name="ServerClock" type="PanelContainer" parent="Normal"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 102.0
+margin_bottom = 41.0
 mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="Clock" type="Label" parent="ServerClock"]
+[node name="Clock" type="Label" parent="Normal/ServerClock"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 19.0
-margin_bottom = 9.0
-custom_fonts/font = SubResource( 2 )
+margin_right = 85.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 3 )
 text = "Server Time:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ResourceBars" type="VBoxContainer" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -100.0
-margin_top = -40.0
+[node name="ResourceBars" type="VBoxContainer" parent="Normal"]
+margin_left = 590.0
+margin_top = 670.0
+margin_right = 690.0
+margin_bottom = 710.0
 rect_min_size = Vector2( 100, 40 )
 mouse_filter = 2
+size_flags_horizontal = 6
+size_flags_vertical = 10
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
-[node name="HealthBar" type="ProgressBar" parent="ResourceBars"]
+[node name="HealthBar" type="ProgressBar" parent="Normal/ResourceBars"]
 margin_right = 100.0
 margin_bottom = 14.0
 mouse_filter = 2
 
-[node name="ManaBar" type="ProgressBar" parent="ResourceBars"]
+[node name="ManaBar" type="ProgressBar" parent="Normal/ResourceBars"]
 margin_top = 18.0
 margin_right = 100.0
 margin_bottom = 32.0
 mouse_filter = 2
 
-[node name="ChatBox" type="ScrollContainer" parent="."]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_top = -200.0
-margin_right = 300.0
+[node name="ChatBox" type="ScrollContainer" parent="Normal"]
+margin_left = 10.0
+margin_top = 510.0
+margin_right = 310.0
+margin_bottom = 710.0
 rect_min_size = Vector2( 300, 200 )
 mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
 follow_focus = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ChatBox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Normal/ChatBox"]
 margin_right = 300.0
 margin_bottom = 200.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="PanelContainer" type="PanelContainer" parent="ChatBox/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Normal/ChatBox/VBoxContainer"]
 margin_right = 300.0
 margin_bottom = 172.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="MsgList" type="VBoxContainer" parent="ChatBox/VBoxContainer/PanelContainer"]
+[node name="MsgList" type="VBoxContainer" parent="Normal/ChatBox/VBoxContainer/PanelContainer"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 293.0
@@ -112,41 +127,153 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Template" type="HBoxContainer" parent="ChatBox/VBoxContainer/PanelContainer/MsgList"]
+[node name="Template" type="HBoxContainer" parent="Normal/ChatBox/VBoxContainer/PanelContainer/MsgList"]
 margin_right = 286.0
 margin_bottom = 14.0
 mouse_filter = 2
 
-[node name="Timestamp" type="Label" parent="ChatBox/VBoxContainer/PanelContainer/MsgList/Template"]
+[node name="Timestamp" type="Label" parent="Normal/ChatBox/VBoxContainer/PanelContainer/MsgList/Template"]
 self_modulate = Color( 0.47451, 0.470588, 0.470588, 1 )
-margin_right = 55.0
 margin_bottom = 14.0
-mouse_filter = 0
-size_flags_horizontal = 3
+size_flags_vertical = 1
 
-[node name="Sender" type="Label" parent="ChatBox/VBoxContainer/PanelContainer/MsgList/Template"]
+[node name="Sender" type="Label" parent="Normal/ChatBox/VBoxContainer/PanelContainer/MsgList/Template"]
 self_modulate = Color( 0.278431, 0.87451, 0.145098, 1 )
-margin_left = 59.0
-margin_right = 115.0
+margin_left = 4.0
+margin_right = 4.0
 margin_bottom = 14.0
-mouse_filter = 0
-size_flags_horizontal = 3
+size_flags_vertical = 1
 
-[node name="Message" type="Label" parent="ChatBox/VBoxContainer/PanelContainer/MsgList/Template"]
-margin_left = 119.0
+[node name="Message" type="Label" parent="Normal/ChatBox/VBoxContainer/PanelContainer/MsgList/Template"]
+margin_left = 8.0
 margin_right = 286.0
 margin_bottom = 14.0
-mouse_filter = 0
 size_flags_horizontal = 3
+size_flags_vertical = 1
 size_flags_stretch_ratio = 3.0
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LineEdit" type="LineEdit" parent="ChatBox/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="Normal/ChatBox/VBoxContainer"]
 margin_top = 176.0
 margin_right = 300.0
 margin_bottom = 200.0
+mouse_filter = 2
 placeholder_text = ">"
 
-[connection signal="text_entered" from="ChatBox/VBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Normal"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 710.0
+mouse_filter = 2
+
+[node name="SettingsButton" type="Button" parent="Normal/VBoxContainer"]
+margin_left = 1197.0
+margin_right = 1260.0
+margin_bottom = 20.0
+size_flags_horizontal = 10
+size_flags_vertical = 0
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ManagmentButton" type="Button" parent="Normal/VBoxContainer"]
+margin_left = 1173.0
+margin_top = 24.0
+margin_right = 1260.0
+margin_bottom = 44.0
+size_flags_horizontal = 10
+size_flags_vertical = 4
+text = "Managment"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Minimap" type="PanelContainer" parent="Normal"]
+margin_left = 1070.0
+margin_top = 510.0
+margin_right = 1270.0
+margin_bottom = 710.0
+rect_min_size = Vector2( 200, 200 )
+mouse_filter = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="TextureRect" type="TextureRect" parent="Normal/Minimap"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 193.0
+mouse_filter = 2
+expand = true
+
+[node name="Settings" type="MarginContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Settings"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 710.0
+mouse_filter = 2
+
+[node name="NormalButton" type="Button" parent="Settings"]
+margin_left = 1211.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 30.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Normal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Managment" type="MarginContainer" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="Managment"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 710.0
+mouse_filter = 2
+
+[node name="NormalButton" type="Button" parent="Managment"]
+margin_left = 1211.0
+margin_top = 10.0
+margin_right = 1270.0
+margin_bottom = 30.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Normal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="text_entered" from="Normal/ChatBox/VBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="pressed" from="Normal/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="Normal/VBoxContainer/ManagmentButton" to="." method="_on_ManagmentButton_pressed"]
+[connection signal="pressed" from="Settings/NormalButton" to="." method="_on_NormalButton_pressed"]
+[connection signal="pressed" from="Managment/NormalButton" to="." method="_on_NormalButton_pressed"]
