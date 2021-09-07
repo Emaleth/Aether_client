@@ -31,7 +31,6 @@ func get_item(obj):
 
 func free_item(obj, id):
 	var object = items.get(obj).bussy.get(id)
-	if object.get_parent():
-		object.get_parent().remove_child(object)
-	items.get(obj).bussy.remove(object)
+	object.get_parent().remove_child(object)
+	items.get(obj).bussy.erase(object)
 	items.get(obj).pool.append(id)

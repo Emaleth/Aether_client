@@ -10,49 +10,66 @@ var last_world_state = 0
 var world_state_buffer = []
 const interpolation_offset = 100
 
+var player_list = {}
+var npc_list = {}
+
 
 func _ready():
 	Server.connect("s_spawn_player", self, "spawn_player")
 	Server.connect("s_despawn_player", self, "despawn_player")
 	Server.connect("s_update_world_state", self, "update_world_state")
 	spawn_character()
-	
+
+func _physics_process(_delta: float) -> void:
+	add_to_the_tree()
+	interpolate_or_extrapolate()
+
+func add_to_the_tree():
+	for i in player_list.keys():
+		if not dummy_container.has_node(str(i)):
+			var new_player = ObjectPool.get_item("dummy")
+			new_player.name = str(i)
+			dummy_container.add_child(new_player, true)
+			
+	for i in npc_list.keys():
+		if not npc_container.has_node(str(i)):
+			var new_npc = ObjectPool.get_item("npc")
+			new_npc.name = str(i)
+			npc_container.add_child(new_npc, true)
+		
 func spawn_character():
 	var p = character_scene.instance()
 	character_container.add_child(p)
 	p.global_transform.origin = Vector3(0, 1, 0)
 	
-func _physics_process(_delta: float) -> void:
-	interpolate_or_extrapolate()
-
 func spawn_player(id, pos, rot):
 	if id == get_tree().get_network_unique_id():
 		pass
 	else:
-		var new_player = ObjectPool.get_item("dummy")#dummy_scene.instance()
-		new_player.transform.origin = pos
-		new_player.transform.basis = rot
-		new_player.name = str(id)
-		dummy_container.add_child(new_player, true)
+		player_list[id] = {}
+		player_list[id]["pos"] = pos
+		player_list[id]["rot"] = rot
 
 func despawn_player(id):
 	yield(get_tree().create_timer(0.2), "timeout")
-	dummy_container.get_node(str(id)).despawn()#queue_free()
-
-func spawn_npc(id, dict):
-	var new_npc = ObjectPool.get_item("npc")#npc_scene.instance()
-	new_npc.transform.origin = dict["pos"]
-	new_npc.transform.basis = dict["rot"]
-	new_npc.max_hp = dict["max_hp"]
-	new_npc.current_hp = dict["hp"]
-	new_npc.type = dict["type"]
-	new_npc.state = dict["state"]
-	new_npc.name = str(id)
-	npc_container.add_child(new_npc, true)
+	player_list.erase(id)
+	if dummy_container.has_node(str(id)):
+		dummy_container.get_node(str(id)).despawn()
+		
+func spawn_npc(id, dict): 
+	npc_list[id] = {}
+	npc_list[id]["pos"] = dict["pos"]
+	npc_list[id]["rot"] = dict["rot"]
+	npc_list[id]["hp"] = dict["hp"]
+	npc_list[id]["max_hp"] = dict["max_hp"]
+	npc_list[id]["type"] = dict["type"]
+	npc_list[id]["state"] = dict["state"]
 	
 func despawn_enemy(id):
 	yield(get_tree().create_timer(0.2), "timeout")
-	npc_container.get_node(str(id)).despawn()#queue_free()
+	npc_list.erase(id)
+	if npc_container.has_node(str(id)):
+		npc_container.get_node(str(id)).despawn()
 	
 func update_world_state(world_state):
 	if world_state["T"] > last_world_state:
@@ -89,6 +106,9 @@ func interpolate(render_time):
 		else:
 			print("player %s not yet spawned" % player)
 #			spawn_player(player, world_state_buffer[2]["P"][player]["pos"], world_state_buffer[2]["P"][player]["rot"])
+		if player_list.has(player):
+			player_list[player]["pos"] = world_state_buffer[2]["P"][player]["pos"]
+		
 	# ENEMIES
 	for enemy in world_state_buffer[2]["E"].keys():
 		if not world_state_buffer[1]["E"].has(enemy):
@@ -104,7 +124,9 @@ func interpolate(render_time):
 			npc_container.get_node(str(enemy)).set_health(world_state_buffer[1]["E"][enemy]["hp"])
 		else:
 			spawn_npc(enemy, world_state_buffer[2]["E"][enemy])
-			
+		if npc_list.has(enemy):
+			npc_list[enemy]["pos"] = world_state_buffer[2]["E"][enemy]["pos"]
+	
 func extrapolate(render_time):
 	var extrapolation_factor = float(render_time - world_state_buffer[0]["T"]) / float(world_state_buffer[1]["T"] - world_state_buffer[0]["T"]) - 1.00
 	# PLAYERS
@@ -123,6 +145,7 @@ func extrapolate(render_time):
 			var rotation_delta = (current_rot - target_rot) 
 			var new_rotation = Basis(current_rot + (rotation_delta * extrapolation_factor))
 			dummy_container.get_node(str(player)).move_player(new_position, new_rotation)
+			
 	# ENEMIES
 	for enemy in world_state_buffer[1]["E"].keys():
 		if not world_state_buffer[0]["E"].has(enemy):
