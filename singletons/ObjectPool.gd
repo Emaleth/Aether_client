@@ -1,28 +1,37 @@
 extends Node
 
 var items = {
-	"name" : {
-		"scene" : null,#preload(""),
-		"max_q" : 1000,
-		"pool" : []
+	"dummy" : {
+		"scene" : preload("res://actors/dummy/Dummy.tscn"),
+		"max_q" : 100,
+		"pool" : [],
+		"bussy" : []
+	},
+	"npc" : {
+		"scene" : preload("res://actors/npc/NPC.tscn"),
+		"max_q" : 100,
+		"pool" : [],
+		"bussy" : []
 	}
 }
 
 
-#func _ready():
-#	initiate_pools()
-	
+func _ready():
+	initiate_pools()
 	
 func initiate_pools():
 	for i in items:
 		for q in items.get(i).max_q:
 			items.get(i).pool.append(items.get(i).scene.instance())
 		
-		
 func get_item(obj):
 	var first_item = items.get(obj).pool.pop_front()
-	if first_item.get_parent():
-		first_item.get_parent().remove_child(first_item)
-	items.get(obj).pool.append(first_item)
-	
+	items.get(obj).bussy.append(first_item)
 	return first_item
+
+func free_item(obj, id):
+	var object = items.get(obj).bussy.get(id)
+	if object.get_parent():
+		object.get_parent().remove_child(object)
+	items.get(obj).bussy.remove(object)
+	items.get(obj).pool.append(id)

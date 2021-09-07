@@ -14,3 +14,6 @@ func move_player(new_position, new_rotation):
 
 func set_health(_num):
 	pass
+
+func despawn():
+	ObjectPool.free_item("dummy", self)

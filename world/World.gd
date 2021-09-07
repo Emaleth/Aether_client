@@ -1,8 +1,6 @@
 extends Node
 
 onready var character_scene = preload("res://actors/character/Character.tscn")
-onready var dummy_scene = preload("res://actors/dummy/Dummy.tscn")
-onready var npc_scene = preload("res://actors/npc/NPC.tscn")
 
 onready var character_container = $Character
 onready var dummy_container = $Dummies
@@ -31,18 +29,18 @@ func spawn_player(id, pos, rot):
 	if id == get_tree().get_network_unique_id():
 		pass
 	else:
-		var new_player = dummy_scene.instance()
+		var new_player = ObjectPool.get_item("dummy")#dummy_scene.instance()
 		new_player.transform.origin = pos
 		new_player.transform.basis = rot
 		new_player.name = str(id)
-		dummy_container.add_child(new_player)
+		dummy_container.add_child(new_player, true)
 
 func despawn_player(id):
 	yield(get_tree().create_timer(0.2), "timeout")
-	dummy_container.get_node(str(id)).queue_free()
+	dummy_container.get_node(str(id)).despawn()#queue_free()
 
 func spawn_npc(id, dict):
-	var new_npc = npc_scene.instance()
+	var new_npc = ObjectPool.get_item("npc")#npc_scene.instance()
 	new_npc.transform.origin = dict["pos"]
 	new_npc.transform.basis = dict["rot"]
 	new_npc.max_hp = dict["max_hp"]
@@ -51,10 +49,10 @@ func spawn_npc(id, dict):
 	new_npc.state = dict["state"]
 	new_npc.name = str(id)
 	npc_container.add_child(new_npc, true)
-	pass
 	
-func despawn_enemy(_id):
-	pass
+func despawn_enemy(id):
+	yield(get_tree().create_timer(0.2), "timeout")
+	npc_container.get_node(str(id)).despawn()#queue_free()
 	
 func update_world_state(world_state):
 	if world_state["T"] > last_world_state:
@@ -89,7 +87,8 @@ func interpolate(render_time):
 			var new_animation = world_state_buffer[2]["P"][player]["anim"]
 			dummy_container.get_node(str(player)).move_player(new_position, new_rotation, new_animation)
 		else:
-			spawn_player(player, world_state_buffer[2]["P"][player]["pos"], world_state_buffer[2]["P"][player]["rot"])
+			print("player %s not yet spawned" % player)
+#			spawn_player(player, world_state_buffer[2]["P"][player]["pos"], world_state_buffer[2]["P"][player]["rot"])
 	# ENEMIES
 	for enemy in world_state_buffer[2]["E"].keys():
 		if not world_state_buffer[1]["E"].has(enemy):

@@ -12,3 +12,5 @@ func move_player(new_position, new_rotation, new_animation = null):
 		anim.current_animation = new_animation[0]
 #		anim.current_animation_position = new_animation[1]
 
+func despawn():
+	ObjectPool.free_item("dummy", self)
