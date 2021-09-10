@@ -81,14 +81,6 @@ remote func return_token_verification_results(result):
 		else:
 			emit_signal("s_token_verification_failure")
 
-remote func spawn_new_player(player_id, position, rotation):
-	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("s_spawn_player", player_id, position, rotation)
-		
-remote func despawn_player(player_id):
-	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("s_despawn_player", player_id)
-
 func send_player_state(player_state):
 	rpc_unreliable_id(1, "recive_player_state", player_state)
 	

@@ -16,4 +16,4 @@ func set_health(_num):
 	pass
 
 func despawn():
-	ObjectPool.free_item("dummy", self)
+	ObjectPool.free_item("dummy", self.get_instance_id())

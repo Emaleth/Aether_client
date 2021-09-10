@@ -10,13 +10,11 @@ var last_world_state = 0
 var world_state_buffer = []
 const interpolation_offset = 100
 
-var player_list = {}
-var npc_list = {}
+var player_buffer = {}
+var npc_buffer = {}
 
 
 func _ready():
-	Server.connect("s_spawn_player", self, "spawn_player")
-	Server.connect("s_despawn_player", self, "despawn_player")
 	Server.connect("s_update_world_state", self, "update_world_state")
 	spawn_character()
 
@@ -25,13 +23,13 @@ func _physics_process(_delta: float) -> void:
 	interpolate_or_extrapolate()
 
 func add_to_the_tree():
-	for i in player_list.keys():
+	for i in player_buffer.keys():
 		if not dummy_container.has_node(str(i)):
 			var new_player = ObjectPool.get_item("dummy")
 			new_player.name = str(i)
 			dummy_container.add_child(new_player, true)
 			
-	for i in npc_list.keys():
+	for i in npc_buffer.keys():
 		if not npc_container.has_node(str(i)):
 			var new_npc = ObjectPool.get_item("npc")
 			new_npc.name = str(i)
@@ -42,32 +40,33 @@ func spawn_character():
 	character_container.add_child(p)
 	p.global_transform.origin = Vector3(0, 1, 0)
 	
-func spawn_player(id, pos, rot):
-	if id == get_tree().get_network_unique_id():
+func spawn_player(_id, _data):
+	if _id == get_tree().get_network_unique_id():
 		pass
 	else:
-		player_list[id] = {}
-		player_list[id]["pos"] = pos
-		player_list[id]["rot"] = rot
+		player_buffer[_id] = {}
+		player_buffer[_id]["pos"] = _data["pos"]
+		player_buffer[_id]["rot"] = _data["rot"]
 
-func despawn_player(id):
+func despawn_player(_id):
+	print("despawning player: %s" % _id)
+	player_buffer.erase(_id)
 	yield(get_tree().create_timer(0.2), "timeout")
-	player_list.erase(id)
-	if dummy_container.has_node(str(id)):
-		dummy_container.get_node(str(id)).despawn()
+	if dummy_container.has_node(str(_id)):
+		dummy_container.get_node(str(_id)).despawn()
 		
-func spawn_npc(id, dict): 
-	npc_list[id] = {}
-	npc_list[id]["pos"] = dict["pos"]
-	npc_list[id]["rot"] = dict["rot"]
-	npc_list[id]["hp"] = dict["hp"]
-	npc_list[id]["max_hp"] = dict["max_hp"]
-	npc_list[id]["type"] = dict["type"]
-	npc_list[id]["state"] = dict["state"]
+func spawn_npc(_id, _data): 
+	npc_buffer[_id] = {}
+	npc_buffer[_id]["pos"] = _data["pos"]
+	npc_buffer[_id]["rot"] = _data["rot"]
+	npc_buffer[_id]["hp"] = _data["hp"]
+	npc_buffer[_id]["max_hp"] = _data["max_hp"]
+	npc_buffer[_id]["type"] = _data["type"]
+	npc_buffer[_id]["state"] = _data["state"]
 	
 func despawn_enemy(id):
 	yield(get_tree().create_timer(0.2), "timeout")
-	npc_list.erase(id)
+	npc_buffer.erase(id)
 	if npc_container.has_node(str(id)):
 		npc_container.get_node(str(id)).despawn()
 	
@@ -104,11 +103,12 @@ func interpolate(render_time):
 			var new_animation = world_state_buffer[2]["P"][player]["anim"]
 			dummy_container.get_node(str(player)).move_player(new_position, new_rotation, new_animation)
 		else:
-			print("player %s not yet spawned" % player)
-#			spawn_player(player, world_state_buffer[2]["P"][player]["pos"], world_state_buffer[2]["P"][player]["rot"])
-		if player_list.has(player):
-			player_list[player]["pos"] = world_state_buffer[2]["P"][player]["pos"]
-		
+			spawn_player(player, world_state_buffer[2]["P"][player])
+		if player_buffer.has(player):
+			player_buffer[player]["pos"] = world_state_buffer[2]["P"][player]["pos"]
+	for p in player_buffer:
+		if not world_state_buffer[2]["P"].keys().has(p):
+			despawn_player(p)
 	# ENEMIES
 	for enemy in world_state_buffer[2]["E"].keys():
 		if not world_state_buffer[1]["E"].has(enemy):
@@ -124,9 +124,12 @@ func interpolate(render_time):
 			npc_container.get_node(str(enemy)).set_health(world_state_buffer[1]["E"][enemy]["hp"])
 		else:
 			spawn_npc(enemy, world_state_buffer[2]["E"][enemy])
-		if npc_list.has(enemy):
-			npc_list[enemy]["pos"] = world_state_buffer[2]["E"][enemy]["pos"]
-	
+		if npc_buffer.has(enemy):
+			npc_buffer[enemy]["pos"] = world_state_buffer[2]["E"][enemy]["pos"]
+	for e in npc_buffer:
+		if not world_state_buffer[2]["E"].keys().has(e):
+			despawn_enemy(e)
+				
 func extrapolate(render_time):
 	var extrapolation_factor = float(render_time - world_state_buffer[0]["T"]) / float(world_state_buffer[1]["T"] - world_state_buffer[0]["T"]) - 1.00
 	# PLAYERS
