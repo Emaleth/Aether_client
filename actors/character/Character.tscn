@@ -46,6 +46,9 @@ enabled = true
 cast_to = Vector3( 0, 0, -1000 )
 collision_mask = 7
 
+[node name="Position3D" type="Position3D" parent="CameraRig/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000 )
+
 [node name="Position3D" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.521776, 0.489, -0.407037 )
 

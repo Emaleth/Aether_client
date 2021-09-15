@@ -47,6 +47,11 @@ func _physics_process(delta: float) -> void:
 	finite_state_machine(delta, get_direction())
 	define_player_state()
 	
+	if ray.is_colliding():
+		gui.aim_hint.text = ray.get_collider().name
+	else:
+		gui.aim_hint.text = ""
+		 
 	
 func finite_state_machine(delta: float, direction) -> void:
 	match state:
@@ -196,8 +201,9 @@ func define_player_state():
 	
 func shoot():
 	if not ray.is_colliding():
-		return
-	bullet_origin.look_at(ray.get_collision_point(), Vector3.UP)
+		bullet_origin.look_at($CameraRig/Camera/Position3D.global_transform.origin, bullet_origin.global_transform.origin.cross($CameraRig/Camera/Position3D.transform.origin))
+	else:
+		bullet_origin.look_at(ray.get_collision_point(), bullet_origin.transform.origin.cross(ray.get_collision_point()))
 	var b = bullet.instance()
 	b.global_transform = bullet_origin.global_transform
 	get_tree().root.add_child(b)

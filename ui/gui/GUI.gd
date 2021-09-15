@@ -5,7 +5,8 @@ onready var normal_panel = $Normal
 onready var managment_panel = $Managment 
 onready var settings_panel = $Settings
 # clock
-onready var clock_label = $Normal/ServerClock/Clock
+onready var clock_label = $Normal/Info/ServerClock/Clock
+onready var latency_label = $Normal/Info/Latency/label
 # resource bars
 onready var health_bar = $Normal/ResourceBars/HealthBar
 onready var mana_bar = $Normal/ResourceBars/ManaBar
@@ -16,22 +17,49 @@ onready var template_chat_line = $Normal/ChatBox/VBoxContainer/PanelContainer/Ms
 onready var input_line = $Normal/ChatBox/VBoxContainer/LineEdit
 # minimap
 onready var minimap = $Normal/Minimap
+onready var menu = load("res://ui/menu/Menu.tscn")
+
+onready var aim_hint = $Normal/CrosshairContainer/MarginContainer/Label
 
 var chat = false
 var mode
-
+var audio_bus_master_index = "Master"
+var audio_bus_bgm_index = "BGM"
+var audio_bus_ui_index = "UI"
+var audio_bus_env_index = "ENV"
+var audio_bus_sfx_index = "SFX"
 
 func _ready() -> void:
 	Server.connect("s_update_chat_state", self, "update_chat_box")
 	template_chat_line.hide()
 	set_gui_mode(NORMAL)
+	get_audio_bus_indexes()
 	
 func _physics_process(_delta: float) -> void:
 	format_time()
+	latency_label.text = "Latency: %sms" % (Server.latency)
 
 func format_time():
 	var date_dict = OS.get_datetime_from_unix_time(Server.client_clock / 1000)
-	clock_label.text = "Server Time: %s:%s:%s" % [date_dict["hour"], date_dict["minute"], date_dict["second"]]
+	var hour : String
+	var minute : String
+	var second : String
+	if date_dict["hour"] < 10:
+		hour = "0" + str(date_dict["hour"])
+	else:
+		hour = str(date_dict["hour"])
+		
+	if date_dict["minute"] < 10:
+		minute = "0" + str(date_dict["minute"])
+	else:
+		minute = str(date_dict["minute"])
+		
+	if date_dict["second"] < 10:
+		second = "0" + str(date_dict["second"])
+	else:
+		second = str(date_dict["second"])
+		
+	clock_label.text = "Server Time: %s:%s:%s" % [hour, minute, second]
 	
 func format_chat_timestamp():
 	var date_dict = OS.get_datetime_from_unix_time(Server.client_clock / 1000)
@@ -111,11 +139,50 @@ func _on_LineEdit_text_entered(new_text: String) -> void:
 	input_line.release_focus()
 	chat = false
 
-func _on_ManagmentButton_pressed() -> void:
-	set_gui_mode(MANAGMENT)
-
 func _on_SettingsButton_pressed() -> void:
 	set_gui_mode(SETTINGS)
 
 func _on_NormalButton_pressed() -> void:
 	set_gui_mode(NORMAL)
+
+func _on_QuitButton_pressed() -> void:
+	get_tree().change_scene_to(menu)
+
+func get_audio_bus_indexes():
+	audio_bus_master_index = AudioServer.get_bus_index(audio_bus_master_index)
+	audio_bus_ui_index = AudioServer.get_bus_index(audio_bus_ui_index)
+	audio_bus_sfx_index = AudioServer.get_bus_index(audio_bus_sfx_index)
+	audio_bus_env_index = AudioServer.get_bus_index(audio_bus_env_index)
+	audio_bus_bgm_index = AudioServer.get_bus_index(audio_bus_bgm_index)
+	print(audio_bus_master_index)
+
+func _on_MasterVolSlide_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(audio_bus_master_index, linear2db(value))
+
+func _on_MusicVolSlide_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(audio_bus_bgm_index, linear2db(value))
+
+func _on_SFXVolSlide_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(audio_bus_sfx_index, linear2db(value))
+
+func _on_EnvVolSlide_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(audio_bus_env_index, linear2db(value))
+
+func _on_UISFXVolSlide_value_changed(value: float) -> void:
+	AudioServer.set_bus_volume_db(audio_bus_ui_index, linear2db(value))
+
+func _on_mast_toggled(button_pressed: bool) -> void:
+	AudioServer.set_bus_mute(audio_bus_master_index, button_pressed)
+
+func _on_mus_toggled(button_pressed: bool) -> void:
+	AudioServer.set_bus_mute(audio_bus_bgm_index, button_pressed)
+
+func _on_sfx_toggled(button_pressed: bool) -> void:
+	AudioServer.set_bus_mute(audio_bus_sfx_index, button_pressed)
+
+func _on_ui_toggled(button_pressed: bool) -> void:
+	AudioServer.set_bus_mute(audio_bus_ui_index, button_pressed)
+	
+func _on_env_toggled(button_pressed: bool) -> void:
+	AudioServer.set_bus_mute(audio_bus_env_index, button_pressed)
+	

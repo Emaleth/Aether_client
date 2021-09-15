@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://ui/gui/GUI.gd" type="Script" id=1]
 [ext_resource path="res://ui/gui/crosshair8.png" type="Texture" id=2]
 [ext_resource path="res://ui/fonts/Content.tres" type="DynamicFont" id=3]
+[ext_resource path="res://ui/fonts/Button.tres" type="DynamicFont" id=4]
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -43,11 +44,35 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource( 2 )
 
-[node name="ServerClock" type="PanelContainer" parent="Normal"]
+[node name="MarginContainer" type="MarginContainer" parent="Normal/CrosshairContainer"]
+margin_left = 591.0
+margin_top = 318.0
+margin_right = 668.0
+margin_bottom = 382.0
+mouse_filter = 2
+custom_constants/margin_left = 50
+custom_constants/margin_bottom = 50
+
+[node name="Label" type="Label" parent="Normal/CrosshairContainer/MarginContainer"]
+margin_left = 50.0
+margin_right = 77.0
+margin_bottom = 14.0
+text = "Test"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="VBoxContainer" parent="Normal"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 102.0
-margin_bottom = 41.0
+margin_bottom = 76.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="ServerClock" type="PanelContainer" parent="Normal/Info"]
+margin_right = 92.0
+margin_bottom = 31.0
 mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -55,13 +80,35 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Clock" type="Label" parent="Normal/ServerClock"]
+[node name="Clock" type="Label" parent="Normal/Info/ServerClock"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 85.0
 margin_bottom = 24.0
 custom_fonts/font = ExtResource( 3 )
 text = "Server Time:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Latency" type="PanelContainer" parent="Normal/Info"]
+margin_top = 35.0
+margin_right = 67.0
+margin_bottom = 66.0
+mouse_filter = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="label" type="Label" parent="Normal/Info/Latency"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 60.0
+margin_bottom = 24.0
+custom_fonts/font = ExtResource( 3 )
+text = "Latency:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -163,36 +210,6 @@ margin_bottom = 200.0
 mouse_filter = 2
 placeholder_text = ">"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Normal"]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1270.0
-margin_bottom = 710.0
-mouse_filter = 2
-
-[node name="SettingsButton" type="Button" parent="Normal/VBoxContainer"]
-margin_left = 1197.0
-margin_right = 1260.0
-margin_bottom = 20.0
-size_flags_horizontal = 10
-size_flags_vertical = 0
-text = "Settings"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ManagmentButton" type="Button" parent="Normal/VBoxContainer"]
-margin_left = 1173.0
-margin_top = 24.0
-margin_right = 1260.0
-margin_bottom = 44.0
-size_flags_horizontal = 10
-size_flags_vertical = 4
-text = "Managment"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Minimap" type="PanelContainer" parent="Normal"]
 margin_left = 1070.0
 margin_top = 510.0
@@ -231,14 +248,165 @@ margin_right = 1270.0
 margin_bottom = 710.0
 mouse_filter = 2
 
-[node name="NormalButton" type="Button" parent="Settings"]
-margin_left = 1211.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 820.0
+margin_bottom = 151.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="Name" type="VBoxContainer" parent="Settings/PanelContainer/HBoxContainer"]
+margin_right = 81.0
+margin_bottom = 144.0
+size_flags_horizontal = 0
+custom_constants/separation = 16
+
+[node name="MasterVolume" type="Label" parent="Settings/PanelContainer/HBoxContainer/Name"]
+margin_right = 81.0
+margin_bottom = 14.0
+text = "Master"
+
+[node name="MusicVolume" type="Label" parent="Settings/PanelContainer/HBoxContainer/Name"]
+margin_top = 30.0
+margin_right = 81.0
+margin_bottom = 44.0
+text = "Music"
+
+[node name="SFXVolume" type="Label" parent="Settings/PanelContainer/HBoxContainer/Name"]
+margin_top = 60.0
+margin_right = 81.0
+margin_bottom = 74.0
+text = "SFX"
+
+[node name="UISFXVolume" type="Label" parent="Settings/PanelContainer/HBoxContainer/Name"]
+margin_top = 90.0
+margin_right = 81.0
+margin_bottom = 104.0
+text = "SFX"
+
+[node name="EnvironmentVolume" type="Label" parent="Settings/PanelContainer/HBoxContainer/Name"]
+margin_top = 120.0
+margin_right = 81.0
+margin_bottom = 134.0
+text = "Environment"
+
+[node name="Value" type="VBoxContainer" parent="Settings/PanelContainer/HBoxContainer"]
+margin_left = 85.0
+margin_right = 785.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 700, 0 )
+size_flags_horizontal = 3
+custom_constants/separation = 14
+
+[node name="MasterVolSlide" type="HSlider" parent="Settings/PanelContainer/HBoxContainer/Value"]
+margin_right = 700.0
+margin_bottom = 16.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+tick_count = 21
+ticks_on_borders = true
+
+[node name="MusicVolSlide" type="HSlider" parent="Settings/PanelContainer/HBoxContainer/Value"]
+margin_top = 30.0
+margin_right = 700.0
+margin_bottom = 46.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+tick_count = 21
+ticks_on_borders = true
+
+[node name="SFXVolSlide" type="HSlider" parent="Settings/PanelContainer/HBoxContainer/Value"]
+margin_top = 60.0
+margin_right = 700.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+tick_count = 21
+ticks_on_borders = true
+
+[node name="UISFXVolSlide" type="HSlider" parent="Settings/PanelContainer/HBoxContainer/Value"]
+margin_top = 90.0
+margin_right = 700.0
+margin_bottom = 106.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+tick_count = 21
+ticks_on_borders = true
+
+[node name="EnvVolSlide" type="HSlider" parent="Settings/PanelContainer/HBoxContainer/Value"]
+margin_top = 120.0
+margin_right = 700.0
+margin_bottom = 136.0
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.05
+tick_count = 21
+ticks_on_borders = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings/PanelContainer/HBoxContainer"]
+margin_left = 789.0
+margin_right = 813.0
+margin_bottom = 144.0
+custom_constants/separation = 6
+
+[node name="mast" type="CheckBox" parent="Settings/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_right = 24.0
+margin_bottom = 24.0
+
+[node name="mus" type="CheckBox" parent="Settings/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_top = 30.0
+margin_right = 24.0
+margin_bottom = 54.0
+
+[node name="sfx" type="CheckBox" parent="Settings/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 24.0
+margin_bottom = 84.0
+
+[node name="ui" type="CheckBox" parent="Settings/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_top = 90.0
+margin_right = 24.0
+margin_bottom = 114.0
+
+[node name="env" type="CheckBox" parent="Settings/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_top = 120.0
+margin_right = 24.0
+margin_bottom = 144.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
+margin_left = 1208.0
 margin_top = 10.0
 margin_right = 1270.0
-margin_bottom = 30.0
+margin_bottom = 60.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
+
+[node name="NormalButton" type="Button" parent="Settings/VBoxContainer"]
+margin_right = 62.0
+margin_bottom = 23.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
 text = "Normal"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="Button" parent="Settings/VBoxContainer"]
+self_modulate = Color( 1, 0, 0, 1 )
+margin_left = 21.0
+margin_top = 27.0
+margin_right = 62.0
+margin_bottom = 50.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -252,6 +420,9 @@ custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="PanelContainer" type="PanelContainer" parent="Managment"]
 margin_left = 10.0
@@ -260,20 +431,70 @@ margin_right = 1270.0
 margin_bottom = 710.0
 mouse_filter = 2
 
-[node name="NormalButton" type="Button" parent="Managment"]
-margin_left = 1211.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Managment"]
+margin_left = 1203.0
 margin_top = 10.0
 margin_right = 1270.0
-margin_bottom = 30.0
+margin_bottom = 87.0
 size_flags_horizontal = 8
 size_flags_vertical = 0
+
+[node name="NormalButton" type="Button" parent="Managment/VBoxContainer"]
+margin_left = 4.0
+margin_right = 63.0
+margin_bottom = 20.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
 text = "Normal"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="SettingsButton" type="Button" parent="Managment/VBoxContainer"]
+margin_top = 24.0
+margin_right = 63.0
+margin_bottom = 44.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "Settings"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="QuitButton" type="Button" parent="Managment/VBoxContainer"]
+self_modulate = Color( 1, 0, 0, 1 )
+margin_left = 23.0
+margin_top = 48.0
+margin_right = 63.0
+margin_bottom = 68.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_fonts/font = ExtResource( 4 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="text_entered" from="Normal/ChatBox/VBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
-[connection signal="pressed" from="Normal/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
-[connection signal="pressed" from="Normal/VBoxContainer/ManagmentButton" to="." method="_on_ManagmentButton_pressed"]
-[connection signal="pressed" from="Settings/NormalButton" to="." method="_on_NormalButton_pressed"]
-[connection signal="pressed" from="Managment/NormalButton" to="." method="_on_NormalButton_pressed"]
+[connection signal="mouse_exited" from="Settings/PanelContainer/HBoxContainer/Value/MasterVolSlide" to="Settings/PanelContainer/HBoxContainer/Value/MasterVolSlide" method="release_focus"]
+[connection signal="value_changed" from="Settings/PanelContainer/HBoxContainer/Value/MasterVolSlide" to="." method="_on_MasterVolSlide_value_changed"]
+[connection signal="mouse_exited" from="Settings/PanelContainer/HBoxContainer/Value/MusicVolSlide" to="Settings/PanelContainer/HBoxContainer/Value/MusicVolSlide" method="release_focus"]
+[connection signal="value_changed" from="Settings/PanelContainer/HBoxContainer/Value/MusicVolSlide" to="." method="_on_MusicVolSlide_value_changed"]
+[connection signal="mouse_exited" from="Settings/PanelContainer/HBoxContainer/Value/SFXVolSlide" to="Settings/PanelContainer/HBoxContainer/Value/SFXVolSlide" method="release_focus"]
+[connection signal="value_changed" from="Settings/PanelContainer/HBoxContainer/Value/SFXVolSlide" to="." method="_on_SFXVolSlide_value_changed"]
+[connection signal="mouse_exited" from="Settings/PanelContainer/HBoxContainer/Value/UISFXVolSlide" to="Settings/PanelContainer/HBoxContainer/Value/UISFXVolSlide" method="release_focus"]
+[connection signal="value_changed" from="Settings/PanelContainer/HBoxContainer/Value/UISFXVolSlide" to="." method="_on_UISFXVolSlide_value_changed"]
+[connection signal="mouse_exited" from="Settings/PanelContainer/HBoxContainer/Value/EnvVolSlide" to="Settings/PanelContainer/HBoxContainer/Value/EnvVolSlide" method="release_focus"]
+[connection signal="value_changed" from="Settings/PanelContainer/HBoxContainer/Value/EnvVolSlide" to="." method="_on_EnvVolSlide_value_changed"]
+[connection signal="toggled" from="Settings/PanelContainer/HBoxContainer/VBoxContainer/mast" to="." method="_on_mast_toggled"]
+[connection signal="toggled" from="Settings/PanelContainer/HBoxContainer/VBoxContainer/mus" to="." method="_on_mus_toggled"]
+[connection signal="toggled" from="Settings/PanelContainer/HBoxContainer/VBoxContainer/sfx" to="." method="_on_sfx_toggled"]
+[connection signal="toggled" from="Settings/PanelContainer/HBoxContainer/VBoxContainer/ui" to="." method="_on_ui_toggled"]
+[connection signal="toggled" from="Settings/PanelContainer/HBoxContainer/VBoxContainer/env" to="." method="_on_env_toggled"]
+[connection signal="pressed" from="Settings/VBoxContainer/NormalButton" to="." method="_on_NormalButton_pressed"]
+[connection signal="pressed" from="Settings/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="Managment/VBoxContainer/NormalButton" to="." method="_on_NormalButton_pressed"]
+[connection signal="pressed" from="Managment/VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="Managment/VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

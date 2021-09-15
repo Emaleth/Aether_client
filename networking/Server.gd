@@ -21,9 +21,12 @@ signal s_update_world_state
 signal s_update_chat_state
 
 func _physics_process(delta: float) -> void:
-	client_clock += int(delta * 1000) + delta_latency
+	clock_decimal_precision(delta)
+	
+func clock_decimal_precision(_delta):
+	client_clock += int(_delta * 1000) + delta_latency
 	delta_latency = 0
-	decimal_collector += (delta * 1000) - int(delta * 1000)
+	decimal_collector += (_delta * 1000) - int(_delta * 1000)
 	if decimal_collector >= 1.00:
 		client_clock += 1
 		decimal_collector -= 1.00
@@ -39,17 +42,26 @@ func _on_connection_failed():
 	print("Could not connect to the Server!")
 	
 func _on_connection_succeeded():
-	rpc_id(1, "fetch_server_time", OS.get_system_time_msecs())
-	var timer = Timer.new()
-	timer.wait_time = 0.5
-	timer.autostart = true
-	timer.connect("timeout", self, "determine_latency")
-	self.add_child(timer)
+	get_server_time()
+	var server_clock_sync_timer = Timer.new()
+	server_clock_sync_timer.wait_time = 5
+	server_clock_sync_timer.autostart = true
+	server_clock_sync_timer.connect("timeout", self, "get_server_time")
+	self.add_child(server_clock_sync_timer)
+	determine_latency()
+	var latency_timer = Timer.new()
+	latency_timer.wait_time = 0.5
+	latency_timer.autostart = true
+	latency_timer.connect("timeout", self, "determine_latency")
+	self.add_child(latency_timer)
 	
 remote func return_server_time(server_time, client_time):
 	if get_tree().get_rpc_sender_id() == 1:
 		latency = (OS.get_system_time_msecs() - client_time) / 2
 		client_clock = server_time + latency
+	
+func get_server_time():
+	rpc_id(1, "fetch_server_time", OS.get_system_time_msecs())
 	
 func determine_latency():
 	rpc_id(1, "determine_latency", OS.get_system_time_msecs())

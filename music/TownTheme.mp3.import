@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/TownTheme.mp3-7a55470a438ce50638d2ca896b5f63dc.mp3str"
+
+[deps]
+
+source_file="res://music/TownTheme.mp3"
+dest_files=[ "res://.import/TownTheme.mp3-7a55470a438ce50638d2ca896b5f63dc.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

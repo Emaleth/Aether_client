@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://ui/fonts/Content.tres" type="DynamicFont" id=2]
 [ext_resource path="res://ui/fonts/Header.tres" type="DynamicFont" id=3]
 [ext_resource path="res://ui/fonts/Button.tres" type="DynamicFont" id=4]
 [ext_resource path="res://world/panorama_image.png" type="Texture" id=5]
+[ext_resource path="res://music/TownTheme.mp3" type="AudioStream" id=6]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -323,6 +324,11 @@ valign = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+autoplay = true
+bus = "BGM"
 
 [connection signal="tab_changed" from="CenterContainer/AuthenticationScreen" to="." method="tab_changed"]
 [connection signal="pressed" from="CenterContainer/AuthenticationScreen/Login/VBoxContainer/Login" to="." method="login"]

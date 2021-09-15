@@ -49,9 +49,7 @@ func spawn_player(_id, _data):
 		player_buffer[_id]["rot"] = _data["rot"]
 
 func despawn_player(_id):
-	print("despawning player: %s" % _id)
 	player_buffer.erase(_id)
-	yield(get_tree().create_timer(0.2), "timeout")
 	if dummy_container.has_node(str(_id)):
 		dummy_container.get_node(str(_id)).despawn()
 		
