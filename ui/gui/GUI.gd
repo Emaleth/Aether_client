@@ -23,17 +23,18 @@ onready var aim_hint = $Normal/CrosshairContainer/MarginContainer/Label
 
 var chat = false
 var mode
-var audio_bus_master_index = "Master"
-var audio_bus_bgm_index = "BGM"
-var audio_bus_ui_index = "UI"
-var audio_bus_env_index = "ENV"
-var audio_bus_sfx_index = "SFX"
+
+onready var audio_bus_master_slider = $Settings/PanelContainer/HBoxContainer/Value/MasterVolSlide
+onready var audio_bus_bgm_slider = $Settings/PanelContainer/HBoxContainer/Value/MusicVolSlide
+onready var audio_bus_ui_slider = $Settings/PanelContainer/HBoxContainer/Value/UISFXVolSlide
+onready var audio_bus_env_slider = $Settings/PanelContainer/HBoxContainer/Value/EnvVolSlide
+onready var audio_bus_sfx_slider = $Settings/PanelContainer/HBoxContainer/Value/SFXVolSlide
 
 func _ready() -> void:
 	Server.connect("s_update_chat_state", self, "update_chat_box")
 	template_chat_line.hide()
 	set_gui_mode(NORMAL)
-	get_audio_bus_indexes()
+	get_audio_slider_values()
 	
 func _physics_process(_delta: float) -> void:
 	format_time()
@@ -148,41 +149,40 @@ func _on_NormalButton_pressed() -> void:
 func _on_QuitButton_pressed() -> void:
 	get_tree().change_scene_to(menu)
 
-func get_audio_bus_indexes():
-	audio_bus_master_index = AudioServer.get_bus_index(audio_bus_master_index)
-	audio_bus_ui_index = AudioServer.get_bus_index(audio_bus_ui_index)
-	audio_bus_sfx_index = AudioServer.get_bus_index(audio_bus_sfx_index)
-	audio_bus_env_index = AudioServer.get_bus_index(audio_bus_env_index)
-	audio_bus_bgm_index = AudioServer.get_bus_index(audio_bus_bgm_index)
-	print(audio_bus_master_index)
-
+func get_audio_slider_values():
+	audio_bus_master_slider.value = db2linear(AudioServer.get_bus_volume_db(0))
+	audio_bus_env_slider.value = db2linear(AudioServer.get_bus_volume_db(1))
+	audio_bus_bgm_slider.value = db2linear(AudioServer.get_bus_volume_db(2))
+	audio_bus_sfx_slider.value = db2linear(AudioServer.get_bus_volume_db(3))
+	audio_bus_ui_slider.value = db2linear(AudioServer.get_bus_volume_db(4))
+	
 func _on_MasterVolSlide_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(audio_bus_master_index, linear2db(value))
+	AudioServer.set_bus_volume_db(0, linear2db(value))
 
 func _on_MusicVolSlide_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(audio_bus_bgm_index, linear2db(value))
+	AudioServer.set_bus_volume_db(2, linear2db(value))
 
 func _on_SFXVolSlide_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(audio_bus_sfx_index, linear2db(value))
+	AudioServer.set_bus_volume_db(3, linear2db(value))
 
 func _on_EnvVolSlide_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(audio_bus_env_index, linear2db(value))
+	AudioServer.set_bus_volume_db(1, linear2db(value))
 
 func _on_UISFXVolSlide_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(audio_bus_ui_index, linear2db(value))
+	AudioServer.set_bus_volume_db(4, linear2db(value))
 
 func _on_mast_toggled(button_pressed: bool) -> void:
-	AudioServer.set_bus_mute(audio_bus_master_index, button_pressed)
+	AudioServer.set_bus_mute(0, button_pressed)
 
 func _on_mus_toggled(button_pressed: bool) -> void:
-	AudioServer.set_bus_mute(audio_bus_bgm_index, button_pressed)
+	AudioServer.set_bus_mute(2, button_pressed)
 
 func _on_sfx_toggled(button_pressed: bool) -> void:
-	AudioServer.set_bus_mute(audio_bus_sfx_index, button_pressed)
+	AudioServer.set_bus_mute(3, button_pressed)
 
 func _on_ui_toggled(button_pressed: bool) -> void:
-	AudioServer.set_bus_mute(audio_bus_ui_index, button_pressed)
+	AudioServer.set_bus_mute(4, button_pressed)
 	
 func _on_env_toggled(button_pressed: bool) -> void:
-	AudioServer.set_bus_mute(audio_bus_env_index, button_pressed)
+	AudioServer.set_bus_mute(1, button_pressed)
 	

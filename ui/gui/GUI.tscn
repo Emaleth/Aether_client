@@ -283,7 +283,7 @@ text = "SFX"
 margin_top = 90.0
 margin_right = 81.0
 margin_bottom = 104.0
-text = "SFX"
+text = "UI"
 
 [node name="EnvironmentVolume" type="Label" parent="Settings/PanelContainer/HBoxContainer/Name"]
 margin_top = 120.0
