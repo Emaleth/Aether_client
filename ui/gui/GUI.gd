@@ -186,3 +186,5 @@ func _on_ui_toggled(button_pressed: bool) -> void:
 func _on_env_toggled(button_pressed: bool) -> void:
 	AudioServer.set_bus_mute(1, button_pressed)
 	
+func show_tooltip(_text):
+	aim_hint.text = str(_text) 

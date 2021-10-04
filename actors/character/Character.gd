@@ -2,13 +2,13 @@ extends KinematicBody
 
 enum {IDLE, WALK, RUN, SPRINT, JUMP, FALL, DEAD}
 # player variables
-var walk_speed = 5
-var run_speed = 10
-var air_speed = 7
-var sprint_speed = 15
+var walk_speed = 1
+var run_speed = 3 
+var air_speed = 3
+var sprint_speed = 5
 var acceleration = 10
 var deceleration = 30
-var jump_force = 20
+var jump_force = 10
 # game / environment variable
 var mouse_sensitivity = 0.005
 var gravity_force = 50
@@ -23,40 +23,40 @@ var walking = false
 var sprinting = false
 
 var player_state # collection of player data to send to the server
-# CAMERA BEGIN
-var sensibility : float = 0.002
-var deadzone : float = 0.1
-var default_rotation_x : float = deg2rad(-15)
-# CAMERA END
+
 onready var bullet_origin : Position3D = $Position3D
 onready var bullet : PackedScene = preload("res://bullet/Bullet.tscn")
-onready var ray : RayCast = $CameraRig/Camera/RayCast
-onready var anim : AnimationPlayer = $Male_Casual/AnimationPlayer
+
 onready var camera_rig = $CameraRig
 onready var gui = $GUI
 onready var minimap_camera = $Viewport/Spatial/MinimapCamera
 
+signal get_target 
 
 func _ready() -> void:
-	camera_rig.rotation.x = default_rotation_x
-	state = IDLE
-	gui.minimap.get_node("TextureRect").texture = minimap_camera.get_viewport().get_texture()
+	configure()
+	$IK.configure(find_node("Skeleton"))
 	
 func _physics_process(delta: float) -> void:
+#	print(abs(velocity.z) + abs(velocity.x))
+	$IK.animation()
 	get_input()
 	finite_state_machine(delta, get_direction())
-	define_player_state()
+	define_player_state() 
 	
-	if ray.is_colliding():
-		gui.aim_hint.text = ray.get_collider().name
-	else:
-		gui.aim_hint.text = ""
-		 
+func configure():
+	state = IDLE
+	gui.minimap.get_node("TextureRect").texture = minimap_camera.get_viewport().get_texture()
+	connect_signals()
+	
+func connect_signals():
+	connect("get_target", camera_rig, "aim")
+	camera_rig.connect("show_aim_hint", gui, "show_tooltip")
+	camera_rig.connect("new_target", self, "shoot_bullet")
 	
 func finite_state_machine(delta: float, direction) -> void:
 	match state:
 		IDLE:
-			anim.play("Man_Idle")
 			snap = -get_floor_normal()
 			velocity = velocity.linear_interpolate(Vector3.ZERO, deceleration * delta)
 			gravity = Vector3.ZERO
@@ -74,7 +74,6 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = FALL
 				
 		WALK:
-			anim.play("Man_Walk")
 			snap = -get_floor_normal()
 			velocity = velocity.linear_interpolate(direction * walk_speed, acceleration * delta)
 			gravity = Vector3.ZERO
@@ -90,7 +89,6 @@ func finite_state_machine(delta: float, direction) -> void:
 					state = RUN
 			
 		RUN:
-			anim.play("Man_Run")
 			snap = -get_floor_normal()
 			velocity = velocity.linear_interpolate(direction * run_speed, acceleration * delta)
 			gravity = Vector3.ZERO
@@ -107,7 +105,6 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = IDLE
 				
 		SPRINT:
-			anim.play("Man_Run")
 			snap = -get_floor_normal()
 			velocity = velocity.linear_interpolate(direction * sprint_speed, acceleration * delta)
 			gravity = Vector3.ZERO
@@ -123,7 +120,6 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = FALL
 			
 		JUMP:
-			anim.play("Man_Jump")
 			snap = Vector3.DOWN
 			velocity = velocity.linear_interpolate(direction * air_speed, acceleration * delta)
 			gravity += Vector3.DOWN * gravity_force * delta
@@ -134,7 +130,6 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = FALL
 			
 		FALL:
-			anim.play("Man_Run")
 			snap = Vector3.DOWN
 			velocity = velocity.linear_interpolate(direction * air_speed, acceleration * delta)
 			gravity += Vector3.DOWN * gravity_force * delta
@@ -143,7 +138,6 @@ func finite_state_machine(delta: float, direction) -> void:
 				state = IDLE
 				
 		DEAD:
-			anim.play("Man_Run")
 			pass
 			
 	movement = velocity + gravity
@@ -177,33 +171,26 @@ func get_input():
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and gui.chat == false:
 		if event is InputEventMouseMotion:
-			if abs(event.relative.y) > deadzone:
-				camera_rig.rotation.x -= event.relative.y * sensibility
-				camera_rig.rotation.x = clamp(camera_rig.rotation.x, deg2rad(-80), deg2rad(80))
-
-		if event is InputEventMouseMotion:
 			if abs(event.relative.x) > .1: 
 				rotate_y(-event.relative.x * mouse_sensitivity)
 				
 		if Input.is_action_just_pressed("primary_action"):
-			if ray.is_colliding():
-				print_debug(ray.get_collider().name + "_PrimaryA")
-			else:
-				print_debug("no ray collision")
-		if Input.is_action_just_pressed("secondary_action"):
-			shoot()
-#			if ray.is_colliding():
-#				print_debug(ray.get_collider().name + "_SecondaryA")
+			emit_signal("get_target")
 			
+		if Input.is_action_just_pressed("secondary_action"):
+			emit_signal("get_target")
+
 func define_player_state():
-	player_state = {"T" : Server.client_clock, "pos" : global_transform.origin, "rot" : global_transform.basis, "anim" : [anim.current_animation, anim.current_animation_position]}
+	player_state = {"T" : Server.client_clock, "pos" : global_transform.origin, "rot" : global_transform.basis, "anim" : [null, null]}
 	Server.send_player_state(player_state)
 	
-func shoot():
-	if not ray.is_colliding():
-		bullet_origin.look_at($CameraRig/Camera/Position3D.global_transform.origin, bullet_origin.global_transform.origin.cross($CameraRig/Camera/Position3D.transform.origin))
-	else:
-		bullet_origin.look_at(ray.get_collision_point(), bullet_origin.transform.origin.cross(ray.get_collision_point()))
+func shoot_ray(_target_position):
+	bullet_origin.look_at(_target_position, bullet_origin.transform.origin.cross(_target_position))
+	if $Position3D/RayCast.is_colliding():
+		print_debug("Ray Target: %s" % $Position3D/RayCast.get_collider().name)
+		
+func shoot_bullet(_target_position):
+	bullet_origin.look_at(_target_position, bullet_origin.transform.origin.cross(_target_position))
 	var b = bullet.instance()
 	b.global_transform = bullet_origin.global_transform
 	get_tree().root.add_child(b)
