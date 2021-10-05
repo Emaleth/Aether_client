@@ -1,11 +1,8 @@
 extends KinematicBody
 
-enum {IDLE, WALK, RUN, SPRINT, JUMP, FALL, DEAD}
+enum {IDLE, RUN, JUMP, FALL, DEAD}
 # player variables
-var walk_speed = 1
-var run_speed = 3 
-var air_speed = 3
-var sprint_speed = 5
+var speed = 5
 var acceleration = 10
 var deceleration = 30
 var jump_force = 10
@@ -19,8 +16,6 @@ var velocity = Vector3.ZERO
 var gravity = Vector3.ZERO
 var movement = Vector3.ZERO
 var jumping = false
-var walking = false
-var sprinting = false
 
 var player_state # collection of player data to send to the server
 
@@ -35,11 +30,8 @@ signal get_target
 
 func _ready() -> void:
 	configure()
-	$IK.configure(find_node("Skeleton"))
 	
 func _physics_process(delta: float) -> void:
-#	print(abs(velocity.z) + abs(velocity.x))
-	$IK.animation()
 	get_input()
 	finite_state_machine(delta, get_direction())
 	define_player_state() 
@@ -48,6 +40,7 @@ func configure():
 	state = IDLE
 	gui.minimap.get_node("TextureRect").texture = minimap_camera.get_viewport().get_texture()
 	connect_signals()
+	$IK.configure(find_node("Skeleton"))
 	
 func connect_signals():
 	connect("get_target", camera_rig, "aim")
@@ -60,68 +53,31 @@ func finite_state_machine(delta: float, direction) -> void:
 			snap = -get_floor_normal()
 			velocity = velocity.linear_interpolate(Vector3.ZERO, deceleration * delta)
 			gravity = Vector3.ZERO
+			$IK.idle_animation()
 			
 			if jumping == true:
 				state = JUMP
 			if get_direction() != Vector3.ZERO:
-				if sprinting == true:
-					state = SPRINT
-				elif walking == true:
-					state = WALK
-				else:
-					state = RUN
+				state = RUN
 			if not is_on_floor() and velocity.y < 0:
 				state = FALL
 				
-		WALK:
-			snap = -get_floor_normal()
-			velocity = velocity.linear_interpolate(direction * walk_speed, acceleration * delta)
-			gravity = Vector3.ZERO
-			
-			if jumping == true:
-				state = JUMP
-			if not is_on_floor():
-				state = FALL
-			if get_direction() == Vector3.ZERO:
-				state = IDLE
-			else:
-				if walking == false:
-					state = RUN
-			
 		RUN:
 			snap = -get_floor_normal()
-			velocity = velocity.linear_interpolate(direction * run_speed, acceleration * delta)
+			velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
 			gravity = Vector3.ZERO
+			$IK.run_animation(velocity.length())
 			
 			if jumping == true:
 				state = JUMP
-			if sprinting == true:
-				state = SPRINT
-			if walking == true:
-				state = WALK
 			if not is_on_floor():
 				state = FALL
 			if get_direction() == Vector3.ZERO:
 				state = IDLE
 				
-		SPRINT:
-			snap = -get_floor_normal()
-			velocity = velocity.linear_interpolate(direction * sprint_speed, acceleration * delta)
-			gravity = Vector3.ZERO
-			
-			if jumping == true:
-				state = JUMP
-			if get_direction() == Vector3.ZERO:
-				state = IDLE
-			else:
-				if sprinting == false:
-					state = RUN
-			if not is_on_floor():
-				state = FALL
-			
 		JUMP:
 			snap = Vector3.DOWN
-			velocity = velocity.linear_interpolate(direction * air_speed, acceleration * delta)
+			velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
 			gravity += Vector3.DOWN * gravity_force * delta
 			if is_on_floor():
 				snap = Vector3.ZERO
@@ -131,7 +87,7 @@ func finite_state_machine(delta: float, direction) -> void:
 			
 		FALL:
 			snap = Vector3.DOWN
-			velocity = velocity.linear_interpolate(direction * air_speed, acceleration * delta)
+			velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
 			gravity += Vector3.DOWN * gravity_force * delta
 			jumping = false
 			if is_on_floor():
@@ -157,16 +113,6 @@ func get_input():
 		jumping = true
 	else:
 		jumping = false
-
-	if Input.is_action_pressed("walk") and gui.chat == false:
-		walking = true
-	else:
-		walking = false
-		
-	if Input.is_action_pressed("sprint") and gui.chat == false:
-		sprinting = true
-	else:
-		sprinting = false
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and gui.chat == false:
