@@ -47,6 +47,7 @@ func configure(_skeleton : Skeleton):
 		skeleton_data[i]["ray_node"].cast_to = Vector3.DOWN * 2
 		skeleton_data[i]["ray_node"].enabled = true
 		skeleton_data[i]["ray_node"].transform.origin.x = skeleton_data[i]["offset_x"]
+#		skeleton_data[i]["ray_node"].transform.origin.z = -0.4
 		# CONFIGURE INITIAL "Position3D" NODE POSITION
 		yield(get_tree(), "idle_frame")
 		skeleton_data[i]["target_node"].global_transform.origin = skeleton_data[i]["ray_node"].get_collision_point()

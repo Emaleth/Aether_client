@@ -1,27 +1,19 @@
 extends KinematicBody
 
 enum {IDLE, RUN, JUMP, FALL, DEAD}
-# player variables
-var speed = 5
-var acceleration = 10
-var deceleration = 30
-var jump_force = 10
-# game / environment variable
+
+var speed = 2.8 # m/s
+var jump_force = 3
 var mouse_sensitivity = 0.005
-var gravity_force = 50
-# internal variables
+var gravity_force = 9.8
 var state = null
 var snap = Vector3.ZERO
-var velocity = Vector3.ZERO
-var gravity = Vector3.ZERO
-var movement = Vector3.ZERO
 var jumping = false
-
 var player_state # collection of player data to send to the server
+var gravity = Vector3.ZERO
 
 onready var bullet_origin : Position3D = $Position3D
 onready var bullet : PackedScene = preload("res://bullet/Bullet.tscn")
-
 onready var camera_rig = $CameraRig
 onready var gui = $GUI
 onready var minimap_camera = $Viewport/Spatial/MinimapCamera
@@ -47,11 +39,13 @@ func connect_signals():
 	camera_rig.connect("show_aim_hint", gui, "show_tooltip")
 	camera_rig.connect("new_target", self, "shoot_bullet")
 	
-func finite_state_machine(delta: float, direction) -> void:
+func finite_state_machine(_delta, _direction) -> void:
+	var velocity = Vector3.ZERO
+
 	match state:
 		IDLE:
 			snap = -get_floor_normal()
-			velocity = velocity.linear_interpolate(Vector3.ZERO, deceleration * delta)
+			velocity = Vector3.ZERO
 			gravity = Vector3.ZERO
 			$IK.idle_animation()
 			
@@ -64,7 +58,7 @@ func finite_state_machine(delta: float, direction) -> void:
 				
 		RUN:
 			snap = -get_floor_normal()
-			velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
+			velocity = _direction * speed
 			gravity = Vector3.ZERO
 			$IK.run_animation(velocity.length())
 			
@@ -77,8 +71,8 @@ func finite_state_machine(delta: float, direction) -> void:
 				
 		JUMP:
 			snap = Vector3.DOWN
-			velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
-			gravity += Vector3.DOWN * gravity_force * delta
+			velocity = _direction * speed
+			gravity += Vector3.DOWN * gravity_force * _delta
 			if is_on_floor():
 				snap = Vector3.ZERO
 				gravity = Vector3.UP * jump_force
@@ -87,8 +81,8 @@ func finite_state_machine(delta: float, direction) -> void:
 			
 		FALL:
 			snap = Vector3.DOWN
-			velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
-			gravity += Vector3.DOWN * gravity_force * delta
+			velocity = _direction * speed
+			gravity += Vector3.DOWN * gravity_force * _delta
 			jumping = false
 			if is_on_floor():
 				state = IDLE
@@ -96,8 +90,7 @@ func finite_state_machine(delta: float, direction) -> void:
 		DEAD:
 			pass
 			
-	movement = velocity + gravity
-	move_and_slide_with_snap(movement, snap, Vector3.UP)
+	move_and_slide_with_snap(velocity + gravity, snap, Vector3.UP)
 	
 func get_direction():
 	var direction = Vector3.ZERO
