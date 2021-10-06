@@ -7,29 +7,27 @@ onready var skeleton_data = {
 		"ik_node" : SkeletonIK.new(),
 		"target_node" : Position3D.new(),
 		"ray_node" : RayCast.new(),
-		"tween_node" : Tween.new(),
 		"root_bone" : "right_upper_leg",
 		"tip_bone" : "right_foot",
 		"magnet" : Vector3(0, 0, -2),
-		"offset_x" : 0.15
+		"offset_x" : 0.15,
+		"move" : true
 	},
 	"left_leg" : {
 		"ik_node" : SkeletonIK.new(),
 		"target_node" : Position3D.new(),
 		"ray_node" : RayCast.new(),
-		"tween_node" : Tween.new(),
 		"root_bone" : "left_upper_leg",
 		"tip_bone" : "left_foot",
 		"magnet" : Vector3(0, 0, -2),
-		"offset_x" : -0.15
+		"offset_x" : -0.15,
+		"move" : true
 	}
 }
 
-var step_time = 0.2
-var step_lenght = model_height * 0.43
+var step_lenght = 1 # model_height * 0.43
 var step_height = model_height * 0.2
 var skeleton : Skeleton = null
-var current_leg = "right_leg"
 var configured = false
 
 
@@ -41,13 +39,11 @@ func configure(_skeleton : Skeleton):
 		get_parent().add_child(skeleton_data[i]["ray_node"])
 		skeleton.add_child(skeleton_data[i]["ik_node"])
 		add_child(skeleton_data[i]["target_node"])
-		add_child(skeleton_data[i]["tween_node"])
 		skeleton_data[i]["target_node"].add_child((load("res://DebugMesh.tscn")).instance())
 		# CONFIGURE "Raycast" NODE
 		skeleton_data[i]["ray_node"].cast_to = Vector3.DOWN * 2
 		skeleton_data[i]["ray_node"].enabled = true
 		skeleton_data[i]["ray_node"].transform.origin.x = skeleton_data[i]["offset_x"]
-#		skeleton_data[i]["ray_node"].transform.origin.z = -0.4
 		# CONFIGURE INITIAL "Position3D" NODE POSITION
 		yield(get_tree(), "idle_frame")
 		skeleton_data[i]["target_node"].global_transform.origin = skeleton_data[i]["ray_node"].get_collision_point()
@@ -61,112 +57,20 @@ func configure(_skeleton : Skeleton):
 		skeleton_data[i]["ik_node"].start()
 	configured = true
 	
-func run_animation(_velocity):
+func run_animation(_direction):
 	if not configured == true:
 		return
-	if not skeleton_data[current_leg]["tween_node"].is_active():
-		if skeleton_data[current_leg]["target_node"].global_transform.origin.distance_to(skeleton_data[current_leg]["ray_node"].get_collision_point()) > step_lenght:
-			# MOVE ON X AXIS
-			skeleton_data[current_leg]["tween_node"].interpolate_property(
-				skeleton_data[current_leg]["target_node"],
-				"global_transform:origin:x",
-				skeleton_data[current_leg]["target_node"].global_transform.origin.x,
-				skeleton_data[current_leg]["ray_node"].get_collision_point().x,
-				step_time,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_IN
-			)
-			# MOVE ON Y AXIS (UP)
-			skeleton_data[current_leg]["tween_node"].interpolate_property(
-				skeleton_data[current_leg]["target_node"],
-				"global_transform:origin:y",
-				skeleton_data[current_leg]["target_node"].global_transform.origin.y,
-				skeleton_data[current_leg]["ray_node"].get_collision_point().y + step_height,
-				step_time / 5,
-				Tween.TRANS_CIRC,
-				Tween.EASE_IN_OUT
-			)
-			# MOVE ON Y AXIS (DOWN)
-			skeleton_data[current_leg]["tween_node"].interpolate_property(
-				skeleton_data[current_leg]["target_node"],
-				"global_transform:origin:y",
-				skeleton_data[current_leg]["target_node"].global_transform.origin.y,
-				skeleton_data[current_leg]["ray_node"].get_collision_point().y,
-				step_time / 5,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_IN,
-				(step_time / 5) * 4
-			)
-			# MOVE ON Z AXIS
-			skeleton_data[current_leg]["tween_node"].interpolate_property(
-				skeleton_data[current_leg]["target_node"],
-				"global_transform:origin:z",
-				skeleton_data[current_leg]["target_node"].global_transform.origin.z,
-				skeleton_data[current_leg]["ray_node"].get_collision_point().z,
-				step_time,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_IN
-			)
-			
-			skeleton_data[current_leg]["tween_node"].start()
-			yield(get_tree().create_timer((step_time / 5) * 2), "timeout")
+		
+	for leg in ["right_leg", "left_leg"]:
+		skeleton_data[leg]["ray_node"].transform.origin.z = step_lenght * sign(_direction) # FOR NOW SET TO FORWARD, SIDES MORE OR LESS WORK
+	
+		if skeleton_data[leg]["target_node"].global_transform.origin.distance_to(skeleton_data[leg]["ray_node"].get_collision_point()) > step_lenght:
+			skeleton_data[leg]["move"] = true
+		elif skeleton_data[leg]["target_node"].global_transform.origin.distance_to(skeleton_data[leg]["ray_node"].get_collision_point()) < 0.1:
+			skeleton_data[leg]["move"] = false
 
-			if current_leg == "right_leg":
-				current_leg = "left_leg"
-			elif current_leg == "left_leg":
-				current_leg = "right_leg"
-
+		if skeleton_data[leg]["move"] == true:
+			skeleton_data[leg]["target_node"].global_transform.origin = skeleton_data[leg]["target_node"].global_transform.origin.linear_interpolate(skeleton_data[leg]["ray_node"].get_collision_point(), 0.5)
+	
 func idle_animation():
-	if not configured == true:
-		return
-	if not skeleton_data[current_leg]["tween_node"].is_active():
-		if skeleton_data[current_leg]["target_node"].global_transform.origin.distance_to(skeleton_data[current_leg]["ray_node"].get_collision_point()) > 0.1:
-			# MOVE ON X AXIS
-			skeleton_data[current_leg]["tween_node"].interpolate_property(
-				skeleton_data[current_leg]["target_node"],
-				"global_transform:origin:x",
-				skeleton_data[current_leg]["target_node"].global_transform.origin.x,
-				skeleton_data[current_leg]["ray_node"].get_collision_point().x,
-				step_time,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_IN
-			)
-			# MOVE ON Y AXIS (UP)
-			skeleton_data[current_leg]["tween_node"].interpolate_property(
-				skeleton_data[current_leg]["target_node"],
-				"global_transform:origin:y",
-				skeleton_data[current_leg]["target_node"].global_transform.origin.y,
-				skeleton_data[current_leg]["ray_node"].get_collision_point().y + step_height,
-				step_time / 5,
-				Tween.TRANS_CIRC,
-				Tween.EASE_IN_OUT
-			)
-			# MOVE ON Y AXIS (DOWN)
-			skeleton_data[current_leg]["tween_node"].interpolate_property(
-				skeleton_data[current_leg]["target_node"],
-				"global_transform:origin:y",
-				skeleton_data[current_leg]["target_node"].global_transform.origin.y,
-				skeleton_data[current_leg]["ray_node"].get_collision_point().y,
-				step_time / 5,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_IN,
-				(step_time / 5) * 4
-			)
-			# MOVE ON Z AXIS
-			skeleton_data[current_leg]["tween_node"].interpolate_property(
-				skeleton_data[current_leg]["target_node"],
-				"global_transform:origin:z",
-				skeleton_data[current_leg]["target_node"].global_transform.origin.z,
-				skeleton_data[current_leg]["ray_node"].get_collision_point().z,
-				step_time,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_IN
-			)
-			
-			skeleton_data[current_leg]["tween_node"].start()
-			yield(get_tree().create_timer((step_time / 5) * 2), "timeout")
-
-			if current_leg == "right_leg":
-				current_leg = "left_leg"
-			elif current_leg == "left_leg":
-				current_leg = "right_leg"
+	pass
