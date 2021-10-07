@@ -59,3 +59,4 @@ update_scale = false
 [node name="IK" parent="." instance=ExtResource( 3 )]
 
 [node name="human" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )

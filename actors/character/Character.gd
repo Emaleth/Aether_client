@@ -11,7 +11,6 @@ var snap = Vector3.ZERO
 var jumping = false
 var player_state # collection of player data to send to the server
 var gravity = Vector3.ZERO
-var loc_dir_z = 0
 
 onready var bullet_origin : Position3D = $Position3D
 onready var bullet : PackedScene = preload("res://bullet/Bullet.tscn")
@@ -27,6 +26,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	get_input()
 	finite_state_machine(delta, get_direction())
+	$IK.animation()
 	define_player_state() 
 	
 func configure():
@@ -48,7 +48,6 @@ func finite_state_machine(_delta, _direction) -> void:
 			snap = -get_floor_normal()
 			velocity = Vector3.ZERO
 			gravity = Vector3.ZERO
-			$IK.idle_animation()
 			
 			if jumping == true:
 				state = JUMP
@@ -61,7 +60,6 @@ func finite_state_machine(_delta, _direction) -> void:
 			snap = -get_floor_normal()
 			velocity = _direction * speed
 			gravity = Vector3.ZERO
-			$IK.run_animation(loc_dir_z)
 			
 			if jumping == true:
 				state = JUMP
@@ -95,10 +93,8 @@ func finite_state_machine(_delta, _direction) -> void:
 	
 func get_direction():
 	var direction = Vector3.ZERO
-	loc_dir_z = 0
 	if gui.chat == false:
 		direction += (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")) * global_transform.basis.z
-		loc_dir_z = (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward"))
 		direction += (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * global_transform.basis.x
 	direction = direction.normalized()
 	
