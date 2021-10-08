@@ -2,7 +2,7 @@ extends KinematicBody
 
 enum {IDLE, RUN, JUMP, FALL, DEAD}
 
-var speed = 2.77 # m/s
+var speed = 5 # m/s
 var jump_force = 3
 var mouse_sensitivity = 0.005
 var gravity_force = 9.8
@@ -26,7 +26,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	get_input()
 	finite_state_machine(delta, get_direction())
-	$IK.animation()
 	define_player_state() 
 	
 func configure():
@@ -89,6 +88,7 @@ func finite_state_machine(_delta, _direction) -> void:
 		DEAD:
 			pass
 			
+	$IK.animate(velocity)
 	move_and_slide_with_snap(velocity + gravity, snap, Vector3.UP)
 	
 func get_direction():
