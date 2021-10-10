@@ -25,7 +25,7 @@ var step_lenght : float = 0.75
 var step_height : float = 0.2
 var skeleton : Skeleton = null
 var configured : bool = false
-
+var foot_spreed = 0.1
 var time = 0
 
 
@@ -60,17 +60,29 @@ func animate(_velocity):
 	if configured == false:
 		return
 		
-	time += 1
+	time += get_process_delta_time()
 	
-	var frequency = 0.1
-	var cosine_wave = cos(time * frequency) * step_lenght
+	var local_velocity = skeleton.global_transform.basis.xform_inv(_velocity).length()
+	var local_direction = skeleton.global_transform.basis.xform_inv(_velocity).normalized()
+	
+	var frequency = local_velocity / step_lenght
+	var cosine_wave_z = cos(time * frequency) * (step_lenght * local_direction.z)
+	var cosine_wave_x = cos(time * frequency) * (step_lenght * local_direction.x)
 	var sine_wave = sin(time * frequency) * step_height
 	
-	skeleton_data["right_leg"]["ray_node"].transform.origin.z = cosine_wave
-	skeleton_data["left_leg"]["ray_node"].transform.origin.z = -cosine_wave
+	var offset_direction = Vector3.FORWARD
+	if local_direction.is_normalized():
+		offset_direction = local_direction
+	
+	skeleton_data["right_leg"]["ray_node"].transform.origin.z = cosine_wave_z + (foot_spreed * -offset_direction.x)
+	skeleton_data["right_leg"]["ray_node"].transform.origin.x = cosine_wave_x + (foot_spreed * abs(offset_direction.z))
+	skeleton_data["left_leg"]["ray_node"].transform.origin.z = -cosine_wave_z + (foot_spreed * -offset_direction.x)
+	skeleton_data["left_leg"]["ray_node"].transform.origin.x = -cosine_wave_x + (foot_spreed * -abs(offset_direction.z))
 	
 	skeleton_data["right_leg"]["target_node"].transform.origin.z = skeleton.to_local(skeleton_data["right_leg"]["ray_node"].get_collision_point()).z
+	skeleton_data["right_leg"]["target_node"].transform.origin.x = skeleton.to_local(skeleton_data["right_leg"]["ray_node"].get_collision_point()).x
 	skeleton_data["left_leg"]["target_node"].transform.origin.z = skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).z
+	skeleton_data["left_leg"]["target_node"].transform.origin.x = skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).x
 	
 	skeleton_data["right_leg"]["target_node"].transform.origin.y = max(skeleton.to_local(skeleton_data["right_leg"]["ray_node"].get_collision_point()).y + sine_wave, skeleton.to_local(skeleton_data["right_leg"]["ray_node"].get_collision_point()).y)
 	skeleton_data["left_leg"]["target_node"].transform.origin.y = max(skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).y + -sine_wave, skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).y)
