@@ -62,8 +62,10 @@ func animate(_velocity):
 		
 	time += get_process_delta_time()
 	
-	var local_velocity = skeleton.global_transform.basis.xform_inv(_velocity).length()
-	var local_direction = skeleton.global_transform.basis.xform_inv(_velocity).normalized()
+#	var local_velocity = skeleton.global_transform.basis.xform_inv(_velocity).length()
+	var local_velocity = _velocity.length()
+#	var local_direction = skeleton.global_transform.basis.xform_inv(_velocity).normalized()
+	var local_direction = _velocity.normalized()
 	
 	var frequency = local_velocity / step_lenght
 	var cosine_wave_z = cos(time * frequency) * (step_lenght * local_direction.z)

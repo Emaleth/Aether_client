@@ -1,14 +1,18 @@
 extends KinematicBody
 
-enum {IDLE, RUN, JUMP, FALL, DEAD}
+enum {GROUNDED, AIRBORNE, SWIMMING}
 
-var speed = 5 # m/s
+var forward_speed = 5 # m/s
+var backward_speed = 2 # m/s
+var side_speed = 3 # m/s
+var air_speed = 3 # m/s
+
 var jump_force = 3
 var mouse_sensitivity = 0.005
 var gravity_force = 9.8
 var state = null
 var snap = Vector3.ZERO
-var jumping = false
+#var jumping = false
 var player_state # collection of player data to send to the server
 var gravity = Vector3.ZERO
 
@@ -24,12 +28,12 @@ func _ready() -> void:
 	configure()
 	
 func _physics_process(delta: float) -> void:
-	get_input()
-	finite_state_machine(delta, get_direction())
+#	get_input()
+	movement(delta, get_direction())
 	define_player_state() 
 	
 func configure():
-	state = IDLE
+	state = GROUNDED
 	gui.minimap.get_node("TextureRect").texture = minimap_camera.get_viewport().get_texture()
 	connect_signals()
 	$IK.configure(find_node("Skeleton"))
@@ -39,72 +43,48 @@ func connect_signals():
 	camera_rig.connect("show_aim_hint", gui, "show_tooltip")
 	camera_rig.connect("new_target", self, "shoot_bullet")
 	
-func finite_state_machine(_delta, _direction) -> void:
+func movement(_delta, _direction) -> void:
 	var velocity = Vector3.ZERO
-
 	match state:
-		IDLE:
-			snap = -get_floor_normal()
-			velocity = Vector3.ZERO
+		GROUNDED:
 			gravity = Vector3.ZERO
-			
-			if jumping == true:
-				state = JUMP
-			if get_direction() != Vector3.ZERO:
-				state = RUN
-			if not is_on_floor() and velocity.y < 0:
-				state = FALL
-				
-		RUN:
 			snap = -get_floor_normal()
-			velocity = _direction * speed
-			gravity = Vector3.ZERO
-			
-			if jumping == true:
-				state = JUMP
-			if not is_on_floor():
-				state = FALL
-			if get_direction() == Vector3.ZERO:
-				state = IDLE
-				
-		JUMP:
-			snap = Vector3.DOWN
-			velocity = _direction * speed
-			gravity += Vector3.DOWN * gravity_force * _delta
-			if is_on_floor():
-				snap = Vector3.ZERO
-				gravity = Vector3.UP * jump_force
-			if gravity.y < 0:
-				state = FALL
-			
-		FALL:
-			snap = Vector3.DOWN
-			velocity = _direction * speed
-			gravity += Vector3.DOWN * gravity_force * _delta
-			jumping = false
-			if is_on_floor():
-				state = IDLE
-				
-		DEAD:
-			pass
-			
+			# Z axis
+			if _direction.z != 0:
+				if _direction.z < 0:
+					velocity.z = _direction.z * forward_speed
+				if _direction.z > 0:
+					velocity.z = _direction.z * backward_speed
+			# X axis
+			if _direction.x != 0:
+				velocity.x = _direction.x * side_speed
+			# Y axix
+			if _direction.y != 0 or not is_on_floor():
+				state = AIRBORNE
+		AIRBORNE:
+			velocity = _direction * air_speed
+			if is_on_floor(): 
+				if _direction.y != 0:
+					snap = Vector3.ZERO
+					gravity = Vector3.UP * jump_force
+				else:
+					state = GROUNDED
+			else:
+				snap = Vector3.DOWN
+				gravity += Vector3.DOWN * gravity_force * _delta
+	
 	$IK.animate(velocity)
-	move_and_slide_with_snap(velocity + gravity, snap, Vector3.UP)
+	move_and_slide_with_snap(global_transform.basis.xform(velocity) + gravity, snap, Vector3.UP)
 	
 func get_direction():
 	var direction = Vector3.ZERO
 	if gui.chat == false:
-		direction += (Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")) * global_transform.basis.z
-		direction += (Input.get_action_strength("move_right") - Input.get_action_strength("move_left")) * global_transform.basis.x
-	direction = direction.normalized()
+		direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
+		direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		direction = direction.normalized()
+		direction.y = Input.get_action_strength("jump")
 	
 	return direction
-	
-func get_input():
-	if Input.is_action_just_pressed("jump") and gui.chat == false:
-		jumping = true
-	else:
-		jumping = false
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and gui.chat == false:
