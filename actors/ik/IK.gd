@@ -39,7 +39,7 @@ func configure(_skeleton : Skeleton):
 		skeleton.add_child(skeleton_data[i]["target_node"])
 		skeleton_data[i]["target_node"].add_child((load("res://DebugMesh.tscn")).instance())
 		# CONFIGURE "Raycast" NODE
-		skeleton_data[i]["ray_node"].cast_to = Vector3.DOWN * 2
+		skeleton_data[i]["ray_node"].cast_to = Vector3.DOWN * 5
 		skeleton_data[i]["ray_node"].enabled = true
 		skeleton_data[i]["ray_node"].transform.origin.x = skeleton_data[i]["offset_x"]
 		skeleton_data[i]["target_node"].transform.origin.x = skeleton_data[i]["offset_x"]
@@ -62,9 +62,7 @@ func animate(_velocity):
 		
 	time += get_process_delta_time()
 	
-#	var local_velocity = skeleton.global_transform.basis.xform_inv(_velocity).length()
 	var local_velocity = _velocity.length()
-#	var local_direction = skeleton.global_transform.basis.xform_inv(_velocity).normalized()
 	var local_direction = _velocity.normalized()
 	
 	var frequency = local_velocity / step_lenght
