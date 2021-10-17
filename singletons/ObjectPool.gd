@@ -9,7 +9,7 @@ var items = {
 	},
 	"npc" : {
 		"scene" : preload("res://actors/npc/NPC.tscn"),
-		"max_q" : 100,
+		"max_q" : 10,
 		"pool" : [],
 		"bussy" : []
 	}

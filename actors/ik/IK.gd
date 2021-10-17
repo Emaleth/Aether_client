@@ -38,14 +38,12 @@ func configure(_skeleton : Skeleton):
 		skeleton.add_child(skeleton_data[i]["ik_node"])
 		skeleton.add_child(skeleton_data[i]["target_node"])
 		skeleton_data[i]["target_node"].add_child((load("res://DebugMesh.tscn")).instance())
+		yield(get_tree(), "idle_frame")
 		# CONFIGURE "Raycast" NODE
 		skeleton_data[i]["ray_node"].cast_to = Vector3.DOWN * 5
 		skeleton_data[i]["ray_node"].enabled = true
 		skeleton_data[i]["ray_node"].transform.origin.x = skeleton_data[i]["offset_x"]
 		skeleton_data[i]["target_node"].transform.origin.x = skeleton_data[i]["offset_x"]
-		# CONFIGURE INITIAL "Position3D" NODE POSITION
-		yield(get_tree(), "idle_frame")
-		skeleton_data[i]["target_node"].transform.origin.y = skeleton.to_local(skeleton_data[i]["ray_node"].get_collision_point()).y
 		# CONFIGURE "SkeletonIK" NODE
 		skeleton_data[i]["ik_node"].root_bone = skeleton_data[i]["root_bone"]
 		skeleton_data[i]["ik_node"].tip_bone = skeleton_data[i]["tip_bone"]
@@ -53,6 +51,7 @@ func configure(_skeleton : Skeleton):
 		skeleton_data[i]["ik_node"].use_magnet = true
 		skeleton_data[i]["ik_node"].magnet = skeleton_data[i]["magnet"]
 		skeleton_data[i]["ik_node"].target_node = skeleton_data[i]["target_node"].get_path()
+		yield(get_tree(), "idle_frame")
 		skeleton_data[i]["ik_node"].start()
 	configured = true
 	

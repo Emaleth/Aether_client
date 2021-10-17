@@ -15,8 +15,6 @@ var decimal_collector : float = 0
 # signals
 signal s_token_verification_success
 signal s_token_verification_failure
-signal s_spawn_player
-signal s_despawn_player
 signal s_update_world_state
 signal s_update_chat_state
 
