@@ -83,6 +83,6 @@ func animate(_velocity):
 	skeleton_data["left_leg"]["target_node"].transform.origin.z = skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).z
 	skeleton_data["left_leg"]["target_node"].transform.origin.x = skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).x
 	
-	skeleton_data["right_leg"]["target_node"].transform.origin.y = max(skeleton.to_local(skeleton_data["right_leg"]["ray_node"].get_collision_point()).y + sine_wave, skeleton.to_local(skeleton_data["right_leg"]["ray_node"].get_collision_point()).y)
-	skeleton_data["left_leg"]["target_node"].transform.origin.y = max(skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).y + -sine_wave, skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).y)
+	skeleton_data["right_leg"]["target_node"].transform.origin.y = max(skeleton.to_local(skeleton_data["right_leg"]["ray_node"].get_collision_point()).y - sine_wave, skeleton.to_local(skeleton_data["right_leg"]["ray_node"].get_collision_point()).y)
+	skeleton_data["left_leg"]["target_node"].transform.origin.y = max(skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).y + sine_wave, skeleton.to_local(skeleton_data["left_leg"]["ray_node"].get_collision_point()).y)
 	

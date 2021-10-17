@@ -1191,13 +1191,6 @@ ui_mode={
  ]
 }
 
-[layer_names]
-
-3d_physics/layer_1="environment"
-3d_physics/layer_2="self"
-3d_physics/layer_3="actors"
-3d_physics/layer_4="projectiles"
-
 [locale]
 
 translations=PoolStringArray(  )

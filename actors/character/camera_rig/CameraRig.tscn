@@ -16,7 +16,6 @@ far = 1000.0
 [node name="RayCast" type="RayCast" parent="Camera"]
 enabled = true
 cast_to = Vector3( 0, 0, -1000 )
-collision_mask = 7
 
 [node name="Position3D" type="Position3D" parent="Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1000 )
