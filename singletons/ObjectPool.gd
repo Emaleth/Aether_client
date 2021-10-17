@@ -1,9 +1,9 @@
 extends Node
 
 var items = {
-	"dummy" : {
-		"scene" : preload("res://actors/dummy/Dummy.tscn"),
-		"max_q" : 100,
+	"pc" : {
+		"scene" : preload("res://actors/pc/PC.tscn"),
+		"max_q" : 10,
 		"pool" : [],
 		"bussy" : []
 	},

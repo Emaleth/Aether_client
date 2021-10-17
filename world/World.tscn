@@ -26,9 +26,9 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -50, 0,
 
 [node name="Character" type="Node" parent="."]
 
-[node name="Dummies" type="Node" parent="."]
+[node name="PCContainer" type="Node" parent="."]
 
-[node name="NPCs" type="Node" parent="."]
+[node name="NPCContainer" type="Node" parent="."]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

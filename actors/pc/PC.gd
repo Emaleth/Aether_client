@@ -2,7 +2,6 @@ extends KinematicBody
 
 var max_hp
 var current_hp
-var type
 
 onready var hp_label = $MeshInstance/Viewport/Label
 
@@ -21,9 +20,8 @@ func update_label():
 	hp_label.text = "%s / %s" % [current_hp, max_hp]
 
 func despawn():
-	ObjectPool.free_item("npc", self.get_instance_id())
+	ObjectPool.free_item("pc", self.get_instance_id())
 
-func configure(_max_hp, _type):
+func configure(_max_hp):
 	max_hp = _max_hp
-	type = _type
 

@@ -99,7 +99,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			emit_signal("get_target")
 
 func define_player_state():
-	player_state = {"T" : Server.client_clock, "pos" : global_transform.origin, "rot" : global_transform.basis, "anim" : [null, null]}
+	player_state = {"T" : Server.client_clock, "pos" : global_transform.origin, "rot" : global_transform.basis, "hp" : 100, "max_hp" : 100}
 	Server.send_player_state(player_state)
 	
 func shoot_ray(_target_position):
