@@ -21,7 +21,6 @@ default_bus_layout="res://audio_bus_layout.tres"
 
 [autoload]
 
-ObjectPool="*res://singletons/ObjectPool.gd"
 Server="*res://networking/Server.gd"
 Gateway="*res://networking/Gateway.gd"
 

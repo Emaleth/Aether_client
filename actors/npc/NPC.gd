@@ -20,9 +20,6 @@ func update(new_position, new_rotation, _hp):
 func update_label():
 	hp_label.text = "%s / %s" % [current_hp, max_hp]
 
-func despawn():
-	ObjectPool.free_item("npc", self.get_instance_id())
-
 func configure(_max_hp, _type):
 	max_hp = _max_hp
 	type = _type

@@ -104,5 +104,8 @@ func send_chat_msg(msg):
 remote func recive_chat_state(chat_state):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("s_update_chat_state", chat_state)
-	
+
+# bullet
+func request_bullet_test(_pos, _rot):
+	rpc_id(1, "recive_bullet_test", _pos, _rot)
 	

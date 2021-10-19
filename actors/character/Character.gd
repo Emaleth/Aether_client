@@ -107,6 +107,7 @@ func shoot_ray(_target_position):
 		
 func shoot_bullet(_target_position):
 	bullet_origin.look_at(_target_position, bullet_origin.transform.origin.cross(_target_position))
+	Server.request_bullet_test(bullet_origin.global_transform.origin, bullet_origin.global_transform.basis)
 	var b = bullet.instance()
 	b.global_transform = bullet_origin.global_transform
 	get_tree().root.add_child(b)
