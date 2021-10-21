@@ -11,7 +11,7 @@ height = 0.4
 
 [sub_resource type="SpatialMaterial" id=3]
 flags_unshaded = true
-albedo_color = Color( 0.92549, 0.431373, 0.0313726, 1 )
+albedo_color = Color( 0.0313726, 0.0666667, 0.92549, 1 )
 
 [sub_resource type="SpatialMaterial" id=4]
 flags_unshaded = true

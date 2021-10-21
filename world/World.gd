@@ -65,14 +65,12 @@ func add_npc_to_the_tree():
 
 func update_npc_in_the_tree():
 	for npc in npc_container.get_children():
-		if npc_collection.has(npc.name):
-			npc.update(npc_collection[npc]["pos"], npc_collection[npc]["rot"], npc_collection[npc]["hp"])
+		if npc_collection.has(int(npc.name)):
+			npc.update(npc_collection[int(npc.name)]["pos"], npc_collection[int(npc.name)]["rot"], npc_collection[int(npc.name)]["hp"])
 			
 func remove_npc_from_the_tree():
 	for npc in npc_container.get_children():
-		if not npc_collection.has(npc.name):
-			print(npc.name)
-			print(npc_collection)
+		if not npc_collection.has(int(npc.name)):
 			npc.call_deferred("queue_free")
 	
 func add_bullet_to_the_tree():
@@ -246,14 +244,14 @@ func extrapolate(_render_time):
 			update_npc_inside_the_collection(npc, new_position, new_rotation, null)
 
 	# BULLET
-#	for bullet in world_state_buffer[1]["B"].keys():
-#		if not world_state_buffer[0]["B"].has(bullet): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR WXTRAPOLATION'S SAKE
-#			continue
-#		if bullet_collection.has(bullet):
-#			var position_delta = (world_state_buffer[1]["B"][bullet]["pos"] - world_state_buffer[0]["B"][bullet]["pos"]) 
-#			var new_position = world_state_buffer[1]["B"][bullet]["pos"] + (position_delta * extrapolation_factor)
-#			var current_rot = Quat(world_state_buffer[1]["B"][bullet]["rot"])
-#			var old_rot = Quat(world_state_buffer[0]["B"][bullet]["rot"])
-#			var rotation_delta = (current_rot - old_rot) 
-#			var new_rotation = Basis(current_rot + (rotation_delta * extrapolation_factor))
-#			update_bullet_inside_the_collection(bullet, new_position, new_rotation)
+	for bullet in world_state_buffer[1]["B"].keys():
+		if not world_state_buffer[0]["B"].has(bullet): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR WXTRAPOLATION'S SAKE
+			continue
+		if bullet_collection.has(bullet):
+			var position_delta = (world_state_buffer[1]["B"][bullet]["pos"] - world_state_buffer[0]["B"][bullet]["pos"]) 
+			var new_position = world_state_buffer[1]["B"][bullet]["pos"] + (position_delta * extrapolation_factor)
+			var current_rot = Quat(world_state_buffer[1]["B"][bullet]["rot"])
+			var old_rot = Quat(world_state_buffer[0]["B"][bullet]["rot"])
+			var rotation_delta = (current_rot - old_rot) 
+			var new_rotation = Basis(current_rot + (rotation_delta * extrapolation_factor))
+			update_bullet_inside_the_collection(bullet, new_position, new_rotation)

@@ -25,7 +25,7 @@ albedo_color = Color( 0.980392, 0.0784314, 0.0352941, 1 )
 material = SubResource( 4 )
 size = Vector2( 0.1, 0.1 )
 
-[node name="Bullet" type="RigidBody"]
+[node name="Bullet" type="Area"]
 collision_layer = 8
 collision_mask = 5
 script = ExtResource( 1 )
