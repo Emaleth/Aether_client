@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://bullet/dummyBullet.gd" type="Script" id=1]
 
@@ -13,18 +13,6 @@ height = 0.4
 flags_unshaded = true
 albedo_color = Color( 0.0313726, 0.0666667, 0.92549, 1 )
 
-[sub_resource type="SpatialMaterial" id=4]
-flags_unshaded = true
-params_billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
-albedo_color = Color( 0.980392, 0.0784314, 0.0352941, 1 )
-
-[sub_resource type="QuadMesh" id=5]
-material = SubResource( 4 )
-size = Vector2( 0.1, 0.1 )
-
 [node name="Bullet" type="Area"]
 collision_layer = 8
 collision_mask = 5
@@ -36,14 +24,3 @@ shape = SubResource( 1 )
 [node name="MeshInstance" type="MeshInstance" parent="."]
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
-
-[node name="CPUParticles" type="CPUParticles" parent="."]
-emitting = false
-amount = 100
-one_shot = true
-local_coords = false
-mesh = SubResource( 5 )
-emission_shape = 1
-emission_sphere_radius = 0.2
-gravity = Vector3( 0, 0, 0 )
-color = Color( 0.941176, 0.290196, 0.0313726, 1 )

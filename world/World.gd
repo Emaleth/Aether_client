@@ -14,9 +14,8 @@ onready var npc_container = $NPCContainer
 onready var bullet_container = $BulletContainer
 
 onready var character_scene = preload("res://actors/character/Character.tscn")
-onready var visual_pc_scene = preload("res://actors/pc/PC.tscn")
-onready var visual_npc_scene = preload("res://actors/npc/NPC.tscn")
-onready var visual_bullet_scene = preload("res://bullet/dummyBullet.tscn")
+onready var dummy_actor_scene = preload("res://actors/dummy_actor/dummy_actor.tscn")
+onready var dummy_bullet_scene = preload("res://bullet/dummyBullet.tscn")
 
 func _ready():
 	Server.connect("s_update_world_state", self, "update_world_state")
@@ -40,7 +39,7 @@ func _physics_process(_delta: float) -> void:
 func add_pc_to_the_tree():
 	for pc in pc_collection.keys():
 		if not pc_container.has_node(str(pc)):
-			var new_pc = visual_pc_scene.instance() #ObjectPool.get_item("pc")
+			var new_pc = dummy_actor_scene.instance()
 			new_pc.name = str(pc)
 			pc_container.add_child(new_pc, true)
 			new_pc.configure(pc_collection[pc]["max_hp"])
@@ -53,31 +52,33 @@ func update_pc_in_the_tree():
 func remove_pc_from_the_tree():
 	for pc in pc_container.get_children():
 		if pc_collection.has(pc.name):
-			pc_container.get_node(str(pc)).queue_free()#despawn()
+			pc_container.get_node(str(pc)).queue_free()
 	
 func add_npc_to_the_tree():
 	for npc in npc_collection.keys():
 		if not npc_container.has_node(str(npc)):
-			var new_npc = visual_npc_scene.instance()
+			var new_npc = dummy_actor_scene.instance()
 			new_npc.name = str(npc)
 			npc_container.call_deferred("add_child", new_npc, true)
-			new_npc.configure(npc_collection[npc]["max_hp"], npc_collection[npc]["type"])
+			new_npc.configure(npc_collection[npc]["max_hp"])
 
 func update_npc_in_the_tree():
 	for npc in npc_container.get_children():
-		if npc_collection.has(int(npc.name)):
-			npc.update(npc_collection[int(npc.name)]["pos"], npc_collection[int(npc.name)]["rot"], npc_collection[int(npc.name)]["hp"])
+		if npc_collection.has(str(npc.name)):
+			npc.update(npc_collection[str(npc.name)]["pos"], npc_collection[str(npc.name)]["rot"], npc_collection[str(npc.name)]["hp"])
 			
 func remove_npc_from_the_tree():
 	for npc in npc_container.get_children():
-		if not npc_collection.has(int(npc.name)):
+		if not npc_collection.has(str(npc.name)):
 			npc.call_deferred("queue_free")
 	
 func add_bullet_to_the_tree():
 	for bullet in bullet_collection.keys():
 		if not bullet_container.has_node(str(bullet)):
-			var new_bullet = visual_bullet_scene.instance()
+			var new_bullet = dummy_bullet_scene.instance()
 			new_bullet.name = str(bullet)
+			new_bullet.transform.origin = bullet_collection[bullet]["pos"]
+			new_bullet.transform.basis = bullet_collection[bullet]["rot"]
 			bullet_container.call_deferred("add_child", new_bullet, true)
 			
 func update_bullet_in_the_tree():
@@ -120,7 +121,6 @@ func add_npc_to_the_collection(_id, _data):
 	npc_collection[_id]["rot"] = _data["rot"]
 	npc_collection[_id]["hp"] = _data["hp"]
 	npc_collection[_id]["max_hp"] = _data["max_hp"]
-	npc_collection[_id]["type"] = _data["type"]
 	
 func update_npc_inside_the_collection(_id, _pos, _rot, _hp):
 	npc_collection[_id]["pos"] = _pos
@@ -201,6 +201,8 @@ func interpolate(_render_time):
 #		print_debug(bullet)
 		if not world_state_buffer[1]["B"].has(bullet): # WE WANT TO BE SURE THAT BOTH WS1 AND WS2 HAVE ANY GIVEN KEY FOR INTERPOLATION'S SAKE
 			continue
+		if world_state_buffer[2]["B"][bullet]["p_id"] == get_tree().get_network_unique_id():
+			continue
 		if bullet_collection.has(bullet):
 			var new_position = lerp(world_state_buffer[1]["B"][bullet]["pos"], world_state_buffer[2]["B"][bullet]["pos"], interpolation_factor)
 			var current_rot = Quat(world_state_buffer[1]["B"][bullet]["rot"])
@@ -219,7 +221,7 @@ func extrapolate(_render_time):
 	for pc in world_state_buffer[1]["P"].keys():
 		if pc == get_tree().get_network_unique_id():
 			continue
-		if not world_state_buffer[0]["P"].has(pc): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR WXTRAPOLATION'S SAKE
+		if not world_state_buffer[0]["P"].has(pc): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR EXTRAPOLATION'S SAKE
 			continue
 		if pc_collection.has(pc):
 			var position_delta = (world_state_buffer[1]["P"][pc]["pos"] - world_state_buffer[0]["P"][pc]["pos"]) 
@@ -232,7 +234,7 @@ func extrapolate(_render_time):
 			
 	# ENEMIES
 	for npc in world_state_buffer[1]["E"].keys():
-		if not world_state_buffer[0]["E"].has(npc): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR WXTRAPOLATION'S SAKE
+		if not world_state_buffer[0]["E"].has(npc): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR EXTRAPOLATION'S SAKE
 			continue
 		if npc_collection.has(npc):
 			var position_delta = (world_state_buffer[1]["E"][npc]["pos"] - world_state_buffer[0]["E"][npc]["pos"]) 
@@ -245,7 +247,7 @@ func extrapolate(_render_time):
 
 	# BULLET
 	for bullet in world_state_buffer[1]["B"].keys():
-		if not world_state_buffer[0]["B"].has(bullet): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR WXTRAPOLATION'S SAKE
+		if not world_state_buffer[0]["B"].has(bullet): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR EXTRAPOLATION'S SAKE
 			continue
 		if bullet_collection.has(bullet):
 			var position_delta = (world_state_buffer[1]["B"][bullet]["pos"] - world_state_buffer[0]["B"][bullet]["pos"]) 

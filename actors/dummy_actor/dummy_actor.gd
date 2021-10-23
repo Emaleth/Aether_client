@@ -22,3 +22,4 @@ func update_label():
 func configure(_max_hp):
 	max_hp = _max_hp
 
+
