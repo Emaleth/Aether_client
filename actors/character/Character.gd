@@ -15,9 +15,9 @@ var gravity = Vector3.ZERO
 onready var gravity_force = ProjectSettings.get("physics/3d/default_gravity")
 onready var bullet_origin : Position3D = $Position3D
 onready var bullet : PackedScene = preload("res://bullet/Bullet.tscn")
-onready var camera_rig = $CameraRig
-onready var gui = $GUI
-onready var minimap_camera = $Viewport/Spatial/MinimapCamera
+#onready var camera_rig = $CameraRig
+#onready var gui = $GUI
+#onready var minimap_camera = $Viewport/Spatial/MinimapCamera
 
 var target
 var mouse_target
@@ -32,9 +32,7 @@ func _physics_process(delta: float) -> void:
 	
 func configure():
 	state = GROUNDED
-	gui.minimap.texture = minimap_camera.get_viewport().get_texture()
 	$IK.configure(find_node("Skeleton"))
-	camera_rig.connect("mouse_target", gui, "show_tooltip")
 	
 func movement(_delta, _direction) -> void:
 	var velocity = Vector3.ZERO
@@ -72,11 +70,11 @@ func movement(_delta, _direction) -> void:
 	
 func get_direction():
 	var direction = Vector3.ZERO
-	if gui.input_line.has_focus() == false:
-		direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
-		direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-		direction = direction.normalized()
-		direction.y = Input.get_action_strength("jump")
+#	if gui.input_line.has_focus() == false:
+	direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
+	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	direction = direction.normalized()
+	direction.y = Input.get_action_strength("jump")
 	
 	return direction
 	

@@ -27,7 +27,7 @@ show_percentage = true
 show_value = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-margin_right = 33.0
+margin_right = 66.0
 margin_bottom = 20.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -36,7 +36,7 @@ custom_styles/fg = SubResource( 2 )
 percent_visible = false
 
 [node name="Label" type="Label" parent="."]
-margin_right = 33.0
+margin_right = 66.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -45,10 +45,3 @@ align = 1
 valign = 1
 
 [node name="Tween" type="Tween" parent="."]
-
-[node name="Button" type="Button" parent="."]
-margin_right = 33.0
-margin_bottom = 20.0
-flat = true
-
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

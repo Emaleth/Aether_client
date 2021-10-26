@@ -8,12 +8,17 @@ var npc_collection = {}
 var pc_collection = {}
 var bullet_collection = {}
 
+var player
+var gui
+
 onready var character_container = $Character
 onready var pc_container = $PCContainer
 onready var npc_container = $NPCContainer
 onready var bullet_container = $BulletContainer
 
 onready var character_scene = preload("res://actors/character/Character.tscn")
+onready var gui_scene = preload("res://ui/gui/GUI.tscn")
+onready var camera_rig_scene = preload("res://actors/character/camera_rig/CameraRig.tscn")
 onready var dummy_actor_scene = preload("res://actors/dummy_actor/dummy_actor.tscn")
 onready var dummy_bullet_scene = preload("res://bullet/dummyBullet.tscn")
 
@@ -44,14 +49,14 @@ func add_pc_to_the_tree():
 			var new_pc = dummy_actor_scene.instance()
 			new_pc.name = str(pc)
 			pc_container.add_child(new_pc, true)
-			new_pc.configure(pc_collection[pc]["max_hp"])
+#			new_pc.configure(pc_collection[pc]["max_hp"])
 	
 func update_pc_in_the_tree():
 	for pc in pc_collection.keys():
 		if pc_container.has_node(str(pc)):
-			pc_container.get_node(str(pc)).update(pc_collection[pc]["pos"], pc_collection[pc]["rot"], pc_collection[pc]["hp"])
+			pc_container.get_node(str(pc)).update(pc_collection[pc]["pos"], pc_collection[pc]["rot"], pc_collection[pc]["hp"], pc_collection[pc]["max_hp"])
 		if pc == get_tree().get_network_unique_id():
-			character_container.get_child(0).gui.update_health_bar(pc_collection[pc]["hp"], pc_collection[pc]["max_hp"])
+			gui.update_health_bar(pc_collection[pc]["hp"], pc_collection[pc]["max_hp"])
 #			character_container.get_child(0).gui.update_mana_bar(pc_collection[pc]["mp"], pc_collection[pc]["max_mp"])
 		
 	
@@ -66,7 +71,7 @@ func add_npc_to_the_tree():
 			var new_npc = dummy_actor_scene.instance()
 			new_npc.name = str(npc)
 			npc_container.call_deferred("add_child", new_npc, true)
-			new_npc.update(npc_collection[npc]["pos"], npc_collection[npc]["rot"], npc_collection[npc]["hp"], npc_collection[npc]["max_hp"])
+#			new_npc.update(npc_collection[npc]["pos"], npc_collection[npc]["rot"], npc_collection[npc]["hp"], npc_collection[npc]["max_hp"])
 			
 func update_npc_in_the_tree():
 	for npc in npc_container.get_children():
@@ -101,10 +106,18 @@ func remove_bullet_from_the_tree():
 			bullet.call_deferred("queue_free")
 			
 func spawn_character():
-	var p = character_scene.instance()
-	character_container.add_child(p)
-	p.global_transform.origin = Vector3(0, 1, 0)
-	
+	player = character_scene.instance()
+	character_container.add_child(player)
+	player.global_transform.origin = Vector3(0, 1, 0)
+	var camera_rig = camera_rig_scene.instance()
+	character_container.add_child(camera_rig)
+	gui = gui_scene.instance()
+	character_container.add_child(gui)
+
+	player.get_node("MinimapRemoteTransform").remote_path = gui.minimap_camera_pivot.get_path()
+	player.get_node("CameraRigTransform").remote_path = camera_rig.get_path()
+	camera_rig.connect("mouse_target", gui, "show_tooltip")
+
 func add_pc_to_the_collection(_id, _data):
 	pc_collection[_id] = {}
 	pc_collection[_id]["pos"] = _data["pos"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://ui/gui/GUI.gd" type="Script" id=1]
 [ext_resource path="res://ui/gui/slot/Slot.tscn" type="PackedScene" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://ui/components/animated_progress_bar/AnimatedProgressBar.tscn" type="PackedScene" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="ViewportTexture" id=4]
+viewport_path = NodePath("MarginContainer/TopRightPanel/VBoxContainer/PanelContainer/Viewport")
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -108,7 +111,21 @@ margin_bottom = 158.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+texture = SubResource( 4 )
 expand = true
+
+[node name="Viewport" type="Viewport" parent="MarginContainer/TopRightPanel/VBoxContainer/PanelContainer"]
+size = Vector2( 200, 200 )
+handle_input_locally = false
+render_target_v_flip = true
+
+[node name="Spatial" type="Spatial" parent="MarginContainer/TopRightPanel/VBoxContainer/PanelContainer/Viewport"]
+
+[node name="MinimapCamera" type="Camera" parent="MarginContainer/TopRightPanel/VBoxContainer/PanelContainer/Viewport/Spatial"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50, 0 )
+projection = 1
+size = 50.0
+near = 0.01
 
 [node name="ServerClock" type="PanelContainer" parent="MarginContainer/TopRightPanel/VBoxContainer"]
 margin_left = 54.0
@@ -215,7 +232,7 @@ placeholder_text = ">"
 
 [node name="BottomMiddlePanel" type="PanelContainer" parent="MarginContainer"]
 margin_left = 462.0
-margin_top = 608.0
+margin_top = 614.0
 margin_right = 818.0
 margin_bottom = 700.0
 size_flags_horizontal = 4
@@ -227,7 +244,7 @@ __meta__ = {
 
 [node name="BottomMiddle" type="VBoxContainer" parent="MarginContainer/BottomMiddlePanel"]
 margin_right = 356.0
-margin_bottom = 92.0
+margin_bottom = 86.0
 rect_min_size = Vector2( 100, 40 )
 mouse_filter = 2
 size_flags_horizontal = 4
@@ -238,25 +255,34 @@ __meta__ = {
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/BottomMiddlePanel/BottomMiddle"]
 margin_right = 356.0
-margin_bottom = 20.0
+margin_bottom = 14.0
 mouse_filter = 2
 alignment = 1
 
 [node name="HealthBar" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/HBoxContainer" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
 margin_right = 176.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
+margin_bottom = 14.0
 
 [node name="ManaBar" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/HBoxContainer" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
 margin_left = 180.0
+margin_top = 0.0
 margin_right = 356.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
+margin_bottom = 14.0
 
 [node name="SkillPanel" type="GridContainer" parent="MarginContainer/BottomMiddlePanel/BottomMiddle"]
-margin_top = 24.0
+margin_top = 18.0
 margin_right = 356.0
-margin_bottom = 92.0
+margin_bottom = 86.0
 mouse_filter = 2
 columns = 10
 

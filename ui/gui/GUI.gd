@@ -13,6 +13,7 @@ onready var template_chat_line = $MarginContainer/BottomLeftPanel/VBoxContainer/
 onready var input_line = $MarginContainer/BottomLeftPanel/VBoxContainer/LineEdit
 # TOP RIGHT
 onready var minimap = $MarginContainer/TopRightPanel/VBoxContainer/PanelContainer/Minimap
+onready var minimap_camera_pivot = $MarginContainer/TopRightPanel/VBoxContainer/PanelContainer/Viewport/Spatial
 onready var clock_label = $MarginContainer/TopRightPanel/VBoxContainer/ServerClock/Label
 
 var target = null
@@ -48,8 +49,8 @@ func format_time():
 		
 	clock_label.text = "%s:%s:%s" % [hour, minute, second]
 	
-func format_chat_timestamp():
-	var date_dict = OS.get_datetime_from_unix_time(Server.client_clock / 1000)
+func format_chat_timestamp(_timestamp):
+	var date_dict = OS.get_datetime_from_unix_time(_timestamp / 1000)
 	var hour : String
 	var minute : String
 	if date_dict["hour"] < 10:
@@ -77,7 +78,7 @@ func update_chat_box(chat_state):
 		var timestamp = i[1]
 		var message = i[2]
 		var new_line = template_chat_line.duplicate()
-		new_line.get_node("Timestamp").text = format_chat_timestamp()
+		new_line.get_node("Timestamp").text = format_chat_timestamp(timestamp)
 		new_line.get_node("Sender").text = "%s: " % str(sender)
 		new_line.get_node("Message").text = str(message)
 		msg_list.add_child(new_line)
@@ -96,3 +97,7 @@ func _on_SkillSlot_pressed() -> void:
 
 func _on_SkillSlot2_pressed() -> void:
 	get_parent().shoot_bullet("ice_bolt", target)
+
+
+func _on_Button_pressed() -> void:
+	get_parent().shoot_bullet("fireball", target)

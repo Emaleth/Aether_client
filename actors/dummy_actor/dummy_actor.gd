@@ -1,9 +1,7 @@
 extends KinematicBody
 
-onready var health_bar = $Sprite3D/Viewport/AnimatedProgressBar
+onready var health_bar = $Viewport/AnimatedProgressBar
 
-func _ready() -> void:
-	$Sprite3D.texture = $Sprite3D/Viewport.get_texture()
 
 func update(new_position, new_rotation, _hp, _max_hp):
 	transform.origin = new_position

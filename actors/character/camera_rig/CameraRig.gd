@@ -22,7 +22,7 @@ func _ready() -> void:
 	rotation.y = default_rotation_y
 	spring_length = default_spring_lenght
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if spring_back == true:
 		rotation.x = lerp(rotation.x, default_rotation_x, spring_back_weight)
 		rotation.y = lerp(rotation.y, default_rotation_y, spring_back_weight)
@@ -53,10 +53,11 @@ func rotate_camera_rig(_amount : Vector2, stable) -> void:
 		return
 	rotation.x -= _amount.y * sensibility
 	rotation.x = clamp(rotation.x, min_rotation_x, max_rotation_x)
-	if stable == false:
-		rotation.y -= _amount.x * sensibility
-	else:
+	rotation.y -= _amount.x * sensibility
+	
+	if stable:
 		default_rotation_x = rotation.x
+		default_rotation_y = rotation.y
 
 func get_mouse_target():
 	var new_target = null

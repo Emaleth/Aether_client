@@ -4,19 +4,21 @@ export(Color) var color
 export(bool) var show_percentage
 export(bool) var show_value
 
-var max_value := 0
-var value := 0
+var max_value := 0.0
+var value := 0.0
+var new_value := 0.0
 
 onready var progress_bar := $ProgressBar
 onready var progress_label := $Label
 onready var tween := $Tween
 
 
-func update_ui(_max_value, _value):
+func update_ui(_value, _max_value):
 	if _max_value == max_value:
-		update_component(_value)
+		if new_value != _value:
+			update_component(float(_value))
 	else:
-		configure_component(_max_value, _value)
+		configure_component(float(_max_value), float(_value))
 		
 func configure_component(_max_value, _value):
 	max_value = _max_value
@@ -30,22 +32,22 @@ func configure_component(_max_value, _value):
 func apply_update(_o = null, _k = null, _e = null, _v = null):
 	# PROGRESS BAR
 	progress_bar.value = value
+	progress_bar.max_value = max_value
 	# LABEL
 	var value_text := ""
 	var percentage_text := ""
 	if show_value:
-		value_text = "%s/%s" % [value, max_value]
+		value_text = "%s/%s" % [int(value), int(max_value)]
 	if show_percentage and show_value:
-		percentage_text = " (%s%%)" % (value / (max_value / 100))
+		percentage_text = " (%s%%)" % int(value / (max_value / 100.0))
 	if show_percentage and not show_value:
-		percentage_text = "%s%%" % (value / (max_value / 100))
+		percentage_text = "%s%%" % int(value / (max_value / 100.0))
 	progress_label.text = "%s%s" % [value_text, percentage_text]
 	
 func update_component(_value):
+	new_value = _value
 	var animation_time = 0.5
+	tween.stop_all()
 	tween.remove_all()
 	tween.interpolate_property(self, "value", value, _value, animation_time, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
-
-func _on_Button_pressed() -> void:
-	update_ui(100, rand_range(0, 100))
