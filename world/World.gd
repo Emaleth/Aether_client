@@ -38,6 +38,8 @@ func _physics_process(_delta: float) -> void:
 	
 func add_pc_to_the_tree():
 	for pc in pc_collection.keys():
+		if pc == get_tree().get_network_unique_id():
+			continue 
 		if not pc_container.has_node(str(pc)):
 			var new_pc = dummy_actor_scene.instance()
 			new_pc.name = str(pc)
@@ -48,6 +50,10 @@ func update_pc_in_the_tree():
 	for pc in pc_collection.keys():
 		if pc_container.has_node(str(pc)):
 			pc_container.get_node(str(pc)).update(pc_collection[pc]["pos"], pc_collection[pc]["rot"], pc_collection[pc]["hp"])
+		if pc == get_tree().get_network_unique_id():
+			character_container.get_child(0).gui.update_health_bar(pc_collection[pc]["hp"], pc_collection[pc]["max_hp"])
+#			character_container.get_child(0).gui.update_mana_bar(pc_collection[pc]["mp"], pc_collection[pc]["max_mp"])
+		
 	
 func remove_pc_from_the_tree():
 	for pc in pc_container.get_children():
@@ -60,12 +66,12 @@ func add_npc_to_the_tree():
 			var new_npc = dummy_actor_scene.instance()
 			new_npc.name = str(npc)
 			npc_container.call_deferred("add_child", new_npc, true)
-			new_npc.configure(npc_collection[npc]["max_hp"])
-
+			new_npc.update(npc_collection[npc]["pos"], npc_collection[npc]["rot"], npc_collection[npc]["hp"], npc_collection[npc]["max_hp"])
+			
 func update_npc_in_the_tree():
 	for npc in npc_container.get_children():
 		if npc_collection.has(str(npc.name)):
-			npc.update(npc_collection[str(npc.name)]["pos"], npc_collection[str(npc.name)]["rot"], npc_collection[str(npc.name)]["hp"])
+			npc.update(npc_collection[str(npc.name)]["pos"], npc_collection[str(npc.name)]["rot"], npc_collection[str(npc.name)]["hp"], npc_collection[str(npc.name)]["max_hp"])
 			
 func remove_npc_from_the_tree():
 	for npc in npc_container.get_children():
@@ -75,10 +81,13 @@ func remove_npc_from_the_tree():
 func add_bullet_to_the_tree():
 	for bullet in bullet_collection.keys():
 		if not bullet_container.has_node(str(bullet)):
+			if bullet_collection[bullet]["p_id"] == get_tree().get_network_unique_id():
+				continue
 			var new_bullet = dummy_bullet_scene.instance()
 			new_bullet.name = str(bullet)
 			new_bullet.transform.origin = bullet_collection[bullet]["pos"]
 			new_bullet.transform.basis = bullet_collection[bullet]["rot"]
+			new_bullet.type = bullet_collection[bullet]["type"]
 			bullet_container.call_deferred("add_child", new_bullet, true)
 			
 func update_bullet_in_the_tree():
@@ -97,20 +106,18 @@ func spawn_character():
 	p.global_transform.origin = Vector3(0, 1, 0)
 	
 func add_pc_to_the_collection(_id, _data):
-	if _id == get_tree().get_network_unique_id():
-		pass
-	else:
-		pc_collection[_id] = {}
-		pc_collection[_id]["pos"] = _data["pos"]
-		pc_collection[_id]["rot"] = _data["rot"]
-		pc_collection[_id]["hp"] = _data["hp"]
-		pc_collection[_id]["max_hp"] = _data["max_hp"]
+	pc_collection[_id] = {}
+	pc_collection[_id]["pos"] = _data["pos"]
+	pc_collection[_id]["rot"] = _data["rot"]
+	pc_collection[_id]["hp"] = _data["hp"]
+	pc_collection[_id]["max_hp"] = _data["max_hp"]
 
 func update_pc_inside_the_collection(_id, _pos, _rot, _hp):
 	pc_collection[_id]["pos"] = _pos
 	pc_collection[_id]["rot"] = _rot
 	if _hp != null:
 		pc_collection[_id]["hp"] = _hp
+	
 
 func remove_pc_from_the_collection(_id):
 	pc_collection.erase(_id)
@@ -135,6 +142,7 @@ func add_bullet_to_the_collection(_id, _data):
 	bullet_collection[_id] = {}
 	bullet_collection[_id]["pos"] = _data["pos"]
 	bullet_collection[_id]["rot"] = _data["rot"]
+	bullet_collection[_id]["p_id"] = _data["p_id"]
 	
 func update_bullet_inside_the_collection(_id, _pos, _rot):
 	bullet_collection[_id]["pos"] = _pos
@@ -162,8 +170,8 @@ func interpolate(_render_time):
 	var interpolation_factor = float(_render_time - world_state_buffer[1]["T"]) / float(world_state_buffer[2]["T"] - world_state_buffer[1]["T"])
 	# PLAYERS
 	for pc in world_state_buffer[2]["P"].keys():
-		if pc == get_tree().get_network_unique_id():
-			continue
+#		if pc == get_tree().get_network_unique_id():
+#			continue
 		if not world_state_buffer[1]["P"].has(pc): # WE WANT TO BE SURE THAT BOTH WS1 AND WS2 HAVE ANY GIVEN KEY FOR INTERPOLATION'S SAKE
 			continue
 		if pc_collection.has(str(pc)):
@@ -201,8 +209,8 @@ func interpolate(_render_time):
 #		print_debug(bullet)
 		if not world_state_buffer[1]["B"].has(bullet): # WE WANT TO BE SURE THAT BOTH WS1 AND WS2 HAVE ANY GIVEN KEY FOR INTERPOLATION'S SAKE
 			continue
-		if world_state_buffer[2]["B"][bullet]["p_id"] == get_tree().get_network_unique_id():
-			continue
+#		if world_state_buffer[2]["B"][bullet]["p_id"] == get_tree().get_network_unique_id():
+#			continue
 		if bullet_collection.has(bullet):
 			var new_position = lerp(world_state_buffer[1]["B"][bullet]["pos"], world_state_buffer[2]["B"][bullet]["pos"], interpolation_factor)
 			var current_rot = Quat(world_state_buffer[1]["B"][bullet]["rot"])

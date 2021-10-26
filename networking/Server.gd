@@ -106,6 +106,6 @@ remote func recive_chat_state(chat_state):
 		emit_signal("s_update_chat_state", chat_state)
 
 # bullet
-func request_bullet_test(_pos, _rot):
-	rpc_id(1, "recive_bullet_test", _pos, _rot)
+func request_bullet_test(_type, _pos, _rot, _target):
+	rpc_id(1, "recive_bullet_test", _type, _pos, _rot, _target)
 	

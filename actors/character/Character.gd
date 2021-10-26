@@ -3,9 +3,9 @@ extends KinematicBody
 enum {GROUNDED, AIRBORNE, SWIMMING}
 
 var forward_speed = 5 # m/s
-var backward_speed = 2 # m/s
-var side_speed = 3 # m/s
-var air_speed = 3 # m/s
+var backward_speed = 5 # m/s
+var side_speed = 5 # m/s
+var air_speed = 5 # m/s
 
 var jump_force = 5
 var mouse_sensitivity = 0.005
@@ -19,26 +19,22 @@ onready var camera_rig = $CameraRig
 onready var gui = $GUI
 onready var minimap_camera = $Viewport/Spatial/MinimapCamera
 
-signal get_target 
+var target
+var mouse_target
 
 func _ready() -> void:
 	configure()
 	
 func _physics_process(delta: float) -> void:
 	movement(delta, get_direction())
+	turn_player(delta)
 	define_player_state() 
 	
 func configure():
 	state = GROUNDED
-	gui.minimap.get_node("TextureRect").texture = minimap_camera.get_viewport().get_texture()
-	connect_signals()
-	camera_rig.ray.add_exception(self)
+	gui.minimap.texture = minimap_camera.get_viewport().get_texture()
 	$IK.configure(find_node("Skeleton"))
-	
-func connect_signals():
-	connect("get_target", camera_rig, "aim")
-	camera_rig.connect("show_aim_hint", gui, "show_tooltip")
-	camera_rig.connect("new_target", self, "shoot_bullet")
+	camera_rig.connect("mouse_target", gui, "show_tooltip")
 	
 func movement(_delta, _direction) -> void:
 	var velocity = Vector3.ZERO
@@ -76,7 +72,7 @@ func movement(_delta, _direction) -> void:
 	
 func get_direction():
 	var direction = Vector3.ZERO
-	if gui.chat == false:
+	if gui.input_line.has_focus() == false:
 		direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
 		direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 		direction = direction.normalized()
@@ -84,31 +80,36 @@ func get_direction():
 	
 	return direction
 	
+func turn_player(_delta):
+	var turn_amount = 0.1
+	if Input.is_action_pressed("turn_left"):
+		rotate_y(turn_amount)
+	if Input.is_action_pressed("turn_right"):
+		rotate_y(-turn_amount)
+		
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and gui.chat == false:
+	if Input.is_action_pressed("secondary_action"):
 		if event is InputEventMouseMotion:
-			if abs(event.relative.x) > .1: 
-				rotate_y(-event.relative.x * mouse_sensitivity)
-				
-		if Input.is_action_just_pressed("primary_action"):
-			emit_signal("get_target")
-			
-		if Input.is_action_just_pressed("secondary_action"):
-			emit_signal("get_target")
+			rotate_y(-event.relative.x * mouse_sensitivity)
 
 func define_player_state():
 	var player_state = {"T" : Server.client_clock, "pos" : global_transform.origin, "rot" : global_transform.basis, "hp" : 100, "max_hp" : 100}
 	Server.send_player_state(player_state)
 	
-func shoot_ray(_target_position):
-	bullet_origin.look_at(_target_position, bullet_origin.transform.origin.cross(_target_position))
-	if $Position3D/RayCast.is_colliding():
-		print_debug("Ray Target: %s" % $Position3D/RayCast.get_collider().name)
+func check_visibility(_target) -> bool:
+	if $VisibilityCheck.is_colliding():
+		if $VisibilityCheck.get_collider() != _target:
+			return false
+		else:
+			return true
+	else:
+		return false
 		
-func shoot_bullet(_target_position):
-	bullet_origin.look_at(_target_position, bullet_origin.transform.origin.cross(_target_position))
-	Server.request_bullet_test(bullet_origin.global_transform.origin, bullet_origin.global_transform.basis)
-	var b = bullet.instance()
-	b.global_transform = bullet_origin.global_transform
-	get_tree().root.add_child(b)
+func shoot_bullet(_ability, _target):
+	if _target != null and is_instance_valid(_target) and _target.is_in_group("Enemy"):
+		Server.request_bullet_test(_ability, bullet_origin.global_transform.origin, bullet_origin.global_transform.basis, _target.name)
+		var b = bullet.instance()
+		b.global_transform = bullet_origin.global_transform
+		get_tree().root.add_child(b)
+		b.conf(_target)
 	

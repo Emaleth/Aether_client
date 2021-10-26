@@ -1,25 +1,17 @@
 extends KinematicBody
 
-var max_hp
-var current_hp
-
-onready var hp_label = $MeshInstance/Viewport/Label
-
+onready var health_bar = $Sprite3D/Viewport/AnimatedProgressBar
 
 func _ready() -> void:
-	$MeshInstance.get("material/0").albedo_texture = $MeshInstance/Viewport.get_texture()
+	$Sprite3D.texture = $Sprite3D/Viewport.get_texture()
 
-func update(new_position, new_rotation, _hp):
+func update(new_position, new_rotation, _hp, _max_hp):
 	transform.origin = new_position
 	transform.basis = new_rotation
-	if current_hp != _hp:
-		current_hp = _hp
-		update_label()
-		
-func update_label():
-	hp_label.text = "%s / %s" % [current_hp, max_hp]
+	health_bar.update_ui(_hp, _max_hp)
 
-func configure(_max_hp):
-	max_hp = _max_hp
-
-
+func target(_bool):
+	if _bool:
+		$DEBUG_Body.get("material/0").albedo_color = Color.red
+	else:
+		$DEBUG_Body.get("material/0").albedo_color = Color.whitesmoke
