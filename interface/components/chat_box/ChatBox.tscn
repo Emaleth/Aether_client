@@ -1,0 +1,95 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://interface/components/chat_box/ChatBox.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="ChatBox" type="PanelContainer"]
+margin_left = 20.0
+margin_top = 500.0
+margin_right = 320.0
+margin_bottom = 700.0
+rect_min_size = Vector2( 300, 200 )
+size_flags_horizontal = 0
+size_flags_vertical = 8
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 300.0
+margin_bottom = 200.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="OutputPanel" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 300.0
+margin_bottom = 158.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/OutputPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 151.0
+size_flags_horizontal = 3
+size_flags_vertical = 11
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MessageList" type="VBoxContainer" parent="VBoxContainer/OutputPanel/ScrollContainer"]
+margin_right = 286.0
+margin_bottom = 144.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Template" type="HBoxContainer" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList"]
+margin_right = 286.0
+margin_bottom = 14.0
+mouse_filter = 2
+
+[node name="Timestamp" type="Label" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template"]
+self_modulate = Color( 0.47451, 0.470588, 0.470588, 1 )
+margin_bottom = 14.0
+size_flags_vertical = 1
+
+[node name="Sender" type="Label" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template"]
+self_modulate = Color( 0.278431, 0.87451, 0.145098, 1 )
+margin_left = 4.0
+margin_right = 4.0
+margin_bottom = 14.0
+size_flags_vertical = 1
+
+[node name="Message" type="Label" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template"]
+margin_left = 8.0
+margin_right = 286.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 3.0
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InputPanel" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 162.0
+margin_right = 300.0
+margin_bottom = 200.0
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/InputPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 293.0
+margin_bottom = 31.0
+placeholder_text = ">"
+
+[connection signal="text_entered" from="VBoxContainer/InputPanel/LineEdit" to="." method="_on_LineEdit_text_entered"]

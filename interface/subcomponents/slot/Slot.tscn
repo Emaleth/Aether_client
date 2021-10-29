@@ -1,0 +1,98 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://icon.png" type="Texture" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends PanelContainer
+
+var item = null
+var amount = null
+
+onready var amount_label = $AmountLabel
+onready var cooldown_overlay = $CooldownOverlay
+onready var cooldown_label = $CooldownLabel
+var sh
+
+func _ready() -> void:
+	amount_label.hide()
+	cooldown_label.hide()
+	cooldown_overlay.hide()
+
+func set_shortcut(_shortcut):
+	sh = _shortcut
+	
+func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
+	pass # Replace with function body.
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed(sh):
+		pass
+	#	Server.send_action_request(_item, camera_rig_get_target())
+
+func cooldown_animation():
+	pass
+
+func get_drag_data(_position: Vector2):
+	pass
+
+func can_drop_data(_position: Vector2, data) -> bool:
+	return true
+
+func drop_data(_position: Vector2, data) -> void:
+	pass
+	
+"
+
+[node name="Slot" type="PanelContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 1 )
+script = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="AmountLabel" type="Label" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "4"
+align = 2
+valign = 2
+
+[node name="CooldownOverlay" type="TextureProgress" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+value = 20.0
+texture_progress = ExtResource( 1 )
+fill_mode = 4
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CooldownLabel" type="Label" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="tween_step" from="Tween" to="." method="_on_Tween_tween_step"]

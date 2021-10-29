@@ -109,3 +109,10 @@ remote func recive_chat_state(chat_state):
 func request_bullet_test(_type, _pos, _rot, _target):
 	rpc_id(1, "recive_bullet_test", _type, _pos, _rot, _target)
 	
+func send_action_request(_action : String, _target : String):
+	rpc_id(1, "recive_action_request", _action, _target)
+	
+func send_movement_request(_position : Vector3):
+	pass
+#	rpc_id(1, "recive_movement_request", _position)
+	

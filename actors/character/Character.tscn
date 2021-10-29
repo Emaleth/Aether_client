@@ -19,16 +19,13 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.6 )
 
 [node name="MinimapRemoteTransform" type="RemoteTransform" parent="."]
+update_rotation = false
 update_scale = false
 
 [node name="IK" parent="." instance=ExtResource( 3 )]
 
 [node name="human" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
-
-[node name="VisibilityCheck" type="RayCast" parent="."]
-enabled = true
-cast_to = Vector3( 0, 0, -1000 )
 
 [node name="CameraRigTransform" type="RemoteTransform" parent="."]
 update_rotation = false

@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://interface/components/mini_map/MiniMap.gd" type="Script" id=1]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("Viewport")
+
+[node name="MiniMap" type="PanelContainer"]
+margin_right = 200.0
+margin_bottom = 165.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 200, 200 )
+handle_input_locally = false
+render_target_v_flip = true
+
+[node name="Spatial" type="Spatial" parent="Viewport"]
+
+[node name="MinimapCamera" type="Camera" parent="Viewport/Spatial"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50, 0 )
+projection = 1
+size = 50.0
+near = 0.01
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 158.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 1 )
+expand = true

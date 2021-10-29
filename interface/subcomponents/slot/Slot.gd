@@ -13,7 +13,7 @@ func _ready() -> void:
 	cooldown_label.hide()
 	cooldown_overlay.hide()
 
-func _on_Tween_tween_step(object: Object, key: NodePath, elapsed: float, value: Object) -> void:
+func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	pass # Replace with function body.
 
 func _on_Slot_pressed() -> void:
@@ -22,12 +22,12 @@ func _on_Slot_pressed() -> void:
 func cooldown_animation():
 	pass
 
-func get_drag_data(position: Vector2):
+func get_drag_data(_position: Vector2):
 	pass
 
-func can_drop_data(position: Vector2, data) -> bool:
+func can_drop_data(_position: Vector2, data) -> bool:
 	return true
 
-func drop_data(position: Vector2, data) -> void:
+func drop_data(_position: Vector2, data) -> void:
 	pass
 	

@@ -23,13 +23,13 @@ func update_ui(_value, _max_value):
 func configure_component(_max_value, _value):
 	max_value = _max_value
 	value = _value
-	var new_fg = StyleBoxFlat.new()
+#	var new_fg = StyleBoxFlat.new()
+	var new_fg = progress_bar.get("custom_styles/fg").duplicate()
 	new_fg.bg_color = color
 	progress_bar.set("custom_styles/fg", new_fg) 
-	tween.connect("tween_step", self, "apply_update")
 	apply_update()
 
-func apply_update(_o = null, _k = null, _e = null, _v = null):
+func apply_update():
 	# PROGRESS BAR
 	progress_bar.value = value
 	progress_bar.max_value = max_value
@@ -51,3 +51,9 @@ func update_component(_value):
 	tween.remove_all()
 	tween.interpolate_property(self, "value", value, _value, animation_time, Tween.TRANS_LINEAR, Tween.EASE_IN)
 	tween.start()
+
+func set_hud_font(_font):
+	$Label.set("custom_fonts/font", _font)
+
+func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
+	apply_update()
