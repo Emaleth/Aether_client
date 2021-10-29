@@ -40,6 +40,6 @@ func update_chat_box(_chat_state):
 		# MAKE IT SCROLL TO THE BOTTOM
 
 func _on_LineEdit_text_entered(new_text: String) -> void:
-	Server.send_chat_msg(new_text)
+	Server.send_chat_message(new_text)
 	input_line.clear()
 	input_line.release_focus()

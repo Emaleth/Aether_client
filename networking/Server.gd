@@ -90,29 +90,21 @@ remote func return_token_verification_results(result):
 			emit_signal("s_token_verification_success")
 		else:
 			emit_signal("s_token_verification_failure")
-
-func send_player_state(player_state):
-	rpc_unreliable_id(1, "recive_player_state", player_state)
 	
 remote func recive_world_state(world_state):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("s_update_world_state", world_state)
-# not on server
-func send_chat_msg(msg):
-	rpc_unreliable_id(1, "recive_chat_msg", client_clock, msg)
+
+func send_chat_message(_message):
+	rpc_unreliable_id(1, "recive_chat_message", client_clock, _message)
 	
 remote func recive_chat_state(chat_state):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("s_update_chat_state", chat_state)
 
-# bullet
-func request_bullet_test(_type, _pos, _rot, _target):
-	rpc_id(1, "recive_bullet_test", _type, _pos, _rot, _target)
-	
 func send_action_request(_action : String, _target : String):
 	rpc_id(1, "recive_action_request", _action, _target)
 	
 func send_movement_request(_position : Vector3):
-	pass
-#	rpc_id(1, "recive_movement_request", _position)
+	rpc_id(1, "recive_movement_request", _position)
 	

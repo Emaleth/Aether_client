@@ -1,4 +1,4 @@
-extends Node
+extends Navigation
 
 const interpolation_offset = 100 # milliseconds
 
@@ -10,6 +10,8 @@ var bullet_collection = {}
 
 var player
 var gui
+var camera_rig
+var player_spawned = false
 
 onready var character_container = $Character
 onready var pc_container = $PCContainer
@@ -23,13 +25,8 @@ onready var dummy_actor_scene = preload("res://actors/dummy_actor/dummy_actor.ts
 onready var dummy_bullet_scene = preload("res://bullet/dummyBullet.tscn")
 
 
-func get_path_to_position(_position):
-	var path = $Environment.get_simple_path(player.global_transform.origin, _position)
-	player.move_along(path)
-	
 func _ready():
 	Server.connect("s_update_world_state", self, "update_world_state")
-	spawn_character()
 
 func _physics_process(_delta: float) -> void:
 	interpolate_or_extrapolate()
@@ -48,25 +45,26 @@ func _physics_process(_delta: float) -> void:
 	
 func add_pc_to_the_tree():
 	for pc in pc_collection.keys():
-		if pc == get_tree().get_network_unique_id():
-			continue 
-		if not pc_container.has_node(str(pc)):
-			var new_pc = dummy_actor_scene.instance()
-			new_pc.name = str(pc)
-			pc_container.add_child(new_pc, true)
+		if pc == str(get_tree().get_network_unique_id()):
+			spawn_character()
+		else:
+			if not pc_container.has_node(str(pc)):
+				var new_pc = dummy_actor_scene.instance()
+				new_pc.name = str(pc)
+				pc_container.add_child(new_pc, true)
 	
 func update_pc_in_the_tree():
 	for pc in pc_collection.keys():
 		if pc_container.has_node(str(pc)):
 			pc_container.get_node(str(pc)).update(pc_collection[pc]["pos"], pc_collection[pc]["rot"], pc_collection[pc]["hp"], pc_collection[pc]["max_hp"])
-		if pc == get_tree().get_network_unique_id():
+		if pc == str(get_tree().get_network_unique_id()):
 			gui.update_health_bar(pc_collection[pc]["hp"], pc_collection[pc]["max_hp"])
 			gui.update_mana_bar(pc_collection[pc]["mp"], pc_collection[pc]["max_mp"])
 
 func remove_pc_from_the_tree():
 	for pc in pc_container.get_children():
-		if pc_collection.has(pc.name):
-			pc_container.get_node(str(pc)).queue_free()
+		if pc_collection.has(str(pc.name)):
+			pc.queue_free()
 	
 func add_npc_to_the_tree():
 	for npc in npc_collection.keys():
@@ -108,19 +106,21 @@ func remove_bullet_from_the_tree():
 			bullet.call_deferred("queue_free")
 			
 func spawn_character():
-	player = character_scene.instance()
-	character_container.add_child(player)
-	player.global_transform.origin = Vector3(0, 1, 0)
-	
-	var camera_rig = camera_rig_scene.instance()
-	character_container.add_child(camera_rig)
-	
-	gui = interface_scene.instance()
-	character_container.add_child(gui)
+	if player_spawned == false:
+		player = character_scene.instance()
+		character_container.add_child(player)
+		
+		camera_rig = camera_rig_scene.instance()
+		character_container.add_child(camera_rig)
+		
+		gui = interface_scene.instance()
+		character_container.add_child(gui)
 
-	player.set_minimap_camera_transform(gui.get_minimap_pivot_path())
-	player.set_camera_rig_transform(camera_rig.get_path())
-	camera_rig.connect("move_to_position", self, "get_path_to_position")
+		player.set_minimap_camera_transform(gui.get_minimap_pivot_path())
+		player.set_camera_rig_transform(camera_rig.get_path())
+		camera_rig.connect("move_to_position", self, "get_path_to_position")
+	
+		player_spawned = true
 
 func add_pc_to_the_collection(_id, _data):
 	pc_collection[_id] = _data
@@ -269,3 +269,7 @@ func extrapolate(_render_time):
 			var rotation_delta = (current_rot - old_rot) 
 			modified_data["rot"] = Basis(current_rot + (rotation_delta * extrapolation_factor))
 			update_bullet_inside_the_collection(bullet, modified_data)
+
+func get_path_to_position(_position):
+	var path = get_simple_path(player.global_transform.origin, _position)
+	player.move_along(path)

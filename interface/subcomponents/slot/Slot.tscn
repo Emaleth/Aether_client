@@ -13,7 +13,7 @@ var amount = null
 onready var amount_label = $AmountLabel
 onready var cooldown_overlay = $CooldownOverlay
 onready var cooldown_label = $CooldownLabel
-var sh
+var sh = null
 
 func _ready() -> void:
 	amount_label.hide()
@@ -27,8 +27,9 @@ func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _val
 	pass # Replace with function body.
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed(sh):
-		pass
+	if sh != null:
+		if Input.is_action_just_pressed(sh):
+			pass
 	#	Server.send_action_request(_item, camera_rig_get_target())
 
 func cooldown_animation():

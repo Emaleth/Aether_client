@@ -15,18 +15,15 @@ script = ExtResource( 2 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 1 )
 
-[node name="Position3D" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.6 )
-
-[node name="MinimapRemoteTransform" type="RemoteTransform" parent="."]
-update_rotation = false
-update_scale = false
-
 [node name="IK" parent="." instance=ExtResource( 3 )]
 
 [node name="human" parent="." instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
 
-[node name="CameraRigTransform" type="RemoteTransform" parent="."]
+[node name="MinimapRemoteTransform" type="RemoteTransform" parent="."]
+update_rotation = false
+update_scale = false
+
+[node name="CameraRigRemoteTransform" type="RemoteTransform" parent="."]
 update_rotation = false
 update_scale = false
