@@ -72,6 +72,8 @@ func animate(_velocity):
 	var offset_direction = Vector3.FORWARD
 	if local_direction.is_normalized():
 		offset_direction = local_direction
+		
+	skeleton.transform.origin.y = abs(sin(time * frequency) * 0.2)
 	
 	skeleton_data["right_leg"]["ray_node"].transform.origin.z = cosine_wave_z + (foot_spreed * -offset_direction.x)
 	skeleton_data["right_leg"]["ray_node"].transform.origin.x = cosine_wave_x + (foot_spreed * abs(offset_direction.z))

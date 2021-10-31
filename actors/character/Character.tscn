@@ -18,7 +18,6 @@ shape = SubResource( 1 )
 [node name="IK" parent="." instance=ExtResource( 3 )]
 
 [node name="human" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0 )
 
 [node name="MinimapRemoteTransform" type="RemoteTransform" parent="."]
 update_rotation = false

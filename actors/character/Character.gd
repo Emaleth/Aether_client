@@ -24,7 +24,7 @@ func move_along(_path):
 	path = []
 	for i in _path:
 		var fixed = i
-		fixed.y += model_height / 2
+		fixed.y += model_height / 2 - 0.1
 		path.append(fixed)
 	
 func m(delta):

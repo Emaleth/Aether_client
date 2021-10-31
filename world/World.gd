@@ -23,7 +23,7 @@ onready var interface_scene = preload("res://interface/Interface.tscn")
 onready var camera_rig_scene = preload("res://actors/character/camera_rig/CameraRig.tscn")
 onready var dummy_actor_scene = preload("res://actors/dummy_actor/dummy_actor.tscn")
 onready var dummy_bullet_scene = preload("res://bullet/dummyBullet.tscn")
-
+onready var click_indicator = $ClickIndicator
 
 func _ready():
 	Server.connect("s_update_world_state", self, "update_world_state")
@@ -271,5 +271,6 @@ func extrapolate(_render_time):
 			update_bullet_inside_the_collection(bullet, modified_data)
 
 func get_path_to_position(_position):
+	click_indicator.global_transform.origin = _position
 	var path = get_simple_path(player.global_transform.origin, _position)
 	player.move_along(path)

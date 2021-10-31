@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://environment/ground/Ground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://environment/wall/wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ClickIndicator.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world/World.gd" type="Script" id=4]
 
 [sub_resource type="NavigationMesh" id=1]
@@ -38,3 +39,9 @@ transform = Transform( -4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -50, 0,
 [node name="NPCContainer" type="Node" parent="."]
 
 [node name="BulletContainer" type="Node" parent="."]
+
+[node name="ClickIndicator" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.20744, 0 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.477711, 0.878517, 0, -0.878517, 0.477711, 0, 28.4655, 29.1982 )
