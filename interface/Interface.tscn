@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://interface/Interface.gd" type="Script" id=1]
 [ext_resource path="res://interface/subcomponents/animated_progress_bar/AnimatedProgressBar.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://interface/assets/fonts/Content.tres" type="DynamicFont" id=4]
 [ext_resource path="res://interface/components/chat_box/ChatBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://interface/components/mini_map/MiniMap.tscn" type="PackedScene" id=6]
+[ext_resource path="res://interface/SkillPanel.gd" type="Script" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -183,6 +184,7 @@ margin_right = 356.0
 margin_bottom = 74.0
 mouse_filter = 2
 columns = 10
+script = ExtResource( 7 )
 
 [node name="Slot" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
 

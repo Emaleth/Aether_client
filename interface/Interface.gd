@@ -9,8 +9,10 @@ onready var mana_bar = $MarginContainer/BottomMiddlePanel/BottomMiddle/HBoxConta
 # TOP RIGHT
 onready var clock_label = $MarginContainer/TopRightPanel/VBoxContainer/ServerClock/Label
 onready var minimap_module = $MarginContainer/TopRightPanel/VBoxContainer/MiniMap
-var target = null
 
+onready var skill_panel = $MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel
+
+	
 func get_minimap_pivot_path():
 	return minimap_module.get_pivot_path()
 	
@@ -46,6 +48,8 @@ func update_health_bar(_hp, _max_hp):
 func update_mana_bar(_mana, _max_mana):
 	mana_bar.update_ui(_mana, _max_mana)
 	
-func show_tooltip(_target):
-	target = _target
-	target_label.text = "Mouse Target: %s" % _target 
+
+#var target = null
+#func show_tooltip(_target):
+#	target = _target
+#	target_label.text = "Mouse Target: %s" % _target 

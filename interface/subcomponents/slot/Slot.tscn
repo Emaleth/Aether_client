@@ -7,30 +7,34 @@
 [sub_resource type="GDScript" id=2]
 script/source = "extends PanelContainer
 
-var item = null
+var item = \"fireball\"
 var amount = null
 
 onready var amount_label = $AmountLabel
 onready var cooldown_overlay = $CooldownOverlay
 onready var cooldown_label = $CooldownLabel
-var sh = null
+var shortcut = null
+
+var camera 
 
 func _ready() -> void:
 	amount_label.hide()
 	cooldown_label.hide()
 	cooldown_overlay.hide()
 
-func set_shortcut(_shortcut):
-	sh = _shortcut
+func conf(_shortcut, _camera):
+	shortcut = _shortcut
+	camera = _camera
 	
 func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	pass # Replace with function body.
 
 func _unhandled_input(event: InputEvent) -> void:
-	if sh != null:
-		if Input.is_action_just_pressed(sh):
-			pass
-	#	Server.send_action_request(_item, camera_rig_get_target())
+	if shortcut != null and item != null:
+		if Input.is_action_just_pressed(shortcut):
+			var target = camera.get_action_target()
+			if target != null:
+				Server.send_action_request(item, target.name)
 
 func cooldown_animation():
 	pass

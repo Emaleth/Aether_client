@@ -86,7 +86,7 @@ func remove_npc_from_the_tree():
 func add_bullet_to_the_tree():
 	for bullet in bullet_collection.keys():
 		if not bullet_container.has_node(str(bullet)):
-			if bullet_collection[bullet]["p_id"] == get_tree().get_network_unique_id():
+			if bullet_collection[bullet]["p_id"] == str(get_tree().get_network_unique_id()):
 				continue
 			var new_bullet = dummy_bullet_scene.instance()
 			new_bullet.name = str(bullet)
@@ -115,6 +115,7 @@ func spawn_character():
 		
 		gui = interface_scene.instance()
 		character_container.add_child(gui)
+		gui.skill_panel.configure(camera_rig)
 
 		player.set_minimap_camera_transform(gui.get_minimap_pivot_path())
 		player.set_camera_rig_transform(camera_rig.get_path())
