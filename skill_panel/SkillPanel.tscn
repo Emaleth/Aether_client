@@ -1,0 +1,130 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://interface/subcomponents/slot/Slot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://skill_panel/SkillPanel.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends PanelContainer
+
+var item = null
+var amount = 0
+
+var shortcut = null
+
+onready var item_texture = $TextureRect
+
+onready var amount_label = $GridContainer/AmountLabel
+onready var shortcut_label = $GridContainer/ShortcutLabel
+
+var camera
+
+	
+func configure(_shortcut, _camera):
+	shortcut = _shortcut
+	shortcut_label.text = str(InputMap.get_action_list(_shortcut))
+	camera = _camera
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if shortcut != null and item != null:
+		if Input.is_action_just_pressed(shortcut):
+			var target = camera.get_action_target()
+			if target != null:
+				Server.send_action_request(item, target.name)
+
+func cooldown_animation():
+	pass
+
+func get_drag_data(_position: Vector2):
+	var data = {
+		\"item\" : item, 
+		\"amount\" : amount
+		}
+#	set_drag_preview()
+	return data
+
+func can_drop_data(_position: Vector2, data) -> bool:
+	return true
+
+func drop_data(_position: Vector2, data) -> void:
+	item = data.item
+	amount = data.amount
+	set_data()
+
+func set_data():
+	if amount > 1:
+		amount_label.text = str(amount)
+		amount_label.show()
+	else:
+		amount_label.hide()
+		
+	hint_tooltip = str(item)
+	
+	item_texture.texture = load(\"res://icon.png\")
+"
+
+[node name="SkillPanel" type="PanelContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 343.0
+margin_bottom = 57.0
+mouse_filter = 2
+columns = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Slot" parent="GridContainer" instance=ExtResource( 1 )]
+script = SubResource( 1 )
+
+[node name="Slot2" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 34.0
+margin_right = 64.0
+script = SubResource( 1 )
+
+[node name="Slot3" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 68.0
+margin_right = 98.0
+script = SubResource( 1 )
+
+[node name="Slot4" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 102.0
+margin_right = 132.0
+script = SubResource( 1 )
+
+[node name="Slot5" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 136.0
+margin_right = 166.0
+script = SubResource( 1 )
+
+[node name="Slot6" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 170.0
+margin_right = 200.0
+script = SubResource( 1 )
+
+[node name="Slot7" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 204.0
+margin_right = 234.0
+script = SubResource( 1 )
+
+[node name="Slot8" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 238.0
+margin_right = 268.0
+script = SubResource( 1 )
+
+[node name="Slot9" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 272.0
+margin_right = 302.0
+script = SubResource( 1 )
+
+[node name="Slot10" parent="GridContainer" instance=ExtResource( 1 )]
+margin_left = 306.0
+margin_right = 336.0
+script = SubResource( 1 )

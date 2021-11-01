@@ -10,8 +10,13 @@ onready var mana_bar = $MarginContainer/BottomMiddlePanel/BottomMiddle/HBoxConta
 onready var clock_label = $MarginContainer/TopRightPanel/VBoxContainer/ServerClock/Label
 onready var minimap_module = $MarginContainer/TopRightPanel/VBoxContainer/MiniMap
 
+onready var eq = $MarginContainer/Equipment
 onready var skill_panel = $MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel
 
+func _ready() -> void:
+	eq.button_list = $Floating/ButtonList
+	Server.connect("update_equipment_data", eq, "configure")
+	Server.request_equipment_data()
 	
 func get_minimap_pivot_path():
 	return minimap_module.get_pivot_path()

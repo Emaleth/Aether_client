@@ -27,6 +27,7 @@ onready var click_indicator = $ClickIndicator
 
 func _ready():
 	Server.connect("s_update_world_state", self, "update_world_state")
+	Server.request_data_tables()
 
 func _physics_process(_delta: float) -> void:
 	interpolate_or_extrapolate()
@@ -115,12 +116,11 @@ func spawn_character():
 		
 		gui = interface_scene.instance()
 		character_container.add_child(gui)
-		gui.skill_panel.configure(camera_rig)
+#		gui.skill_panel.configure(camera_rig)
 
 		player.set_minimap_camera_transform(gui.get_minimap_pivot_path())
 		player.set_camera_rig_transform(camera_rig.get_path())
 		camera_rig.connect("move_to_position", self, "get_path_to_position")
-	
 		player_spawned = true
 
 func add_pc_to_the_collection(_id, _data):

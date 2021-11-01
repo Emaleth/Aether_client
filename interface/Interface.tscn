@@ -1,12 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://interface/Interface.gd" type="Script" id=1]
 [ext_resource path="res://interface/subcomponents/animated_progress_bar/AnimatedProgressBar.tscn" type="PackedScene" id=2]
-[ext_resource path="res://interface/subcomponents/slot/Slot.tscn" type="PackedScene" id=3]
+[ext_resource path="res://skill_panel/SkillPanel.tscn" type="PackedScene" id=3]
 [ext_resource path="res://interface/assets/fonts/Content.tres" type="DynamicFont" id=4]
 [ext_resource path="res://interface/components/chat_box/ChatBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://interface/components/mini_map/MiniMap.tscn" type="PackedScene" id=6]
-[ext_resource path="res://interface/SkillPanel.gd" type="Script" id=7]
+[ext_resource path="res://eq/Equipment.tscn" type="PackedScene" id=7]
+[ext_resource path="res://interface/components/button_list/ButtonList.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -120,9 +121,9 @@ __meta__ = {
 }
 
 [node name="BottomMiddlePanel" type="PanelContainer" parent="MarginContainer"]
-margin_left = 462.0
-margin_top = 626.0
-margin_right = 818.0
+margin_left = 465.0
+margin_top = 614.0
+margin_right = 815.0
 margin_bottom = 700.0
 size_flags_horizontal = 4
 size_flags_vertical = 8
@@ -132,8 +133,8 @@ __meta__ = {
 }
 
 [node name="BottomMiddle" type="VBoxContainer" parent="MarginContainer/BottomMiddlePanel"]
-margin_right = 356.0
-margin_bottom = 74.0
+margin_right = 350.0
+margin_bottom = 86.0
 rect_min_size = Vector2( 100, 40 )
 mouse_filter = 2
 size_flags_horizontal = 4
@@ -143,7 +144,7 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/BottomMiddlePanel/BottomMiddle"]
-margin_right = 356.0
+margin_right = 350.0
 margin_bottom = 17.0
 mouse_filter = 2
 alignment = 1
@@ -155,7 +156,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 0.0
-margin_right = 176.0
+margin_right = 173.0
 margin_bottom = 17.0
 
 [node name="ManaBar" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/HBoxContainer" instance=ExtResource( 2 )]
@@ -163,10 +164,15 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 180.0
+margin_left = 177.0
 margin_top = 0.0
-margin_right = 356.0
+margin_right = 350.0
 margin_bottom = 17.0
+
+[node name="SkillPanel" parent="MarginContainer/BottomMiddlePanel/BottomMiddle" instance=ExtResource( 3 )]
+margin_top = 21.0
+margin_right = 350.0
+margin_bottom = 65.0
 
 [node name="ExperienceBar" parent="MarginContainer/BottomMiddlePanel/BottomMiddle" instance=ExtResource( 2 )]
 anchor_left = 0.0
@@ -174,54 +180,18 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
-margin_top = 21.0
-margin_right = 356.0
-margin_bottom = 38.0
-
-[node name="SkillPanel" type="GridContainer" parent="MarginContainer/BottomMiddlePanel/BottomMiddle"]
-margin_top = 42.0
-margin_right = 356.0
-margin_bottom = 74.0
-mouse_filter = 2
-columns = 10
-script = ExtResource( 7 )
-
-[node name="Slot" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-
-[node name="Slot2" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-margin_left = 36.0
-margin_right = 68.0
-
-[node name="Slot3" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-margin_left = 72.0
-margin_right = 104.0
-
-[node name="Slot4" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-margin_left = 108.0
-margin_right = 140.0
-
-[node name="Slot5" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-margin_left = 144.0
-margin_right = 176.0
-
-[node name="Slot6" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-margin_left = 180.0
-margin_right = 212.0
-
-[node name="Slot7" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-margin_left = 216.0
-margin_right = 248.0
-
-[node name="Slot8" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-margin_left = 252.0
-margin_right = 284.0
-
-[node name="Slot9" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-margin_left = 288.0
-margin_right = 320.0
-
-[node name="Slot10" parent="MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel" instance=ExtResource( 3 )]
-margin_left = 324.0
-margin_right = 356.0
+margin_top = 69.0
+margin_right = 350.0
+margin_bottom = 86.0
 
 [node name="ChatBox" parent="MarginContainer" instance=ExtResource( 5 )]
+
+[node name="Equipment" parent="MarginContainer" instance=ExtResource( 7 )]
+margin_left = 20.0
+margin_top = 353.0
+margin_right = 34.0
+margin_bottom = 367.0
+
+[node name="Floating" type="Node" parent="."]
+
+[node name="ButtonList" parent="Floating" instance=ExtResource( 8 )]

@@ -23,6 +23,7 @@ default_bus_layout="res://audio_bus_layout.tres"
 
 Server="*res://networking/Server.gd"
 Gateway="*res://networking/Gateway.gd"
+LocalDataTables="*res://local_data_tables.gd"
 
 [debug]
 

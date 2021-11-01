@@ -1,59 +1,46 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.109804, 0.101961, 0.101961, 1 )
 
 [sub_resource type="GDScript" id=2]
 script/source = "extends PanelContainer
 
-var item = \"fireball\"
-var amount = null
+var item = null
 
-onready var amount_label = $AmountLabel
-onready var cooldown_overlay = $CooldownOverlay
-onready var cooldown_label = $CooldownLabel
-var shortcut = null
+onready var item_texture = $TextureRect
+onready var button_list = null
 
-var camera 
 
-func _ready() -> void:
-	amount_label.hide()
-	cooldown_label.hide()
-	cooldown_overlay.hide()
-
-func conf(_shortcut, _camera):
-	shortcut = _shortcut
-	camera = _camera
+func configure(_item, _button_list):
+	item = _item
+	button_list = _button_list
+	if _item != null:
+		hint_tooltip = str(item + \"\\n\" + str(LocalDataTables.item_table[item]))
+		item_texture.texture = load(\"res://icon.png\")
 	
-func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
-	pass # Replace with function body.
+func _on_Slot_gui_input(event: InputEvent) -> void:
+	if item != null and event.is_action_pressed(\"click\"):
+		show_button_list()
+		
+func show_button_list():
+	button_list.configure(configure_buttons(str(LocalDataTables.item_table[item][\"type\"])), self, $ButtonPivot.rect_global_position)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if shortcut != null and item != null:
-		if Input.is_action_just_pressed(shortcut):
-			var target = camera.get_action_target()
-			if target != null:
-				Server.send_action_request(item, target.name)
-
-func cooldown_animation():
-	pass
-
-func get_drag_data(_position: Vector2):
-	pass
-
-func can_drop_data(_position: Vector2, data) -> bool:
-	return true
-
-func drop_data(_position: Vector2, data) -> void:
-	pass
-	
+func configure_buttons(_type):
+	match _type:
+		\"container\":
+			return [\"Delete\", \"Open\"]
+			
+func button_pressed(b):
+	print(b)
 "
 
+[sub_resource type="StyleBoxEmpty" id=3]
+
 [node name="Slot" type="PanelContainer"]
-margin_right = 32.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 32, 32 )
+margin_right = 30.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 30, 30 )
 custom_styles/panel = SubResource( 1 )
 script = SubResource( 2 )
 __meta__ = {
@@ -61,43 +48,112 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 32.0
-margin_bottom = 32.0
+margin_right = 30.0
+margin_bottom = 30.0
+mouse_filter = 2
+expand = true
+stretch_mode = 6
 
-[node name="AmountLabel" type="Label" parent="."]
-margin_right = 32.0
-margin_bottom = 32.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-text = "4"
-align = 2
-valign = 2
-
-[node name="CooldownOverlay" type="TextureProgress" parent="."]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_right = 30.0
+margin_bottom = 30.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-value = 20.0
-texture_progress = ExtResource( 1 )
-fill_mode = 4
-nine_patch_stretch = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
 
-[node name="CooldownLabel" type="Label" parent="."]
-margin_right = 32.0
-margin_bottom = 32.0
+[node name="Panel" type="Panel" parent="GridContainer"]
+margin_right = 10.0
+margin_bottom = 10.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_styles/panel = SubResource( 3 )
 
-[node name="Tween" type="Tween" parent="."]
+[node name="Panel2" type="Panel" parent="GridContainer"]
+margin_left = 10.0
+margin_right = 20.0
+margin_bottom = 10.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
 
-[connection signal="tween_step" from="Tween" to="." method="_on_Tween_tween_step"]
+[node name="Panel3" type="Panel" parent="GridContainer"]
+margin_left = 20.0
+margin_right = 30.0
+margin_bottom = 10.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel4" type="Panel" parent="GridContainer"]
+margin_top = 10.0
+margin_right = 10.0
+margin_bottom = 20.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel5" type="Panel" parent="GridContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 20.0
+margin_bottom = 20.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel6" type="Panel" parent="GridContainer"]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 30.0
+margin_bottom = 20.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel7" type="Panel" parent="GridContainer"]
+margin_top = 20.0
+margin_right = 10.0
+margin_bottom = 30.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel8" type="Panel" parent="GridContainer"]
+margin_left = 10.0
+margin_top = 20.0
+margin_right = 20.0
+margin_bottom = 30.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="Panel9" type="Panel" parent="GridContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 30.0
+margin_bottom = 30.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 3 )
+
+[node name="ButtonPivot" type="Control" parent="."]
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 15.0
+margin_bottom = 15.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[connection signal="gui_input" from="." to="." method="_on_Slot_gui_input"]
