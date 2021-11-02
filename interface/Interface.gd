@@ -11,12 +11,14 @@ onready var clock_label = $MarginContainer/TopRightPanel/VBoxContainer/ServerClo
 onready var minimap_module = $MarginContainer/TopRightPanel/VBoxContainer/MiniMap
 
 onready var eq = $MarginContainer/Equipment
+onready var inventory = $MarginContainer/Inventory
 onready var skill_panel = $MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel
 
 func _ready() -> void:
-	eq.button_list = $Floating/ButtonList
 	Server.connect("update_equipment_data", eq, "configure")
 	Server.request_equipment_data()
+	Server.connect("update_inventory_data", inventory, "configure")
+	Server.request_inventory_data()
 	
 func get_minimap_pivot_path():
 	return minimap_module.get_pivot_path()

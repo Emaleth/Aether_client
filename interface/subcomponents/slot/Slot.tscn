@@ -1,39 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
+[ext_resource path="res://interface/subcomponents/slot/Slot.gd" type="Script" id=1]
+
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.109804, 0.101961, 0.101961, 1 )
-
-[sub_resource type="GDScript" id=2]
-script/source = "extends PanelContainer
-
-var item = null
-
-onready var item_texture = $TextureRect
-onready var button_list = null
-
-
-func configure(_item, _button_list):
-	item = _item
-	button_list = _button_list
-	if _item != null:
-		hint_tooltip = str(item + \"\\n\" + str(LocalDataTables.item_table[item]))
-		item_texture.texture = load(\"res://icon.png\")
-	
-func _on_Slot_gui_input(event: InputEvent) -> void:
-	if item != null and event.is_action_pressed(\"click\"):
-		show_button_list()
-		
-func show_button_list():
-	button_list.configure(configure_buttons(str(LocalDataTables.item_table[item][\"type\"])), self, $ButtonPivot.rect_global_position)
-
-func configure_buttons(_type):
-	match _type:
-		\"container\":
-			return [\"Delete\", \"Open\"]
-			
-func button_pressed(b):
-	print(b)
-"
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -42,7 +12,7 @@ margin_right = 30.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 30, 30 )
 custom_styles/panel = SubResource( 1 )
-script = SubResource( 2 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -147,13 +117,3 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 3 )
-
-[node name="ButtonPivot" type="Control" parent="."]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 15.0
-margin_bottom = 15.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[connection signal="gui_input" from="." to="." method="_on_Slot_gui_input"]

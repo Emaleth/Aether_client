@@ -18,6 +18,7 @@ signal s_token_verification_failure
 signal s_update_world_state
 signal s_update_chat_state
 signal update_equipment_data
+signal update_inventory_data
 
 func _physics_process(delta: float) -> void:
 	clock_decimal_precision(delta)
@@ -124,4 +125,11 @@ func request_equipment_data():
 remote func recive_equipment_data(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("update_equipment_data", _data)
+
+func request_inventory_data():
+	rpc_id(1, "request_inventory_data")
+		
+remote func recive_inventory_data(_data : Dictionary):
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("update_inventory_data", _data)
 

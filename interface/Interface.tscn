@@ -7,7 +7,7 @@
 [ext_resource path="res://interface/components/chat_box/ChatBox.tscn" type="PackedScene" id=5]
 [ext_resource path="res://interface/components/mini_map/MiniMap.tscn" type="PackedScene" id=6]
 [ext_resource path="res://eq/Equipment.tscn" type="PackedScene" id=7]
-[ext_resource path="res://interface/components/button_list/ButtonList.tscn" type="PackedScene" id=8]
+[ext_resource path="res://inv/Inventory.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -192,6 +192,9 @@ margin_top = 353.0
 margin_right = 34.0
 margin_bottom = 367.0
 
-[node name="Floating" type="Node" parent="."]
-
-[node name="ButtonList" parent="Floating" instance=ExtResource( 8 )]
+[node name="Inventory" parent="MarginContainer" instance=ExtResource( 9 )]
+margin_left = 633.0
+margin_top = 353.0
+margin_right = 647.0
+margin_bottom = 367.0
+size_flags_horizontal = 4
