@@ -1,20 +1,19 @@
 extends SpringArm
 
-var sensibility : float = 0.002
+var sensibility : float = 0.005
 var deadzone : float = 0.1
 var default_rotation_x : float = deg2rad(-45)
 var min_rotation_x : float = deg2rad(-80)
-var max_rotation_x : float = deg2rad(0)
+var max_rotation_x : float = deg2rad(80)
 var default_rotation_y : float = deg2rad(0)
 var default_spring_lenght = 15
 var zoom_sensibility = 0.5
 var max_spring_leght = 20
-var min_spring_leght = 5
+var min_spring_leght = 3
 
 onready var camera = $Camera
 
 signal move_to_position
-signal ability_target
 
 
 func _ready() -> void:
@@ -33,11 +32,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			rotate_camera_rig(event.relative)
 			
+	if Input.is_action_just_pressed("rotate_camera"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
+	elif Input.is_action_just_released("rotate_camera"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	if Input.is_action_just_pressed("zoom_in"):
-		spring_length = clamp(spring_length - zoom_sensibility, min_spring_leght, max_spring_leght)
+		spring_length = max(spring_length - zoom_sensibility, min_spring_leght)
 		
 	elif Input.is_action_just_pressed("zoom_out"):
-		spring_length = clamp(spring_length + zoom_sensibility, min_spring_leght, max_spring_leght)
+		spring_length = min(spring_length + zoom_sensibility, max_spring_leght)
 		
 func rotate_camera_rig(_amount : Vector2) -> void:
 	if _amount.length() <= deadzone:

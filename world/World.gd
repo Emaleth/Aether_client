@@ -19,7 +19,7 @@ onready var npc_container = $NPCContainer
 onready var bullet_container = $BulletContainer
 
 onready var character_scene = preload("res://actors/character/Character.tscn")
-onready var interface_scene = preload("res://interface/Interface.tscn")
+onready var interface_scene = preload("res://source/ui/UI.tscn")
 onready var camera_rig_scene = preload("res://actors/character/camera_rig/CameraRig.tscn")
 onready var dummy_actor_scene = preload("res://actors/dummy_actor/dummy_actor.tscn")
 onready var dummy_bullet_scene = preload("res://bullet/dummyBullet.tscn")
@@ -57,10 +57,9 @@ func add_pc_to_the_tree():
 func update_pc_in_the_tree():
 	for pc in pc_collection.keys():
 		if pc_container.has_node(str(pc)):
-			pc_container.get_node(str(pc)).update(pc_collection[pc]["pos"], pc_collection[pc]["rot"], pc_collection[pc]["hp"], pc_collection[pc]["max_hp"])
+			pc_container.get_node(str(pc)).update(pc_collection[pc]["pos"], pc_collection[pc]["rot"], pc_collection[pc]["res"])
 		if pc == str(get_tree().get_network_unique_id()):
-			gui.update_health_bar(pc_collection[pc]["hp"], pc_collection[pc]["max_hp"])
-			gui.update_mana_bar(pc_collection[pc]["mp"], pc_collection[pc]["max_mp"])
+			gui.update_resources_bar(pc_collection[pc]["res"])
 
 func remove_pc_from_the_tree():
 	for pc in pc_container.get_children():
@@ -77,7 +76,7 @@ func add_npc_to_the_tree():
 func update_npc_in_the_tree():
 	for npc in npc_container.get_children():
 		if npc_collection.has(str(npc.name)):
-			npc.update(npc_collection[str(npc.name)]["pos"], npc_collection[str(npc.name)]["rot"], npc_collection[str(npc.name)]["hp"], npc_collection[str(npc.name)]["max_hp"])
+			npc.update(npc_collection[str(npc.name)]["pos"], npc_collection[str(npc.name)]["rot"], npc_collection[str(npc.name)]["res"])
 			
 func remove_npc_from_the_tree():
 	for npc in npc_container.get_children():

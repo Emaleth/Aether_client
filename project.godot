@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Aether - Client"
-run/main_scene="res://interface/menu/Menu.tscn"
+run/main_scene="res://menu/Menu.tscn"
 boot_splash/bg_color=Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 config/icon="res://icon.png"
 
@@ -33,6 +33,8 @@ gdscript/warnings/return_value_discarded=false
 
 window/size/width=1280
 window/size/height=720
+mouse_cursor/custom_image="res://assets/cursors/crosshair003.png"
+mouse_cursor/custom_image_hotspot=Vector2( 32, 32 )
 
 [gui]
 
