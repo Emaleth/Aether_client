@@ -32,7 +32,7 @@ __meta__ = {
 margin_left = 20.0
 margin_top = 20.0
 margin_right = 93.0
-margin_bottom = 90.0
+margin_bottom = 53.0
 mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -54,28 +54,6 @@ margin_right = 66.0
 margin_bottom = 26.0
 custom_fonts/font = ExtResource( 2 )
 text = "Latency:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Target" type="PanelContainer" parent="MarginContainer/DebugInfoPanels"]
-margin_top = 37.0
-margin_right = 65.0
-margin_bottom = 70.0
-mouse_filter = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="MarginContainer/DebugInfoPanels/Target"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 58.0
-margin_bottom = 26.0
-custom_fonts/font = ExtResource( 2 )
-text = "Target:"
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -1,0 +1,11 @@
+[gd_resource type="Environment" load_steps=3 format=2]
+
+[ext_resource path="res://assets/panorama/lilienstein_2k.hdr" type="Texture" id=1]
+
+[sub_resource type="PanoramaSky" id=2]
+panorama = ExtResource( 1 )
+
+[resource]
+background_mode = 2
+background_sky = SubResource( 2 )
+dof_blur_far_distance = 100.0

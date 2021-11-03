@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Aether - Client"
-run/main_scene="res://menu/Menu.tscn"
+run/main_scene="res://menu_old/Menu.tscn"
 boot_splash/bg_color=Color( 0.0941176, 0.0941176, 0.0941176, 1 )
 config/icon="res://icon.png"
 
@@ -21,9 +21,9 @@ default_bus_layout="res://audio_bus_layout.tres"
 
 [autoload]
 
-Server="*res://networking/Server.gd"
-Gateway="*res://networking/Gateway.gd"
-LocalDataTables="*res://local_data_tables.gd"
+Server="*res://source/networking/Server.gd"
+Gateway="*res://source/networking/Gateway.gd"
+LocalDataTables="*res://source/local_data_tables.gd"
 
 [debug]
 
@@ -1234,4 +1234,4 @@ quality/driver/driver_name="GLES2"
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0.0941176, 0.0941176, 0.0941176, 1 )
-environment/default_environment="res://world/environment.tres"
+environment/default_environment="res://source/world/environment.tres"

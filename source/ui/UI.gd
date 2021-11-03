@@ -2,7 +2,6 @@ extends CanvasLayer
 
 # DEBUG PANELS
 onready var latency_label = $MarginContainer/DebugInfoPanels/Latency/Label
-onready var target_label = $MarginContainer/DebugInfoPanels/Target/Label
 # resource bars
 onready var health_bar = $MarginContainer/BottomMiddlePanel/BottomMiddle/HBoxContainer/HealthBar
 onready var mana_bar = $MarginContainer/BottomMiddlePanel/BottomMiddle/HBoxContainer/ManaBar
@@ -52,8 +51,4 @@ func format_time():
 func update_resources_bar(_res):
 	health_bar.update_ui(_res["health"]["current"], _res["health"]["max"])
 	mana_bar.update_ui(_res["mana"]["current"], _res["mana"]["max"])
-	
-#var target = null
-#func show_tooltip(_target):
-#	target = _target
-#	target_label.text = "Mouse Target: %s" % _target 
+
