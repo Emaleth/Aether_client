@@ -18,10 +18,10 @@ onready var pc_container = $PCContainer
 onready var npc_container = $NPCContainer
 onready var bullet_container = $BulletContainer
 
-onready var character_scene = preload("res://actors_old/character/Character.tscn")
+onready var character_scene = preload("res://source/actor/character/Character.tscn")
 onready var interface_scene = preload("res://source/ui/UI.tscn")
-onready var camera_rig_scene = preload("res://actors_old/character/camera_rig/CameraRig.tscn")
-onready var dummy_actor_scene = preload("res://actors_old/dummy_actor/dummy_actor.tscn")
+onready var camera_rig_scene = preload("res://source/camera_rig/CameraRig.tscn")
+onready var dummy_actor_scene = preload("res://source/actor/dummy_actor/dummy_actor.tscn")
 onready var dummy_bullet_scene = preload("res://source/projectile/dummyBullet.tscn")
 onready var click_indicator = $ClickIndicator
 
@@ -271,6 +271,6 @@ func extrapolate(_render_time):
 			update_bullet_inside_the_collection(bullet, modified_data)
 
 func get_path_to_position(_position):
-	click_indicator.global_transform.origin = _position
 	var path = get_simple_path(player.global_transform.origin, _position)
+	click_indicator.configure(_position, path)
 	player.move_along(path)

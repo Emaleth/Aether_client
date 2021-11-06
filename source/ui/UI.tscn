@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
-[ext_resource path="res://resources/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=2]
 [ext_resource path="res://source/ui/subcomponents/animated_progress_bar/AnimatedProgressBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/ui/inventory/Inventory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/ui/quick_slot_panel/SkillPanel.tscn" type="PackedScene" id=5]

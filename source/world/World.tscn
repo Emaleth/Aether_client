@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://resources/models/Ground.tscn" type="PackedScene" id=1]
-[ext_resource path="res://resources/models/wall.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ClickIndicator.tscn" type="PackedScene" id=3]
+[ext_resource path="res://source/environment/Ground.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/environment/wall.tscn" type="PackedScene" id=2]
+[ext_resource path="res://source/path_indicator/PathIndicator.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/world/World.gd" type="Script" id=4]
 
 [sub_resource type="NavigationMesh" id=1]

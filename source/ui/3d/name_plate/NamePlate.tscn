@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://resources/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://source/ui/subcomponents/animated_progress_bar/AnimatedProgressBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/ui/3d/name_plate/NamePlate.gd" type="Script" id=3]
 

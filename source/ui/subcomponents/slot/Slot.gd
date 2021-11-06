@@ -19,12 +19,12 @@ func generate_tooltip_text() -> String:
 	return tooltip_text
 	
 func get_item_icon() -> Texture:
-	var item_icon_path = "res://assets/item_icons/%s.png" % str(item["archetype"])
+	var item_icon_path = "res://assets/icons/item//%s.png" % str(item["archetype"])
 	var texture : Texture
 	if ResourceLoader.exists(item_icon_path):
 		texture = load(item_icon_path)
 	else:
-		texture = preload("res://assets/item_icons/no_icon.png")
+		texture = preload("res://assets/icons/item/no_icon.png")
 	return texture
 	
 	
