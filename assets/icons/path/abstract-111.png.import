@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/reticule.png-86ae251a96675ecc6a5887a9afa532f4.s3tc.stex"
-path.etc="res://.import/reticule.png-86ae251a96675ecc6a5887a9afa532f4.etc.stex"
+path.s3tc="res://.import/abstract-111.png-7d5173b28f04a35349a0ebb895ef3eff.s3tc.stex"
+path.etc="res://.import/abstract-111.png-7d5173b28f04a35349a0ebb895ef3eff.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/icons/path/reticule.png"
-dest_files=[ "res://.import/reticule.png-86ae251a96675ecc6a5887a9afa532f4.s3tc.stex", "res://.import/reticule.png-86ae251a96675ecc6a5887a9afa532f4.etc.stex" ]
+source_file="res://assets/icons/path/abstract-111.png"
+dest_files=[ "res://.import/abstract-111.png-7d5173b28f04a35349a0ebb895ef3eff.s3tc.stex", "res://.import/abstract-111.png-7d5173b28f04a35349a0ebb895ef3eff.etc.stex" ]
 
 [params]
 
@@ -30,6 +30,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=false

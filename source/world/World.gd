@@ -272,5 +272,5 @@ func extrapolate(_render_time):
 
 func get_path_to_position(_position):
 	var path = get_simple_path(player.global_transform.origin, _position)
-	click_indicator.configure(_position, path)
+	click_indicator.configure(path)
 	player.move_along(path)
