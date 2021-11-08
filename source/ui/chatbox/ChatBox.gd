@@ -1,11 +1,12 @@
-extends PanelContainer
+extends "res://source/ui/subcomponents/window/Window.gd"
 
-onready var msg_list = $VBoxContainer/OutputPanel/ScrollContainer/MessageList
-onready var template_chat_line = $VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template
-onready var input_line = $VBoxContainer/InputPanel/LineEdit
+onready var msg_list = $VBoxContainer/ContentPanel/VBoxContainer/OutputPanel/ScrollContainer/MessageList
+onready var template_chat_line = $VBoxContainer/ContentPanel/VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template
+onready var input_line = $VBoxContainer/ContentPanel/VBoxContainer/InputPanel/LineEdit
 
 
 func _ready() -> void:
+	window_title_label.text = "Chat Box"
 	Server.connect("s_update_chat_state", self, "update_chat_box")
 	template_chat_line.hide()
 	

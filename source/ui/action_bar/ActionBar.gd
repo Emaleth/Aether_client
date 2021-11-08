@@ -1,4 +1,4 @@
-extends PanelContainer
+extends "res://source/ui/subcomponents/window/Window.gd"
 
 var buttons = [
 	"skill_1",
@@ -13,6 +13,8 @@ var buttons = [
 	"skill_10"
 ]
 
+func _ready() -> void:
+	window_title_label.text = "Action Bar"
 	
 ##func configure(_camera):
 ##	for i in $GridContainer.get_children().size():

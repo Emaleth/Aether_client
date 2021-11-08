@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/iconmonstr-circle-1-240.png-a64e74aaf5e9710b61ff4b5e1db5f9b3.s3tc.stex"
-path.etc="res://.import/iconmonstr-circle-1-240.png-a64e74aaf5e9710b61ff4b5e1db5f9b3.etc.stex"
+path.s3tc="res://.import/plain-circle.svg-cbd1610d9dc95a00fcd3f299c7ec2748.s3tc.stex"
+path.etc="res://.import/plain-circle.svg-cbd1610d9dc95a00fcd3f299c7ec2748.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/icons/path/iconmonstr-circle-1-240.png"
-dest_files=[ "res://.import/iconmonstr-circle-1-240.png-a64e74aaf5e9710b61ff4b5e1db5f9b3.s3tc.stex", "res://.import/iconmonstr-circle-1-240.png-a64e74aaf5e9710b61ff4b5e1db5f9b3.etc.stex" ]
+source_file="res://assets/icons/path/plain-circle.svg"
+dest_files=[ "res://.import/plain-circle.svg-cbd1610d9dc95a00fcd3f299c7ec2748.s3tc.stex", "res://.import/plain-circle.svg-cbd1610d9dc95a00fcd3f299c7ec2748.etc.stex" ]
 
 [params]
 

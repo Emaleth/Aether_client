@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/ui/clock/Clock.gd" type="Script" id=2]
+[ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=3]
+
+[node name="Clock" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" parent="." index="0"]
+margin_bottom = 87.0
+
+[node name="ContentPanel" parent="VBoxContainer" index="1"]
+margin_bottom = 87.0
+
+[node name="Label" type="Label" parent="VBoxContainer/ContentPanel" index="0"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 183.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 3 )
+align = 1
+valign = 1

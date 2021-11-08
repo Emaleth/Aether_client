@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/no_icon.png-d4b1b85743044cebd423f174ddf86b9d.stex"
+path="res://.import/g76.png-63180272a1d9327a9ba1c05c3a576ce4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/no_icon.png"
-dest_files=[ "res://.import/no_icon.png-d4b1b85743044cebd423f174ddf86b9d.stex" ]
+source_file="res://assets/cursors/g76.png"
+dest_files=[ "res://.import/g76.png-63180272a1d9327a9ba1c05c3a576ce4.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

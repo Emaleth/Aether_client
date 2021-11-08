@@ -24,7 +24,7 @@ func get_item_icon() -> Texture:
 	if ResourceLoader.exists(item_icon_path):
 		texture = load(item_icon_path)
 	else:
-		texture = preload("res://assets/icons/item/no_icon.png")
+		texture = preload("res://assets/icons/item/interdiction.svg")
 	return texture
 	
 	
