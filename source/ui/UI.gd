@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 # DEBUG PANELS
 onready var latency_label = $MarginContainer/DebugInfoPanels/Latency/Label
@@ -7,10 +7,10 @@ onready var health_bar = $MarginContainer/BottomMiddlePanel/BottomMiddle/HBoxCon
 onready var mana_bar = $MarginContainer/BottomMiddlePanel/BottomMiddle/HBoxContainer/ManaBar
 # TOP RIGHT
 onready var clock_label = $MarginContainer/TopRightPanel/VBoxContainer/ServerClock/Label
-onready var minimap_module = $MarginContainer/TopRightPanel/VBoxContainer/MiniMap
+onready var minimap_module = $Minimap
 
-onready var eq = $MarginContainer/Equipment
-onready var inventory = $MarginContainer/Inventory
+onready var eq = $Equipment
+onready var inventory = $Inventory
 onready var skill_panel = $MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel
 
 func _ready() -> void:
@@ -52,3 +52,7 @@ func update_resources_bar(_res):
 	health_bar.update_ui(_res["health"]["current"], _res["health"]["max"])
 	mana_bar.update_ui(_res["mana"]["current"], _res["mana"]["max"])
 
+func _on_Interface_resized() -> void:
+	for i in get_children():
+		i.rect_global_position.x = clamp(i.rect_global_position.x, 0, rect_size.x - i.rect_size.x)
+		i.rect_global_position.y = clamp(i.rect_global_position.y, 0, rect_size.y - i.rect_size.y)

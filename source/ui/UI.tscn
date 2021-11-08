@@ -6,15 +6,22 @@
 [ext_resource path="res://source/ui/inventory/Inventory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/ui/quick_slot_panel/SkillPanel.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/ui/chatbox/ChatBox.tscn" type="PackedScene" id=6]
-[ext_resource path="res://source/ui/minimap/MiniMap.tscn" type="PackedScene" id=7]
 [ext_resource path="res://source/ui/equipment/Equipment.tscn" type="PackedScene" id=8]
+[ext_resource path="res://source/ui/minimap/Minimap.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
-[node name="Interface" type="CanvasLayer"]
+[node name="Interface" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 2
+size_flags_vertical = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 1.0
@@ -73,14 +80,10 @@ custom_styles/panel = SubResource( 1 )
 margin_right = 200.0
 margin_bottom = 200.0
 
-[node name="MiniMap" parent="MarginContainer/TopRightPanel/VBoxContainer" instance=ExtResource( 7 )]
-margin_bottom = 163.0
-
 [node name="ServerClock" type="PanelContainer" parent="MarginContainer/TopRightPanel/VBoxContainer"]
 margin_left = 47.0
-margin_top = 167.0
 margin_right = 152.0
-margin_bottom = 200.0
+margin_bottom = 33.0
 mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
@@ -166,15 +169,18 @@ margin_bottom = 90.0
 
 [node name="ChatBox" parent="MarginContainer" instance=ExtResource( 6 )]
 
-[node name="Equipment" parent="MarginContainer" instance=ExtResource( 8 )]
-margin_left = 20.0
-margin_top = 353.0
-margin_right = 34.0
-margin_bottom = 367.0
+[node name="Minimap" parent="." instance=ExtResource( 9 )]
 
-[node name="Inventory" parent="MarginContainer" instance=ExtResource( 4 )]
-margin_left = 1246.0
-margin_top = 353.0
-margin_right = 1260.0
-margin_bottom = 367.0
-size_flags_horizontal = 8
+[node name="Inventory" parent="." instance=ExtResource( 4 )]
+margin_left = 484.904
+margin_top = 258.166
+margin_right = 674.904
+margin_bottom = 326.166
+
+[node name="Equipment" parent="." instance=ExtResource( 8 )]
+margin_left = 835.112
+margin_top = 208.778
+margin_right = 1025.11
+margin_bottom = 276.778
+
+[connection signal="resized" from="." to="." method="_on_Interface_resized"]

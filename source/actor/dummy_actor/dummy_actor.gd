@@ -13,6 +13,9 @@ func update(new_position, new_rotation, _res):
 
 func _on_NPC_mouse_entered() -> void:
 	$DEBUG_Body.get("material/0").albedo_color = Color.red
+#	Input.set_custom_mouse_cursor(load("res://assets/cursors/broad-dagger.png"))
+#	Input.hotspot
 
 func _on_NPC_mouse_exited() -> void:
 	$DEBUG_Body.get("material/0").albedo_color = Color.whitesmoke
+#	Input.set_custom_mouse_cursor(load("res://assets/cursors/crosshair070.png"))

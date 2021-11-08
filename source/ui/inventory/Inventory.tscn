@@ -1,19 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/ui/inventory/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=2]
 
-[node name="Inventory" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
-size_flags_horizontal = 0
-size_flags_vertical = 4
+[node name="Inventory" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 7.0
+margin_right = 183.0
 margin_bottom = 7.0
+columns = 5

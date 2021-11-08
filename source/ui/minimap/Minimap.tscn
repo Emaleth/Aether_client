@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/ui/minimap/Minimap.gd" type="Script" id=2]
+
+[sub_resource type="ViewportTexture" id=1]
+viewport_path = NodePath("VBoxContainer/ContentPanel/Viewport")
+
+[node name="Minimap" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" parent="." index="0"]
+margin_right = 214.0
+margin_bottom = 268.0
+
+[node name="TopBar" parent="VBoxContainer" index="0"]
+margin_right = 214.0
+
+[node name="HBoxContainer" parent="VBoxContainer/TopBar" index="0"]
+margin_right = 207.0
+
+[node name="Close" parent="VBoxContainer/TopBar/HBoxContainer" index="2"]
+margin_right = 200.0
+
+[node name="ContentPanel" parent="VBoxContainer" index="1"]
+margin_right = 214.0
+margin_bottom = 268.0
+
+[node name="Viewport" type="Viewport" parent="VBoxContainer/ContentPanel" index="0"]
+size = Vector2( 200, 200 )
+handle_input_locally = false
+render_target_v_flip = true
+
+[node name="Spatial" type="Spatial" parent="VBoxContainer/ContentPanel/Viewport" index="0"]
+
+[node name="MinimapCamera" type="Camera" parent="VBoxContainer/ContentPanel/Viewport/Spatial" index="0"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50, 0 )
+projection = 1
+size = 50.0
+near = 0.01
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ContentPanel" index="1"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 207.0
+margin_bottom = 207.0
+rect_min_size = Vector2( 200, 200 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = SubResource( 1 )
+expand = true

@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/ui/subcomponents/window/Window.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[node name="Window" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 190.0
+margin_bottom = 68.0
+custom_constants/separation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TopBar" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 190.0
+margin_bottom = 54.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 183.0
+margin_bottom = 47.0
+mouse_filter = 2
+
+[node name="Lock" type="CheckButton" parent="VBoxContainer/TopBar/HBoxContainer"]
+margin_right = 76.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+expand_icon = true
+
+[node name="Title" type="Label" parent="VBoxContainer/TopBar/HBoxContainer"]
+margin_left = 80.0
+margin_right = 153.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "inventory"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Close" type="Button" parent="VBoxContainer/TopBar/HBoxContainer"]
+margin_left = 157.0
+margin_right = 176.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+text = "x"
+
+[node name="ContentPanel" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 54.0
+margin_right = 190.0
+margin_bottom = 68.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="gui_input" from="VBoxContainer/TopBar" to="." method="_on_TopBar_gui_input"]
+[connection signal="toggled" from="VBoxContainer/TopBar/HBoxContainer/Lock" to="." method="_on_Lock_toggled"]
+[connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/Close" to="." method="_on_Close_pressed"]
