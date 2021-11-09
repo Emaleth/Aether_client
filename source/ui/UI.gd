@@ -1,5 +1,6 @@
 extends Control
 
+enum {NORMAL, EDIT}
 # DEBUG PANELS
 onready var latency_label = $LatencyDEBUG/Label
 # resource bars
@@ -8,14 +9,19 @@ onready var mana_bar = $Resources/VBoxContainer/ContentPanel/VBoxContainer/ManaB
 # TOP RIGHT
 onready var minimap_module = $Minimap
 
-onready var eq = $Equipment
+onready var equipment = $Equipment
 onready var inventory = $Inventory
+onready var toobag 
 #onready var skill_panel = $MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel
 
+func enable_edit_mode(_b : bool):
+	for i in get_children():
+		i.enable_edit(_b)
+		
 func _ready() -> void:
-	Server.connect("update_equipment_data", eq, "configure")
+#	Server.connect("update_equipment_data", equipment, "configure")
 	Server.request_equipment_data()
-	Server.connect("update_inventory_data", inventory, "configure")
+#	Server.connect("update_inventory_data", inventory, "configure")
 	Server.request_inventory_data()
 	
 func get_minimap_pivot_path():

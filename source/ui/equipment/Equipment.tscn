@@ -9,6 +9,6 @@ script = ExtResource( 1 )
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 183.0
+margin_right = 167.0
 margin_bottom = 7.0
 columns = 3

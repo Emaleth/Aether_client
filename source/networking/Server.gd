@@ -124,12 +124,21 @@ func request_equipment_data():
 		
 remote func recive_equipment_data(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("update_equipment_data", _data)
+		GlobalVariables.equipment_data = _data
+#		emit_signal("update_equipment_data", _data)
 
 func request_inventory_data():
 	rpc_id(1, "request_inventory_data")
 		
 remote func recive_inventory_data(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("update_inventory_data", _data)
+		GlobalVariables.inventory_data = _data
+#		emit_signal("update_inventory_data", _data)
 
+func request_toolbag_data():
+	rpc_id(1, "request_toolbag_data")
+		
+remote func recive_toolbag_data(_data : Dictionary):
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.toolbag_data = _data
+#		emit_signal("update_toolbag_data", _data)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=2]
@@ -9,6 +9,14 @@
 [ext_resource path="res://source/ui/clock/Clock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://source/ui/equipment/Equipment.tscn" type="PackedScene" id=8]
 [ext_resource path="res://source/ui/minimap/Minimap.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/shaders/grid.tres" type="Shader" id=10]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 10 )
+shader_param/size = Vector2( 1280, 720 )
+shader_param/cell_size = 16.0
+shader_param/cell_spacing = 1.0
+shader_param/line_color = Color( 0.976471, 0.909804, 0.909804, 1 )
 
 [node name="Interface" type="Control"]
 anchor_right = 1.0
@@ -17,6 +25,18 @@ mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 732.47, 1264.28 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0.14902, 0.317647, 0.313726, 0.490196 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -44,41 +64,45 @@ __meta__ = {
 }
 
 [node name="Minimap" parent="." instance=ExtResource( 9 )]
-margin_left = 1052.0
-margin_top = 14.0
-margin_right = 1266.0
-margin_bottom = 282.0
+margin_left = 1056.0
+margin_top = 16.0
+margin_right = 1270.0
+margin_bottom = 284.0
 
 [node name="Inventory" parent="." instance=ExtResource( 4 )]
-margin_left = 1012.9
-margin_top = 316.166
-margin_right = 1202.9
-margin_bottom = 384.166
+margin_left = 1072.0
+margin_top = 304.0
+margin_right = 1262.0
+margin_bottom = 372.0
 
 [node name="Equipment" parent="." instance=ExtResource( 8 )]
-margin_left = 23.112
-margin_top = 156.778
-margin_right = 213.112
-margin_bottom = 224.778
+margin_left = 16.0
+margin_top = 160.0
+margin_right = 206.0
+margin_bottom = 228.0
 
 [node name="Clock" parent="." instance=ExtResource( 7 )]
-margin_left = 854.0
+margin_left = 864.0
 margin_top = 16.0
-margin_right = 1044.0
+margin_right = 1054.0
 margin_bottom = 103.0
 
 [node name="ActionBar" parent="." instance=ExtResource( 5 )]
-margin_left = 467.47
-margin_top = 611.961
-margin_right = 817.47
-margin_bottom = 709.961
+margin_left = 480.0
+margin_top = 608.0
+margin_right = 830.0
+margin_bottom = 706.0
 
 [node name="Chatbox" parent="." instance=ExtResource( 6 )]
-margin_left = 38.9559
-margin_top = 557.37
-margin_right = 212.956
-margin_bottom = 681.37
+margin_left = 16.0
+margin_top = 576.0
+margin_right = 190.0
+margin_bottom = 700.0
 
 [node name="Resources" parent="." instance=ExtResource( 3 )]
+margin_left = 16.0
+margin_top = 32.0
+margin_right = 190.0
+margin_bottom = 142.0
 
 [connection signal="resized" from="." to="." method="_on_Interface_resized"]
