@@ -1,48 +1,52 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/ui/buttons/Buttons.gd" type="Script" id=2]
+[ext_resource path="res://assets/icons/ui/battle-gear.svg" type="Texture" id=3]
+[ext_resource path="res://assets/icons/ui/knapsack.svg" type="Texture" id=4]
 
 [node name="Buttons" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" parent="." index="0"]
-margin_right = 66.0
-margin_bottom = 38.0
+margin_right = 82.0
+margin_bottom = 46.0
 
 [node name="TopBar" parent="VBoxContainer" index="0"]
 visible = false
 
 [node name="ContentPanel" parent="VBoxContainer" index="1"]
 margin_top = 0.0
-margin_right = 66.0
-margin_bottom = 38.0
+margin_right = 82.0
+margin_bottom = 46.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 59.0
-margin_bottom = 31.0
+margin_right = 75.0
+margin_bottom = 39.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
 [node name="Equipment" type="Button" parent="VBoxContainer/ContentPanel/GridContainer" index="0"]
-margin_right = 24.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 24 )
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "E"
+icon = ExtResource( 3 )
+expand_icon = true
 
 [node name="Inventory" type="Button" parent="VBoxContainer/ContentPanel/GridContainer" index="1"]
-margin_left = 28.0
-margin_right = 52.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 24, 24 )
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "I"
+icon = ExtResource( 4 )
+expand_icon = true
 
 [node name="PanelDrag" parent="." index="1"]
 visible = false
