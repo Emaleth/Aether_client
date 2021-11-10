@@ -19,8 +19,8 @@ func _ready() -> void:
 	window_title_label.text = window_title
 	if window_type == type.PANEL:
 		snap_position_to_grid()
-#	elif window_type == type.WINDOW:
-#		hide()
+	elif window_type == type.WINDOW:
+		hide()
 		
 	snap_size_to_grid()
 	enable_edit_mode(false)

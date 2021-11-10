@@ -15,8 +15,6 @@ onready var equipment = $Equipment
 onready var inventory = $Inventory
 onready var buttons = $Buttons
 onready var toobag 
-#onready var skill_panel = $MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel
-
 
 	
 func enable_edit_mode(_b : bool):
@@ -33,11 +31,9 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		
 func _ready() -> void:
 	enable_edit_mode(false)
-	buttons.connect("toggled_equipment_window", self, "toggle_inventory")
-	buttons.connect("toggled_inventory_window", self, "toggle_equipment")
-#	Server.connect("update_equipment_data", equipment, "configure")
+	buttons.connect("toggled_equipment_window", self, "toggle_equipment")
+	buttons.connect("toggled_inventory_window", self, "toggle_inventory")
 	Server.request_equipment_data()
-#	Server.connect("update_inventory_data", inventory, "configure")
 	Server.request_inventory_data()
 		
 func get_minimap_pivot_path():

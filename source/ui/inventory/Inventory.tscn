@@ -11,9 +11,11 @@ window_title = "inventory"
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 167.0
+margin_right = 87.0
 margin_bottom = 7.0
 columns = 5
 
 [node name="PanelDrag" parent="." index="1"]
 visible = false
+
+[connection signal="visibility_changed" from="." to="." method="_on_Inventory_visibility_changed"]
