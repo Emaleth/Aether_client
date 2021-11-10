@@ -6,7 +6,6 @@ onready var input_line = $VBoxContainer/ContentPanel/VBoxContainer/InputPanel/Li
 
 
 func _ready() -> void:
-	window_title_label.text = "Chat Box"
 	Server.connect("s_update_chat_state", self, "update_chat_box")
 	template_chat_line.hide()
 	

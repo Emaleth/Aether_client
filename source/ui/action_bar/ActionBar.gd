@@ -13,9 +13,6 @@ var buttons = [
 	"skill_10"
 ]
 
-func _ready() -> void:
-	window_title_label.text = "Action Bar"
-	
 ##func configure(_camera):
 ##	for i in $GridContainer.get_children().size():
 ##		$GridContainer.get_child(i).conf(buttons[i], _camera)

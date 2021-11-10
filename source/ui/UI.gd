@@ -1,34 +1,62 @@
 extends Control
 
-enum {NORMAL, EDIT}
+var edit_mode := false
 # DEBUG PANELS
-onready var latency_label = $LatencyDEBUG/Label
+onready var latency_label = $Label
 # resource bars
 onready var health_bar = $Resources/VBoxContainer/ContentPanel/VBoxContainer/HealthBar
 onready var mana_bar = $Resources/VBoxContainer/ContentPanel/VBoxContainer/ManaBar
 # TOP RIGHT
 onready var minimap_module = $Minimap
 
+onready var grid := $Grid
+
 onready var equipment = $Equipment
 onready var inventory = $Inventory
+onready var buttons = $Buttons
 onready var toobag 
 #onready var skill_panel = $MarginContainer/BottomMiddlePanel/BottomMiddle/SkillPanel
 
+
+	
 func enable_edit_mode(_b : bool):
+	grid.conf(_b)
 	for i in get_children():
-		i.enable_edit(_b)
+		if i.has_method("enable_edit_mode"):
+			i.enable_edit_mode(_b)
+	
+func _unhandled_key_input(event: InputEventKey) -> void:
+	if event.is_action_pressed("edit_ui"):
+		enable_edit_mode(true)
+	if event.is_action_pressed("normal_ui"):
+		enable_edit_mode(false)
 		
 func _ready() -> void:
+	enable_edit_mode(false)
+	buttons.connect("toggled_equipment_window", self, "toggle_inventory")
+	buttons.connect("toggled_inventory_window", self, "toggle_equipment")
 #	Server.connect("update_equipment_data", equipment, "configure")
 	Server.request_equipment_data()
 #	Server.connect("update_inventory_data", inventory, "configure")
 	Server.request_inventory_data()
-	
+		
 func get_minimap_pivot_path():
 	return minimap_module.get_pivot_path()
 	
 func _physics_process(_delta: float) -> void:
 	latency_label.text = "Latency: %sms" % (Server.latency)
+	
+func toggle_inventory():
+	if inventory.visible:
+		inventory.hide()
+	else:
+		inventory.show()
+	
+func toggle_equipment():
+	if equipment.visible:
+		equipment.hide()
+	else:
+		equipment.show()	
 	
 func update_resources_bar(_res):
 	health_bar.update_ui(_res["health"]["current"], _res["health"]["max"])

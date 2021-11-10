@@ -5,10 +5,15 @@
 
 [node name="Inventory" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+window_type = 1
+window_title = "inventory"
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 183.0
+margin_right = 167.0
 margin_bottom = 7.0
 columns = 5
+
+[node name="PanelDrag" parent="." index="1"]
+visible = false

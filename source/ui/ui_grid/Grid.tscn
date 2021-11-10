@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/shaders/grid.tres" type="Shader" id=1]
+[ext_resource path="res://source/ui/ui_grid/Grid.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/columns = 64.0
+shader_param/rows = 36.0
+shader_param/border_width = 0.05
+shader_param/border_color = Color( 0.25098, 0.54902, 0.556863, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+
+[node name="Grid" type="PanelContainer"]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]

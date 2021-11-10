@@ -5,7 +5,6 @@ onready var slot_grid = $VBoxContainer/ContentPanel/GridContainer
 
 
 func _ready() -> void:
-	window_title_label.text = "Inventory"
 	configure(GlobalVariables.inventory_data)
 	
 func configure(_data : Dictionary):

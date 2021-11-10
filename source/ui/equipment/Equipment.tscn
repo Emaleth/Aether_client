@@ -5,10 +5,18 @@
 
 [node name="Equipment" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+window_type = 1
+window_title = "equipment"
+
+[node name="Title" parent="VBoxContainer/TopBar/HBoxContainer" index="0"]
+size_flags_horizontal = 3
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 167.0
+margin_right = 87.0
 margin_bottom = 7.0
 columns = 3
+
+[node name="PanelDrag" parent="." index="1"]
+visible = false

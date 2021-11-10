@@ -3,9 +3,6 @@ extends "res://source/ui/subcomponents/window/Window.gd"
 onready var clock_label = $VBoxContainer/ContentPanel/Label
 
 
-func _ready() -> void:
-	window_title_label.text = "Clock"
-	
 func _physics_process(_delta: float) -> void:
 	clock_label.text = format_time()
 	

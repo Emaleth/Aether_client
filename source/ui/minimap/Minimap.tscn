@@ -7,24 +7,32 @@
 viewport_path = NodePath("VBoxContainer/ContentPanel/Viewport")
 
 [node name="Minimap" instance=ExtResource( 1 )]
+margin_right = 214.0
+margin_bottom = 214.0
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" parent="." index="0"]
 margin_right = 214.0
-margin_bottom = 268.0
+margin_bottom = 214.0
 
 [node name="TopBar" parent="VBoxContainer" index="0"]
+visible = false
 margin_right = 214.0
 
 [node name="HBoxContainer" parent="VBoxContainer/TopBar" index="0"]
 margin_right = 207.0
 
+[node name="Title" parent="VBoxContainer/TopBar/HBoxContainer" index="1"]
+margin_right = 169.0
+
 [node name="Close" parent="VBoxContainer/TopBar/HBoxContainer" index="2"]
+margin_left = 173.0
 margin_right = 200.0
 
 [node name="ContentPanel" parent="VBoxContainer" index="1"]
+margin_top = 0.0
 margin_right = 214.0
-margin_bottom = 268.0
+margin_bottom = 214.0
 
 [node name="Viewport" type="Viewport" parent="VBoxContainer/ContentPanel" index="0"]
 size = Vector2( 200, 200 )
@@ -50,3 +58,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 texture = SubResource( 1 )
 expand = true
+
+[node name="PanelDrag" parent="." index="1"]
+margin_right = 214.0
+margin_bottom = 214.0
+
+[node name="Label" parent="PanelDrag/CenterContainer" index="0"]
+margin_left = 81.0
+margin_top = 100.0
+margin_right = 133.0
+margin_bottom = 114.0

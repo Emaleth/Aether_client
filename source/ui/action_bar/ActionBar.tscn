@@ -6,14 +6,15 @@
 
 [node name="ActionBar" instance=ExtResource( 2 )]
 margin_right = 350.0
-margin_bottom = 98.0
+margin_bottom = 44.0
 script = ExtResource( 3 )
 
 [node name="VBoxContainer" parent="." index="0"]
 margin_right = 350.0
-margin_bottom = 98.0
+margin_bottom = 44.0
 
 [node name="TopBar" parent="VBoxContainer" index="0"]
+visible = false
 margin_right = 350.0
 
 [node name="HBoxContainer" parent="VBoxContainer/TopBar" index="0"]
@@ -27,8 +28,9 @@ margin_left = 309.0
 margin_right = 336.0
 
 [node name="ContentPanel" parent="VBoxContainer" index="1"]
+margin_top = 0.0
 margin_right = 350.0
-margin_bottom = 98.0
+margin_bottom = 44.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
 margin_left = 7.0
@@ -80,3 +82,13 @@ margin_right = 302.0
 [node name="Slot10" parent="VBoxContainer/ContentPanel/GridContainer" index="9" instance=ExtResource( 1 )]
 margin_left = 306.0
 margin_right = 336.0
+
+[node name="PanelDrag" parent="." index="1"]
+margin_right = 350.0
+margin_bottom = 44.0
+
+[node name="Label" parent="PanelDrag/CenterContainer" index="0"]
+margin_left = 149.0
+margin_top = 15.0
+margin_right = 201.0
+margin_bottom = 29.0
