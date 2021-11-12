@@ -3,6 +3,8 @@ extends PanelContainer
 
 func _ready() -> void:
 	self_modulate.a = 0
+	material.set("shader_param/columns", 128)
+	material.set("shader_param/rows", 72)
 	hide()
 	
 func conf(_b : bool):

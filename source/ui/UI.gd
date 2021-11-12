@@ -30,12 +30,17 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		enable_edit_mode(false)
 		
 func _ready() -> void:
-	enable_edit_mode(false)
-	buttons.connect("toggled_equipment_window", self, "toggle_equipment")
-	buttons.connect("toggled_inventory_window", self, "toggle_inventory")
 	Server.request_equipment_data()
 	Server.request_inventory_data()
+	Server.request_pouch_data()
+	
+	enable_edit_mode(false)
+	connect_button()
 		
+func connect_button():
+	buttons.connect("toggled_equipment_window", self, "toggle_equipment")
+	buttons.connect("toggled_inventory_window", self, "toggle_inventory")
+	
 func get_minimap_pivot_path():
 	return minimap_module.get_pivot_path()
 	
@@ -59,7 +64,8 @@ func update_resources_bar(_res):
 	mana_bar.update_ui(_res["mana"]["current"], _res["mana"]["max"])
 
 func _on_Interface_resized() -> void:
-	pass
-#	for i in get_children():
-#		i.rect_global_position.x = clamp(i.rect_global_position.x, 0, rect_size.x - i.rect_size.x)
-#		i.rect_global_position.y = clamp(i.rect_global_position.y, 0, rect_size.y - i.rect_size.y)
+	for i in get_children():
+		if i.has_method("enable_edit_mode"):
+			i.rect_global_position.x = clamp(i.rect_global_position.x, 0, OS.window_size.x - i.rect_size.x)
+			i.rect_global_position.y = clamp(i.rect_global_position.y, 0, OS.window_size.y - i.rect_size.y)
+			i.resize()

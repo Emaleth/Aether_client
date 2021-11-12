@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://source/ui/minimap/Minimap.tscn" type="PackedScene" id=9]
 [ext_resource path="res://source/ui/ui_grid/Grid.tscn" type="PackedScene" id=10]
 [ext_resource path="res://source/ui/buttons/Buttons.tscn" type="PackedScene" id=11]
+[ext_resource path="res://source/ui/pouch/Pouch.tscn" type="PackedScene" id=12]
+
+[sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="Interface" type="Control"]
 anchor_right = 1.0
@@ -43,6 +46,7 @@ margin_left = 80.0
 margin_top = -32.0
 margin_right = 254.0
 margin_bottom = 36.0
+custom_styles/panel = SubResource( 2 )
 
 [node name="Inventory" parent="." instance=ExtResource( 4 )]
 anchor_left = 1.0
@@ -53,6 +57,7 @@ margin_left = -246.0
 margin_top = -32.0
 margin_right = -72.0
 margin_bottom = 36.0
+custom_styles/panel = SubResource( 2 )
 
 [node name="Minimap" parent="." instance=ExtResource( 9 )]
 anchor_left = 1.0
@@ -61,12 +66,14 @@ margin_left = -286.0
 margin_top = 32.0
 margin_right = -72.0
 margin_bottom = 246.0
+custom_styles/panel = SubResource( 2 )
 
 [node name="Resources" parent="." instance=ExtResource( 3 )]
 margin_left = 40.0
 margin_top = 32.0
 margin_right = 189.0
 margin_bottom = 88.0
+custom_styles/panel = SubResource( 2 )
 
 [node name="ActionBar" parent="." instance=ExtResource( 5 )]
 anchor_left = 0.5
@@ -77,6 +84,7 @@ margin_left = -163.0
 margin_top = -112.0
 margin_right = 187.0
 margin_bottom = -68.0
+custom_styles/panel = SubResource( 2 )
 
 [node name="Chatbox" parent="." instance=ExtResource( 6 )]
 anchor_top = 1.0
@@ -85,6 +93,7 @@ margin_left = 40.0
 margin_top = -240.0
 margin_right = 254.0
 margin_bottom = -76.0
+custom_styles/panel = SubResource( 2 )
 
 [node name="Clock" parent="." instance=ExtResource( 7 )]
 anchor_left = 0.5
@@ -93,11 +102,20 @@ margin_left = -3.0
 margin_top = 48.0
 margin_right = 11.0
 margin_bottom = 81.0
+custom_styles/panel = SubResource( 2 )
 
 [node name="Buttons" parent="." instance=ExtResource( 11 )]
 margin_left = 1240.0
 margin_top = 688.0
 margin_right = 1306.0
 margin_bottom = 726.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="Pouch" parent="." instance=ExtResource( 12 )]
+margin_left = 960.0
+margin_top = 672.0
+margin_right = 974.0
+margin_bottom = 686.0
+custom_styles/panel = SubResource( 2 )
 
 [connection signal="resized" from="." to="." method="_on_Interface_resized"]

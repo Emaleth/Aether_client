@@ -8,11 +8,35 @@ script = ExtResource( 1 )
 window_type = 1
 window_title = "equipment"
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
+[node name="VBoxContainer" parent="." index="0"]
+margin_right = 101.0
+margin_bottom = 56.0
+
+[node name="TopBar" parent="VBoxContainer" index="0"]
+visible = true
+
+[node name="HBoxContainer" parent="VBoxContainer/TopBar" index="0"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 87.0
+margin_bottom = 28.0
+
+[node name="ContentPanel" parent="VBoxContainer" index="1"]
+margin_top = 35.0
+margin_right = 94.0
+margin_bottom = 49.0
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/ContentPanel" index="0"]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 87.0
 margin_bottom = 7.0
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel/CenterContainer" index="0"]
+margin_left = 40.0
+margin_right = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 columns = 3
 
 [node name="PanelDrag" parent="." index="1"]

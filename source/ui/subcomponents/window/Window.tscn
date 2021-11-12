@@ -5,8 +5,7 @@
 [ext_resource path="res://assets/icons/ui/cancel.svg" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=4]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.945098, 0.0352941, 0.952941, 1 )
+[sub_resource type="StyleBoxEmpty" id=3]
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.6, 0.6, 0.6, 0.588235 )
@@ -16,23 +15,22 @@ margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 94.0
-margin_bottom = 49.0
-size_flags_horizontal = 5
-size_flags_vertical = 5
+margin_right = 14.0
+margin_bottom = 14.0
 custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TopBar" type="PanelContainer" parent="VBoxContainer"]
+visible = false
 margin_right = 94.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
@@ -42,10 +40,8 @@ __meta__ = {
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 87.0
-margin_bottom = 28.0
+margin_right = 80.0
+margin_bottom = 21.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -73,9 +69,8 @@ flat = true
 align = 2
 
 [node name="ContentPanel" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 35.0
-margin_right = 94.0
-margin_bottom = 49.0
+margin_right = 14.0
+margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -83,8 +78,9 @@ __meta__ = {
 }
 
 [node name="PanelDrag" type="Panel" parent="."]
-margin_right = 94.0
-margin_bottom = 49.0
+visible = false
+margin_right = 14.0
+margin_bottom = 14.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelDrag"]
@@ -99,10 +95,8 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="PanelDrag/CenterContainer"]
 self_modulate = Color( 0.94902, 0.0509804, 0.0509804, 1 )
-margin_left = 10.0
-margin_top = 15.0
-margin_right = 84.0
-margin_bottom = 34.0
+margin_right = 74.0
+margin_bottom = 19.0
 custom_fonts/font = ExtResource( 4 )
 text = "drag me"
 align = 1

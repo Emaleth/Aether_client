@@ -17,8 +17,7 @@ signal s_token_verification_success
 signal s_token_verification_failure
 signal s_update_world_state
 signal s_update_chat_state
-signal update_equipment_data
-signal update_inventory_data
+
 
 func _physics_process(delta: float) -> void:
 	clock_decimal_precision(delta)
@@ -122,23 +121,21 @@ remote func receive_data_tables(_data : Dictionary):
 func request_equipment_data():
 	rpc_id(1, "request_equipment_data")
 		
-remote func recive_equipment_data(_data : Dictionary):
+remote func recive_equipment_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.equipment_data = _data
-#		emit_signal("update_equipment_data", _data)
 
 func request_inventory_data():
 	rpc_id(1, "request_inventory_data")
 		
-remote func recive_inventory_data(_data : Dictionary):
+remote func recive_inventory_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.inventory_data = _data
-#		emit_signal("update_inventory_data", _data)
 
-func request_toolbag_data():
-	rpc_id(1, "request_toolbag_data")
+func request_pouch_data():
+	rpc_id(1, "request_pouch_data")
 		
-remote func recive_toolbag_data(_data : Dictionary):
+remote func recive_pouch_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.toolbag_data = _data
-#		emit_signal("update_toolbag_data", _data)
+		GlobalVariables.pouch_data = _data
+

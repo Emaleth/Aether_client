@@ -20,11 +20,18 @@ func _ready() -> void:
 	if window_type == type.PANEL:
 		snap_position_to_grid()
 	elif window_type == type.WINDOW:
+		top_bar.show()
 		hide()
 		
 	snap_size_to_grid()
 	enable_edit_mode(false)
 		
+func resize():
+	get_grid()
+	if window_type == type.PANEL:
+		snap_position_to_grid()
+	snap_size_to_grid()
+	
 func enable_edit_mode(_b : bool):
 	editable = _b
 	if _b:
@@ -57,6 +64,7 @@ func snap_position_to_grid():
 	rect_global_position = rect_global_position.snapped(Vector2.ONE * cell_size)
 
 func snap_size_to_grid():
+	rect_size = rect_min_size
 	var size_x : float = rect_size.x
 	var size_y : float = rect_size.y
 
@@ -66,12 +74,11 @@ func snap_size_to_grid():
 	if floor(size_y / cell_size.y) != (size_y / cell_size.y):
 		size_y = stepify(size_y, cell_size.y) + cell_size.y
 
-	rect_min_size = Vector2(size_x, size_y)
 	rect_size = Vector2(size_x, size_y)
 
 func get_grid():
-	cell_size.x = OS.window_size.x / 64
-	cell_size.y = OS.window_size.y / 36
+	cell_size.x = OS.window_size.x / 128
+	cell_size.y = OS.window_size.y / 72
 
 func _on_PanelDrag_gui_input(event: InputEvent) -> void:
 	if window_type == type.PANEL:
@@ -82,3 +89,4 @@ func _on_PanelDrag_gui_input(event: InputEvent) -> void:
 			rect_global_position.x = clamp(get_global_mouse_position().x - mouse_offset.x, 0, get_parent().rect_size.x - rect_size.x)
 			rect_global_position.y = clamp(get_global_mouse_position().y - mouse_offset.y, 0, get_parent().rect_size.y - rect_size.y)
 			snap_position_to_grid()
+
