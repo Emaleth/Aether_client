@@ -25,7 +25,7 @@ func set_defaults():
 	spring_length = default_spring_lenght
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if Input.is_action_pressed("click"):
+	if event.is_action("click") and event.is_pressed():
 		get_move_position()
 		
 	if Input.is_action_pressed("rotate_camera"):

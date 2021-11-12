@@ -139,3 +139,6 @@ remote func recive_pouch_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.pouch_data = _data
 
+func request_item_transfer(_from_data : Dictionary, _to_data : Dictionary):
+	rpc_id(1, "request_item_transfer", _from_data, _to_data)
+	

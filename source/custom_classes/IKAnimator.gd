@@ -34,6 +34,9 @@ func configure(_skeleton : Skeleton):
 	skeleton = _skeleton
 	yield(get_tree(), "idle_frame")
 	for i in ["right_leg", "left_leg"]: # CONFIG LEGS
+		# test
+		skeleton_data[i]["ik_node"].root_bone = skeleton_data[i]["root_bone"]
+		skeleton_data[i]["ik_node"].tip_bone = skeleton_data[i]["tip_bone"]
 		# ADD NODES TO THE TREE
 		get_parent().add_child(skeleton_data[i]["ray_node"])
 		skeleton.add_child(skeleton_data[i]["ik_node"])
@@ -46,8 +49,6 @@ func configure(_skeleton : Skeleton):
 		skeleton_data[i]["ray_node"].transform.origin.x = skeleton_data[i]["offset_x"]
 		skeleton_data[i]["target_node"].transform.origin.x = skeleton_data[i]["offset_x"]
 		# CONFIGURE "SkeletonIK" NODE
-		skeleton_data[i]["ik_node"].root_bone = skeleton_data[i]["root_bone"]
-		skeleton_data[i]["ik_node"].tip_bone = skeleton_data[i]["tip_bone"]
 		skeleton_data[i]["ik_node"].override_tip_basis = false 
 		skeleton_data[i]["ik_node"].use_magnet = true
 		skeleton_data[i]["ik_node"].magnet = skeleton_data[i]["magnet"]
