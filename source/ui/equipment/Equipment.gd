@@ -4,13 +4,13 @@ onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
 onready var slot_grid = $VBoxContainer/ContentPanel/CenterContainer/GridContainer
 
 
-func configure(_data : Array):
+func configure(_data : Dictionary):
 	for i in slot_grid.get_children():
 		i.queue_free()
-	for i in _data:
+	for i in _data.keys():
 		var new_slot = slot.instance()
 		slot_grid.add_child(new_slot)
-		new_slot.configure(i)
+		new_slot.configure(_data[i])
 
 
 func _on_Equipment_visibility_changed() -> void:

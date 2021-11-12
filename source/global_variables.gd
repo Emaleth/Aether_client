@@ -1,6 +1,6 @@
 extends Node
 
-var equipment_data := []
+var equipment_data := {}
 var inventory_data := []
 var pouch_data := []
 

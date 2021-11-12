@@ -121,7 +121,7 @@ remote func receive_data_tables(_data : Dictionary):
 func request_equipment_data():
 	rpc_id(1, "request_equipment_data")
 		
-remote func recive_equipment_data(_data : Array):
+remote func recive_equipment_data(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.equipment_data = _data
 

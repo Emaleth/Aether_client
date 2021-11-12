@@ -14,13 +14,12 @@ func configure(_item):
 		
 func generate_tooltip_text() -> String:
 	var tooltip_text := ""
-	tooltip_text += str(item)
-#	tooltip_text += str(item["archetype"])
-#	tooltip_text += str(LocalDataTables.item_table[item["archetype"]])
+	tooltip_text += str(item["archetype"])
+	tooltip_text += str(LocalDataTables.item_table[item["archetype"]])
 	return tooltip_text
 	
 func get_item_icon() -> Texture:
-	var item_icon_path = ""# "res://assets/icons/item//%s.png" % str(item["archetype"])
+	var item_icon_path = "res://assets/icons/item//%s.png" % str(item["archetype"])
 	var texture : Texture
 	if ResourceLoader.exists(item_icon_path):
 		texture = load(item_icon_path)
