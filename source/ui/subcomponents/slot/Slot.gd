@@ -1,12 +1,13 @@
 extends PanelContainer
 
 var item = null
-
+var container = null
 onready var item_texture = $TextureRect
 signal swap
 
-func configure(_item):
+func configure(_item, _container = null):
 	item = _item
+	container = _container
 	hint_tooltip = generate_tooltip_text()
 	item_texture.texture = get_item_icon()
 	
@@ -33,8 +34,10 @@ func get_item_icon() -> Texture:
 		
 func get_drag_data(_position: Vector2):
 	var data := {}
+	data["container"] = container
 	data["slot"] = self
-	data["item"] = item
+	data["index"] = self.get_index()
+
 	return data
 
 func can_drop_data(_position: Vector2, _data) -> bool:
@@ -43,10 +46,11 @@ func can_drop_data(_position: Vector2, _data) -> bool:
 func drop_data(_position: Vector2, _data) -> void:
 #	if get_parent().has_method("swap_slots"):
 	var data = {}
+	data["container"] = container
 	data["slot"] = self
-	data["item"] = item
+	data["index"] = self.get_index()
 	Server.request_item_transfer(_data, data)
-#	emit_signal("swap", _data, data)
+	emit_signal("swap", _data, data)
 #		get_parent().swap_slots(_data, data)
 	
 	
