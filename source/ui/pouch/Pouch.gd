@@ -13,7 +13,7 @@ func configure(_data : Array):
 	for i in _data:
 		var new_slot = slot.instance()
 		slot_grid.add_child(new_slot)
-		new_slot.configure(i)
-		snap_size_to_grid()
+		new_slot.configure(i, "pouch")
+
 
 

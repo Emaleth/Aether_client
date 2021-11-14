@@ -1,11 +1,9 @@
 [gd_resource type="Environment" load_steps=3 format=2]
 
-[sub_resource type="StreamTexture" id=1]
-flags = 4
-load_path = "res://.import/lilienstein_2k.hdr-9798c56e57c8dc3e9fff1e9955456516.stex"
+[ext_resource path="res://assets/textures/panorama/hilly_terrain_01_2k.hdr" type="Texture" id=1]
 
 [sub_resource type="PanoramaSky" id=2]
-panorama = SubResource( 1 )
+panorama = ExtResource( 1 )
 
 [resource]
 background_mode = 2

@@ -10,7 +10,7 @@ func configure(_data : Dictionary):
 	for i in _data.keys():
 		var new_slot = slot.instance()
 		slot_grid.add_child(new_slot)
-		new_slot.configure(_data[i])
+		new_slot.configure(_data[i], "equipment")
 
 
 func _on_Equipment_visibility_changed() -> void:
