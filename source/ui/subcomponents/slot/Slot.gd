@@ -49,9 +49,11 @@ func drop_data(_position: Vector2, _data) -> void:
 	data["container"] = container
 	data["slot"] = self
 	data["index"] = self.get_index()
+#	if data["container"] == _data["container"] and data["container"] != "equipment":
+#		Server.action_stack.append("something")
+#		emit_signal("swap", _data, data)
+#	else:
 	Server.request_item_transfer(_data, data)
-	emit_signal("swap", _data, data)
-#		get_parent().swap_slots(_data, data)
 	
 	
 	

@@ -12,7 +12,7 @@ func configure(_data : Array):
 		var new_slot = slot.instance()
 		slot_grid.add_child(new_slot)
 		new_slot.configure(i, "inventory")
-#		new_slot.connect("swap", self, "swap_slots")
+		new_slot.connect("swap", self, "swap_slots")
 
 
 func _on_Inventory_visibility_changed() -> void:

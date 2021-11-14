@@ -14,6 +14,11 @@ func configure(_data : Array):
 		var new_slot = slot.instance()
 		slot_grid.add_child(new_slot)
 		new_slot.configure(i, "pouch")
+		new_slot.connect("swap", self, "swap_slots")
+
+func swap_slots(slot_a, slot_b):
+	slot_a["slot"].configure(slot_b["item"])
+	slot_b["slot"].configure(slot_a["item"])
 
 
 

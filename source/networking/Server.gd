@@ -4,6 +4,7 @@ var network = NetworkedMultiplayerENet.new()
 var ip = "127.0.0.1"
 var port = 1909
 
+var action_stack := []
 # verification token
 var token
 # clock sync
