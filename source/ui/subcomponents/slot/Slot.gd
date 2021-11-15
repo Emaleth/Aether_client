@@ -2,7 +2,10 @@ extends PanelContainer
 
 var item = null
 var container = null
+
 onready var item_texture = $TextureRect
+onready var drag_preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
+
 signal swap
 
 func configure(_item, _container = null):
@@ -33,12 +36,17 @@ func get_item_icon() -> Texture:
 		return null
 		
 func get_drag_data(_position: Vector2):
-	var data := {}
-	data["container"] = container
-	data["slot"] = self
-	data["index"] = self.get_index()
+	if item != null:
+		var data := {}
+		data["container"] = container
+		data["slot"] = self
+		data["index"] = self.get_index()
+		
+		var new_drag_preview = drag_preview.instance()
+		new_drag_preview.set_preview(item)
+		set_drag_preview(new_drag_preview)
 
-	return data
+		return data
 
 func can_drop_data(_position: Vector2, _data) -> bool:
 	return true
@@ -54,7 +62,6 @@ func drop_data(_position: Vector2, _data) -> void:
 #		emit_signal("swap", _data, data)
 #	else:
 	Server.request_item_transfer(_data, data)
-	
 	
 	
 	
