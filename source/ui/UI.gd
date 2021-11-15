@@ -31,9 +31,9 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		enable_edit_mode(false)
 		
 func _ready() -> void:
-	Server.request_equipment_data()
-	Server.request_inventory_data()
-	Server.request_pouch_data()
+#	Server.request_equipment_data()
+#	Server.request_inventory_data()
+#	Server.request_pouch_data()
 	
 	Server.connect("update_equipment_ui", self, "update_equipment_ui")
 	Server.connect("update_inventory_ui", self, "update_inventory_ui")

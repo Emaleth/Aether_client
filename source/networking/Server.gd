@@ -22,6 +22,7 @@ signal s_update_chat_state
 signal update_inventory_ui
 signal update_pouch_ui
 signal update_equipment_ui
+signal update_spellbook_ui
 
 
 func _physics_process(delta: float) -> void:
@@ -114,39 +115,32 @@ func send_action_request(_action : String, _target : String):
 func send_movement_request(_position : Vector3):
 	rpc_id(1, "recive_movement_request", _position)
 	
-func request_data_tables():
-	rpc_id(1, "request_data_tables")
-
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
 		LocalDataTables.item_table = _data["item_table"]
 		LocalDataTables.enemy_table = _data["enemy_table"]
 		LocalDataTables.skill_table = _data["skill_table"]
 	
-func request_equipment_data():
-	rpc_id(1, "request_equipment_data")
-		
 remote func recive_equipment_data(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.equipment_data = _data
 		emit_signal("update_equipment_ui", _data)
 
-func request_inventory_data():
-	rpc_id(1, "request_inventory_data")
-		
 remote func recive_inventory_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.inventory_data = _data
 		emit_signal("update_inventory_ui", _data)
 
-func request_pouch_data():
-	rpc_id(1, "request_pouch_data")
-		
 remote func recive_pouch_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.pouch_data = _data
 		emit_signal("update_pouch_ui", _data)
 
+remote func recive_spellbook_data(_data : Array):
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.spellbook_data = _data
+		emit_signal("update_spellbook_ui", _data)
+		
 func request_item_transfer(_from_data : Dictionary, _to_data : Dictionary):
 	rpc_id(1, "request_item_transfer", _from_data, _to_data)
 	

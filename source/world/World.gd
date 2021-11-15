@@ -27,7 +27,6 @@ onready var click_indicator = $ClickIndicator
 
 func _ready():
 	Server.connect("s_update_world_state", self, "update_world_state")
-	Server.request_data_tables()
 
 func _physics_process(_delta: float) -> void:
 	interpolate_or_extrapolate()

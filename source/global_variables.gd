@@ -3,6 +3,7 @@ extends Node
 var equipment_data := {}
 var inventory_data := []
 var pouch_data := []
+var spellbook_data := []
 
 var player_actor = null
 var user_interface = null
