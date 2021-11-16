@@ -13,6 +13,7 @@ onready var grid := $Grid
 
 onready var equipment = $Equipment
 onready var inventory = $Inventory
+onready var spellbook = $ActionBar
 onready var pouch = $Pouch
 onready var buttons = $Buttons
 onready var toobag 
@@ -38,6 +39,7 @@ func _ready() -> void:
 	Server.connect("update_equipment_ui", self, "update_equipment_ui")
 	Server.connect("update_inventory_ui", self, "update_inventory_ui")
 	Server.connect("update_pouch_ui", self, "update_pouch_ui")
+	Server.connect("update_spellbook_ui", self, "update_spellbook_ui")
 	
 	
 	enable_edit_mode(false)
@@ -53,6 +55,8 @@ func update_inventory_ui(_data : Array):
 	inventory.configure(_data)
 func update_pouch_ui(_data : Array):
 	pouch.configure(_data)
+func update_spellbook_ui(_data : Array):
+	spellbook.configure(_data)
 	
 func get_minimap_pivot_path():
 	return minimap_module.get_pivot_path()
