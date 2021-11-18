@@ -1,0 +1,29 @@
+{
+	"human" : {
+		"spine" : {
+			"root_bone" : "right_upper_leg",
+			"tip_bone" : "right_foot",
+			"magnet" : [0, 0, -2]
+		},
+		"right_leg" : {
+			"root_bone" : "right_upper_leg",
+			"tip_bone" : "right_foot",
+			"magnet" : [0, 0, -2]
+		},
+		"left_leg" : {
+			"root_bone" : "left_upper_leg",
+			"tip_bone" : "left_foot",
+			"magnet" : [0, 0, -2]
+		},
+		"right_hand" : {
+			"root_bone" : "right_upper_leg",
+			"tip_bone" : "right_foot",
+			"magnet" : [0, 0, -2]	
+		},
+		"left_hand" : {
+			"root_bone" : "right_upper_leg",
+			"tip_bone" : "right_foot",
+			"magnet" : [0, 0, -2]
+		}
+	}
+}

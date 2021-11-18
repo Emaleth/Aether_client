@@ -30,7 +30,8 @@ var foot_spreed = 0.1
 var time = 0
 
 
-func configure(_skeleton : Skeleton):
+func configure(_skeleton : Skeleton, _type):
+	var animation_data = LocalDataTables.animation_data[_type]
 	skeleton = _skeleton
 	yield(get_tree(), "idle_frame")
 	for i in ["right_leg", "left_leg"]: # CONFIG LEGS

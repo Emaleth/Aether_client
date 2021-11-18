@@ -15,7 +15,7 @@ func set_minimap_camera_transform(_path):
 	minimap_remote_transform.remote_path = _path
 	
 func _ready() -> void:
-	$IKAnimator.configure(find_node("Skeleton"))
+	$IKAnimator.configure(find_node("Skeleton"), "human")
 	
 func _physics_process(delta: float) -> void:
 	m(delta)
