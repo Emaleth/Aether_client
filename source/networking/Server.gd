@@ -141,6 +141,6 @@ remote func recive_spellbook_data(_data : Array):
 		GlobalVariables.spellbook_data = _data
 		emit_signal("update_spellbook_ui", _data)
 		
-func request_item_transfer(_from_data : Dictionary, _to_data : Dictionary):
-	rpc_id(1, "request_item_transfer", _from_data, _to_data)
+func request_item_transfer(_from_data : Dictionary, _amount : int, _to_data : Dictionary):
+	rpc_id(1, "request_item_transfer", _from_data, _amount, _to_data)
 	
