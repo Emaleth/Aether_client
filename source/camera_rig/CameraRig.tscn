@@ -3,7 +3,6 @@
 [ext_resource path="res://source/camera_rig/CameraRig.gd" type="Script" id=1]
 
 [node name="CameraRig" type="SpringArm"]
-collision_mask = 0
 spring_length = 5.0
 script = ExtResource( 1 )
 
