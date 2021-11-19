@@ -1,7 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=2]
+[ext_resource path="res://source/ui/amount_popup/AmountPopup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/ui/resources/Resources.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/ui/inventory/Inventory.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/ui/action_bar/ActionBar.tscn" type="PackedScene" id=5]
@@ -12,6 +12,7 @@
 [ext_resource path="res://source/ui/ui_grid/Grid.tscn" type="PackedScene" id=10]
 [ext_resource path="res://source/ui/buttons/Buttons.tscn" type="PackedScene" id=11]
 [ext_resource path="res://source/ui/pouch/Pouch.tscn" type="PackedScene" id=12]
+[ext_resource path="res://source/ui/debug/Debug.tscn" type="PackedScene" id=13]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -27,17 +28,6 @@ __meta__ = {
 }
 
 [node name="Grid" parent="." instance=ExtResource( 10 )]
-
-[node name="Label" type="Label" parent="."]
-margin_left = 7.0
-margin_top = 8.0
-margin_right = 66.0
-margin_bottom = 27.0
-custom_fonts/font = ExtResource( 2 )
-text = "Latency:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Equipment" parent="." instance=ExtResource( 8 )]
 anchor_top = 0.5
@@ -117,5 +107,13 @@ margin_top = 672.0
 margin_right = 974.0
 margin_bottom = 686.0
 custom_styles/panel = SubResource( 2 )
+
+[node name="AmountPopup" parent="." instance=ExtResource( 2 )]
+margin_left = 520.0
+margin_top = 384.0
+margin_right = 624.0
+margin_bottom = 446.0
+
+[node name="Debug" parent="." instance=ExtResource( 13 )]
 
 [connection signal="resized" from="." to="." method="_on_Interface_resized"]

@@ -8,15 +8,10 @@ var npc_collection = {}
 var pc_collection = {}
 var bullet_collection = {}
 
-var player
-var gui
-var camera_rig
-var player_spawned = false
-
-onready var character_container = $Character
-onready var pc_container = $PCContainer
-onready var npc_container = $NPCContainer
-onready var bullet_container = $BulletContainer
+var character_container = Node.new()
+var pc_container = Node.new()
+var npc_container = Node.new()
+var bullet_container = Node.new()
 
 onready var character_scene = preload("res://source/actor/character/Character.tscn")
 onready var interface_scene = preload("res://source/ui/UI.tscn")
@@ -25,7 +20,14 @@ onready var dummy_actor_scene = preload("res://source/actor/dummy_actor/dummy_ac
 onready var dummy_bullet_scene = preload("res://source/projectile/dummyBullet.tscn")
 onready var click_indicator = $ClickIndicator
 
+func create_container_nodes():
+	get_tree().root.add_child(character_container)
+	get_tree().root.add_child(pc_container)
+	get_tree().root.add_child(npc_container)
+	get_tree().root.add_child(bullet_container)
+
 func _ready():
+	create_container_nodes()
 	Server.connect("s_update_world_state", self, "update_world_state")
 
 func _physics_process(_delta: float) -> void:
@@ -58,7 +60,7 @@ func update_pc_in_the_tree():
 		if pc_container.has_node(str(pc)):
 			pc_container.get_node(str(pc)).update(pc_collection[pc]["pos"], pc_collection[pc]["rot"], pc_collection[pc]["res"])
 		if pc == str(get_tree().get_network_unique_id()):
-			gui.update_resources_bar(pc_collection[pc]["res"])
+			GlobalVariables.resources_data = pc_collection[pc]["res"]
 
 func remove_pc_from_the_tree():
 	for pc in pc_container.get_children():
@@ -105,21 +107,20 @@ func remove_bullet_from_the_tree():
 			bullet.call_deferred("queue_free")
 			
 func spawn_character():
-	if player_spawned == false:
-		player = character_scene.instance()
-		character_container.add_child(player)
+	if GlobalVariables.player_actor == null:
+		GlobalVariables.player_actor = character_scene.instance()
+		character_container.add_child(GlobalVariables.player_actor)
 		
-		camera_rig = camera_rig_scene.instance()
-		character_container.add_child(camera_rig)
+		GlobalVariables.camera_rig = camera_rig_scene.instance()
+		character_container.add_child(GlobalVariables.camera_rig)
 		
-		gui = interface_scene.instance()
-		character_container.add_child(gui)
+		GlobalVariables.user_interface = interface_scene.instance()
+		character_container.add_child(GlobalVariables.user_interface)
 #		gui.skill_panel.configure(camera_rig)
 
-		player.set_minimap_camera_transform(gui.get_minimap_pivot_path())
-		player.set_camera_rig_transform(camera_rig.get_path())
-		camera_rig.connect("move_to_position", self, "get_path_to_position")
-		player_spawned = true
+		GlobalVariables.player_actor.set_minimap_camera_transform(GlobalVariables.user_interface.get_minimap_pivot_path())
+		GlobalVariables.player_actor.set_camera_rig_transform(GlobalVariables.camera_rig.get_path())
+		GlobalVariables.camera_rig.connect("move_to_position", self, "get_path_to_position")
 
 func add_pc_to_the_collection(_id, _data):
 	pc_collection[_id] = _data
@@ -206,11 +207,8 @@ func interpolate(_render_time):
 			
 	# BULLET
 	for bullet in world_state_buffer[2]["B"].keys():
-#		print_debug(bullet)
 		if not world_state_buffer[1]["B"].has(bullet): # WE WANT TO BE SURE THAT BOTH WS1 AND WS2 HAVE ANY GIVEN KEY FOR INTERPOLATION'S SAKE
 			continue
-#		if world_state_buffer[2]["B"][bullet]["p_id"] == get_tree().get_network_unique_id():
-#			continue
 		if bullet_collection.has(bullet):
 			var modified_data := {}
 			modified_data = world_state_buffer[2]["B"][bullet]
@@ -270,6 +268,6 @@ func extrapolate(_render_time):
 			update_bullet_inside_the_collection(bullet, modified_data)
 
 func get_path_to_position(_position):
-	var path = get_simple_path(player.global_transform.origin, _position)
+	var path = get_simple_path(GlobalVariables.player_actor.global_transform.origin, _position)
 	click_indicator.configure(path)
-	player.move_along(path)
+	GlobalVariables.player_actor.move_along(path)

@@ -1,22 +1,14 @@
 extends Control
 
-var edit_mode := false
-# DEBUG PANELS
-onready var latency_label = $Label
-# resource bars
-onready var health_bar = $Resources/VBoxContainer/ContentPanel/VBoxContainer/HealthBar
-onready var mana_bar = $Resources/VBoxContainer/ContentPanel/VBoxContainer/ManaBar
-# TOP RIGHT
-onready var minimap_module = $Minimap
-
+onready var resources := $Resources
+onready var minimap := $Minimap
 onready var grid := $Grid
-
-onready var equipment = $Equipment
-onready var inventory = $Inventory
-onready var spellbook = $ActionBar
-onready var pouch = $Pouch
-onready var buttons = $Buttons
-onready var toobag 
+onready var debug := $Debug
+onready var equipment := $Equipment
+onready var inventory := $Inventory
+onready var spellbook := $ActionBar
+onready var pouch := $Pouch
+onready var buttons := $Buttons
 
 	
 func enable_edit_mode(_b : bool):
@@ -32,15 +24,10 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		enable_edit_mode(false)
 		
 func _ready() -> void:
-#	Server.request_equipment_data()
-#	Server.request_inventory_data()
-#	Server.request_pouch_data()
-	
 	Server.connect("update_equipment_ui", self, "update_equipment_ui")
 	Server.connect("update_inventory_ui", self, "update_inventory_ui")
 	Server.connect("update_pouch_ui", self, "update_pouch_ui")
 	Server.connect("update_spellbook_ui", self, "update_spellbook_ui")
-	
 	
 	enable_edit_mode(false)
 	connect_button()
@@ -51,18 +38,21 @@ func connect_button():
 	
 func update_equipment_ui(_data : Dictionary):
 	equipment.configure(_data)
+	
 func update_inventory_ui(_data : Array):
 	inventory.configure(_data)
+
 func update_pouch_ui(_data : Array):
 	pouch.configure(_data)
+
 func update_spellbook_ui(_data : Array):
 	spellbook.configure(_data)
 	
 func get_minimap_pivot_path():
-	return minimap_module.get_pivot_path()
+	return minimap.get_pivot_path()
 	
 func _physics_process(_delta: float) -> void:
-	latency_label.text = "Latency: %sms" % (Server.latency)
+	debug.conf(Server.latency)
 	
 func toggle_inventory():
 	if inventory.visible:
@@ -77,10 +67,6 @@ func toggle_equipment():
 	else:
 		equipment.show()
 		equipment.raise()
-	
-func update_resources_bar(_res):
-	health_bar.update_ui(_res["health"]["current"], _res["health"]["max"])
-	mana_bar.update_ui(_res["mana"]["current"], _res["mana"]["max"])
 
 func _on_Interface_resized() -> void:
 	for i in get_children():
