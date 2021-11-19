@@ -17,9 +17,10 @@ func _ready() -> void:
 	path_sprite.hide()
 
 func configure(_path):
-	global_transform.origin = _path[_path.size() - 1]
-	clear_path_point_sprites()
-	display_path_sprites(_path)
+	if _path.size() > 0:
+		global_transform.origin = _path[_path.size() - 1]
+		clear_path_point_sprites()
+		display_path_sprites(_path)
 	
 func _physics_process(delta: float) -> void:
 	animate(delta)
