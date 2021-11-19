@@ -1,13 +1,13 @@
 extends PanelContainer
 
 onready var preview = $TextureRect
+var item := {}
 
-func set_preview(_item):
-	var item_icon_path = "res://assets/icons/item//%s.svg" % str(_item["archetype"])
-	var texture : Texture
-	if ResourceLoader.exists(item_icon_path):
-		texture = load(item_icon_path)
-	else:
-		texture = preload("res://assets/icons/item/null.svg")
+
+func conf(_item):
+	item = _item
+
+func _ready() -> void:
+	var item_icon_path = "res://assets/icons/item//%s.svg" % str(item["archetype"])
+	preview.texture = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/item/no_icon.svg")
 	
-	$TextureRect.texture = texture

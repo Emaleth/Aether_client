@@ -4,8 +4,9 @@ var item = null
 var container = null
 
 onready var item_texture = $TextureRect
-onready var drag_preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
 onready var amount_label = $GridContainer/AmountLabel
+onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
+onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
 
 signal swap
 
@@ -13,23 +14,22 @@ signal swap
 func configure(_item, _container = null):
 	item = _item
 	container = _container
-	hint_tooltip = generate_tooltip_text()
+	set_tooltip_text()
 	set_item_icon()
 	set_amount_label()
 	
-func generate_tooltip_text() -> String:
-	if item:
-		var tooltip_text := ""
-		tooltip_text += str(item["archetype"])
-		tooltip_text += str(LocalDataTables.item_table[item["archetype"]])
-		return tooltip_text
-	else:
-		return ""
+func set_tooltip_text() -> void:
+	hint_tooltip = "text" if item else ""
+
+func _make_custom_tooltip(for_text: String) -> Control:
+	var new_tooltip = tooltip.instance()
+	new_tooltip.conf(item)
+	return new_tooltip
 		
 func set_item_icon() -> void:
 	if item:
 		var item_icon_path = "res://assets/icons/item//%s.svg" % str(item["archetype"])
-		item_texture.texture = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/item/null.svg")
+		item_texture.texture = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/item/no_icon.svg")
 	else:
 		item_texture.texture = null
 
@@ -47,9 +47,9 @@ func get_drag_data(_position: Vector2):
 			"index" : self.get_index(),
 			"amount" : item["amount"]
 		}
-		var new_drag_preview = drag_preview.instance()
-		new_drag_preview.set_preview(item)
-		set_drag_preview(new_drag_preview)
+		var new_preview = preview.instance()
+		new_preview.conf(item)
+		set_drag_preview(new_preview)
 
 		return data
 
