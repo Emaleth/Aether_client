@@ -1,16 +1,51 @@
 extends "res://source/ui/subcomponents/window/Window.gd"
 
+var data_a := {}
+var data_b := {}
+var amount := 1
+var max_amount := 1
+var min_amount := 1
 
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
+onready var line_edit = $VBoxContainer/ContentPanel/VBoxContainer/HBoxContainer/LineEdit
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	hide()
+	
+func conf(_data_a, _data_b):
+	data_a = _data_a
+	data_b = _data_b
+	line_edit.text = str(amount)
+	max_amount = max(data_a["amount"] - 1, 1)
+	show()
+	raise()
 
+func _on_Less_pressed() -> void:
+	if data_a.size() != 0:
+		amount = clamp(amount - 1 , min_amount, max_amount)
+		line_edit.text = str(amount)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+func _on_More_pressed() -> void:
+	if data_a.size() != 0:
+		amount = clamp(amount + 1, min_amount, max_amount)
+		line_edit.text = str(amount)
+
+func _on_Confirm_pressed() -> void:
+	if data_a.size() != 0:
+		Server.request_item_transfer(data_a, amount, data_b)
+	line_edit.clear()
+	data_a = {}
+	data_b = {}
+	amount = 1
+	hide()
+	
+func _on_LineEdit_text_entered(_new_text: String) -> void:
+	_on_Confirm_pressed()
+
+func _on_LineEdit_text_changed(new_text: String) -> void:
+	var new_amount = new_text.to_int()
+	new_amount = clamp(new_amount, min_amount, max_amount)
+	line_edit.text = str(new_amount)
+	line_edit.caret_position = str(new_amount).length()
+	amount = int(new_text)
+

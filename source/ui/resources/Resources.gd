@@ -3,7 +3,7 @@ extends "res://source/ui/subcomponents/window/Window.gd"
 onready var health_bar = $VBoxContainer/ContentPanel/VBoxContainer/HealthBar
 onready var mana_bar = $VBoxContainer/ContentPanel/VBoxContainer/ManaBar
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if GlobalVariables.resources_data.size() != 0:
 		update_resources_bar(GlobalVariables.resources_data)
 	

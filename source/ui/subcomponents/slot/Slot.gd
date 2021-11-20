@@ -21,7 +21,7 @@ func configure(_item, _container = null):
 func set_tooltip_text() -> void:
 	hint_tooltip = "text" if item else ""
 
-func _make_custom_tooltip(for_text: String) -> Control:
+func _make_custom_tooltip(_for_text: String) -> Control:
 	var new_tooltip = tooltip.instance()
 	new_tooltip.conf(item)
 	return new_tooltip
@@ -64,11 +64,14 @@ func drop_data(_position: Vector2, _data) -> void:
 		"index" : self.get_index(),
 		"amount" : item["amount"] if item else null 
 	}
+	if Input.is_action_pressed("mod"):
+		GlobalVariables.user_interface.get_node("AmountPopup").conf(_data, data)
+	else:
 #	if data["container"] == _data["container"] and data["container"] != "equipment":
 #		Server.action_stack.append("something")
 #		emit_signal("swap", _data, data)
 #	else:
-	Server.request_item_transfer(_data, -1, data)
+		Server.request_item_transfer(_data, -1, data)
 	
 	
 	
