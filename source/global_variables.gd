@@ -10,6 +10,7 @@ var resources_data := {}
 var player_actor = null
 var user_interface = null
 var camera_rig = null
+var world = null
 
 var path_indicator = null
 

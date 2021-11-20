@@ -27,6 +27,7 @@ func create_container_nodes():
 	get_tree().root.add_child(bullet_container)
 
 func _ready():
+	GlobalVariables.world = self
 	create_container_nodes()
 	Server.connect("s_update_world_state", self, "update_world_state")
 
