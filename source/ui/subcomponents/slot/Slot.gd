@@ -2,21 +2,26 @@ extends PanelContainer
 
 var item = null
 var container = null
+var shortcut = null
 
 onready var item_texture = $TextureRect
 onready var amount_label = $GridContainer/AmountLabel
+onready var shortcut_label = $GridContainer/ShortcutLabel
+
 onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
 onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
 
 signal swap
 
 
-func configure(_item, _container = null):
+func configure(_item, _container, _shortcut = null):
 	item = _item
 	container = _container
+	shortcut = _shortcut
 	set_tooltip_text()
 	set_item_icon()
 	set_amount_label()
+	set_shortcut_label()
 	
 func set_tooltip_text() -> void:
 	hint_tooltip = "text" if item else ""
@@ -33,6 +38,12 @@ func set_item_icon() -> void:
 	else:
 		item_texture.texture = null
 
+func set_shortcut_label() -> void:
+	if shortcut and InputMap.get_action_list(shortcut).size() != 0:
+		shortcut_label.text = InputMap.get_action_list(shortcut)[0].as_text() if shortcut else ""
+	else:
+		shortcut_label.text = ""
+		
 func set_amount_label() -> void:
 	if item:
 		amount_label.text = "" if item["amount"] == 1 else str(item["amount"])
@@ -64,7 +75,7 @@ func drop_data(_position: Vector2, _data) -> void:
 		"index" : self.get_index(),
 		"amount" : item["amount"] if item else null 
 	}
-	if Input.is_action_pressed("mod"):
+	if Input.is_action_pressed("mod") and _data["amount"] > 1:
 		GlobalVariables.user_interface.get_node("AmountPopup").conf(_data, data)
 	else:
 #	if data["container"] == _data["container"] and data["container"] != "equipment":
@@ -73,5 +84,16 @@ func drop_data(_position: Vector2, _data) -> void:
 #	else:
 		Server.request_item_transfer(_data, -1, data)
 	
+func _unhandled_key_input(event: InputEventKey) -> void:
+	if !event.pressed:
+		return
+	if !item:
+		return
+	if !LocalDataTables.item_table[item["archetype"]].has("action"):
+		return
+	if !shortcut:
+		return
+	if !InputMap.action_has_event(shortcut, event):
+		return
 	
-	
+	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["action"], "target_name")

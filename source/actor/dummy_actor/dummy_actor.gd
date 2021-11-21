@@ -5,6 +5,7 @@ onready var name_plate = $NamePlate
 
 func _ready() -> void:
 	add_to_group("Actor")
+	$DEBUG_Body.get("material/0").next_pass.set("shader_param/outline_color", Color.transparent)
 	
 func update(new_position, new_rotation, _res):
 	transform.origin = new_position
@@ -12,10 +13,8 @@ func update(new_position, new_rotation, _res):
 	name_plate.update_health_bar(_res["health"]["current"], _res["health"]["max"])
 
 func _on_NPC_mouse_entered() -> void:
-	$DEBUG_Body.get("material/0").albedo_color = Color.red
-#	Input.set_custom_mouse_cursor(load("res://assets/cursors/broad-dagger.png"))
-#	Input.hotspot
+	$DEBUG_Body.get("material/0").next_pass.set("shader_param/outline_color", Color.red)
 
 func _on_NPC_mouse_exited() -> void:
-	$DEBUG_Body.get("material/0").albedo_color = Color.whitesmoke
-#	Input.set_custom_mouse_cursor(load("res://assets/cursors/crosshair070.png"))
+	$DEBUG_Body.get("material/0").next_pass.set("shader_param/outline_color", Color.transparent)
+

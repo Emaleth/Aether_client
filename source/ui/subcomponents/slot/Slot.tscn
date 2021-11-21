@@ -35,8 +35,19 @@ custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 columns = 3
 
+[node name="ShortcutLabel" type="Label" parent="GridContainer"]
+margin_right = 11.0
+margin_bottom = 10.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "[n]"
+align = 2
+valign = 2
+
 [node name="Panel" type="Panel" parent="GridContainer"]
-margin_right = 9.0
+margin_left = 11.0
+margin_right = 19.0
 margin_bottom = 10.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -44,8 +55,8 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel2" type="Panel" parent="GridContainer"]
-margin_left = 9.0
-margin_right = 18.0
+margin_left = 19.0
+margin_right = 30.0
 margin_bottom = 10.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -53,17 +64,18 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel3" type="Panel" parent="GridContainer"]
-margin_left = 18.0
-margin_right = 29.0
-margin_bottom = 10.0
+margin_top = 10.0
+margin_right = 11.0
+margin_bottom = 20.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel4" type="Panel" parent="GridContainer"]
+margin_left = 11.0
 margin_top = 10.0
-margin_right = 9.0
+margin_right = 19.0
 margin_bottom = 20.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -71,9 +83,9 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel5" type="Panel" parent="GridContainer"]
-margin_left = 9.0
+margin_left = 19.0
 margin_top = 10.0
-margin_right = 18.0
+margin_right = 30.0
 margin_bottom = 20.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -81,28 +93,18 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel6" type="Panel" parent="GridContainer"]
-margin_left = 18.0
-margin_top = 10.0
-margin_right = 29.0
-margin_bottom = 20.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="Panel7" type="Panel" parent="GridContainer"]
 margin_top = 20.0
-margin_right = 9.0
+margin_right = 11.0
 margin_bottom = 30.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="Panel8" type="Panel" parent="GridContainer"]
-margin_left = 9.0
+[node name="Panel7" type="Panel" parent="GridContainer"]
+margin_left = 11.0
 margin_top = 20.0
-margin_right = 18.0
+margin_right = 19.0
 margin_bottom = 30.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -110,9 +112,9 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="AmountLabel" type="Label" parent="GridContainer"]
-margin_left = 18.0
+margin_left = 19.0
 margin_top = 20.0
-margin_right = 29.0
+margin_right = 30.0
 margin_bottom = 30.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
