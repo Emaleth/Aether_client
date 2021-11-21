@@ -59,12 +59,12 @@ func get_move_position():
 		emit_signal("move_to_position", intersection.position)
 		Server.send_movement_request(intersection.position)
 		
-func get_action_target():
-	var intersection = cast_ray_from_camera_to_mouse_pointer()
-	if intersection.empty():
-		return null
-	else:
-		return intersection.collider
+#func get_action_target():
+#	var intersection = cast_ray_from_camera_to_mouse_pointer()
+#	if intersection.empty():
+#		return null
+#	else:
+#		return intersection.collider
 
 func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 	var space_state = get_world().direct_space_state

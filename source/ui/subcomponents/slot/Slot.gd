@@ -95,5 +95,6 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		return
 	if !InputMap.action_has_event(shortcut, event):
 		return
-	
-	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["action"], "target_name")
+	if !GlobalVariables.target:
+		return
+	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["action"], GlobalVariables.target)

@@ -12,6 +12,8 @@ var user_interface = null
 var camera_rig = null
 var world = null
 
+var target = null
+
 var path_indicator = null
 
 var settings := {}
