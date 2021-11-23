@@ -5,16 +5,16 @@ onready var slot_grid = $VBoxContainer/ContentPanel/CenterContainer/GridContaine
 
 var sc_index = 0
 var x = [
-	"skill_01",
-	"skill_02",
-	"skill_03",
-	"skill_04",
-	"skill_05",
-	"skill_06",
-	"skill_07",
-	"skill_08",
-	"skill_09",
-	"skill_10"
+	"ability_slot_01", "ability_slot_02",
+	"ability_slot_03", "ability_slot_04", 
+	"ability_slot_05", "ability_slot_06",
+	"ability_slot_07", "ability_slot_08",
+	"ability_slot_09", "ability_slot_10",
+	"ability_slot_11", "ability_slot_12",
+	"ability_slot_13", "ability_slot_14",
+	"ability_slot_15", "ability_slot_16",
+	"ability_slot_17", "ability_slot_18",
+	"ability_slot_19", "ability_slot_20"
 ]
 
 

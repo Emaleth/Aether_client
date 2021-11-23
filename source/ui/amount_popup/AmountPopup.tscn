@@ -39,6 +39,8 @@ margin_bottom = 55.0
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/ContentPanel/VBoxContainer" index="0"]
 margin_right = 106.0
 margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Less" type="Button" parent="VBoxContainer/ContentPanel/VBoxContainer/HBoxContainer" index="0"]
 margin_right = 20.0

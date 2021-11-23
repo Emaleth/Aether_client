@@ -17,25 +17,8 @@ func set_minimap_camera_transform(_path):
 func _ready() -> void:
 	$IKAnimator.configure(find_node("Skeleton"), "human")
 	
-func move() -> void:
-	var direction = Vector3.ZERO
-	if Input.is_action_pressed("move_forward"):
-		direction += Vector3.FORWARD
-	if Input.is_action_pressed("move_backward"):
-		direction += Vector3.BACK
-	if Input.is_action_pressed("move_left"):
-		direction += Vector3.LEFT
-	if Input.is_action_pressed("move_right"):
-		direction += Vector3.RIGHT
-	if direction != Vector3.ZERO:
-		var rotated_direction = GlobalVariables.camera_rig.global_transform.basis.xform(direction).normalized()
-		if path.size() == 0:
-			GlobalVariables.world.get_path_to_position(global_transform.origin + rotated_direction)
-			Server.send_movement_request(global_transform.origin + rotated_direction)
-			
 func _physics_process(delta: float) -> void:
 	m(delta)
-	move()
 	
 func move_along(_path):
 	path = []

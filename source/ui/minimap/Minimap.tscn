@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/ui/minimap/Minimap.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=3]
+[ext_resource path="res://assets/icons/ui/Blue W.png" type="Texture" id=3]
+[ext_resource path="res://assets/icons/ui/Blue N.png" type="Texture" id=4]
+[ext_resource path="res://assets/icons/ui/Blue S.png" type="Texture" id=5]
+[ext_resource path="res://assets/icons/ui/Blue E.png" type="Texture" id=6]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("VBoxContainer/ContentPanel/Viewport")
@@ -58,55 +61,57 @@ size_flags_vertical = 3
 texture = SubResource( 1 )
 expand = true
 
-[node name="N" type="Label" parent="VBoxContainer/ContentPanel" index="2"]
-margin_left = 101.0
+[node name="N" type="TextureRect" parent="VBoxContainer/ContentPanel" index="2"]
+margin_left = 99.0
 margin_top = 7.0
-margin_right = 113.0
-margin_bottom = 26.0
+margin_right = 115.0
+margin_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 16, 16 )
 size_flags_horizontal = 4
 size_flags_vertical = 0
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-text = "N"
-align = 1
-valign = 1
+texture = ExtResource( 4 )
+expand = true
 
-[node name="E" type="Label" parent="VBoxContainer/ContentPanel" index="3"]
-margin_left = 197.0
-margin_top = 97.0
+[node name="E" type="TextureRect" parent="VBoxContainer/ContentPanel" index="3"]
+margin_left = 191.0
+margin_top = 99.0
 margin_right = 207.0
-margin_bottom = 116.0
+margin_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 16, 16 )
 size_flags_horizontal = 8
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-text = "E"
-align = 1
-valign = 1
+size_flags_vertical = 4
+texture = ExtResource( 6 )
+expand = true
 
-[node name="S" type="Label" parent="VBoxContainer/ContentPanel" index="4"]
-margin_left = 102.0
-margin_top = 188.0
-margin_right = 111.0
+[node name="S" type="TextureRect" parent="VBoxContainer/ContentPanel" index="4"]
+margin_left = 99.0
+margin_top = 191.0
+margin_right = 115.0
 margin_bottom = 207.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 16, 16 )
 size_flags_horizontal = 4
 size_flags_vertical = 8
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-text = "S"
-align = 1
-valign = 1
+texture = ExtResource( 5 )
+expand = true
 
-[node name="W" type="Label" parent="VBoxContainer/ContentPanel" index="5"]
+[node name="W" type="TextureRect" parent="VBoxContainer/ContentPanel" index="5"]
 margin_left = 7.0
-margin_top = 97.0
-margin_right = 22.0
-margin_bottom = 116.0
+margin_top = 99.0
+margin_right = 23.0
+margin_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 16, 16 )
 size_flags_horizontal = 0
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
-custom_fonts/font = ExtResource( 3 )
-text = "W"
-align = 1
-valign = 1
+size_flags_vertical = 4
+texture = ExtResource( 3 )
+expand = true
 
 [node name="PanelDrag" parent="." index="1"]
 margin_right = 214.0
