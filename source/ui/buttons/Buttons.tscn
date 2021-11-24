@@ -1,26 +1,26 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/ui/buttons/Buttons.gd" type="Script" id=2]
 [ext_resource path="res://assets/icons/ui/battle-gear.svg" type="Texture" id=3]
 [ext_resource path="res://assets/icons/ui/knapsack.svg" type="Texture" id=4]
+[ext_resource path="res://assets/styleboxes/empty.tres" type="StyleBox" id=5]
 
 [node name="Buttons" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" parent="." index="0"]
-margin_right = 72.0
-margin_bottom = 40.0
+margin_right = 64.0
+margin_bottom = 32.0
 
 [node name="ContentPanel" parent="VBoxContainer" index="1"]
-margin_right = 72.0
-margin_bottom = 40.0
+margin_right = 64.0
+margin_bottom = 32.0
+custom_styles/panel = ExtResource( 5 )
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 68.0
-margin_bottom = 36.0
+margin_right = 64.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/vseparation = 0

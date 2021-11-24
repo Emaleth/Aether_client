@@ -4,7 +4,7 @@ var item = null
 var container = null
 var shortcut = null
 
-onready var item_texture = $TextureRect
+onready var item_texture = $Icon
 onready var amount_label = $GridContainer/AmountLabel
 onready var shortcut_label = $GridContainer/ShortcutLabel
 
