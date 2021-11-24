@@ -1,11 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://source/menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/menu_background.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=3]
 [ext_resource path="res://assets/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=4]
-[ext_resource path="res://assets/styleboxes/background_no_borders.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/styleboxes/background_with_borders.tres" type="StyleBox" id=6]
+[ext_resource path="res://assets/styleboxes/window/content.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/styleboxes/buttons/confirm_normal.tres" type="StyleBox" id=7]
+[ext_resource path="res://assets/styleboxes/buttons/confirm_pressed.tres" type="StyleBox" id=8]
+[ext_resource path="res://assets/styleboxes/buttons/cancel_pressed.tres" type="StyleBox" id=9]
+[ext_resource path="res://assets/styleboxes/buttons/cancel_normal.tres" type="StyleBox" id=10]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -65,19 +68,15 @@ __meta__ = {
 
 [node name="AuthenticationScreen" type="TabContainer" parent="CenterContainer"]
 margin_left = 578.0
-margin_top = 288.0
+margin_top = 284.0
 margin_right = 788.0
-margin_bottom = 480.0
+margin_bottom = 484.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 210, 0 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_fonts/font = ExtResource( 4 )
-custom_styles/tab_fg = ExtResource( 5 )
-custom_styles/tab_disabled = ExtResource( 5 )
-custom_styles/tab_bg = ExtResource( 5 )
-custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -85,19 +84,20 @@ __meta__ = {
 [node name="Login" type="PanelContainer" parent="CenterContainer/AuthenticationScreen"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 19.0
+margin_left = 4.0
+margin_top = 37.0
+margin_right = -4.0
+margin_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_styles/panel = ExtResource( 6 )
+custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/AuthenticationScreen/Login"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 206.0
-margin_bottom = 169.0
+margin_right = 202.0
+margin_bottom = 159.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -176,12 +176,17 @@ grow_vertical = 2
 [node name="Login" type="Button" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
 margin_top = 140.0
 margin_right = 202.0
-margin_bottom = 165.0
+margin_bottom = 159.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
 text = "Login"
 
 [node name="Register" type="PanelContainer" parent="CenterContainer/AuthenticationScreen"]
@@ -189,7 +194,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 19.0
-custom_styles/panel = ExtResource( 6 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/AuthenticationScreen/Register"]
 margin_left = 7.0
@@ -298,6 +303,11 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
 custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 7 )
+custom_styles/pressed = ExtResource( 8 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/disabled = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
 text = "Register"
 
 [node name="Quit" type="Button" parent="."]
@@ -308,6 +318,11 @@ margin_top = -70.0
 margin_right = 90.0
 margin_bottom = -50.0
 custom_fonts/font = ExtResource( 4 )
+custom_styles/hover = ExtResource( 10 )
+custom_styles/pressed = ExtResource( 9 )
+custom_styles/focus = ExtResource( 10 )
+custom_styles/disabled = ExtResource( 10 )
+custom_styles/normal = ExtResource( 10 )
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false

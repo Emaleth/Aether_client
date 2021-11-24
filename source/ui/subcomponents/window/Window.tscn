@@ -4,20 +4,18 @@
 [ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/icons/ui/cancel.svg" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=4]
-[ext_resource path="res://assets/styleboxes/background_with_borders.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/styleboxes/background_no_borders.tres" type="StyleBox" id=6]
+[ext_resource path="res://assets/styleboxes/window/drag.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/styleboxes/window/topbar.tres" type="StyleBox" id=6]
+[ext_resource path="res://assets/styleboxes/window/content.tres" type="StyleBox" id=7]
 
-[sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.6, 0.6, 0.6, 0.588235 )
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="Window" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -33,20 +31,18 @@ __meta__ = {
 
 [node name="TopBar" type="PanelContainer" parent="VBoxContainer"]
 visible = false
-margin_right = 84.0
-margin_bottom = 25.0
+margin_right = 80.0
+margin_bottom = 21.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
-custom_styles/panel = ExtResource( 5 )
+custom_styles/panel = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar"]
-margin_left = 2.0
-margin_top = 2.0
-margin_right = 82.0
-margin_bottom = 23.0
+margin_right = 80.0
+margin_bottom = 21.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -78,7 +74,7 @@ margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = ExtResource( 6 )
+custom_styles/panel = ExtResource( 7 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -87,7 +83,7 @@ __meta__ = {
 visible = false
 margin_right = 14.0
 margin_bottom = 14.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="CenterContainer" type="CenterContainer" parent="PanelDrag"]
 anchor_right = 1.0

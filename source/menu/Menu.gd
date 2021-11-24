@@ -25,9 +25,6 @@ onready var quit_button = $Quit
 func _ready():
 	Server.connect("s_token_verification_success", self, "enter_world")
 	Server.connect("s_token_verification_failure", self, "set_menu_state", [LOGIN])
-	login_button.self_modulate = Color.green
-	register_button.self_modulate = Color.green
-	quit_button.self_modulate = Color.red
 	set_menu_state(LOGIN)
 	
 func set_menu_state(state):
