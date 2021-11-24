@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/icons/ui/cancel.svg" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=4]
+[ext_resource path="res://assets/styleboxes/background_with_borders.tres" type="StyleBox" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -31,17 +32,20 @@ __meta__ = {
 
 [node name="TopBar" type="PanelContainer" parent="VBoxContainer"]
 visible = false
-margin_right = 94.0
-margin_bottom = 35.0
+margin_right = 84.0
+margin_bottom = 25.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
+custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar"]
-margin_right = 80.0
-margin_bottom = 21.0
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 82.0
+margin_bottom = 23.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -73,6 +77,7 @@ margin_right = 14.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/panel = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

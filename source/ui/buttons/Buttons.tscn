@@ -9,24 +9,22 @@
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" parent="." index="0"]
-margin_right = 82.0
-margin_bottom = 46.0
-
-[node name="TopBar" parent="VBoxContainer" index="0"]
-visible = false
+margin_right = 72.0
+margin_bottom = 40.0
 
 [node name="ContentPanel" parent="VBoxContainer" index="1"]
-margin_top = 0.0
-margin_right = 82.0
-margin_bottom = 46.0
+margin_right = 72.0
+margin_bottom = 40.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel" index="0"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 75.0
-margin_bottom = 39.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 68.0
+margin_bottom = 36.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
 columns = 2
 
 [node name="Equipment" type="Button" parent="VBoxContainer/ContentPanel/GridContainer" index="0"]
@@ -36,27 +34,26 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource( 3 )
+flat = true
 expand_icon = true
 
 [node name="Inventory" type="Button" parent="VBoxContainer/ContentPanel/GridContainer" index="1"]
-margin_left = 36.0
-margin_right = 68.0
+margin_left = 32.0
+margin_right = 64.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource( 4 )
+flat = true
 expand_icon = true
 
 [node name="PanelDrag" parent="." index="1"]
-visible = false
 margin_right = 66.0
 margin_bottom = 38.0
 
 [node name="Label" parent="PanelDrag/CenterContainer" index="0"]
-margin_left = 0.0
 margin_top = 9.0
-margin_right = 74.0
 margin_bottom = 28.0
 
 [connection signal="pressed" from="VBoxContainer/ContentPanel/GridContainer/Equipment" to="." method="_on_Equipment_pressed"]

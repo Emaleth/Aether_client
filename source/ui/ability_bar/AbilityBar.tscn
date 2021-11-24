@@ -3,7 +3,7 @@
 [ext_resource path="res://source/ui/ability_bar/AbilityBar.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=2]
 
-[node name="ActionBar" instance=ExtResource( 2 )]
+[node name="AbilityBar" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
 
 [node name="TopBar" parent="VBoxContainer" index="0"]
@@ -20,12 +20,16 @@ margin_left = 309.0
 margin_right = 336.0
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/ContentPanel" index="0"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 7.0
-margin_bottom = 7.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 10.0
+margin_bottom = 10.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel/CenterContainer" index="0"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 3.0
+margin_bottom = 3.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2

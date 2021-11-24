@@ -8,7 +8,7 @@ shader = ExtResource( 1 )
 shader_param/columns = 64.0
 shader_param/rows = 36.0
 shader_param/border_width = 0.05
-shader_param/border_color = Color( 0.25098, 0.54902, 0.556863, 1 )
+shader_param/border_color = Color( 0.588235, 0.588235, 0.588235, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 
@@ -20,5 +20,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="."]
