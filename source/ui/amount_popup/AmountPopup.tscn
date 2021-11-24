@@ -2,10 +2,10 @@
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/ui/amount_popup/AmountPopup.gd" type="Script" id=2]
-[ext_resource path="res://assets/styleboxes/buttons/confirm_normal.tres" type="StyleBox" id=3]
-[ext_resource path="res://assets/styleboxes/buttons/default_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://assets/styleboxes/buttons/default_pressed.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/styleboxes/buttons/confirm_pressed.tres" type="StyleBox" id=6]
+[ext_resource path="res://assets/styleboxes/confirm_button_normal.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/styleboxes/default_button_normal.tres" type="StyleBox" id=4]
+[ext_resource path="res://assets/styleboxes/default_button_pressed.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/styleboxes/confirm_button_pressed.tres" type="StyleBox" id=6]
 
 [node name="AmountPopup" instance=ExtResource( 1 )]
 script = ExtResource( 2 )

@@ -4,9 +4,9 @@
 [ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/icons/ui/cancel.svg" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=4]
-[ext_resource path="res://assets/styleboxes/window/drag.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/styleboxes/window/topbar.tres" type="StyleBox" id=6]
-[ext_resource path="res://assets/styleboxes/window/content.tres" type="StyleBox" id=7]
+[ext_resource path="res://assets/styleboxes/drag_panel.tres" type="StyleBox" id=5]
+[ext_resource path="res://assets/styleboxes/window_topbar.tres" type="StyleBox" id=6]
+[ext_resource path="res://assets/styleboxes/window_content.tres" type="StyleBox" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 

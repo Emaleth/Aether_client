@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/ui/minimap/Minimap.gd" type="Script" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://assets/icons/ui/Blue N.png" type="Texture" id=4]
 [ext_resource path="res://assets/icons/ui/Blue S.png" type="Texture" id=5]
 [ext_resource path="res://assets/icons/ui/Blue E.png" type="Texture" id=6]
-[ext_resource path="res://assets/styleboxes/empty.tres" type="StyleBox" id=7]
 
 [sub_resource type="ViewportTexture" id=1]
 viewport_path = NodePath("VBoxContainer/ContentPanel/Viewport")
@@ -36,7 +35,6 @@ margin_right = 200.0
 [node name="ContentPanel" parent="VBoxContainer" index="1"]
 margin_right = 214.0
 margin_bottom = 214.0
-custom_styles/panel = ExtResource( 7 )
 
 [node name="Viewport" type="Viewport" parent="VBoxContainer/ContentPanel" index="0"]
 size = Vector2( 200, 200 )
@@ -52,8 +50,10 @@ size = 50.0
 near = 0.01
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/ContentPanel" index="1"]
-margin_right = 214.0
-margin_bottom = 214.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 210.0
+margin_bottom = 210.0
 rect_min_size = Vector2( 200, 200 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -63,8 +63,9 @@ expand = true
 
 [node name="N" type="TextureRect" parent="VBoxContainer/ContentPanel" index="2"]
 margin_left = 99.0
+margin_top = 4.0
 margin_right = 115.0
-margin_bottom = 16.0
+margin_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 16, 16 )
@@ -74,9 +75,9 @@ texture = ExtResource( 4 )
 expand = true
 
 [node name="E" type="TextureRect" parent="VBoxContainer/ContentPanel" index="3"]
-margin_left = 198.0
+margin_left = 194.0
 margin_top = 99.0
-margin_right = 214.0
+margin_right = 210.0
 margin_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -88,9 +89,9 @@ expand = true
 
 [node name="S" type="TextureRect" parent="VBoxContainer/ContentPanel" index="4"]
 margin_left = 99.0
-margin_top = 198.0
+margin_top = 194.0
 margin_right = 115.0
-margin_bottom = 214.0
+margin_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 16, 16 )
@@ -100,8 +101,9 @@ texture = ExtResource( 5 )
 expand = true
 
 [node name="W" type="TextureRect" parent="VBoxContainer/ContentPanel" index="5"]
+margin_left = 4.0
 margin_top = 99.0
-margin_right = 16.0
+margin_right = 20.0
 margin_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
