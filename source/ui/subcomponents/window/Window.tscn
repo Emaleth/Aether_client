@@ -1,110 +1,14 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=2]
-[ext_resource path="res://assets/icons/ui/cancel.svg" type="Texture" id=3]
-[ext_resource path="res://assets/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=4]
-[ext_resource path="res://assets/styleboxes/drag_panel.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/styleboxes/window_topbar.tres" type="StyleBox" id=6]
-[ext_resource path="res://assets/styleboxes/window_content.tres" type="StyleBox" id=7]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[node name="Window" type="PanelContainer"]
+[node name="Panel" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_right = 14.0
-margin_bottom = 14.0
-custom_constants/separation = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TopBar" type="PanelContainer" parent="VBoxContainer"]
-visible = false
-margin_right = 80.0
-margin_bottom = 21.0
-size_flags_horizontal = 3
-size_flags_vertical = 4
-custom_styles/panel = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar"]
-margin_right = 80.0
-margin_bottom = 21.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-
-[node name="Title" type="Label" parent="VBoxContainer/TopBar/HBoxContainer"]
-margin_top = 1.0
-margin_right = 49.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-custom_fonts/font = ExtResource( 2 )
-text = "[title]"
-align = 1
-valign = 1
-uppercase = true
-
-[node name="Close" type="Button" parent="VBoxContainer/TopBar/HBoxContainer"]
-self_modulate = Color( 1, 0, 0, 1 )
-margin_left = 53.0
-margin_right = 80.0
-margin_bottom = 21.0
-size_flags_horizontal = 8
-size_flags_vertical = 4
-icon = ExtResource( 3 )
-flat = true
-align = 2
-
-[node name="ContentPanel" type="PanelContainer" parent="VBoxContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PanelDrag" type="Panel" parent="."]
-visible = false
-margin_right = 14.0
-margin_bottom = 14.0
-custom_styles/panel = ExtResource( 5 )
-
-[node name="CenterContainer" type="CenterContainer" parent="PanelDrag"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label" type="Label" parent="PanelDrag/CenterContainer"]
-self_modulate = Color( 0.94902, 0.0509804, 0.0509804, 1 )
-margin_right = 74.0
-margin_bottom = 19.0
-custom_fonts/font = ExtResource( 4 )
-text = "drag me"
-align = 1
-valign = 1
-uppercase = true
-
-[connection signal="gui_input" from="VBoxContainer/TopBar" to="." method="_on_TopBar_gui_input"]
-[connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/Close" to="." method="_on_Close_pressed"]
-[connection signal="gui_input" from="PanelDrag" to="." method="_on_PanelDrag_gui_input"]

@@ -1,6 +1,6 @@
 extends "res://source/ui/subcomponents/window/Window.gd"
 
-onready var clock_label = $VBoxContainer/ContentPanel/Label
+onready var clock_label = $Label
 
 
 func _physics_process(_delta: float) -> void:

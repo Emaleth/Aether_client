@@ -1,8 +1,8 @@
 extends "res://source/ui/subcomponents/window/Window.gd"
 
-onready var msg_list = $VBoxContainer/ContentPanel/VBoxContainer/OutputPanel/ScrollContainer/MessageList
-onready var template_chat_line = $VBoxContainer/ContentPanel/VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template
-onready var input_line = $VBoxContainer/ContentPanel/VBoxContainer/InputPanel/LineEdit
+onready var msg_list = $VBoxContainer/OutputPanel/ScrollContainer/MessageList
+onready var template_chat_line = $VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template
+onready var input_line = $VBoxContainer/InputPanel/LineEdit
 
 
 func _ready() -> void:

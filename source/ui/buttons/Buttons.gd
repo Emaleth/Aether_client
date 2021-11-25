@@ -1,8 +1,8 @@
 extends "res://source/ui/subcomponents/window/Window.gd"
 
 
-onready var inventory_button := $VBoxContainer/ContentPanel/GridContainer/Inventory
-onready var equipment_button := $VBoxContainer/ContentPanel/GridContainer/Equipment
+onready var inventory_button := $CenterContainer/GridContainer/Inventory
+onready var equipment_button := $CenterContainer/GridContainer/Equipment
 
 signal toggled_inventory_window
 signal toggled_equipment_window

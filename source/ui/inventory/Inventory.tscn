@@ -4,41 +4,11 @@
 [ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=2]
 
 [node name="Inventory" instance=ExtResource( 2 )]
+margin_right = 0.0
+margin_bottom = 0.0
 script = ExtResource( 1 )
-window_type = 1
-window_title = "inventory"
 
-[node name="VBoxContainer" parent="." index="0"]
-margin_right = 88.0
-margin_bottom = 37.0
+[node name="CenterContainer" type="CenterContainer" parent="." index="0"]
 
-[node name="TopBar" parent="VBoxContainer" index="0"]
-visible = true
-margin_right = 88.0
-margin_bottom = 29.0
-
-[node name="HBoxContainer" parent="VBoxContainer/TopBar" index="0"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 84.0
-margin_bottom = 25.0
-
-[node name="ContentPanel" parent="VBoxContainer" index="1"]
-margin_top = 29.0
-margin_right = 88.0
-margin_bottom = 37.0
-
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/ContentPanel" index="0"]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 84.0
-margin_bottom = 4.0
-
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/ContentPanel/CenterContainer" index="0"]
-margin_left = 40.0
-margin_right = 40.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="GridContainer" type="GridContainer" parent="CenterContainer" index="0"]
 columns = 5
-
-[connection signal="visibility_changed" from="." to="." method="_on_Inventory_visibility_changed"]

@@ -71,6 +71,4 @@ func toggle_equipment():
 func _on_Interface_resized() -> void:
 	for i in get_children():
 		if i.has_method("enable_edit_mode"):
-			i.rect_global_position.x = clamp(i.rect_global_position.x, 0, OS.window_size.x - i.rect_size.x)
-			i.rect_global_position.y = clamp(i.rect_global_position.y, 0, OS.window_size.y - i.rect_size.y)
 			i.resize()

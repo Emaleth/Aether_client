@@ -1,6 +1,6 @@
 extends "res://source/ui/subcomponents/window/Window.gd"
 
-onready var camera_pivot = $VBoxContainer/ContentPanel/Viewport/Spatial
+onready var camera_pivot = $Viewport/Spatial
 
 
 func get_pivot_path():

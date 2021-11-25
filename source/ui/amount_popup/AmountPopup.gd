@@ -6,7 +6,7 @@ var amount := 1
 var max_amount := 1
 var min_amount := 1
 
-onready var line_edit = $VBoxContainer/ContentPanel/VBoxContainer/HBoxContainer/LineEdit
+onready var line_edit = $VBoxContainer/HBoxContainer/LineEdit
 
 
 func _ready() -> void:

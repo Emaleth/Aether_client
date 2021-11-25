@@ -38,6 +38,8 @@ margin_left = 80.0
 margin_top = -32.0
 margin_right = 160.0
 margin_bottom = -11.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_styles/panel = SubResource( 2 )
 
 [node name="Inventory" parent="." instance=ExtResource( 4 )]
@@ -49,6 +51,8 @@ margin_left = -246.0
 margin_top = -32.0
 margin_right = -166.0
 margin_bottom = -11.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_styles/panel = SubResource( 2 )
 
 [node name="Minimap" parent="." instance=ExtResource( 9 )]
@@ -58,6 +62,8 @@ margin_left = -286.0
 margin_top = 32.0
 margin_right = -72.0
 margin_bottom = 246.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_styles/panel = SubResource( 2 )
 
 [node name="Resources" parent="." instance=ExtResource( 3 )]
@@ -65,6 +71,8 @@ margin_left = 40.0
 margin_top = 32.0
 margin_right = 189.0
 margin_bottom = 88.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_styles/panel = SubResource( 2 )
 
 [node name="ActionBar" parent="." instance=ExtResource( 5 )]
@@ -76,6 +84,8 @@ margin_left = -163.0
 margin_top = -112.0
 margin_right = -163.0
 margin_bottom = -112.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_styles/panel = SubResource( 2 )
 
 [node name="Chatbox" parent="." instance=ExtResource( 6 )]
@@ -85,6 +95,8 @@ margin_left = 40.0
 margin_top = -240.0
 margin_right = 254.0
 margin_bottom = -76.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_styles/panel = SubResource( 2 )
 
 [node name="Clock" parent="." instance=ExtResource( 7 )]
@@ -101,6 +113,8 @@ margin_left = 1240.0
 margin_top = 688.0
 margin_right = 1306.0
 margin_bottom = 726.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_styles/panel = SubResource( 2 )
 
 [node name="Pouch" parent="." instance=ExtResource( 12 )]
@@ -108,6 +122,8 @@ margin_left = 960.0
 margin_top = 672.0
 margin_right = 974.0
 margin_bottom = 686.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_styles/panel = SubResource( 2 )
 
 [node name="AmountPopup" parent="." instance=ExtResource( 2 )]
@@ -119,9 +135,22 @@ margin_left = -60.0
 margin_top = -31.0
 margin_right = 60.0
 margin_bottom = 31.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 custom_styles/panel = SubResource( 3 )
 
 [node name="Debug" parent="." instance=ExtResource( 13 )]
 custom_styles/panel = SubResource( 3 )
 
 [connection signal="resized" from="." to="." method="_on_Interface_resized"]
+[connection signal="resized" from="Equipment" to="Equipment" method="_on_Panel_resized"]
+[connection signal="resized" from="Inventory" to="Inventory" method="_on_Panel_resized"]
+[connection signal="resized" from="Minimap" to="Minimap" method="_on_Panel_resized"]
+[connection signal="resized" from="Resources" to="Resources" method="_on_Panel_resized"]
+[connection signal="resized" from="ActionBar" to="ActionBar" method="_on_Panel_resized"]
+[connection signal="resized" from="Chatbox" to="Chatbox" method="_on_Panel_resized"]
+[connection signal="resized" from="Clock" to="Clock" method="_on_Panel_resized"]
+[connection signal="resized" from="Buttons" to="Buttons" method="_on_Panel_resized"]
+[connection signal="resized" from="Pouch" to="Pouch" method="_on_Panel_resized"]
+[connection signal="resized" from="AmountPopup" to="AmountPopup" method="_on_Panel_resized"]
+[connection signal="resized" from="Debug" to="Debug" method="_on_Panel_resized"]

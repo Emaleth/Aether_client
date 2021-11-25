@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/ui/chatbox/ChatBox.gd" type="Script" id=2]
@@ -8,24 +8,13 @@
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="StyleBoxEmpty" id=2]
-
 [sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="Chatbox" instance=ExtResource( 1 )]
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
 
-[node name="VBoxContainer" parent="." index="0"]
-margin_right = 200.0
-margin_bottom = 150.0
-
-[node name="ContentPanel" parent="VBoxContainer" index="1"]
-margin_right = 200.0
-margin_bottom = 150.0
-custom_styles/panel = SubResource( 2 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ContentPanel" index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
 margin_right = 200.0
 margin_bottom = 150.0
 rect_min_size = Vector2( 200, 150 )
@@ -33,7 +22,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="OutputPanel" type="PanelContainer" parent="VBoxContainer/ContentPanel/VBoxContainer" index="0"]
+[node name="OutputPanel" type="PanelContainer" parent="VBoxContainer" index="0"]
 margin_right = 200.0
 margin_bottom = 124.0
 mouse_filter = 2
@@ -41,9 +30,11 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = ExtResource( 3 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ContentPanel/VBoxContainer/OutputPanel" index="0"]
-margin_right = 200.0
-margin_bottom = 124.0
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/OutputPanel" index="0"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 196.0
+margin_bottom = 120.0
 size_flags_horizontal = 3
 size_flags_vertical = 11
 scroll_horizontal_enabled = false
@@ -51,33 +42,33 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MessageList" type="VBoxContainer" parent="VBoxContainer/ContentPanel/VBoxContainer/OutputPanel/ScrollContainer" index="0"]
-margin_right = 200.0
-margin_bottom = 124.0
+[node name="MessageList" type="VBoxContainer" parent="VBoxContainer/OutputPanel/ScrollContainer" index="0"]
+margin_right = 192.0
+margin_bottom = 116.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Template" type="HBoxContainer" parent="VBoxContainer/ContentPanel/VBoxContainer/OutputPanel/ScrollContainer/MessageList" index="0"]
-margin_right = 200.0
+[node name="Template" type="HBoxContainer" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList" index="0"]
+margin_right = 192.0
 margin_bottom = 14.0
 mouse_filter = 2
 
-[node name="Timestamp" type="Label" parent="VBoxContainer/ContentPanel/VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template" index="0"]
+[node name="Timestamp" type="Label" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template" index="0"]
 self_modulate = Color( 0.47451, 0.470588, 0.470588, 1 )
 margin_bottom = 14.0
 size_flags_vertical = 1
 
-[node name="Sender" type="Label" parent="VBoxContainer/ContentPanel/VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template" index="1"]
+[node name="Sender" type="Label" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template" index="1"]
 self_modulate = Color( 0.278431, 0.87451, 0.145098, 1 )
 margin_left = 4.0
 margin_right = 4.0
 margin_bottom = 14.0
 size_flags_vertical = 1
 
-[node name="Message" type="Label" parent="VBoxContainer/ContentPanel/VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template" index="2"]
+[node name="Message" type="Label" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template" index="2"]
 margin_left = 8.0
-margin_right = 200.0
+margin_right = 192.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -87,27 +78,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="InputPanel" type="PanelContainer" parent="VBoxContainer/ContentPanel/VBoxContainer" index="1"]
+[node name="InputPanel" type="PanelContainer" parent="VBoxContainer" index="1"]
 margin_top = 128.0
 margin_right = 200.0
 margin_bottom = 150.0
 custom_styles/panel = SubResource( 3 )
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/ContentPanel/VBoxContainer/InputPanel" index="0"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/InputPanel" index="0"]
 margin_right = 200.0
 margin_bottom = 22.0
 custom_styles/focus = ExtResource( 4 )
 custom_styles/normal = ExtResource( 5 )
 placeholder_text = ">"
 
-[node name="PanelDrag" parent="." index="1"]
-margin_right = 214.0
-margin_bottom = 164.0
-
-[node name="Label" parent="PanelDrag/CenterContainer" index="0"]
-margin_left = 70.0
-margin_top = 72.0
-margin_right = 144.0
-margin_bottom = 91.0
-
-[connection signal="text_entered" from="VBoxContainer/ContentPanel/VBoxContainer/InputPanel/LineEdit" to="." method="_on_LineEdit_text_entered"]
+[connection signal="text_entered" from="VBoxContainer/InputPanel/LineEdit" to="." method="_on_LineEdit_text_entered"]
