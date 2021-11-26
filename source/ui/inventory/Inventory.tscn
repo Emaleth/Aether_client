@@ -12,14 +12,12 @@ script = ExtResource( 1 )
 margin_right = 12.0
 margin_bottom = 12.0
 
-[node name="GridContainer" type="GridContainer" parent="CenterContainer" index="0"]
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer" index="0"]
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 6.0
 margin_bottom = 6.0
-columns = 5
+scroll_horizontal_enabled = false
 
-[node name="VScrollBar" type="VScrollBar" parent="." index="1"]
-margin_right = 12.0
-margin_bottom = 12.0
-size_flags_horizontal = 8
+[node name="GridContainer" type="GridContainer" parent="CenterContainer/ScrollContainer" index="0"]
+columns = 5

@@ -111,7 +111,7 @@ func spawn_character():
 	if GlobalVariables.player_actor == null:
 		GlobalVariables.player_actor = character_scene.instance()
 		character_container.add_child(GlobalVariables.player_actor)
-		GlobalVariables.player_actor.global_transform.origin.y = 3
+		GlobalVariables.player_actor.global_transform.origin = Vector3(400, 6, 250)
 		
 		GlobalVariables.camera_rig = camera_rig_scene.instance()
 		character_container.add_child(GlobalVariables.camera_rig)
