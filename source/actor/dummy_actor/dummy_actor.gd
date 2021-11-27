@@ -22,7 +22,7 @@ func _on_NPC_mouse_exited() -> void:
 
 func _on_NPC_input_event(_camera: Node, event: InputEvent, _position: Vector3, _normal: Vector3, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
-		if GlobalVariables.target:
+		if GlobalVariables.target and is_instance_valid(GlobalVariables.target):
 			GlobalVariables.target.get_node("DEBUG_Body").get("material/0").next_pass.set("shader_param/outline_color", Color.transparent)
 		GlobalVariables.target = self
 		$DEBUG_Body.get("material/0").next_pass.set("shader_param/outline_color", Color.red)

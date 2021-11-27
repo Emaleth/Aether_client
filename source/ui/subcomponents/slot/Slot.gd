@@ -85,16 +85,16 @@ func drop_data(_position: Vector2, _data) -> void:
 	
 	
 func _unhandled_key_input(event: InputEventKey) -> void:
-	if !event.pressed:
-		return
-	if !item:
-		return
-	if !LocalDataTables.item_table[item["archetype"]].has("action"):
-		return
 	if !shortcut:
 		return
 	if !InputMap.action_has_event(shortcut, event):
 		return
-	if !GlobalVariables.target:
+	if !event.pressed:
 		return
-	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["action"], GlobalVariables.target)
+	if !item:
+		return
+	if !GlobalVariables.target or !is_instance_valid(GlobalVariables.target) or !GlobalVariables.target.is_inside_tree():
+		return
+	if !LocalDataTables.item_table[item["archetype"]].has("use_action"):
+		return
+	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["use_action"], GlobalVariables.target.name)
