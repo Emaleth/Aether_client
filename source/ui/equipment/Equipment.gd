@@ -1,7 +1,7 @@
 extends "res://source/ui/subcomponents/window/Window.gd"
 
 onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
-onready var slot_grid = $CenterContainer/GridContainer
+onready var slot_grid = $HBoxContainer/CenterContainer/GridContainer
 
 
 func configure(_data : Dictionary):

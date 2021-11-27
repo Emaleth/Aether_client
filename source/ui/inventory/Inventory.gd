@@ -22,7 +22,7 @@ func configure(_data : Array):
 
 func _ready() -> void:
 	configure(GlobalVariables.inventory_data)
-#	hide_scroll_bar()
+	hide_scroll_bar()
 
 
 func hide_scroll_bar():

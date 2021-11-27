@@ -19,10 +19,12 @@ signal move_to_position
 func _ready() -> void:
 	set_defaults()
 
+
 func set_defaults():
 	rotation.x = default_rotation_x
 	rotation.y = default_rotation_y
 	spring_length = default_spring_lenght
+	
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("click") and event.is_pressed():
@@ -44,6 +46,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	elif Input.is_action_just_pressed("zoom_out"):
 		spring_length = min(spring_length + zoom_sensibility, max_spring_leght)
 		
+		
 func rotate_camera_rig(_amount : Vector2) -> void:
 	if _amount.length() <= deadzone:
 		return
@@ -51,20 +54,17 @@ func rotate_camera_rig(_amount : Vector2) -> void:
 	rotation.x = clamp(rotation.x, min_rotation_x, max_rotation_x)
 	rotation.y -= _amount.x * sensibility
 
+
 func get_move_position():
 	var intersection = cast_ray_from_camera_to_mouse_pointer()
 	if intersection.empty():
 		return
+	elif intersection.collider is KinematicBody and intersection.collider != GlobalVariables.target: 
+		return
 	else:
 		emit_signal("move_to_position", intersection.position)
 		Server.send_movement_request(intersection.position)
-		
-#func get_action_target():
-#	var intersection = cast_ray_from_camera_to_mouse_pointer()
-#	if intersection.empty():
-#		return null
-#	else:
-#		return intersection.collider
+	
 
 func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 	var space_state = get_world().direct_space_state
