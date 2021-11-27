@@ -1,54 +1,42 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/ui/amount_popup/AmountPopup.gd" type="Script" id=2]
-[ext_resource path="res://assets/styleboxes/confirm_button_normal.tres" type="StyleBox" id=3]
-[ext_resource path="res://assets/styleboxes/default_button_normal.tres" type="StyleBox" id=4]
-[ext_resource path="res://assets/styleboxes/default_button_pressed.tres" type="StyleBox" id=5]
-[ext_resource path="res://assets/styleboxes/confirm_button_pressed.tres" type="StyleBox" id=6]
 
 [node name="AmountPopup" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
-margin_right = 98.0
-margin_bottom = 50.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 113.0
+margin_bottom = 55.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" index="0"]
-margin_right = 98.0
+margin_right = 106.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Less" type="Button" parent="VBoxContainer/HBoxContainer" index="0"]
-margin_right = 16.0
+margin_right = 20.0
 margin_bottom = 24.0
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 4 )
 text = "<"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer" index="1"]
-margin_left = 20.0
-margin_right = 78.0
+margin_left = 24.0
+margin_right = 82.0
 margin_bottom = 24.0
 align = 1
 max_length = 3
 
 [node name="More" type="Button" parent="VBoxContainer/HBoxContainer" index="2"]
-margin_left = 82.0
-margin_right = 98.0
+margin_left = 86.0
+margin_right = 106.0
 margin_bottom = 24.0
-custom_styles/hover = ExtResource( 4 )
-custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = ExtResource( 4 )
-custom_styles/disabled = ExtResource( 4 )
-custom_styles/normal = ExtResource( 4 )
 text = ">"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -56,13 +44,8 @@ __meta__ = {
 
 [node name="Confirm" type="Button" parent="VBoxContainer" index="1"]
 margin_top = 28.0
-margin_right = 98.0
-margin_bottom = 50.0
-custom_styles/hover = ExtResource( 3 )
-custom_styles/pressed = ExtResource( 6 )
-custom_styles/focus = ExtResource( 3 )
-custom_styles/disabled = ExtResource( 3 )
-custom_styles/normal = ExtResource( 3 )
+margin_right = 106.0
+margin_bottom = 48.0
 text = "ok"
 __meta__ = {
 "_edit_use_anchors_": false

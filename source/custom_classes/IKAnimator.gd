@@ -1,5 +1,13 @@
-extends Node
+extends Spatial
 class_name IKAnimator, "res://assets/icons/class/IKAnimator.svg" 
+
+export(NodePath) var spine_target
+export(NodePath) var right_arm_target
+export(NodePath) var left_arm_target
+export(NodePath) var right_leg_target
+export(NodePath) var left_leg_target
+
+export(float) var foot_offset
 
 onready var skeleton_data = {
 	"right_leg" : {

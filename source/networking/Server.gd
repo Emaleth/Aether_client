@@ -4,7 +4,6 @@ var network = NetworkedMultiplayerENet.new()
 var ip = "127.0.0.1"
 var port = 1909
 
-var action_stack := []
 # verification token
 var token
 # clock sync
@@ -28,6 +27,7 @@ signal update_spellbook_ui
 func _physics_process(delta: float) -> void:
 	clock_decimal_precision(delta)
 	
+	
 func clock_decimal_precision(_delta):
 	client_clock += int(_delta * 1000) + delta_latency
 	delta_latency = 0
@@ -36,6 +36,7 @@ func clock_decimal_precision(_delta):
 		client_clock += 1
 		decimal_collector -= 1.00
 	
+	
 func connect_to_server():
 	network.create_client(ip, port)
 	get_tree().set_network_peer(network)
@@ -43,8 +44,10 @@ func connect_to_server():
 	network.connect("connection_failed", self, "_on_connection_failed")
 	network.connect("connection_succeeded", self, "_on_connection_succeeded")
 	
+	
 func _on_connection_failed():
 	print("Could not connect to the Server!")
+	
 	
 func _on_connection_succeeded():
 	get_server_time()
@@ -60,16 +63,20 @@ func _on_connection_succeeded():
 	latency_timer.connect("timeout", self, "determine_latency")
 	self.add_child(latency_timer)
 	
+	
 remote func return_server_time(server_time, client_time):
 	if get_tree().get_rpc_sender_id() == 1:
 		latency = (OS.get_system_time_msecs() - client_time) / 2
 		client_clock = server_time + latency
 	
+	
 func get_server_time():
 	rpc_id(1, "fetch_server_time", OS.get_system_time_msecs())
 	
+	
 func determine_latency():
 	rpc_id(1, "determine_latency", OS.get_system_time_msecs())
+	
 	
 remote func return_latency(client_time):
 	if get_tree().get_rpc_sender_id() == 1:
@@ -87,9 +94,11 @@ remote func return_latency(client_time):
 			latency = total_latency / latency_array.size()
 			latency_array.clear()
 	
+	
 remote func fetch_token():
 	if get_tree().get_rpc_sender_id() == 1:
 		rpc_id(1, "return_token", token)
+	
 	
 remote func return_token_verification_results(result):
 	if get_tree().get_rpc_sender_id() == 1:
@@ -98,22 +107,28 @@ remote func return_token_verification_results(result):
 		else:
 			emit_signal("s_token_verification_failure")
 	
+	
 remote func recive_world_state(world_state):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("s_update_world_state", world_state)
 
+
 func send_chat_message(_message):
 	rpc_unreliable_id(1, "recive_chat_message", client_clock, _message)
+	
 	
 remote func recive_chat_state(chat_state):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("s_update_chat_state", chat_state)
 
+
 func send_action_request(_action : String, _target : String):
 	rpc_id(1, "recive_action_request", _action, _target)
 	
+	
 func send_movement_request(_position : Vector3):
 	rpc_id(1, "recive_movement_request", _position)
+	
 	
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
@@ -121,25 +136,30 @@ remote func receive_data_tables(_data : Dictionary):
 		LocalDataTables.enemy_table = _data["enemy_table"]
 		LocalDataTables.skill_table = _data["skill_table"]
 	
+	
 remote func recive_equipment_data(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.equipment_data = _data
 		emit_signal("update_equipment_ui", _data)
+
 
 remote func recive_inventory_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.inventory_data = _data
 		emit_signal("update_inventory_ui", _data)
 
+
 remote func recive_pouch_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.pouch_data = _data
 		emit_signal("update_pouch_ui", _data)
 
+
 remote func recive_spellbook_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.spellbook_data = _data
 		emit_signal("update_spellbook_ui", _data)
+		
 		
 func request_item_transfer(_from_data : Dictionary, _amount : int, _to_data : Dictionary):
 	rpc_id(1, "request_item_transfer", _from_data, _amount, _to_data)

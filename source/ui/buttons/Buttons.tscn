@@ -9,8 +9,10 @@
 script = ExtResource( 2 )
 
 [node name="CenterContainer" type="CenterContainer" parent="." index="0"]
-margin_right = 64.0
-margin_bottom = 32.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 71.0
+margin_bottom = 39.0
 
 [node name="GridContainer" type="GridContainer" parent="CenterContainer" index="0"]
 margin_right = 64.0
@@ -28,7 +30,6 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource( 3 )
-flat = true
 expand_icon = true
 
 [node name="Inventory" type="Button" parent="CenterContainer/GridContainer" index="1"]
@@ -39,7 +40,6 @@ rect_min_size = Vector2( 32, 32 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 icon = ExtResource( 4 )
-flat = true
 expand_icon = true
 
 [connection signal="pressed" from="CenterContainer/GridContainer/Equipment" to="." method="_on_Equipment_pressed"]

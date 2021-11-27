@@ -1,13 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/window/Window.gd" type="Script" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="Panel" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
-custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

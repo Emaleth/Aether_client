@@ -6,7 +6,7 @@ onready var grid := $Grid
 onready var debug := $Debug
 onready var equipment := $Equipment
 onready var inventory := $Inventory
-onready var spellbook := $ActionBar
+onready var spellbook := $AbilityBar
 onready var pouch := $Pouch
 onready var buttons := $Buttons
 

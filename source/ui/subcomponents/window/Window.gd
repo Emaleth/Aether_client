@@ -56,7 +56,8 @@ func drag_window(event: InputEvent) -> void:
 		mouse_offset = get_local_mouse_position()
 		raise()
 	elif editable and mouse_offset and event is InputEventMouseMotion and Input.is_action_pressed("click") and !Input.is_action_just_pressed("click"):
-		rect_global_position.x = clamp(get_global_mouse_position().x - mouse_offset.x, 0, get_parent().rect_size.x - rect_size.x)
-		rect_global_position.y = clamp(get_global_mouse_position().y - mouse_offset.y, 0, get_parent().rect_size.y - rect_size.y)
+		rect_global_position.x = get_global_mouse_position().x - mouse_offset.x
+		rect_global_position.y = get_global_mouse_position().y - mouse_offset.y
+	check_in_window()
 	snap_position_to_grid()
 

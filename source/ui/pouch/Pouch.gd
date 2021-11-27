@@ -17,6 +17,7 @@ func _ready() -> void:
 	yield(get_tree().create_timer(1),"timeout")
 	configure(GlobalVariables.pouch_data)
 
+
 func configure(_data : Array):
 	sc_index = 0
 	for i in slot_grid.get_children():
@@ -27,12 +28,6 @@ func configure(_data : Array):
 		slot_grid.add_child(new_slot)
 		new_slot.configure(i, "pouch", x[sc_index])
 		sc_index += 1
-#		new_slot.connect("swap", self, "swap_slots")
 	resize()
-
-func swap_slots(slot_a, slot_b):
-	slot_a["slot"].configure(slot_b["item"])
-	slot_b["slot"].configure(slot_a["item"])
-
 
 

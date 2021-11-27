@@ -111,14 +111,12 @@ func spawn_character():
 	if GlobalVariables.player_actor == null:
 		GlobalVariables.player_actor = character_scene.instance()
 		character_container.add_child(GlobalVariables.player_actor)
-		GlobalVariables.player_actor.global_transform.origin = Vector3(400, 6, 250)
 		
 		GlobalVariables.camera_rig = camera_rig_scene.instance()
 		character_container.add_child(GlobalVariables.camera_rig)
 		
 		GlobalVariables.user_interface = interface_scene.instance()
 		character_container.add_child(GlobalVariables.user_interface)
-#		gui.skill_panel.configure(camera_rig)
 
 		GlobalVariables.player_actor.set_minimap_camera_transform(GlobalVariables.user_interface.get_minimap_pivot_path())
 		GlobalVariables.player_actor.set_camera_rig_transform(GlobalVariables.camera_rig.get_path())

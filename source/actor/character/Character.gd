@@ -14,8 +14,8 @@ func set_camera_rig_transform(_path):
 func set_minimap_camera_transform(_path):
 	minimap_remote_transform.remote_path = _path
 	
-func _ready() -> void:
-	$IKAnimator.configure(find_node("Skeleton"), "human")
+#func _ready() -> void:
+#	$IKAnimator.configure(find_node("Skeleton"), "human")
 	
 func _physics_process(delta: float) -> void:
 	m(delta)
@@ -31,7 +31,7 @@ func m(delta):
 	var direction = Vector3()
 	var step_size = delta * speed
 	if path.size() > 0:
-		$IKAnimator.animate(Vector3.FORWARD * speed)
+#		$IKAnimator.animate(Vector3.FORWARD * speed)
 		var destination = path[0]
 		direction = destination - global_transform.origin
 		if step_size > direction.length():
@@ -43,5 +43,6 @@ func m(delta):
 			var look_at_point = global_transform.origin + direction.normalized()
 			look_at(look_at_point, Vector3.UP)
 	else:
-		$IKAnimator.animate(Vector3.ZERO)
+		pass
+#		$IKAnimator.animate(Vector3.ZERO)
 		

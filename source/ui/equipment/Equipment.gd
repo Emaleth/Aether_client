@@ -14,5 +14,6 @@ func configure(_data : Dictionary):
 		new_slot.configure(_data[i], "equipment")
 	resize()
 	
+	
 func _ready() -> void:
 	configure(GlobalVariables.equipment_data)
