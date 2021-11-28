@@ -68,6 +68,7 @@ remote func return_server_time(server_time, client_time):
 	if get_tree().get_rpc_sender_id() == 1:
 		latency = (OS.get_system_time_msecs() - client_time) / 2
 		client_clock = server_time + latency
+#	print("clock re-sync")
 	
 	
 func get_server_time():

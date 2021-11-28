@@ -16,17 +16,20 @@ func conf(_data_a, _data_b):
 	data_a = _data_a
 	data_b = _data_b
 	line_edit.text = str(amount)
+# warning-ignore:narrowing_conversion
 	max_amount = max(data_a["amount"] - 1, 1)
 	show()
 	raise()
 
 func _on_Less_pressed() -> void:
 	if data_a.size() != 0:
+# warning-ignore:narrowing_conversion
 		amount = clamp(amount - 1 , min_amount, max_amount)
 		line_edit.text = str(amount)
 
 func _on_More_pressed() -> void:
 	if data_a.size() != 0:
+# warning-ignore:narrowing_conversion
 		amount = clamp(amount + 1, min_amount, max_amount)
 		line_edit.text = str(amount)
 

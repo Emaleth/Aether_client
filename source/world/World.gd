@@ -2,7 +2,7 @@ extends Navigation
 
 const interpolation_offset = 100 # milliseconds
 
-var last_world_state = 0
+var last_world_state := 0.0
 var world_state_buffer = []
 var npc_collection = {}
 var pc_collection = {}
@@ -49,7 +49,8 @@ func _physics_process(_delta: float) -> void:
 func add_pc_to_the_tree():
 	for pc in pc_collection.keys():
 		if pc == str(get_tree().get_network_unique_id()):
-			spawn_character()
+			if GlobalVariables.player_actor == null:
+				spawn_character()
 		else:
 			if not pc_container.has_node(str(pc)):
 				var new_pc = dummy_actor_scene.instance()
@@ -57,15 +58,15 @@ func add_pc_to_the_tree():
 				pc_container.add_child(new_pc, true)
 	
 func update_pc_in_the_tree():
-	for pc in pc_collection.keys():
-		if pc_container.has_node(str(pc)):
-			pc_container.get_node(str(pc)).update(pc_collection[pc]["pos"], pc_collection[pc]["rot"], pc_collection[pc]["res"])
-		if pc == str(get_tree().get_network_unique_id()):
-			GlobalVariables.resources_data = pc_collection[pc]["res"]
+	for pc in pc_container.get_children():
+		if pc_collection.has(str(pc.name)):
+			pc.update(pc_collection[str(pc.name)]["pos"], pc_collection[str(pc.name)]["rot"], pc_collection[str(pc.name)]["res"])
+	if pc_collection.has(str(get_tree().get_network_unique_id())):
+		GlobalVariables.resources_data = pc_collection[str(get_tree().get_network_unique_id())]["res"]
 
 func remove_pc_from_the_tree():
 	for pc in pc_container.get_children():
-		if pc_collection.has(str(pc.name)):
+		if !pc_collection.has(str(pc.name)):
 			pc.queue_free()
 	
 func add_npc_to_the_tree():
@@ -88,14 +89,14 @@ func remove_npc_from_the_tree():
 func add_bullet_to_the_tree():
 	for bullet in bullet_collection.keys():
 		if not bullet_container.has_node(str(bullet)):
-			if bullet_collection[bullet]["p_id"] == str(get_tree().get_network_unique_id()):
-				continue
+#			if bullet_collection[bullet]["p_id"] == str(get_tree().get_network_unique_id()):
+#				continue
 			var new_bullet = dummy_bullet_scene.instance()
 			new_bullet.name = str(bullet)
 			new_bullet.transform.origin = bullet_collection[bullet]["pos"]
 			new_bullet.transform.basis = bullet_collection[bullet]["rot"]
 			new_bullet.type = bullet_collection[bullet]["type"]
-			bullet_container.call_deferred("add_child", new_bullet, true)
+			bullet_container.add_child(new_bullet, true)
 			
 func update_bullet_in_the_tree():
 	for bullet in bullet_container.get_children():
@@ -105,22 +106,21 @@ func update_bullet_in_the_tree():
 func remove_bullet_from_the_tree():
 	for bullet in bullet_container.get_children():
 		if not bullet_collection.has(bullet.name):
-			bullet.call_deferred("queue_free")
+			bullet.queue_free()
 			
 func spawn_character():
-	if GlobalVariables.player_actor == null:
-		GlobalVariables.player_actor = character_scene.instance()
-		character_container.add_child(GlobalVariables.player_actor)
-		
-		GlobalVariables.camera_rig = camera_rig_scene.instance()
-		character_container.add_child(GlobalVariables.camera_rig)
-		
-		GlobalVariables.user_interface = interface_scene.instance()
-		character_container.add_child(GlobalVariables.user_interface)
+	GlobalVariables.player_actor = character_scene.instance()
+	character_container.add_child(GlobalVariables.player_actor)
+	
+	GlobalVariables.camera_rig = camera_rig_scene.instance()
+	character_container.add_child(GlobalVariables.camera_rig)
+	
+	GlobalVariables.user_interface = interface_scene.instance()
+	character_container.add_child(GlobalVariables.user_interface)
 
-		GlobalVariables.player_actor.set_minimap_camera_transform(GlobalVariables.user_interface.get_minimap_pivot_path())
-		GlobalVariables.player_actor.set_camera_rig_transform(GlobalVariables.camera_rig.get_path())
-		GlobalVariables.camera_rig.connect("move_to_position", self, "get_path_to_position")
+	GlobalVariables.player_actor.set_minimap_camera_transform(GlobalVariables.user_interface.get_minimap_pivot_path())
+	GlobalVariables.player_actor.set_camera_rig_transform(GlobalVariables.camera_rig.get_path())
+	GlobalVariables.camera_rig.connect("move_to_position", self, "get_path_to_position")
 
 func add_pc_to_the_collection(_id, _data):
 	pc_collection[_id] = _data
@@ -153,18 +153,19 @@ func remove_bullet_from_the_collection(_id):
 	bullet_collection.erase(_id)
 	
 func update_world_state(_world_state):
-	if _world_state["T"] > last_world_state:
+	if float(_world_state["T"]) > last_world_state:
 		last_world_state = _world_state["T"]
 		world_state_buffer.append(_world_state)
 	
 func interpolate_or_extrapolate():
 	var render_time = Server.client_clock - interpolation_offset
+#	var render_time = OS.get_system_time_msecs() - interpolation_offset
 	if world_state_buffer.size() > 1:
-		while world_state_buffer.size() > 2 and render_time > world_state_buffer[2].T:
+		while world_state_buffer.size() > 2 and render_time > float(world_state_buffer[2]["T"]):
 			world_state_buffer.remove(0)
 		if world_state_buffer.size() > 2:
 			interpolate(render_time)
-		elif render_time > world_state_buffer[1].T:
+		elif render_time > float(world_state_buffer[1]["T"]):
 			extrapolate(render_time)
 	
 func interpolate(_render_time):
@@ -175,10 +176,10 @@ func interpolate(_render_time):
 			continue
 		if pc_collection.has(str(pc)):
 			var modified_data := {}
-			modified_data = world_state_buffer[2]["P"][pc]
+			modified_data = world_state_buffer[2]["P"][pc].duplicate(true)
 			modified_data["pos"] = lerp(world_state_buffer[1]["P"][pc]["pos"], world_state_buffer[2]["P"][pc]["pos"], interpolation_factor)
-			var current_rot = Quat(world_state_buffer[1]["P"][pc]["rot"])
-			var target_rot = Quat(world_state_buffer[2]["P"][pc]["rot"])
+			var current_rot = (world_state_buffer[1]["P"][pc]["rot"]).get_rotation_quat()
+			var target_rot = (world_state_buffer[2]["P"][pc]["rot"]).get_rotation_quat()
 			modified_data["rot"] = Basis(current_rot.slerp(target_rot, interpolation_factor))
 			update_pc_inside_the_collection(pc, modified_data)
 		else:
@@ -193,10 +194,10 @@ func interpolate(_render_time):
 			continue
 		if npc_collection.has(npc):
 			var modified_data := {}
-			modified_data = world_state_buffer[2]["E"][npc]
+			modified_data = world_state_buffer[2]["E"][npc].duplicate(true)
 			modified_data["pos"] = lerp(world_state_buffer[1]["E"][npc]["pos"], world_state_buffer[2]["E"][npc]["pos"], interpolation_factor)
-			var current_rot = Quat(world_state_buffer[1]["E"][npc]["rot"])
-			var target_rot = Quat(world_state_buffer[2]["E"][npc]["rot"])
+			var current_rot = (world_state_buffer[1]["E"][npc]["rot"]).get_rotation_quat()
+			var target_rot = (world_state_buffer[2]["E"][npc]["rot"]).get_rotation_quat()
 			modified_data["rot"] = Basis(current_rot.slerp(target_rot, interpolation_factor))
 			update_npc_inside_the_collection(npc, modified_data)
 		else:
@@ -211,10 +212,10 @@ func interpolate(_render_time):
 			continue
 		if bullet_collection.has(bullet):
 			var modified_data := {}
-			modified_data = world_state_buffer[2]["B"][bullet]
+			modified_data = world_state_buffer[2]["B"][bullet].duplicate(true)
 			modified_data["pos"] = lerp(world_state_buffer[1]["B"][bullet]["pos"], world_state_buffer[2]["B"][bullet]["pos"], interpolation_factor)
-			var current_rot = Quat(world_state_buffer[1]["B"][bullet]["rot"])
-			var target_rot = Quat(world_state_buffer[2]["B"][bullet]["rot"])
+			var current_rot = (world_state_buffer[1]["B"][bullet]["rot"]).get_rotation_quat()
+			var target_rot = (world_state_buffer[2]["B"][bullet]["rot"]).get_rotation_quat()
 			modified_data["rot"] = Basis(current_rot.slerp(target_rot, interpolation_factor))
 			update_bullet_inside_the_collection(bullet, modified_data)
 		else:
@@ -233,8 +234,8 @@ func extrapolate(_render_time):
 			var modified_data := {}
 			var position_delta = (world_state_buffer[1]["P"][pc]["pos"] - world_state_buffer[0]["P"][pc]["pos"]) 
 			modified_data["pos"] = world_state_buffer[1]["P"][pc]["pos"] + (position_delta * extrapolation_factor)
-			var current_rot = Quat(world_state_buffer[1]["P"][pc]["rot"])
-			var old_rot = Quat(world_state_buffer[0]["P"][pc]["rot"])
+			var current_rot = (world_state_buffer[1]["P"][pc]["rot"]).get_rotation_quat()
+			var old_rot = (world_state_buffer[0]["P"][pc]["rot"]).get_rotation_quat()
 			var rotation_delta = (current_rot - old_rot) 
 			modified_data["rot"] = Basis(current_rot + (rotation_delta * extrapolation_factor))
 			update_pc_inside_the_collection(pc, modified_data)
@@ -247,8 +248,8 @@ func extrapolate(_render_time):
 			var modified_data := {}
 			var position_delta = (world_state_buffer[1]["E"][npc]["pos"] - world_state_buffer[0]["E"][npc]["pos"]) 
 			modified_data["pos"] = world_state_buffer[1]["E"][npc]["pos"] + (position_delta * extrapolation_factor)
-			var current_rot = Quat(world_state_buffer[1]["E"][npc]["rot"])
-			var old_rot = Quat(world_state_buffer[0]["E"][npc]["rot"])
+			var current_rot = (world_state_buffer[1]["E"][npc]["rot"]).get_rotation_quat()
+			var old_rot = (world_state_buffer[0]["E"][npc]["rot"]).get_rotation_quat()
 			var rotation_delta = (current_rot - old_rot) 
 			modified_data["rot"] = Basis(current_rot + (rotation_delta * extrapolation_factor))
 			update_npc_inside_the_collection(npc, modified_data)
@@ -261,8 +262,8 @@ func extrapolate(_render_time):
 			var modified_data := {}
 			var position_delta = (world_state_buffer[1]["B"][bullet]["pos"] - world_state_buffer[0]["B"][bullet]["pos"]) 
 			modified_data["pos"] = world_state_buffer[1]["B"][bullet]["pos"] + (position_delta * extrapolation_factor)
-			var current_rot = Quat(world_state_buffer[1]["B"][bullet]["rot"])
-			var old_rot = Quat(world_state_buffer[0]["B"][bullet]["rot"])
+			var current_rot = (world_state_buffer[1]["B"][bullet]["rot"]).get_rotation_quat()
+			var old_rot = (world_state_buffer[0]["B"][bullet]["rot"]).get_rotation_quat()
 			var rotation_delta = (current_rot - old_rot) 
 			modified_data["rot"] = Basis(current_rot + (rotation_delta * extrapolation_factor))
 			update_bullet_inside_the_collection(bullet, modified_data)
