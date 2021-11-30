@@ -2,7 +2,7 @@ extends SpringArm
 
 var sensibility : float = 0.005
 var deadzone : float = 0.1
-var default_rotation_x : float = deg2rad(-45)
+var default_rotation_x : float = deg2rad(-55)
 var min_rotation_x : float = deg2rad(-80)
 var max_rotation_x : float = deg2rad(80)
 var default_rotation_y : float = deg2rad(0)
@@ -50,8 +50,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func rotate_camera_rig(_amount : Vector2) -> void:
 	if _amount.length() <= deadzone:
 		return
-	rotation.x -= _amount.y * sensibility
-	rotation.x = clamp(rotation.x, min_rotation_x, max_rotation_x)
+#	rotation.x -= _amount.y * sensibility
+#	rotation.x = clamp(rotation.x, min_rotation_x, max_rotation_x)
 	rotation.y -= _amount.x * sensibility
 
 
