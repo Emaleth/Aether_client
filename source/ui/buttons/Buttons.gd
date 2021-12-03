@@ -1,4 +1,4 @@
-extends "res://source/ui/subcomponents/window/Window.gd"
+extends PanelContainer
 
 
 onready var inventory_button := $CenterContainer/GridContainer/Inventory

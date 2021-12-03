@@ -1,35 +1,44 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://source/ui/subcomponents/window/Window.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/styleboxes/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://source/ui/subcomponents/animated_progress_bar/AnimatedProgressBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/ui/resources/Resources.gd" type="Script" id=3]
 
-[node name="Resources" instance=ExtResource( 1 )]
-margin_right = 149.0
-margin_bottom = 56.0
+[node name="Resources" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1338.0
+margin_bottom = -736.0
+custom_styles/panel = ExtResource( 1 )
 script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
-margin_right = 149.0
-margin_bottom = 56.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 104.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 100, 0 )
 
-[node name="HealthBar" parent="VBoxContainer" index="0" instance=ExtResource( 2 )]
+[node name="HealthBar" parent="VBoxContainer" instance=ExtResource( 2 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 0.0
-margin_right = 149.0
-margin_bottom = 26.0
+margin_right = 100.0
+margin_bottom = 10.0
 
-[node name="ManaBar" parent="VBoxContainer" index="1" instance=ExtResource( 2 )]
+[node name="ManaBar" parent="VBoxContainer" instance=ExtResource( 2 )]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
-margin_top = 30.0
-margin_right = 149.0
-margin_bottom = 56.0
+margin_top = 14.0
+margin_right = 100.0
+margin_bottom = 24.0
 color = Color( 0.0470588, 0.694118, 0.780392, 1 )

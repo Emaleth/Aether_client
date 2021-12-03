@@ -1,8 +1,8 @@
 extends Spatial
 
-onready var name_label = $Viewport/PanelContainer/VBoxContainer/NameLabel
-onready var health_bar = $Viewport/PanelContainer/VBoxContainer/HealthBar
-onready var mana_bar = $Viewport/PanelContainer/VBoxContainer/ManaBar
+onready var name_label = $Viewport/VBoxContainer/NameLabel
+onready var health_bar = $Viewport/VBoxContainer/HealthBar
+onready var mana_bar = $Viewport/VBoxContainer/ManaBar
 onready var sprite = $Sprite3D
 
 

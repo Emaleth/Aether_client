@@ -2,7 +2,7 @@ extends SpringArm
 
 var sensibility : float = 0.005
 var deadzone : float = 0.1
-var default_rotation_x : float = deg2rad(-55)
+var default_rotation_x : float = deg2rad(-45)
 var min_rotation_x : float = deg2rad(-80)
 var max_rotation_x : float = deg2rad(80)
 var default_rotation_y : float = deg2rad(0)
@@ -27,7 +27,7 @@ func set_defaults():
 	
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action("click") and event.is_pressed():
+	if event.is_action("move") and event.is_pressed():
 		get_move_position()
 		
 	if Input.is_action_pressed("rotate_camera"):

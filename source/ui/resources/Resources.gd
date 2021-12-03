@@ -1,4 +1,4 @@
-extends "res://source/ui/subcomponents/window/Window.gd"
+extends PanelContainer
 
 onready var health_bar = $VBoxContainer/HealthBar
 onready var mana_bar = $VBoxContainer/ManaBar

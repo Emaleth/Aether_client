@@ -1,4 +1,4 @@
-extends "res://source/ui/subcomponents/window/Window.gd"
+extends PanelContainer
 
 onready var msg_list = $VBoxContainer/OutputPanel/ScrollContainer/MessageList
 onready var template_chat_line = $VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template

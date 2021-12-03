@@ -1,4 +1,4 @@
-extends "res://source/ui/subcomponents/window/Window.gd"
+extends PanelContainer
 
 var data_a := {}
 var data_b := {}

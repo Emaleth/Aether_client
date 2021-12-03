@@ -1,11 +1,11 @@
-extends "res://source/ui/subcomponents/window/Window.gd"
+extends PanelContainer
 
 onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
 onready var slot_grid = $CenterContainer/ScrollContainer/GridContainer
 onready var scroll_container = $CenterContainer/ScrollContainer
 onready var scoll_bar = scroll_container.get_v_scrollbar()
 
-var max_rows = 3
+var max_rows = 5
 
 
 func configure(_data : Array):
@@ -17,7 +17,6 @@ func configure(_data : Array):
 		slot_grid.add_child(new_slot)
 		new_slot.configure(i, "inventory")
 	calculate_scroll_container_size(ceil(_data.size() / float(slot_grid.columns)), slot_grid.get_constant("vseparation"), 40)
-	resize()
 
 
 func _ready() -> void:

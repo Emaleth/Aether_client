@@ -1,4 +1,4 @@
-extends "res://source/ui/subcomponents/window/Window.gd"
+extends PanelContainer
 
 onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
 onready var slot_grid = $CenterContainer/GridContainer
@@ -33,6 +33,6 @@ func configure(_data : Array):
 		slot_grid.add_child(new_slot)
 		new_slot.configure(i, "spellbook", x[sc_index])
 		sc_index += 1
-	resize()
+	
 
 
