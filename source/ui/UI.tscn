@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/amount_popup/AmountPopup.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://source/ui/equipment/Equipment.tscn" type="PackedScene" id=8]
 [ext_resource path="res://source/ui/minimap/Minimap.tscn" type="PackedScene" id=9]
 [ext_resource path="res://source/ui/buttons/Buttons.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/icons/path/abstract-111.svg" type="Texture" id=11]
 [ext_resource path="res://source/ui/pouch/Pouch.tscn" type="PackedScene" id=12]
 [ext_resource path="res://source/ui/debug/Debug.tscn" type="PackedScene" id=13]
 
@@ -139,12 +140,28 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="AmountPopup" parent="GridContainer/B2" instance=ExtResource( 2 )]
+visible = false
 margin_left = 170.0
 margin_top = 100.0
 margin_right = 284.0
 margin_bottom = 156.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="CenterContainer" type="CenterContainer" parent="GridContainer/B2"]
+margin_right = 455.0
+margin_bottom = 256.0
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer/B2/CenterContainer"]
+margin_left = 219.0
+margin_top = 120.0
+margin_right = 235.0
+margin_bottom = 136.0
+rect_min_size = Vector2( 16, 16 )
+mouse_filter = 2
+texture = ExtResource( 11 )
+expand = true
 
 [node name="B3" type="PanelContainer" parent="GridContainer"]
 margin_left = 910.0
