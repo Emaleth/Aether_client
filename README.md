@@ -1,13 +1,14 @@
 # Aether
 
-## Assets
+## Overwiev
+
+
+## Third Party:
+
 
 ### Textures
 
--[OpenGameArt](https://opengameart.org/content/space-backdrop)
--[OpenGameArt](https://kenney.nl/assets/prototype-textures)
--[OpenGameArt](https://opengameart.org/content/seamless-textures)
--[OpenGameArt](https://opengameart.org/content/seamless-2)
+-[Open Game Art](https://opengameart.org/content/prototype-textures)
 
 ### Icons
 
@@ -15,4 +16,7 @@
 
 ### Fonts
 
--[]()
+-[Google Fonts](https://fonts.google.com/specimen/Ubuntu#about)
+
+
+## License
