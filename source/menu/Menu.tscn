@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://assets/textures/menu_background.png" type="Texture" id=2]
-[ext_resource path="res://assets/fonts/Ubuntu-Regular_16.tres" type="DynamicFont" id=3]
-[ext_resource path="res://assets/fonts/Ubuntu-Bold_16.tres" type="DynamicFont" id=4]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -63,15 +61,14 @@ __meta__ = {
 
 [node name="AuthenticationScreen" type="TabContainer" parent="CenterContainer"]
 margin_left = 578.0
-margin_top = 325.0
+margin_top = 289.0
 margin_right = 788.0
-margin_bottom = 443.0
+margin_bottom = 479.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 210, 0 )
 size_flags_horizontal = 4
 size_flags_vertical = 4
-custom_fonts/font = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -80,7 +77,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 20.0
+margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 grow_horizontal = 2
@@ -93,50 +90,46 @@ __meta__ = {
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 195.0
-margin_bottom = 87.0
+margin_bottom = 147.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="AccountLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
 margin_right = 188.0
-margin_bottom = 2.0
+margin_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 text = "Email:"
 align = 1
 valign = 1
 
 [node name="AccountLine" type="LineEdit" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
-margin_top = 6.0
+margin_top = 18.0
 margin_right = 188.0
-margin_bottom = 18.0
+margin_bottom = 42.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 text = "Emaleth@protonmail.com"
 align = 1
 caret_blink = true
 caret_blink_speed = 0.5
 
 [node name="PasswordLabel" type="Label" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
-margin_top = 22.0
+margin_top = 46.0
 margin_right = 188.0
-margin_bottom = 24.0
+margin_bottom = 60.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 text = "Password:"
 align = 1
 valign = 1
 
 [node name="PasswordLine" type="LineEdit" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
-margin_top = 28.0
+margin_top = 64.0
 margin_right = 188.0
-margin_bottom = 40.0
+margin_bottom = 88.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 text = "12345678"
 align = 1
 secret = true
@@ -144,40 +137,38 @@ caret_blink = true
 caret_blink_speed = 0.5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
-margin_left = 70.0
-margin_top = 44.0
-margin_right = 118.0
-margin_bottom = 68.0
+margin_left = 7.0
+margin_top = 92.0
+margin_right = 181.0
+margin_bottom = 116.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Remember" type="Label" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer/HBoxContainer"]
-margin_top = 11.0
-margin_right = 20.0
-margin_bottom = 13.0
+margin_top = 5.0
+margin_right = 146.0
+margin_bottom = 19.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 text = "Remember credentials"
 
 [node name="CheckBox" type="CheckBox" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer/HBoxContainer"]
-margin_left = 24.0
-margin_right = 48.0
+margin_left = 150.0
+margin_right = 174.0
 margin_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Login" type="Button" parent="CenterContainer/AuthenticationScreen/Login/VBoxContainer"]
-margin_top = 72.0
+margin_top = 120.0
 margin_right = 188.0
-margin_bottom = 80.0
+margin_bottom = 140.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
-custom_fonts/font = ExtResource( 4 )
 text = "Login"
 
 [node name="Register" type="PanelContainer" parent="CenterContainer/AuthenticationScreen"]
@@ -185,7 +176,7 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 20.0
+margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 
@@ -202,7 +193,6 @@ margin_right = 189.0
 margin_bottom = 17.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 text = "Email:"
 align = 1
 valign = 1
@@ -213,7 +203,6 @@ margin_right = 189.0
 margin_bottom = 48.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 align = 1
 caret_blink = true
 caret_blink_speed = 0.5
@@ -224,7 +213,6 @@ margin_right = 189.0
 margin_bottom = 69.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 text = "Password:"
 align = 1
 valign = 1
@@ -235,7 +223,6 @@ margin_right = 189.0
 margin_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 align = 1
 secret = true
 caret_blink = true
@@ -247,7 +234,6 @@ margin_right = 189.0
 margin_bottom = 121.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 text = "Repeat Password:"
 align = 1
 valign = 1
@@ -258,7 +244,6 @@ margin_right = 189.0
 margin_bottom = 152.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 align = 1
 secret = true
 caret_blink = true
@@ -277,7 +262,6 @@ margin_right = 161.0
 margin_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_fonts/font = ExtResource( 3 )
 text = "Agree to Terms of Servise"
 
 [node name="CheckBox" type="CheckBox" parent="CenterContainer/AuthenticationScreen/Register/VBoxContainer/HBoxContainer"]
@@ -295,7 +279,6 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 10
-custom_fonts/font = ExtResource( 4 )
 text = "Register"
 
 [node name="Quit" type="Button" parent="."]
@@ -305,7 +288,6 @@ margin_left = 50.0
 margin_top = -70.0
 margin_right = 90.0
 margin_bottom = -50.0
-custom_fonts/font = ExtResource( 4 )
 text = "Quit"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -316,7 +298,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 3 )
 text = "Version: 0.0.0-dev"
 valign = 2
 __meta__ = {

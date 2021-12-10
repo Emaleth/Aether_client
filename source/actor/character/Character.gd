@@ -15,8 +15,9 @@ onready var minimap_remote_transform = $MinimapRemoteTransform
 
 
 func instanciate_camera():
-	GlobalVariables.camera_rig = camera_rig_scene.instance()
-	camera_position.add_child(GlobalVariables.camera_rig)
+#	GlobalVariables.camera_rig = camera_rig_scene.instance()
+#	camera_position.add_child(GlobalVariables.camera_rig)
+	camera_position.add_child(camera_rig_scene.instance())
 
 
 func set_minimap_camera_transform(_path):

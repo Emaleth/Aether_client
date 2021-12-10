@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/amount_popup/AmountPopup.tscn" type="PackedScene" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://source/ui/clock/Clock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://source/ui/equipment/Equipment.tscn" type="PackedScene" id=8]
 [ext_resource path="res://source/ui/minimap/Minimap.tscn" type="PackedScene" id=9]
-[ext_resource path="res://source/ui/buttons/Buttons.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/icons/path/abstract-111.svg" type="Texture" id=11]
 [ext_resource path="res://source/ui/pouch/Pouch.tscn" type="PackedScene" id=12]
 [ext_resource path="res://source/ui/debug/Debug.tscn" type="PackedScene" id=13]
@@ -29,16 +28,14 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-resources_node = NodePath("GridContainer/A1/VBoxContainer/Resources")
-minimap_node = NodePath("GridContainer/A3/VBoxContainer/Minimap")
-debug_node = NodePath("GridContainer/A1/VBoxContainer/Debug")
-equipment_node = NodePath("GridContainer/B1/Equipment")
-inventory_node = NodePath("GridContainer/B3/Inventory")
-spellbook_node = NodePath("GridContainer/C2/VBoxContainer/AbilityBar")
-pouch_node = NodePath("GridContainer/C2/VBoxContainer/Pouch")
-buttons_node = NodePath("GridContainer/C3/Buttons")
+resources_node = NodePath("CombatGrid/A1/VBoxContainer/Resources")
+minimap_node = NodePath("CombatGrid/A3/VBoxContainer/Minimap")
+debug_node = NodePath("CombatGrid/A1/VBoxContainer/Debug")
+spellbook_node = NodePath("CombatGrid/C2/VBoxContainer/AbilityBar")
+pouch_node = NodePath("CombatGrid/C2/VBoxContainer/Pouch")
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="CombatGrid" type="GridContainer" parent="."]
+visible = false
 margin_right = 1366.0
 margin_bottom = 768.0
 mouse_filter = 2
@@ -46,7 +43,7 @@ custom_constants/vseparation = 0
 custom_constants/hseparation = 0
 columns = 3
 
-[node name="A1" type="PanelContainer" parent="GridContainer"]
+[node name="A1" type="PanelContainer" parent="CombatGrid"]
 margin_right = 455.0
 margin_bottom = 256.0
 mouse_filter = 2
@@ -54,29 +51,29 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/A1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CombatGrid/A1"]
 margin_right = 108.0
-margin_bottom = 58.0
+margin_bottom = 66.0
 mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Resources" parent="GridContainer/A1/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Resources" parent="CombatGrid/A1/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 108.0
-margin_bottom = 32.0
+margin_bottom = 40.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Debug" parent="GridContainer/A1/VBoxContainer" instance=ExtResource( 13 )]
-margin_top = 36.0
+[node name="Debug" parent="CombatGrid/A1/VBoxContainer" instance=ExtResource( 13 )]
+margin_top = 44.0
 margin_right = 8.0
-margin_bottom = 58.0
+margin_bottom = 66.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="A2" type="PanelContainer" parent="GridContainer"]
+[node name="A2" type="PanelContainer" parent="CombatGrid"]
 margin_left = 455.0
 margin_right = 910.0
 margin_bottom = 256.0
@@ -85,7 +82,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="A3" type="PanelContainer" parent="GridContainer"]
+[node name="A3" type="PanelContainer" parent="CombatGrid"]
 margin_left = 910.0
 margin_right = 1365.0
 margin_bottom = 256.0
@@ -94,25 +91,25 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/A3"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CombatGrid/A3"]
 margin_left = 247.0
 margin_right = 455.0
 margin_bottom = 256.0
 mouse_filter = 2
 size_flags_horizontal = 10
 
-[node name="Minimap" parent="GridContainer/A3/VBoxContainer" instance=ExtResource( 9 )]
+[node name="Minimap" parent="CombatGrid/A3/VBoxContainer" instance=ExtResource( 9 )]
 margin_right = 208.0
 margin_bottom = 208.0
 
-[node name="Clock" parent="GridContainer/A3/VBoxContainer" instance=ExtResource( 7 )]
-margin_left = 78.0
+[node name="Clock" parent="CombatGrid/A3/VBoxContainer" instance=ExtResource( 7 )]
+margin_left = 81.0
 margin_top = 212.0
-margin_right = 129.0
-margin_bottom = 239.0
+margin_right = 127.0
+margin_bottom = 234.0
 size_flags_horizontal = 4
 
-[node name="B1" type="PanelContainer" parent="GridContainer"]
+[node name="B1" type="PanelContainer" parent="CombatGrid"]
 margin_top = 256.0
 margin_right = 455.0
 margin_bottom = 512.0
@@ -121,15 +118,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="Equipment" parent="GridContainer/B1" instance=ExtResource( 8 )]
-margin_left = 223.0
-margin_top = 124.0
-margin_right = 231.0
-margin_bottom = 132.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="B2" type="PanelContainer" parent="GridContainer"]
+[node name="B2" type="PanelContainer" parent="CombatGrid"]
 margin_left = 455.0
 margin_top = 256.0
 margin_right = 910.0
@@ -139,21 +128,12 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="AmountPopup" parent="GridContainer/B2" instance=ExtResource( 2 )]
-visible = false
-margin_left = 170.0
-margin_top = 100.0
-margin_right = 284.0
-margin_bottom = 156.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="CenterContainer" type="CenterContainer" parent="GridContainer/B2"]
+[node name="CenterContainer" type="CenterContainer" parent="CombatGrid/B2"]
 margin_right = 455.0
 margin_bottom = 256.0
 mouse_filter = 2
 
-[node name="TextureRect" type="TextureRect" parent="GridContainer/B2/CenterContainer"]
+[node name="TextureRect" type="TextureRect" parent="CombatGrid/B2/CenterContainer"]
 margin_left = 219.0
 margin_top = 120.0
 margin_right = 235.0
@@ -163,7 +143,7 @@ mouse_filter = 2
 texture = ExtResource( 11 )
 expand = true
 
-[node name="B3" type="PanelContainer" parent="GridContainer"]
+[node name="B3" type="PanelContainer" parent="CombatGrid"]
 margin_left = 910.0
 margin_top = 256.0
 margin_right = 1365.0
@@ -173,15 +153,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="Inventory" parent="GridContainer/B3" instance=ExtResource( 4 )]
-margin_left = 223.0
-margin_top = 124.0
-margin_right = 231.0
-margin_bottom = 132.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="C1" type="PanelContainer" parent="GridContainer"]
+[node name="C1" type="PanelContainer" parent="CombatGrid"]
 margin_top = 512.0
 margin_right = 455.0
 margin_bottom = 768.0
@@ -190,14 +162,14 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="Chatbox" parent="GridContainer/C1" instance=ExtResource( 6 )]
+[node name="Chatbox" parent="CombatGrid/C1" instance=ExtResource( 6 )]
 margin_top = 98.0
 margin_right = 208.0
 margin_bottom = 256.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 
-[node name="C2" type="PanelContainer" parent="GridContainer"]
+[node name="C2" type="PanelContainer" parent="CombatGrid"]
 margin_left = 455.0
 margin_top = 512.0
 margin_right = 910.0
@@ -207,7 +179,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GridContainer/C2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CombatGrid/C2"]
 margin_left = 227.0
 margin_top = 252.0
 margin_right = 227.0
@@ -216,16 +188,16 @@ mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="Pouch" parent="GridContainer/C2/VBoxContainer" instance=ExtResource( 12 )]
+[node name="Pouch" parent="CombatGrid/C2/VBoxContainer" instance=ExtResource( 12 )]
 margin_right = 0.0
 margin_bottom = 0.0
 
-[node name="AbilityBar" parent="GridContainer/C2/VBoxContainer" instance=ExtResource( 5 )]
+[node name="AbilityBar" parent="CombatGrid/C2/VBoxContainer" instance=ExtResource( 5 )]
 margin_top = 4.0
 margin_right = 0.0
 margin_bottom = 4.0
 
-[node name="C3" type="PanelContainer" parent="GridContainer"]
+[node name="C3" type="PanelContainer" parent="CombatGrid"]
 margin_left = 910.0
 margin_top = 512.0
 margin_right = 1365.0
@@ -235,10 +207,124 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="Buttons" parent="GridContainer/C3" instance=ExtResource( 10 )]
-margin_left = 383.0
-margin_top = 216.0
-margin_right = 455.0
-margin_bottom = 256.0
-size_flags_horizontal = 8
-size_flags_vertical = 8
+[node name="ManagmentGrid" type="GridContainer" parent="."]
+margin_right = 1366.0
+margin_bottom = 768.0
+columns = 3
+
+[node name="B2" type="PanelContainer" parent="ManagmentGrid"]
+margin_right = 452.0
+margin_bottom = 253.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AmountPopup" parent="ManagmentGrid/B2" instance=ExtResource( 2 )]
+visible = false
+margin_left = 170.0
+margin_top = 100.0
+margin_right = 284.0
+margin_bottom = 156.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="B3" type="PanelContainer" parent="ManagmentGrid"]
+margin_left = 456.0
+margin_right = 908.0
+margin_bottom = 253.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Inventory" parent="ManagmentGrid/B3" instance=ExtResource( 4 )]
+margin_left = 210.0
+margin_top = 122.0
+margin_right = 242.0
+margin_bottom = 130.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="B1" type="PanelContainer" parent="ManagmentGrid"]
+margin_left = 912.0
+margin_right = 1364.0
+margin_bottom = 253.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Equipment" parent="ManagmentGrid/B1" instance=ExtResource( 8 )]
+margin_left = 222.0
+margin_top = 122.0
+margin_right = 230.0
+margin_bottom = 130.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="A1" type="PanelContainer" parent="ManagmentGrid"]
+margin_top = 257.0
+margin_right = 452.0
+margin_bottom = 510.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="A2" type="PanelContainer" parent="ManagmentGrid"]
+margin_left = 456.0
+margin_top = 257.0
+margin_right = 908.0
+margin_bottom = 510.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="A3" type="PanelContainer" parent="ManagmentGrid"]
+margin_left = 912.0
+margin_top = 257.0
+margin_right = 1364.0
+margin_bottom = 510.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="C1" type="PanelContainer" parent="ManagmentGrid"]
+margin_top = 514.0
+margin_right = 452.0
+margin_bottom = 767.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Pouch" parent="ManagmentGrid/C1" instance=ExtResource( 12 )]
+margin_right = 452.0
+margin_bottom = 253.0
+
+[node name="C2" type="PanelContainer" parent="ManagmentGrid"]
+margin_left = 456.0
+margin_top = 514.0
+margin_right = 908.0
+margin_bottom = 767.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AbilityBar" parent="ManagmentGrid/C2" instance=ExtResource( 5 )]
+margin_right = 452.0
+margin_bottom = 253.0
+
+[node name="C3" type="PanelContainer" parent="ManagmentGrid"]
+margin_left = 912.0
+margin_top = 514.0
+margin_right = 1364.0
+margin_bottom = 767.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )

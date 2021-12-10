@@ -1,5 +1,6 @@
 extends PanelContainer
 
+# COMBAT LAYER PANELS
 export(NodePath) var resources_node
 onready var resources := get_node(resources_node)
 
@@ -23,15 +24,34 @@ onready var pouch := get_node(pouch_node)
 
 export(NodePath) var buttons_node
 onready var buttons := get_node(buttons_node)
-
-
+# MANAGMENT LAYER PANELS
+enum {COMBAT, MANAGMENT}
+var current_mode
 func _unhandled_key_input(_event: InputEventKey) -> void:
-	pass
-	
-	
+	if Input.is_action_just_pressed("ui_layer"):
+		switch_mode()
+
+
+func switch_mode():
+	if current_mode == COMBAT:
+		set_mode(MANAGMENT)
+	else:
+		set_mode(COMBAT)
+
+
+func set_mode(_mode):
+	match _mode:
+		COMBAT:
+			$CombatGrid.show()
+			$ManagmentGrid.hide()
+		MANAGMENT:
+			$CombatGrid.hide()
+			$ManagmentGrid.show()
+
+
 func _ready() -> void:
+	set_mode(COMBAT)
 	connect_signals()
-	connect_button()
 	
 	
 func connect_signals():
@@ -39,11 +59,6 @@ func connect_signals():
 	Server.connect("update_inventory_ui", self, "update_inventory_ui")
 	Server.connect("update_pouch_ui", self, "update_pouch_ui")
 	Server.connect("update_spellbook_ui", self, "update_spellbook_ui")
-	
-	
-func connect_button():
-	buttons.connect("toggled_equipment_window", self, "toggle_equipment")
-	buttons.connect("toggled_inventory_window", self, "toggle_inventory")
 	
 	
 func update_equipment_ui(_data : Dictionary):
@@ -68,19 +83,3 @@ func get_minimap_pivot_path():
 	
 func _physics_process(_delta: float) -> void:
 	debug.conf(Server.latency)
-
-	
-func toggle_inventory():
-	if inventory.visible:
-		inventory.hide()
-	else:
-		inventory.show()
-		inventory.raise()
-
-	
-func toggle_equipment():
-	if equipment.visible:
-		equipment.hide()
-	else:
-		equipment.show()
-		equipment.raise()

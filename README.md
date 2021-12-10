@@ -1,6 +1,4 @@
-<p align="center">
-  <h1> Aether </h1>
-</p>
+# Aether
 
 ## Overwiev
 n/a
