@@ -93,8 +93,6 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		return
 	if !item:
 		return
-	if !GlobalVariables.target or !is_instance_valid(GlobalVariables.target) or !GlobalVariables.target.is_inside_tree():
-		return
 	if !LocalDataTables.item_table[item["archetype"]].has("use_action"):
 		return
-	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["use_action"], GlobalVariables.target.name)
+	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["use_action"])

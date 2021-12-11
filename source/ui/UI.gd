@@ -1,32 +1,38 @@
 extends PanelContainer
 
-# COMBAT LAYER PANELS
-export(NodePath) var resources_node
-onready var resources := get_node(resources_node)
-
-export(NodePath) var minimap_node
-onready var minimap := get_node(minimap_node)
-
-export(NodePath) var debug_node
-onready var debug := get_node(debug_node)
-
-export(NodePath) var equipment_node
-onready var equipment := get_node(equipment_node)
-
-export(NodePath) var inventory_node
-onready var inventory := get_node(inventory_node)
-
-export(NodePath) var spellbook_node
-onready var spellbook := get_node(spellbook_node)
-
-export(NodePath) var pouch_node
-onready var pouch := get_node(pouch_node)
-
-export(NodePath) var buttons_node
-onready var buttons := get_node(buttons_node)
-# MANAGMENT LAYER PANELS
 enum {COMBAT, MANAGMENT}
 var current_mode
+
+# COMBAT LAYER PANELS
+export(NodePath) var CL_resources_node
+onready var CL_resources := get_node(CL_resources_node)
+
+export(NodePath) var CL_minimap_node
+onready var CL_minimap := get_node(CL_minimap_node)
+
+export(NodePath) var CL_debug_node
+onready var CL_debug := get_node(CL_debug_node)
+
+export(NodePath) var CL_spellbook_node
+onready var CL_spellbook := get_node(CL_spellbook_node)
+
+export(NodePath) var CL_pouch_node
+onready var CL_pouch := get_node(CL_pouch_node)
+
+# MANAGMENT LAYER PANELS
+export(NodePath) var ML_equipment_node
+onready var ML_equipment := get_node(ML_equipment_node)
+
+export(NodePath) var ML_inventory_node
+onready var ML_inventory := get_node(ML_inventory_node)
+
+export(NodePath) var ML_spellbook_node
+onready var ML_spellbook := get_node(ML_spellbook_node)
+
+export(NodePath) var ML_pouch_node
+onready var ML_pouch := get_node(ML_pouch_node)
+
+
 func _unhandled_key_input(_event: InputEventKey) -> void:
 	if Input.is_action_just_pressed("ui_layer"):
 		switch_mode()
@@ -40,11 +46,14 @@ func switch_mode():
 
 
 func set_mode(_mode):
+	current_mode = _mode
 	match _mode:
 		COMBAT:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			$CombatGrid.show()
 			$ManagmentGrid.hide()
 		MANAGMENT:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			$CombatGrid.hide()
 			$ManagmentGrid.show()
 
@@ -62,24 +71,26 @@ func connect_signals():
 	
 	
 func update_equipment_ui(_data : Dictionary):
-	equipment.configure(_data)
+	ML_equipment.configure(_data)
 	
 	
 func update_inventory_ui(_data : Array):
-	inventory.configure(_data)
+	ML_inventory.configure(_data)
 
 
 func update_pouch_ui(_data : Array):
-	pouch.configure(_data)
+	CL_pouch.configure(_data)
+	ML_pouch.configure(_data)
 
 
 func update_spellbook_ui(_data : Array):
-	spellbook.configure(_data)
+	CL_spellbook.configure(_data)
+	ML_spellbook.configure(_data)
 
 	
 func get_minimap_pivot_path():
-	return minimap.get_pivot_path()
+	return CL_minimap.get_pivot_path()
 
 	
 func _physics_process(_delta: float) -> void:
-	debug.conf(Server.latency)
+	CL_debug.conf(Server.latency)

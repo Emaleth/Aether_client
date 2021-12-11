@@ -28,11 +28,15 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-resources_node = NodePath("CombatGrid/A1/VBoxContainer/Resources")
-minimap_node = NodePath("CombatGrid/A3/VBoxContainer/Minimap")
-debug_node = NodePath("CombatGrid/A1/VBoxContainer/Debug")
-spellbook_node = NodePath("CombatGrid/C2/VBoxContainer/AbilityBar")
-pouch_node = NodePath("CombatGrid/C2/VBoxContainer/Pouch")
+CL_resources_node = NodePath("CombatGrid/A1/VBoxContainer/Resources")
+CL_minimap_node = NodePath("CombatGrid/A3/VBoxContainer/Minimap")
+CL_debug_node = NodePath("CombatGrid/A1/VBoxContainer/Debug")
+CL_spellbook_node = NodePath("CombatGrid/C2/VBoxContainer/AbilityBar")
+CL_pouch_node = NodePath("CombatGrid/C2/VBoxContainer/Pouch")
+ML_equipment_node = NodePath("ManagmentGrid/B1/Equipment")
+ML_inventory_node = NodePath("ManagmentGrid/B3/Inventory")
+ML_spellbook_node = NodePath("ManagmentGrid/C2/AbilityBar")
+ML_pouch_node = NodePath("ManagmentGrid/C3/Pouch")
 
 [node name="CombatGrid" type="GridContainer" parent="."]
 visible = false
@@ -212,9 +216,54 @@ margin_right = 1366.0
 margin_bottom = 768.0
 columns = 3
 
-[node name="B2" type="PanelContainer" parent="ManagmentGrid"]
+[node name="A1" type="PanelContainer" parent="ManagmentGrid"]
 margin_right = 452.0
 margin_bottom = 253.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="A2" type="PanelContainer" parent="ManagmentGrid"]
+margin_left = 456.0
+margin_right = 908.0
+margin_bottom = 253.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="A3" type="PanelContainer" parent="ManagmentGrid"]
+margin_left = 912.0
+margin_right = 1364.0
+margin_bottom = 253.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="B1" type="PanelContainer" parent="ManagmentGrid"]
+margin_top = 257.0
+margin_right = 452.0
+margin_bottom = 510.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Equipment" parent="ManagmentGrid/B1" instance=ExtResource( 8 )]
+margin_left = 222.0
+margin_top = 122.0
+margin_right = 230.0
+margin_bottom = 130.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="B2" type="PanelContainer" parent="ManagmentGrid"]
+margin_left = 456.0
+margin_top = 257.0
+margin_right = 908.0
+margin_bottom = 510.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -230,67 +279,22 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="B3" type="PanelContainer" parent="ManagmentGrid"]
-margin_left = 456.0
-margin_right = 908.0
-margin_bottom = 253.0
+margin_left = 912.0
+margin_top = 257.0
+margin_right = 1364.0
+margin_bottom = 510.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Inventory" parent="ManagmentGrid/B3" instance=ExtResource( 4 )]
-margin_left = 210.0
-margin_top = 122.0
-margin_right = 242.0
-margin_bottom = 130.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="B1" type="PanelContainer" parent="ManagmentGrid"]
-margin_left = 912.0
-margin_right = 1364.0
-margin_bottom = 253.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="Equipment" parent="ManagmentGrid/B1" instance=ExtResource( 8 )]
 margin_left = 222.0
 margin_top = 122.0
 margin_right = 230.0
 margin_bottom = 130.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="A1" type="PanelContainer" parent="ManagmentGrid"]
-margin_top = 257.0
-margin_right = 452.0
-margin_bottom = 510.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="A2" type="PanelContainer" parent="ManagmentGrid"]
-margin_left = 456.0
-margin_top = 257.0
-margin_right = 908.0
-margin_bottom = 510.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="A3" type="PanelContainer" parent="ManagmentGrid"]
-margin_left = 912.0
-margin_top = 257.0
-margin_right = 1364.0
-margin_bottom = 510.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
 
 [node name="C1" type="PanelContainer" parent="ManagmentGrid"]
 margin_top = 514.0
@@ -300,10 +304,6 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
-
-[node name="Pouch" parent="ManagmentGrid/C1" instance=ExtResource( 12 )]
-margin_right = 452.0
-margin_bottom = 253.0
 
 [node name="C2" type="PanelContainer" parent="ManagmentGrid"]
 margin_left = 456.0
@@ -328,3 +328,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
+
+[node name="Pouch" parent="ManagmentGrid/C3" instance=ExtResource( 12 )]
+margin_right = 452.0
+margin_bottom = 253.0
