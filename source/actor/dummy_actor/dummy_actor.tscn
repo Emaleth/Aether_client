@@ -2,7 +2,7 @@
 
 [ext_resource path="res://source/actor/dummy_actor/dummy_actor.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/3d/name_plate/NamePlate.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/materials/prototype_red.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/proto_material_08.tres" type="Material" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.3
