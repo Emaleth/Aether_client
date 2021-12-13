@@ -93,6 +93,6 @@ func _unhandled_key_input(event: InputEventKey) -> void:
 		return
 	if !item:
 		return
-	if !LocalDataTables.item_table[item["archetype"]].has("use_action"):
+	if !LocalDataTables.item_table[item["archetype"]].has("action") and LocalDataTables.item_table[item["archetype"]]["action"] != null:
 		return
-	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["use_action"])
+	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["action"])
