@@ -30,4 +30,6 @@ func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 	var from = camera.project_ray_origin(mouse_position)
 	var to = from + camera.project_ray_normal(mouse_position) * ray_length
 	var intersection = space_state.intersect_ray(from, to)
+	
 	return intersection
+	

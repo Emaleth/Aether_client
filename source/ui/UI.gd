@@ -53,12 +53,12 @@ func set_mode(_mode):
 	match _mode:
 		COMBAT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			$CombatGrid.show()
-			$ManagmentGrid.hide()
+			$CombatLayer.show()
+			$ManagmentLayer.hide()
 		MANAGMENT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			$CombatGrid.hide()
-			$ManagmentGrid.show()
+			$CombatLayer.hide()
+			$ManagmentLayer.show()
 
 
 func _ready() -> void:
