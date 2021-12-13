@@ -79,7 +79,7 @@ func drop_data(_position: Vector2, _data) -> void:
 		"amount" : item["amount"] if item else null 
 	}
 	if Input.is_action_pressed("mod") and _data["amount"] > 1:
-		GlobalVariables.user_interface.get_node("AmountPopup").conf(_data, data)
+		GlobalVariables.user_interface.ML_amount_popup.conf(_data, data)
 	else:
 		Server.request_item_transfer(_data, -1, data)
 	

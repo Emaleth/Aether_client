@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://assets/styleboxes/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://source/ui/minimap/Minimap.gd" type="Script" id=2]
 [ext_resource path="res://assets/icons/ui/Blue W.png" type="Texture" id=3]
 [ext_resource path="res://assets/icons/ui/Blue N.png" type="Texture" id=4]
@@ -13,7 +12,6 @@ viewport_path = NodePath("Viewport")
 [node name="Minimap" type="PanelContainer"]
 margin_right = 214.0
 margin_bottom = 214.0
-custom_styles/panel = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="Viewport" type="Viewport" parent="."]
@@ -30,10 +28,10 @@ size = 50.0
 near = 0.01
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 210.0
-margin_bottom = 210.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 207.0
+margin_bottom = 207.0
 rect_min_size = Vector2( 200, 200 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -42,9 +40,9 @@ texture = SubResource( 1 )
 expand = true
 
 [node name="E" type="TextureRect" parent="."]
-margin_left = 194.0
+margin_left = 191.0
 margin_top = 99.0
-margin_right = 210.0
+margin_right = 207.0
 margin_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -55,9 +53,9 @@ texture = ExtResource( 6 )
 expand = true
 
 [node name="W" type="TextureRect" parent="."]
-margin_left = 4.0
+margin_left = 7.0
 margin_top = 99.0
-margin_right = 20.0
+margin_right = 23.0
 margin_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -69,9 +67,9 @@ expand = true
 
 [node name="S" type="TextureRect" parent="."]
 margin_left = 99.0
-margin_top = 194.0
+margin_top = 191.0
 margin_right = 115.0
-margin_bottom = 210.0
+margin_bottom = 207.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 16, 16 )
@@ -82,9 +80,9 @@ expand = true
 
 [node name="N" type="TextureRect" parent="."]
 margin_left = 99.0
-margin_top = 4.0
+margin_top = 7.0
 margin_right = 115.0
-margin_bottom = 20.0
+margin_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 16, 16 )

@@ -15,9 +15,8 @@ onready var minimap_remote_transform = $MinimapRemoteTransform
 
 
 func instanciate_camera():
-#	GlobalVariables.camera_rig = camera_rig_scene.instance()
-#	camera_position.add_child(GlobalVariables.camera_rig)
-	camera_position.add_child(camera_rig_scene.instance())
+	GlobalVariables.camera_rig = camera_rig_scene.instance()
+	camera_position.add_child(GlobalVariables.camera_rig)
 
 
 func set_minimap_camera_transform(_path):
@@ -30,11 +29,15 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	move()
-	
+#	$Position3D.look_at(GlobalVariables.camera_rig.cast_ray_from_camera_to_mouse_pointer().position)
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		return
+	if Input.is_action_just_pressed("primary_action"):
+		pass
+	if Input.is_action_just_pressed("secondary_action"):
+		pass
 	if event is InputEventMouseMotion:
 		rotate_character(event.relative)
 

@@ -1,23 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://assets/styleboxes/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://source/ui/chatbox/ChatBox.gd" type="Script" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="Chatbox" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
-custom_styles/panel = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 204.0
-margin_bottom = 154.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 207.0
+margin_bottom = 157.0
 rect_min_size = Vector2( 200, 150 )
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -25,15 +19,16 @@ size_flags_vertical = 3
 
 [node name="OutputPanel" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 200.0
-margin_bottom = 122.0
+margin_bottom = 108.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 1 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/OutputPanel"]
-margin_right = 200.0
-margin_bottom = 122.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 101.0
 size_flags_horizontal = 3
 size_flags_vertical = 11
 scroll_horizontal_enabled = false
@@ -42,14 +37,14 @@ __meta__ = {
 }
 
 [node name="MessageList" type="VBoxContainer" parent="VBoxContainer/OutputPanel/ScrollContainer"]
-margin_right = 200.0
-margin_bottom = 122.0
+margin_right = 186.0
+margin_bottom = 94.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Template" type="HBoxContainer" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList"]
-margin_right = 200.0
+margin_right = 186.0
 margin_bottom = 14.0
 mouse_filter = 2
 
@@ -67,7 +62,7 @@ size_flags_vertical = 1
 
 [node name="Message" type="Label" parent="VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template"]
 margin_left = 8.0
-margin_right = 200.0
+margin_right = 186.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -78,14 +73,15 @@ __meta__ = {
 }
 
 [node name="InputPanel" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 126.0
+margin_top = 112.0
 margin_right = 200.0
 margin_bottom = 150.0
-custom_styles/panel = SubResource( 2 )
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer/InputPanel"]
-margin_right = 200.0
-margin_bottom = 24.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 31.0
 placeholder_text = ">"
 caret_blink = true
 caret_blink_speed = 0.5

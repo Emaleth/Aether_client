@@ -1,25 +1,23 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://source/ui/equipment/Equipment.gd" type="Script" id=1]
-[ext_resource path="res://assets/styleboxes/panel.tres" type="StyleBox" id=2]
 
 [node name="Equipment" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
-custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-margin_left = 4.0
-margin_top = 4.0
-margin_right = 10.0
-margin_bottom = 10.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 7.0
+margin_bottom = 7.0
 custom_constants/separation = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
-margin_bottom = 6.0
 
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/CenterContainer"]
-margin_top = 3.0
-margin_bottom = 3.0
 columns = 3

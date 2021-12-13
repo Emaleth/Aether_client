@@ -34,6 +34,9 @@ func _ready():
 
 
 func _physics_process(_delta: float) -> void:
+	# player state
+	send_player_state()
+	# int / ext
 	interpolate_or_extrapolate()
 	# pc
 	add_pc_to_the_tree()
@@ -285,3 +288,14 @@ func extrapolate(_render_time):
 			var rotation_delta = (current_rot - old_rot) 
 			modified_data["rot"] = Basis(current_rot + (rotation_delta * extrapolation_factor))
 			update_bullet_inside_the_collection(bullet, modified_data)
+
+var frame_index = 0
+func send_player_state():
+	if GlobalVariables.player_actor:
+		frame_index += 1
+		if frame_index >= 3:
+			var pos = GlobalVariables.player_actor.global_transform.origin
+			var rot = GlobalVariables.player_actor.global_transform.basis
+			var aim = GlobalVariables.camera_rig.cast_ray_from_camera_to_mouse_pointer().position if GlobalVariables.camera_rig.cast_ray_from_camera_to_mouse_pointer().size() != 0 else Vector3.ZERO
+			Server.send_player_state(pos, rot, aim)
+			frame_index = 0

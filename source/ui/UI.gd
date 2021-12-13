@@ -32,6 +32,9 @@ onready var ML_spellbook := get_node(ML_spellbook_node)
 export(NodePath) var ML_pouch_node
 onready var ML_pouch := get_node(ML_pouch_node)
 
+export(NodePath) var ML_amount_popup_node
+onready var ML_amount_popup := get_node(ML_amount_popup_node)
+
 
 func _unhandled_key_input(_event: InputEventKey) -> void:
 	if Input.is_action_just_pressed("ui_layer"):

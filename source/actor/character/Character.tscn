@@ -28,3 +28,10 @@ material/0 = null
 
 [node name="CameraPosition" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.3, 0 )
+
+[node name="Position3D" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.497738, 1.26055, 0.443406 )
+
+[node name="RayCast" type="RayCast" parent="Position3D"]
+enabled = true
+cast_to = Vector3( 0, 0, -1000 )

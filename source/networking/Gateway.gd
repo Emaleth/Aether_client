@@ -15,8 +15,8 @@ signal login_failure
 signal registration_success
 signal registration_failure
 
-func _ready() -> void: #temp intill auth is removed
-	connect_to_server("emaleth@protonmail.com", "12345678", false)
+#func _ready() -> void: #temp intill auth is removed
+#	connect_to_server("emaleth@protonmail.com", "12345678", false)
 	
 func _process(_delta: float) -> void:
 	if not get_custom_multiplayer():

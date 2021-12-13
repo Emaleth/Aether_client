@@ -124,13 +124,11 @@ remote func recive_chat_state(chat_state):
 
 
 func send_action_request(_action : String):
-	pass
-#	rpc_id(1, "recive_action_request", _action, _target)
+	rpc_id(1, "recive_action_request", _action)
 	
 	
-#	rpc_id(1, "recive_movement_request", _position)
-func send_player_state(_position : Vector3, _rotation : Basis):
-	pass
+func send_player_state(_position : Vector3, _rotation : Basis, _aim : Vector3):
+	rpc_unreliable_id(1, "recive_player_state", _position, _rotation, _aim)
 	
 
 remote func receive_data_tables(_data : Dictionary):

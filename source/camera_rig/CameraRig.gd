@@ -8,10 +8,6 @@ var max_rotation_x : float = deg2rad(80)
 
 onready var camera = $Camera
 
-
-#func _ready() -> void:
-#	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
