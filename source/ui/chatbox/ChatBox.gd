@@ -9,6 +9,7 @@ func _ready() -> void:
 	Server.connect("s_update_chat_state", self, "update_chat_box")
 	template_chat_line.hide()
 	
+	
 func format_chat_timestamp(_timestamp):
 	var date_dict = OS.get_datetime_from_unix_time(_timestamp / 1000)
 	var hour : String
@@ -26,6 +27,7 @@ func format_chat_timestamp(_timestamp):
 	
 	return formatted_timestamp
 
+
 func update_chat_box(_chat_state):
 	for i in _chat_state:
 		var sender = i[0]
@@ -39,7 +41,13 @@ func update_chat_box(_chat_state):
 		new_line.show()
 		# MAKE IT SCROLL TO THE BOTTOM
 
+
 func _on_LineEdit_text_entered(new_text: String) -> void:
 	Server.send_chat_message(new_text)
 	input_line.clear()
 	input_line.release_focus()
+
+
+func _unhandled_key_input(event: InputEventKey) -> void:
+	if Input.is_action_just_pressed("chat"):
+		input_line.grab_focus()

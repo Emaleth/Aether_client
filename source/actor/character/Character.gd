@@ -27,9 +27,9 @@ func _ready() -> void:
 	instanciate_camera()
 	
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	move()
-#	$Position3D.look_at(GlobalVariables.camera_rig.cast_ray_from_camera_to_mouse_pointer().position)
+
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -44,9 +44,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func get_direction() -> Vector3:
 	var direction = Vector3.ZERO
-	direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
-	direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	direction = direction.normalized()
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
+		direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		direction = direction.normalized()
 	
 	return direction
 	

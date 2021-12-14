@@ -25,6 +25,7 @@ Server="*res://source/networking/Server.gd"
 Gateway="*res://source/networking/Gateway.gd"
 LocalDataTables="*res://source/local_data_tables.gd"
 GlobalVariables="*res://source/global_variables.gd"
+MaterialPreloader="*res://source/optimization/MaterialPreloader.tscn"
 
 [debug]
 

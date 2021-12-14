@@ -35,4 +35,3 @@ mesh = SubResource( 5 )
 material/0 = null
 
 [node name="NamePlate" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.827291, 0 )

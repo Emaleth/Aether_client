@@ -1,0 +1,85 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/materials/proto_material_04.tres" type="Material" id=1]
+[ext_resource path="res://assets/materials/proto_material_05.tres" type="Material" id=2]
+[ext_resource path="res://assets/materials/proto_material_06.tres" type="Material" id=3]
+[ext_resource path="res://assets/materials/proto_material_08.tres" type="Material" id=4]
+[ext_resource path="res://assets/materials/proto_material_09.tres" type="Material" id=5]
+[ext_resource path="res://assets/materials/proto_material_13.tres" type="Material" id=6]
+[ext_resource path="res://assets/materials/proto_material_12.tres" type="Material" id=7]
+[ext_resource path="res://assets/materials/proto_material_07.tres" type="Material" id=8]
+[ext_resource path="res://assets/materials/proto_material_11.tres" type="Material" id=9]
+[ext_resource path="res://assets/materials/proto_material_01.tres" type="Material" id=10]
+[ext_resource path="res://assets/materials/proto_material_10.tres" type="Material" id=11]
+[ext_resource path="res://assets/materials/proto_material_03.tres" type="Material" id=12]
+[ext_resource path="res://assets/materials/proto_material_02.tres" type="Material" id=13]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 1, 1, 1 )
+
+[node name="MaterialPreloader" type="Node"]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 4 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 10 )
+
+[node name="MeshInstance2" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 2 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 13 )
+
+[node name="MeshInstance3" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 12 )
+
+[node name="MeshInstance4" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, -2 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="MeshInstance5" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1000, -4 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="MeshInstance6" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1000, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 3 )
+
+[node name="MeshInstance7" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1000, 2 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 8 )
+
+[node name="MeshInstance8" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1000, 4 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 4 )
+
+[node name="MeshInstance9" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1000, -2 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 5 )
+
+[node name="MeshInstance10" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -1000, -4 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 11 )
+
+[node name="MeshInstance11" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1000, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 9 )
+
+[node name="MeshInstance12" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1000, 2 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 7 )
+
+[node name="MeshInstance13" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -1000, -2 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 6 )
