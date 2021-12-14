@@ -4,20 +4,22 @@ enum {LOGIN, REGISTER, LOADING}
 # world scene
 onready var game = preload("res://source/world/World.tscn")
 # main tab container
-onready var tab_container = $CenterContainer/AuthenticationScreen
+#onready var tab_container = $CenterContainer/AuthenticationScreen
+onready var login_panel = $CenterContainer2/PanelContainer2/VBoxContainer/Login
+onready var register_panel = $CenterContainer2/PanelContainer2/VBoxContainer/Register
 # loading info / animation nodes
 onready var loading_label = $MarginContainer/VBoxContainer/Label
 # login window
-onready var login_account = $CenterContainer/AuthenticationScreen/Login/VBoxContainer/AccountLine
-onready var login_password = $CenterContainer/AuthenticationScreen/Login/VBoxContainer/PasswordLine
-onready var login_remember = $CenterContainer/AuthenticationScreen/Login/VBoxContainer/HBoxContainer/CheckBox
-onready var login_button = $CenterContainer/AuthenticationScreen/Login/VBoxContainer/Login
+onready var login_account = $CenterContainer2/PanelContainer2/VBoxContainer/Login/VBoxContainer/AccountLine
+onready var login_password = $CenterContainer2/PanelContainer2/VBoxContainer/Login/VBoxContainer/PasswordLine
+onready var login_remember = $CenterContainer2/PanelContainer2/VBoxContainer/Login/VBoxContainer/HBoxContainer/CheckBox
+onready var login_button = $CenterContainer2/PanelContainer2/VBoxContainer/Login/VBoxContainer/Login
 # register window
-onready var register_email = $CenterContainer/AuthenticationScreen/Register/VBoxContainer/EmailLine
-onready var register_password = $CenterContainer/AuthenticationScreen/Login/VBoxContainer/PasswordLine
-onready var register_password_repeat = $CenterContainer/AuthenticationScreen/Register/VBoxContainer/PasswordRepeatLine
-onready var register_agreement = $CenterContainer/AuthenticationScreen/Register/VBoxContainer/HBoxContainer/CheckBox
-onready var register_button = $CenterContainer/AuthenticationScreen/Register/VBoxContainer/Register
+onready var register_email = $CenterContainer2/PanelContainer2/VBoxContainer/Register/VBoxContainer/EmailLine
+onready var register_password = $CenterContainer2/PanelContainer2/VBoxContainer/Register/VBoxContainer/PasswordLine
+onready var register_password_repeat = $CenterContainer2/PanelContainer2/VBoxContainer/Register/VBoxContainer/PasswordRepeatLine
+onready var register_agreement = $CenterContainer2/PanelContainer2/VBoxContainer/Register/VBoxContainer/HBoxContainer/CheckBox
+onready var register_button = $CenterContainer2/PanelContainer2/VBoxContainer/Register/VBoxContainer/Register
 # else
 onready var quit_button = $Quit
 
@@ -30,17 +32,19 @@ func _ready():
 func set_menu_state(state):
 	match state:
 		LOGIN:
-			tab_container.show()
+			login_panel.show()
+			register_panel.hide()
 			loading_label.hide()
 			login_button.disabled = false
 			register_button.disabled = true
 		REGISTER:
-			tab_container.show()
+			login_panel.hide()
+			register_panel.show()
 			loading_label.hide()
 			login_button.disabled = true
 			register_button.disabled = false
 		LOADING:
-			tab_container.hide()
+			$CenterContainer2.hide()
 			loading_label.show()
 			loading_label.text = "Logging in..."
 			login_button.disabled = true
@@ -52,14 +56,14 @@ func enter_world():
 func quit() -> void:
 	get_tree().quit()
 
-func tab_changed(tab):
-	tab_container.rect_size = tab_container.get_child(tab).rect_size
-	yield(get_tree(), "idle_frame")
-	match tab:
-		0:
-			set_menu_state(LOGIN)
-		1:
-			set_menu_state(REGISTER)
+#func tab_changed(tab):
+#	tab_container.rect_size = tab_container.get_child(tab).rect_size
+#	yield(get_tree(), "idle_frame")
+#	match tab:
+#		0:
+#			set_menu_state(LOGIN)
+#		1:
+#			set_menu_state(REGISTER)
 
 func login() -> void:
 	if login_account.text == "" or login_password.text == "":
@@ -87,3 +91,11 @@ func register() -> void:
 		Gateway.connect_to_server(username, password, true)
 
 
+
+
+func _on_LoginTab_pressed() -> void:
+	set_menu_state(LOGIN)
+
+func _on_RegisterTab_pressed() -> void:
+	set_menu_state(REGISTER)
+	
