@@ -48,6 +48,6 @@ func _on_LineEdit_text_entered(new_text: String) -> void:
 	input_line.release_focus()
 
 
-func _unhandled_key_input(event: InputEventKey) -> void:
+func _unhandled_key_input(_event: InputEventKey) -> void:
 	if Input.is_action_just_pressed("chat"):
 		input_line.grab_focus()

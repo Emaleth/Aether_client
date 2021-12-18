@@ -245,6 +245,10 @@ func interpolate(_render_time):
 			remove_bullet_from_the_collection(bullet)
 	
 	
+	for loot in world_state_buffer[2]["L"]:
+		print(loot)
+	
+	
 func extrapolate(_render_time):
 	var extrapolation_factor = float(_render_time - world_state_buffer[0]["T"]) / float(world_state_buffer[1]["T"] - world_state_buffer[0]["T"]) - 1.00
 	# PLAYERS
