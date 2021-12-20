@@ -31,12 +31,13 @@ func interpolate_or_extrapolate():
 			$NPCProcessor.interpolate(render_time, world_state_buffer)
 			$PCProcessor.interpolate(render_time, world_state_buffer)
 			$AbilityProcessor.interpolate(render_time, world_state_buffer)
-#			$LootProcessor.interpolate(render_time, world_state_buffer)
+		
+			$LootProcessor.process_data()
 
 		elif render_time > float(world_state_buffer[1]["T"]):
 			$NPCProcessor.extrapolate(render_time, world_state_buffer)
 			$PCProcessor.extrapolate(render_time, world_state_buffer)
 			$AbilityProcessor.extrapolate(render_time, world_state_buffer)
-#			$LootProcessor.extrapolate(render_time, world_state_buffer)
+
 
 

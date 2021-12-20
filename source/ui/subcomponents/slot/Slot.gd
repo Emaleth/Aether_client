@@ -84,15 +84,31 @@ func drop_data(_position: Vector2, _data) -> void:
 		Server.request_item_transfer(_data, -1, data)
 	
 	
+#func _unhandled_key_input(event: InputEventKey) -> void:
+#	if !shortcut:
+#		return
+#	if !InputMap.action_has_event(shortcut, event):
+#		return
+#	if !event.pressed:
+#		return
+#	if !item:
+#		return
+#	if !LocalDataTables.item_table[item["archetype"]].has("action") and LocalDataTables.item_table[item["archetype"]]["action"] != null:
+#		return
+#	if Input.is_action_just_pressed(shortcut):
+#		Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["action"])
+
 func _unhandled_key_input(event: InputEventKey) -> void:
-	if !shortcut:
-		return
-	if !InputMap.action_has_event(shortcut, event):
-		return
-	if !event.pressed:
-		return
-	if !item:
-		return
-	if !LocalDataTables.item_table[item["archetype"]].has("action") and LocalDataTables.item_table[item["archetype"]]["action"] != null:
-		return
-	Server.send_action_request(LocalDataTables.item_table[item["archetype"]]["action"])
+	var data = {
+		"container" : container,
+		"index" : self.get_index()
+	}
+	if (shortcut and
+		InputMap.action_has_event(shortcut, event) and
+		event.pressed and
+		item and
+		LocalDataTables.item_table[item["archetype"]].has("action") and 
+		LocalDataTables.item_table[item["archetype"]]["action"] != null):
+#		print("YEEEE")
+		if Input.is_action_just_pressed(shortcut):
+			Server.send_action_request(data)
