@@ -123,8 +123,8 @@ remote func recive_chat_state(chat_state):
 		emit_signal("s_update_chat_state", chat_state)
 
 
-func send_action_request(_action : Dictionary):
-	rpc_id(1, "recive_action_request", _action)
+func send_item_use_request(_data : Dictionary):
+	rpc_id(1, "request_item_use", _data)
 	
 	
 func send_player_state(_position : Vector3, _rotation : Basis, _aim : Vector3):
@@ -164,4 +164,8 @@ remote func recive_spellbook_data(_data : Array):
 		
 func request_item_transfer(_from_data : Dictionary, _amount : int, _to_data : Dictionary):
 	rpc_id(1, "request_item_transfer", _from_data, _amount, _to_data)
+	
+	
+func request_interaction(m_interaction_type : String, m_interact_with_id : String):
+	rpc_id(1, "request_interaction", m_interaction_type, m_interact_with_id)
 	

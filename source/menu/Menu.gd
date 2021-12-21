@@ -1,13 +1,12 @@
 extends Control
-# menu states
+
 enum {LOGIN, REGISTER, LOADING}
-# world scene
+
 onready var game = preload("res://source/world_processor/WorldProcessor.tscn")
-# main tab container
-#onready var tab_container = $CenterContainer/AuthenticationScreen
+
 onready var login_panel = $CenterContainer/LoginPanel
 onready var register_panel = $CenterContainer/RegisterPanel
-# loading info / animation nodes
+
 
 onready var quit_button = $Quit
 
