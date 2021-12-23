@@ -17,7 +17,6 @@ func add_to_the_tree():
 			var new_loot = loot_scene.instance()
 			new_loot.name = str(key)
 			container.call_deferred("add_child", new_loot, true)
-#			new_loot.set_deferred("global_transform.origin", collection[key]["pos"])
 			new_loot.update(collection[key]["pos"])
 			
 

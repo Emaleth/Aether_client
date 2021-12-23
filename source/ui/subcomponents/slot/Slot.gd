@@ -84,7 +84,7 @@ func drop_data(_position: Vector2, _data) -> void:
 		Server.request_item_transfer(_data, -1, data)
 	
 	
-func _unhandled_key_input(_event: InputEventKey) -> void:
+func _unhandled_key_input(event: InputEventKey) -> void:
 	if !shortcut or !item:
 		return
 	if Input.is_action_just_pressed(shortcut):

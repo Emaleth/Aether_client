@@ -41,6 +41,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_character(event.relative)
 
+	if Input.is_action_just_pressed("pick_loot"):
+		pick_loot()
+		
 
 func get_direction() -> Vector3:
 	var direction = Vector3.ZERO
@@ -62,3 +65,19 @@ func rotate_character(_amount : Vector2) -> void:
 		return
 	rotation.y -= _amount.x * sensibility
 	rotation.y = wrapf(rotation.y, -180, 180)
+
+
+func pick_loot():
+	var pickable_loot = $LootDetector.get_overlapping_bodies()
+	if pickable_loot.size() != 0:
+		var nearest_loot = null
+		var closest_distance = null
+		for i in pickable_loot:
+			if closest_distance == null:
+				nearest_loot = i
+				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
+			elif i.global_transform.origin.distance_to(global_transform.origin) < closest_distance:
+				nearest_loot = i
+				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
+		Server.request_interaction("loot", nearest_loot.get_parent().name)
+#		print(nearest_loot.name)
