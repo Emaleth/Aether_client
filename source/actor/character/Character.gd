@@ -43,6 +43,8 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	if Input.is_action_just_pressed("pick_loot"):
 		pick_loot()
+	if Input.is_action_just_pressed("npc_interact"):
+		npc_interact()
 		
 
 func get_direction() -> Vector3:
@@ -80,4 +82,18 @@ func pick_loot():
 				nearest_loot = i
 				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
 		Server.request_interaction("loot", nearest_loot.get_parent().name)
-#		print(nearest_loot.name)
+
+
+func npc_interact():
+	var interact_with = $LootDetector.get_overlapping_bodies()
+	if interact_with.size() != 0:
+		var nearest_npc = null
+		var closest_distance = null
+		for i in interact_with:
+			if closest_distance == null:
+				nearest_npc = i
+				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
+			elif i.global_transform.origin.distance_to(global_transform.origin) < closest_distance:
+				nearest_npc = i
+				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
+		Server.request_interaction("shop", nearest_npc.get_parent().name)
