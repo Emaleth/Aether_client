@@ -29,7 +29,11 @@ func _ready() -> void:
 	
 func _physics_process(_delta: float) -> void:
 	move()
-
+	
+	
+func _process(_delta: float) -> void:
+	get_interactables()
+	
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -41,10 +45,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_character(event.relative)
 
-	if Input.is_action_just_pressed("pick_loot"):
-		pick_loot()
-	if Input.is_action_just_pressed("npc_interact"):
-		npc_interact()
+	if Input.is_action_just_pressed("interact"):
+		interact()
 		
 
 func get_direction() -> Vector3:
@@ -69,31 +71,22 @@ func rotate_character(_amount : Vector2) -> void:
 	rotation.y = wrapf(rotation.y, -180, 180)
 
 
-func pick_loot():
-	var pickable_loot = $LootDetector.get_overlapping_bodies()
-	if pickable_loot.size() != 0:
-		var nearest_loot = null
+func interact():
+	if GlobalVariables.interactable != null:
+		Server.request_interaction("loot", GlobalVariables.interactable.name)
+	
+
+func get_interactables():
+	var interactable = $InteractionArea.get_overlapping_bodies()
+	var nearest_loot = null
+	if interactable.size() != 0:
 		var closest_distance = null
-		for i in pickable_loot:
+		for i in interactable:
 			if closest_distance == null:
 				nearest_loot = i
 				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
 			elif i.global_transform.origin.distance_to(global_transform.origin) < closest_distance:
 				nearest_loot = i
 				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
-		Server.request_interaction("loot", nearest_loot.get_parent().name)
-
-
-func npc_interact():
-	var interact_with = $LootDetector.get_overlapping_bodies()
-	if interact_with.size() != 0:
-		var nearest_npc = null
-		var closest_distance = null
-		for i in interact_with:
-			if closest_distance == null:
-				nearest_npc = i
-				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
-			elif i.global_transform.origin.distance_to(global_transform.origin) < closest_distance:
-				nearest_npc = i
-				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
-		Server.request_interaction("shop", nearest_npc.get_parent().name)
+	GlobalVariables.interactable = nearest_loot if nearest_loot != null else null
+	

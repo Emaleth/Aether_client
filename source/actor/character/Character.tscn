@@ -40,13 +40,13 @@ material/0 = null
 [node name="CameraPosition" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.3, 0 )
 
-[node name="LootDetector" type="Area" parent="."]
+[node name="InteractionArea" type="Area" parent="."]
 collision_layer = 0
 collision_mask = 16
 
-[node name="CollisionShape" type="CollisionShape" parent="LootDetector"]
+[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
 shape = SubResource( 3 )
 
-[node name="MeshInstance" type="MeshInstance" parent="LootDetector"]
+[node name="MeshInstance" type="MeshInstance" parent="InteractionArea"]
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )

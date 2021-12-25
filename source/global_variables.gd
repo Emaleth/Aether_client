@@ -15,7 +15,7 @@ var player_actor = null
 var user_interface = null
 var world = null
 
-var target = null
+var interactable = null
 
 # CLIENT SETTINGS
 var settings := {}
