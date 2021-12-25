@@ -33,3 +33,6 @@ func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 	
 	return intersection
 	
+func _process(delta: float) -> void:
+	var x = cast_ray_from_camera_to_mouse_pointer()
+	GlobalVariables.target = x.collider if x.size() != 0 else null
