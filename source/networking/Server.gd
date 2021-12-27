@@ -127,6 +127,10 @@ func send_item_use_request(_data : Dictionary):
 	rpc_id(1, "request_item_use", _data)
 	
 	
+func send_weapon_use_request(_mode : String):
+	rpc_id(1, "request_weapon_use", _mode)
+	
+	
 func send_player_state(_position : Vector3, _rotation : Basis, _aim : Vector3):
 	rpc_unreliable_id(1, "recive_player_state", _position, _rotation, _aim)
 	

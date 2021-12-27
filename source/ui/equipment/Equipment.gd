@@ -16,3 +16,9 @@ func configure(_data : Dictionary):
 	
 func _ready() -> void:
 	configure(GlobalVariables.equipment_data)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("primary_action"):
+		Server.send_weapon_use_request("primary")
+	elif Input.is_action_just_pressed("secondary_action"):
+		Server.send_weapon_use_request("secondary")
