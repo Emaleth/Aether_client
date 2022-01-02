@@ -1,9 +1,10 @@
 extends PanelContainer
 
 onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
-onready var slot_grid = $CenterContainer/ScrollContainer/GridContainer
-onready var scroll_container = $CenterContainer/ScrollContainer
+onready var slot_grid = $VBoxContainer/CenterContainer/ScrollContainer/GridContainer
+onready var scroll_container = $VBoxContainer/CenterContainer/ScrollContainer
 onready var scoll_bar = scroll_container.get_v_scrollbar()
+onready var gold_label = $VBoxContainer/HBoxContainer/Label 
 
 var max_rows = 5
 
@@ -19,8 +20,13 @@ func configure(_data : Array):
 	calculate_scroll_container_size(ceil(_data.size() / float(slot_grid.columns)), slot_grid.get_constant("vseparation"), 40)
 
 
+func configure_currency(_data : Dictionary):
+	gold_label.text = str(_data.gold)
+
+
 func _ready() -> void:
 	configure(GlobalVariables.inventory_data)
+	configure_currency(GlobalVariables.currency_data)
 	hide_scroll_bar()
 
 

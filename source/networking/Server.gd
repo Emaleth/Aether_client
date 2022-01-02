@@ -22,6 +22,7 @@ signal update_inventory_ui
 signal update_pouch_ui
 signal update_equipment_ui
 signal update_spellbook_ui
+signal update_currency_ui
 
 
 func _physics_process(delta: float) -> void:
@@ -158,6 +159,12 @@ remote func recive_pouch_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.pouch_data = _data
 		emit_signal("update_pouch_ui", _data)
+
+
+remote func recive_currency_data(_data : Dictionary):
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.currency_data = _data
+		emit_signal("update_currency_ui", _data)
 
 
 remote func recive_spellbook_data(_data : Array):

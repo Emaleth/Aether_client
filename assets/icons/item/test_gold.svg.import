@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/cancel.svg-d2de647bf76e1fb53f2fba5399d64763.stex"
+path="res://.import/test_gold.svg-4932bc8a5a47b061633147248056150a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/ui/cancel.svg"
-dest_files=[ "res://.import/cancel.svg-d2de647bf76e1fb53f2fba5399d64763.stex" ]
+source_file="res://assets/icons/item/test_gold.svg"
+dest_files=[ "res://.import/test_gold.svg-4932bc8a5a47b061633147248056150a.stex" ]
 
 [params]
 
@@ -32,4 +32,4 @@ process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
-svg/scale=0.03
+svg/scale=1.0

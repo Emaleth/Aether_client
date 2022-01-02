@@ -71,6 +71,7 @@ func connect_signals():
 	Server.connect("update_inventory_ui", self, "update_inventory_ui")
 	Server.connect("update_pouch_ui", self, "update_pouch_ui")
 	Server.connect("update_spellbook_ui", self, "update_spellbook_ui")
+	Server.connect("update_currency_ui", self, "update_currency_ui")
 	
 	
 func update_equipment_ui(_data : Dictionary):
@@ -80,6 +81,9 @@ func update_equipment_ui(_data : Dictionary):
 func update_inventory_ui(_data : Array):
 	ML_inventory.configure(_data)
 
+
+func update_currency_ui(_data : Dictionary):
+	ML_inventory.configure_currency(_data)
 
 func update_pouch_ui(_data : Array):
 	CL_pouch.configure(_data)

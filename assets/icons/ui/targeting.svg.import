@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/battle-gear.svg-415cc443b1bf667535e745d1659d84ae.stex"
+path="res://.import/targeting.svg-9e90078a7d0f59ea05d0187a5bcd1768.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/ui/battle-gear.svg"
-dest_files=[ "res://.import/battle-gear.svg-415cc443b1bf667535e745d1659d84ae.stex" ]
+source_file="res://assets/icons/ui/targeting.svg"
+dest_files=[ "res://.import/targeting.svg-9e90078a7d0f59ea05d0187a5bcd1768.stex" ]
 
 [params]
 

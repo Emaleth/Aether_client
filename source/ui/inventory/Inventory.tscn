@@ -1,18 +1,54 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/ui/inventory/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://assets/icons/ui/two-coins.svg" type="Texture" id=2]
 
 [node name="Inventory" type="PanelContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 7.0
-margin_bottom = 7.0
+margin_right = 25.0
+margin_bottom = 25.0
 
-[node name="ScrollContainer" type="ScrollContainer" parent="CenterContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 18.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/CenterContainer"]
+margin_left = 9.0
+margin_right = 9.0
 scroll_horizontal_enabled = false
 
-[node name="GridContainer" type="GridContainer" parent="CenterContainer/ScrollContainer"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer/ScrollContainer"]
 columns = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 4.0
+margin_right = 18.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 14, 14 )
+texture = ExtResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_left = 18.0
+margin_right = 18.0
+margin_bottom = 14.0
+size_flags_horizontal = 10
+size_flags_vertical = 1
+align = 2
+valign = 1
