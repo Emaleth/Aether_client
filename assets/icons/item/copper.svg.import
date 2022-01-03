@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/test_pouch.svg-5837befa5dc8e7fad3a7c1b8b137ce40.stex"
+path="res://.import/copper.svg-0b8d4b2f2866e95a113dd359c741b7e3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/test_pouch.svg"
-dest_files=[ "res://.import/test_pouch.svg-5837befa5dc8e7fad3a7c1b8b137ce40.stex" ]
+source_file="res://assets/icons/item/copper.svg"
+dest_files=[ "res://.import/copper.svg-0b8d4b2f2866e95a113dd359c741b7e3.stex" ]
 
 [params]
 

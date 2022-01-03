@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/test_big_sword.svg-c4d4cc0a6c901283cf27b0387d275782.stex"
+path="res://.import/novice_bow.svg-2be6f2c216a4a000fc85e7fbdbf304c4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/test_big_sword.svg"
-dest_files=[ "res://.import/test_big_sword.svg-c4d4cc0a6c901283cf27b0387d275782.stex" ]
+source_file="res://assets/icons/item/novice_bow.svg"
+dest_files=[ "res://.import/novice_bow.svg-2be6f2c216a4a000fc85e7fbdbf304c4.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/test_rune.svg-1a08244ee10f7743a915acb015c225fc.stex"
+path="res://.import/fireball_spell.svg-581ac0641cca47946bb2375b9a6679ce.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/test_rune.svg"
-dest_files=[ "res://.import/test_rune.svg-1a08244ee10f7743a915acb015c225fc.stex" ]
+source_file="res://assets/icons/item/fireball_spell.svg"
+dest_files=[ "res://.import/fireball_spell.svg-581ac0641cca47946bb2375b9a6679ce.stex" ]
 
 [params]
 

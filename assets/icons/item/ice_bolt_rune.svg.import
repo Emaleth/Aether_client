@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/test_backpack.svg-d8e124834bc9b84729b89759115cacfa.stex"
+path="res://.import/ice_bolt_rune.svg-1f7ec4b2046e4830c1104aeb0130fc1a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/test_backpack.svg"
-dest_files=[ "res://.import/test_backpack.svg-d8e124834bc9b84729b89759115cacfa.stex" ]
+source_file="res://assets/icons/item/ice_bolt_rune.svg"
+dest_files=[ "res://.import/ice_bolt_rune.svg-1f7ec4b2046e4830c1104aeb0130fc1a.stex" ]
 
 [params]
 

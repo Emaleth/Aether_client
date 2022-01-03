@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/test_spell_v2.svg-7e49064cf65afaa266b4a90e9fc8c51e.stex"
+path="res://.import/lesser_mana_potion.svg-16f09554b9620d373b0ba4c95ad3fa67.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/test_spell_v2.svg"
-dest_files=[ "res://.import/test_spell_v2.svg-7e49064cf65afaa266b4a90e9fc8c51e.stex" ]
+source_file="res://assets/icons/item/lesser_mana_potion.svg"
+dest_files=[ "res://.import/lesser_mana_potion.svg-16f09554b9620d373b0ba4c95ad3fa67.stex" ]
 
 [params]
 

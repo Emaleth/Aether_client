@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/test_shield.svg-7bc56f6c12c03d0052a3b7d60d066d51.stex"
+path="res://.import/novice_pouch.svg-fc50b9d5ef6d775ee8346c50942f9134.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/test_shield.svg"
-dest_files=[ "res://.import/test_shield.svg-7bc56f6c12c03d0052a3b7d60d066d51.stex" ]
+source_file="res://assets/icons/item/novice_pouch.svg"
+dest_files=[ "res://.import/novice_pouch.svg-fc50b9d5ef6d775ee8346c50942f9134.stex" ]
 
 [params]
 

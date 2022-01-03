@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/null.svg-67689f376668709ddf6e4129d30198fd.stex"
+path="res://.import/ice_bolt_spell.svg-9d0a370d958520ac1108b5b79e3a5fa4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/null.svg"
-dest_files=[ "res://.import/null.svg-67689f376668709ddf6e4129d30198fd.stex" ]
+source_file="res://assets/icons/item/ice_bolt_spell.svg"
+dest_files=[ "res://.import/ice_bolt_spell.svg-9d0a370d958520ac1108b5b79e3a5fa4.stex" ]
 
 [params]
 
