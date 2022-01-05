@@ -29,6 +29,7 @@ scroll_horizontal_enabled = false
 columns = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+visible = false
 margin_top = 4.0
 margin_right = 18.0
 margin_bottom = 18.0

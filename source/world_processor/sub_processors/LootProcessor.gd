@@ -17,7 +17,7 @@ func add_to_the_tree():
 			var new_loot = loot_scene.instance()
 			new_loot.name = str(key)
 			container.call_deferred("add_child", new_loot, true)
-			new_loot.update(collection[key]["pos"], collection[key]["item"], collection[key]["amount"])
+			new_loot.update(collection[key]["pos"], collection[key]["item"])
 			
 
 func remove_from_the_tree():

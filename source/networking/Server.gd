@@ -161,10 +161,10 @@ remote func recive_pouch_data(_data : Array):
 		emit_signal("update_pouch_ui", _data)
 
 
-remote func recive_currency_data(_data : Dictionary):
-	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.currency_data = _data
-		emit_signal("update_currency_ui", _data)
+#remote func recive_currency_data(_data : Dictionary):
+#	if get_tree().get_rpc_sender_id() == 1:
+#		GlobalVariables.currency_data = _data
+#		emit_signal("update_currency_ui", _data)
 
 
 remote func recive_spellbook_data(_data : Array):

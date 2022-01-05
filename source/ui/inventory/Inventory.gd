@@ -20,13 +20,13 @@ func configure(_data : Array):
 	calculate_scroll_container_size(ceil(_data.size() / float(slot_grid.columns)), slot_grid.get_constant("vseparation"), 40)
 
 
-func configure_currency(_data : Dictionary):
-	gold_label.text = str(_data.gold)
+#func configure_currency(_data : Dictionary):
+#	gold_label.text = str(_data.gold)
 
 
 func _ready() -> void:
 	configure(GlobalVariables.inventory_data)
-	configure_currency(GlobalVariables.currency_data)
+#	configure_currency(GlobalVariables.currency_data)
 	hide_scroll_bar()
 
 
