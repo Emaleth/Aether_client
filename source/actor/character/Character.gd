@@ -73,7 +73,7 @@ func rotate_character(_amount : Vector2) -> void:
 
 func interact():
 	if GlobalVariables.interactable != null:
-		Server.request_interaction("loot", GlobalVariables.interactable.name)
+		Server.request_loot_pickup(GlobalVariables.interactable.name)
 	
 
 func get_interactables():

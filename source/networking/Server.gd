@@ -161,12 +161,6 @@ remote func recive_pouch_data(_data : Array):
 		emit_signal("update_pouch_ui", _data)
 
 
-#remote func recive_currency_data(_data : Dictionary):
-#	if get_tree().get_rpc_sender_id() == 1:
-#		GlobalVariables.currency_data = _data
-#		emit_signal("update_currency_ui", _data)
-
-
 remote func recive_spellbook_data(_data : Array):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.spellbook_data = _data
@@ -177,6 +171,13 @@ func request_item_transfer(_from_data : Dictionary, _amount : int, _to_data : Di
 	rpc_id(1, "request_item_transfer", _from_data, _amount, _to_data)
 	
 	
-func request_interaction(m_interaction_type : String, m_interact_with_id : String):
-	rpc_id(1, "request_interaction", m_interaction_type, m_interact_with_id)
+func request_loot_pickup(_loot_id : String):
+	rpc_id(1, "request_loot_pickup", _loot_id)
 	
+	
+func request_item_buy(_shop_id : String, _slot_index : int):
+	rpc_id(1, "request_item_buy", _shop_id, _slot_index)
+	
+	
+func request_item_sell(_shop_id : String, _container : String, _slot_index : int):
+	rpc_id(1, "request_item_sell", _shop_id, _container, _slot_index)
