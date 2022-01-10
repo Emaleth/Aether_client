@@ -3,6 +3,7 @@ extends PanelContainer
 var item = null
 var container = null
 var shortcut = null
+var index : int
 
 onready var item_texture = $Icon
 onready var amount_label = $GridContainer/AmountLabel
@@ -12,10 +13,11 @@ onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
 onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
 
 
-func configure(_item, _container, _shortcut = null):
+func configure(_item, _container, _index, _shortcut = null):
 	item = _item
 	container = _container
 	shortcut = _shortcut
+	index = _index
 	set_tooltip_text()
 	set_item_icon()
 	set_amount_label()
@@ -58,7 +60,7 @@ func get_drag_data(_position: Vector2):
 	if item != null:
 		var data := {
 			"container" : container,
-			"index" : self.get_index(),
+			"index" : index,
 			"amount" : item["amount"]
 		}
 		var new_preview = preview.instance()
@@ -75,7 +77,7 @@ func can_drop_data(_position: Vector2, _data) -> bool:
 func drop_data(_position: Vector2, _data) -> void:
 	var data = {
 		"container" : container,
-		"index" : self.get_index(),
+		"index" : index,
 		"amount" : item["amount"] if item else null 
 	}
 	if Input.is_action_pressed("mod") and _data["amount"] > 1:
@@ -90,6 +92,6 @@ func _unhandled_key_input(_event: InputEventKey) -> void:
 	if Input.is_action_just_pressed(shortcut):
 		var data = {
 			"container" : container,
-			"index" : self.get_index()
+			"index" : index
 		}
 		Server.send_item_use_request(data)

@@ -1,11 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/ui/inventory/Inventory.gd" type="Script" id=1]
-[ext_resource path="res://assets/icons/ui/two-coins.svg" type="Texture" id=2]
+[ext_resource path="res://source/ui/subcomponents/slot/Slot.tscn" type="PackedScene" id=2]
 
 [node name="Inventory" type="PanelContainer"]
-margin_right = 32.0
-margin_bottom = 32.0
+margin_right = 375.0
+margin_bottom = 282.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -14,42 +16,122 @@ __meta__ = {
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 25.0
-margin_bottom = 25.0
+margin_right = 543.0
+margin_bottom = 275.0
 
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 18.0
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/CenterContainer"]
-margin_left = 9.0
-margin_right = 9.0
-scroll_horizontal_enabled = false
-
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer/ScrollContainer"]
-columns = 5
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-visible = false
-margin_top = 4.0
-margin_right = 18.0
-margin_bottom = 18.0
+margin_right = 536.0
+margin_bottom = 268.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 14, 14 )
-texture = ExtResource( 2 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/CenterContainer"]
+margin_top = 100.0
+margin_right = 536.0
+margin_bottom = 168.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+columns = 15
 
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_left = 18.0
-margin_right = 18.0
-margin_bottom = 14.0
-size_flags_horizontal = 10
-size_flags_vertical = 1
-align = 2
-valign = 1
+[node name="Slot" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_right = 32.0
+margin_bottom = 32.0
+
+[node name="Slot2" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_right = 68.0
+margin_bottom = 32.0
+
+[node name="Slot3" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_right = 104.0
+margin_bottom = 32.0
+
+[node name="Slot4" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_right = 140.0
+margin_bottom = 32.0
+
+[node name="Slot5" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_right = 176.0
+margin_bottom = 32.0
+
+[node name="Slot6" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 180.0
+margin_right = 212.0
+margin_bottom = 32.0
+
+[node name="Slot7" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 216.0
+margin_right = 248.0
+margin_bottom = 32.0
+
+[node name="Slot8" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 252.0
+margin_right = 284.0
+margin_bottom = 32.0
+
+[node name="Slot9" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 288.0
+margin_right = 320.0
+margin_bottom = 32.0
+
+[node name="Slot10" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 324.0
+margin_right = 356.0
+margin_bottom = 32.0
+
+[node name="Slot11" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 360.0
+margin_right = 392.0
+margin_bottom = 32.0
+
+[node name="Slot12" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 396.0
+margin_right = 428.0
+margin_bottom = 32.0
+
+[node name="Slot13" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 432.0
+margin_right = 464.0
+margin_bottom = 32.0
+
+[node name="Slot14" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 468.0
+margin_right = 500.0
+margin_bottom = 32.0
+
+[node name="Slot15" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 504.0
+margin_right = 536.0
+margin_bottom = 32.0
+
+[node name="Slot16" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_top = 36.0
+margin_right = 32.0
+margin_bottom = 68.0
+
+[node name="Slot17" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+
+[node name="Slot18" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 68.0
+
+[node name="Slot19" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_top = 36.0
+margin_right = 140.0
+margin_bottom = 68.0
+
+[node name="Slot20" parent="VBoxContainer/CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_top = 36.0
+margin_right = 176.0
+margin_bottom = 68.0

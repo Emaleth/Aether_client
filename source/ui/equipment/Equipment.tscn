@@ -1,23 +1,94 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://source/ui/equipment/Equipment.gd" type="Script" id=1]
+[ext_resource path="res://source/ui/subcomponents/slot/Slot.tscn" type="PackedScene" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
 
 [node name="Equipment" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+chest_slot = NodePath("HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/LeftEqRow/ChestSlot")
+right_hand_slot = NodePath("HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/LeftEqRow/RightHandSlot")
+left_hand_slot = NodePath("HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/RightEqRow/LeftHandSlot")
+inventory_slot = NodePath("HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/RightEqRow/InventorySlot")
+pouch_slot = NodePath("HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/RightEqRow/PouchSlot")
+spellbook_slot = NodePath("HBoxContainer/Eq/CenterContainer/VBoxContainer/BottomEqRow/SpellBookSlot")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 7.0
-margin_bottom = 7.0
+margin_right = 293.0
+margin_bottom = 261.0
 custom_constants/separation = 0
 
-[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer"]
+[node name="Eq" type="PanelContainer" parent="HBoxContainer"]
+margin_right = 286.0
+margin_bottom = 254.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/CenterContainer"]
-columns = 3
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/Eq"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 279.0
+margin_bottom = 247.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Eq/CenterContainer"]
+margin_right = 272.0
+margin_bottom = 240.0
+
+[node name="TopEqRow" type="HBoxContainer" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer"]
+margin_right = 272.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer"]
+margin_top = 4.0
+margin_right = 272.0
+margin_bottom = 204.0
+
+[node name="LeftEqRow" type="VBoxContainer" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 32.0
+margin_bottom = 200.0
+
+[node name="ChestSlot" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/LeftEqRow" instance=ExtResource( 2 )]
+
+[node name="RightHandSlot" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/LeftEqRow" instance=ExtResource( 2 )]
+margin_top = 36.0
+margin_bottom = 68.0
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 36.0
+margin_right = 236.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 200 )
+custom_styles/panel = SubResource( 1 )
+
+[node name="RightEqRow" type="VBoxContainer" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 240.0
+margin_right = 272.0
+margin_bottom = 200.0
+
+[node name="InventorySlot" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/RightEqRow" instance=ExtResource( 2 )]
+
+[node name="PouchSlot" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/RightEqRow" instance=ExtResource( 2 )]
+margin_top = 36.0
+margin_bottom = 68.0
+
+[node name="LeftHandSlot" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer/HBoxContainer2/RightEqRow" instance=ExtResource( 2 )]
+margin_top = 72.0
+margin_bottom = 104.0
+
+[node name="BottomEqRow" type="HBoxContainer" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer"]
+margin_top = 208.0
+margin_right = 272.0
+margin_bottom = 240.0
+
+[node name="SpellBookSlot" parent="HBoxContainer/Eq/CenterContainer/VBoxContainer/BottomEqRow" instance=ExtResource( 2 )]

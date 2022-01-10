@@ -1,33 +1,43 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/slot/Slot.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/ui/slot.png" type="Texture" id=2]
+
+[sub_resource type="StyleBoxTexture" id=3]
+texture = ExtResource( 2 )
+region_rect = Rect2( 0, 0, 32, 32 )
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
 [node name="Slot" type="PanelContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 30, 30 )
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = SubResource( 3 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Icon" type="TextureRect" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 39.0
-margin_bottom = 39.0
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+expand = true
+stretch_mode = 6
+
+[node name="Border" type="TextureRect" parent="."]
+margin_right = 32.0
+margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 mouse_filter = 2
 expand = true
 stretch_mode = 6
 
 [node name="GridContainer" type="GridContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 39.0
-margin_bottom = 39.0
+margin_right = 32.0
+margin_bottom = 32.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

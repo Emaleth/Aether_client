@@ -1,4 +1,4 @@
-extends PanelContainer
+extends MarginContainer
 
 enum {COMBAT, MANAGMENT}
 var current_mode
@@ -55,10 +55,13 @@ func set_mode(_mode):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			$CombatLayer.show()
 			$ManagmentLayer.hide()
+			$EquipmentLayer.hide()
 		MANAGMENT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			$EquipmentLayer.show()
+			
 			$CombatLayer.hide()
-			$ManagmentLayer.show()
+			$ManagmentLayer.hide()
 
 
 func _ready() -> void:

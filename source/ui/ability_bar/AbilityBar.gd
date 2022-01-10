@@ -19,6 +19,7 @@ func _ready() -> void:
 
 
 func configure(_data : Array):
+	var index = 0
 	sc_index = 0
 	for i in slot_grid.get_children():
 		i.hide()
@@ -26,8 +27,9 @@ func configure(_data : Array):
 	for i in _data:
 		var new_slot = slot.instance()
 		slot_grid.add_child(new_slot)
-		new_slot.configure(i, "spellbook", x[sc_index])
+		new_slot.configure(i, "spellbook", index, x[sc_index])
 		sc_index += 1
+		index += 1
 	
 
 

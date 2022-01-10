@@ -1,17 +1,29 @@
 extends PanelContainer
 
 onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
-onready var slot_grid = $HBoxContainer/CenterContainer/GridContainer
 
+export var chest_slot : NodePath
+export var right_hand_slot : NodePath
+export var left_hand_slot : NodePath
+export var inventory_slot : NodePath
+export var pouch_slot : NodePath
+export var spellbook_slot : NodePath
+
+onready var slots = {
+	"chest" : get_node(chest_slot),
+	"right_hand" : get_node(right_hand_slot),
+	"left_hand" : get_node(left_hand_slot),
+	"inventory" : get_node(inventory_slot),
+	"pouch" : get_node(pouch_slot),
+	"spellbook" : get_node(spellbook_slot),
+}
 
 func configure(_data : Dictionary):
-	for i in slot_grid.get_children():
-		i.hide()
-		i.queue_free()
+	var index = 0
 	for i in _data.keys():
-		var new_slot = slot.instance()
-		slot_grid.add_child(new_slot)
-		new_slot.configure(_data[i], "equipment")
+		var new_slot = slots[i]
+		new_slot.configure(_data[i], "equipment", index)
+		index += 1
 	
 	
 func _ready() -> void:
