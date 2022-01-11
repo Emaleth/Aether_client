@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/amount_popup/AmountPopup.tscn" type="PackedScene" id=2]
@@ -8,7 +8,7 @@
 [ext_resource path="res://source/ui/chatbox/ChatBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://source/ui/clock/Clock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://source/ui/equipment/Equipment.tscn" type="PackedScene" id=8]
-[ext_resource path="res://source/ui/minimap/Minimap.tscn" type="PackedScene" id=9]
+[ext_resource path="res://source/ui/compass/Compass.tscn" type="PackedScene" id=9]
 [ext_resource path="res://source/ui/interaction_indicator/InteractionIndicator.tscn" type="PackedScene" id=10]
 [ext_resource path="res://assets/icons/ui/targeting.svg" type="Texture" id=11]
 [ext_resource path="res://source/ui/pouch/Pouch.tscn" type="PackedScene" id=12]
@@ -16,67 +16,47 @@
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
-[sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=4]
-
 [node name="Interface" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-CL_resources_node = NodePath("CombatLayer/CombatGrid/A1/VBoxContainer/Resources")
-CL_minimap_node = NodePath("CombatLayer/CombatGrid/A3/VBoxContainer/Minimap")
-CL_debug_node = NodePath("CombatLayer/CombatGrid/A1/VBoxContainer/Debug")
-CL_spellbook_node = NodePath("CombatLayer/CombatGrid/C2/VBoxContainer/AbilityBar")
-CL_pouch_node = NodePath("CombatLayer/CombatGrid/C2/VBoxContainer/Pouch")
-ML_equipment_node = NodePath("EquipmentLayer/HBoxContainer/Equipment")
-ML_inventory_node = NodePath("EquipmentLayer/HBoxContainer/Inventory")
-ML_spellbook_node = NodePath("ManagmentLayer/ManagmentGrid/B1/AbilityBar")
-ML_pouch_node = NodePath("ManagmentLayer/ManagmentGrid/B2/Pouch")
-ML_amount_popup_node = NodePath("ManagmentLayer/CenterContainer/AmountPopup")
+CL_resources_node = NodePath("Combat/VBoxContainer/Resources")
+CL_debug_node = NodePath("Combat/VBoxContainer/Debug")
+CL_compass_node = NodePath("Compass")
+CL_spellbook_node = NodePath("Combat/VBoxContainer3/AbilityBar")
+CL_pouch_node = NodePath("Combat/VBoxContainer3/Pouch")
+ML_equipment_node = NodePath("Management/MarginContainer/HBoxContainer/VBoxContainerLeft/Equipment")
+ML_inventory_node = NodePath("Management/MarginContainer/HBoxContainer/VBoxContainerRight/Inventory")
+ML_spellbook_node = NodePath("Management/MarginContainer/HBoxContainer/VBoxContainerLeft/AbilityBar")
+ML_pouch_node = NodePath("Management/MarginContainer/HBoxContainer/VBoxContainerRight/Pouch")
+ML_amount_popup_node = NodePath("Management/CenterContainer/AmountPopup")
 
-[node name="CombatLayer" type="PanelContainer" parent="."]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1356.0
-margin_bottom = 758.0
+[node name="Combat" type="PanelContainer" parent="."]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1361.0
+margin_bottom = 763.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 3 )
 
-[node name="CombatGrid" type="GridContainer" parent="CombatLayer"]
-margin_right = 1346.0
-margin_bottom = 748.0
-mouse_filter = 2
-custom_constants/vseparation = 0
-custom_constants/hseparation = 0
-columns = 3
-
-[node name="A1" type="PanelContainer" parent="CombatLayer/CombatGrid"]
-margin_right = 448.0
-margin_bottom = 249.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CombatLayer/CombatGrid/A1"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Combat"]
 margin_right = 114.0
 margin_bottom = 92.0
 mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Resources" parent="CombatLayer/CombatGrid/A1/VBoxContainer" instance=ExtResource( 3 )]
+[node name="Resources" parent="Combat/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 114.0
@@ -84,260 +64,162 @@ margin_bottom = 46.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Debug" parent="CombatLayer/CombatGrid/A1/VBoxContainer" instance=ExtResource( 13 )]
+[node name="Debug" parent="Combat/VBoxContainer" instance=ExtResource( 13 )]
 margin_top = 50.0
 margin_bottom = 92.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="A2" type="PanelContainer" parent="CombatLayer/CombatGrid"]
-margin_left = 448.0
-margin_right = 896.0
-margin_bottom = 249.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="A3" type="PanelContainer" parent="CombatLayer/CombatGrid"]
-margin_left = 896.0
-margin_right = 1344.0
-margin_bottom = 249.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CombatLayer/CombatGrid/A3"]
-margin_left = 396.0
-margin_right = 448.0
-margin_bottom = 249.0
+[node name="VBoxContainer2" type="VBoxContainer" parent="Combat"]
+margin_left = 1304.0
+margin_right = 1356.0
+margin_bottom = 28.0
 mouse_filter = 2
 size_flags_horizontal = 10
+size_flags_vertical = 0
 
-[node name="Minimap" parent="CombatLayer/CombatGrid/A3/VBoxContainer" instance=ExtResource( 9 )]
-visible = false
-
-[node name="Clock" parent="CombatLayer/CombatGrid/A3/VBoxContainer" instance=ExtResource( 7 )]
+[node name="Clock" parent="Combat/VBoxContainer2" instance=ExtResource( 7 )]
 margin_right = 52.0
 margin_bottom = 28.0
 size_flags_horizontal = 4
 
-[node name="B1" type="PanelContainer" parent="CombatLayer/CombatGrid"]
-margin_top = 249.0
-margin_right = 448.0
-margin_bottom = 498.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="B2" type="PanelContainer" parent="CombatLayer/CombatGrid"]
-margin_left = 448.0
-margin_top = 249.0
-margin_right = 896.0
-margin_bottom = 498.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="InteractionIndicator" parent="CombatLayer/CombatGrid/B2" instance=ExtResource( 10 )]
-margin_left = 448.0
-margin_top = 235.0
-margin_right = 448.0
-margin_bottom = 249.0
-
-[node name="B3" type="PanelContainer" parent="CombatLayer/CombatGrid"]
-margin_left = 896.0
-margin_top = 249.0
-margin_right = 1344.0
-margin_bottom = 498.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="C1" type="PanelContainer" parent="CombatLayer/CombatGrid"]
-margin_top = 498.0
-margin_right = 448.0
-margin_bottom = 747.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="Chatbox" parent="CombatLayer/CombatGrid/C1" instance=ExtResource( 6 )]
-visible = false
-margin_top = 92.0
-margin_right = 214.0
-margin_bottom = 256.0
-size_flags_horizontal = 0
-size_flags_vertical = 8
-
-[node name="C2" type="PanelContainer" parent="CombatLayer/CombatGrid"]
-margin_left = 448.0
-margin_top = 498.0
-margin_right = 896.0
-margin_bottom = 747.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CombatLayer/CombatGrid/C2"]
-margin_left = 217.0
-margin_top = 217.0
-margin_right = 231.0
-margin_bottom = 249.0
+[node name="VBoxContainer3" type="VBoxContainer" parent="Combat"]
+margin_left = 493.0
+margin_top = 662.0
+margin_right = 863.0
+margin_bottom = 758.0
 mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
-[node name="Pouch" parent="CombatLayer/CombatGrid/C2/VBoxContainer" instance=ExtResource( 12 )]
-margin_right = 14.0
-margin_bottom = 14.0
+[node name="Pouch" parent="Combat/VBoxContainer3" instance=ExtResource( 12 )]
+margin_left = 90.0
+margin_right = 280.0
+margin_bottom = 46.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="AbilityBar" parent="CombatLayer/CombatGrid/C2/VBoxContainer" instance=ExtResource( 5 )]
-margin_top = 18.0
-margin_bottom = 32.0
+[node name="AbilityBar" parent="Combat/VBoxContainer3" instance=ExtResource( 5 )]
+margin_top = 50.0
+margin_right = 370.0
+margin_bottom = 96.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="C3" type="PanelContainer" parent="CombatLayer/CombatGrid"]
-margin_left = 896.0
-margin_top = 498.0
-margin_right = 1344.0
-margin_bottom = 747.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="CenterContainer" type="CenterContainer" parent="CombatLayer"]
-margin_right = 1346.0
-margin_bottom = 748.0
+[node name="CenterContainer" type="CenterContainer" parent="Combat"]
+margin_right = 1356.0
+margin_bottom = 758.0
 mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TextureRect" type="TextureRect" parent="CombatLayer/CenterContainer"]
-margin_left = 665.0
-margin_top = 366.0
-margin_right = 681.0
-margin_bottom = 382.0
+[node name="TextureRect" type="TextureRect" parent="Combat/CenterContainer"]
+margin_left = 670.0
+margin_top = 371.0
+margin_right = 686.0
+margin_bottom = 387.0
 rect_min_size = Vector2( 16, 16 )
 mouse_filter = 2
 texture = ExtResource( 11 )
 expand = true
 
-[node name="ManagmentLayer" type="PanelContainer" parent="."]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1356.0
+[node name="Chatbox" parent="Combat" instance=ExtResource( 6 )]
+margin_top = 594.0
+margin_right = 214.0
 margin_bottom = 758.0
-mouse_filter = 2
-custom_styles/panel = SubResource( 4 )
+size_flags_horizontal = 0
+size_flags_vertical = 8
 
-[node name="ManagmentGrid" type="GridContainer" parent="ManagmentLayer"]
-margin_right = 1346.0
-margin_bottom = 748.0
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="A1" type="PanelContainer" parent="ManagmentLayer/ManagmentGrid"]
-margin_right = 671.0
-margin_bottom = 372.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="A2" type="PanelContainer" parent="ManagmentLayer/ManagmentGrid"]
-margin_left = 675.0
-margin_right = 1346.0
-margin_bottom = 372.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="B1" type="PanelContainer" parent="ManagmentLayer/ManagmentGrid"]
-margin_top = 376.0
-margin_right = 671.0
-margin_bottom = 748.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
-
-[node name="AbilityBar" parent="ManagmentLayer/ManagmentGrid/B1" instance=ExtResource( 5 )]
-margin_left = 328.0
-margin_top = 179.0
-margin_right = 342.0
-margin_bottom = 193.0
+[node name="InteractionIndicator" parent="Combat" instance=ExtResource( 10 )]
+margin_left = 578.0
+margin_top = 279.0
+margin_right = 778.0
+margin_bottom = 479.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="B2" type="PanelContainer" parent="ManagmentLayer/ManagmentGrid"]
-margin_left = 675.0
-margin_top = 376.0
-margin_right = 1346.0
-margin_bottom = 748.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_styles/panel = SubResource( 2 )
+[node name="Compass" parent="." instance=ExtResource( 9 )]
+margin_left = 633.0
+margin_top = 5.0
+margin_right = 733.0
+margin_bottom = 25.0
 
-[node name="Pouch" parent="ManagmentLayer/ManagmentGrid/B2" instance=ExtResource( 12 )]
-margin_left = 328.0
-margin_top = 179.0
-margin_right = 342.0
-margin_bottom = 193.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="CenterContainer" type="CenterContainer" parent="ManagmentLayer"]
-margin_right = 1346.0
-margin_bottom = 748.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AmountPopup" parent="ManagmentLayer/CenterContainer" instance=ExtResource( 2 )]
+[node name="Management" type="PanelContainer" parent="."]
 visible = false
-margin_left = 666.0
-margin_top = 367.0
-margin_right = 680.0
-margin_bottom = 381.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="EquipmentLayer" type="PanelContainer" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 1356.0
-margin_bottom = 758.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1361.0
+margin_bottom = 763.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="EquipmentLayer"]
+[node name="MarginContainer" type="MarginContainer" parent="Management"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1339.0
-margin_bottom = 741.0
-custom_constants/separation = 10
+margin_right = 1349.0
+margin_bottom = 751.0
+custom_constants/margin_right = 20
+custom_constants/margin_top = 20
+custom_constants/margin_left = 20
+custom_constants/margin_bottom = 20
 
-[node name="Equipment" parent="EquipmentLayer/HBoxContainer" instance=ExtResource( 8 )]
-margin_right = 661.0
-margin_bottom = 734.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Management/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1322.0
+margin_bottom = 724.0
+custom_constants/separation = 15
 
-[node name="Inventory" parent="EquipmentLayer/HBoxContainer" instance=ExtResource( 4 )]
-margin_left = 671.0
-margin_right = 1332.0
-margin_bottom = 734.0
+[node name="VBoxContainerLeft" type="VBoxContainer" parent="Management/MarginContainer/HBoxContainer"]
+margin_right = 643.0
+margin_bottom = 704.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 15
+
+[node name="Equipment" parent="Management/MarginContainer/HBoxContainer/VBoxContainerLeft" instance=ExtResource( 8 )]
+margin_right = 643.0
+margin_bottom = 551.0
+size_flags_stretch_ratio = 4.0
+
+[node name="AbilityBar" parent="Management/MarginContainer/HBoxContainer/VBoxContainerLeft" instance=ExtResource( 5 )]
+margin_top = 566.0
+margin_right = 643.0
+margin_bottom = 704.0
+
+[node name="VBoxContainerRight" type="VBoxContainer" parent="Management/MarginContainer/HBoxContainer"]
+margin_left = 658.0
+margin_right = 1302.0
+margin_bottom = 704.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 15
+
+[node name="Inventory" parent="Management/MarginContainer/HBoxContainer/VBoxContainerRight" instance=ExtResource( 4 )]
+margin_right = 644.0
+margin_bottom = 551.0
+size_flags_stretch_ratio = 4.0
+
+[node name="Pouch" parent="Management/MarginContainer/HBoxContainer/VBoxContainerRight" instance=ExtResource( 12 )]
+margin_top = 566.0
+margin_right = 644.0
+margin_bottom = 704.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Management"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1349.0
+margin_bottom = 751.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmountPopup" parent="Management/CenterContainer" instance=ExtResource( 2 )]
+visible = false
+margin_left = 664.0
+margin_top = 365.0
+margin_right = 678.0
+margin_bottom = 379.0
+size_flags_horizontal = 4
+size_flags_vertical = 4

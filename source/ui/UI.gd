@@ -1,17 +1,18 @@
 extends MarginContainer
 
 enum {COMBAT, MANAGMENT}
-var current_mode
+var mode
 
 # COMBAT LAYER PANELS
 export(NodePath) var CL_resources_node
 onready var CL_resources := get_node(CL_resources_node)
 
-export(NodePath) var CL_minimap_node
-onready var CL_minimap := get_node(CL_minimap_node)
 
 export(NodePath) var CL_debug_node
 onready var CL_debug := get_node(CL_debug_node)
+
+export(NodePath) var CL_compass_node
+onready var CL_compass := get_node(CL_compass_node)
 
 export(NodePath) var CL_spellbook_node
 onready var CL_spellbook := get_node(CL_spellbook_node)
@@ -42,26 +43,23 @@ func _unhandled_key_input(_event: InputEventKey) -> void:
 
 
 func switch_mode():
-	if current_mode == COMBAT:
+	if mode == COMBAT:
 		set_mode(MANAGMENT)
 	else:
 		set_mode(COMBAT)
 
 
 func set_mode(_mode):
-	current_mode = _mode
 	match _mode:
 		COMBAT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			$CombatLayer.show()
-			$ManagmentLayer.hide()
-			$EquipmentLayer.hide()
+			$Combat.show()
+			$Management.hide()
 		MANAGMENT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			$EquipmentLayer.show()
-			
-			$CombatLayer.hide()
-			$ManagmentLayer.hide()
+			$Combat.hide()
+			$Management.show()
+	mode = _mode
 
 
 func _ready() -> void:
@@ -96,10 +94,6 @@ func update_pouch_ui(_data : Array):
 func update_spellbook_ui(_data : Array):
 	CL_spellbook.configure(_data)
 	ML_spellbook.configure(_data)
-
-	
-func get_minimap_pivot_path():
-	return CL_minimap.get_pivot_path()
 
 	
 func _physics_process(_delta: float) -> void:

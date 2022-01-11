@@ -1,19 +1,27 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/ui/ability_bar/AbilityBar.gd" type="Script" id=1]
+[ext_resource path="res://source/ui/subcomponents/slot/Slot.tscn" type="PackedScene" id=2]
 
 [node name="AbilityBar" type="PanelContainer"]
 margin_right = 14.0
 margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 7.0
-margin_bottom = 7.0
+margin_right = 363.0
+margin_bottom = 39.0
 
 [node name="GridContainer" type="GridContainer" parent="CenterContainer"]
+margin_right = 356.0
+margin_bottom = 32.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -21,3 +29,41 @@ columns = 10
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Slot" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+
+[node name="Slot2" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_right = 68.0
+
+[node name="Slot3" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_right = 104.0
+
+[node name="Slot4" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_right = 140.0
+
+[node name="Slot5" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_right = 176.0
+
+[node name="Slot6" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 180.0
+margin_right = 212.0
+
+[node name="Slot7" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 216.0
+margin_right = 248.0
+
+[node name="Slot8" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 252.0
+margin_right = 284.0
+
+[node name="Slot9" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 288.0
+margin_right = 320.0
+
+[node name="Slot10" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 324.0
+margin_right = 356.0

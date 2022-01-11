@@ -5,10 +5,12 @@
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="InteractionIndicator" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
+margin_right = 200.0
+margin_bottom = 200.0
 grow_horizontal = 0
 grow_vertical = 0
+rect_min_size = Vector2( 200, 200 )
+mouse_filter = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 custom_styles/panel = SubResource( 1 )
@@ -18,5 +20,9 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="."]
-margin_right = 14.0
-margin_bottom = 14.0
+margin_top = 186.0
+margin_right = 200.0
+margin_bottom = 200.0
+size_flags_vertical = 8
+align = 2
+valign = 2

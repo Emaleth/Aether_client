@@ -16,7 +16,7 @@ func spawn_character():
 	container.add_child(GlobalVariables.player_actor)
 	GlobalVariables.user_interface = interface_scene.instance()
 	container.add_child(GlobalVariables.user_interface)
-	GlobalVariables.player_actor.set_minimap_camera_transform(GlobalVariables.user_interface.get_minimap_pivot_path())
+#	GlobalVariables.player_actor.set_minimap_camera_transform(GlobalVariables.user_interface.get_minimap_pivot_path())
 
 
 var frame_index = 0
