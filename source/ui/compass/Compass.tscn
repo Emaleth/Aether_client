@@ -1,344 +1,234 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/ui/compass/Compass.gd" type="Script" id=1]
-
-[sub_resource type="StyleBoxEmpty" id=1]
+[ext_resource path="res://assets/icons/ui/targeting.svg" type="Texture" id=2]
 
 [node name="Compass" type="PanelContainer"]
-margin_right = 100.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 300, 50 )
+self_modulate = Color( 1, 1, 1, 0.196078 )
+margin_right = 200.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 200, 28 )
 rect_clip_content = true
 size_flags_horizontal = 4
 size_flags_vertical = 0
-custom_styles/panel = SubResource( 1 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Control" type="Control" parent="."]
-margin_right = 300.0
-margin_bottom = 50.0
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 21.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-margin_left = 0.492
-margin_right = 244.492
+margin_right = 88.0
 margin_bottom = 14.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
-custom_constants/separation = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="South" type="Label" parent="Control/HBoxContainer"]
-margin_right = 7.0
+[node name="DirectionLabel" type="Label" parent="Control/HBoxContainer"]
+margin_right = 10.0
 margin_bottom = 14.0
-text = "S"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "n"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="VSeparator" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 7.0
-margin_right = 17.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator2" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 17.0
-margin_right = 27.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator3" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 27.0
-margin_right = 37.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator4" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 37.0
-margin_right = 47.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator5" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 47.0
-margin_right = 57.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="West" type="Label" parent="Control/HBoxContainer"]
-margin_left = 57.0
+[node name="TickLabel" type="Label" parent="Control/HBoxContainer"]
+margin_left = 14.0
 margin_right = 70.0
 margin_bottom = 14.0
-text = "W"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "||||||||"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="VSeparator6" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 70.0
-margin_right = 80.0
+[node name="DirectionLabel2" type="Label" parent="Control/HBoxContainer"]
+margin_left = 74.0
+margin_right = 81.0
 margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator7" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 80.0
-margin_right = 90.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator8" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 90.0
-margin_right = 100.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator9" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 100.0
-margin_right = 110.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator10" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 110.0
-margin_right = 120.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="North" type="Label" parent="Control/HBoxContainer"]
-margin_left = 120.0
-margin_right = 130.0
-margin_bottom = 14.0
-text = "N"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "e"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="VSeparator11" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 130.0
-margin_right = 140.0
+[node name="TickLabel2" type="Label" parent="Control/HBoxContainer"]
+margin_left = 85.0
+margin_right = 141.0
 margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator12" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 140.0
-margin_right = 150.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator13" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 150.0
-margin_right = 160.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator14" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 160.0
-margin_right = 170.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator15" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 170.0
-margin_right = 180.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="East" type="Label" parent="Control/HBoxContainer"]
-margin_left = 180.0
-margin_right = 187.0
-margin_bottom = 14.0
-text = "E"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "||||||||"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="VSeparator16" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 187.0
-margin_right = 197.0
+[node name="DirectionLabel3" type="Label" parent="Control/HBoxContainer"]
+margin_left = 145.0
+margin_right = 152.0
 margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator17" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 197.0
-margin_right = 207.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator18" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 207.0
-margin_right = 217.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator19" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 217.0
-margin_right = 227.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator20" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 227.0
-margin_right = 237.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="South2" type="Label" parent="Control/HBoxContainer"]
-margin_left = 237.0
-margin_right = 244.0
-margin_bottom = 14.0
-text = "S"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "s"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="VSeparator21" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 244.0
-margin_right = 254.0
+[node name="TickLabel3" type="Label" parent="Control/HBoxContainer"]
+margin_left = 156.0
+margin_right = 212.0
 margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator22" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 254.0
-margin_right = 264.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator23" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 264.0
-margin_right = 274.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator24" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 274.0
-margin_right = 284.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator25" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 284.0
-margin_right = 294.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="West2" type="Label" parent="Control/HBoxContainer"]
-margin_left = 294.0
-margin_right = 307.0
-margin_bottom = 14.0
-text = "W"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "||||||||"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="VSeparator26" type="VSeparator" parent="Control/HBoxContainer"]
+[node name="DirectionLabel4" type="Label" parent="Control/HBoxContainer"]
+margin_left = 216.0
+margin_right = 229.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "w"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="TickLabel4" type="Label" parent="Control/HBoxContainer"]
+margin_left = 233.0
+margin_right = 289.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "||||||||"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="DirectionLabel5" type="Label" parent="Control/HBoxContainer"]
+margin_left = 293.0
+margin_right = 303.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "n"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="TickLabel5" type="Label" parent="Control/HBoxContainer"]
 margin_left = 307.0
-margin_right = 317.0
+margin_right = 363.0
 margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator27" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 317.0
-margin_right = 327.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator28" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 327.0
-margin_right = 337.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator29" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 337.0
-margin_right = 347.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator30" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 347.0
-margin_right = 357.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="North2" type="Label" parent="Control/HBoxContainer"]
-margin_left = 357.0
-margin_right = 367.0
-margin_bottom = 14.0
-text = "N"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "||||||||"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="VSeparator31" type="VSeparator" parent="Control/HBoxContainer"]
+[node name="DirectionLabel6" type="Label" parent="Control/HBoxContainer"]
 margin_left = 367.0
-margin_right = 377.0
+margin_right = 374.0
 margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator32" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 377.0
-margin_right = 387.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator33" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 387.0
-margin_right = 397.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator34" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 397.0
-margin_right = 407.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="VSeparator35" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 407.0
-margin_right = 417.0
-margin_bottom = 14.0
-custom_constants/separation = 10
-
-[node name="East2" type="Label" parent="Control/HBoxContainer"]
-margin_left = 417.0
-margin_right = 424.0
-margin_bottom = 14.0
-text = "E"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "e"
 align = 1
 valign = 1
 uppercase = true
 
-[node name="VSeparator36" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 424.0
+[node name="TickLabel6" type="Label" parent="Control/HBoxContainer"]
+margin_left = 378.0
 margin_right = 434.0
 margin_bottom = 14.0
-custom_constants/separation = 10
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "||||||||"
+align = 1
+valign = 1
+uppercase = true
 
-[node name="VSeparator37" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 434.0
-margin_right = 444.0
+[node name="DirectionLabel7" type="Label" parent="Control/HBoxContainer"]
+margin_left = 438.0
+margin_right = 445.0
 margin_bottom = 14.0
-custom_constants/separation = 10
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "s"
+align = 1
+valign = 1
+uppercase = true
 
-[node name="VSeparator38" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 444.0
-margin_right = 454.0
+[node name="TickLabel7" type="Label" parent="Control/HBoxContainer"]
+margin_left = 449.0
+margin_right = 505.0
 margin_bottom = 14.0
-custom_constants/separation = 10
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "||||||||"
+align = 1
+valign = 1
+uppercase = true
 
-[node name="VSeparator39" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 454.0
-margin_right = 464.0
+[node name="DirectionLabel8" type="Label" parent="Control/HBoxContainer"]
+margin_left = 509.0
+margin_right = 522.0
 margin_bottom = 14.0
-custom_constants/separation = 10
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "w"
+align = 1
+valign = 1
+uppercase = true
 
-[node name="VSeparator40" type="VSeparator" parent="Control/HBoxContainer"]
-margin_left = 464.0
-margin_right = 474.0
+[node name="TickLabel8" type="Label" parent="Control/HBoxContainer"]
+margin_left = 526.0
+margin_right = 582.0
 margin_bottom = 14.0
-custom_constants/separation = 10
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "||||||||"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="DirectionLabel9" type="Label" parent="Control/HBoxContainer"]
+margin_left = 586.0
+margin_right = 596.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "n"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 193.0
+margin_bottom = 21.0
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+self_modulate = Color( 0.952941, 0.0588235, 0.0588235, 1 )
+margin_left = 88.0
+margin_top = 2.0
+margin_right = 98.0
+margin_bottom = 12.0
+rect_min_size = Vector2( 10, 10 )
+texture = ExtResource( 2 )
+expand = true
