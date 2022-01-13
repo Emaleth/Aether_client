@@ -1,27 +1,33 @@
 extends PanelContainer
 
+enum {ITEM, SPELL, SHOP}
+var mode : int
+
 var item = null
 var container = null
 var shortcut = null
 var index : int
 
-onready var item_texture = $Icon
-onready var amount_label = $GridContainer/AmountLabel
-onready var shortcut_label = $GridContainer/ShortcutLabel
+onready var item_texture := $VBoxContainer/PanelContainer/Icon
+onready var amount_label := $VBoxContainer/PanelContainer/GridContainer/AmountLabel
+onready var shortcut_label := $VBoxContainer/PanelContainer/GridContainer/ShortcutLabel
+onready var price_label := $VBoxContainer/Price
 
 onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
 onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
 
 
-func configure(_item, _container, _index, _shortcut = null):
+func configure(_item, _container, _index, _shortcut, _mode):
 	item = _item
 	container = _container
 	shortcut = _shortcut
 	index = _index
+	mode = _mode
 	set_tooltip_text()
 	set_item_icon()
 	set_amount_label()
 	set_shortcut_label()
+	set_price_label()
 	
 	
 func set_tooltip_text() -> void:
@@ -49,6 +55,13 @@ func set_shortcut_label() -> void:
 		shortcut_label.text = ""
 		
 		
+func set_price_label() -> void:
+	if mode == SHOP:
+		price_label.text = "3"
+	else:
+		price_label.hide()
+		
+		
 func set_amount_label() -> void:
 	if item:
 		amount_label.text = "" if item["amount"] == 1 else str(item["amount"])
@@ -61,7 +74,8 @@ func get_drag_data(_position: Vector2):
 		var data := {
 			"container" : container,
 			"index" : index,
-			"amount" : item["amount"]
+			"amount" : item["amount"],
+			"mode" : mode
 		}
 		var new_preview = preview.instance()
 		new_preview.conf(item)
@@ -81,7 +95,10 @@ func drop_data(_position: Vector2, _data) -> void:
 		"amount" : item["amount"] if item else null 
 	}
 	if Input.is_action_pressed("mod") and _data["amount"] > 1:
-		GlobalVariables.user_interface.ML_amount_popup.conf(_data, data)
+		if _data["mode"] == SHOP:
+			GlobalVariables.user_interface.SL_amount_popup.conf(_data, data)
+		else:
+			GlobalVariables.user_interface.ML_amount_popup.conf(_data, data)
 	else:
 		Server.request_item_transfer(_data, -1, data)
 	

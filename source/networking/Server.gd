@@ -22,7 +22,6 @@ signal update_inventory_ui
 signal update_pouch_ui
 signal update_equipment_ui
 signal update_spellbook_ui
-signal update_currency_ui
 
 
 func _physics_process(delta: float) -> void:

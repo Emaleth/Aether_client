@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/amount_popup/AmountPopup.tscn" type="PackedScene" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/icons/ui/targeting.svg" type="Texture" id=11]
 [ext_resource path="res://source/ui/pouch/Pouch.tscn" type="PackedScene" id=12]
 [ext_resource path="res://source/ui/debug/Debug.tscn" type="PackedScene" id=13]
+[ext_resource path="res://source/ui/shop/Shop.tscn" type="PackedScene" id=14]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -30,16 +31,6 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-CL_resources_node = NodePath("Combat/VBoxContainer/Resources")
-CL_debug_node = NodePath("Combat/VBoxContainer/Debug")
-CL_compass_node = NodePath("Compass")
-CL_spellbook_node = NodePath("Combat/VBoxContainer3/AbilityBar")
-CL_pouch_node = NodePath("Combat/VBoxContainer3/Pouch")
-ML_equipment_node = NodePath("Management/MarginContainer/HBoxContainer/VBoxContainerLeft/Equipment")
-ML_inventory_node = NodePath("Management/MarginContainer/HBoxContainer/VBoxContainerRight/Inventory")
-ML_spellbook_node = NodePath("Management/MarginContainer/HBoxContainer/VBoxContainerLeft/AbilityBar")
-ML_pouch_node = NodePath("Management/MarginContainer/HBoxContainer/VBoxContainerRight/Pouch")
-ML_amount_popup_node = NodePath("Management/CenterContainer/AmountPopup")
 
 [node name="Combat" type="PanelContainer" parent="."]
 margin_left = 5.0
@@ -125,6 +116,7 @@ texture = ExtResource( 11 )
 expand = true
 
 [node name="Chatbox" parent="Combat" instance=ExtResource( 6 )]
+visible = false
 margin_top = 594.0
 margin_right = 214.0
 margin_bottom = 758.0
@@ -139,11 +131,10 @@ margin_bottom = 479.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Compass" parent="." instance=ExtResource( 9 )]
-margin_left = 633.0
-margin_top = 5.0
-margin_right = 733.0
-margin_bottom = 25.0
+[node name="Compass" parent="Combat" instance=ExtResource( 9 )]
+margin_left = 578.0
+margin_right = 778.0
+margin_bottom = 28.0
 
 [node name="Management" type="PanelContainer" parent="."]
 visible = false
@@ -216,6 +207,47 @@ __meta__ = {
 }
 
 [node name="AmountPopup" parent="Management/CenterContainer" instance=ExtResource( 2 )]
+visible = false
+margin_left = 664.0
+margin_top = 365.0
+margin_right = 678.0
+margin_bottom = 379.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Shop" type="PanelContainer" parent="."]
+visible = false
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1361.0
+margin_bottom = 763.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1349.0
+margin_bottom = 751.0
+
+[node name="Inventory" parent="Shop/HBoxContainer" instance=ExtResource( 4 )]
+margin_right = 669.0
+margin_bottom = 744.0
+
+[node name="Shop" parent="Shop/HBoxContainer" instance=ExtResource( 14 )]
+margin_left = 673.0
+margin_right = 1342.0
+margin_bottom = 744.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Shop"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1349.0
+margin_bottom = 751.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AmountPopup" parent="Shop/CenterContainer" instance=ExtResource( 2 )]
 visible = false
 margin_left = 664.0
 margin_top = 365.0

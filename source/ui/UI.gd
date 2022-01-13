@@ -1,40 +1,26 @@
 extends MarginContainer
 
-enum {COMBAT, MANAGMENT}
+enum {COMBAT, MANAGMENT, SHOP}
 var mode
 
 # COMBAT LAYER PANELS
-export(NodePath) var CL_resources_node
-onready var CL_resources := get_node(CL_resources_node)
-
-
-export(NodePath) var CL_debug_node
-onready var CL_debug := get_node(CL_debug_node)
-
-export(NodePath) var CL_compass_node
-onready var CL_compass := get_node(CL_compass_node)
-
-export(NodePath) var CL_spellbook_node
-onready var CL_spellbook := get_node(CL_spellbook_node)
-
-export(NodePath) var CL_pouch_node
-onready var CL_pouch := get_node(CL_pouch_node)
+onready var CL_resources := $Combat/VBoxContainer/Resources
+onready var CL_debug := $Combat/VBoxContainer/Debug
+onready var CL_compass := $Combat/Compass
+onready var CL_spellbook := $Combat/VBoxContainer3/AbilityBar
+onready var CL_pouch := $Combat/VBoxContainer3/Pouch
 
 # MANAGMENT LAYER PANELS
-export(NodePath) var ML_equipment_node
-onready var ML_equipment := get_node(ML_equipment_node)
+onready var ML_equipment := $Management/MarginContainer/HBoxContainer/VBoxContainerLeft/Equipment
+onready var ML_inventory := $Management/MarginContainer/HBoxContainer/VBoxContainerRight/Inventory
+onready var ML_spellbook := $Management/MarginContainer/HBoxContainer/VBoxContainerLeft/AbilityBar
+onready var ML_pouch := $Management/MarginContainer/HBoxContainer/VBoxContainerRight/Pouch
+onready var ML_amount_popup := $Management/CenterContainer/AmountPopup
 
-export(NodePath) var ML_inventory_node
-onready var ML_inventory := get_node(ML_inventory_node)
-
-export(NodePath) var ML_spellbook_node
-onready var ML_spellbook := get_node(ML_spellbook_node)
-
-export(NodePath) var ML_pouch_node
-onready var ML_pouch := get_node(ML_pouch_node)
-
-export(NodePath) var ML_amount_popup_node
-onready var ML_amount_popup := get_node(ML_amount_popup_node)
+# SHOP LAYER PANELS
+onready var SL_inventory := $Shop/HBoxContainer/Inventory
+onready var SL_shop := $Shop/HBoxContainer/Shop
+onready var SL_amount_popup := $Shop/CenterContainer/AmountPopup
 
 
 func _unhandled_key_input(_event: InputEventKey) -> void:
@@ -55,10 +41,17 @@ func set_mode(_mode):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 			$Combat.show()
 			$Management.hide()
+			$Shop.hide()
 		MANAGMENT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			$Combat.hide()
 			$Management.show()
+			$Shop.hide()
+		SHOP:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			$Combat.hide()
+			$Management.hide()
+			$Shop.show()
 	mode = _mode
 
 
@@ -72,8 +65,7 @@ func connect_signals():
 	Server.connect("update_inventory_ui", self, "update_inventory_ui")
 	Server.connect("update_pouch_ui", self, "update_pouch_ui")
 	Server.connect("update_spellbook_ui", self, "update_spellbook_ui")
-	Server.connect("update_currency_ui", self, "update_currency_ui")
-	
+
 	
 func update_equipment_ui(_data : Dictionary):
 	ML_equipment.configure(_data)
@@ -81,10 +73,8 @@ func update_equipment_ui(_data : Dictionary):
 	
 func update_inventory_ui(_data : Array):
 	ML_inventory.configure(_data)
+	SL_inventory.configure(_data)
 
-
-func update_currency_ui(_data : Dictionary):
-	ML_inventory.configure_currency(_data)
 
 func update_pouch_ui(_data : Array):
 	CL_pouch.configure(_data)
