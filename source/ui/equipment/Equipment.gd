@@ -22,7 +22,7 @@ func configure(_data : Dictionary):
 	var index = 0
 	for i in _data.keys():
 		var new_slot = slots[i]
-		new_slot.configure(_data[i], "equipment", index, null, new_slot.ITEM)
+		new_slot.configure(_data[i], "equipment", index, null)
 		index += 1
 	
 	

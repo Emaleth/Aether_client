@@ -24,7 +24,7 @@ func configure(_data : Array):
 	for i in _data:
 		var new_slot = slot.instance()
 		slot_grid.add_child(new_slot)
-		new_slot.configure(i, "pouch", index, x[index], new_slot.ITEM)
+		new_slot.configure(i, "pouch", index, x[index])
 		index += 1
 	
 

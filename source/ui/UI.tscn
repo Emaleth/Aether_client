@@ -33,6 +33,7 @@ __meta__ = {
 }
 
 [node name="Combat" type="PanelContainer" parent="."]
+visible = false
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1361.0
@@ -216,26 +217,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Shop" type="PanelContainer" parent="."]
-visible = false
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1361.0
 margin_bottom = 763.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Shop"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1349.0
-margin_bottom = 751.0
-
-[node name="Inventory" parent="Shop/HBoxContainer" instance=ExtResource( 4 )]
-margin_right = 669.0
-margin_bottom = 744.0
-
-[node name="Shop" parent="Shop/HBoxContainer" instance=ExtResource( 14 )]
-margin_left = 673.0
-margin_right = 1342.0
-margin_bottom = 744.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Shop"]
 margin_left = 7.0
@@ -255,3 +240,9 @@ margin_right = 678.0
 margin_bottom = 379.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Shop" parent="Shop" instance=ExtResource( 14 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1349.0
+margin_bottom = 751.0

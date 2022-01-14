@@ -2,26 +2,22 @@ extends PanelContainer
 
 var item = null
 var container = null
-var shortcut = null
 var index : int
+var shop_id = null
 
-onready var item_texture := $Icon
-onready var amount_label := $GridContainer/AmountLabel
-onready var shortcut_label := $GridContainer/ShortcutLabel
+onready var item_texture := $VBoxContainer/PanelContainer/Icon
+onready var price_label := $VBoxContainer/PanelContainer2/price
 
 onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
 onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
 
 
-func configure(_item, _container, _index, _shortcut):
+func configure(_item, _container, _index):
 	item = _item
 	container = _container
-	shortcut = _shortcut
 	index = _index
 	set_tooltip_text()
 	set_item_icon()
-	set_amount_label()
-	set_shortcut_label()
 	
 	
 func set_tooltip_text() -> void:
@@ -43,17 +39,10 @@ func set_item_icon() -> void:
 
 
 func set_shortcut_label() -> void:
-	if shortcut and InputMap.get_action_list(shortcut).size() != 0:
-		shortcut_label.text = InputMap.get_action_list(shortcut)[0].as_text() if shortcut else ""
+	if LocalDataTables.item_table[item["archetype"]].has("msrp"):
+		price_label.text = LocalDataTables.item_table[item["archetype"]]["msrp"]
 	else:
-		shortcut_label.text = ""
-		
-		
-func set_amount_label() -> void:
-	if item:
-		amount_label.text = "" if item["amount"] == 1 else str(item["amount"])
-	else:
-		amount_label.text = ""
+		price_label.text = ""
 		
 		
 func get_drag_data(_position: Vector2):
@@ -61,7 +50,8 @@ func get_drag_data(_position: Vector2):
 		var data := {
 			"container" : container,
 			"index" : index,
-			"amount" : item["amount"]
+			"amount" : item["amount"],
+			"shop_id" : shop_id
 		}
 		var new_preview = preview.instance()
 		new_preview.conf(item)
@@ -78,20 +68,14 @@ func drop_data(_position: Vector2, _data) -> void:
 	var data = {
 		"container" : container,
 		"index" : index,
-		"amount" : item["amount"] if item else null 
+		"amount" : item["amount"] if item else null,
+		"shop_id" : shop_id
+		 
 	}
-	if Input.is_action_pressed("mod") and _data["amount"] > 1:
-		GlobalVariables.user_interface.ML_amount_popup.conf(_data, data)
+#	if Input.is_action_pressed("mod") and _data["amount"] > 1:
+#		GlobalVariables.user_interface.SL_amount_popup.conf(_data, data)
+#	else:
+	if data["container"] == "shop":
+		Server.request_item_sell(data["shop_id"], _data["index"])
 	else:
-		Server.request_item_transfer(_data, -1, data)
-	
-	
-func _unhandled_key_input(_event: InputEventKey) -> void:
-	if !shortcut or !item:
-		return
-	if Input.is_action_just_pressed(shortcut):
-		var data = {
-			"container" : container,
-			"index" : index
-		}
-		Server.send_item_use_request(data)
+		Server.request_item_buy(_data["shop_id"], data["index"])
