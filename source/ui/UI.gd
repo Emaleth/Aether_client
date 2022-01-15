@@ -51,6 +51,7 @@ func set_mode(_mode):
 			$Combat.hide()
 			$Management.hide()
 			$Shop.show()
+			update_shop_ui(GlobalVariables.interactable.goods)
 	mode = _mode
 
 
@@ -68,6 +69,9 @@ func connect_signals():
 	
 func update_equipment_ui(_data : Dictionary):
 	ML_equipment.configure(_data)
+	
+func update_shop_ui(_data : Array):
+	SL_shop.configure_buy(_data)
 	
 	
 func update_inventory_ui(_data : Array):

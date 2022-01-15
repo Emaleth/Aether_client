@@ -3,7 +3,6 @@ extends PanelContainer
 var item = null
 var container = null
 var index : int
-var shop_id = null
 
 onready var item_texture := $VBoxContainer/PanelContainer/Icon
 onready var price_label := $VBoxContainer/PanelContainer2/price
@@ -42,7 +41,7 @@ func set_shortcut_label() -> void:
 	if LocalDataTables.item_table[item["archetype"]].has("msrp"):
 		price_label.text = LocalDataTables.item_table[item["archetype"]]["msrp"]
 	else:
-		price_label.text = ""
+		price_label.text = "?"
 		
 		
 func get_drag_data(_position: Vector2):
@@ -50,8 +49,8 @@ func get_drag_data(_position: Vector2):
 		var data := {
 			"container" : container,
 			"index" : index,
-			"amount" : item["amount"],
-			"shop_id" : shop_id
+			"amount" : 1,#item["amount"],
+			"shop_id" : GlobalVariables.interactable.name if GlobalVariables.interactable else null
 		}
 		var new_preview = preview.instance()
 		new_preview.conf(item)
@@ -68,14 +67,14 @@ func drop_data(_position: Vector2, _data) -> void:
 	var data = {
 		"container" : container,
 		"index" : index,
-		"amount" : item["amount"] if item else null,
-		"shop_id" : shop_id
+		"amount" : 1,#item["amount"] if item else null,
+		"shop_id" : GlobalVariables.interactable.name if GlobalVariables.interactable else null
 		 
 	}
 #	if Input.is_action_pressed("mod") and _data["amount"] > 1:
 #		GlobalVariables.user_interface.SL_amount_popup.conf(_data, data)
 #	else:
-	if data["container"] == "shop":
+	if data["container"] == "shop" and data["shop_id"] != null:
 		Server.request_item_sell(data["shop_id"], _data["index"])
-	else:
+	elif _data["container"] == "shop" and _data["shop_id"] != null:
 		Server.request_item_buy(_data["shop_id"], data["index"])

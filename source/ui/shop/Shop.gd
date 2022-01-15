@@ -14,7 +14,8 @@ func configure_buy(_data : Array):
 	for i in _data:
 		var new_slot = slot.instance()
 		buy_slot_grid.add_child(new_slot)
-		new_slot.configure(i, "shop", index)
+		var x = {"archetype" : i}
+		new_slot.configure(x, "shop", index)
 		index += 1
 
 
@@ -28,3 +29,8 @@ func configure_sell(_data : Array):
 		sell_slot_grid.add_child(new_slot)
 		new_slot.configure(i, "inventory", index)
 		index += 1
+
+
+func _ready() -> void:
+	configure_sell(GlobalVariables.inventory_data)
+

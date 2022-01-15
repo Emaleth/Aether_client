@@ -184,3 +184,4 @@ func request_item_buy(_shop_id : String, _slot_index : int):
 	
 func request_item_sell(_shop_id : String, _slot_index : int):
 	rpc_id(1, "request_item_sell", _shop_id, _slot_index)
+

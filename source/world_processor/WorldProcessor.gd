@@ -33,6 +33,7 @@ func interpolate_or_extrapolate():
 			$AbilityProcessor.interpolate(render_time, world_state_buffer)
 		
 			$LootProcessor.process_data()
+			$ShopProcessor.process_data()
 
 		elif render_time > float(world_state_buffer[1]["T"]):
 			$NPCProcessor.extrapolate(render_time, world_state_buffer)

@@ -73,8 +73,12 @@ func rotate_character(_amount : Vector2) -> void:
 
 func interact():
 	if GlobalVariables.interactable != null:
-		Server.request_loot_pickup(GlobalVariables.interactable.name)
-	
+		if GlobalVariables.interactable.is_in_group("loot"):
+			Server.request_loot_pickup(GlobalVariables.interactable.name)
+		if GlobalVariables.interactable.is_in_group("shop"):
+#			GlobalVariables.user_interface.update_shop_ui(GlobalVariables.interactable.goods)
+			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOP)
+
 
 func get_interactables():
 	var interactable = $InteractionArea.get_overlapping_bodies()
