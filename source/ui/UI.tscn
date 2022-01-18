@@ -222,6 +222,12 @@ margin_top = 5.0
 margin_right = 1361.0
 margin_bottom = 763.0
 
+[node name="Shop" parent="Shop" instance=ExtResource( 14 )]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1349.0
+margin_bottom = 751.0
+
 [node name="CenterContainer" type="CenterContainer" parent="Shop"]
 margin_left = 7.0
 margin_top = 7.0
@@ -240,9 +246,3 @@ margin_right = 678.0
 margin_bottom = 379.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-
-[node name="Shop" parent="Shop" instance=ExtResource( 14 )]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1349.0
-margin_bottom = 751.0
