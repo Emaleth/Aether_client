@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/ui/compass/Compass.gd" type="Script" id=1]
+[ext_resource path="res://assets/stylebox/inventory.tres" type="StyleBox" id=2]
 
 [node name="Compass" type="PanelContainer"]
 self_modulate = Color( 1, 1, 1, 0.196078 )
@@ -10,16 +11,17 @@ rect_min_size = Vector2( 200, 28 )
 rect_clip_content = true
 size_flags_horizontal = 4
 size_flags_vertical = 0
+custom_styles/panel = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Control" type="Control" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 193.0
-margin_bottom = 21.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 22.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 margin_right = 88.0
@@ -218,10 +220,10 @@ uppercase = true
 
 [node name="Label" type="Label" parent="."]
 self_modulate = Color( 0.133333, 0.819608, 0.0745098, 1 )
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 193.0
-margin_bottom = 21.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 192.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "[[ ]]"

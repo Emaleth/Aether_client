@@ -2,8 +2,8 @@ extends PanelContainer
 
 onready var slot = preload("res://source/ui/subcomponents/shop_slot/ShopSlot.tscn")
 
-onready var buy_slot_grid = $CenterContainer/HBoxContainer/BuySection/GridContainer
-onready var sell_slot_grid = $CenterContainer/HBoxContainer/SellSection/GridContainer
+onready var buy_slot_grid = $CenterContainer/HBoxContainer/BuyContainer/BuySection/GridContainer
+onready var sell_slot_grid = $CenterContainer/HBoxContainer/SellContainer/SellSection/GridContainer
 
 
 func configure_buy(_data : Array):
