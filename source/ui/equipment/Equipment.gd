@@ -1,6 +1,5 @@
 extends PanelContainer
 
-onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
 
 export var chest_slot : NodePath
 export var right_hand_slot : NodePath

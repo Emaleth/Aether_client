@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://source/ui/subcomponents/shop_slot/ShopSlot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/ui/subcomponents/old_slots/ShopSlot_old.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/ui/shop/Shop.gd" type="Script" id=2]
 [ext_resource path="res://assets/stylebox/inventory.tres" type="StyleBox" id=3]
 

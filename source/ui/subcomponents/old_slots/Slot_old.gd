@@ -5,10 +5,9 @@ var container = null
 var shortcut = null
 var index : int
 
-onready var item_texture := $VBoxContainer/PanelContainer/Icon
-onready var amount_label := $VBoxContainer/PanelContainer/GridContainer/AmountLabel
-onready var shortcut_label := $VBoxContainer/PanelContainer/GridContainer/ShortcutLabel
-onready var price_label := $VBoxContainer/PanelContainer2/price
+onready var item_texture := $Icon
+onready var amount_label := $GridContainer/AmountLabel
+onready var shortcut_label := $GridContainer/ShortcutLabel
 
 onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
 onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
@@ -23,7 +22,6 @@ func configure(_item, _container, _index, _shortcut):
 	set_item_icon()
 	set_amount_label()
 	set_shortcut_label()
-	set_price_label()
 	
 	
 func set_tooltip_text() -> void:
@@ -34,14 +32,6 @@ func _make_custom_tooltip(_for_text: String) -> Control:
 	var new_tooltip = tooltip.instance()
 	new_tooltip.conf(item)
 	return new_tooltip
-		
-		
-func set_price_label() -> void:
-	if item and container == "shop":
-		price_label.text = str(LocalDataTables.item_table[item["archetype"]]["msrp"]) if LocalDataTables.item_table[item["archetype"]].has("msrp") else "?"
-	else:
-		price_label.text = ""
-		price_label.hide()
 		
 		
 func set_item_icon() -> void:
@@ -71,9 +61,7 @@ func get_drag_data(_position: Vector2):
 		var data := {
 			"container" : container,
 			"index" : index,
-			"amount" : item["amount"],
-			"shop_id" : GlobalVariables.interactable.name if container == "shop" and GlobalVariables.interactable else null,
-			"is_multi" : LocalDataTables.item_table[item["archetype"]]["max_stack"] if LocalDataTables.item_table[item["archetype"]]["max_stack"] > 1 else null
+			"amount" : item["amount"]
 		}
 		var new_preview = preview.instance()
 		new_preview.conf(item)
@@ -90,30 +78,12 @@ func drop_data(_position: Vector2, _data) -> void:
 	var data = {
 		"container" : container,
 		"index" : index,
-		"amount" : item["amount"] if item else null,
-		"shop_id" : GlobalVariables.interactable.name if container == "shop" and GlobalVariables.interactable else null
+		"amount" : item["amount"] if item else null 
 	}
-	
-	
-	if data["container"] == "shop" and _data["container"] == "inventory" and data["shop_id"] != null:
-		if Input.is_action_pressed("mod") and _data["amount"] > 1:
-			GlobalVariables.user_interface.SL_amount_popup.conf(_data, data, true, true)
-		else:
-			Server.request_item_sell(data["shop_id"], _data["index"])
-	
-	elif data["container"] == "inventory" and _data["container"] == "shop" and _data["shop_id"] != null:
-		if Input.is_action_pressed("mod") and _data["is_multi"] != null:
-			GlobalVariables.user_interface.SL_amount_popup.conf(_data, data, true, false)
-		else:
-			Server.request_item_buy(_data["shop_id"], _data["index"])
-	
-	elif data["container"] != "shop" and _data["container"] != "shop":
-		if Input.is_action_pressed("mod") and _data["amount"] > 1:
-			GlobalVariables.user_interface.ML_amount_popup.conf(_data, data)
-		else:
-			Server.request_item_transfer(_data, -1, data)
+	if Input.is_action_pressed("mod") and _data["amount"] > 1:
+		GlobalVariables.user_interface.ML_amount_popup.conf(_data, data)
 	else:
-		print("WTF?!")
+		Server.request_item_transfer(_data, -1, data)
 	
 	
 func _unhandled_key_input(_event: InputEventKey) -> void:
