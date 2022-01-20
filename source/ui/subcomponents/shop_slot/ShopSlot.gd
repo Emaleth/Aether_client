@@ -81,34 +81,13 @@ func drop_data(_position: Vector2, _data) -> void:
 		"amount" : item["amount"] if item else null,
 		"shop_id" : GlobalVariables.interactable.name if GlobalVariables.interactable else null
 	}
-#	print(index)
-#	if Input.is_action_pressed("mod") and _data["amount"] > 1:
-#		if data["container"] == "shop" and data["shop_id"] != null:
-#			GlobalVariables.user_interface.SL_amount_popup.conf(_data, data, true, true)
-#		elif _data["container"] == "shop" and _data["shop_id"] != null:
-#			GlobalVariables.user_interface.SL_amount_popup.conf(_data, data, true, false)
-#	else:
-#		if data["container"] == "shop" and data["shop_id"] != null:
-#			Server.request_item_sell(data["shop_id"], _data["index"])
-#		elif _data["container"] == "shop" and _data["shop_id"] != null:
-#			Server.request_item_buy(_data["shop_id"], _data["index"])
 
-
-
-
-
-
-#	print(index)
-#	if Input.is_action_pressed("mod") and _data["amount"] > 1:
-#		if data["container"] == "shop" and data["shop_id"] != null:
-#		elif _data["container"] == "shop" and _data["shop_id"] != null:
-#	else:
-	if data["container"] == "shop" and data["shop_id"] != null:
+	if data["container"] == "shop" and _data["container"] == "inventory" and data["shop_id"] != null:
 		if Input.is_action_pressed("mod") and _data["amount"] > 1:
 			GlobalVariables.user_interface.SL_amount_popup.conf(_data, data, true, true)
 		else:
 			Server.request_item_sell(data["shop_id"], _data["index"])
-	elif _data["container"] == "shop" and _data["shop_id"] != null:
+	elif data["container"] == "inventory" and _data["container"] == "shop" and _data["shop_id"] != null:
 		if Input.is_action_pressed("mod") and _data["is_multi"] != null:
 			GlobalVariables.user_interface.SL_amount_popup.conf(_data, data, true, false)
 		else:
