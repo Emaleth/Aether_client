@@ -18,7 +18,8 @@ onready var ML_pouch := $Management/MarginContainer/HBoxContainer/VBoxContainerR
 onready var ML_amount_popup := $Management/CenterContainer/AmountPopup
 
 # SHOP LAYER PANELS
-onready var SL_shop := $Shop/Shop
+onready var SL_shop := $Shop/CenterContainer2/HBoxContainer/BuySection/Shop
+onready var SL_inventory := $Shop/CenterContainer2/HBoxContainer/SellSection/Inventory
 onready var SL_amount_popup := $Shop/CenterContainer/AmountPopup
 
 
@@ -76,7 +77,8 @@ func update_shop_ui(_data : Array):
 	
 func update_inventory_ui(_data : Array):
 	ML_inventory.configure(_data)
-	SL_shop.configure_sell(_data)
+	SL_inventory.configure(_data)
+#	SL_shop.configure_sell(_data)
 
 
 func update_pouch_ui(_data : Array):
