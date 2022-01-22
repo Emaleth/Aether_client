@@ -1,17 +1,17 @@
 extends KinematicBody
 
-var speed = 5
-var jump_force = 10
-var jump_vector = Vector3.UP * jump_force
-var gravity = 9.8
-var gravity_vec = Vector3.DOWN * gravity
+var speed := 7
+var jump_force := 20
+var gravity := -50
+var snap_vector := Vector3.DOWN
+var velocity := Vector3.ZERO
 
-var sensibility : float = 0.005
-var deadzone : float = 0.1
+var mouse_sensibility : float = 0.005
+var mouse_deadzone : float = 0.1
 
 onready var camera_rig_scene = preload("res://source/camera_rig/CameraRig.tscn")
 onready var camera_position = $CameraPosition
-onready var minimap_remote_transform = $MinimapRemoteTransform
+onready var interaction_area = $InteractionArea
 
 
 func instanciate_camera():
@@ -19,78 +19,57 @@ func instanciate_camera():
 	camera_position.add_child(GlobalVariables.camera_rig)
 
 
-func set_minimap_camera_transform(_path):
-	minimap_remote_transform.remote_path = _path
-
-
 func _ready() -> void:
 	instanciate_camera()
 	
 	
-func _physics_process(_delta: float) -> void:
-	move()
-	
-	
-func _process(_delta: float) -> void:
-	get_interactables()
+func _physics_process(delta: float) -> void:
+	move(delta)
+	get_look_direction()
 	
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		return
-	if Input.is_action_just_pressed("primary_action"):
-		pass
-	if Input.is_action_just_pressed("secondary_action"):
-		pass
-	if event is InputEventMouseMotion:
-		rotate_character(event.relative)
-
+		
 	if Input.is_action_just_pressed("interact"):
-		interact()
+		interaction_area.interact()
 		
 
-func get_direction() -> Vector3:
-	var direction = Vector3.ZERO
+func get_move_direction() -> Vector3:
+	var move_direction := Vector3.ZERO
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
-		direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-		direction = direction.normalized()
-	
-	return direction
-	
-	
-func move():
-	var direction_xform = transform.basis.xform(Vector3(get_direction() * speed))
-	move_and_slide_with_snap(direction_xform, Vector3.DOWN, Vector3.UP)
+		move_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+		move_direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
+		move_direction = move_direction.rotated(Vector3.UP, GlobalVariables.camera_rig.rotation.y).normalized()
+				
+	return move_direction
 	
 	
-func rotate_character(_amount : Vector2) -> void:
-	if _amount.length() <= deadzone:
-		return
-	rotation.y -= _amount.x * sensibility
-	rotation.y = wrapf(rotation.y, -180, 180)
+func get_move_velocity(_mov_dir : Vector3, _delta : float) -> void:
+	velocity.x = _mov_dir.x * speed
+	velocity.z = _mov_dir.z * speed
+	velocity.y = gravity if is_on_floor() else (velocity.y + (gravity * _delta))
+	
+	var just_landed := is_on_floor() and snap_vector == Vector3.ZERO
+	var is_jumping := is_on_floor() and Input.is_action_just_pressed("jump") 
+	
+	if is_jumping:
+		velocity.y = jump_force
+		snap_vector = Vector3.ZERO
+	elif just_landed:
+		snap_vector = Vector3.DOWN
+	
+	
+func move(_delta : float):
+	get_move_velocity(get_move_direction(), _delta)
+	move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
+	
+	
+func get_look_direction():
+	if velocity.length() > 2:
+		var look_direction = Vector2(velocity.z, velocity.x)
+#		model.rotation.y = look_direction.angle()
+		
 
 
-func interact():
-	if GlobalVariables.interactable != null:
-		if GlobalVariables.interactable.is_in_group("loot"):
-			Server.request_loot_pickup(GlobalVariables.interactable.name)
-		if GlobalVariables.interactable.is_in_group("shop"):
-#			GlobalVariables.user_interface.update_shop_ui(GlobalVariables.interactable.goods)
-			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOP)
-
-
-func get_interactables():
-	var interactable = $InteractionArea.get_overlapping_bodies()
-	var nearest_loot = null
-	if interactable.size() != 0:
-		var closest_distance = null
-		for i in interactable:
-			if closest_distance == null:
-				nearest_loot = i
-				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
-			elif i.global_transform.origin.distance_to(global_transform.origin) < closest_distance:
-				nearest_loot = i
-				closest_distance = i.global_transform.origin.distance_to(global_transform.origin)
-	GlobalVariables.interactable = nearest_loot if nearest_loot != null else null
-	

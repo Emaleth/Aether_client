@@ -1,13 +1,13 @@
 extends SpringArm
 
-var sensibility : float = 0.005
-var deadzone : float = 0.1
+var mouse_sensibility : float = 0.005
+var mouse_deadzone : float = 0.1
 var min_rotation_x : float = deg2rad(-80)
 var max_rotation_x : float = deg2rad(80)
 
 
 onready var camera = $Camera
-
+	
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -17,11 +17,14 @@ func _unhandled_input(event: InputEvent) -> void:
 
 		
 func rotate_camera_rig(_amount : Vector2) -> void:
-	if _amount.length() <= deadzone:
+	if _amount.length() <= mouse_deadzone:
 		return
-	rotation.x -= _amount.y * sensibility
+	rotation.x -= _amount.y * mouse_sensibility
 	rotation.x = clamp(rotation.x, min_rotation_x, max_rotation_x)
 	
+	rotation.y -= _amount.x * mouse_sensibility
+	rotation.y = wrapf(rotation.y, -180, 180)
+
 
 func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 	var space_state = get_world().direct_space_state
@@ -33,6 +36,3 @@ func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 	
 	return intersection
 	
-#func _process(delta: float) -> void:
-#	var x = cast_ray_from_camera_to_mouse_pointer()
-#	GlobalVariables.target = x.collider if x.size() != 0 else null

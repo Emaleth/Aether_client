@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/actor/character/Character.gd" type="Script" id=1]
+[ext_resource path="res://source/actor/interaction_area/InteractionArea.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.3
@@ -9,17 +10,6 @@ height = 1.2
 [sub_resource type="CapsuleMesh" id=2]
 radius = 0.3
 mid_height = 1.2
-
-[sub_resource type="SphereShape" id=3]
-radius = 3.0
-
-[sub_resource type="SphereMesh" id=4]
-radius = 3.0
-height = 6.0
-
-[sub_resource type="SpatialMaterial" id=5]
-flags_transparent = true
-albedo_color = Color( 0, 0.784314, 0.784314, 0.196078 )
 
 [node name="Actor" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -40,13 +30,4 @@ material/0 = null
 [node name="CameraPosition" type="Position3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.3, 0 )
 
-[node name="InteractionArea" type="Area" parent="."]
-collision_layer = 0
-collision_mask = 16
-
-[node name="CollisionShape" type="CollisionShape" parent="InteractionArea"]
-shape = SubResource( 3 )
-
-[node name="MeshInstance" type="MeshInstance" parent="InteractionArea"]
-mesh = SubResource( 4 )
-material/0 = SubResource( 5 )
+[node name="InteractionArea" parent="." instance=ExtResource( 2 )]
