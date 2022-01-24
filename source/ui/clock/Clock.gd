@@ -27,4 +27,5 @@ func format_time():
 		second = str(date_dict["second"])
 		
 	var formatted_time := "%s:%s:%s" % [hour, minute, second]
+	
 	return formatted_time

@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://source/actor/character/Character.gd" type="Script" id=1]
-[ext_resource path="res://source/actor/interaction_area/InteractionArea.tscn" type="PackedScene" id=2]
-[ext_resource path="res://source/camera_rig/CameraRig.tscn" type="PackedScene" id=3]
+[ext_resource path="res://source/actor/character/interaction_area/InteractionArea.tscn" type="PackedScene" id=2]
+[ext_resource path="res://source/actor/character/camera_rig/CameraRig.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.3

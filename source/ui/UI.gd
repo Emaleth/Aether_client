@@ -53,32 +53,33 @@ func set_mode(_mode):
 			$Management.hide()
 			$Shop.show()
 			update_shop_ui(GlobalVariables.interactable.goods)
+			
 	mode = _mode
 
 
 func _ready() -> void:
 	set_mode(COMBAT)
 	connect_signals()
-	
-	
+
+
 func connect_signals():
 	Server.connect("update_equipment_ui", self, "update_equipment_ui")
 	Server.connect("update_inventory_ui", self, "update_inventory_ui")
 	Server.connect("update_pouch_ui", self, "update_pouch_ui")
 	Server.connect("update_spellbook_ui", self, "update_spellbook_ui")
 
-	
+
 func update_equipment_ui(_data : Dictionary):
 	ML_equipment.configure(_data)
-	
+
+
 func update_shop_ui(_data : Array):
 	SL_shop.configure_buy(_data)
-	
-	
+
+
 func update_inventory_ui(_data : Array):
 	ML_inventory.configure(_data)
 	SL_inventory.configure(_data)
-#	SL_shop.configure_sell(_data)
 
 
 func update_pouch_ui(_data : Array):
@@ -90,6 +91,6 @@ func update_spellbook_ui(_data : Array):
 	CL_spellbook.configure(_data)
 	ML_spellbook.configure(_data)
 
-	
+
 func _physics_process(_delta: float) -> void:
 	CL_debug.conf(Server.latency)

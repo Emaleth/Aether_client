@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Blue E.png-21e14342528e7b7a44ca7daa4868a09a.stex"
+path="res://.import/painting-02.jpg-25c74275163554b74926cebaeaeee25c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/ui/Blue E.png"
-dest_files=[ "res://.import/Blue E.png-21e14342528e7b7a44ca7daa4868a09a.stex" ]
+source_file="res://assets/textures/painting-02.jpg"
+dest_files=[ "res://.import/painting-02.jpg-25c74275163554b74926cebaeaeee25c.stex" ]
 
 [params]
 

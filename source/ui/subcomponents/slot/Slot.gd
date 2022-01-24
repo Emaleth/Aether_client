@@ -41,7 +41,7 @@ func set_price_label() -> void:
 		price_label.text = str(LocalDataTables.item_table[item["archetype"]]["msrp"]) if LocalDataTables.item_table[item["archetype"]].has("msrp") else "?"
 	else:
 		price_label.text = ""
-		price_label.hide()
+		$VBoxContainer/PanelContainer2.hide()
 		
 		
 func set_item_icon() -> void:
