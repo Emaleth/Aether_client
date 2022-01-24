@@ -240,54 +240,54 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Shop/CenterContainer2"]
-margin_left = 199.0
-margin_top = 278.0
-margin_right = 1157.0
-margin_bottom = 480.0
+margin_left = 249.0
+margin_top = 283.0
+margin_right = 1106.0
+margin_bottom = 475.0
 custom_constants/separation = 25
 
 [node name="BuySection" type="VBoxContainer" parent="Shop/CenterContainer2/HBoxContainer"]
-margin_right = 381.0
-margin_bottom = 202.0
+margin_right = 336.0
+margin_bottom = 192.0
 
 [node name="Label" type="Label" parent="Shop/CenterContainer2/HBoxContainer/BuySection"]
-margin_right = 381.0
+margin_right = 336.0
 margin_bottom = 14.0
 text = "BUY"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="Shop/CenterContainer2/HBoxContainer/BuySection"]
 margin_top = 18.0
-margin_right = 381.0
+margin_right = 336.0
 margin_bottom = 22.0
 
 [node name="Shop" parent="Shop/CenterContainer2/HBoxContainer/BuySection" instance=ExtResource( 14 )]
 margin_top = 26.0
-margin_right = 381.0
-margin_bottom = 202.0
+margin_right = 336.0
+margin_bottom = 192.0
 
 [node name="SellSection" type="VBoxContainer" parent="Shop/CenterContainer2/HBoxContainer"]
-margin_left = 406.0
-margin_right = 958.0
-margin_bottom = 202.0
+margin_left = 361.0
+margin_right = 857.0
+margin_bottom = 192.0
 
 [node name="Label" type="Label" parent="Shop/CenterContainer2/HBoxContainer/SellSection"]
-margin_right = 552.0
+margin_right = 496.0
 margin_bottom = 14.0
 text = "SELL"
 align = 1
 
 [node name="HSeparator" type="HSeparator" parent="Shop/CenterContainer2/HBoxContainer/SellSection"]
 margin_top = 18.0
-margin_right = 552.0
+margin_right = 496.0
 margin_bottom = 22.0
 
 [node name="Inventory" parent="Shop/CenterContainer2/HBoxContainer/SellSection" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 54.0
-margin_right = 552.0
-margin_bottom = 174.0
+margin_top = 51.0
+margin_right = 496.0
+margin_bottom = 167.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Shop"]
 margin_right = 1356.0

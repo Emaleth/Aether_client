@@ -13,6 +13,9 @@ viewport_path = NodePath("Viewport")
 margin_right = 214.0
 margin_bottom = 214.0
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Viewport" type="Viewport" parent="."]
 size = Vector2( 200, 200 )
