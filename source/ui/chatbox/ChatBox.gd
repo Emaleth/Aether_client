@@ -3,6 +3,9 @@ extends PanelContainer
 enum {READ, WRITE}
 
 var mode
+var small_window_size = Vector2(200, 150)
+var big_window_size = Vector2(250, 200)
+
 
 onready var msg_list := $VBoxContainer/OutputPanel/ScrollContainer/MessageList
 onready var template_chat_line := $VBoxContainer/OutputPanel/ScrollContainer/MessageList/Template
@@ -10,6 +13,7 @@ onready var input_line := $VBoxContainer/InputPanel/LineEdit
 onready var scroll_container = $VBoxContainer/OutputPanel/ScrollContainer
 onready var mode_tween := $ModeTween
 onready var scroll_tween := $ScrollTween
+onready var outer_frame := get_parent()
 
 
 func _ready() -> void:
@@ -97,7 +101,15 @@ func make_small() -> void:
 			self, 
 			"rect_size", 
 			rect_size, 
-			Vector2(200, 150), 
+			small_window_size, 
+			0.3, 
+			Tween.TRANS_QUAD, 
+			Tween.EASE_OUT)
+	mode_tween.interpolate_property(
+			self, 
+			"rect_position:y", 
+			rect_position.y, 
+			outer_frame.rect_size.y - small_window_size.y, 
 			0.3, 
 			Tween.TRANS_QUAD, 
 			Tween.EASE_OUT)
@@ -110,7 +122,15 @@ func make_big() -> void:
 			self, 
 			"rect_size", 
 			rect_size, 
-			Vector2(300, 250), 
+			big_window_size, 
+			0.3,  
+			Tween.TRANS_QUAD, 
+			Tween.EASE_OUT)
+	mode_tween.interpolate_property(
+			self, 
+			"rect_position:y", 
+			rect_position.y, 
+			outer_frame.rect_size.y - big_window_size.y, 
 			0.3,  
 			Tween.TRANS_QUAD, 
 			Tween.EASE_OUT)
