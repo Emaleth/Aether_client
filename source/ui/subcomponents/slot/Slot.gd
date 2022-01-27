@@ -4,11 +4,12 @@ var item = null
 var container = null
 var shortcut = null
 var index : int
+var alternative := false
 
 onready var item_texture := $VBoxContainer/PanelContainer/Icon
 onready var amount_label := $VBoxContainer/PanelContainer/GridContainer/AmountLabel
 onready var shortcut_label := $VBoxContainer/PanelContainer/GridContainer/ShortcutLabel
-onready var price_label := $VBoxContainer/PanelContainer2/price
+onready var price_label := $VBoxContainer/PricePanel/PriceLabel
 
 onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
 onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
@@ -41,13 +42,13 @@ func set_price_label() -> void:
 		price_label.text = str(LocalDataTables.item_table[item["archetype"]]["msrp"]) if LocalDataTables.item_table[item["archetype"]].has("msrp") else "?"
 	else:
 		price_label.text = ""
-		$VBoxContainer/PanelContainer2.hide()
+		$VBoxContainer/PricePanel.hide()
 		
 		
 func set_item_icon() -> void:
 	if item:
-		var item_icon_path = "res://assets/icons/item//%s.svg" % str(item["archetype"])
-		item_texture.texture = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/item/no_icon.svg")
+		var item_icon_path = "res://assets/icons/item//%s.svg" % str(item["archetype"]) if alternative == false else "res://assets/icons/abilities//%s.svg" % str(LocalDataTables.item_table[item["archetype"]]["action"])
+		item_texture.texture = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/no_icon.svg")
 	else:
 		item_texture.texture = null
 

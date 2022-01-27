@@ -9,5 +9,5 @@ func conf(_item):
 
 func _ready() -> void:
 	var item_icon_path = "res://assets/icons/item//%s.svg" % str(item["archetype"])
-	preview.texture = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/item/no_icon.svg")
+	preview.texture = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/no_icon.svg")
 	

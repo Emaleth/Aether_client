@@ -1,5 +1,6 @@
 extends PanelContainer
 
+
 onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
 onready var slot_grid = $CenterContainer/GridContainer
 

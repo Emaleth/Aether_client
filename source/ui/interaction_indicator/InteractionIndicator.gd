@@ -1,6 +1,6 @@
 extends PanelContainer
 
-onready var label = $Label
+onready var label = $PanelContainer/Label
 
 
 func _process(_delta: float) -> void:
