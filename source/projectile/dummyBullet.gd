@@ -1,6 +1,6 @@
 extends Area
 
-var type : String
+var ability : String
 
 func update(new_position, new_rotation):
 	global_transform.origin = new_position

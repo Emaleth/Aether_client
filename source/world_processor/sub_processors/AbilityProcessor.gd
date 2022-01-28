@@ -21,7 +21,7 @@ func add_to_the_tree():
 			new_bullet.name = str(bullet)
 			new_bullet.transform.origin = collection[bullet]["pos"]
 			new_bullet.transform.basis = collection[bullet]["rot"]
-			new_bullet.type = collection[bullet]["type"]
+			new_bullet.ability = collection[bullet]["ability"]
 			container.add_child(new_bullet, true)
 
 
