@@ -56,7 +56,10 @@ func move(_delta : float):
 
 
 func get_look_direction():
-	rotation_degrees.y = GlobalVariables.camera_rig.rotation_degrees.y
+	if velocity.length() > 2:
+		rotation_degrees.y = lerp(rotation_degrees.y, GlobalVariables.camera_rig.rotation_degrees.y, 0.2)
 
 
+func face_target():
+	pass
 
