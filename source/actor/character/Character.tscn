@@ -23,15 +23,14 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.9, 0 )
 layers = 513
 mesh = SubResource( 2 )
-material/0 = null
 
 [node name="InteractionArea" parent="." instance=ExtResource( 2 )]
 
 [node name="CameraRig" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
 [node name="CameraRemoteTransform" type="RemoteTransform" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.3, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 remote_path = NodePath("../CameraRig")
 update_rotation = false
 update_scale = false

@@ -86,9 +86,11 @@ func _unhandled_key_input(_event: InputEventKey) -> void:
 func change_mode(_mode):
 	match _mode:
 		READ:
+			GlobalVariables.chatting = false
 			input_line.release_focus()
 			make_small()
 		WRITE:
+			GlobalVariables.chatting = true
 			input_line.grab_focus()
 			make_big()
 			

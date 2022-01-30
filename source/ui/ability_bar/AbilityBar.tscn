@@ -15,15 +15,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
+[node name="GridContainer" type="GridContainer" parent="."]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 383.0
 margin_bottom = 65.0
-
-[node name="GridContainer" type="GridContainer" parent="CenterContainer"]
-margin_right = 380.0
-margin_bottom = 62.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -34,51 +30,51 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Slot" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot" parent="GridContainer" instance=ExtResource( 2 )]
 margin_right = 38.0
 margin_bottom = 62.0
 
-[node name="Slot2" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot2" parent="GridContainer" instance=ExtResource( 2 )]
 margin_left = 38.0
 margin_right = 76.0
 margin_bottom = 62.0
 
-[node name="Slot3" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot3" parent="GridContainer" instance=ExtResource( 2 )]
 margin_left = 76.0
 margin_right = 114.0
 margin_bottom = 62.0
 
-[node name="Slot4" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot4" parent="GridContainer" instance=ExtResource( 2 )]
 margin_left = 114.0
 margin_right = 152.0
 margin_bottom = 62.0
 
-[node name="Slot5" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot5" parent="GridContainer" instance=ExtResource( 2 )]
 margin_left = 152.0
 margin_right = 190.0
 margin_bottom = 62.0
 
-[node name="Slot6" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot6" parent="GridContainer" instance=ExtResource( 2 )]
 margin_left = 190.0
 margin_right = 228.0
 margin_bottom = 62.0
 
-[node name="Slot7" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot7" parent="GridContainer" instance=ExtResource( 2 )]
 margin_left = 228.0
 margin_right = 266.0
 margin_bottom = 62.0
 
-[node name="Slot8" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot8" parent="GridContainer" instance=ExtResource( 2 )]
 margin_left = 266.0
 margin_right = 304.0
 margin_bottom = 62.0
 
-[node name="Slot9" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot9" parent="GridContainer" instance=ExtResource( 2 )]
 margin_left = 304.0
 margin_right = 342.0
 margin_bottom = 62.0
 
-[node name="Slot10" parent="CenterContainer/GridContainer" instance=ExtResource( 2 )]
+[node name="Slot10" parent="GridContainer" instance=ExtResource( 2 )]
 margin_left = 342.0
 margin_right = 380.0
 margin_bottom = 62.0

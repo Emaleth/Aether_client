@@ -14,6 +14,7 @@ var camera_rig = null
 var player_actor = null
 var user_interface = null
 var world = null
+var chatting := false
 
 var interactable = null
 

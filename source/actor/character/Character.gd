@@ -1,8 +1,8 @@
 extends KinematicBody
 
 var speed := 7
-var jump_force := 20
-var gravity := -50
+var jump_force := 10
+var gravity := -45
 var snap_vector := Vector3.DOWN
 var velocity := Vector3.ZERO
 
@@ -20,14 +20,15 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		return
-
+	if GlobalVariables.chatting:
+		return
 	if Input.is_action_just_pressed("interact"):
 		interaction_area.interact()
 
 
 func get_move_direction() -> Vector3:
 	var move_direction := Vector3.ZERO
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and GlobalVariables.chatting == false:
 		move_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 		move_direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
 		move_direction = move_direction.rotated(Vector3.UP, GlobalVariables.camera_rig.rotation.y).normalized()
@@ -41,7 +42,7 @@ func get_move_velocity(_mov_dir : Vector3, _delta : float) -> void:
 	velocity.y = (gravity * _delta) if is_on_floor() else (velocity.y + (gravity * _delta))
 
 	var just_landed := is_on_floor() and snap_vector == Vector3.ZERO
-	var is_jumping := is_on_floor() and Input.is_action_just_pressed("jump")
+	var is_jumping := is_on_floor() and Input.is_action_just_pressed("jump") and GlobalVariables.chatting == false
 
 	if is_jumping:
 		velocity.y = jump_force

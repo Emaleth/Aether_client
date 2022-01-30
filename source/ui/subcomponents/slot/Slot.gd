@@ -15,7 +15,7 @@ onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
 onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
 
 
-func configure(_item, _container, _index, _shortcut):
+func configure(_item, _container, _index, _shortcut, _show_msrp):
 	item = _item
 	container = _container
 	shortcut = _shortcut
@@ -24,7 +24,7 @@ func configure(_item, _container, _index, _shortcut):
 	set_item_icon()
 	set_amount_label()
 	set_shortcut_label()
-	set_price_label()
+	set_price_label(_show_msrp)
 	
 	
 func set_tooltip_text() -> void:
@@ -37,11 +37,13 @@ func _make_custom_tooltip(_for_text: String) -> Control:
 	return new_tooltip
 		
 		
-func set_price_label() -> void:
-	if item and container == "shop":
-		price_label.text = str(LocalDataTables.item_table[item["archetype"]]["msrp"]) if LocalDataTables.item_table[item["archetype"]].has("msrp") else "?"
+func set_price_label(_show) -> void:
+	if _show:
+		if item:
+			price_label.text = str(LocalDataTables.item_table[item["archetype"]]["msrp"]) if LocalDataTables.item_table[item["archetype"]].has("msrp") else "?"
+		else:
+			price_label.text = ""
 	else:
-		price_label.text = ""
 		$VBoxContainer/PricePanel.hide()
 		
 		

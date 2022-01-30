@@ -21,13 +21,13 @@ func configure(_data : Dictionary):
 	var index = 0
 	for i in _data.keys():
 		var new_slot = slots[i]
-		new_slot.configure(_data[i], "equipment", index, null)
+		new_slot.configure(_data[i], "equipment", index, null, false)
 		index += 1
 	
 	
 func _ready() -> void:
 	configure(GlobalVariables.equipment_data)
-	GlobalVariables.player_actor.get_node("EqPanelPrewievRemoteTransform").remote_path = $CenterContainer/VBoxContainer/HBoxContainer2/PanelContainer/ViewportContainer/Viewport/Camera.get_path()
+	GlobalVariables.player_actor.get_node("EqPanelPrewievRemoteTransform").remote_path = $VBoxContainer/HBoxContainer2/PanelContainer/ViewportContainer/Viewport/Camera.get_path()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("primary_action"):

@@ -4,7 +4,7 @@ extends PanelContainer
 export var alternative := false
 
 onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
-onready var slot_grid = $CenterContainer/GridContainer
+onready var slot_grid = $GridContainer
 
 var x = [
 	"ability_slot_01", "ability_slot_02",
@@ -29,7 +29,7 @@ func configure(_data : Array):
 		var new_slot = slot.instance()
 		slot_grid.add_child(new_slot)
 		new_slot.alternative = alternative
-		new_slot.configure(i, "spellbook", index, x[index])
+		new_slot.configure(i, "spellbook", index, x[index], false)
 		index += 1
 	
 

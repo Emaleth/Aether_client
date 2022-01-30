@@ -2,7 +2,7 @@ extends PanelContainer
 
 
 onready var slot = preload("res://source/ui/subcomponents/slot/Slot.tscn")
-onready var slot_grid = $CenterContainer/GridContainer
+onready var slot_grid = $GridContainer
 
 var x = [
 	"item_slot_01", "item_slot_02",
@@ -25,7 +25,7 @@ func configure(_data : Array):
 	for i in _data:
 		var new_slot = slot.instance()
 		slot_grid.add_child(new_slot)
-		new_slot.configure(i, "pouch", index, x[index])
+		new_slot.configure(i, "pouch", index, x[index], false)
 		index += 1
 	
 

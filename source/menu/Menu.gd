@@ -4,11 +4,11 @@ enum {LOGIN, REGISTER, LOADING}
 
 onready var game = preload("res://source/world_processor/WorldProcessor.tscn")
 
-onready var login_panel = $VBoxContainer/CenterContainer/LoginPanel
-onready var register_panel = $VBoxContainer/CenterContainer/RegisterPanel
+onready var login_panel = $MarginContainer/VBoxContainer/CenterContainer/LoginPanel
+onready var register_panel = $MarginContainer/VBoxContainer/CenterContainer/RegisterPanel
 
 
-onready var quit_button = $VBoxContainer/VBoxContainer/Quit
+onready var quit_button = $MarginContainer/VBoxContainer/VBoxContainer/Quit
 
 
 func _ready():
