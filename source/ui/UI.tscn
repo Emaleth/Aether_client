@@ -10,7 +10,7 @@
 [ext_resource path="res://source/ui/equipment/Equipment.tscn" type="PackedScene" id=8]
 [ext_resource path="res://source/ui/compass/Compass.tscn" type="PackedScene" id=9]
 [ext_resource path="res://source/ui/interaction_indicator/InteractionIndicator.tscn" type="PackedScene" id=10]
-[ext_resource path="res://assets/icons/ui/targeting.svg" type="Texture" id=11]
+[ext_resource path="res://assets/icons/ui/select.svg" type="Texture" id=11]
 [ext_resource path="res://source/ui/pouch/Pouch.tscn" type="PackedScene" id=12]
 [ext_resource path="res://source/ui/debug/Debug.tscn" type="PackedScene" id=13]
 [ext_resource path="res://source/ui/shop/Shop.tscn" type="PackedScene" id=14]
@@ -35,7 +35,6 @@ __meta__ = {
 }
 
 [node name="Combat" type="PanelContainer" parent="."]
-visible = false
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1361.0
@@ -45,7 +44,7 @@ custom_styles/panel = SubResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Combat"]
 margin_right = 106.0
-margin_bottom = 84.0
+margin_bottom = 90.0
 mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -60,21 +59,22 @@ size_flags_vertical = 0
 
 [node name="Debug" parent="Combat/VBoxContainer" instance=ExtResource( 13 )]
 margin_top = 42.0
-margin_bottom = 84.0
+margin_right = 6.0
+margin_bottom = 90.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Combat"]
-margin_left = 1304.0
+margin_left = 1312.0
 margin_right = 1356.0
-margin_bottom = 28.0
+margin_bottom = 20.0
 mouse_filter = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 
 [node name="Clock" parent="Combat/VBoxContainer2" instance=ExtResource( 7 )]
-margin_right = 52.0
-margin_bottom = 28.0
+margin_right = 44.0
+margin_bottom = 20.0
 size_flags_horizontal = 4
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Combat"]
@@ -110,11 +110,11 @@ __meta__ = {
 }
 
 [node name="TextureRect" type="TextureRect" parent="Combat/CenterContainer"]
-margin_left = 670.0
-margin_top = 371.0
-margin_right = 686.0
-margin_bottom = 387.0
-rect_min_size = Vector2( 16, 16 )
+margin_left = 672.0
+margin_top = 373.0
+margin_right = 684.0
+margin_bottom = 385.0
+rect_min_size = Vector2( 12, 12 )
 mouse_filter = 2
 texture = ExtResource( 11 )
 expand = true
@@ -227,6 +227,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="Shop" type="PanelContainer" parent="."]
+visible = false
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1361.0
@@ -240,10 +241,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Shop/CenterContainer2"]
-margin_left = 184.0
-margin_top = 270.0
-margin_right = 1171.0
-margin_bottom = 488.0
+margin_left = 638.0
+margin_top = 363.0
+margin_right = 717.0
+margin_bottom = 395.0
 custom_constants/separation = 25
 
 [node name="BuySection" type="VBoxContainer" parent="Shop/CenterContainer2/HBoxContainer"]

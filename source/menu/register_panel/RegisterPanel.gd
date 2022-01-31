@@ -28,8 +28,10 @@ func register() -> void:
 
 
 func _on_Register_pressed() -> void:
+	AudioHandler.play_sfx("button")
 	register()
 
 
 func _on_LoginTab_pressed() -> void:
+	AudioHandler.play_sfx("button")
 	emit_signal("switch_to_login")

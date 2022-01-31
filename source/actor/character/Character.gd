@@ -1,7 +1,7 @@
 extends KinematicBody
 
 var speed := 7
-var jump_force := 10
+var jump_force := 12
 var gravity := -45
 var snap_vector := Vector3.DOWN
 var velocity := Vector3.ZERO
@@ -28,7 +28,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func get_move_direction() -> Vector3:
 	var move_direction := Vector3.ZERO
-	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and GlobalVariables.chatting == false:
+	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and GlobalVariables.chatting == false and GlobalVariables.user_interface.mode == GlobalVariables.COMBAT:
 		move_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 		move_direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
 		move_direction = move_direction.rotated(Vector3.UP, GlobalVariables.camera_rig.rotation.y).normalized()
@@ -42,7 +42,8 @@ func get_move_velocity(_mov_dir : Vector3, _delta : float) -> void:
 	velocity.y = (gravity * _delta) if is_on_floor() else (velocity.y + (gravity * _delta))
 
 	var just_landed := is_on_floor() and snap_vector == Vector3.ZERO
-	var is_jumping := is_on_floor() and Input.is_action_just_pressed("jump") and GlobalVariables.chatting == false
+	var ui_mode_check := true if GlobalVariables.user_interface.mode == GlobalVariables.COMBAT else false
+	var is_jumping := is_on_floor() and Input.is_action_just_pressed("jump") and GlobalVariables.chatting == false and ui_mode_check
 
 	if is_jumping:
 		velocity.y = jump_force
@@ -57,10 +58,7 @@ func move(_delta : float):
 
 
 func get_look_direction():
-	if velocity.length() > 2:
-		rotation_degrees.y = lerp(rotation_degrees.y, GlobalVariables.camera_rig.rotation_degrees.y, 0.2)
+#	if velocity.length() > 2:
+	rotation_degrees.y = lerp(rotation_degrees.y, GlobalVariables.camera_rig.rotation_degrees.y, 0.2)
 
-
-func face_target():
-	pass
 

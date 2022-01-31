@@ -44,5 +44,7 @@ func enter_world():
 
 	
 func quit() -> void:
+	AudioHandler.play_sfx("button")
+	yield(get_tree().create_timer(0.3), "timeout")
 	get_tree().quit()
 

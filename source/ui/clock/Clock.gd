@@ -21,11 +21,6 @@ func format_time():
 	else:
 		minute = str(date_dict["minute"])
 		
-	if date_dict["second"] < 10:
-		second = "0" + str(date_dict["second"])
-	else:
-		second = str(date_dict["second"])
-		
-	var formatted_time := "%s:%s:%s" % [hour, minute, second]
+	var formatted_time := "%s:%s" % [hour, minute]
 	
 	return formatted_time

@@ -26,6 +26,7 @@ Gateway="*res://source/networking/Gateway.gd"
 LocalDataTables="*res://source/local_data_tables.gd"
 GlobalVariables="*res://source/global_variables.gd"
 MaterialPreloader="*res://source/optimization/MaterialPreloader.tscn"
+AudioHandler="*res://source/audio_handler/AudioHandler.tscn"
 
 [debug]
 
@@ -1094,6 +1095,10 @@ scene={
 "nodes/storage": 0,
 "nodes/use_legacy_names": true,
 "skins/use_named_skins": true
+}
+ogg_vorbis={
+"loop": false,
+"loop_offset": 0
 }
 
 [input]

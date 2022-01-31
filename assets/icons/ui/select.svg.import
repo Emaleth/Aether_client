@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/two-coins.svg-5b7cb8ccaace208d07a083a928a903ae.stex"
+path="res://.import/select.svg-edad16f566a9eab18f8d8587fdbf0a04.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/ui/two-coins.svg"
-dest_files=[ "res://.import/two-coins.svg-5b7cb8ccaace208d07a083a928a903ae.stex" ]
+source_file="res://assets/icons/ui/select.svg"
+dest_files=[ "res://.import/select.svg-edad16f566a9eab18f8d8587fdbf0a04.stex" ]
 
 [params]
 
