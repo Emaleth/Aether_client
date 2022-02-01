@@ -13,6 +13,10 @@ func _ready() -> void:
 	label.text = tooltip_text
 
 
+#func _process(delta: float) -> void:
+#	check_in_window()
+	
+	
 func conf(_item):
 	item = _item
 
