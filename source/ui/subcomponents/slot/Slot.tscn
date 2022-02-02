@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/slot/Slot.gd" type="Script" id=1]
 [ext_resource path="res://assets/stylebox/label.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/stylebox/slot.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/fonts/content_mini.tres" type="DynamicFont" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -19,7 +20,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 38.0
-margin_bottom = 62.0
+margin_bottom = 60.0
 mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
@@ -62,66 +63,65 @@ custom_constants/hseparation = 0
 columns = 3
 
 [node name="ShortcutLabel" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
-margin_right = 16.0
-margin_bottom = 14.0
+margin_right = 11.0
+margin_bottom = 12.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color = Color( 1, 1, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
 text = "[n]"
-align = 2
-valign = 2
+align = 1
+valign = 1
 
 [node name="Panel" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
-margin_left = 16.0
-margin_right = 16.0
-margin_bottom = 14.0
+margin_left = 11.0
+margin_right = 21.0
+margin_bottom = 12.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel2" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
-margin_left = 16.0
+margin_left = 21.0
 margin_right = 32.0
-margin_bottom = 14.0
+margin_bottom = 12.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel3" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
-margin_top = 14.0
-margin_right = 16.0
-margin_bottom = 18.0
+margin_top = 12.0
+margin_right = 11.0
+margin_bottom = 20.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel4" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
-margin_left = 16.0
-margin_top = 14.0
-margin_right = 16.0
-margin_bottom = 18.0
+margin_left = 11.0
+margin_top = 12.0
+margin_right = 21.0
+margin_bottom = 20.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel5" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
-margin_left = 16.0
-margin_top = 14.0
+margin_left = 21.0
+margin_top = 12.0
 margin_right = 32.0
-margin_bottom = 18.0
+margin_bottom = 20.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel6" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
-margin_top = 18.0
-margin_right = 16.0
+margin_top = 20.0
+margin_right = 11.0
 margin_bottom = 32.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -129,9 +129,9 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="Panel7" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
-margin_left = 16.0
-margin_top = 18.0
-margin_right = 16.0
+margin_left = 11.0
+margin_top = 20.0
+margin_right = 21.0
 margin_bottom = 32.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -139,22 +139,21 @@ size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
 [node name="AmountLabel" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
-margin_left = 16.0
-margin_top = 18.0
+margin_left = 21.0
+margin_top = 20.0
 margin_right = 32.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_colors/font_color = Color( 1, 0, 0, 1 )
-custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
+custom_fonts/font = ExtResource( 4 )
 text = "[n]"
-align = 2
-valign = 2
+align = 1
+valign = 1
 
 [node name="PricePanel" type="PanelContainer" parent="VBoxContainer"]
 margin_top = 42.0
 margin_right = 38.0
-margin_bottom = 62.0
+margin_bottom = 60.0
 mouse_filter = 2
 custom_styles/panel = ExtResource( 2 )
 __meta__ = {
@@ -165,7 +164,8 @@ __meta__ = {
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 35.0
-margin_bottom = 17.0
+margin_bottom = 15.0
+custom_fonts/font = ExtResource( 4 )
 text = "$"
 align = 1
 valign = 1
