@@ -3,7 +3,7 @@ extends PanelContainer
 onready var direction_strip = $Control/HBoxContainer
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	configure(GlobalVariables.camera_rig.rotation_degrees.y)
 	
 	

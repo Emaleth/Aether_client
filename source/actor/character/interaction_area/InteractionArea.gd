@@ -1,7 +1,7 @@
 extends Area
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	get_interactables()
 	
 

@@ -17,7 +17,7 @@ func _physics_process(delta: float) -> void:
 	get_look_direction()
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _unhandled_input(_event: InputEvent) -> void:
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		return
 	if GlobalVariables.chatting:

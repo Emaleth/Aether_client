@@ -44,7 +44,7 @@ custom_styles/panel = SubResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Combat"]
 margin_right = 106.0
-margin_bottom = 90.0
+margin_bottom = 120.0
 mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -53,28 +53,28 @@ size_flags_vertical = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 106.0
-margin_bottom = 38.0
+margin_bottom = 50.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Debug" parent="Combat/VBoxContainer" instance=ExtResource( 13 )]
-margin_top = 42.0
+margin_top = 54.0
 margin_right = 6.0
-margin_bottom = 90.0
+margin_bottom = 120.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Combat"]
-margin_left = 1312.0
+margin_left = 1310.0
 margin_right = 1356.0
-margin_bottom = 20.0
+margin_bottom = 26.0
 mouse_filter = 2
 size_flags_horizontal = 10
 size_flags_vertical = 0
 
 [node name="Clock" parent="Combat/VBoxContainer2" instance=ExtResource( 7 )]
-margin_right = 44.0
-margin_bottom = 20.0
+margin_right = 46.0
+margin_bottom = 26.0
 size_flags_horizontal = 4
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Combat"]

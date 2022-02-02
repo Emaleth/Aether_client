@@ -2,12 +2,12 @@
 
 importer="scene"
 type="PackedScene"
-path="res://.import/sapling.glb-7e21a1e4aab9d80f8e90287734a6e46a.scn"
+path="res://.import/rock_handpainted_4.glb-a6e75ffcfc8a0bb8d4c49fb0f26da36a.scn"
 
 [deps]
 
-source_file="res://assets/meshes/third_party/sapling.glb"
-dest_files=[ "res://.import/sapling.glb-7e21a1e4aab9d80f8e90287734a6e46a.scn" ]
+source_file="res://assets/meshes/third_party/rock_handpainted_4.glb"
+dest_files=[ "res://.import/rock_handpainted_4.glb-a6e75ffcfc8a0bb8d4c49fb0f26da36a.scn" ]
 
 [params]
 

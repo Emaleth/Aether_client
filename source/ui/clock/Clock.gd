@@ -10,7 +10,7 @@ func format_time():
 	var date_dict = OS.get_datetime_from_unix_time(Server.client_clock / 1000)
 	var hour : String
 	var minute : String
-	var second : String
+#	var second : String
 	if date_dict["hour"] < 10:
 		hour = "0" + str(date_dict["hour"])
 	else:
