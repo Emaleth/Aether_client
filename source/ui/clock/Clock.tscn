@@ -2,7 +2,7 @@
 
 [ext_resource path="res://assets/stylebox/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://source/ui/clock/Clock.gd" type="Script" id=2]
-[ext_resource path="res://assets/fonts/content.tres" type="DynamicFont" id=3]
+[ext_resource path="res://resources/fonts/content.tres" type="DynamicFont" id=3]
 
 [node name="Clock" type="PanelContainer"]
 margin_right = 14.0

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://source/menu/login_panel/LoginPanel.gd" type="Script" id=1]
-[ext_resource path="res://assets/fonts/content.tres" type="DynamicFont" id=2]
+[ext_resource path="res://resources/fonts/content.tres" type="DynamicFont" id=2]
 
 [node name="LoginPanel" type="PanelContainer"]
 margin_left = 7.0

@@ -1,7 +1,7 @@
 extends Node
 
 
-onready var landscape_scene = preload("res://source/environment/World.tscn")
+onready var landscape_scene = preload("res://source/world/World.tscn")
 
 
 func _ready() -> void:

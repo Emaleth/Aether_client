@@ -3,7 +3,7 @@
 [ext_resource path="res://source/ui/subcomponents/slot/Slot.gd" type="Script" id=1]
 [ext_resource path="res://assets/stylebox/label.tres" type="StyleBox" id=2]
 [ext_resource path="res://assets/stylebox/slot.tres" type="StyleBox" id=3]
-[ext_resource path="res://assets/fonts/content_mini.tres" type="DynamicFont" id=4]
+[ext_resource path="res://resources/fonts/content_mini.tres" type="DynamicFont" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
