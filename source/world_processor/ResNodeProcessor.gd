@@ -3,7 +3,7 @@ extends Node
 var collection = {}
 var container = self
 
-onready var res_node_scene = preload("res://source/dummy_shop/DummyShop.tscn")
+onready var res_node_scene = preload("res://source/dummy_res_node/DummyResNode.tscn")
 
 
 func _physics_process(_delta: float) -> void:
