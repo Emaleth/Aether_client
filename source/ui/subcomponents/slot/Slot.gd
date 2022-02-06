@@ -5,11 +5,15 @@ var container = null
 var shortcut = null
 var index : int
 var alternative := false
+var tmp_cd := 0.0
 
 onready var item_texture := $VBoxContainer/PanelContainer/Icon
 onready var amount_label := $VBoxContainer/PanelContainer/GridContainer/AmountLabel
 onready var shortcut_label := $VBoxContainer/PanelContainer/GridContainer/ShortcutLabel
 onready var price_label := $VBoxContainer/PricePanel/PriceLabel
+onready var cooldown_progress := $VBoxContainer/PanelContainer/TextureProgress
+onready var cooldown_tween := $VBoxContainer/PanelContainer/TextureProgress/Tween
+onready var cooldown_lable := $VBoxContainer/PanelContainer/CooldownLabel
 
 onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
 onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
@@ -25,12 +29,53 @@ func configure(_item, _container, _index, _shortcut, _show_msrp):
 	set_amount_label()
 	set_shortcut_label()
 	set_price_label(_show_msrp)
+	set_cooldown()
 	
 	
 func set_tooltip_text() -> void:
 	hint_tooltip = "text" if item else ""
 
 
+func set_cooldown():
+	if item == null: 
+		cooldown_progress.hide()
+		cooldown_lable.hide()
+		return 
+	var current_time = Server.client_clock
+	var ability = LocalDataTables.item_table[item["archetype"]]["action"]
+	if ability == null: 
+		cooldown_progress.hide()
+		cooldown_lable.hide()
+		return
+	var ability_data = LocalDataTables.skill_table[LocalDataTables.item_table[item["archetype"]]["action"]] 
+	var tmp_cd = (float(ability_data["cooldown"]) * 1000) - (current_time - item["last_used"])
+	if tmp_cd > 0:
+		cooldown_tween.remove_all()
+		cooldown_tween.interpolate_property(
+				cooldown_progress,
+				"value",
+				100,
+				0,
+				tmp_cd / 1000.0,
+				Tween.TRANS_LINEAR, 
+				Tween.EASE_IN)
+		cooldown_tween.interpolate_property(
+				self,
+				"tmp_cd",
+				tmp_cd,
+				0,
+				tmp_cd / 1000.0,
+				Tween.TRANS_LINEAR, 
+				Tween.EASE_IN)
+		cooldown_tween.start()
+		cooldown_progress.show()
+		cooldown_lable.show()
+		
+	else:
+		cooldown_lable.hide()
+		cooldown_progress.hide()
+	
+	
 func _make_custom_tooltip(_for_text: String) -> Control:
 	var new_tooltip = tooltip.instance()
 	new_tooltip.conf(item)
@@ -128,3 +173,12 @@ func _unhandled_key_input(_event: InputEventKey) -> void:
 			"index" : index
 		}
 		Server.send_item_use_request(data)
+
+
+func _on_Tween_tween_all_completed() -> void:
+	cooldown_progress.hide()
+	cooldown_lable.hide()
+
+
+func _on_Tween_tween_step(object: Object, key: NodePath, elapsed: float, value: Object) -> void:
+	cooldown_lable.text = str(round(tmp_cd))
