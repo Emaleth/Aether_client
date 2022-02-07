@@ -172,7 +172,11 @@ func request_item_transfer(_from_data : Dictionary, _amount : int, _to_data : Di
 	
 func request_loot_pickup(_loot_id : String):
 	rpc_id(1, "request_loot_pickup", _loot_id)
-	
+
+
+func request_material_gather(_material_id : String):
+	rpc_id(1, "request_material_gather", _material_id)
+
 	
 func request_loot_drop(_loot_id : String):
 	rpc_id(1, "request_loot_drop", _loot_id)

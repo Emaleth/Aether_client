@@ -10,7 +10,7 @@ func interact():
 		if GlobalVariables.interactable.is_in_group("loot"):
 			Server.request_loot_pickup(GlobalVariables.interactable.name)
 		elif GlobalVariables.interactable.is_in_group("res"):
-			Server.request_loot_pickup(GlobalVariables.interactable.name)
+			Server.request_material_gather(GlobalVariables.interactable.name)
 		elif GlobalVariables.interactable.is_in_group("shop"):
 			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOP)
 
