@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/ui/crafting_panel/CraftingPanel.gd" type="Script" id=1]
+[ext_resource path="res://source/ui/crafting_panel/PanelContainer.gd" type="Script" id=2]
+
+[node name="CraftingPanel" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 78.0
+margin_bottom = 35.0
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 64.0
+margin_bottom = 21.0
+text = "craft me!"

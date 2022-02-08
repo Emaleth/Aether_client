@@ -37,7 +37,7 @@ func set_tooltip_text() -> void:
 
 
 func set_cooldown():
-	if item == null: 
+	if item == null or container == "shop": 
 		cooldown_progress.hide()
 		cooldown_lable.hide()
 		return 

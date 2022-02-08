@@ -3,8 +3,8 @@ extends PanelContainer
 enum {READ, WRITE}
 
 var mode
-var small_window_size = Vector2(200, 150)
-var big_window_size = Vector2(250, 200)
+var small_window_size = Vector2(250, 150)
+var big_window_size = Vector2(300, 250)
 
 
 onready var msg_list := $VBoxContainer/OutputPanel/ScrollContainer/MessageList
@@ -20,7 +20,9 @@ func _ready() -> void:
 	Server.connect("s_update_chat_state", self, "update_chat_box")
 	template_chat_line.hide()
 	change_mode(READ)
-	
+	rect_min_size = small_window_size
+	rect_size = small_window_size
+
 	
 func format_chat_timestamp(_timestamp):
 	var date_dict := OS.get_datetime_from_unix_time(_timestamp / 1000)

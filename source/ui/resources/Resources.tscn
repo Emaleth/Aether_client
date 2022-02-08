@@ -1,25 +1,24 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/stylebox/panel.tres" type="StyleBox" id=1]
 [ext_resource path="res://source/ui/subcomponents/animated_progress_bar/AnimatedProgressBar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/ui/resources/Resources.gd" type="Script" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=1]
 
 [node name="Resources" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -1338.0
 margin_bottom = -736.0
-custom_styles/panel = ExtResource( 1 )
+custom_styles/panel = SubResource( 1 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 3.0
-margin_top = 3.0
-margin_right = 103.0
-margin_bottom = 35.0
+margin_right = 100.0
+margin_bottom = 44.0
 rect_min_size = Vector2( 100, 0 )
 
 [node name="HealthBar" parent="VBoxContainer" instance=ExtResource( 2 )]
@@ -30,7 +29,7 @@ anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 0.0
 margin_right = 100.0
-margin_bottom = 14.0
+margin_bottom = 20.0
 
 [node name="ManaBar" parent="VBoxContainer" instance=ExtResource( 2 )]
 anchor_left = 0.0
@@ -38,7 +37,7 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
-margin_top = 18.0
+margin_top = 24.0
 margin_right = 100.0
-margin_bottom = 32.0
+margin_bottom = 44.0
 color = Color( 0.0470588, 0.694118, 0.780392, 1 )

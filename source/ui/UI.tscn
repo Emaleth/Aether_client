@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/amount_popup/AmountPopup.tscn" type="PackedScene" id=2]
@@ -14,10 +14,16 @@
 [ext_resource path="res://source/ui/pouch/Pouch.tscn" type="PackedScene" id=12]
 [ext_resource path="res://source/ui/debug/Debug.tscn" type="PackedScene" id=13]
 [ext_resource path="res://source/ui/shop/Shop.tscn" type="PackedScene" id=14]
+[ext_resource path="res://source/timed_progress_bar/TimedProgressBar.tscn" type="PackedScene" id=15]
+[ext_resource path="res://source/ui/crafting_panel/CraftingPanel.tscn" type="PackedScene" id=16]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
+[sub_resource type="StyleBoxEmpty" id=5]
+
 [sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=6]
 
 [node name="Interface" type="MarginContainer"]
 anchor_right = 1.0
@@ -43,8 +49,8 @@ mouse_filter = 2
 custom_styles/panel = SubResource( 3 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Combat"]
-margin_right = 106.0
-margin_bottom = 120.0
+margin_right = 100.0
+margin_bottom = 114.0
 mouse_filter = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -52,15 +58,15 @@ size_flags_vertical = 0
 [node name="Resources" parent="Combat/VBoxContainer" instance=ExtResource( 3 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 106.0
-margin_bottom = 50.0
+margin_right = 100.0
+margin_bottom = 44.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Debug" parent="Combat/VBoxContainer" instance=ExtResource( 13 )]
-margin_top = 54.0
+margin_top = 48.0
 margin_right = 6.0
-margin_bottom = 120.0
+margin_bottom = 114.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
@@ -79,24 +85,37 @@ size_flags_horizontal = 4
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Combat"]
 margin_left = 485.0
-margin_top = 618.0
+margin_top = 571.0
 margin_right = 871.0
 margin_bottom = 758.0
 mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
+[node name="TimedProgressBar" parent="Combat/VBoxContainer3" instance=ExtResource( 15 )]
+margin_left = 118.0
+margin_right = 268.0
+
+[node name="HSeparator" type="HSeparator" parent="Combat/VBoxContainer3"]
+margin_top = 18.0
+margin_right = 386.0
+margin_bottom = 43.0
+mouse_filter = 2
+custom_constants/separation = 25
+custom_styles/separator = SubResource( 5 )
+
 [node name="Pouch" parent="Combat/VBoxContainer3" instance=ExtResource( 12 )]
 margin_left = 95.0
+margin_top = 47.0
 margin_right = 291.0
-margin_bottom = 68.0
+margin_bottom = 115.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
 [node name="AbilityBar" parent="Combat/VBoxContainer3" instance=ExtResource( 5 )]
-margin_top = 72.0
+margin_top = 119.0
 margin_right = 386.0
-margin_bottom = 140.0
+margin_bottom = 187.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 alternative = true
@@ -120,12 +139,10 @@ texture = ExtResource( 11 )
 expand = true
 
 [node name="InteractionIndicator" parent="Combat" instance=ExtResource( 10 )]
-margin_left = 578.0
-margin_top = 279.0
-margin_right = 778.0
-margin_bottom = 479.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+margin_left = 1156.0
+margin_top = 558.0
+margin_right = 1356.0
+margin_bottom = 758.0
 
 [node name="Compass" parent="Combat" instance=ExtResource( 9 )]
 margin_left = 578.0
@@ -133,11 +150,10 @@ margin_right = 778.0
 margin_bottom = 28.0
 
 [node name="Chatbox" parent="Combat" instance=ExtResource( 6 )]
+anchor_top = 0.0
+anchor_bottom = 0.0
 margin_top = 608.0
-margin_right = 200.0
 margin_bottom = 758.0
-size_flags_horizontal = 0
-size_flags_vertical = 8
 
 [node name="Management" type="PanelContainer" parent="."]
 visible = false
@@ -172,17 +188,17 @@ size_flags_vertical = 3
 custom_constants/separation = 15
 
 [node name="Equipment" parent="Management/MarginContainer/HBoxContainer/VBoxContainerLeft" instance=ExtResource( 8 )]
-margin_left = 171.0
-margin_top = 132.0
-margin_right = 471.0
-margin_bottom = 418.0
+margin_left = 176.0
+margin_top = 137.0
+margin_right = 466.0
+margin_bottom = 413.0
 size_flags_stretch_ratio = 4.0
 
 [node name="AbilityBar" parent="Management/MarginContainer/HBoxContainer/VBoxContainerLeft" instance=ExtResource( 5 )]
-margin_left = 123.0
-margin_top = 596.0
-margin_right = 519.0
-margin_bottom = 674.0
+margin_left = 128.0
+margin_top = 601.0
+margin_right = 514.0
+margin_bottom = 669.0
 
 [node name="VBoxContainerRight" type="VBoxContainer" parent="Management/MarginContainer/HBoxContainer"]
 margin_left = 658.0
@@ -202,10 +218,10 @@ margin_bottom = 340.0
 size_flags_stretch_ratio = 4.0
 
 [node name="Pouch" parent="Management/MarginContainer/HBoxContainer/VBoxContainerRight" instance=ExtResource( 12 )]
-margin_left = 219.0
-margin_top = 596.0
-margin_right = 425.0
-margin_bottom = 674.0
+margin_left = 224.0
+margin_top = 601.0
+margin_right = 420.0
+margin_bottom = 669.0
 
 [node name="CenterContainer" type="CenterContainer" parent="Management"]
 margin_left = 7.0
@@ -307,3 +323,35 @@ margin_right = 681.0
 margin_bottom = 382.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+
+[node name="Crafting" type="PanelContainer" parent="."]
+visible = false
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1361.0
+margin_bottom = 763.0
+custom_styles/panel = SubResource( 6 )
+
+[node name="CenterContainer" type="CenterContainer" parent="Crafting"]
+margin_right = 1356.0
+margin_bottom = 758.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Crafting/CenterContainer"]
+margin_left = 653.0
+margin_top = 372.0
+margin_right = 703.0
+margin_bottom = 386.0
+custom_constants/separation = 30
+
+[node name="CraftingPanel" parent="Crafting/CenterContainer/HBoxContainer" instance=ExtResource( 16 )]
+margin_right = 85.0
+margin_bottom = 130.0
+
+[node name="Inventory" parent="Crafting/CenterContainer/HBoxContainer" instance=ExtResource( 4 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 115.0
+margin_right = 691.0
+margin_bottom = 130.0
