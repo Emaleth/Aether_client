@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://source/dummy_res_node/DummyResNode.gd" type="Script" id=1]
 [ext_resource path="res://source/environment/nature/rocks/rock_handpainted_1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://resources/particles/SparkParticle.tres" type="Material" id=3]
 
 [sub_resource type="SphereShape" id=1]
 
 [sub_resource type="QuadMesh" id=2]
+material = ExtResource( 3 )
 
 [node name="DummyResNode" type="StaticBody"]
 collision_layer = 16

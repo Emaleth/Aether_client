@@ -10,3 +10,5 @@ func _ready() -> void:
 
 func make_landscape():
 	add_child(landscape_scene.instance())
+
+

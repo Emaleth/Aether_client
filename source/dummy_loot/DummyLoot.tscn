@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://source/dummy_loot/DummyLoot.gd" type="Script" id=1]
+[ext_resource path="res://resources/particles/SparkParticle.tres" type="Material" id=2]
 
 [sub_resource type="SphereShape" id=6]
 
@@ -19,6 +20,9 @@ height = 5.0
 flags_transparent = true
 albedo_color = Color( 1, 0, 1, 0.784314 )
 
+[sub_resource type="QuadMesh" id=7]
+material = ExtResource( 2 )
+
 [node name="DummyLoot" type="StaticBody"]
 collision_layer = 16
 collision_mask = 0
@@ -35,3 +39,12 @@ material/0 = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0 )
 mesh = SubResource( 4 )
 material/0 = SubResource( 5 )
+
+[node name="CPUParticles" type="CPUParticles" parent="."]
+mesh = SubResource( 7 )
+flag_align_y = true
+flag_rotate_y = true
+direction = Vector3( 0, 0.5, 0 )
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 1.0
+color = Color( 0.807843, 0.854902, 0.266667, 1 )
