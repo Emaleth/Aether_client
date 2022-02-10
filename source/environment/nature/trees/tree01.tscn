@@ -11,7 +11,7 @@ albedo_texture = ExtResource( 1 )
 
 [sub_resource type="CylinderShape" id=2]
 radius = 0.359068
-height = 3.53504
+height = 10.0
 
 [node name="tree01" instance=ExtResource( 2 )]
 
@@ -21,5 +21,5 @@ material/0 = SubResource( 1 )
 [node name="StaticBody" type="StaticBody" parent="RootNode/tree01" index="0"]
 
 [node name="CollisionShape" type="CollisionShape" parent="RootNode/tree01/StaticBody" index="0"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.78934, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.02217, 0 )
 shape = SubResource( 2 )
