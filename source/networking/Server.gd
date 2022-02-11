@@ -183,7 +183,8 @@ func request_loot_drop(_loot_id : String):
 	
 	
 func request_recipe_craft(_data : Dictionary):
-	print("requesting craft (dummy)")
+	rpc_id(1, "request_recipe_craft", _data)
+
 	
 func request_item_buy(_shop_id : String, _slot_index : int, _amount = 1):
 	rpc_id(1, "request_item_buy", _shop_id, _slot_index, _amount)

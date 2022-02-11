@@ -1,8 +1,9 @@
 tool
-extends Node
+extends Spatial
 # GENERATE
 export(bool) var generate_world := false
 export(int) var density = 0
+export(int) var extents = 0
 var a := {
 	"assets" : [
 		preload("res://source/environment/nature/bushes/bush01.tscn"),
@@ -14,7 +15,7 @@ var a := {
 		preload("res://source/environment/nature/bushes/bush07.tscn"),
 		preload("res://source/environment/nature/bushes/bush08.tscn"),
 	],
-	"weight" : 5
+	"weight" : 3
 }
 
 var b := {
@@ -56,7 +57,7 @@ var b := {
 		preload("res://source/environment/nature/trees/tree35.tscn"),
 		preload("res://source/environment/nature/trees/tree36.tscn"),
 	],
-	"weight" : 10
+	"weight" : 5
 }
 
 var c := {
@@ -70,7 +71,7 @@ var c := {
 	"weight" : 1
 }
 
-var max_angle := Vector3(5, 180, 5)
+var max_angle := Vector3(15, 180, 15)
 
 var height_probe : RayCast
 var points := []
@@ -109,7 +110,7 @@ func generate():
 	
 func generate_points():
 	for i in range(0, density):
-		points.append(Vector3(rand_range(-500, 500), 0, rand_range(-500, 500)))
+		points.append(Vector3(rand_range(-extents, extents), 0, rand_range(-extents, extents)))
 
 
 func place_meshes():
@@ -126,8 +127,8 @@ func place_meshes():
 				mesh_group.append(f)
 		
 		var random_mesh = mesh_group[randi() % mesh_group.size()]
-		print(random_mesh)
 		var new_mesh = random_mesh.instance()
+		new_mesh.set_disable_scale(true)
 		add_child(new_mesh)
 		new_mesh.set_owner(get_tree().edited_scene_root)
 		height_probe.global_transform.origin.x = point.x
