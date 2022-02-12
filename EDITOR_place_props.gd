@@ -4,6 +4,8 @@ extends Spatial
 export(bool) var generate_world := false
 export(int) var density = 0
 export(int) var extents = 0
+export(float) var water_level = 0.0
+
 var a := {
 	"assets" : [
 		preload("res://source/environment/nature/bushes/bush01.tscn"),
@@ -126,20 +128,19 @@ func place_meshes():
 			for f in c["assets"]:
 				mesh_group.append(f)
 		
-		var random_mesh = mesh_group[randi() % mesh_group.size()]
-		var new_mesh = random_mesh.instance()
-		new_mesh.set_disable_scale(true)
-		add_child(new_mesh)
-		new_mesh.set_owner(get_tree().edited_scene_root)
 		height_probe.global_transform.origin.x = point.x
 		height_probe.global_transform.origin.z = point.z
 		height_probe.force_raycast_update()
 		var target_pos : Vector3 = height_probe.get_collision_point()
-		if target_pos.y < 0: continue
-		new_mesh.global_transform.origin += target_pos
-		var rand_rot = Vector3(
-				rand_range(-max_angle.x, max_angle.x),
-				rand_range(-max_angle.y, max_angle.y),
-				rand_range(-max_angle.z, max_angle.z)
-		)
-		new_mesh.rotation_degrees += rand_rot
+		if target_pos.y >= water_level:
+			var random_mesh = mesh_group[randi() % mesh_group.size()]
+			var new_mesh = random_mesh.instance()
+			add_child(new_mesh)
+			new_mesh.set_owner(get_tree().edited_scene_root)
+			new_mesh.global_transform.origin += target_pos
+			var rand_rot = Vector3(
+					rand_range(-max_angle.x, max_angle.x),
+					rand_range(-max_angle.y, max_angle.y),
+					rand_range(-max_angle.z, max_angle.z)
+			)
+			new_mesh.rotation_degrees += rand_rot
