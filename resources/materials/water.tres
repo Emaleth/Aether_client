@@ -4,5 +4,7 @@
 
 [resource]
 flags_world_triplanar = true
+params_blend_mode = 1
 albedo_texture = ExtResource( 1 )
+metallic = 1.0
 uv1_triplanar = true
