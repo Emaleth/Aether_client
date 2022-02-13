@@ -1,0 +1,203 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/stylebox/label.tres" type="StyleBox" id=1]
+[ext_resource path="res://resources/fonts/content_mini.tres" type="DynamicFont" id=2]
+[ext_resource path="res://source/ui/subcomponents/slots/equipment_slot/EquipmentSlot.gd" type="Script" id=3]
+[ext_resource path="res://assets/textures/menu_bg.jpg" type="Texture" id=4]
+[ext_resource path="res://assets/stylebox/slot.tres" type="StyleBox" id=5]
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="Slot" type="PanelContainer"]
+margin_right = 32.0
+margin_bottom = 32.0
+custom_styles/panel = SubResource( 3 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 38.0
+margin_bottom = 62.0
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 38.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+custom_styles/panel = ExtResource( 5 )
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer/PanelContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 35.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+expand = true
+stretch_mode = 6
+
+[node name="Border" type="TextureRect" parent="VBoxContainer/PanelContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 35.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 32, 32 )
+mouse_filter = 2
+expand = true
+stretch_mode = 6
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 35.0
+margin_bottom = 35.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 3
+
+[node name="ShortcutLabel" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_right = 12.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "[n]"
+align = 1
+valign = 1
+
+[node name="Panel" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 12.0
+margin_right = 20.0
+margin_bottom = 14.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Panel2" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 20.0
+margin_right = 32.0
+margin_bottom = 14.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Panel3" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_top = 14.0
+margin_right = 12.0
+margin_bottom = 18.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Panel4" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 12.0
+margin_top = 14.0
+margin_right = 20.0
+margin_bottom = 18.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Panel5" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 20.0
+margin_top = 14.0
+margin_right = 32.0
+margin_bottom = 18.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Panel6" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_top = 18.0
+margin_right = 12.0
+margin_bottom = 32.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="Panel7" type="Panel" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 12.0
+margin_top = 18.0
+margin_right = 20.0
+margin_bottom = 32.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="AmountLabel" type="Label" parent="VBoxContainer/PanelContainer/GridContainer"]
+margin_left = 20.0
+margin_top = 18.0
+margin_right = 32.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 2 )
+text = "[n]"
+align = 1
+valign = 1
+
+[node name="TextureProgress" type="TextureProgress" parent="VBoxContainer/PanelContainer"]
+self_modulate = Color( 0.027451, 0.027451, 0.027451, 1 )
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 35.0
+margin_bottom = 35.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+value = 34.0
+texture_progress = ExtResource( 4 )
+fill_mode = 5
+nine_patch_stretch = true
+
+[node name="Tween" type="Tween" parent="VBoxContainer/PanelContainer/TextureProgress"]
+
+[node name="CooldownLabel" type="Label" parent="VBoxContainer/PanelContainer"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 35.0
+margin_bottom = 35.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_colors/font_color = Color( 0.929412, 0.027451, 0.027451, 1 )
+custom_fonts/font = ExtResource( 2 )
+align = 1
+valign = 1
+
+[node name="PricePanel" type="PanelContainer" parent="VBoxContainer"]
+margin_top = 42.0
+margin_right = 38.0
+margin_bottom = 62.0
+mouse_filter = 2
+custom_styles/panel = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PriceLabel" type="Label" parent="VBoxContainer/PricePanel"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 35.0
+margin_bottom = 17.0
+custom_fonts/font = ExtResource( 2 )
+text = "$"
+align = 1
+valign = 1
+
+[connection signal="tween_all_completed" from="VBoxContainer/PanelContainer/TextureProgress/Tween" to="." method="_on_Tween_tween_all_completed"]
+[connection signal="tween_step" from="VBoxContainer/PanelContainer/TextureProgress/Tween" to="." method="_on_Tween_tween_step"]

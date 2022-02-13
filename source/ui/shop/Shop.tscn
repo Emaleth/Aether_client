@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://source/ui/subcomponents/slot/Slot.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/ui/subcomponents/slots/Slot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/ui/shop/Shop.gd" type="Script" id=2]
 [ext_resource path="res://assets/stylebox/panel.tres" type="StyleBox" id=3]
 

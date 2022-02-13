@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://source/ui/subcomponents/slot/Slot.gd" type="Script" id=1]
-[ext_resource path="res://assets/stylebox/label.tres" type="StyleBox" id=2]
-[ext_resource path="res://assets/stylebox/slot.tres" type="StyleBox" id=3]
-[ext_resource path="res://resources/fonts/content_mini.tres" type="DynamicFont" id=4]
-[ext_resource path="res://assets/textures/menu_bg.jpg" type="Texture" id=5]
+[ext_resource path="res://assets/stylebox/label.tres" type="StyleBox" id=1]
+[ext_resource path="res://resources/fonts/content_mini.tres" type="DynamicFont" id=2]
+[ext_resource path="res://source/ui/subcomponents/slots/Slot.gd" type="Script" id=3]
+[ext_resource path="res://assets/textures/menu_bg.jpg" type="Texture" id=4]
+[ext_resource path="res://assets/stylebox/slot.tres" type="StyleBox" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -14,7 +14,7 @@
 margin_right = 32.0
 margin_bottom = 32.0
 custom_styles/panel = SubResource( 3 )
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -29,7 +29,7 @@ margin_right = 38.0
 margin_bottom = 38.0
 rect_min_size = Vector2( 32, 32 )
 mouse_filter = 2
-custom_styles/panel = ExtResource( 3 )
+custom_styles/panel = ExtResource( 5 )
 
 [node name="Icon" type="TextureRect" parent="VBoxContainer/PanelContainer"]
 margin_left = 3.0
@@ -68,7 +68,7 @@ margin_right = 12.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 text = "[n]"
 align = 1
 valign = 1
@@ -146,7 +146,7 @@ margin_right = 32.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 text = "[n]"
 align = 1
 valign = 1
@@ -161,7 +161,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 value = 34.0
-texture_progress = ExtResource( 5 )
+texture_progress = ExtResource( 4 )
 fill_mode = 5
 nine_patch_stretch = true
 
@@ -175,7 +175,7 @@ margin_bottom = 35.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_colors/font_color = Color( 0.929412, 0.027451, 0.027451, 1 )
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 align = 1
 valign = 1
 
@@ -184,7 +184,7 @@ margin_top = 42.0
 margin_right = 38.0
 margin_bottom = 62.0
 mouse_filter = 2
-custom_styles/panel = ExtResource( 2 )
+custom_styles/panel = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -194,7 +194,7 @@ margin_left = 3.0
 margin_top = 3.0
 margin_right = 35.0
 margin_bottom = 17.0
-custom_fonts/font = ExtResource( 4 )
+custom_fonts/font = ExtResource( 2 )
 text = "$"
 align = 1
 valign = 1

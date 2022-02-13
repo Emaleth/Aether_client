@@ -18,6 +18,7 @@ onready var slots = {
 }
 
 func configure(_data : Dictionary):
+	return
 	var index = 0
 	for i in _data.keys():
 		var new_slot = slots[i]
@@ -29,8 +30,8 @@ func _ready() -> void:
 	configure(GlobalVariables.equipment_data)
 	GlobalVariables.player_actor.get_node("EqPanelPrewievRemoteTransform").remote_path = $VBoxContainer/HBoxContainer2/PanelContainer/ViewportContainer/Viewport/Camera.get_path()
 
-func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("primary_action"):
-		Server.send_weapon_use_request("primary")
-	elif Input.is_action_just_pressed("secondary_action"):
-		Server.send_weapon_use_request("secondary")
+#func _unhandled_input(_event: InputEvent) -> void:
+#	if Input.is_action_just_pressed("primary_action"):
+#		Server.send_weapon_use_request("primary")
+#	elif Input.is_action_just_pressed("secondary_action"):
+#		Server.send_weapon_use_request("secondary")

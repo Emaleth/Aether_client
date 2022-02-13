@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://source/ui/subcomponents/slot_placeholder/SlotPlaceholder.gd" type="Script" id=1]
+[ext_resource path="res://source/ui/subcomponents/slots/placeholder_slot/PlaceholderSlot.gd" type="Script" id=1]
 
 [node name="SlotPlaceholder" type="PanelContainer"]
 margin_right = 14.0
