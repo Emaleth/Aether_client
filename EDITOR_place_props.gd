@@ -2,7 +2,8 @@ tool
 extends Spatial
 # GENERATE
 export(bool) var generate_world := false
-export(int) var density = 0
+export(bool) var extract_collisions := false
+export(int, 0, 1000) var density = 0
 export(int) var extents = 0
 export(float) var water_level = 0.0
 
@@ -92,7 +93,31 @@ func _process(delta: float) -> void:
 		generate()
 		generate_world = false
 		
+	if extract_collisions:
+		extract_collisions()
+		extract_collisions = false
 		
+		
+func extract_collisions():
+	if get_child_count() > 0:
+		var t = OS.get_ticks_msec()
+		print("..:: starting ::..")
+		var collision_shape_container := Spatial.new()
+		get_parent().add_child(collision_shape_container)
+		collision_shape_container.name = "ServerPropCollisions"
+		collision_shape_container.set_owner(get_tree().edited_scene_root)
+		for i in get_children():
+			var new_collision_shape = find_node("StaticBody", true).duplicate(true)
+			collision_shape_container.add_child(new_collision_shape)
+			new_collision_shape.set_owner(get_tree().edited_scene_root)
+			for a in new_collision_shape.get_children():
+				a.set_owner(get_tree().edited_scene_root)
+			new_collision_shape.transform = i.transform
+		print("..:: CollisionShapes copied in %ss ::.." % ((OS.get_ticks_msec() - t) / 1000.0)) 
+		
+			
+	
+	
 func clear():
 	points = []
 	
@@ -132,15 +157,15 @@ func place_meshes():
 		height_probe.global_transform.origin.z = point.z
 		height_probe.force_raycast_update()
 		var target_pos : Vector3 = height_probe.get_collision_point()
-		if target_pos.y >= water_level:
-			var random_mesh = mesh_group[randi() % mesh_group.size()]
-			var new_mesh = random_mesh.instance()
-			add_child(new_mesh)
-			new_mesh.set_owner(get_tree().edited_scene_root)
-			new_mesh.global_transform.origin += target_pos
-			var rand_rot = Vector3(
-					rand_range(-max_angle.x, max_angle.x),
-					rand_range(-max_angle.y, max_angle.y),
-					rand_range(-max_angle.z, max_angle.z)
-			)
-			new_mesh.rotation_degrees += rand_rot
+#		if target_pos.y >= water_level:
+		var random_mesh = mesh_group[randi() % mesh_group.size()]
+		var new_mesh = random_mesh.instance()
+		add_child(new_mesh)
+		new_mesh.set_owner(get_tree().edited_scene_root)
+		new_mesh.global_transform.origin += target_pos
+		var rand_rot = Vector3(
+				rand_range(-max_angle.x, max_angle.x),
+				rand_range(-max_angle.y, max_angle.y),
+				rand_range(-max_angle.z, max_angle.z)
+		)
+		new_mesh.rotation_degrees += rand_rot
