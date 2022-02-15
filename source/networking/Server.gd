@@ -134,6 +134,14 @@ func send_weapon_use_request(_mode : String):
 func send_player_state(_position : Vector3, _rotation : Basis, _aim : Vector3):
 	rpc_unreliable_id(1, "recive_player_state", _position, _rotation, _aim)
 	
+	
+func request_item_discard(_index):
+	rpc_id(1, "request_item_discard", _index)
+
+	
+func request_item_equip(_index):
+	rpc_id(1, "request_item_equip", _index)
+	
 
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:

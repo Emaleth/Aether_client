@@ -16,7 +16,7 @@ onready var cooldown_tween := $VBoxContainer/PanelContainer/TextureProgress/Twee
 onready var cooldown_lable := $VBoxContainer/PanelContainer/CooldownLabel
 
 onready var preview = preload("res://source/ui/drag_preview/DragPreview.tscn")
-onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
+#onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
 
 
 func configure(_item, _container, _index, _shortcut, _show_msrp):
@@ -76,10 +76,10 @@ func set_cooldown():
 		cooldown_progress.hide()
 	
 	
-func _make_custom_tooltip(_for_text: String) -> Control:
-	var new_tooltip = tooltip.instance()
-	new_tooltip.conf(item)
-	return new_tooltip
+#func _make_custom_tooltip(_for_text: String) -> Control:
+#	var new_tooltip = tooltip.instance()
+#	new_tooltip.conf(item)
+#	return new_tooltip
 		
 		
 func set_price_label(_show) -> void:

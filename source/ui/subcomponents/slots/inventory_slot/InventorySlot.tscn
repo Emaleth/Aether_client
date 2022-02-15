@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/slots/inventory_slot/InventorySlot.gd" type="Script" id=1]
 [ext_resource path="res://assets/stylebox/slot.tres" type="StyleBox" id=2]
+[ext_resource path="res://source/ui/subcomponents/interaction_menu/InteractionMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://resources/fonts/content_mini.tres" type="DynamicFont" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=2]
@@ -119,3 +120,7 @@ custom_fonts/font = ExtResource( 4 )
 text = "[n]"
 align = 1
 valign = 1
+
+[node name="InteractionMenu" parent="." instance=ExtResource( 3 )]
+
+[connection signal="pressed" from="." to="." method="_on_InventorySlot_pressed"]
