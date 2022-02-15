@@ -141,7 +141,11 @@ func request_item_discard(_index):
 	
 func request_item_equip(_index):
 	rpc_id(1, "request_item_equip", _index)
-	
+
+
+func request_item_unequip(_index):
+	rpc_id(1, "request_item_unequip", _index)
+		
 
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
