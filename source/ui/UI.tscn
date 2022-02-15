@@ -1,10 +1,9 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/amount_popup/AmountPopup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/ui/resources/Resources.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/ui/inventory/Inventory.tscn" type="PackedScene" id=4]
-[ext_resource path="res://source/ui/ability_bar/AbilityBar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/ui/chatbox/ChatBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://source/ui/clock/Clock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://source/ui/compass/Compass.tscn" type="PackedScene" id=9]
@@ -80,33 +79,24 @@ margin_bottom = 26.0
 size_flags_horizontal = 4
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="Combat"]
-margin_left = 515.0
-margin_top = 673.0
-margin_right = 841.0
+margin_left = 603.0
+margin_top = 715.0
+margin_right = 753.0
 margin_bottom = 758.0
 mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 
 [node name="TimedProgressBar" parent="Combat/VBoxContainer3" instance=ExtResource( 15 )]
-margin_left = 88.0
-margin_right = 238.0
+margin_right = 150.0
 
 [node name="HSeparator" type="HSeparator" parent="Combat/VBoxContainer3"]
 margin_top = 18.0
-margin_right = 326.0
+margin_right = 150.0
 margin_bottom = 43.0
 mouse_filter = 2
 custom_constants/separation = 25
 custom_styles/separator = SubResource( 5 )
-
-[node name="AbilityBar" parent="Combat/VBoxContainer3" instance=ExtResource( 5 )]
-margin_top = 47.0
-margin_right = 326.0
-margin_bottom = 85.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-alternative = true
 
 [node name="CenterContainer" type="CenterContainer" parent="Combat"]
 margin_right = 1356.0
@@ -160,6 +150,27 @@ custom_constants/margin_top = 20
 custom_constants/margin_left = 20
 custom_constants/margin_bottom = 20
 
+[node name="VBoxContainer" type="VBoxContainer" parent="Management/MarginContainer"]
+margin_left = 20.0
+margin_top = 20.0
+margin_right = 1322.0
+margin_bottom = 724.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Management/MarginContainer/VBoxContainer"]
+margin_right = 1302.0
+margin_bottom = 20.0
+
+[node name="ItemButton" type="Button" parent="Management/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 20.0
+text = "Items"
+
+[node name="AbilityButton" type="Button" parent="Management/MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 54.0
+margin_right = 119.0
+margin_bottom = 20.0
+text = "Abilities"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="Management/MarginContainer"]
 margin_left = 20.0
 margin_top = 20.0
@@ -167,21 +178,7 @@ margin_right = 1322.0
 margin_bottom = 724.0
 custom_constants/separation = 15
 
-[node name="VBoxContainerLeft" type="VBoxContainer" parent="Management/MarginContainer/HBoxContainer"]
-margin_right = 643.0
-margin_bottom = 704.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 15
-
-[node name="AbilityBar" parent="Management/MarginContainer/HBoxContainer/VBoxContainerLeft" instance=ExtResource( 5 )]
-margin_left = 158.0
-margin_top = 333.0
-margin_right = 484.0
-margin_bottom = 371.0
-
 [node name="VBoxContainerRight" type="VBoxContainer" parent="Management/MarginContainer/HBoxContainer"]
-margin_left = 658.0
 margin_right = 1302.0
 margin_bottom = 704.0
 size_flags_horizontal = 3
@@ -191,30 +188,11 @@ custom_constants/separation = 15
 [node name="Inventory" parent="Management/MarginContainer/HBoxContainer/VBoxContainerRight" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 141.0
-margin_top = 252.0
-margin_right = 503.0
-margin_bottom = 452.0
+margin_left = 470.0
+margin_top = 162.0
+margin_right = 832.0
+margin_bottom = 542.0
 size_flags_stretch_ratio = 4.0
-
-[node name="CenterContainer" type="CenterContainer" parent="Management"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 1349.0
-margin_bottom = 751.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="AmountPopup" parent="Management/CenterContainer" instance=ExtResource( 2 )]
-visible = false
-margin_left = 668.0
-margin_top = 369.0
-margin_right = 674.0
-margin_bottom = 375.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="Shop" type="PanelContainer" parent="."]
 visible = false

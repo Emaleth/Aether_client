@@ -19,7 +19,7 @@ signal s_update_world_state
 signal s_update_chat_state
 
 signal update_inventory_ui
-signal update_pouch_ui
+signal update_currency_ui
 signal update_equipment_ui
 signal update_spellbook_ui
 
@@ -137,10 +137,14 @@ func send_player_state(_position : Vector3, _rotation : Basis, _aim : Vector3):
 
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
-		LocalDataTables.item_table = _data["item_table"]
+		LocalDataTables.item_index = _data["item_index"]
+		LocalDataTables.equipment_table = _data["equipment_table"]
+		LocalDataTables.material_table = _data["material_table"]
+		LocalDataTables.craft_recipe_table = _data["craft_recipe_table"]
+		# bad below
 		LocalDataTables.enemy_table = _data["enemy_table"]
 		LocalDataTables.skill_table = _data["skill_table"]
-	
+		
 	
 remote func recive_equipment_data(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
@@ -154,16 +158,16 @@ remote func recive_inventory_data(_data : Array):
 		emit_signal("update_inventory_ui", _data)
 
 
-remote func recive_pouch_data(_data : Array):
+remote func recive_ability_data(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.pouch_data = _data
-		emit_signal("update_pouch_ui", _data)
-
-
-remote func recive_spellbook_data(_data : Array):
-	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.spellbook_data = _data
+		GlobalVariables.ability_data = _data
 		emit_signal("update_spellbook_ui", _data)
+		
+		
+remote func recive_currency_data(_data : Dictionary):
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.currency_data = _data
+		emit_signal("update_currency_ui", _data)
 		
 		
 func request_item_transfer(_from_data : Dictionary, _amount : int, _to_data : Dictionary):

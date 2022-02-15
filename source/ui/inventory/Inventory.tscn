@@ -21,11 +21,11 @@ __meta__ = {
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 359.0
-margin_bottom = 197.0
+margin_bottom = 377.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
 margin_right = 356.0
-margin_bottom = 176.0
+margin_bottom = 356.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 columns = 10
@@ -300,11 +300,301 @@ margin_top = 144.0
 margin_right = 356.0
 margin_bottom = 176.0
 
-[node name="Label" type="Label" parent="VBoxContainer"]
-margin_left = 305.0
+[node name="InventorySlot51" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_top = 180.0
+margin_bottom = 212.0
+
+[node name="InventorySlot52" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_top = 180.0
+margin_right = 68.0
+margin_bottom = 212.0
+
+[node name="InventorySlot53" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_top = 180.0
+margin_right = 104.0
+margin_bottom = 212.0
+
+[node name="InventorySlot54" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_top = 180.0
+margin_right = 140.0
+margin_bottom = 212.0
+
+[node name="InventorySlot55" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_top = 180.0
+margin_right = 176.0
+margin_bottom = 212.0
+
+[node name="InventorySlot56" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 180.0
+margin_top = 180.0
+margin_right = 212.0
+margin_bottom = 212.0
+
+[node name="InventorySlot57" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 216.0
+margin_top = 180.0
+margin_right = 248.0
+margin_bottom = 212.0
+
+[node name="InventorySlot58" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 252.0
+margin_top = 180.0
+margin_right = 284.0
+margin_bottom = 212.0
+
+[node name="InventorySlot59" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 288.0
+margin_top = 180.0
+margin_right = 320.0
+margin_bottom = 212.0
+
+[node name="InventorySlot60" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 324.0
 margin_top = 180.0
 margin_right = 356.0
-margin_bottom = 194.0
+margin_bottom = 212.0
+
+[node name="InventorySlot61" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_top = 216.0
+margin_bottom = 248.0
+
+[node name="InventorySlot62" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_top = 216.0
+margin_right = 68.0
+margin_bottom = 248.0
+
+[node name="InventorySlot63" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_top = 216.0
+margin_right = 104.0
+margin_bottom = 248.0
+
+[node name="InventorySlot64" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_top = 216.0
+margin_right = 140.0
+margin_bottom = 248.0
+
+[node name="InventorySlot65" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_top = 216.0
+margin_right = 176.0
+margin_bottom = 248.0
+
+[node name="InventorySlot66" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 180.0
+margin_top = 216.0
+margin_right = 212.0
+margin_bottom = 248.0
+
+[node name="InventorySlot67" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 216.0
+margin_top = 216.0
+margin_right = 248.0
+margin_bottom = 248.0
+
+[node name="InventorySlot68" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 252.0
+margin_top = 216.0
+margin_right = 284.0
+margin_bottom = 248.0
+
+[node name="InventorySlot69" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 288.0
+margin_top = 216.0
+margin_right = 320.0
+margin_bottom = 248.0
+
+[node name="InventorySlot70" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 324.0
+margin_top = 216.0
+margin_right = 356.0
+margin_bottom = 248.0
+
+[node name="InventorySlot71" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_top = 252.0
+margin_bottom = 284.0
+
+[node name="InventorySlot72" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_top = 252.0
+margin_right = 68.0
+margin_bottom = 284.0
+
+[node name="InventorySlot73" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_top = 252.0
+margin_right = 104.0
+margin_bottom = 284.0
+
+[node name="InventorySlot74" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_top = 252.0
+margin_right = 140.0
+margin_bottom = 284.0
+
+[node name="InventorySlot75" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_top = 252.0
+margin_right = 176.0
+margin_bottom = 284.0
+
+[node name="InventorySlot76" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 180.0
+margin_top = 252.0
+margin_right = 212.0
+margin_bottom = 284.0
+
+[node name="InventorySlot77" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 216.0
+margin_top = 252.0
+margin_right = 248.0
+margin_bottom = 284.0
+
+[node name="InventorySlot78" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 252.0
+margin_top = 252.0
+margin_right = 284.0
+margin_bottom = 284.0
+
+[node name="InventorySlot79" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 288.0
+margin_top = 252.0
+margin_right = 320.0
+margin_bottom = 284.0
+
+[node name="InventorySlot80" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 324.0
+margin_top = 252.0
+margin_right = 356.0
+margin_bottom = 284.0
+
+[node name="InventorySlot81" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_top = 288.0
+margin_bottom = 320.0
+
+[node name="InventorySlot82" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_top = 288.0
+margin_right = 68.0
+margin_bottom = 320.0
+
+[node name="InventorySlot83" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_top = 288.0
+margin_right = 104.0
+margin_bottom = 320.0
+
+[node name="InventorySlot84" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_top = 288.0
+margin_right = 140.0
+margin_bottom = 320.0
+
+[node name="InventorySlot85" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_top = 288.0
+margin_right = 176.0
+margin_bottom = 320.0
+
+[node name="InventorySlot86" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 180.0
+margin_top = 288.0
+margin_right = 212.0
+margin_bottom = 320.0
+
+[node name="InventorySlot87" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 216.0
+margin_top = 288.0
+margin_right = 248.0
+margin_bottom = 320.0
+
+[node name="InventorySlot88" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 252.0
+margin_top = 288.0
+margin_right = 284.0
+margin_bottom = 320.0
+
+[node name="InventorySlot89" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 288.0
+margin_top = 288.0
+margin_right = 320.0
+margin_bottom = 320.0
+
+[node name="InventorySlot90" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 324.0
+margin_top = 288.0
+margin_right = 356.0
+margin_bottom = 320.0
+
+[node name="InventorySlot91" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_top = 324.0
+margin_bottom = 356.0
+
+[node name="InventorySlot92" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_top = 324.0
+margin_right = 68.0
+margin_bottom = 356.0
+
+[node name="InventorySlot93" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_top = 324.0
+margin_right = 104.0
+margin_bottom = 356.0
+
+[node name="InventorySlot94" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_top = 324.0
+margin_right = 140.0
+margin_bottom = 356.0
+
+[node name="InventorySlot95" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_top = 324.0
+margin_right = 176.0
+margin_bottom = 356.0
+
+[node name="InventorySlot96" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 180.0
+margin_top = 324.0
+margin_right = 212.0
+margin_bottom = 356.0
+
+[node name="InventorySlot97" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 216.0
+margin_top = 324.0
+margin_right = 248.0
+margin_bottom = 356.0
+
+[node name="InventorySlot98" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 252.0
+margin_top = 324.0
+margin_right = 284.0
+margin_bottom = 356.0
+
+[node name="InventorySlot99" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 288.0
+margin_top = 324.0
+margin_right = 320.0
+margin_bottom = 356.0
+
+[node name="InventorySlot100" parent="VBoxContainer/GridContainer" instance=ExtResource( 2 )]
+margin_left = 324.0
+margin_top = 324.0
+margin_right = 356.0
+margin_bottom = 356.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_left = 305.0
+margin_top = 360.0
+margin_right = 356.0
+margin_bottom = 374.0
 size_flags_horizontal = 10
 text = "[gold: 0]"
 align = 2

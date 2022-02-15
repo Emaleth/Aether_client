@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/test_rune.svg-1a08244ee10f7743a915acb015c225fc.stex"
+path="res://.import/test_craft_recipe.svg-d400c002440b3e99d054ced6f3fa038d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/test_rune.svg"
-dest_files=[ "res://.import/test_rune.svg-1a08244ee10f7743a915acb015c225fc.stex" ]
+source_file="res://assets/icons/item/test_craft_recipe.svg"
+dest_files=[ "res://.import/test_craft_recipe.svg-d400c002440b3e99d054ced6f3fa038d.stex" ]
 
 [params]
 

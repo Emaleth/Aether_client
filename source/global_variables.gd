@@ -3,8 +3,8 @@ extends Node
 # PLAYER CONTAINERS
 var equipment_data := {}
 var inventory_data := []
-var pouch_data := []
-var spellbook_data := []
+var ability_data := {}
+var currency_data := {}
 
 # PLAYER RESOURCES
 var resources_data := {}

@@ -94,11 +94,11 @@ func _process(delta: float) -> void:
 		generate_world = false
 		
 	if extract_collisions:
-		extract_collisions()
+		extract()
 		extract_collisions = false
 		
 		
-func extract_collisions():
+func extract():
 	if get_child_count() > 0:
 		var t = OS.get_ticks_msec()
 		print("..:: starting ::..")
@@ -110,8 +110,8 @@ func extract_collisions():
 			var new_collision_shape = find_node("StaticBody", true).duplicate(true)
 			collision_shape_container.add_child(new_collision_shape)
 			new_collision_shape.set_owner(get_tree().edited_scene_root)
-			for a in new_collision_shape.get_children():
-				a.set_owner(get_tree().edited_scene_root)
+			for x in new_collision_shape.get_children():
+				x.set_owner(get_tree().edited_scene_root)
 			new_collision_shape.transform = i.transform
 		print("..:: CollisionShapes copied in %ss ::.." % ((OS.get_ticks_msec() - t) / 1000.0)) 
 		

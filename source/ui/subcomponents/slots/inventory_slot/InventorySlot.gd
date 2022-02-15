@@ -22,13 +22,13 @@ func set_dummy_tooltip_text() -> void:
 	
 func _make_custom_tooltip(_for_text: String) -> Control:
 	var new_tooltip = tooltip.instance()
-	new_tooltip.conf(item)
+#	new_tooltip.conf(item)
 	return new_tooltip
 				
 		
 func set_item_icon() -> void:
 	if item:
-		var item_icon_path = "res://assets/icons/item//%s.svg" % str(item["archetype"])
+		var item_icon_path = "res://assets/icons/item//%s.svg" % str(item["item"])
 		icon = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/no_icon.svg")
 	else:
 		icon = null

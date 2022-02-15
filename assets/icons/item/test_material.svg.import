@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/novice_spellbook.svg-df4d0297d47f9fe8b6d426d9b63de504.stex"
+path="res://.import/test_material.svg-d38ca46342363d868fe8d8a1283940b7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/novice_spellbook.svg"
-dest_files=[ "res://.import/novice_spellbook.svg-df4d0297d47f9fe8b6d426d9b63de504.stex" ]
+source_file="res://assets/icons/item/test_material.svg"
+dest_files=[ "res://.import/test_material.svg-d38ca46342363d868fe8d8a1283940b7.stex" ]
 
 [params]
 

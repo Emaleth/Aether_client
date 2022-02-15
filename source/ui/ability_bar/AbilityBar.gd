@@ -17,10 +17,10 @@ var shortcut_list = [
 
 func _ready() -> void:
 	yield(get_tree().create_timer(1),"timeout")
-	configure(GlobalVariables.spellbook_data)
+#	configure(GlobalVariables.ability_data)
 
 
-func configure(_data : Array):
+func configure(_data : Dictionary):
 	var index = 0
 	for i in slot_grid.get_children():
 		i.hide()

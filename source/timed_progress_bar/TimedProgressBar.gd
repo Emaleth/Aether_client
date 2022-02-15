@@ -31,5 +31,5 @@ func _on_Tween_tween_all_completed() -> void:
 	hide()
 
 
-func _on_Tween_tween_step(object: Object, key: NodePath, elapsed: float, value: Object) -> void:
+func _on_Tween_tween_step(_object: Object, _key: NodePath, elapsed: float, _value: Object) -> void:
 	label.text = str(stepify(time - elapsed, 0.1))

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/novice_armor.svg-d0498e4d052c881914b0bdf95a08d240.stex"
+path="res://.import/test_armor.svg-c08036cc882f161877ee04cfb8843764.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/item/novice_armor.svg"
-dest_files=[ "res://.import/novice_armor.svg-d0498e4d052c881914b0bdf95a08d240.stex" ]
+source_file="res://assets/icons/item/test_armor.svg"
+dest_files=[ "res://.import/test_armor.svg-c08036cc882f161877ee04cfb8843764.stex" ]
 
 [params]
 
