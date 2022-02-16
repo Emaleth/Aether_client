@@ -158,32 +158,44 @@ remote func receive_data_tables(_data : Dictionary):
 		LocalDataTables.skill_table = _data["skill_table"]
 		
 	
-remote func recive_equipment_data(_data : Dictionary):
+remote func recive_equipment_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.equipment_data = _data
 		emit_signal("update_equipment_ui", _data)
 
 
-remote func recive_inventory_data(_data : Array):
+remote func recive_inventory_data(_data : Array): #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.inventory_data = _data
 		emit_signal("update_inventory_ui", _data)
 
 
-remote func recive_ability_data(_data : Dictionary):
+remote func recive_ability_data(_data : Array): #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.ability_data = _data
-		emit_signal("update_spellbook_ui", _data)
+#		emit_signal("update_spellbook_ui", _data)
+	
+	
+remote func recive_recipe_data(_data : Array):  #OK
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.recipe_data = _data
+#		emit_signal("update_spellbook_ui", _data)
+			
 		
+remote func recive_attributes_data(_data : Dictionary):  #OK
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.attributes_data = _data
+#		emit_signal("update_spellbook_ui", _data)
+			
 		
-remote func recive_currency_data(_data : Dictionary):
+remote func recive_currency_data(_data : Dictionary):  #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.currency_data = _data
 		emit_signal("update_currency_ui", _data)
 		
 		
-func request_item_transfer(_from_data : Dictionary, _amount : int, _to_data : Dictionary):
-	rpc_id(1, "request_item_transfer", _from_data, _amount, _to_data)
+#func request_item_transfer(_from_data : Dictionary, _amount : int, _to_data : Dictionary):
+#	rpc_id(1, "request_item_transfer", _from_data, _amount, _to_data)
 	
 	
 func request_loot_pickup(_loot_id : String):

@@ -3,7 +3,9 @@ extends Node
 # PLAYER CONTAINERS
 var equipment_data := {}
 var inventory_data := []
-var ability_data := {}
+var ability_data := []
+var recipe_data := []
+var attributes_data := {}
 var currency_data := {}
 
 # PLAYER RESOURCES
