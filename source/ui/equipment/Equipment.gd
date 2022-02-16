@@ -4,27 +4,18 @@ extends PanelContainer
 export var chest_slot : NodePath
 export var right_hand_slot : NodePath
 export var left_hand_slot : NodePath
-export var inventory_slot : NodePath
-export var pouch_slot : NodePath
-export var spellbook_slot : NodePath
 
 onready var slots = {
 	"chest" : get_node(chest_slot),
 	"right_hand" : get_node(right_hand_slot),
 	"left_hand" : get_node(left_hand_slot),
-	"inventory" : get_node(inventory_slot),
-	"pouch" : get_node(pouch_slot),
-	"spellbook" : get_node(spellbook_slot),
 }
 
 func configure(_data : Dictionary):
-	return
-	var index = 0
 	for i in _data.keys():
 		var new_slot = slots[i]
-		new_slot.configure(_data[i], "equipment", index, null, false)
-		index += 1
-	
+		new_slot.configure(_data[i], i)
+
 	
 func _ready() -> void:
 	configure(GlobalVariables.equipment_data)

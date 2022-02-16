@@ -1,9 +1,10 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/amount_popup/AmountPopup.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/ui/resources/Resources.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/ui/inventory/Inventory.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/ui/equipment/Equipment.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/ui/chatbox/ChatBox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://source/ui/clock/Clock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://source/ui/compass/Compass.tscn" type="PackedScene" id=9]
@@ -177,20 +178,19 @@ margin_top = 20.0
 margin_right = 1322.0
 margin_bottom = 724.0
 custom_constants/separation = 15
+alignment = 1
 
-[node name="VBoxContainerRight" type="VBoxContainer" parent="Management/MarginContainer/HBoxContainer"]
-margin_right = 1302.0
-margin_bottom = 704.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/separation = 15
+[node name="Equipment" parent="Management/MarginContainer/HBoxContainer" instance=ExtResource( 5 )]
+margin_top = 245.0
+margin_right = 278.0
+margin_bottom = 459.0
 
-[node name="Inventory" parent="Management/MarginContainer/HBoxContainer/VBoxContainerRight" instance=ExtResource( 4 )]
+[node name="Inventory" parent="Management/MarginContainer/HBoxContainer" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 470.0
+margin_left = 616.0
 margin_top = 162.0
-margin_right = 832.0
+margin_right = 978.0
 margin_bottom = 542.0
 size_flags_stretch_ratio = 4.0
 

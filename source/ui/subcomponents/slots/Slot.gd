@@ -180,5 +180,5 @@ func _on_Tween_tween_all_completed() -> void:
 	cooldown_lable.hide()
 
 
-func _on_Tween_tween_step(object: Object, key: NodePath, elapsed: float, value: Object) -> void:
+func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
 	cooldown_lable.text = str(round(tmp_cd))

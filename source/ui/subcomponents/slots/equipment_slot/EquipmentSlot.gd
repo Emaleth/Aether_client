@@ -1,16 +1,44 @@
-extends PanelContainer
+extends Button
+
+var item = null
+var index : String
+
+onready var tooltip = preload("res://source/ui/tooltips/inventory_tooltip/InventoryTooltip.tscn")
+onready var interaction_menu = $InteractionMenu
 
 
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
+func configure(_item, _index):
+	item = _item
+	index = _index
+	set_dummy_tooltip_text()
+	set_item_icon()
+	connect_interaction_menu_signals()
+	
+	
+func set_dummy_tooltip_text() -> void:
+	hint_tooltip = "text" if item else ""
+	
 
+func connect_interaction_menu_signals():
+	if not interaction_menu.is_connected("unequip", Server, "request_item_unequip"):
+		interaction_menu.connect("unequip", Server, "request_item_unequip", [index])
+	
+	
+func _make_custom_tooltip(_for_text: String) -> Control:
+	var new_tooltip = tooltip.instance()
+	new_tooltip.conf(item)
+	return new_tooltip
+				
+		
+func set_item_icon() -> void:
+	if item:
+		var item_icon_path = "res://assets/icons/item//%s.svg" % str(item["item"])
+		icon = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/no_icon.svg")
+	else:
+		icon = null
+		
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _on_EquipmentSlot_pressed() -> void:
+	if item:
+		$InteractionMenu.show_menu()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass

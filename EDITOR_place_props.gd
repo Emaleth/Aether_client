@@ -88,7 +88,7 @@ func create_raycast_probe():
 	height_probe.cast_to.y = -100
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if generate_world:
 		generate()
 		generate_world = false

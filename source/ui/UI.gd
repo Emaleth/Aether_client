@@ -11,8 +11,8 @@ onready var compass := $Combat/Compass
 
 
 # MANAGMENT LAYER PANELS
-#onready var equipment := $Equip
-onready var inventory := $Management/MarginContainer/HBoxContainer/VBoxContainerRight/Inventory
+onready var equipment := $Management/MarginContainer/HBoxContainer/Equipment
+onready var inventory := $Management/MarginContainer/HBoxContainer/Inventory
 #onready var spellbook := $Management/MarginContainer/HBoxContainer/VBoxContainerLeft/AbilityBar
 #
 ## SHOP LAYER PANELS
@@ -61,14 +61,14 @@ func _ready() -> void:
 
 
 func connect_signals():
-#	Server.connect("update_equipment_ui", self, "update_equipment_ui")
+	Server.connect("update_equipment_ui", self, "update_equipment_ui")
 	Server.connect("update_inventory_ui", self, "update_inventory_ui")
 	Server.connect("update_currency_ui", self, "update_currency_ui")
 #	Server.connect("update_spellbook_ui", self, "update_spellbook_ui")
 
 
-#func update_equipment_ui(_data : Dictionary):
-#	equipment.configure(_data)
+func update_equipment_ui(_data : Dictionary):
+	equipment.configure(_data)
 
 
 #func update_shop_ui(_data : Array):
