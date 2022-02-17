@@ -124,5 +124,6 @@ valign = 1
 [node name="InteractionMenu" parent="." instance=ExtResource( 3 )]
 equip_action_allowed = true
 discard_action_allowed = true
+use_action_allowed = true
 
 [connection signal="pressed" from="." to="." method="_on_InventorySlot_pressed"]

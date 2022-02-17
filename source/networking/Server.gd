@@ -143,6 +143,10 @@ func request_item_equip(_index):
 	rpc_id(1, "request_item_equip", _index)
 
 
+func request_item_use(_index):
+	rpc_id(1, "request_item_use", _index)
+
+
 func request_item_unequip(_index):
 	rpc_id(1, "request_item_unequip", _index)
 		
@@ -173,13 +177,11 @@ remote func recive_inventory_data(_data : Array): #OK
 remote func recive_ability_data(_data : Array): #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.ability_data = _data
-#		emit_signal("update_spellbook_ui", _data)
 	
 	
 remote func recive_recipe_data(_data : Array):  #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.recipe_data = _data
-#		emit_signal("update_spellbook_ui", _data)
 			
 		
 remote func recive_attributes_data(_data : Dictionary):  #OK

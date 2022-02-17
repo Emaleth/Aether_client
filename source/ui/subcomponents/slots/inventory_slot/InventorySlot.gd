@@ -25,7 +25,7 @@ func set_dummy_tooltip_text() -> void:
 func connect_interaction_menu_signals():
 	interaction_menu.connect("discard", Server, "request_item_discard", [index])
 	interaction_menu.connect("equip", Server, "request_item_equip", [index])
-#	interaction_menu.connect("unequip", Server, "request_item_unequip", [index])
+	interaction_menu.connect("use", Server, "request_item_use", [index])
 	
 	
 func _make_custom_tooltip(_for_text: String) -> Control:

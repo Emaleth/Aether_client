@@ -31,18 +31,26 @@ margin_bottom = 20.0
 custom_fonts/font = ExtResource( 2 )
 text = "Equip"
 
-[node name="Unequip" type="Button" parent="VBoxContainer"]
+[node name="Use" type="Button" parent="VBoxContainer"]
+self_modulate = Color( 0, 1, 0, 1 )
 margin_top = 24.0
 margin_right = 52.0
 margin_bottom = 44.0
+custom_fonts/font = ExtResource( 2 )
+text = "Use"
+
+[node name="Unequip" type="Button" parent="VBoxContainer"]
+margin_top = 48.0
+margin_right = 52.0
+margin_bottom = 68.0
 custom_fonts/font = ExtResource( 2 )
 text = "Unequip"
 
 [node name="Discard" type="Button" parent="VBoxContainer"]
 self_modulate = Color( 1, 0, 0, 1 )
-margin_top = 48.0
+margin_top = 72.0
 margin_right = 52.0
-margin_bottom = 68.0
+margin_bottom = 92.0
 custom_fonts/font = ExtResource( 2 )
 text = "Discard"
 __meta__ = {
@@ -51,5 +59,6 @@ __meta__ = {
 
 [connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]
 [connection signal="pressed" from="VBoxContainer/Equip" to="." method="_on_Equip_pressed"]
+[connection signal="pressed" from="VBoxContainer/Use" to="." method="_on_Use_pressed"]
 [connection signal="pressed" from="VBoxContainer/Unequip" to="." method="_on_Unequip_pressed"]
 [connection signal="pressed" from="VBoxContainer/Discard" to="." method="_on_Discard_pressed"]
