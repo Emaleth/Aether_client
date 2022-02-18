@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/wallB_flatWindow.obj-7b923c8bc26c9184d8ff0b969843800e.mesh"
+
+[deps]
+
+files=[ "res://.import/wallB_flatWindow.obj-7b923c8bc26c9184d8ff0b969843800e.mesh" ]
+
+source_file="res://assets/third_party/kenney_retroUrbanKit/Models/OBJ format/wallB_flatWindow.obj"
+dest_files=[ "res://.import/wallB_flatWindow.obj-7b923c8bc26c9184d8ff0b969843800e.mesh", "res://.import/wallB_flatWindow.obj-7b923c8bc26c9184d8ff0b969843800e.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/floor_stairsCornerOuter.obj-a8684c0bb5bec6080688430cff3a4bde.mesh"
+
+[deps]
+
+files=[ "res://.import/floor_stairsCornerOuter.obj-a8684c0bb5bec6080688430cff3a4bde.mesh" ]
+
+source_file="res://assets/third_party/retro-medieval-kit-1.0/Models/OBJ format/floor_stairsCornerOuter.obj"
+dest_files=[ "res://.import/floor_stairsCornerOuter.obj-a8684c0bb5bec6080688430cff3a4bde.mesh", "res://.import/floor_stairsCornerOuter.obj-a8684c0bb5bec6080688430cff3a4bde.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

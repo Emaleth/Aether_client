@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/scaffolding_structure.obj-b6e37f718269b8fc6f5e83c48658b5ab.mesh"
+
+[deps]
+
+files=[ "res://.import/scaffolding_structure.obj-b6e37f718269b8fc6f5e83c48658b5ab.mesh" ]
+
+source_file="res://assets/third_party/kenney_retroUrbanKit/Models/OBJ format/scaffolding_structure.obj"
+dest_files=[ "res://.import/scaffolding_structure.obj-b6e37f718269b8fc6f5e83c48658b5ab.mesh", "res://.import/scaffolding_structure.obj-b6e37f718269b8fc6f5e83c48658b5ab.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

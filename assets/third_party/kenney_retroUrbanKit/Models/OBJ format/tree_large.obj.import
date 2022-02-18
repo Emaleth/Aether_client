@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/tree_large.obj-0bd215b0d8c51e07142952371984a625.mesh"
+
+[deps]
+
+files=[ "res://.import/tree_large.obj-0bd215b0d8c51e07142952371984a625.mesh" ]
+
+source_file="res://assets/third_party/kenney_retroUrbanKit/Models/OBJ format/tree_large.obj"
+dest_files=[ "res://.import/tree_large.obj-0bd215b0d8c51e07142952371984a625.mesh", "res://.import/tree_large.obj-0bd215b0d8c51e07142952371984a625.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

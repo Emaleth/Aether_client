@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/wallA_detailPainted.obj-78d04ea0d9b90e662ed0d27bd80a3613.mesh"
+
+[deps]
+
+files=[ "res://.import/wallA_detailPainted.obj-78d04ea0d9b90e662ed0d27bd80a3613.mesh" ]
+
+source_file="res://assets/third_party/kenney_retroUrbanKit/Models/OBJ format/wallA_detailPainted.obj"
+dest_files=[ "res://.import/wallA_detailPainted.obj-78d04ea0d9b90e662ed0d27bd80a3613.mesh", "res://.import/wallA_detailPainted.obj-78d04ea0d9b90e662ed0d27bd80a3613.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

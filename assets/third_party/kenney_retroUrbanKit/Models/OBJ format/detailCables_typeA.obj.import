@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/detailCables_typeA.obj-06b6fce879702518c92112a3350cf9ce.mesh"
+
+[deps]
+
+files=[ "res://.import/detailCables_typeA.obj-06b6fce879702518c92112a3350cf9ce.mesh" ]
+
+source_file="res://assets/third_party/kenney_retroUrbanKit/Models/OBJ format/detailCables_typeA.obj"
+dest_files=[ "res://.import/detailCables_typeA.obj-06b6fce879702518c92112a3350cf9ce.mesh", "res://.import/detailCables_typeA.obj-06b6fce879702518c92112a3350cf9ce.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286
