@@ -102,17 +102,17 @@ func extract():
 	if get_child_count() > 0:
 		var t = OS.get_ticks_msec()
 		print("..:: starting ::..")
-		var collision_shape_container := Spatial.new()
-		get_parent().add_child(collision_shape_container)
-		collision_shape_container.name = "ServerPropCollisions"
-		collision_shape_container.set_owner(get_tree().edited_scene_root)
+		var static_body := StaticBody.new()
+		get_parent().add_child(static_body)
+		static_body.name = "ServerPropStaticBody"
+		static_body.set_owner(get_tree().edited_scene_root)
 		for i in get_children():
-			var new_collision_shape = find_node("StaticBody", true).duplicate(true)
-			collision_shape_container.add_child(new_collision_shape)
+			var collision_shape = find_node("CollisionShape", true)
+			var new_collision_shape = CollisionShape.new()
+			new_collision_shape.shape = collision_shape.shape.duplicate()
+			static_body.add_child(new_collision_shape)
 			new_collision_shape.set_owner(get_tree().edited_scene_root)
-			for x in new_collision_shape.get_children():
-				x.set_owner(get_tree().edited_scene_root)
-			new_collision_shape.transform = i.transform
+			new_collision_shape.global_transform = i.global_transform
 		print("..:: CollisionShapes copied in %ss ::.." % ((OS.get_ticks_msec() - t) / 1000.0)) 
 		
 			
@@ -136,7 +136,7 @@ func generate():
 	
 	
 func generate_points():
-	for i in range(0, density):
+	for _i in range(0, density):
 		points.append(Vector3(rand_range(-extents, extents), 0, rand_range(-extents, extents)))
 
 

@@ -21,7 +21,7 @@ signal s_update_chat_state
 signal update_inventory_ui
 signal update_currency_ui
 signal update_equipment_ui
-signal update_spellbook_ui
+#signal update_spellbook_ui
 
 
 func _physics_process(delta: float) -> void:
@@ -150,7 +150,11 @@ func request_item_use(_index):
 func request_item_unequip(_index):
 	rpc_id(1, "request_item_unequip", _index)
 		
-
+		
+func request_item_craft(_index):
+	rpc_id(1, "request_item_craft", _index)
+		
+		
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
 		LocalDataTables.item_index = _data["item_index"]

@@ -3,8 +3,8 @@ extends PanelContainer
 enum {READ, WRITE}
 
 var mode
-var small_window_size = Vector2(250, 150)
-var big_window_size = Vector2(300, 250)
+var small_window_size = Vector2(200, 150)
+var big_window_size = Vector2(250, 200)
 
 
 onready var msg_list := $VBoxContainer/OutputPanel/ScrollContainer/MessageList

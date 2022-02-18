@@ -1,24 +1,21 @@
 extends MarginContainer
 
-enum {COMBAT, MANAGMENT, SHOP}
+enum {COMBAT, MANAGMENT, SHOPPING, CRAFTING}
 var mode
 
 # COMBAT LAYER PANELS
-onready var resources := $Combat/VBoxContainer/Resources
-onready var debug := $Combat/VBoxContainer/Debug
-onready var compass := $Combat/Compass
-#onready var spellbook := $Combat/VBoxContainer3/AbilityBar
-
+onready var resources := $CombatLayer/VBoxContainer/Resources
+onready var debug := $CombatLayer/VBoxContainer/Debug
+onready var compass := $CombatLayer/Compass
 
 # MANAGMENT LAYER PANELS
-onready var equipment := $Management/MarginContainer/HBoxContainer/Equipment
-onready var inventory := $Management/MarginContainer/HBoxContainer/Inventory
-#onready var spellbook := $Management/MarginContainer/HBoxContainer/VBoxContainerLeft/AbilityBar
-#
-## SHOP LAYER PANELS
-#onready var SL_shop := $Shop/CenterContainer2/HBoxContainer/BuySection/Shop
-#onready var SL_inventory := $Shop/CenterContainer2/HBoxContainer/SellSection/Inventory
-#onready var SL_amount_popup := $Shop/CenterContainer/AmountPopup
+onready var equipment := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/Equipment
+onready var inventory := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/Inventory
+
+onready var item_section := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection
+onready var ability_section := $ManagementLayer/MarginContainer/VBoxContainer/AbilitySection
+# CRAFTING LAYER PANELS
+# SHOPPING LAYER PANELS
 
 
 func _unhandled_key_input(_event: InputEventKey) -> void:
@@ -37,54 +34,66 @@ func set_mode(_mode):
 	match _mode:
 		COMBAT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			$Combat.show()
-			$Management.hide()
-			$Shop.hide()
+			$CombatLayer.show()
+			$ManagementLayer.hide()
+			$ShoppingLayer.hide()
+			$CraftingLayer.hide()
 		MANAGMENT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			$Combat.hide()
-			$Management.show()
-			$Shop.hide()
-		SHOP:
+			$CombatLayer.hide()
+			$ManagementLayer.show()
+			$ShoppingLayer.hide()
+			$CraftingLayer.hide()
+		SHOPPING:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			$Combat.hide()
-			$Management.hide()
-			$Shop.show()
-#			update_shop_ui(GlobalVariables.interactable.goods)
-			
+			$CombatLayer.hide()
+			$ManagementLayer.hide()
+			$ShoppingLayer.show()
+			$CraftingLayer.hide()
+		CRAFTING:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			$CombatLayer.hide()
+			$ManagementLayer.hide()
+			$ShoppingLayer.hide()
+			$CraftingLayer.show()
+						
 	mode = _mode
 
 
 func _ready() -> void:
 	set_mode(COMBAT)
 	connect_signals()
+	item_section.show()
+	ability_section.hide()
 
 
 func connect_signals():
-	Server.connect("update_equipment_ui", self, "update_equipment_ui")
-	Server.connect("update_inventory_ui", self, "update_inventory_ui")
-	Server.connect("update_currency_ui", self, "update_currency_ui")
-#	Server.connect("update_spellbook_ui", self, "update_spellbook_ui")
+	Server.connect("update_equipment_ui", self, "update_equipment_panel")
+	Server.connect("update_inventory_ui", self, "update_inventory_panel")
+	Server.connect("update_currency_ui", self, "update_currency_panel")
 
 
-func update_equipment_ui(_data : Dictionary):
+func update_equipment_panel(_data : Dictionary):
 	equipment.configure(_data)
 
 
-#func update_shop_ui(_data : Array):
-#	shop.configure_buy(_data)
-
-
-func update_inventory_ui(_data : Array):
+func update_inventory_panel(_data : Array):
 	inventory.configure(_data)
 
 
-func update_currency_ui(_data : Dictionary):
+func update_currency_panel(_data : Dictionary):
 	inventory.configure_g(_data)
 
-#func update_spellbook_ui(_data : Array):
-#	spellbook.configure(_data)
 
-
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void: # DEBUG
 	debug.conf(Server.latency)
+
+
+func _on_AbilityButton_pressed() -> void:
+	item_section.hide()
+	ability_section.show()
+
+
+func _on_ItemButton_pressed() -> void:
+	ability_section.hide()
+	item_section.show()

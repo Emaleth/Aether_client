@@ -28,7 +28,7 @@ static func get_item_data(_item : String) -> Array:
 	return [index_data, type_data]
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	check_in_window()
 	
 	
