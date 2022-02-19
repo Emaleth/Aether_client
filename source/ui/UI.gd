@@ -90,6 +90,7 @@ func _physics_process(_delta: float) -> void: # DEBUG
 
 
 func _on_AbilityButton_pressed() -> void:
+	Server.request_item_craft(0)
 	item_section.hide()
 	ability_section.show()
 

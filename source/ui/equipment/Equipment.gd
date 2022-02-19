@@ -7,8 +7,8 @@ export var left_hand_slot : NodePath
 
 onready var slots = {
 	"chest" : get_node(chest_slot),
-	"right_hand" : get_node(right_hand_slot),
-	"left_hand" : get_node(left_hand_slot),
+	"primary_weapon" : get_node(right_hand_slot),
+	"secondary_weapon" : get_node(left_hand_slot),
 }
 
 func configure(_data : Dictionary):
