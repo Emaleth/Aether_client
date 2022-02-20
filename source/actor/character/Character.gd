@@ -14,16 +14,17 @@ onready var interaction_area = $InteractionArea
 
 func _physics_process(delta: float) -> void:
 	move(delta)
-	get_look_direction()
 
 
-func _unhandled_input(_event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
 		return
 	if GlobalVariables.chatting:
 		return
 	if Input.is_action_just_pressed("interact"):
 		interaction_area.interact()
+	if event is InputEventMouseMotion:
+		rotate_camera_rig(event.relative)
 
 
 func get_move_direction() -> Vector3:
@@ -31,7 +32,7 @@ func get_move_direction() -> Vector3:
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED and GlobalVariables.chatting == false and GlobalVariables.user_interface.mode == GlobalVariables.user_interface.COMBAT:
 		move_direction.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 		move_direction.z = Input.get_action_strength("move_backward") - Input.get_action_strength("move_forward")
-		move_direction = move_direction.rotated(Vector3.UP, GlobalVariables.camera_rig.rotation.y).normalized()
+		move_direction = move_direction.rotated(Vector3.UP, rotation.y).normalized()
 
 	return move_direction
 
@@ -57,11 +58,8 @@ func move(_delta : float):
 	move_and_slide_with_snap(velocity, snap_vector, Vector3.UP, true)
 
 
-func get_look_direction():
-	if velocity.length() > 2:
-		snap_to_camera_rotaion()
-#	rotation_degrees.y = lerp(rotation_degrees.y, GlobalVariables.camera_rig.rotation_degrees.y, 0.2)
-		
-		
-func snap_to_camera_rotaion():
-		rotation_degrees.y = GlobalVariables.camera_rig.rotation_degrees.y
+func rotate_camera_rig(_amount : Vector2) -> void:
+	if _amount.length() <= mouse_deadzone:
+		return
+	rotation.y -= _amount.x * mouse_sensibility
+	rotation.y = wrapf(rotation.y, -180, 180)

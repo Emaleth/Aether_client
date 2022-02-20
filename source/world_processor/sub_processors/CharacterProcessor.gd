@@ -24,8 +24,7 @@ func send_player_state():
 	if GlobalVariables.player_actor:
 		frame_index += 1
 		if frame_index >= 3:
-			var pos = GlobalVariables.player_actor.global_transform.origin
-			var rot = GlobalVariables.player_actor.global_transform.basis
-			var aim = GlobalVariables.camera_rig.cast_ray_from_camera_to_mouse_pointer()["position"]
-			Server.send_player_state(pos, rot, aim)
+			Server.send_player_state(
+					GlobalVariables.player_actor.global_transform,
+					GlobalVariables.player_actor.global_transform)
 			frame_index = 0

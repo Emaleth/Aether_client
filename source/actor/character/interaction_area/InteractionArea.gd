@@ -12,7 +12,7 @@ func interact():
 		elif GlobalVariables.interactable.is_in_group("res"):
 			Server.request_material_gather(GlobalVariables.interactable.name)
 		elif GlobalVariables.interactable.is_in_group("shop"):
-			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOP)
+			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOPPING)
 
 
 func get_interactables():

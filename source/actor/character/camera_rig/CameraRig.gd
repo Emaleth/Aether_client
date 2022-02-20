@@ -12,7 +12,6 @@ onready var camera = $Camera
 
 func _ready() -> void:
 	GlobalVariables.camera_rig = self
-	set_as_toplevel(true)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -27,9 +26,6 @@ func rotate_camera_rig(_amount : Vector2) -> void:
 		return
 	rotation.x -= _amount.y * mouse_sensibility
 	rotation.x = clamp(rotation.x, min_rotation_x, max_rotation_x)
-
-	rotation.y -= _amount.x * mouse_sensibility
-	rotation.y = wrapf(rotation.y, -180, 180)
 
 
 func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:

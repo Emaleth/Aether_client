@@ -1,15 +1,15 @@
 extends Node
 
 # PLAYER CONTAINERS
-var equipment_data := {}
-var inventory_data := []
-var ability_data := []
-var recipe_data := []
+var equipment_data := {} #ok
+var inventory_data := [] #ok
+var ability_data := [] #ok
+var recipe_data := [] #ok
 var attributes_data := {}
-var currency_data := {}
-
+var currency_data := {} #ok
+var shop_data := {} #ok 
 # PLAYER RESOURCES
-var resources_data := {}
+var resources_data := {} #ok
 
 
 var camera_rig = null

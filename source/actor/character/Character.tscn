@@ -29,12 +29,6 @@ shape = SubResource( 1 )
 [node name="CameraRig" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
 
-[node name="CameraRemoteTransform" type="RemoteTransform" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0 )
-remote_path = NodePath("../CameraRig")
-update_rotation = false
-update_scale = false
-
 [node name="EqPanelPrewievRemoteTransform" type="RemoteTransform" parent="."]
 transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.9, -2 )
 update_scale = false

@@ -21,7 +21,8 @@ signal s_update_chat_state
 signal update_inventory_ui
 signal update_currency_ui
 signal update_equipment_ui
-#signal update_spellbook_ui
+signal update_ability_ui
+signal update_crafting_ui
 
 
 func _physics_process(delta: float) -> void:
@@ -114,6 +115,11 @@ remote func recive_world_state(world_state):
 		emit_signal("s_update_world_state", world_state)
 
 
+remote func recive_shop_data(_data : Dictionary):
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.shop_data = _data
+
+
 func send_chat_message(_message):
 	rpc_unreliable_id(1, "recive_chat_message", client_clock, _message)
 	
@@ -131,8 +137,8 @@ func send_weapon_use_request(_mode : String):
 	rpc_id(1, "request_weapon_use", _mode)
 	
 	
-func send_player_state(_position : Vector3, _rotation : Basis, _aim : Vector3):
-	rpc_unreliable_id(1, "recive_player_state", _position, _rotation, _aim)
+func send_player_state(_player_transform : Transform, _weapon_transform : Transform):
+	rpc_unreliable_id(1, "recive_player_state", _player_transform, _weapon_transform)
 	
 	
 func request_item_discard(_index):
@@ -181,11 +187,13 @@ remote func recive_inventory_data(_data : Array): #OK
 remote func recive_ability_data(_data : Array): #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.ability_data = _data
+		emit_signal("update_ability_ui", _data)
 	
 	
 remote func recive_recipe_data(_data : Array):  #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.recipe_data = _data
+		emit_signal("update_crafting_ui", _data)
 			
 		
 remote func recive_attributes_data(_data : Dictionary):  #OK

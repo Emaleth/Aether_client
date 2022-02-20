@@ -8,7 +8,7 @@ onready var cooldown_progress := $TextureProgress
 onready var cooldown_tween := $TextureProgress/Tween
 onready var cooldown_label := $CooldownLabel
 
-onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
+#onready var tooltip = preload("res://source/ui/tooltip/Tooltip.tscn")
 
 
 func configure(_ability, _shortcut):
@@ -59,10 +59,10 @@ func set_cooldown():
 		cooldown_progress.hide()
 
 	
-func _make_custom_tooltip(_for_text: String) -> Control:
-	var new_tooltip = tooltip.instance()
-	new_tooltip.conf(ability)
-	return new_tooltip
+#func _make_custom_tooltip(_for_text: String) -> Control:
+#	var new_tooltip = tooltip.instance()
+#	new_tooltip.conf(ability)
+#	return new_tooltip
 		
 		
 func set_ability_icon() -> void:
