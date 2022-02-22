@@ -15,7 +15,8 @@ var decimal_collector : float = 0
 # signals
 signal s_token_verification_success
 signal s_token_verification_failure
-signal s_update_world_state
+signal sig_update_fast_world_state
+signal sig_update_slow_world_state
 signal s_update_chat_state
 
 signal update_inventory_ui
@@ -110,10 +111,15 @@ remote func return_token_verification_results(result):
 			emit_signal("s_token_verification_failure")
 	
 	
-remote func recive_world_state(world_state):
+remote func recive_fast_world_state(world_state):
 	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("s_update_world_state", world_state)
+		emit_signal("sig_update_fast_world_state", world_state)
 
+
+remote func recive_slow_world_state(world_state):
+	if get_tree().get_rpc_sender_id() == 1:
+		emit_signal("sig_update_slow_world_state", world_state)
+		
 
 remote func recive_shop_data(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:

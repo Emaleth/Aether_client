@@ -3,7 +3,7 @@ extends Node
 var collection = {}
 var container = self
 
-onready var dummy_actor_scene = preload("res://source/actor/dummy_actor/dummy_actor.tscn")
+onready var dummy_actor_scene = preload("res://source/actor/dummy_player/dummy_player.tscn")
 
 
 func _physics_process(_delta: float) -> void:
@@ -27,9 +27,9 @@ func add_to_the_tree():
 func update_in_the_tree():
 	for pc in container.get_children():
 		if collection.has(str(pc.name)):
-			pc.update(collection[str(pc.name)]["pos"], collection[str(pc.name)]["rot"], collection[str(pc.name)]["res"])
+			pc.update(collection[str(pc.name)]["t"], collection[str(pc.name)]["r"])
 	if collection.has(str(get_tree().get_network_unique_id())):
-		GlobalVariables.resources_data = collection[str(get_tree().get_network_unique_id())]["res"]
+		GlobalVariables.resources_data = collection[str(get_tree().get_network_unique_id())]["r"]
 
 
 func remove_from_the_tree():
@@ -60,10 +60,10 @@ func interpolate(_render_time, world_state_buffer):
 		if collection.has(str(pc)):
 			var modified_data := {}
 			modified_data = world_state_buffer[2]["P"][pc].duplicate(true)
-			modified_data["pos"] = lerp(world_state_buffer[1]["P"][pc]["pos"], world_state_buffer[2]["P"][pc]["pos"], interpolation_factor)
-			var current_rot = (world_state_buffer[1]["P"][pc]["rot"]).get_rotation_quat()
-			var target_rot = (world_state_buffer[2]["P"][pc]["rot"]).get_rotation_quat()
-			modified_data["rot"] = Basis(current_rot.slerp(target_rot, interpolation_factor))
+			modified_data["t"].origin = lerp(world_state_buffer[1]["P"][pc]["t"].origin, world_state_buffer[2]["P"][pc]["t"].origin, interpolation_factor)
+			var current_rot = (world_state_buffer[1]["P"][pc]["t"].basis).get_rotation_quat()
+			var target_rot = (world_state_buffer[2]["P"][pc]["t"].basis).get_rotation_quat()
+			modified_data["t"].basis = Basis(current_rot.slerp(target_rot, interpolation_factor))
 			update_inside_the_collection(pc, modified_data)
 		else:
 			add_to_the_collection(pc, world_state_buffer[2]["P"][pc])
@@ -80,11 +80,12 @@ func extrapolate(_render_time, world_state_buffer):
 			continue
 		if collection.has(pc):
 			var modified_data := {}
-			var position_delta = (world_state_buffer[1]["P"][pc]["pos"] - world_state_buffer[0]["P"][pc]["pos"])
-			modified_data["pos"] = world_state_buffer[1]["P"][pc]["pos"] + (position_delta * extrapolation_factor)
-			var current_rot = (world_state_buffer[1]["P"][pc]["rot"]).get_rotation_quat()
-			var old_rot = (world_state_buffer[0]["P"][pc]["rot"]).get_rotation_quat()
+			var position_delta = (world_state_buffer[1]["P"][pc]["t"].origin - world_state_buffer[0]["P"][pc]["t"].origin)
+			modified_data["t"] = Transform.IDENTITY
+			modified_data["t"].origin = world_state_buffer[1]["P"][pc]["t"].origin + (position_delta * extrapolation_factor)
+			var current_rot = (world_state_buffer[1]["P"][pc]["t"].basis).get_rotation_quat()
+			var old_rot = (world_state_buffer[0]["P"][pc]["t"].basis).get_rotation_quat()
 			var rotation_delta = (current_rot - old_rot)
-			modified_data["rot"] = Basis(current_rot + (rotation_delta * extrapolation_factor))
+			modified_data["t"].basis = Basis(current_rot + (rotation_delta * extrapolation_factor))
 			update_inside_the_collection(pc, modified_data)
 

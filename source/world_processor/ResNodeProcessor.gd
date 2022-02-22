@@ -35,7 +35,7 @@ func remove_from_the_collection(_id):
 
 
 func process_data():
-	var wsb2_loot = get_parent().world_state_buffer[2]["R"]
+	var wsb2_loot = get_parent().fast_world_state_buffer[2]["R"]
 	for npc in wsb2_loot.keys():
 		if not collection.has(npc):
 			add_to_the_collection(npc, wsb2_loot[npc])
