@@ -1,5 +1,11 @@
 extends Node
 
+const interpolation_offset = 100 # milliseconds
+# FAST
+var world_state_buffer = []
+var last_world_state := 0.0
+var render_time : float
+
 
 var buffer_index_table := {
 	1 : { # PLAYERS
@@ -19,10 +25,29 @@ var buffer_index_table := {
 	},
 }
 
+
 func _physics_process(_delta: float) -> void:
-	add_to_the_tree()
+	interpolate_or_extrapolate()
+#	add_to_the_tree()
 	update_in_the_tree()
-	remove_from_the_tree()
+#	remove_from_the_tree()
+
+
+func update_world_state(_world_state):
+	if float(_world_state[0]) > last_world_state:
+		last_world_state = _world_state[0]
+		world_state_buffer.append(_world_state)
+		
+
+func interpolate_or_extrapolate():
+	render_time = Server.client_clock - interpolation_offset
+	if world_state_buffer.size() > 1:
+		while world_state_buffer.size() > 2 and render_time > float(world_state_buffer[2][0]):
+			world_state_buffer.remove(0)
+		if world_state_buffer.size() > 2:
+			interpolate()
+		elif render_time > float(world_state_buffer[1][0]):
+			extrapolate()
 
 
 func configure(_player_container, _npc_container, _ability_container):
@@ -31,17 +56,17 @@ func configure(_player_container, _npc_container, _ability_container):
 	buffer_index_table[3]["container"] = _ability_container
 
 	
-func add_to_the_tree():
-	for index in buffer_index_table:
-		for npc in buffer_index_table[index]["collection"].keys():
-			if npc == str(get_tree().get_network_unique_id()):
-				if GlobalVariables.player_actor == null:
-					get_parent().get_node("CharacterProcessor").spawn_character()
-			else:
-				if not buffer_index_table[index]["container"].has_node(str(npc)):
-					var new_npc = buffer_index_table[index]["scene"].instance()
-					new_npc.name = str(npc)
-					buffer_index_table[index]["container"].call_deferred("add_child", new_npc, true)
+#func add_to_the_tree():
+#	for index in buffer_index_table:
+#		for npc in buffer_index_table[index]["collection"].keys():
+#			if npc == str(get_tree().get_network_unique_id()):
+#				if GlobalVariables.player_actor == null:
+#					get_parent().get_node("CharacterProcessor").spawn_character()
+#			else:
+#				if not buffer_index_table[index]["container"].has_node(str(npc)):
+#					var new_npc = buffer_index_table[index]["scene"].instance()
+#					new_npc.name = str(npc)
+#					buffer_index_table[index]["container"].call_deferred("add_child", new_npc, true)
 
 
 
@@ -52,11 +77,11 @@ func update_in_the_tree():
 				npc.global_transform = buffer_index_table[index]["collection"][str(npc.name)]
 
 
-func remove_from_the_tree():
-	for index in buffer_index_table:
-		for npc in buffer_index_table[index]["container"].get_children():
-			if not buffer_index_table[index]["collection"].has(str(npc.name)):
-				npc.call_deferred("queue_free")
+#func remove_from_the_tree():
+#	for index in buffer_index_table:
+#		for npc in buffer_index_table[index]["container"].get_children():
+#			if not buffer_index_table[index]["collection"].has(str(npc.name)):
+#				npc.call_deferred("queue_free")
 
 
 func add_to_the_collection(_index, _id, _data):
@@ -71,8 +96,8 @@ func remove_from_the_collection(_index, _id):
 	buffer_index_table[_index]["collection"].erase(_id)
 
 
-func interpolate(_render_time, world_state_buffer):
-	var interpolation_factor = float(_render_time - world_state_buffer[1][0]) / float(world_state_buffer[2][0] - world_state_buffer[1][0])
+func interpolate():
+	var interpolation_factor = float(render_time - world_state_buffer[1][0]) / float(world_state_buffer[2][0] - world_state_buffer[1][0])
 	for index in buffer_index_table:
 		for npc in world_state_buffer[2][index].keys():
 			if not world_state_buffer[1][index].has(npc): # WE WANT TO BE SURE THAT BOTH WS1 AND WS2 HAVE ANY GIVEN KEY FOR INTERPOLATION'S SAKE
@@ -91,8 +116,8 @@ func interpolate(_render_time, world_state_buffer):
 				remove_from_the_collection(index, npc)
 
 
-func extrapolate(_render_time, world_state_buffer):
-	var extrapolation_factor = float(_render_time - world_state_buffer[0][0]) / float(world_state_buffer[1][0] - world_state_buffer[0][0]) - 1.00
+func extrapolate():
+	var extrapolation_factor = float(render_time - world_state_buffer[0][0]) / float(world_state_buffer[1][0] - world_state_buffer[0][0]) - 1.00
 	for index in buffer_index_table:
 		for npc in world_state_buffer[1][index].keys():
 			if not world_state_buffer[0][index].has(npc): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR EXTRAPOLATION'S SAKE

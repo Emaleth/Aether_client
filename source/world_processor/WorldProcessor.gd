@@ -1,48 +1,33 @@
 extends Node
 
-const interpolation_offset = 100 # milliseconds
 
-var last_fast_world_state := 0.0
-var fast_world_state_buffer = []
+onready var fast_processor = $FastProcessor
+onready var slow_processor = $SlowProcessor
 
-onready var fast_processor = $Fast
+onready var player_container := Node.new()
+onready var npc_container := Node.new()
+onready var ability_container := Node.new()
+onready var resource_node_container := Node.new()
+
+onready var landscape_scene = preload("res://source/world/World.tscn")
+
 
 func _ready():
 	GlobalVariables.world = self
-	Server.connect("sig_update_fast_world_state", self, "update_fast_world_state")
-	fast_processor.configure($PlayerContainer, $NPCContainer, $AbilityContainer)
-
-func _physics_process(_delta: float) -> void:
-	interpolate_or_extrapolate()
+	add_child(landscape_scene.instance())
+	create_containers()
+	configure_processors()
 
 
-func update_fast_world_state(_world_state):
-	if float(_world_state[0]) > last_fast_world_state:
-		last_fast_world_state = _world_state[0]
-		fast_world_state_buffer.append(_world_state)
-
-
-func interpolate_or_extrapolate():
-	var render_time = Server.client_clock - interpolation_offset
-	if fast_world_state_buffer.size() > 1:
-		while fast_world_state_buffer.size() > 2 and render_time > float(fast_world_state_buffer[2][0]):
-			fast_world_state_buffer.remove(0)
-
-		if fast_world_state_buffer.size() > 2:
-			fast_processor.interpolate(render_time, fast_world_state_buffer)
-#			$NPCProcessor.interpolate(render_time, fast_world_state_buffer)
-#			$PCProcessor.interpolate(render_time, fast_world_state_buffer)
-#			$AbilityProcessor.interpolate(render_time, fast_world_state_buffer)
-#
-##			$LootProcessor.process_data()
-##			$ShopProcessor.process_data()
-#			$ResNodeProcessor.process_data()
-
-		elif render_time > float(fast_world_state_buffer[1][0]):
-			fast_processor.extrapolate(render_time, fast_world_state_buffer)
-#			$NPCProcessor.extrapolate(render_time, fast_world_state_buffer)
-#			$PCProcessor.extrapolate(render_time, fast_world_state_buffer)
-#			$AbilityProcessor.extrapolate(render_time, fast_world_state_buffer)
-
-
-
+func create_containers():
+	add_child(player_container)
+	add_child(npc_container)
+	add_child(ability_container)
+	add_child(resource_node_container)
+	
+	
+func configure_processors():
+	fast_processor.configure(player_container, npc_container, ability_container)
+	slow_processor.configure(player_container, npc_container, ability_container, resource_node_container)
+	Server.connect("sig_update_fast_world_state", fast_processor, "update_world_state")
+	Server.connect("sig_update_slow_world_state", slow_processor, "update_world_state")

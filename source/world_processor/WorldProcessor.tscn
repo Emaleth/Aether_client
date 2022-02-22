@@ -1,48 +1,18 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/world_processor/sub_processors/CharacterProcessor.gd" type="Script" id=1]
-[ext_resource path="res://source/world_processor/sub_processors/AbilityProcessor.gd" type="Script" id=2]
-[ext_resource path="res://source/world_processor/sub_processors/LandscapeGenerator.gd" type="Script" id=3]
-[ext_resource path="res://source/world_processor/sub_processors/LootProcessor.gd" type="Script" id=4]
 [ext_resource path="res://source/world_processor/WorldProcessor.gd" type="Script" id=5]
-[ext_resource path="res://source/world_processor/sub_processors/NPCProcessor.gd" type="Script" id=6]
-[ext_resource path="res://source/world_processor/sub_processors/PCProcessor.gd" type="Script" id=7]
-[ext_resource path="res://source/world_processor/ResNodeProcessor.gd" type="Script" id=8]
-[ext_resource path="res://source/world_processor/ShopProcessor.gd" type="Script" id=9]
 [ext_resource path="res://source/world_processor/Fast.gd" type="Script" id=10]
+[ext_resource path="res://source/world_processor/Slow.gd" type="Script" id=11]
 
 [node name="WorldProcessor" type="Node"]
 script = ExtResource( 5 )
 
-[node name="NPCProcessor" type="Node" parent="."]
-script = ExtResource( 6 )
+[node name="FastProcessor" type="Node" parent="."]
+script = ExtResource( 10 )
 
-[node name="LootProcessor" type="Node" parent="."]
-script = ExtResource( 4 )
-
-[node name="ResNodeProcessor" type="Node" parent="."]
-script = ExtResource( 8 )
-
-[node name="PCProcessor" type="Node" parent="."]
-script = ExtResource( 7 )
-
-[node name="AbilityProcessor" type="Node" parent="."]
-script = ExtResource( 2 )
+[node name="SlowProcessor" type="Node" parent="."]
+script = ExtResource( 11 )
 
 [node name="CharacterProcessor" type="Node" parent="."]
 script = ExtResource( 1 )
-
-[node name="LandscapeGenerator" type="Node" parent="."]
-script = ExtResource( 3 )
-
-[node name="ShopProcessor" type="Node" parent="."]
-script = ExtResource( 9 )
-
-[node name="Fast" type="Node" parent="."]
-script = ExtResource( 10 )
-
-[node name="PlayerContainer" type="Node" parent="."]
-
-[node name="NPCContainer" type="Node" parent="."]
-
-[node name="AbilityContainer" type="Node" parent="."]
