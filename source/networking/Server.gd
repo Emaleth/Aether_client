@@ -17,6 +17,7 @@ signal s_token_verification_success
 signal s_token_verification_failure
 signal sig_update_fast_world_state
 signal sig_update_slow_world_state
+#signal sig_configure_unique_world_state
 signal s_update_chat_state
 
 signal update_inventory_ui
@@ -119,11 +120,18 @@ remote func recive_fast_world_state(world_state):
 remote func recive_slow_world_state(world_state):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("sig_update_slow_world_state", world_state)
-		
 
-remote func recive_shop_data(_data : Dictionary):
+
+remote func recive_unique_world_state(world_state):
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.shop_data = _data
+		GlobalVariables.unique_world_state = world_state
+#		print(world_state)
+#		emit_signal("sig_configure_unique_world_state", world_state)
+		
+				
+#remote func recive_shop_data(_data : Dictionary):
+#	if get_tree().get_rpc_sender_id() == 1:
+#		GlobalVariables.shop_data = _data
 
 
 func send_chat_message(_message):
@@ -213,10 +221,6 @@ remote func recive_currency_data(_data : Dictionary):  #OK
 		GlobalVariables.currency_data = _data
 		emit_signal("update_currency_ui", _data)
 		
-		
-#func request_item_transfer(_from_data : Dictionary, _amount : int, _to_data : Dictionary):
-#	rpc_id(1, "request_item_transfer", _from_data, _amount, _to_data)
-	
 	
 func request_loot_pickup(_loot_id : String):
 	rpc_id(1, "request_loot_pickup", _loot_id)
@@ -229,10 +233,6 @@ func request_material_gather(_material_id : String):
 func request_loot_drop(_loot_id : String):
 	rpc_id(1, "request_loot_drop", _loot_id)
 	
-	
-func request_recipe_craft(_data : Dictionary):
-	rpc_id(1, "request_recipe_craft", _data)
-
 	
 func request_item_buy(_shop_id : String, _slot_index : int, _amount = 1):
 	rpc_id(1, "request_item_buy", _shop_id, _slot_index, _amount)

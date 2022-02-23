@@ -4,7 +4,7 @@ onready var direction_strip = $Control/HBoxContainer
 
 
 func _process(_delta: float) -> void:
-	configure(GlobalVariables.camera_rig.rotation_degrees.y)
+	configure(GlobalVariables.player_actor.rotation_degrees.y)
 	
 	
 func configure(_degrees : float):

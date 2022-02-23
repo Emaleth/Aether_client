@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/third_party/crosshairpack_kenney/PNG/White/crosshair001.png" type="Texture" id=2]
@@ -9,7 +9,6 @@
 [ext_resource path="res://source/ui/clock/Clock.tscn" type="PackedScene" id=7]
 [ext_resource path="res://source/ui/crafting_panel/CraftingPanel.tscn" type="PackedScene" id=8]
 [ext_resource path="res://source/ui/compass/Compass.tscn" type="PackedScene" id=9]
-[ext_resource path="res://source/ui/interaction_indicator/InteractionIndicator.tscn" type="PackedScene" id=10]
 [ext_resource path="res://source/ui/abilities_panel/AbilitiesPanel.tscn" type="PackedScene" id=11]
 [ext_resource path="res://source/ui/debug/Debug.tscn" type="PackedScene" id=13]
 [ext_resource path="res://source/timed_progress_bar/TimedProgressBar.tscn" type="PackedScene" id=15]
@@ -117,12 +116,6 @@ mouse_filter = 2
 texture = ExtResource( 2 )
 expand = true
 
-[node name="InteractionIndicator" parent="CombatLayer" instance=ExtResource( 10 )]
-margin_left = 1156.0
-margin_top = 558.0
-margin_right = 1356.0
-margin_bottom = 758.0
-
 [node name="Compass" parent="CombatLayer" instance=ExtResource( 9 )]
 margin_left = 578.0
 margin_right = 778.0
@@ -211,6 +204,11 @@ margin_top = 5.0
 margin_right = 1361.0
 margin_bottom = 763.0
 custom_styles/panel = SubResource( 4 )
+
+[node name="ColorRect" type="ColorRect" parent="ShoppingLayer"]
+margin_right = 1356.0
+margin_bottom = 758.0
+color = Color( 1, 0, 0, 0.4 )
 
 [node name="CraftingLayer" type="PanelContainer" parent="."]
 visible = false

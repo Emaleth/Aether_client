@@ -9,8 +9,6 @@ var velocity := Vector3.ZERO
 var mouse_sensibility : float = 0.005
 var mouse_deadzone : float = 0.1
 
-onready var interaction_area = $InteractionArea
-
 
 func _physics_process(delta: float) -> void:
 	move(delta)
@@ -21,8 +19,6 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if GlobalVariables.chatting:
 		return
-	if Input.is_action_just_pressed("interact"):
-		interaction_area.interact()
 	if event is InputEventMouseMotion:
 		rotate_camera_rig(event.relative)
 

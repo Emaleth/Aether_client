@@ -1,12 +1,12 @@
 extends Spatial
 
 
-var data : Dictionary
+var type : String
 
 func _ready() -> void:
 	add_to_group("res")
 	
 	
-func update(new_position, _data):
-	transform.origin = new_position
-	data = _data
+func update_data(_data):
+	global_transform = _data[0]
+	type = _data[1]
