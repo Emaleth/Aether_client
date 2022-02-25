@@ -143,12 +143,12 @@ remote func recive_chat_state(chat_state):
 		emit_signal("s_update_chat_state", chat_state)
 
 
-func send_item_use_request(_data : Dictionary):
-	rpc_id(1, "request_item_use", _data)
+#func send_item_use_request(_data : Dictionary):
+#	rpc_id(1, "request_item_use", _data)
 	
 	
-func send_weapon_use_request(_mode : String):
-	rpc_id(1, "request_weapon_use", _mode)
+#func send_weapon_use_request(_mode : String):
+#	rpc_id(1, "request_weapon_use", _mode)
 	
 	
 func send_player_state(_player_transform : Transform, _weapon_transform : Transform):
@@ -173,7 +173,11 @@ func request_item_unequip(_index):
 		
 func request_item_craft(_index):
 	rpc_id(1, "request_item_craft", _index)
+
 		
+func request_material_gather(_material_id : String):
+	rpc_id(1, "request_material_gather", _material_id)
+
 		
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
@@ -225,9 +229,6 @@ remote func recive_currency_data(_data : Dictionary):  #OK
 func request_loot_pickup(_loot_id : String):
 	rpc_id(1, "request_loot_pickup", _loot_id)
 
-
-func request_material_gather(_material_id : String):
-	rpc_id(1, "request_material_gather", _material_id)
 
 	
 func request_loot_drop(_loot_id : String):

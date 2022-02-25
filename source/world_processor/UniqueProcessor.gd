@@ -5,12 +5,18 @@ var buffer_index_table := {
 		"collection" : {},
 		"container" : null,
 		"scene" : preload("res://source/dummy_shop/DummyShop.tscn")
+	},
+	1 : { # CRAFTING STATION
+		"collection" : {},
+		"container" : null,
+		"scene" : preload("res://source/dummy_crafting_station/DummyCraftingStation.tscn")
 	}
 }
 
 
-func configure(_shop_container):
+func configure(_shop_container, _crafting_station_container):
 	buffer_index_table[0]["container"] = _shop_container
+	buffer_index_table[1]["container"] = _crafting_station_container
 	configure_world_state(GlobalVariables.unique_world_state)
 	add_to_the_tree()
 

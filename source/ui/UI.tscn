@@ -211,7 +211,6 @@ margin_bottom = 758.0
 color = Color( 1, 0, 0, 0.4 )
 
 [node name="CraftingLayer" type="PanelContainer" parent="."]
-visible = false
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1361.0
@@ -223,10 +222,10 @@ margin_right = 1356.0
 margin_bottom = 758.0
 
 [node name="CraftingPanel" parent="CraftingLayer/CenterContainer" instance=ExtResource( 8 )]
-margin_left = 671.0
-margin_top = 372.0
-margin_right = 685.0
-margin_bottom = 386.0
+margin_left = 583.0
+margin_top = 338.0
+margin_right = 773.0
+margin_bottom = 420.0
 
 [connection signal="pressed" from="ManagementLayer/MarginContainer/VBoxContainer/HBoxContainer/ItemButton" to="." method="_on_ItemButton_pressed"]
 [connection signal="pressed" from="ManagementLayer/MarginContainer/VBoxContainer/HBoxContainer/AbilityButton" to="." method="_on_AbilityButton_pressed"]

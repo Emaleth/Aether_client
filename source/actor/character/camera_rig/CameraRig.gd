@@ -7,6 +7,8 @@ var min_rotation_x : float = deg2rad(-80)
 var max_rotation_x : float = deg2rad(80)
 var raycast_lenght := 10000
 
+var interaction_range := 10
+
 onready var camera = $Camera
 
 
@@ -44,8 +46,11 @@ func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 
 func interact(_body):
 	if _body.is_in_group("shop"):
-		if _body.global_transform.origin.distance_to(GlobalVariables.player_actor.global_transform.origin) < 10:
+		if _body.global_transform.origin.distance_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
 			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOPPING)
 	elif _body.is_in_group("crafting_station"):
-		if _body.global_transform.origin.distance_to(GlobalVariables.player_actor.global_transform.origin) < 10:
+		if _body.global_transform.origin.distance_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
 			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.CRAFTING)
+	elif _body.is_in_group("res"):
+		if _body.global_transform.origin.distance_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
+			Server.request_material_gather(_body.name)

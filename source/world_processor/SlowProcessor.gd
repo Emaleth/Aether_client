@@ -45,6 +45,8 @@ func update_in_the_tree():
 		if index == 1:
 			if buffer_index_table[index]["collection"].has(str(get_tree().get_network_unique_id())):
 				GlobalVariables.resources_data = buffer_index_table[index]["collection"][str(get_tree().get_network_unique_id())][0]
+		if index == 4:
+			pass # resource state so it disappears
 
 
 func slow_add_to_the_tree():
