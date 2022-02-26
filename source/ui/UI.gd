@@ -19,6 +19,7 @@ onready var ability_panel := $ManagementLayer/MarginContainer/VBoxContainer/Abil
 onready var crafting_panel := $CraftingLayer/CenterContainer/CraftingPanel
 
 # SHOPPING LAYER PANELS
+onready var shopping_panel := $ShoppingLayer/Shop
 
 
 func _unhandled_key_input(_event: InputEventKey) -> void:
@@ -97,6 +98,10 @@ func update_ability_panel(_data : Array):
 func update_currency_panel(_data : Dictionary):
 	inventory_panel.configure_g(_data)
 
+
+func update_shopping_panel(_data : Array):
+	shopping_panel.configure(_data)
+	
 
 func _physics_process(_delta: float) -> void: # DEBUG
 	debug.conf(Server.latency)

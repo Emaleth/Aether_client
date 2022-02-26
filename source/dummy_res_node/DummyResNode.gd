@@ -2,6 +2,7 @@ extends Spatial
 
 
 var type : String
+var state : bool
 
 func _ready() -> void:
 	add_to_group("res")
@@ -10,3 +11,8 @@ func _ready() -> void:
 func update_data(_data):
 	global_transform = _data[0]
 	type = _data[1]
+	state = _data[2]
+	if state:
+		show()
+	else:
+		hide()
