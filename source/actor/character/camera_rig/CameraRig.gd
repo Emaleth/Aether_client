@@ -7,8 +7,9 @@ var min_rotation_x : float = deg2rad(-80)
 var max_rotation_x : float = deg2rad(80)
 var raycast_lenght := 10000
 
-var interaction_range := 10
+var interaction_range := 100
 
+var target_data := {}
 onready var camera = $Camera
 
 
@@ -16,13 +17,17 @@ func _ready() -> void:
 	GlobalVariables.camera_rig = self
 
 
+func _physics_process(_delta: float) -> void:
+	target_data = cast_ray_from_camera_to_mouse_pointer()
+	
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		return
 	if event is InputEventMouseMotion:
 		rotate_camera_rig(event.relative)
 	if Input.is_action_just_pressed("primary_action"):
-		var body = cast_ray_from_camera_to_mouse_pointer().collider if cast_ray_from_camera_to_mouse_pointer().size() > 0 else null
+		var body = target_data.collider if target_data.size() > 0 else null
 		if body:
 			interact(body)
 
@@ -46,11 +51,13 @@ func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 
 func interact(_body):
 	if _body.is_in_group("shop"):
-		if _body.global_transform.origin.distance_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
+		if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
 			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOPPING)
 	elif _body.is_in_group("crafting_station"):
-		if _body.global_transform.origin.distance_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
+		if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
 			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.CRAFTING)
-	elif _body.is_in_group("res"):
-		if _body.global_transform.origin.distance_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
+	elif _body.is_in_group("resource"):
+		if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
 			Server.request_material_gather(_body.name)
+	else:
+		Server.send_weapon_use_request()

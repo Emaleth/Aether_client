@@ -13,15 +13,15 @@ var delta_latency = 0
 var latency_array = []
 var decimal_collector : float = 0
 # signals
-signal s_token_verification_success
-signal s_token_verification_failure
 signal sig_update_fast_world_state
 signal sig_update_slow_world_state
-#signal sig_configure_unique_world_state
-signal s_update_chat_state
+signal sig_update_currency
+signal sig_update_attributes
 
+signal s_token_verification_success
+signal s_token_verification_failure
+signal s_update_chat_state
 signal update_inventory_ui
-signal update_currency_ui
 signal update_equipment_ui
 signal update_ability_ui
 signal update_crafting_ui
@@ -71,7 +71,6 @@ remote func return_server_time(server_time, client_time):
 	if get_tree().get_rpc_sender_id() == 1:
 		latency = (OS.get_system_time_msecs() - client_time) / 2
 		client_clock = server_time + latency
-#	print("clock re-sync")
 	
 	
 func get_server_time():
@@ -125,13 +124,6 @@ remote func recive_slow_world_state(world_state):
 remote func recive_unique_world_state(world_state):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.unique_world_state = world_state
-#		print(world_state)
-#		emit_signal("sig_configure_unique_world_state", world_state)
-		
-				
-#remote func recive_shop_data(_data : Dictionary):
-#	if get_tree().get_rpc_sender_id() == 1:
-#		GlobalVariables.shop_data = _data
 
 
 func send_chat_message(_message):
@@ -147,8 +139,8 @@ remote func recive_chat_state(chat_state):
 #	rpc_id(1, "request_item_use", _data)
 	
 	
-#func send_weapon_use_request(_mode : String):
-#	rpc_id(1, "request_weapon_use", _mode)
+func send_weapon_use_request():
+	rpc_id(1, "request_weapon_use")
 	
 	
 func send_player_state(_player_transform : Transform, _weapon_transform : Transform):
@@ -217,13 +209,13 @@ remote func recive_recipe_data(_data : Array):  #OK
 remote func recive_attributes_data(_data : Dictionary):  #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.attributes_data = _data
-#		emit_signal("update_spellbook_ui", _data)
+		emit_signal("sig_update_attributes", _data)
 			
 		
 remote func recive_currency_data(_data : Dictionary):  #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.currency_data = _data
-		emit_signal("update_currency_ui", _data)
+		emit_signal("sig_update_currency", _data)
 		
 	
 func request_loot_pickup(_loot_id : String):

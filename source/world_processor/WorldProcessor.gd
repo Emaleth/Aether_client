@@ -32,9 +32,12 @@ func create_containers():
 	
 	
 func configure_processors():
+	# FAST
 	fast_processor.configure(player_container, npc_container, ability_container)
-	slow_processor.configure(player_container, npc_container, ability_container, resource_node_container)
-	unique_processor.configure(shop_container, crafting_station_container)
 	Server.connect("sig_update_fast_world_state", fast_processor, "update_world_state")
+	# SLOW
+	slow_processor.configure(player_container, npc_container, ability_container, resource_node_container)
 	Server.connect("sig_update_slow_world_state", slow_processor, "update_world_state")
-#	Server.connect("sig_configure_unique_world_state", unique_processor, "configure_world_state")
+	# UNIQUE
+	unique_processor.configure(shop_container, crafting_station_container)
+

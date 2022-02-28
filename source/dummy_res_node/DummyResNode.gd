@@ -5,7 +5,7 @@ var type : String
 var state : bool
 
 func _ready() -> void:
-	add_to_group("res")
+	add_to_group("resource")
 	
 	
 func update_data(_data):

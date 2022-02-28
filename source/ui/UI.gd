@@ -9,8 +9,10 @@ onready var debug := $CombatLayer/VBoxContainer/Debug
 onready var compass := $CombatLayer/Compass
 
 # MANAGMENT LAYER PANELS
-onready var equipment_panel := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/Equipment
-onready var inventory_panel := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/Inventory
+onready var equipment_panel := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/VBoxContainer/Equipment
+onready var attributes_panel := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/VBoxContainer/AttributesPanel
+onready var inventory_panel := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/VBoxContainer2/Inventory
+onready var currency_panel := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/VBoxContainer2/CurrencyPanel
 
 onready var item_section := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection
 onready var ability_panel := $ManagementLayer/MarginContainer/VBoxContainer/AbilitiesPanel
@@ -73,14 +75,19 @@ func _ready() -> void:
 
 func connect_signals():
 	Server.connect("update_equipment_ui", self, "update_equipment_panel")
+	Server.connect("sig_update_attributes", self, "update_attributes_panel")
 	Server.connect("update_inventory_ui", self, "update_inventory_panel")
-	Server.connect("update_currency_ui", self, "update_currency_panel")
+	Server.connect("sig_update_currency", self, "update_currency_panel")
 	Server.connect("update_ability_ui", self, "update_ability_panel")
 	Server.connect("update_crafting_ui", self, "update_crafting_panel")
 
 
 func update_equipment_panel(_data : Dictionary):
 	equipment_panel.configure(_data)
+
+
+func update_attributes_panel(_data : Dictionary):
+	attributes_panel.configure(_data)
 
 
 func update_inventory_panel(_data : Array):
@@ -96,7 +103,7 @@ func update_ability_panel(_data : Array):
 
 
 func update_currency_panel(_data : Dictionary):
-	inventory_panel.configure_g(_data)
+	currency_panel.configure_g(_data)
 
 
 func update_shopping_panel(_data : Array):

@@ -7,7 +7,6 @@ onready var game = preload("res://source/world_processor/WorldProcessor.tscn")
 onready var login_panel = $MarginContainer/VBoxContainer/CenterContainer/LoginPanel
 onready var register_panel = $MarginContainer/VBoxContainer/CenterContainer/RegisterPanel
 
-
 onready var quit_button = $MarginContainer/VBoxContainer/VBoxContainer/Quit
 
 

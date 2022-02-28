@@ -12,7 +12,8 @@ var mouse_deadzone : float = 0.1
 
 func _physics_process(delta: float) -> void:
 	move(delta)
-
+	if $CameraRig.target_data.size() > 0: aim($CameraRig.target_data) 
+	
 
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.get_mouse_mode() != Input.MOUSE_MODE_CAPTURED:
@@ -59,3 +60,7 @@ func rotate_camera_rig(_amount : Vector2) -> void:
 		return
 	rotation.y -= _amount.x * mouse_sensibility
 	rotation.y = wrapf(rotation.y, -180, 180)
+
+
+func aim(target_data):
+	$gun.look_at(target_data.position, Vector3.UP)

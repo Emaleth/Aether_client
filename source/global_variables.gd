@@ -7,7 +7,7 @@ var ability_data := [] #ok
 var recipe_data := [] #ok
 var attributes_data := {}
 var currency_data := {} #ok
-#var shop_data := {} #ok 
+
 # PLAYER RESOURCES
 var resources_data := {} #ok
 
@@ -18,8 +18,6 @@ var player_actor = null
 var user_interface = null
 var world = null
 var chatting := false
-
-#var interactable = null
 
 # CLIENT SETTINGS
 var settings := {}
