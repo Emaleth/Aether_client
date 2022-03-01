@@ -174,7 +174,8 @@ func request_material_gather(_material_id : String):
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
 		LocalDataTables.item_index = _data["item_index"]
-		LocalDataTables.equipment_table = _data["equipment_table"]
+		LocalDataTables.armor_table = _data["armor_table"]
+		LocalDataTables.weapon_table = _data["weapon_table"]
 		LocalDataTables.material_table = _data["material_table"]
 		LocalDataTables.craft_recipe_table = _data["craft_recipe_table"]
 		# bad below

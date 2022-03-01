@@ -1,14 +1,13 @@
 extends PanelContainer
 
 
-export var chest_slot : NodePath
-export var right_hand_slot : NodePath
-export var left_hand_slot : NodePath
+export var armor_slot : NodePath
+export var weapon_slot : NodePath
+
 
 onready var slots = {
-	"chest" : get_node(chest_slot),
-	"primary_weapon" : get_node(right_hand_slot),
-	"secondary_weapon" : get_node(left_hand_slot),
+	"armor" : get_node(armor_slot),
+	"weapon" : get_node(weapon_slot),
 }
 
 func configure(_data : Dictionary):

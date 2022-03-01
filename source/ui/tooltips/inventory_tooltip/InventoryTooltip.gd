@@ -19,8 +19,8 @@ static func get_item_data(_item : String) -> Array:
 	var type_data := {}
 	index_data = LocalDataTables.item_index[_item]
 #	match index_data["type"]:
-#		"equipment":
-#			type_data = LocalDataTables.equipment_table[_item]
+#		"armor":
+#			type_data = LocalDataTables.armor_table[_item]
 #		"material":
 #			type_data = LocalDataTables.material_table[_item]
 #		"craft_recipe":
