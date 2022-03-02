@@ -19,6 +19,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	target_data = cast_ray_from_camera_to_mouse_pointer()
+	get_input()
 	
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -26,12 +27,19 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	if event is InputEventMouseMotion:
 		rotate_camera_rig(event.relative)
-	if Input.is_action_just_pressed("primary_action"):
+#	if Input.is_action_pressed("primary_action"):
+#		var body = target_data.collider if target_data.size() > 0 else null
+#		if body:
+#			interact(body)
+
+
+func get_input():
+	if Input.is_action_pressed("primary_action"):
 		var body = target_data.collider if target_data.size() > 0 else null
 		if body:
 			interact(body)
-
-
+			
+			
 func rotate_camera_rig(_amount : Vector2) -> void:
 	if _amount.length() <= mouse_deadzone:
 		return
@@ -60,4 +68,17 @@ func interact(_body):
 		if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
 			Server.request_material_gather(_body.name)
 	else:
-		Server.send_weapon_use_request()
+		shoot()
+		
+
+func shoot():
+	var weapon = GlobalVariables.equipment_data["weapon"]
+	if not weapon:
+		return
+	var weapon_data = GlobalVariables.get_item_data(weapon["item"])
+	var w_cd : float = 1.0 / weapon_data[1]["rof"] * 1000
+	var current_time = Server.client_clock
+	if current_time - weapon["used"] < w_cd:
+		return
+	weapon["used"] = current_time
+	Server.send_weapon_use_request()

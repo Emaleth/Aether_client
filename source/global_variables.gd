@@ -22,3 +22,18 @@ var chatting := false
 # CLIENT SETTINGS
 var settings := {}
 
+
+static func get_item_data(_item : String) -> Array:
+	var index_data := {}
+	var type_data := {}
+	index_data = LocalDataTables.item_index[_item]
+	match index_data["type"]:
+		"weapon":
+			type_data = LocalDataTables.weapon_table[_item]
+		"armor":
+			type_data = LocalDataTables.armor_table[_item]
+		"material":
+			type_data = LocalDataTables.material_table[_item]
+		"craft_recipe":
+			type_data = LocalDataTables.craft_recipe_table[_item]
+	return [index_data, type_data]
