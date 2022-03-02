@@ -9,67 +9,25 @@ export(float) var water_level = 0.0
 
 var a := {
 	"assets" : [
-		preload("res://source/environment/nature/bushes/bush01.tscn"),
-		preload("res://source/environment/nature/bushes/bush02.tscn"),
-		preload("res://source/environment/nature/bushes/bush03.tscn"),
-		preload("res://source/environment/nature/bushes/bush04.tscn"),
-		preload("res://source/environment/nature/bushes/bush05.tscn"),
-		preload("res://source/environment/nature/bushes/bush06.tscn"),
-		preload("res://source/environment/nature/bushes/bush07.tscn"),
-		preload("res://source/environment/nature/bushes/bush08.tscn"),
+		preload("res://source/environment/Bush.tscn"),
 	],
 	"weight" : 3
 }
 
 var b := {
 	"assets" : [
-		preload("res://source/environment/nature/trees/tree01.tscn"),
-		preload("res://source/environment/nature/trees/tree02.tscn"),
-		preload("res://source/environment/nature/trees/tree03.tscn"),
-		preload("res://source/environment/nature/trees/tree04.tscn"),
-		preload("res://source/environment/nature/trees/tree05.tscn"),
-		preload("res://source/environment/nature/trees/tree06.tscn"),
-		preload("res://source/environment/nature/trees/tree07.tscn"),
-		preload("res://source/environment/nature/trees/tree08.tscn"),
-		preload("res://source/environment/nature/trees/tree09.tscn"),
-		preload("res://source/environment/nature/trees/tree10.tscn"),
-		preload("res://source/environment/nature/trees/tree11.tscn"),
-		preload("res://source/environment/nature/trees/tree12.tscn"),
-		preload("res://source/environment/nature/trees/tree13.tscn"),
-		preload("res://source/environment/nature/trees/tree14.tscn"),
-		preload("res://source/environment/nature/trees/tree15.tscn"),
-		preload("res://source/environment/nature/trees/tree16.tscn"),
-		preload("res://source/environment/nature/trees/tree17.tscn"),
-		preload("res://source/environment/nature/trees/tree18.tscn"),
-		preload("res://source/environment/nature/trees/tree19.tscn"),
-		preload("res://source/environment/nature/trees/tree20.tscn"),
-		preload("res://source/environment/nature/trees/tree21.tscn"),
-		preload("res://source/environment/nature/trees/tree22.tscn"),
-		preload("res://source/environment/nature/trees/tree23.tscn"),
-		preload("res://source/environment/nature/trees/tree24.tscn"),
-		preload("res://source/environment/nature/trees/tree25.tscn"),
-		preload("res://source/environment/nature/trees/tree26.tscn"),
-		preload("res://source/environment/nature/trees/tree27.tscn"),
-		preload("res://source/environment/nature/trees/tree28.tscn"),
-		preload("res://source/environment/nature/trees/tree29.tscn"),
-		preload("res://source/environment/nature/trees/tree30.tscn"),
-		preload("res://source/environment/nature/trees/tree31.tscn"),
-		preload("res://source/environment/nature/trees/tree32.tscn"),
-		preload("res://source/environment/nature/trees/tree33.tscn"),
-		preload("res://source/environment/nature/trees/tree34.tscn"),
-		preload("res://source/environment/nature/trees/tree35.tscn"),
-		preload("res://source/environment/nature/trees/tree36.tscn"),
+		preload("res://source/environment/BlueTree.tscn"),
+		preload("res://source/environment/RedTree.tscn"),
+		preload("res://source/environment/YellowTree.tscn"),
+		preload("res://source/environment/GreenTree.tscn"),
+		preload("res://source/environment/PinkTree.tscn"),
 	],
 	"weight" : 5
 }
 
 var c := {
 	"assets" : [
-		preload("res://source/environment/nature/rocks/rock_handpainted_1.tscn"),
-		preload("res://source/environment/nature/rocks/rock_handpainted_2.tscn"),
-		preload("res://source/environment/nature/rocks/rock_handpainted_3.tscn"),
-		preload("res://source/environment/nature/rocks/rock_handpainted_4.tscn"),
-		preload("res://source/environment/nature/rocks/rock_handpainted_5.tscn"),
+		preload("res://source/environment/Rock.tscn"),
 	],
 	"weight" : 1
 }

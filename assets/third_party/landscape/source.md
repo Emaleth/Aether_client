@@ -1,1 +1,0 @@
-Stalf @ Game Develpment Center

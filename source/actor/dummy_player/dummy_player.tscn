@@ -2,11 +2,14 @@
 
 [ext_resource path="res://source/actor/dummy_player/dummy_player.gd" type="Script" id=1]
 [ext_resource path="res://source/ui/3d/name_plate/NamePlate.tscn" type="PackedScene" id=2]
-[ext_resource path="res://source/actor/human_male.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.3
 height = 1.2
+
+[sub_resource type="CapsuleMesh" id=2]
+radius = 0.3
+mid_height = 1.2
 
 [node name="Player" type="KinematicBody" groups=["Enemy"]]
 script = ExtResource( 1 )
@@ -17,4 +20,6 @@ shape = SubResource( 1 )
 
 [node name="NamePlate" parent="." instance=ExtResource( 2 )]
 
-[node name="human_male" parent="." instance=ExtResource( 3 )]
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.9, 0 )
+mesh = SubResource( 2 )
