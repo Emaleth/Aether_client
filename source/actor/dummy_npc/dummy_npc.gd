@@ -4,6 +4,7 @@ onready var name_plate = $NamePlate
 
 
 func _ready() -> void:
+	name = str(get_index())
 	add_to_group("Actor")
 	
 	

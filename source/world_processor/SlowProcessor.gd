@@ -27,7 +27,7 @@ var buffer_index_table := {
 
 func _physics_process(_delta: float) -> void:
 	update_in_the_tree()
-	slow_add_to_the_tree()
+#	slow_add_to_the_tree()
 
 
 func configure(_player_container, _npc_container, _ability_container, _resource_node_container):

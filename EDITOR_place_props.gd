@@ -2,10 +2,9 @@ tool
 extends Spatial
 # GENERATE
 export(bool) var generate_world := false
-export(bool) var extract_collisions := false
 export(int, 0, 1000) var density = 0
 export(int) var extents = 0
-export(float) var water_level = 0.0
+
 
 var a := {
 	"assets" : [
@@ -50,31 +49,7 @@ func _process(_delta: float) -> void:
 	if generate_world:
 		generate()
 		generate_world = false
-		
-	if extract_collisions:
-		extract()
-		extract_collisions = false
-		
-		
-func extract():
-	if get_child_count() > 0:
-		var t = OS.get_ticks_msec()
-		print("..:: starting ::..")
-		var static_body := StaticBody.new()
-		get_parent().add_child(static_body)
-		static_body.name = "ServerPropStaticBody"
-		static_body.set_owner(get_tree().edited_scene_root)
-		for i in get_children():
-			var collision_shape = find_node("CollisionShape", true)
-			var new_collision_shape = CollisionShape.new()
-			new_collision_shape.shape = collision_shape.shape.duplicate()
-			static_body.add_child(new_collision_shape)
-			new_collision_shape.set_owner(get_tree().edited_scene_root)
-			new_collision_shape.global_transform = i.global_transform
-		print("..:: CollisionShapes copied in %ss ::.." % ((OS.get_ticks_msec() - t) / 1000.0)) 
-		
 			
-	
 	
 func clear():
 	points = []
