@@ -3,7 +3,6 @@ extends Node
 
 onready var fast_processor = $FastProcessor
 onready var slow_processor = $SlowProcessor
-onready var unique_processor = $UniqueProcessor
 
 onready var world := $World
 
@@ -28,5 +27,4 @@ func configure_processors():
 	slow_processor.configure(player_container, npc_container, ability_container, resource_node_container)
 	Server.connect("sig_update_slow_world_state", slow_processor, "update_world_state")
 	# UNIQUE
-#	unique_processor.configure(shop_container, crafting_station_container)
 

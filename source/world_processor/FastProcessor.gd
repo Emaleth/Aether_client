@@ -69,7 +69,6 @@ func add_to_the_tree():
 					buffer_index_table[index]["container"].call_deferred("add_child", new_npc, true)
 
 
-
 func update_in_the_tree():
 	for index in buffer_index_table:
 		for npc in buffer_index_table[index]["container"].get_children():
@@ -84,18 +83,6 @@ func remove_from_the_tree():
 				npc.call_deferred("queue_free")
 
 
-#func add_to_the_collection(_index, _id, _data):
-#	buffer_index_table[_index]["collection"][_id] = _data
-
-
-#func update_inside_the_collection(_index, _id, _data):
-#	buffer_index_table[_index]["collection"][_id] = _data
-#
-#
-#func remove_from_the_collection(_index, _id):
-#	buffer_index_table[_index]["collection"].erase(_id)
-
-
 func interpolate():
 	var interpolation_factor = float(render_time - world_state_buffer[1][0]) / float(world_state_buffer[2][0] - world_state_buffer[1][0])
 	for index in buffer_index_table:
@@ -108,19 +95,15 @@ func interpolate():
 				var current_rot = (world_state_buffer[1][index][npc].basis).get_rotation_quat()
 				var target_rot = (world_state_buffer[2][index][npc].basis).get_rotation_quat()
 				modified_data.basis = Basis(current_rot.slerp(target_rot, interpolation_factor))
-#				update_inside_the_collection(index, npc, modified_data)
 				buffer_index_table[index]["collection"][npc] = modified_data
 				
 			else:
-#				add_to_the_collection(index, npc, world_state_buffer[2][index][npc])
 				buffer_index_table[index]["collection"][npc] = world_state_buffer[2][index][npc]
 				
 		for npc in buffer_index_table[index]["collection"]:
 			if not world_state_buffer[2][index].keys().has(npc):
-#				remove_from_the_collection(index, npc)
 				buffer_index_table[index]["collection"].erase(npc)
 				
-
 
 func extrapolate():
 	var extrapolation_factor = float(render_time - world_state_buffer[0][0]) / float(world_state_buffer[1][0] - world_state_buffer[0][0]) - 1.00
@@ -136,6 +119,5 @@ func extrapolate():
 				var old_rot = (world_state_buffer[0][index][npc].basis).get_rotation_quat()
 				var rotation_delta = (current_rot - old_rot)
 				modified_data.basis = Basis(current_rot + (rotation_delta * extrapolation_factor))
-#				update_inside_the_collection(index, npc, modified_data)
 				buffer_index_table[index]["collection"][npc] = modified_data
 				

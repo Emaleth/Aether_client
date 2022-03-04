@@ -121,11 +121,6 @@ remote func recive_slow_world_state(world_state):
 		emit_signal("sig_update_slow_world_state", world_state)
 
 
-remote func recive_unique_world_state(world_state):
-	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.unique_world_state = world_state
-
-
 func send_chat_message(_message):
 	rpc_unreliable_id(1, "recive_chat_message", client_clock, _message)
 	
@@ -134,10 +129,6 @@ remote func recive_chat_state(chat_state):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("s_update_chat_state", chat_state)
 
-
-#func send_item_use_request(_data : Dictionary):
-#	rpc_id(1, "request_item_use", _data)
-	
 	
 func send_weapon_use_request():
 	rpc_id(1, "request_weapon_use")

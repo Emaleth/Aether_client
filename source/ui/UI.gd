@@ -87,7 +87,7 @@ func update_equipment_panel(_data : Dictionary):
 
 
 func update_attributes_panel(_data : Dictionary):
-	attributes_panel.configure(_data)
+	attributes_panel.update_data(_data)
 
 
 func update_inventory_panel(_data : Array):

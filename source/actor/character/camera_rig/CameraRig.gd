@@ -59,14 +59,17 @@ func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 
 func interact(_body):
 	if _body.is_in_group("shop"):
-		if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
-			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOPPING)
+		if Input.is_action_just_pressed("primary_action"):
+			if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
+				GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOPPING)
 	elif _body.is_in_group("crafting_station"):
-		if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
-			GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.CRAFTING)
+		if Input.is_action_just_pressed("primary_action"):
+			if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
+				GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.CRAFTING)
 	elif _body.is_in_group("resource"):
-		if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
-			Server.request_material_gather(_body.name)
+		if Input.is_action_just_pressed("primary_action"):
+			if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
+				Server.request_material_gather(_body.name)
 	else:
 		shoot()
 		
