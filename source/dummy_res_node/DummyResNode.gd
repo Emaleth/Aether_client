@@ -10,9 +10,7 @@ func _ready() -> void:
 	
 	
 func update_data(_data):
-	global_transform = _data[0]
-	type = _data[1]
-	state = _data[2]
+	state = _data[0]
 	if state:
 		show()
 	else:

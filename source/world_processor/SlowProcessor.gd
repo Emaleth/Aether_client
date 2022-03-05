@@ -4,12 +4,10 @@ var buffer_index_table := {
 	1 : { # PLAYERS
 		"collection" : {},
 		"container" : null,
-		"scene" : preload("res://source/actor/dummy_player/dummy_player.tscn")
 	},
 	2 : { # NPC
 		"collection" : {},
 		"container" : null,
-		"scene" : preload("res://source/actor/dummy_npc/dummy_npc.tscn")
 	},
 	3 : { # ABILITY
 		"collection" : {},
@@ -19,7 +17,6 @@ var buffer_index_table := {
 	4 : { # RESOURCE NODES
 		"collection" : {},
 		"container" : null,
-		"scene" : preload("res://source/dummy_res_node/DummyResNode.tscn") 
 	}
 }
 
