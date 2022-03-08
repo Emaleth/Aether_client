@@ -1,6 +1,7 @@
 extends KinematicBody
 
-onready var name_plate = $NamePlate
+onready var name_plate := $NamePlate
+onready var loot := $Loot
 
 
 func _ready() -> void:

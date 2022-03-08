@@ -157,6 +157,10 @@ func request_item_unequip(_index):
 func request_item_craft(_index):
 	rpc_id(1, "request_item_craft", _index)
 
+
+func request_loot_pickup(_npc_id, _index):
+	rpc_id(1, "request_loot_pickup", _npc_id, _index)
+
 		
 func request_material_gather(_material_id : String):
 	rpc_id(1, "request_material_gather", _material_id)
@@ -164,13 +168,17 @@ func request_material_gather(_material_id : String):
 		
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
+		# ITEM DATA
 		LocalDataTables.item_index = _data["item_index"]
 		LocalDataTables.armor_table = _data["armor_table"]
 		LocalDataTables.weapon_table = _data["weapon_table"]
 		LocalDataTables.material_table = _data["material_table"]
 		LocalDataTables.craft_recipe_table = _data["craft_recipe_table"]
+		# NPC DATA
+		LocalDataTables.npc_index = _data["npc_index"]
+		LocalDataTables.mob_table = _data["mob_table"]
 		# bad below
-		LocalDataTables.enemy_table = _data["enemy_table"]
+#		LocalDataTables.enemy_table = _data["enemy_table"]
 		LocalDataTables.skill_table = _data["skill_table"]
 		
 	
@@ -209,15 +217,6 @@ remote func recive_currency_data(_data : Dictionary):  #OK
 		GlobalVariables.currency_data = _data
 		emit_signal("sig_update_currency", _data)
 		
-	
-func request_loot_pickup(_loot_id : String):
-	rpc_id(1, "request_loot_pickup", _loot_id)
-
-
-	
-func request_loot_drop(_loot_id : String):
-	rpc_id(1, "request_loot_drop", _loot_id)
-	
 	
 func request_item_buy(_shop_id : String, _slot_index : int, _amount = 1):
 	rpc_id(1, "request_item_buy", _shop_id, _slot_index, _amount)

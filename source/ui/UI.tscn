@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://source/ui/UI.gd" type="Script" id=1]
 [ext_resource path="res://assets/third_party/crosshairpack_kenney/PNG/White/crosshair001.png" type="Texture" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://source/ui/debug/Debug.tscn" type="PackedScene" id=13]
 [ext_resource path="res://source/ui/currency_panel/CurrencyPanel.tscn" type="PackedScene" id=14]
 [ext_resource path="res://source/timed_progress_bar/TimedProgressBar.tscn" type="PackedScene" id=15]
+[ext_resource path="res://source/ui/loot_panel/LootingPanel.tscn" type="PackedScene" id=16]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -23,6 +24,8 @@
 [sub_resource type="StyleBoxEmpty" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=4]
+
+[sub_resource type="StyleBoxEmpty" id=7]
 
 [node name="Interface" type="MarginContainer"]
 anchor_right = 1.0
@@ -146,58 +149,58 @@ margin_right = 1349.0
 margin_bottom = 751.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ManagementLayer/MarginContainer"]
-margin_left = 346.0
+margin_left = 362.0
 margin_top = 163.0
-margin_right = 996.0
+margin_right = 980.0
 margin_bottom = 580.0
 custom_constants/separation = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ManagementLayer/MarginContainer/VBoxContainer"]
-margin_right = 650.0
+margin_right = 618.0
 margin_bottom = 20.0
 alignment = 1
 
 [node name="ItemButton" type="Button" parent="ManagementLayer/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 265.0
-margin_right = 315.0
+margin_left = 249.0
+margin_right = 299.0
 margin_bottom = 20.0
 text = "Items"
 
 [node name="AbilityButton" type="Button" parent="ManagementLayer/MarginContainer/VBoxContainer/HBoxContainer"]
-margin_left = 319.0
-margin_right = 384.0
+margin_left = 303.0
+margin_right = 368.0
 margin_bottom = 20.0
 text = "Abilities"
 
 [node name="ItemSection" type="PanelContainer" parent="ManagementLayer/MarginContainer/VBoxContainer"]
 margin_top = 25.0
-margin_right = 650.0
+margin_right = 618.0
 margin_bottom = 417.0
 custom_styles/panel = SubResource( 6 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ManagementLayer/MarginContainer/VBoxContainer/ItemSection"]
-margin_right = 650.0
+margin_right = 618.0
 margin_bottom = 392.0
 custom_constants/separation = 10
 alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer"]
-margin_right = 278.0
+margin_right = 246.0
 margin_bottom = 392.0
 custom_constants/separation = 10
 
 [node name="Equipment" parent="ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/VBoxContainer" instance=ExtResource( 5 )]
-margin_right = 278.0
+margin_right = 246.0
 margin_bottom = 214.0
 
 [node name="AttributesPanel" parent="ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/VBoxContainer" instance=ExtResource( 12 )]
 margin_top = 224.0
-margin_right = 278.0
+margin_right = 246.0
 margin_bottom = 392.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer"]
-margin_left = 288.0
-margin_right = 650.0
+margin_left = 256.0
+margin_right = 618.0
 margin_bottom = 392.0
 custom_constants/separation = 10
 
@@ -247,6 +250,24 @@ margin_right = 1356.0
 margin_bottom = 758.0
 
 [node name="CraftingPanel" parent="CraftingLayer/CenterContainer" instance=ExtResource( 8 )]
+margin_left = 671.0
+margin_top = 372.0
+margin_right = 685.0
+margin_bottom = 386.0
+
+[node name="LootingLayer" type="PanelContainer" parent="."]
+visible = false
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1361.0
+margin_bottom = 763.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="CenterContainer" type="CenterContainer" parent="LootingLayer"]
+margin_right = 1356.0
+margin_bottom = 758.0
+
+[node name="LootingPanel" parent="LootingLayer/CenterContainer" instance=ExtResource( 16 )]
 margin_left = 671.0
 margin_top = 372.0
 margin_right = 685.0

@@ -18,9 +18,11 @@ func set_name_label(_name):
 	name_label.text = _name
 	name_label.modulate.a = 1
 	
+	
 func update_health_bar(_hp, _max_hp):
 	health_bar.update_ui(_hp, _max_hp)
 	health_bar.modulate.a = 1
+	
 	
 func update_mana_bar(_mana, _max_mana):
 	mana_bar.update_ui(_mana, _max_mana)

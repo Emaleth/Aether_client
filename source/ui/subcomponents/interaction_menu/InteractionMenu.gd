@@ -8,12 +8,14 @@ export var unequip_action_allowed := false
 export var discard_action_allowed := false
 export var use_action_allowed := false
 export var craft_action_allowed := false
+export var loot_action_allowed := false
 
 signal equip
 signal unequip
 signal discard
 signal use
 signal craft
+signal loot
 
 
 func _ready() -> void:
@@ -49,6 +51,12 @@ func _ready() -> void:
 	else:
 		$VBoxContainer/Craft.hide()
 		$VBoxContainer/Craft.disabled = true
+	if loot_action_allowed:
+		$VBoxContainer/Loot.show()
+		$VBoxContainer/Loot.disabled = false
+	else:
+		$VBoxContainer/Loot.hide()
+		$VBoxContainer/Loot.disabled = true
 				
 	
 func show_menu():
@@ -87,7 +95,14 @@ func _on_Craft_pressed() -> void:
 		i.hide()
 
 
+func _on_Loot_pressed() -> void:
+	emit_signal("loot")
+	for i in get_children():
+		i.hide()
+
+
 func _on_Control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		for i in get_children():
 			i.hide()
+

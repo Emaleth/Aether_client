@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/ui/loot_panel/LootingPanel.gd" type="Script" id=1]
+[ext_resource path="res://source/ui/subcomponents/slots/loot_slot/LootSlot.tscn" type="PackedScene" id=2]
+
+[node name="LootingPanel" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 183.0
+margin_bottom = 75.0
+columns = 5
+
+[node name="InventorySlot" parent="GridContainer" instance=ExtResource( 2 )]
+
+[node name="InventorySlot2" parent="GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_right = 68.0
+
+[node name="InventorySlot3" parent="GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_right = 104.0
+
+[node name="InventorySlot4" parent="GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_right = 140.0
+
+[node name="InventorySlot5" parent="GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_right = 176.0
+
+[node name="InventorySlot6" parent="GridContainer" instance=ExtResource( 2 )]
+margin_top = 36.0
+margin_bottom = 68.0
+
+[node name="InventorySlot7" parent="GridContainer" instance=ExtResource( 2 )]
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
+
+[node name="InventorySlot8" parent="GridContainer" instance=ExtResource( 2 )]
+margin_left = 72.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 68.0
+
+[node name="InventorySlot9" parent="GridContainer" instance=ExtResource( 2 )]
+margin_left = 108.0
+margin_top = 36.0
+margin_right = 140.0
+margin_bottom = 68.0
+
+[node name="InventorySlot10" parent="GridContainer" instance=ExtResource( 2 )]
+margin_left = 144.0
+margin_top = 36.0
+margin_right = 176.0
+margin_bottom = 68.0

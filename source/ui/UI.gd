@@ -1,6 +1,6 @@
 extends MarginContainer
 
-enum {COMBAT, MANAGMENT, SHOPPING, CRAFTING}
+enum {COMBAT, MANAGMENT, SHOPPING, CRAFTING, LOOTING}
 var mode
 
 # COMBAT LAYER PANELS
@@ -22,6 +22,8 @@ onready var crafting_panel := $CraftingLayer/CenterContainer/CraftingPanel
 
 # SHOPPING LAYER PANELS
 onready var shopping_panel := $ShoppingLayer/Shop
+# LOOTING LAYER PANELS
+onready var looting_panel := $LootingLayer/CenterContainer/LootingPanel
 
 
 func _unhandled_key_input(_event: InputEventKey) -> void:
@@ -44,24 +46,35 @@ func set_mode(_mode):
 			$ManagementLayer.hide()
 			$ShoppingLayer.hide()
 			$CraftingLayer.hide()
+			$LootingLayer.hide()
 		MANAGMENT:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			$CombatLayer.hide()
 			$ManagementLayer.show()
 			$ShoppingLayer.hide()
 			$CraftingLayer.hide()
+			$LootingLayer.hide()
 		SHOPPING:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			$CombatLayer.hide()
 			$ManagementLayer.hide()
 			$ShoppingLayer.show()
 			$CraftingLayer.hide()
+			$LootingLayer.hide()
 		CRAFTING:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			$CombatLayer.hide()
 			$ManagementLayer.hide()
 			$ShoppingLayer.hide()
 			$CraftingLayer.show()
+			$LootingLayer.hide()
+		LOOTING:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			$CombatLayer.hide()
+			$ManagementLayer.hide()
+			$ShoppingLayer.hide()
+			$CraftingLayer.hide()
+			$LootingLayer.show()
 						
 	mode = _mode
 
@@ -122,3 +135,8 @@ func _on_AbilityButton_pressed() -> void:
 func _on_ItemButton_pressed() -> void:
 	ability_panel.hide()
 	item_section.show()
+
+
+func conf_loot(_data, _npc_id):
+	looting_panel.configure(_data, _npc_id)
+	set_mode(GlobalVariables.user_interface.LOOTING)

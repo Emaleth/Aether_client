@@ -1,0 +1,4 @@
+extends StaticBody
+
+
+var loot := []
