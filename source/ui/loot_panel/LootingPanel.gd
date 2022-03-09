@@ -5,6 +5,7 @@ onready var slot_grid = $GridContainer
 
 
 func configure(_data : Array, _npc_id : int):
+#	print("configurinf looting panel")
 	var index = 0
 	for i in slot_grid.get_children():
 		i.hide()

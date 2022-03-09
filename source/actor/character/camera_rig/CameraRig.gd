@@ -23,7 +23,8 @@ func _physics_process(_delta: float) -> void:
 	
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+	if GlobalVariables.user_interface.mode != GlobalVariables.user_interface.COMBAT:
+#	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		return
 	if event is InputEventMouseMotion:
 		rotate_camera_rig(event.relative)
@@ -34,6 +35,9 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func get_input():
+	if GlobalVariables.user_interface.mode != GlobalVariables.user_interface.COMBAT:
+#	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		return
 	if Input.is_action_pressed("primary_action"):
 		var body = target_data.collider if target_data.size() > 0 else null
 		if body:
@@ -73,8 +77,9 @@ func interact(_body):
 	elif _body.is_in_group("loot"):
 		if Input.is_action_just_pressed("primary_action"):
 			if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
-				GlobalVariables.user_interface.conf_loot(_body.loot, int(_body.name))
+#				GlobalVariables.user_interface.conf_loot(_body.loot, int(_body.name))
 #				GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.LOOTING)
+				Server.request_loot_data(int(_body.mob_id))
 	else:
 		shoot()
 		

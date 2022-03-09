@@ -16,6 +16,7 @@ func _ready() -> void:
 	name = str(get_index())
 	add_to_group("Actor")
 	loot_node.add_to_group("loot")
+	loot_node.mob_id = int(name)
 	data = GlobalVariables.get_npc_data(type)
 	name_plate.set_name_label(str(data[0]["name"]))
 	
@@ -23,7 +24,6 @@ func _ready() -> void:
 func update_data(_data):
 	name_plate.update_health_bar(_data[0], data[1]["health"])
 	change_master_state(_data[1])
-	loot_node.loot = _data[2]
 
 
 func change_master_state(_master_state):

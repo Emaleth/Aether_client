@@ -138,5 +138,5 @@ func _on_ItemButton_pressed() -> void:
 
 
 func conf_loot(_data, _npc_id):
-	looting_panel.configure(_data, _npc_id)
+	looting_panel.configure(_data, int(_npc_id))
 	set_mode(GlobalVariables.user_interface.LOOTING)

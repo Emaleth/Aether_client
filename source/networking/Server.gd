@@ -161,6 +161,17 @@ func request_item_craft(_index):
 func request_loot_pickup(_npc_id, _index):
 	rpc_id(1, "request_loot_pickup", _npc_id, _index)
 
+
+func request_loot_data(_npc_id):
+#	print(_npc_id)
+	rpc_id(1, "request_loot_data", _npc_id)
+
+	
+remote func receive_loot_data(_data, _npc_id):
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.user_interface.conf_loot(_data, _npc_id)
+#		print(_data)
+		
 		
 func request_material_gather(_material_id : String):
 	rpc_id(1, "request_material_gather", _material_id)
