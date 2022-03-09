@@ -25,6 +25,6 @@ func send_player_state():
 		frame_index += 1
 		if frame_index >= 3:
 			Server.send_player_state(
-					GlobalVariables.player_actor.global_transform,
-					GlobalVariables.player_actor.get_node("gun").global_transform)
+					GlobalVariables.player_actor.global_transform)#,
+#					GlobalVariables.player_actor.get_node("gun").global_transform)
 			frame_index = 0

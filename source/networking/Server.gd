@@ -130,12 +130,12 @@ remote func recive_chat_state(chat_state):
 		emit_signal("s_update_chat_state", chat_state)
 
 	
-func send_weapon_use_request():
-	rpc_id(1, "request_weapon_use")
+func send_weapon_use_request(_weapon_pos):
+	rpc_id(1, "request_weapon_use", _weapon_pos)
 	
 	
-func send_player_state(_player_transform : Transform, _weapon_transform : Transform):
-	rpc_unreliable_id(1, "recive_player_state", _player_transform, _weapon_transform)
+func send_player_state(_player_transform : Transform):
+	rpc_unreliable_id(1, "recive_player_state", _player_transform)
 	
 	
 func request_item_discard(_index):
@@ -163,14 +163,21 @@ func request_loot_pickup(_npc_id, _index):
 
 
 func request_loot_data(_npc_id):
-#	print(_npc_id)
 	rpc_id(1, "request_loot_data", _npc_id)
 
 	
 remote func receive_loot_data(_data, _npc_id):
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.user_interface.conf_loot(_data, _npc_id)
-#		print(_data)
+		
+		
+func request_shop_data(_shop_id):
+	rpc_id(1, "request_shop_data", _shop_id)
+
+	
+remote func receive_shop_data(_data, _shop_id):
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.user_interface.conf_shop(_data, _shop_id)
 		
 		
 func request_material_gather(_material_id : String):
@@ -188,9 +195,6 @@ remote func receive_data_tables(_data : Dictionary):
 		# NPC DATA
 		LocalDataTables.npc_index = _data["npc_index"]
 		LocalDataTables.mob_table = _data["mob_table"]
-		# bad below
-#		LocalDataTables.enemy_table = _data["enemy_table"]
-		LocalDataTables.skill_table = _data["skill_table"]
 		
 	
 remote func recive_equipment_data(_data : Dictionary): #OK
