@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/fern.obj-c196f63db578b5dd40cc951596302d81.mesh"
+
+[deps]
+
+files=[ "res://.import/fern.obj-c196f63db578b5dd40cc951596302d81.mesh" ]
+
+source_file="res://assets/third_party/yughues/fern_v2/fern.obj"
+dest_files=[ "res://.import/fern.obj-c196f63db578b5dd40cc951596302d81.mesh", "res://.import/fern.obj-c196f63db578b5dd40cc951596302d81.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

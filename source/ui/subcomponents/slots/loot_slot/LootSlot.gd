@@ -1,6 +1,6 @@
 extends Button
 
-var item = null
+var item := {}
 var index : int
 var npc_id : int
 
@@ -30,7 +30,7 @@ func connect_interaction_menu_signals():
 	
 func _make_custom_tooltip(_for_text: String) -> Control:
 	var new_tooltip = tooltip.instance()
-	new_tooltip.conf(item)
+	new_tooltip.conf(item.keys()[0])
 	return new_tooltip
 				
 		
@@ -49,6 +49,8 @@ func set_amount_label() -> void:
 		amount_label.text = ""
 		
 
-func _on_InventorySlot_pressed() -> void:
-	if item:
+func _on_LootSlot_pressed() -> void:
+	if item.size() > 0:
 		$InteractionMenu.show_menu()
+
+

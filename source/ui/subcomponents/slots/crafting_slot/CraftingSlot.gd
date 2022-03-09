@@ -23,10 +23,10 @@ func connect_interaction_menu_signals():
 	interaction_menu.connect("craft", Server, "request_item_craft", [index])
 	
 	
-#func _make_custom_tooltip(_for_text: String) -> Control:
-#	var new_tooltip = tooltip.instance()
-#	new_tooltip.conf(item)
-#	return new_tooltip
+func _make_custom_tooltip(_for_text: String) -> Control:
+	var new_tooltip = tooltip.instance()
+	new_tooltip.conf(item)
+	return new_tooltip
 				
 		
 func set_item_icon() -> void:

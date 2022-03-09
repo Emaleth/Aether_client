@@ -35,7 +35,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45493, 7.99422, 16.3651 )
 [node name="ShopContainer" type="Node" parent="."]
 
 [node name="Shop" parent="ShopContainer" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.35775, -3.89955 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.30192, -3.89955 )
 
 [node name="CraftingStationContainer" type="Node" parent="."]
 

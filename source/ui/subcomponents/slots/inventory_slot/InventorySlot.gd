@@ -30,7 +30,7 @@ func connect_interaction_menu_signals():
 	
 func _make_custom_tooltip(_for_text: String) -> Control:
 	var new_tooltip = tooltip.instance()
-	new_tooltip.conf(item)
+	new_tooltip.conf(item["item"])
 	return new_tooltip
 				
 		
