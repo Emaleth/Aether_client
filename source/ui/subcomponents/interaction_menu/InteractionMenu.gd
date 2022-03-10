@@ -9,6 +9,7 @@ export var discard_action_allowed := false
 export var use_action_allowed := false
 export var craft_action_allowed := false
 export var loot_action_allowed := false
+export var buy_action_allowed := false
 
 signal equip
 signal unequip
@@ -16,6 +17,7 @@ signal discard
 signal use
 signal craft
 signal loot
+signal buy
 
 
 func _ready() -> void:
@@ -57,7 +59,13 @@ func _ready() -> void:
 	else:
 		$VBoxContainer/Loot.hide()
 		$VBoxContainer/Loot.disabled = true
-				
+	if buy_action_allowed:
+		$VBoxContainer/Buy.show()
+		$VBoxContainer/Buy.disabled = false
+	else:
+		$VBoxContainer/Buy.hide()
+		$VBoxContainer/Buy.disabled = true
+		
 	
 func show_menu():
 	button_menu.rect_global_position = (get_parent().rect_global_position + get_parent().rect_size / 2)
@@ -97,6 +105,12 @@ func _on_Craft_pressed() -> void:
 
 func _on_Loot_pressed() -> void:
 	emit_signal("loot")
+	for i in get_children():
+		i.hide()
+
+
+func _on_Buy_pressed() -> void:
+	emit_signal("buy")
 	for i in get_children():
 		i.hide()
 

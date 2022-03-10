@@ -221,22 +221,22 @@ remote func recive_recipe_data(_data : Array):  #OK
 		emit_signal("update_crafting_ui", _data)
 			
 		
-remote func recive_attributes_data(_data : Dictionary):  #OK
+remote func recive_attributes_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.attributes_data = _data
 		emit_signal("sig_update_attributes", _data)
 			
 		
-remote func recive_currency_data(_data : Dictionary):  #OK
+remote func recive_currency_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.currency_data = _data
 		emit_signal("sig_update_currency", _data)
 		
 	
-func request_item_buy(_shop_id : String, _slot_index : int, _amount = 1):
-	rpc_id(1, "request_item_buy", _shop_id, _slot_index, _amount)
+func request_item_buy(_shop_id : int, _index : int): #OK
+	rpc_id(1, "request_item_buy", _shop_id, _index)
 	
 	
-func request_item_sell(_shop_id : String, _slot_index : int, _amount = 1):
-	rpc_id(1, "request_item_sell", _shop_id, _slot_index, _amount)
+func request_item_sell(_shop_id : int, _index : int):
+	rpc_id(1, "request_item_sell", _shop_id, _index)
 
