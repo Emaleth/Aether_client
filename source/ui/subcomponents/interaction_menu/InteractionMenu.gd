@@ -10,6 +10,7 @@ export var use_action_allowed := false
 export var craft_action_allowed := false
 export var loot_action_allowed := false
 export var buy_action_allowed := false
+export var sell_action_allowed := false
 
 signal equip
 signal unequip
@@ -18,6 +19,7 @@ signal use
 signal craft
 signal loot
 signal buy
+signal sell
 
 
 func _ready() -> void:
@@ -65,6 +67,12 @@ func _ready() -> void:
 	else:
 		$VBoxContainer/Buy.hide()
 		$VBoxContainer/Buy.disabled = true
+	if sell_action_allowed:
+		$VBoxContainer/Sell.show()
+		$VBoxContainer/Sell.disabled = false
+	else:
+		$VBoxContainer/Sell.hide()
+		$VBoxContainer/Sell.disabled = true
 		
 	
 func show_menu():
@@ -114,6 +122,12 @@ func _on_Buy_pressed() -> void:
 	for i in get_children():
 		i.hide()
 
+
+func _on_Sell_pressed() -> void:
+	emit_signal("sell")
+	for i in get_children():
+		i.hide()
+		
 
 func _on_Control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:

@@ -93,6 +93,17 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Sell" type="Button" parent="VBoxContainer"]
+self_modulate = Color( 1, 0, 0, 1 )
+margin_top = 120.0
+margin_right = 52.0
+margin_bottom = 140.0
+custom_fonts/font = ExtResource( 2 )
+text = "Sell"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="gui_input" from="Control" to="." method="_on_Control_gui_input"]
 [connection signal="pressed" from="VBoxContainer/Equip" to="." method="_on_Equip_pressed"]
 [connection signal="pressed" from="VBoxContainer/Use" to="." method="_on_Use_pressed"]
@@ -101,3 +112,4 @@ __meta__ = {
 [connection signal="pressed" from="VBoxContainer/Craft" to="." method="_on_Craft_pressed"]
 [connection signal="pressed" from="VBoxContainer/Loot" to="." method="_on_Loot_pressed"]
 [connection signal="pressed" from="VBoxContainer/Buy" to="." method="_on_Buy_pressed"]
+[connection signal="pressed" from="VBoxContainer/Sell" to="." method="_on_Sell_pressed"]

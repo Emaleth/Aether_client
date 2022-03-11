@@ -24,13 +24,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75007, 8.79564, 0.280731 )
 [node name="ResourceNodeContainer" type="Node" parent="."]
 
 [node name="ResourceNode" parent="ResourceNodeContainer" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95872, 8.00409, 14.9742 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.95872, 7.70573, 14.9742 )
 
 [node name="ResourceNode2" parent="ResourceNodeContainer" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.10706, 8.09353, 14.7686 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.10706, 7.80554, 14.7686 )
 
 [node name="ResourceNode3" parent="ResourceNodeContainer" instance=ExtResource( 8 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45493, 7.99422, 16.3651 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45493, 7.70624, 16.3651 )
 
 [node name="ShopContainer" type="Node" parent="."]
 

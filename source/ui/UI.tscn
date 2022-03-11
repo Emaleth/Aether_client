@@ -136,6 +136,7 @@ margin_top = 608.0
 margin_bottom = 758.0
 
 [node name="ManagementLayer" type="PanelContainer" parent="."]
+visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 5.0
 margin_top = 5.0
@@ -149,10 +150,10 @@ margin_right = 1349.0
 margin_bottom = 751.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ManagementLayer/MarginContainer"]
-margin_left = 362.0
-margin_top = 163.0
-margin_right = 980.0
-margin_bottom = 580.0
+margin_left = 611.0
+margin_top = 359.0
+margin_right = 730.0
+margin_bottom = 384.0
 custom_constants/separation = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ManagementLayer/MarginContainer/VBoxContainer"]
@@ -224,18 +225,30 @@ margin_right = 429.0
 margin_bottom = 504.0
 
 [node name="ShoppingLayer" type="PanelContainer" parent="."]
-visible = false
 margin_left = 5.0
 margin_top = 5.0
 margin_right = 1361.0
 margin_bottom = 763.0
 custom_styles/panel = SubResource( 4 )
 
-[node name="Shop" parent="ShoppingLayer" instance=ExtResource( 10 )]
-margin_left = 515.0
-margin_top = 344.0
-margin_right = 841.0
-margin_bottom = 414.0
+[node name="CenterContainer" type="CenterContainer" parent="ShoppingLayer"]
+margin_right = 1356.0
+margin_bottom = 758.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ShoppingLayer/CenterContainer"]
+margin_left = 509.0
+margin_top = 300.0
+margin_right = 847.0
+margin_bottom = 458.0
+
+[node name="Shop" parent="ShoppingLayer/CenterContainer/VBoxContainer" instance=ExtResource( 10 )]
+margin_right = 338.0
+margin_bottom = 134.0
+
+[node name="CurrencyPanel" parent="ShoppingLayer/CenterContainer/VBoxContainer" instance=ExtResource( 14 )]
+margin_top = 138.0
+margin_right = 338.0
+margin_bottom = 158.0
 
 [node name="CraftingLayer" type="PanelContainer" parent="."]
 visible = false

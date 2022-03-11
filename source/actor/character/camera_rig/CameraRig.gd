@@ -66,6 +66,7 @@ func interact(_body):
 		if Input.is_action_just_pressed("primary_action"):
 			if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
 				Server.request_shop_data(int(_body.name))
+				GlobalVariables.user_interface.set_mode(GlobalVariables.user_interface.SHOPPING)
 	elif _body.is_in_group("crafting_station"):
 		if Input.is_action_just_pressed("primary_action"):
 			if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:

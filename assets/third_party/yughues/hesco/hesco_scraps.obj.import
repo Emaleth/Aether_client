@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/hesco_scraps.obj-3a29dd37ffc7508dece34815ed4eae03.mesh"
+
+[deps]
+
+files=[ "res://.import/hesco_scraps.obj-3a29dd37ffc7508dece34815ed4eae03.mesh" ]
+
+source_file="res://assets/third_party/yughues/hesco/hesco_scraps.obj"
+dest_files=[ "res://.import/hesco_scraps.obj-3a29dd37ffc7508dece34815ed4eae03.mesh", "res://.import/hesco_scraps.obj-3a29dd37ffc7508dece34815ed4eae03.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

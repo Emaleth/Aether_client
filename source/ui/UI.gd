@@ -21,7 +21,8 @@ onready var ability_panel := $ManagementLayer/MarginContainer/VBoxContainer/Abil
 onready var crafting_panel := $CraftingLayer/CenterContainer/CraftingPanel
 
 # SHOPPING LAYER PANELS
-onready var shopping_panel := $ShoppingLayer/Shop
+onready var shopping_panel := $ShoppingLayer/CenterContainer/VBoxContainer/Shop
+onready var shopping_panel_curreny := $ShoppingLayer/CenterContainer/VBoxContainer/CurrencyPanel
 # LOOTING LAYER PANELS
 onready var looting_panel := $LootingLayer/CenterContainer/LootingPanel
 
@@ -105,6 +106,7 @@ func update_attributes_panel(_data : Dictionary):
 
 func update_inventory_panel(_data : Array):
 	inventory_panel.configure(_data)
+	shopping_panel.configure_sell_grid(_data)
 
 
 func update_crafting_panel(_data : Array):
@@ -116,7 +118,8 @@ func update_ability_panel(_data : Array):
 
 
 func update_currency_panel(_data : Dictionary):
-	currency_panel.configure_g(_data)
+	currency_panel.configure(_data)
+	shopping_panel_curreny.configure(_data)
 
 
 func update_shopping_panel(_data : Array):
@@ -142,5 +145,7 @@ func conf_loot(_data, _npc_id):
 	set_mode(LOOTING)
 
 func conf_shop(_data, _shop_id):
-	shopping_panel.configure(_data, int(_shop_id))
-	set_mode(SHOPPING)
+	shopping_panel.shop_id = _shop_id
+	shopping_panel.configure_buy_grid(_data)
+#	set_mode(SHOPPING)
+

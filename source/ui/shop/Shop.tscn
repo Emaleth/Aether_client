@@ -15,109 +15,236 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 323.0
-margin_bottom = 67.0
+margin_right = 335.0
+margin_bottom = 131.0
+
+[node name="BuyGrid" type="GridContainer" parent="HBoxContainer"]
+margin_right = 160.0
+margin_bottom = 128.0
 size_flags_horizontal = 5
 size_flags_vertical = 5
 custom_constants/vseparation = 0
 custom_constants/hseparation = 0
-columns = 10
+columns = 5
 
-[node name="ShoppingSlot" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 
-[node name="ShoppingSlot2" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot2" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 margin_left = 32.0
 margin_right = 64.0
 
-[node name="ShoppingSlot3" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot3" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 margin_left = 64.0
 margin_right = 96.0
 
-[node name="ShoppingSlot4" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot4" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 margin_left = 96.0
 margin_right = 128.0
 
-[node name="ShoppingSlot5" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot5" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 margin_left = 128.0
 margin_right = 160.0
 
-[node name="ShoppingSlot6" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 160.0
-margin_right = 192.0
-
-[node name="ShoppingSlot7" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 192.0
-margin_right = 224.0
-
-[node name="ShoppingSlot8" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 224.0
-margin_right = 256.0
-
-[node name="ShoppingSlot9" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 256.0
-margin_right = 288.0
-
-[node name="ShoppingSlot10" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 288.0
-margin_right = 320.0
-
-[node name="ShoppingSlot11" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot6" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 margin_top = 32.0
 margin_bottom = 64.0
 
-[node name="ShoppingSlot12" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot7" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 margin_left = 32.0
 margin_top = 32.0
 margin_right = 64.0
 margin_bottom = 64.0
 
-[node name="ShoppingSlot13" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot8" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 margin_left = 64.0
 margin_top = 32.0
 margin_right = 96.0
 margin_bottom = 64.0
 
-[node name="ShoppingSlot14" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot9" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 margin_left = 96.0
 margin_top = 32.0
 margin_right = 128.0
 margin_bottom = 64.0
 
-[node name="ShoppingSlot15" parent="GridContainer" instance=ExtResource( 1 )]
+[node name="ShoppingSlot10" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
 margin_left = 128.0
 margin_top = 32.0
 margin_right = 160.0
 margin_bottom = 64.0
 
-[node name="ShoppingSlot16" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 160.0
+[node name="ShoppingSlot11" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_top = 64.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot12" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_left = 32.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot13" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 96.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot14" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot15" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 160.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot16" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_top = 96.0
+margin_bottom = 128.0
+
+[node name="ShoppingSlot17" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_left = 32.0
+margin_top = 96.0
+margin_right = 64.0
+margin_bottom = 128.0
+
+[node name="ShoppingSlot18" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 96.0
+margin_bottom = 128.0
+
+[node name="ShoppingSlot19" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 128.0
+margin_bottom = 128.0
+
+[node name="ShoppingSlot20" parent="HBoxContainer/BuyGrid" instance=ExtResource( 1 )]
+margin_left = 128.0
+margin_top = 96.0
+margin_right = 160.0
+margin_bottom = 128.0
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+margin_left = 164.0
+margin_right = 168.0
+margin_bottom = 128.0
+
+[node name="SellGrid" type="GridContainer" parent="HBoxContainer"]
+margin_left = 172.0
+margin_right = 332.0
+margin_bottom = 128.0
+size_flags_horizontal = 5
+size_flags_vertical = 5
+custom_constants/vseparation = 0
+custom_constants/hseparation = 0
+columns = 5
+
+[node name="ShoppingSlot" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+
+[node name="ShoppingSlot2" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 32.0
+margin_right = 64.0
+
+[node name="ShoppingSlot3" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_right = 96.0
+
+[node name="ShoppingSlot4" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 96.0
+margin_right = 128.0
+
+[node name="ShoppingSlot5" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 128.0
+margin_right = 160.0
+
+[node name="ShoppingSlot6" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
 margin_top = 32.0
-margin_right = 192.0
 margin_bottom = 64.0
 
-[node name="ShoppingSlot17" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 192.0
+[node name="ShoppingSlot7" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 32.0
 margin_top = 32.0
-margin_right = 224.0
+margin_right = 64.0
 margin_bottom = 64.0
 
-[node name="ShoppingSlot18" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 224.0
+[node name="ShoppingSlot8" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 64.0
 margin_top = 32.0
-margin_right = 256.0
+margin_right = 96.0
 margin_bottom = 64.0
 
-[node name="ShoppingSlot19" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 256.0
+[node name="ShoppingSlot9" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 96.0
 margin_top = 32.0
-margin_right = 288.0
+margin_right = 128.0
 margin_bottom = 64.0
 
-[node name="ShoppingSlot20" parent="GridContainer" instance=ExtResource( 1 )]
-margin_left = 288.0
+[node name="ShoppingSlot10" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 128.0
 margin_top = 32.0
-margin_right = 320.0
+margin_right = 160.0
 margin_bottom = 64.0
+
+[node name="ShoppingSlot11" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_top = 64.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot12" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 32.0
+margin_top = 64.0
+margin_right = 64.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot13" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_top = 64.0
+margin_right = 96.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot14" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 96.0
+margin_top = 64.0
+margin_right = 128.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot15" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 128.0
+margin_top = 64.0
+margin_right = 160.0
+margin_bottom = 96.0
+
+[node name="ShoppingSlot16" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_top = 96.0
+margin_bottom = 128.0
+
+[node name="ShoppingSlot17" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 32.0
+margin_top = 96.0
+margin_right = 64.0
+margin_bottom = 128.0
+
+[node name="ShoppingSlot18" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 64.0
+margin_top = 96.0
+margin_right = 96.0
+margin_bottom = 128.0
+
+[node name="ShoppingSlot19" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 96.0
+margin_top = 96.0
+margin_right = 128.0
+margin_bottom = 128.0
+
+[node name="ShoppingSlot20" parent="HBoxContainer/SellGrid" instance=ExtResource( 1 )]
+margin_left = 128.0
+margin_top = 96.0
+margin_right = 160.0
+margin_bottom = 128.0

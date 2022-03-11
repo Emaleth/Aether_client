@@ -237,6 +237,6 @@ func request_item_buy(_shop_id : int, _index : int): #OK
 	rpc_id(1, "request_item_buy", _shop_id, _index)
 	
 	
-func request_item_sell(_shop_id : int, _index : int):
+func request_item_sell(_shop_id : int, _index : int): #OK
 	rpc_id(1, "request_item_sell", _shop_id, _index)
 
