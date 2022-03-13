@@ -10,3 +10,4 @@ var craft_recipe_table := {}
 # NPC DATA
 var npc_index := {}
 var mob_table := {}
+var shop_table := {}

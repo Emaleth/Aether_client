@@ -171,15 +171,6 @@ remote func receive_loot_data(_data, _npc_id):
 		GlobalVariables.user_interface.conf_loot(_data, _npc_id)
 		
 		
-func request_shop_data(_shop_id):
-	rpc_id(1, "request_shop_data", _shop_id)
-
-	
-remote func receive_shop_data(_data, _shop_id):
-	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.user_interface.conf_shop(_data, _shop_id)
-		
-		
 func request_material_gather(_material_id : String):
 	rpc_id(1, "request_material_gather", _material_id)
 
@@ -195,6 +186,7 @@ remote func receive_data_tables(_data : Dictionary):
 		# NPC DATA
 		LocalDataTables.npc_index = _data["npc_index"]
 		LocalDataTables.mob_table = _data["mob_table"]
+		LocalDataTables.shop_table = _data["shop_table"]
 		
 	
 remote func recive_equipment_data(_data : Dictionary): #OK

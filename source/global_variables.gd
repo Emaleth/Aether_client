@@ -21,8 +21,6 @@ var chatting := false
 
 # CLIENT SETTINGS
 var settings := {}
-#var tmp_loot_data : Array 
-#var tmp_loot_name : int
 
 
 static func get_item_data(_item : String) -> Array:
@@ -48,4 +46,6 @@ static func get_npc_data(_npc : String) -> Array:
 	match index_data["type"]:
 		"mob":
 			type_data = LocalDataTables.mob_table[_npc]
+		"shop":
+			type_data = LocalDataTables.shop_table[_npc]
 	return [index_data, type_data]

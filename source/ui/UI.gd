@@ -144,8 +144,9 @@ func conf_loot(_data, _npc_id):
 	looting_panel.configure(_data, int(_npc_id))
 	set_mode(LOOTING)
 
+
 func conf_shop(_data, _shop_id):
 	shopping_panel.shop_id = _shop_id
 	shopping_panel.configure_buy_grid(_data)
-#	set_mode(SHOPPING)
+	set_mode(SHOPPING)
 
