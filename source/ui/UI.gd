@@ -4,9 +4,10 @@ enum {COMBAT, MANAGMENT, SHOPPING, CRAFTING, LOOTING}
 var mode
 
 # COMBAT LAYER PANELS
-onready var resources_panel := $CombatLayer/VBoxContainer/Resources
-onready var debug := $CombatLayer/VBoxContainer/Debug
+onready var resources_panel := $CombatLayer/VBoxContainer3/Resources
+onready var debug := $CombatLayer/Debug
 onready var compass := $CombatLayer/Compass
+onready var action_bar := $CombatLayer/VBoxContainer3/AbilityBar
 
 # MANAGMENT LAYER PANELS
 onready var equipment_panel := $ManagementLayer/MarginContainer/VBoxContainer/ItemSection/HBoxContainer/VBoxContainer/Equipment
@@ -23,6 +24,7 @@ onready var crafting_panel := $CraftingLayer/CenterContainer/CraftingPanel
 # SHOPPING LAYER PANELS
 onready var shopping_panel := $ShoppingLayer/CenterContainer/VBoxContainer/Shop
 onready var shopping_panel_curreny := $ShoppingLayer/CenterContainer/VBoxContainer/CurrencyPanel
+
 # LOOTING LAYER PANELS
 onready var looting_panel := $LootingLayer/CenterContainer/LootingPanel
 
@@ -92,6 +94,7 @@ func connect_signals():
 	Server.connect("sig_update_attributes", self, "update_attributes_panel")
 	Server.connect("update_inventory_ui", self, "update_inventory_panel")
 	Server.connect("sig_update_currency", self, "update_currency_panel")
+	Server.connect("sig_update_action_bar_ui", self, "update_action_bar")
 	Server.connect("update_ability_ui", self, "update_ability_panel")
 	Server.connect("update_crafting_ui", self, "update_crafting_panel")
 
@@ -150,3 +153,7 @@ func conf_shop(_data, _shop_id):
 	shopping_panel.configure_buy_grid(_data)
 	set_mode(SHOPPING)
 
+
+func update_action_bar(_data : Array):
+	pass
+#	action_bar.configure(_data)

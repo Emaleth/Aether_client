@@ -1,9 +1,7 @@
 extends PanelContainer
 
 
-export var alternative := false
-
-onready var slot = preload("res://source/ui/subcomponents/slots/ability_slot/AbilitySlot.tscn")
+onready var slot = preload("res://source/ui/subcomponents/slots/action_slot/ActionSlot.tscn")
 onready var slot_grid = $GridContainer
 
 var shortcut_list = [
@@ -15,21 +13,20 @@ var shortcut_list = [
 ]
 
 
-func _ready() -> void:
-	yield(get_tree().create_timer(1),"timeout")
+#func _ready() -> void:
 #	configure(GlobalVariables.ability_data)
-
-
-func configure(_data : Dictionary):
-	var index = 0
-	for i in slot_grid.get_children():
-		i.hide()
-		i.queue_free()
-	for i in _data:
-		var new_slot = slot.instance()
-		slot_grid.add_child(new_slot)
-		new_slot.configure(i, shortcut_list[index])
-		index += 1
+#
+#
+#func configure(_data : Array):
+#	var index = 0
+#	for i in slot_grid.get_children():
+#		i.hide()
+#		i.queue_free()
+#	for i in _data:
+#		var new_slot = slot.instance()
+#		slot_grid.add_child(new_slot)
+#		new_slot.configure(i, index, shortcut_list[index])
+#		index += 1
 	
 
 

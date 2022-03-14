@@ -1,7 +1,7 @@
 extends PanelContainer
 
-onready var health_bar = $VBoxContainer/HealthBar
-onready var mana_bar = $VBoxContainer/ManaBar
+onready var health_bar = $HBoxContainer/HealthBar
+onready var mana_bar = $HBoxContainer/ManaBar
 
 
 func _process(_delta: float) -> void:

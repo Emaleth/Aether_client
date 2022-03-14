@@ -1,6 +1,6 @@
 extends PanelContainer
 
-onready var slot = preload("res://source/ui/subcomponents/slots/crafting_slot/CraftingSlot.tscn")
+onready var slot = preload("res://source/ui/subcomponents/slots/ability_slot/AbilitySlot.tscn")
 onready var slot_grid = $GridContainer
 
 
@@ -17,4 +17,4 @@ func configure(_data : Array):
 			
 	
 func _ready() -> void:
-	configure(GlobalVariables.recipe_data)
+	configure(GlobalVariables.ability_data)

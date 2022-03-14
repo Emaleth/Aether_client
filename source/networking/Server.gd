@@ -17,6 +17,7 @@ signal sig_update_fast_world_state
 signal sig_update_slow_world_state
 signal sig_update_currency
 signal sig_update_attributes
+signal sig_update_action_bar_ui
 
 signal s_token_verification_success
 signal s_token_verification_failure
@@ -158,6 +159,10 @@ func request_item_craft(_index):
 	rpc_id(1, "request_item_craft", _index)
 
 
+func request_ability_pin(_index):
+	rpc_id(1, "request_ability_pin", _index)
+
+
 func request_loot_pickup(_npc_id, _index):
 	rpc_id(1, "request_loot_pickup", _npc_id, _index)
 
@@ -193,6 +198,12 @@ remote func recive_equipment_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		GlobalVariables.equipment_data = _data
 		emit_signal("update_equipment_ui", _data)
+
+
+remote func recive_action_bar_data(_data : Array): #OK
+	if get_tree().get_rpc_sender_id() == 1:
+		GlobalVariables.action_bar_data = _data
+		emit_signal("sig_update_action_bar_ui", _data)
 
 
 remote func recive_inventory_data(_data : Array): #OK

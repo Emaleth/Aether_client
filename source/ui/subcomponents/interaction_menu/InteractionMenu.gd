@@ -11,6 +11,7 @@ export var craft_action_allowed := false
 export var loot_action_allowed := false
 export var buy_action_allowed := false
 export var sell_action_allowed := false
+export var pin_action_allowed := false
 
 signal equip
 signal unequip
@@ -20,60 +21,39 @@ signal craft
 signal loot
 signal buy
 signal sell
-
+signal pin
 
 func _ready() -> void:
 	for i in get_children():
 		i.hide()
-	if equip_action_allowed:
-		$VBoxContainer/Equip.show()
-		$VBoxContainer/Equip.disabled = false
-	else:
-		$VBoxContainer/Equip.hide()
-		$VBoxContainer/Equip.disabled = true
-	if unequip_action_allowed:
-		$VBoxContainer/Unequip.show()
-		$VBoxContainer/Unequip.disabled = false
-	else:
-		$VBoxContainer/Unequip.hide()
-		$VBoxContainer/Unequip.disabled = true
-	if discard_action_allowed:
-		$VBoxContainer/Discard.show()
-		$VBoxContainer/Discard.disabled = false
-	else:
-		$VBoxContainer/Discard.hide()
-		$VBoxContainer/Discard.disabled = true
-	if use_action_allowed:
-		$VBoxContainer/Use.show()
-		$VBoxContainer/Use.disabled = false
-	else:
-		$VBoxContainer/Use.hide()
-		$VBoxContainer/Use.disabled = true
-	if craft_action_allowed:
-		$VBoxContainer/Craft.show()
-		$VBoxContainer/Craft.disabled = false
-	else:
-		$VBoxContainer/Craft.hide()
-		$VBoxContainer/Craft.disabled = true
-	if loot_action_allowed:
-		$VBoxContainer/Loot.show()
-		$VBoxContainer/Loot.disabled = false
-	else:
-		$VBoxContainer/Loot.hide()
-		$VBoxContainer/Loot.disabled = true
-	if buy_action_allowed:
-		$VBoxContainer/Buy.show()
-		$VBoxContainer/Buy.disabled = false
-	else:
-		$VBoxContainer/Buy.hide()
-		$VBoxContainer/Buy.disabled = true
-	if sell_action_allowed:
-		$VBoxContainer/Sell.show()
-		$VBoxContainer/Sell.disabled = false
-	else:
-		$VBoxContainer/Sell.hide()
-		$VBoxContainer/Sell.disabled = true
-		
+
+	$VBoxContainer/Equip.visible = equip_action_allowed
+	$VBoxContainer/Equip.disabled = not equip_action_allowed
+
+	$VBoxContainer/Unequip.visible = unequip_action_allowed
+	$VBoxContainer/Unequip.disabled = not unequip_action_allowed
+
+	$VBoxContainer/Discard.visible = discard_action_allowed
+	$VBoxContainer/Discard.disabled = not discard_action_allowed
+
+	$VBoxContainer/Use.visible = use_action_allowed
+	$VBoxContainer/Use.disabled = not use_action_allowed
+
+	$VBoxContainer/Craft.visible = craft_action_allowed
+	$VBoxContainer/Craft.disabled = not craft_action_allowed
+
+	$VBoxContainer/Loot.visible = loot_action_allowed
+	$VBoxContainer/Loot.disabled = not loot_action_allowed
+
+	$VBoxContainer/Buy.visible = buy_action_allowed
+	$VBoxContainer/Buy.disabled = not buy_action_allowed
+
+	$VBoxContainer/Sell.visible = sell_action_allowed
+	$VBoxContainer/Sell.disabled = not sell_action_allowed
+
+	$VBoxContainer/Pin.visible = pin_action_allowed
+	$VBoxContainer/Pin.disabled = not pin_action_allowed
+	
 	
 func show_menu():
 	button_menu.rect_global_position = (get_parent().rect_global_position + get_parent().rect_size / 2)
@@ -128,9 +108,14 @@ func _on_Sell_pressed() -> void:
 	for i in get_children():
 		i.hide()
 		
-
+		
+func _on_Pin_pressed() -> void:
+	emit_signal("pin")
+	for i in get_children():
+		i.hide()
+		
+		
 func _on_Control_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		for i in get_children():
 			i.hide()
-
