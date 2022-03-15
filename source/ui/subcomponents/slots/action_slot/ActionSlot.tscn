@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/slots/action_slot/ActionSlot.gd" type="Script" id=1]
-[ext_resource path="res://source/ui/subcomponents/interaction_menu/InteractionMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/stylebox/slot.tres" type="StyleBox" id=3]
 [ext_resource path="res://resources/fonts/content_mini.tres" type="DynamicFont" id=4]
 [ext_resource path="res://assets/third_party/crosshairpack_kenney/Preview.png" type="Texture" id=5]
@@ -154,7 +153,6 @@ custom_fonts/font = ExtResource( 4 )
 align = 1
 valign = 1
 
-[node name="InteractionMenu" parent="." instance=ExtResource( 2 )]
-
+[connection signal="pressed" from="." to="." method="_on_ActionSlot_pressed"]
 [connection signal="tween_all_completed" from="TextureProgress/Tween" to="." method="_on_Tween_tween_all_completed"]
 [connection signal="tween_step" from="TextureProgress/Tween" to="." method="_on_Tween_tween_step"]

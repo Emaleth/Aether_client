@@ -188,11 +188,17 @@ remote func receive_data_tables(_data : Dictionary):
 		LocalDataTables.weapon_table = _data["weapon_table"]
 		LocalDataTables.material_table = _data["material_table"]
 		LocalDataTables.craft_recipe_table = _data["craft_recipe_table"]
+		LocalDataTables.ability_scroll_table = _data["ability_scroll_table"]
 		# NPC DATA
 		LocalDataTables.npc_index = _data["npc_index"]
 		LocalDataTables.mob_table = _data["mob_table"]
 		LocalDataTables.shop_table = _data["shop_table"]
-		
+		# ABILITY DATA
+		LocalDataTables.ability_index = _data["ability_index"]
+		LocalDataTables.projectile_table = _data["projectile_table"]
+		LocalDataTables.area_table = _data["area_table"]
+		LocalDataTables.raycast_table = _data["raycast_table"]
+				
 	
 remote func recive_equipment_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:

@@ -155,5 +155,4 @@ func conf_shop(_data, _shop_id):
 
 
 func update_action_bar(_data : Array):
-	pass
-#	action_bar.configure(_data)
+	action_bar.configure(_data)

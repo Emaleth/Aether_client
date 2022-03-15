@@ -8,12 +8,9 @@ var action_bar_data := [] #ok
 var recipe_data := [] #ok
 var attributes_data := {}
 var currency_data := {} #ok
-
-# PLAYER RESOURCES
 var resources_data := {} #ok
 
-#var unique_world_state:= []
-
+# GENERAL DATA
 var camera_rig = null
 var player_actor = null
 var user_interface = null
@@ -37,6 +34,8 @@ static func get_item_data(_item : String) -> Array:
 			type_data = LocalDataTables.material_table[_item]
 		"craft_recipe":
 			type_data = LocalDataTables.craft_recipe_table[_item]
+		"ability_scroll":
+			type_data = LocalDataTables.ability_scroll_table[_item]
 	return [index_data, type_data]
 
 
@@ -49,4 +48,18 @@ static func get_npc_data(_npc : String) -> Array:
 			type_data = LocalDataTables.mob_table[_npc]
 		"shop":
 			type_data = LocalDataTables.shop_table[_npc]
+	return [index_data, type_data]
+
+
+static func get_ability_data(_ability : String) -> Array:
+	var index_data := {}
+	var type_data := {}
+	index_data = LocalDataTables.ability_index[_ability]
+	match index_data["type"]:
+		"projectile":
+			type_data = LocalDataTables.projectile_table[_ability]
+		"area":
+			type_data = LocalDataTables.area_table[_ability]
+		"raycast":
+			type_data = LocalDataTables.raycast_table[_ability]
 	return [index_data, type_data]
