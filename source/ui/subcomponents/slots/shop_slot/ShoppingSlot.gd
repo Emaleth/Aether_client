@@ -41,9 +41,9 @@ func set_item_icon() -> void:
 	if item:
 		var item_icon_path : String
 		if buy:
-			item_icon_path = "res://assets/icons/item//%s.svg" % str(item)
+			item_icon_path = "res://assets/icons/item/%s.svg" % str(item)
 		else:
-			item_icon_path = "res://assets/icons/item//%s.svg" % str(item["item"])
+			item_icon_path = "res://assets/icons/item/%s.svg" % str(item["item"])
 		icon = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/no_icon.svg")
 	else:
 		icon = null

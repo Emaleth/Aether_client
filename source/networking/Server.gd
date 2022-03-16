@@ -173,7 +173,8 @@ func request_loot_data(_npc_id):
 	
 remote func receive_loot_data(_data, _npc_id):
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.user_interface.conf_loot(_data, _npc_id)
+		if _data.size() > 0:
+			GlobalVariables.user_interface.conf_loot(_data, _npc_id)
 		
 		
 func request_material_gather(_material_id : String):
@@ -244,8 +245,10 @@ remote func recive_currency_data(_data : Dictionary): #OK
 	
 func request_item_buy(_shop_id : int, _index : int): #OK
 	rpc_id(1, "request_item_buy", _shop_id, _index)
+#	print("test buy")
 	
 	
 func request_item_sell(_shop_id : int, _index : int): #OK
 	rpc_id(1, "request_item_sell", _shop_id, _index)
+#	print("test sell")
 

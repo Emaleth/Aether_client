@@ -31,7 +31,7 @@ func set_dummy_tooltip_text():
 		
 func set_ability_icon() -> void:
 	if ability:
-		var ability_icon_path = "res://assets/icons/item//%s.svg" % str(ability["ability"])
+		var ability_icon_path = "res://assets/icons/abilities/%s.svg" % str(ability["ability"])
 		icon = load(ability_icon_path) if ResourceLoader.exists(ability_icon_path) else preload("res://assets/icons/no_icon.svg")
 	else:
 		icon = null

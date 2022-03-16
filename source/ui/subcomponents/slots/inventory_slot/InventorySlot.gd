@@ -36,7 +36,7 @@ func _make_custom_tooltip(_for_text: String) -> Control:
 		
 func set_item_icon() -> void:
 	if item:
-		var item_icon_path = "res://assets/icons/item//%s.svg" % str(item["item"])
+		var item_icon_path = "res://assets/icons/item/%s.svg" % str(item["item"])
 		icon = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/no_icon.svg")
 	else:
 		icon = null

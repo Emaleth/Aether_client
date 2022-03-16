@@ -51,6 +51,8 @@ func set_mode(_mode):
 			$CraftingLayer.hide()
 			$LootingLayer.hide()
 		MANAGMENT:
+			ability_panel.hide()
+			item_section.show()
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			$CombatLayer.hide()
 			$ManagementLayer.show()

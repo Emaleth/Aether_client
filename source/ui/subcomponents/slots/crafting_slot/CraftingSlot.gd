@@ -25,13 +25,13 @@ func connect_interaction_menu_signals():
 	
 func _make_custom_tooltip(_for_text: String) -> Control:
 	var new_tooltip = tooltip.instance()
-	new_tooltip.conf(item)
+	new_tooltip.conf(item["recipe"])
 	return new_tooltip
 				
 		
 func set_item_icon() -> void:
 	if item:
-		var item_icon_path = "res://assets/icons/item//%s.svg" % str(item)
+		var item_icon_path = "res://assets/icons/item/%s.svg" % str(item["recipe"])
 		icon = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/icons/no_icon.svg")
 	else:
 		icon = null

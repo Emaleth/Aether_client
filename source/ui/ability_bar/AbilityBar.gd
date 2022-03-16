@@ -23,9 +23,12 @@ func configure(_data : Array):
 		i.hide()
 		i.queue_free()
 	for i in _data:
-		var new_slot = slot.instance()
-		slot_grid.add_child(new_slot)
-		new_slot.configure(i, index, shortcut_list[index])
+		if i != null:
+			var new_slot = slot.instance()
+			slot_grid.add_child(new_slot)
+			new_slot.configure(i, index, shortcut_list[index])
+		else:
+			pass
 		index += 1
 	
 
