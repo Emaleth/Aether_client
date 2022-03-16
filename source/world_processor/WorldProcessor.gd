@@ -21,10 +21,10 @@ func _ready():
 	
 func configure_processors():
 	# FAST
-	fast_processor.configure(player_container, npc_container, ability_container)
+	fast_processor.configure(player_container, npc_container)
 	Server.connect("sig_update_fast_world_state", fast_processor, "update_world_state")
 	# SLOW
-	slow_processor.configure(player_container, npc_container, ability_container, resource_node_container)
+	slow_processor.configure(player_container, npc_container, resource_node_container, ability_container)
 	Server.connect("sig_update_slow_world_state", slow_processor, "update_world_state")
 	# UNIQUE
 

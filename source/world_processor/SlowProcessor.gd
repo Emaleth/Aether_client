@@ -15,15 +15,18 @@ var buffer_index_table := {
 	}
 }
 
+var ability_container = null # WORLD STATE INDEX 4
+
 
 func _physics_process(_delta: float) -> void:
 	update_in_the_tree()
 
 
-func configure(_player_container, _npc_container, _ability_container, _resource_node_container):
+func configure(_player_container, _npc_container, _resource_node_container, _ability_container):
 	buffer_index_table[1]["container"] = _player_container
 	buffer_index_table[2]["container"] = _npc_container
 	buffer_index_table[3]["container"] = _resource_node_container
+	ability_container = _ability_container
 
 
 func update_in_the_tree():
@@ -39,4 +42,8 @@ func update_in_the_tree():
 func update_world_state(world_state):
 	for index in buffer_index_table:
 		buffer_index_table[index]["collection"] = world_state[index]
-		
+	process_abilities(world_state[4])
+
+
+func process_abilities(_data):
+	pass
