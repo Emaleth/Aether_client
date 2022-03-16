@@ -9,12 +9,7 @@ var buffer_index_table := {
 		"collection" : {},
 		"container" : null,
 	},
-	3 : { # ABILITY
-		"collection" : {},
-		"container" : null,
-		"scene" : preload("res://source/projectile/dummyBullet.tscn") 
-	},
-	4 : { # RESOURCE NODES
+	3 : { # RESOURCE NODES
 		"collection" : {},
 		"container" : null,
 	}
@@ -28,8 +23,7 @@ func _physics_process(_delta: float) -> void:
 func configure(_player_container, _npc_container, _ability_container, _resource_node_container):
 	buffer_index_table[1]["container"] = _player_container
 	buffer_index_table[2]["container"] = _npc_container
-	buffer_index_table[3]["container"] = _ability_container
-	buffer_index_table[4]["container"] = _resource_node_container
+	buffer_index_table[3]["container"] = _resource_node_container
 
 
 func update_in_the_tree():

@@ -92,5 +92,5 @@ func _on_Tween_tween_all_completed() -> void:
 
 
 func _on_ActionSlot_pressed() -> void:
-	pass
+	Server.request_ability_use(index)
 	

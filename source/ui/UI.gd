@@ -147,7 +147,8 @@ func _on_ItemButton_pressed() -> void:
 
 func conf_loot(_data, _npc_id):
 	looting_panel.configure(_data, int(_npc_id))
-	set_mode(LOOTING)
+	if _data.size() > 0:
+		set_mode(LOOTING)
 
 
 func conf_shop(_data, _shop_id):
