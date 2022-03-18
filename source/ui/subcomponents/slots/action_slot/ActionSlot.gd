@@ -92,5 +92,5 @@ func _on_Tween_tween_all_completed() -> void:
 
 
 func _on_ActionSlot_pressed() -> void:
-	Server.request_ability_use(index)
-	
+	Server.request_ability_use(GlobalVariables.player_actor.get_node("gun").global_transform, index)
+

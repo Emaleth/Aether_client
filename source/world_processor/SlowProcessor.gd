@@ -1,5 +1,6 @@
 extends Node
 
+onready var projectile := preload("res://source/projectile_ability/ProjectileAbility.tscn")
 var buffer_index_table := {
 	1 : { # PLAYERS
 		"collection" : {},
@@ -46,4 +47,10 @@ func update_world_state(world_state):
 
 
 func process_abilities(_data):
-	pass
+	for i in _data:
+		var new_ability = projectile.instance()
+		new_ability.configure(i[1], GlobalVariables.get_ability_data(i[0]))
+		ability_container.add_child(new_ability, true)
+	
+	
+	

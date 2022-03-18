@@ -251,6 +251,6 @@ func request_item_sell(_shop_id : int, _index : int): #OK
 	rpc_id(1, "request_item_sell", _shop_id, _index)
 #	print("test sell")
 
-func request_ability_use(_index):
-	rpc_id(1, "request_ability_use", _index)
+func request_ability_use(_gun_pos, _index):
+	rpc_id(1, "request_ability_use", _gun_pos, _index)
 	
