@@ -9,7 +9,7 @@ var data := []
 onready var loot_node := $Loot
 onready var name_plate := $NamePlate
 onready var collision_shape := $CollisionShapeBody
-onready var mesh := $MeshInstance
+onready var mesh := $actor
 
 
 func _ready() -> void:

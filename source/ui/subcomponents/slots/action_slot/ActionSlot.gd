@@ -5,8 +5,8 @@ var cooldown := 0.0
 var index : int
 
 onready var shortcut_label := $GridContainer/ShortcutLabel
-onready var cooldown_progress := $TextureProgress
-onready var cooldown_tween := $TextureProgress/Tween
+onready var cooldown_progress := $ProgressBar
+onready var cooldown_tween := $ProgressBar/Tween
 onready var cooldown_label := $CooldownLabel
 
 
@@ -83,7 +83,7 @@ func set_shortcut_label() -> void:
 
 				
 func _on_Tween_tween_step(_object: Object, _key: NodePath, _elapsed: float, _value: Object) -> void:
-	cooldown_label.text = str(round(cooldown))
+	cooldown_label.text = str(round(cooldown / 1000.0))
 
 
 func _on_Tween_tween_all_completed() -> void:
