@@ -1,5 +1,6 @@
 extends Node
 
+onready var base_attack := preload("res://source/test_bullet/TestBullet.tscn")
 onready var projectile := preload("res://source/projectile_ability/ProjectileAbility.tscn")
 var buffer_index_table := {
 	1 : { # PLAYERS
@@ -44,6 +45,7 @@ func update_world_state(world_state):
 	for index in buffer_index_table:
 		buffer_index_table[index]["collection"] = world_state[index]
 	process_abilities(world_state[4])
+	process_attack(world_state[5])
 
 
 func process_abilities(_data):
@@ -53,4 +55,11 @@ func process_abilities(_data):
 		ability_container.add_child(new_ability, true)
 	
 	
+func process_attack(_data):
+	for i in _data:
+		var new_ability = base_attack.instance()
+		new_ability.global_transform = i[1]
+		ability_container.add_child(new_ability, true)
+	
+		
 	
