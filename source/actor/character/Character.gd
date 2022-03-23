@@ -64,3 +64,5 @@ func rotate_camera_rig(_amount : Vector2) -> void:
 
 func aim(target_data):
 	$gun.look_at(target_data.position, Vector3.UP)
+
+
