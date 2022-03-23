@@ -24,19 +24,13 @@ func _physics_process(_delta: float) -> void:
 	
 func _unhandled_input(event: InputEvent) -> void:
 	if GlobalVariables.user_interface.mode != GlobalVariables.user_interface.COMBAT:
-#	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		return
 	if event is InputEventMouseMotion:
 		rotate_camera_rig(event.relative)
-#	if Input.is_action_pressed("primary_action"):
-#		var body = target_data.collider if target_data.size() > 0 else null
-#		if body:
-#			interact(body)
 
 
 func get_input():
 	if GlobalVariables.user_interface.mode != GlobalVariables.user_interface.COMBAT:
-#	if not Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		return
 	if Input.is_action_pressed("primary_action"):
 		var body = target_data.collider if target_data.size() > 0 else null
@@ -92,4 +86,5 @@ func shoot():
 	if current_time - weapon["used"] < w_cd:
 		return
 	weapon["used"] = current_time
-	Server.send_weapon_use_request(GlobalVariables.player_actor.get_node("gun").global_transform)
+	Server.send_weapon_use_request(GlobalVariables.player_actor.get_node("weapon_pivot").global_transform)
+	GlobalVariables.player_actor.weapon_pivot.get_node("MeshInstance").shoot()

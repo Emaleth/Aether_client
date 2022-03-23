@@ -9,10 +9,13 @@ var velocity := Vector3.ZERO
 var mouse_sensibility : float = 0.005
 var mouse_deadzone : float = 0.1
 
+onready var weapon_pivot := $weapon_pivot
+onready var camera_rig := $CameraRig
+
 
 func _physics_process(delta: float) -> void:
 	move(delta)
-	if $CameraRig.target_data.size() > 0: aim($CameraRig.target_data) 
+	if camera_rig.target_data.size() > 0: aim(camera_rig.target_data) 
 	
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -63,6 +66,6 @@ func rotate_camera_rig(_amount : Vector2) -> void:
 
 
 func aim(target_data):
-	$gun.look_at(target_data.position, Vector3.UP)
+	weapon_pivot.look_at(target_data.position, Vector3.UP)
 
 
