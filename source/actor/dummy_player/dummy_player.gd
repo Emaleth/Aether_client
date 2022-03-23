@@ -17,9 +17,9 @@ func update_data(_data):
 func aim(target_data : Array):
 	for i in target_data:
 		$gun.global_transform = i
-		$gun/MeshInstance2.show()
-		$Timer.start(0.03)
+		$gun/bullet_trail.conf($gun.global_transform.origin, $gun/RayCast.get_collision_point())
 		
 
-func _on_Timer_timeout() -> void:
-		$gun/MeshInstance2.hide()
+
+
+	

@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://resources/particles/SparkParticle.tres" type="Material" id=1]
+[ext_resource path="res://assets/custom_meshes/shop/shop.tscn" type="PackedScene" id=2]
+[ext_resource path="res://source/shop/shop.gd" type="Script" id=3]
+[ext_resource path="res://resources/custom_materials/resource_node_material.tres" type="Material" id=4]
+[ext_resource path="res://assets/custom_meshes/actor/actor.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/custom_materials/crafting_station_material.tres" type="Material" id=6]
+
+[sub_resource type="QuadMesh" id=1]
+material = ExtResource( 1 )
+size = Vector2( 0.1, 0.1 )
+
+[node name="shop" instance=ExtResource( 2 )]
+script = ExtResource( 3 )
+
+[node name="Cube" parent="." index="0"]
+material/0 = ExtResource( 4 )
+
+[node name="Cube001" parent="." index="2"]
+material/0 = ExtResource( 4 )
+
+[node name="Cube002" parent="." index="4"]
+material/0 = ExtResource( 4 )
+
+[node name="Cube003" parent="." index="6"]
+material/0 = ExtResource( 4 )
+
+[node name="Cube004" parent="." index="8"]
+material/0 = ExtResource( 4 )
+
+[node name="Cube005" parent="." index="10"]
+material/0 = ExtResource( 4 )
+
+[node name="Cube006" parent="." index="12"]
+material/0 = ExtResource( 4 )
+
+[node name="Cube007" parent="." index="14"]
+material/0 = ExtResource( 4 )
+
+[node name="Cube008" parent="." index="16"]
+material/0 = ExtResource( 4 )
+
+[node name="CPUParticles" type="CPUParticles" parent="." index="18"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0 )
+amount = 25
+mesh = SubResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 3.0
+flag_align_y = true
+flag_rotate_y = true
+direction = Vector3( 0, 0, 0 )
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 0.5
+angular_velocity = 50.0
+angular_velocity_random = 1.0
+hue_variation = 1.0
+
+[node name="actor" parent="." index="19" instance=ExtResource( 5 )]
+
+[node name="Icosphere" parent="actor" index="0"]
+material/0 = ExtResource( 6 )
+
+[editable path="actor"]

@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/custom_meshes/terrain/landscape.tscn" type="PackedScene" id=1]
-[ext_resource path="res://source/dummy_crafting_station/crafting_station.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/custom_meshes/terrain/terrain.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/crafting_station/crafting_station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/dummy_res_node/resource_node.tscn" type="PackedScene" id=3]
-[ext_resource path="res://source/dummy_shop/DummyShop.tscn" type="PackedScene" id=5]
+[ext_resource path="res://source/shop/shop.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/actor/dummy_npc/dummy_npc.tscn" type="PackedScene" id=7]
 
 [node name="World" type="Node"]
@@ -34,8 +34,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.45493, 7.48956, 16.3651 )
 
 [node name="ShopContainer" type="Node" parent="."]
 
-[node name="Shop" parent="ShopContainer" instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.30192, -3.89955 )
+[node name="shop" parent="ShopContainer" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.35775, -3.89955 )
 
 [node name="CraftingStationContainer" type="Node" parent="."]
 

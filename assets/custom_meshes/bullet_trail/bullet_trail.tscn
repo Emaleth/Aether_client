@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/custom_meshes/bullet_trail/bullet_trail.glb" type="PackedScene" id=1]
+[ext_resource path="res://assets/custom_meshes/bullet_trail/bullet_trail.gd" type="Script" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+flags_unshaded = true
+albedo_color = Color( 0.941176, 0.94902, 0.027451, 1 )
+
+[node name="bullet_trail" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Plane" parent="." index="0"]
+material/0 = SubResource( 1 )
+
+[node name="Plane001" parent="." index="1"]
+material/0 = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="." index="2"]

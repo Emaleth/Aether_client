@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://assets/custom_meshes/bullet_hole/bullet_hole.glb" type="PackedScene" id=1]
+
+[node name="bullet_hole" instance=ExtResource( 1 )]
