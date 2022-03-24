@@ -3,7 +3,7 @@ extends Node
 var container = self
 
 
-onready var character_scene = preload("res://source/actor/character/Character.tscn")
+onready var character_scene = preload("res://source/actors/character/Character.tscn")
 onready var interface_scene = preload("res://source/ui/UI.tscn")
 
 

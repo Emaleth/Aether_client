@@ -5,18 +5,15 @@ enum mstates {ALIVE, DEAD_LOOTABLE, DEAD_EMPTY}
 var master_state : int
 var type := "training_dummy"
 var data := []
-#var loot := []
-onready var loot_node := $Loot
+
 onready var name_plate := $NamePlate
 onready var collision_shape := $CollisionShapeBody
-onready var mesh := $actor
+onready var mesh := $actor/Icosphere
 
 
 func _ready() -> void:
 	name = str(get_index())
 	add_to_group("Actor")
-	loot_node.add_to_group("loot")
-	loot_node.mob_id = int(name)
 	data = GlobalVariables.get_npc_data(type)
 	name_plate.set_name_label(str(data[0]["name"]))
 	
@@ -30,18 +27,26 @@ func change_master_state(_master_state):
 	match _master_state:
 		mstates.ALIVE:
 			collision_shape.disabled = false
+			if is_in_group("loot"):
+				remove_from_group("loot")
 			name_plate.show()
+			var m = mesh.get("material/0").duplicate()
+			m.set("albedo_color", Color.red)
+			mesh.set("material/0", m)
 			mesh.show()
-			loot_node.hide()
 		mstates.DEAD_LOOTABLE:
-			collision_shape.disabled = true
+			add_to_group("loot")
+			collision_shape.disabled = false
 			name_plate.hide()
-			mesh.hide()
-			loot_node.show()
+			var m = mesh.get("material/0").duplicate()
+			m.set("albedo_color", Color.green)
+			mesh.set("material/0", m)
+			mesh.show()
 		mstates.DEAD_EMPTY:
+			if is_in_group("loot"):
+				remove_from_group("loot")
 			collision_shape.disabled = true
 			name_plate.hide()
 			mesh.hide()
-			loot_node.hide()
 
 	master_state = _master_state

@@ -14,7 +14,7 @@
 [ext_resource path="res://source/ui/attributes_panel/AttributesPanel.tscn" type="PackedScene" id=12]
 [ext_resource path="res://source/ui/debug/Debug.tscn" type="PackedScene" id=13]
 [ext_resource path="res://source/ui/currency_panel/CurrencyPanel.tscn" type="PackedScene" id=14]
-[ext_resource path="res://source/timed_progress_bar/TimedProgressBar.tscn" type="PackedScene" id=15]
+[ext_resource path="res://source/ui/timed_progress_bar/TimedProgressBar.tscn" type="PackedScene" id=15]
 [ext_resource path="res://source/ui/loot_panel/LootingPanel.tscn" type="PackedScene" id=16]
 [ext_resource path="res://source/ui/ability_bar/AbilityBar.tscn" type="PackedScene" id=17]
 

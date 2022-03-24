@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://source/timed_progress_bar/TimedProgressBar.gd" type="Script" id=1]
-[ext_resource path="res://resources/fonts/content_mini.tres" type="DynamicFont" id=2]
+[ext_resource path="res://resources/fonts/content_mini.tres" type="DynamicFont" id=1]
+[ext_resource path="res://source/ui/timed_progress_bar/TimedProgressBar.gd" type="Script" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
@@ -13,7 +13,7 @@ mouse_filter = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = SubResource( 1 )
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -33,7 +33,7 @@ margin_right = 150.0
 margin_bottom = 14.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_fonts/font = ExtResource( 2 )
+custom_fonts/font = ExtResource( 1 )
 text = "[time]"
 align = 1
 valign = 1

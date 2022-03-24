@@ -11,12 +11,12 @@ var buffer_index_table := {
 	1 : { # PLAYERS
 		"collection" : {},
 		"container" : null,
-		"scene" : preload("res://source/actor/dummy_player/dummy_player.tscn")
+		"scene" : preload("res://source/actors/player/player.tscn")
 	},
 	2 : { # NPC
 		"collection" : {},
 		"container" : null,
-		"scene" : preload("res://source/actor/dummy_npc/dummy_npc.tscn")
+		"scene" : preload("res://source/actors/npc/npc.tscn")
 	},
 }
 
@@ -51,16 +51,17 @@ func configure(_player_container, _npc_container):
 
 	
 func add_to_the_tree():
-	for index in buffer_index_table:
-		for npc in buffer_index_table[index]["collection"].keys():
-			if npc == str(get_tree().get_network_unique_id()):
-				if GlobalVariables.player_actor == null:
-					get_parent().get_node("CharacterProcessor").spawn_character()
-			else:
-				if not buffer_index_table[index]["container"].has_node(str(npc)):
-					var new_npc = buffer_index_table[index]["scene"].instance()
-					new_npc.name = str(npc)
-					buffer_index_table[index]["container"].call_deferred("add_child", new_npc, true)
+	var index := 0
+#	for index in buffer_index_table:
+	for npc in buffer_index_table[index]["collection"].keys():
+		if npc == str(get_tree().get_network_unique_id()):
+			if GlobalVariables.player_actor == null:
+				get_parent().get_node("CharacterProcessor").spawn_character()
+		else:
+			if not buffer_index_table[index]["container"].has_node(str(npc)):
+				var new_npc = buffer_index_table[index]["scene"].instance()
+				new_npc.name = str(npc)
+				buffer_index_table[index]["container"].call_deferred("add_child", new_npc, true)
 
 
 func update_in_the_tree():
@@ -71,10 +72,11 @@ func update_in_the_tree():
 
 
 func remove_from_the_tree():
-	for index in buffer_index_table:
-		for npc in buffer_index_table[index]["container"].get_children():
-			if not buffer_index_table[index]["collection"].has(str(npc.name)):
-				npc.call_deferred("queue_free")
+	var index := 0
+#	for index in buffer_index_table:
+	for npc in buffer_index_table[index]["container"].get_children():
+		if not buffer_index_table[index]["collection"].has(str(npc.name)):
+			npc.call_deferred("queue_free")
 
 
 func interpolate():

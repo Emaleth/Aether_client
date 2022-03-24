@@ -71,7 +71,7 @@ func interact(_body):
 	elif _body.is_in_group("loot"):
 		if Input.is_action_just_pressed("primary_action"):
 			if _body.global_transform.origin.distance_squared_to(GlobalVariables.player_actor.global_transform.origin) < interaction_range:
-				Server.request_loot_data(int(_body.mob_id))
+				Server.request_loot_data(int(_body.name))
 	else:
 		shoot()
 		
