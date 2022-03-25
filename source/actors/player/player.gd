@@ -16,7 +16,6 @@ func update_data(_data):
 	
 func aim(target_data : Array):
 	for i in target_data:
-		weapon_pivot.global_transform = i
 		weapon_pivot.get_node("MeshInstance").shoot()
 
 

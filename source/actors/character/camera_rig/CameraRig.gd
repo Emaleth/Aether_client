@@ -86,5 +86,5 @@ func shoot():
 	if current_time - weapon["used"] < w_cd:
 		return
 	weapon["used"] = current_time
-	Server.send_weapon_use_request(GlobalVariables.player_actor.get_node("weapon_pivot").global_transform)
+	Server.send_weapon_use_request()
 	GlobalVariables.player_actor.weapon_pivot.get_node("MeshInstance").shoot()

@@ -51,7 +51,7 @@ func configure(_player_container, _npc_container):
 
 	
 func add_to_the_tree():
-	var index := 0
+	var index := 1
 #	for index in buffer_index_table:
 	for npc in buffer_index_table[index]["collection"].keys():
 		if npc == str(get_tree().get_network_unique_id()):
@@ -66,13 +66,19 @@ func add_to_the_tree():
 
 func update_in_the_tree():
 	for index in buffer_index_table:
-		for npc in buffer_index_table[index]["container"].get_children():
-			if buffer_index_table[index]["collection"].has(str(npc.name)):
-				npc.global_transform = buffer_index_table[index]["collection"][str(npc.name)]
+		if index == 1:
+			for npc in buffer_index_table[index]["container"].get_children():
+				if buffer_index_table[index]["collection"].has(str(npc.name)):
+					npc.global_transform = buffer_index_table[index]["collection"][str(npc.name)][0]
+					npc.get_node("weapon_pivot").global_transform.basis = buffer_index_table[index]["collection"][str(npc.name)][1]
+		else:
+			for npc in buffer_index_table[index]["container"].get_children():
+				if buffer_index_table[index]["collection"].has(str(npc.name)):
+					npc.global_transform = buffer_index_table[index]["collection"][str(npc.name)]
 
 
 func remove_from_the_tree():
-	var index := 0
+	var index := 1
 #	for index in buffer_index_table:
 	for npc in buffer_index_table[index]["container"].get_children():
 		if not buffer_index_table[index]["collection"].has(str(npc.name)):
@@ -86,12 +92,25 @@ func interpolate():
 			if not world_state_buffer[1][index].has(npc): # WE WANT TO BE SURE THAT BOTH WS1 AND WS2 HAVE ANY GIVEN KEY FOR INTERPOLATION'S SAKE
 				continue
 			if buffer_index_table[index]["collection"].has(npc):
-				var modified_data = Transform.IDENTITY
-				modified_data.origin = lerp(world_state_buffer[1][index][npc].origin, world_state_buffer[2][index][npc].origin, interpolation_factor)
-				var current_rot = (world_state_buffer[1][index][npc].basis).get_rotation_quat()
-				var target_rot = (world_state_buffer[2][index][npc].basis).get_rotation_quat()
-				modified_data.basis = Basis(current_rot.slerp(target_rot, interpolation_factor))
-				buffer_index_table[index]["collection"][npc] = modified_data
+				if index == 1:
+					var modified_data = [Transform.IDENTITY, Transform.IDENTITY.basis]
+					modified_data[0].origin = lerp(world_state_buffer[1][index][npc][0].origin, world_state_buffer[2][index][npc][0].origin, interpolation_factor)
+					var current_rot = (world_state_buffer[1][index][npc][0].basis).get_rotation_quat()
+					var target_rot = (world_state_buffer[2][index][npc][0].basis).get_rotation_quat()
+					modified_data[0].basis = Basis(current_rot.slerp(target_rot, interpolation_factor))
+					# aim section
+					var current_rot_look_at = (world_state_buffer[1][index][npc][1]).get_rotation_quat()
+					var target_rot_look_at = (world_state_buffer[2][index][npc][1]).get_rotation_quat()
+					modified_data[1] = Basis(current_rot_look_at.slerp(target_rot_look_at, interpolation_factor))
+					# aim section
+					buffer_index_table[index]["collection"][npc] = modified_data
+				else:
+					var modified_data = Transform.IDENTITY
+					modified_data.origin = lerp(world_state_buffer[1][index][npc].origin, world_state_buffer[2][index][npc].origin, interpolation_factor)
+					var current_rot = (world_state_buffer[1][index][npc].basis).get_rotation_quat()
+					var target_rot = (world_state_buffer[2][index][npc].basis).get_rotation_quat()
+					modified_data.basis = Basis(current_rot.slerp(target_rot, interpolation_factor))
+					buffer_index_table[index]["collection"][npc] = modified_data
 				
 			else:
 				buffer_index_table[index]["collection"][npc] = world_state_buffer[2][index][npc]
@@ -108,12 +127,28 @@ func extrapolate():
 			if not world_state_buffer[0][index].has(npc): # WE WANT TO BE SURE THAT BOTH WS0 AND WS1 HAVE ANY GIVEN KEY FOR EXTRAPOLATION'S SAKE
 				continue
 			if buffer_index_table[index]["collection"].has(npc):
-				var position_delta = (world_state_buffer[1][index][npc].origin - world_state_buffer[0][index][npc].origin)
-				var modified_data = Transform.IDENTITY
-				modified_data.origin = world_state_buffer[1][index][npc].origin + (position_delta * extrapolation_factor)
-				var current_rot = (world_state_buffer[1][index][npc].basis).get_rotation_quat()
-				var old_rot = (world_state_buffer[0][index][npc].basis).get_rotation_quat()
-				var rotation_delta = (current_rot - old_rot)
-				modified_data.basis = Basis(current_rot + (rotation_delta * extrapolation_factor))
-				buffer_index_table[index]["collection"][npc] = modified_data
+				if index == 1:
+					var position_delta = (world_state_buffer[1][index][npc][0].origin - world_state_buffer[0][index][npc][0].origin)
+					var modified_data = [Transform.IDENTITY, Transform.IDENTITY.basis]
+					modified_data[0].origin = world_state_buffer[1][index][npc][0].origin + (position_delta * extrapolation_factor)
+					var current_rot = (world_state_buffer[1][index][npc][0].basis).get_rotation_quat()
+					var old_rot = (world_state_buffer[0][index][npc][0].basis).get_rotation_quat()
+					var rotation_delta = (current_rot - old_rot)
+					modified_data[0].basis = Basis(current_rot + (rotation_delta * extrapolation_factor))
+					# look at
+					var current_rot_look_at = (world_state_buffer[1][index][npc][1]).get_rotation_quat()
+					var old_rot_look_at = (world_state_buffer[0][index][npc][1]).get_rotation_quat()
+					var rotation_delta_look_at = (current_rot_look_at - old_rot_look_at)
+					modified_data[1] = Basis(current_rot_look_at + (rotation_delta_look_at * extrapolation_factor))
+					# look at
+					buffer_index_table[index]["collection"][npc] = modified_data
+				else:
+					var position_delta = (world_state_buffer[1][index][npc].origin - world_state_buffer[0][index][npc].origin)
+					var modified_data = Transform.IDENTITY
+					modified_data.origin = world_state_buffer[1][index][npc].origin + (position_delta * extrapolation_factor)
+					var current_rot = (world_state_buffer[1][index][npc].basis).get_rotation_quat()
+					var old_rot = (world_state_buffer[0][index][npc].basis).get_rotation_quat()
+					var rotation_delta = (current_rot - old_rot)
+					modified_data.basis = Basis(current_rot + (rotation_delta * extrapolation_factor))
+					buffer_index_table[index]["collection"][npc] = modified_data
 				
