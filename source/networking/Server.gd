@@ -104,8 +104,9 @@ remote func fetch_token():
 		rpc_id(1, "return_token", token)
 	
 	
-remote func return_token_verification_results(result):
+remote func return_token_verification_results(result, account_id):
 	if get_tree().get_rpc_sender_id() == 1:
+		print(account_id)
 		if result == true:
 			emit_signal("s_token_verification_success")
 		else:
