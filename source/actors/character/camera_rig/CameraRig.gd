@@ -1,7 +1,5 @@
 extends SpringArm
 
-var mouse_sensibility : float = 0.005
-var mouse_deadzone : float = 0.1
 
 var min_rotation_x : float = deg2rad(-80)
 var max_rotation_x : float = deg2rad(80)
@@ -39,9 +37,9 @@ func get_input():
 			
 			
 func rotate_camera_rig(_amount : Vector2) -> void:
-	if _amount.length() <= mouse_deadzone:
+	if _amount.length() <= GlobalSettings.mouse_deadzone:
 		return
-	rotation.x -= _amount.y * mouse_sensibility
+	rotation.x -= _amount.y * GlobalSettings.mouse_sensibility
 	rotation.x = clamp(rotation.x, min_rotation_x, max_rotation_x)
 
 

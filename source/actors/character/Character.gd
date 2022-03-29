@@ -6,9 +6,6 @@ var gravity := -45
 var snap_vector := Vector3.DOWN
 var velocity := Vector3.ZERO
 
-var mouse_sensibility : float = 0.005
-var mouse_deadzone : float = 0.1
-
 onready var weapon_pivot := $weapon_pivot
 onready var camera_rig := $CameraRig
 
@@ -59,9 +56,9 @@ func move(_delta : float):
 
 
 func rotate_camera_rig(_amount : Vector2) -> void:
-	if _amount.length() <= mouse_deadzone:
+	if _amount.length() <= GlobalSettings.mouse_deadzone:
 		return
-	rotation.y -= _amount.x * mouse_sensibility
+	rotation.y -= _amount.x * GlobalSettings.mouse_sensibility
 	rotation.y = wrapf(rotation.y, -180, 180)
 
 
