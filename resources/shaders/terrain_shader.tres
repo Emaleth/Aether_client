@@ -7,19 +7,21 @@ uniform sampler2D grass_texture;
 uniform sampler2D rock_texture;
 uniform sampler2D dirt_texture;
 uniform sampler2D splatmap;
+uniform float terrain_size = 1.0;
 
-void fragment(){
+void fragment() {
 	float grass_value = texture(splatmap, UV).g;
 	float rock_value = texture(splatmap, UV).r;
 	float dirt_value = texture(splatmap, UV).b;
-
-	vec3 grass_color = texture(grass_texture, UV).rgb * grass_value;
-	vec3 rock_color = texture(rock_texture, UV).rgb * rock_value;
-	vec3 dirt_color = texture(dirt_texture, UV).rgb * dirt_value;
+	
+	vec2 t_size = vec2(terrain_size, terrain_size);
+	
+	vec3 grass_color = texture(grass_texture, UV * t_size).rgb * grass_value;
+	vec3 rock_color = texture(rock_texture, UV * t_size).rgb * rock_value;
+	vec3 dirt_color = texture(dirt_texture, UV * t_size).rgb * dirt_value;
 
 	vec3 results = grass_color + rock_color + dirt_color;
-
+	
 	ALBEDO = results;
 	
-}
-"
+}"
