@@ -3,25 +3,31 @@
 [resource]
 code = "shader_type spatial;
 
-uniform sampler2D grass_texture;
-uniform sampler2D rock_texture;
-uniform sampler2D dirt_texture;
+
+uniform sampler2D red_diffuse;
+uniform float red_scale = 1.0;
+
+uniform sampler2D green_diffuse;
+uniform float green_scale = 1.0;
+
+uniform sampler2D blue_diffuse;
+uniform float blue_scale = 1.0;
+
+uniform sampler2D alpha_diffuse;
+uniform float alpha_scale = 1.0;
+
 uniform sampler2D splatmap;
-uniform float terrain_size = 1.0;
+
 
 void fragment() {
-	float grass_value = texture(splatmap, UV).g;
-	float rock_value = texture(splatmap, UV).r;
-	float dirt_value = texture(splatmap, UV).b;
+	mat4 albedo; 
+	vec4 value = texture(splatmap, UV);
 	
-	vec2 t_size = vec2(terrain_size, terrain_size);
+	albedo[0].rgb = texture(red_diffuse, UV * vec2(red_scale)).rgb * value.r;
+	albedo[1].rgb = texture(green_diffuse, UV * vec2(green_scale)).rgb * value.g;
+	albedo[2].rgb = texture(blue_diffuse, UV * vec2(blue_scale)).rgb * value.b;
+	albedo[3].rgb = texture(alpha_diffuse, UV * vec2(alpha_scale)).rgb * value.a;
 	
-	vec3 grass_color = texture(grass_texture, UV * t_size).rgb * grass_value;
-	vec3 rock_color = texture(rock_texture, UV * t_size).rgb * rock_value;
-	vec3 dirt_color = texture(dirt_texture, UV * t_size).rgb * dirt_value;
-
-	vec3 results = grass_color + rock_color + dirt_color;
-	
-	ALBEDO = results;
-	
-}"
+	ALBEDO = albedo[0].rgb + albedo[1].rgb + albedo[2].rgb;// + albedo[3].rgb;
+}
+"

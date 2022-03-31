@@ -1,15 +1,18 @@
 [gd_resource type="ShaderMaterial" load_steps=6 format=2]
 
 [ext_resource path="res://resources/shaders/terrain_shader.tres" type="Shader" id=1]
-[ext_resource path="res://assets/third_party/pbr/Grass004_1K-PNG/Grass004_1K_Color.png" type="Texture" id=2]
-[ext_resource path="res://assets/custom_textures/splatmap.png" type="Texture" id=3]
-[ext_resource path="res://assets/third_party/pbr/Ground048_1K-PNG/Ground048_1K_Color.png" type="Texture" id=4]
-[ext_resource path="res://assets/third_party/pbr/Rock048_1K-PNG/Rock048_1K_Color.png" type="Texture" id=5]
+[ext_resource path="res://assets/third_party/PBR/Rock048_1K-PNG/Rock048_1K_Color.png" type="Texture" id=2]
+[ext_resource path="res://assets/custom_meshes/terrain/splatmap.png" type="Texture" id=3]
+[ext_resource path="res://assets/third_party/PBR/Ground048_1K-PNG/Ground048_1K_Color.png" type="Texture" id=4]
+[ext_resource path="res://assets/third_party/PBR/Grass004_1K-PNG/Grass004_1K_Color.png" type="Texture" id=5]
 
 [resource]
 shader = ExtResource( 1 )
-shader_param/terrain_size = 500.0
-shader_param/grass_texture = ExtResource( 2 )
-shader_param/rock_texture = ExtResource( 5 )
-shader_param/dirt_texture = ExtResource( 4 )
+shader_param/red_scale = 500.0
+shader_param/green_scale = 500.0
+shader_param/blue_scale = 500.0
+shader_param/alpha_scale = 1.0
+shader_param/red_diffuse = ExtResource( 4 )
+shader_param/green_diffuse = ExtResource( 5 )
+shader_param/blue_diffuse = ExtResource( 2 )
 shader_param/splatmap = ExtResource( 3 )

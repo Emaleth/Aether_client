@@ -51,3 +51,6 @@ transform = Transform( 1, 0, 0, 0, -0.642788, 0.766045, 0, -0.766045, -0.642788,
 light_energy = 2.0
 shadow_enabled = true
 shadow_color = Color( 0.6, 0.6, 0.6, 1 )
+
+[node name="EditorCameraPeg" type="Position3D" parent="."]
+transform = Transform( 0.706761, 0, 0.707452, 0, 1, 0, -0.707452, 0, 0.706761, -3.5922, 7.65541, 7.99257 )
