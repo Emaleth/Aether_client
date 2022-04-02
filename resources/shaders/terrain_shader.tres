@@ -13,21 +13,17 @@ uniform float green_scale = 1.0;
 uniform sampler2D blue_diffuse;
 uniform float blue_scale = 1.0;
 
-uniform sampler2D alpha_diffuse;
-uniform float alpha_scale = 1.0;
-
 uniform sampler2D splatmap;
 
 
 void fragment() {
-	mat4 albedo; 
-	vec4 value = texture(splatmap, UV);
+	mat3 albedo; 
+	vec3 value = texture(splatmap, UV).rgb;
 	
 	albedo[0].rgb = texture(red_diffuse, UV * vec2(red_scale)).rgb * value.r;
 	albedo[1].rgb = texture(green_diffuse, UV * vec2(green_scale)).rgb * value.g;
 	albedo[2].rgb = texture(blue_diffuse, UV * vec2(blue_scale)).rgb * value.b;
-	albedo[3].rgb = texture(alpha_diffuse, UV * vec2(alpha_scale)).rgb * value.a;
 	
-	ALBEDO = albedo[0].rgb + albedo[1].rgb + albedo[2].rgb;// + albedo[3].rgb;
+	ALBEDO = albedo[0].rgb + albedo[1].rgb + albedo[2].rgb;
 }
 "
