@@ -28,6 +28,8 @@ static func get_item_data(_item : String) -> Array:
 	match index_data["type"]:
 		"weapon":
 			type_data = LocalDataTables.weapon_table[_item]
+		"sidearm":
+			type_data = LocalDataTables.sidearm_table[_item]
 		"armor":
 			type_data = LocalDataTables.armor_table[_item]
 		"material":
