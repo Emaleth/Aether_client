@@ -4,7 +4,7 @@ extends Node
 var item_index := {}
 var armor_table := {}
 var weapon_table := {}
-var sidearm_table := {}
+#var sidearm_table := {}
 var material_table := {}
 var craft_recipe_table := {}
 var ability_scroll_table := {}

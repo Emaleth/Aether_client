@@ -18,22 +18,22 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 armor_slot = NodePath("VBoxContainer/HBoxContainer2/LeftEqRow/ArmorSlot")
-weapon_slot = NodePath("VBoxContainer/HBoxContainer2/LeftEqRow/WeaponSlot")
-sidearm_slot = NodePath("VBoxContainer/HBoxContainer2/LeftEqRow/SidearmSlot")
+primary_weapon = NodePath("VBoxContainer/HBoxContainer2/LeftEqRow/WeaponSlot")
+secondary_weapon = NodePath("VBoxContainer/HBoxContainer2/RightEqRow/SidearmSlot")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 243.0
+margin_right = 275.0
 margin_bottom = 211.0
 
 [node name="TopEqRow" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 240.0
+margin_right = 272.0
 custom_constants/separation = 0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 4.0
-margin_right = 240.0
+margin_right = 272.0
 margin_bottom = 204.0
 
 [node name="LeftEqRow" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
@@ -44,11 +44,6 @@ custom_constants/separation = 0
 [node name="ArmorSlot" parent="VBoxContainer/HBoxContainer2/LeftEqRow" instance=ExtResource( 2 )]
 
 [node name="WeaponSlot" parent="VBoxContainer/HBoxContainer2/LeftEqRow" instance=ExtResource( 2 )]
-margin_top = 84.0
-margin_bottom = 116.0
-size_flags_vertical = 10
-
-[node name="SidearmSlot" parent="VBoxContainer/HBoxContainer2/LeftEqRow" instance=ExtResource( 2 )]
 margin_top = 168.0
 margin_bottom = 200.0
 size_flags_vertical = 10
@@ -79,12 +74,17 @@ environment = ExtResource( 4 )
 
 [node name="RightEqRow" type="VBoxContainer" parent="VBoxContainer/HBoxContainer2"]
 margin_left = 240.0
-margin_right = 240.0
+margin_right = 272.0
 margin_bottom = 200.0
 custom_constants/separation = 0
 
+[node name="SidearmSlot" parent="VBoxContainer/HBoxContainer2/RightEqRow" instance=ExtResource( 2 )]
+margin_top = 168.0
+margin_bottom = 200.0
+size_flags_vertical = 10
+
 [node name="BottomEqRow" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 208.0
-margin_right = 240.0
+margin_right = 272.0
 margin_bottom = 208.0
 custom_constants/separation = 0
