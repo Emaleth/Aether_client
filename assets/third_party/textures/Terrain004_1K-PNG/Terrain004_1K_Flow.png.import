@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Terrain004_1K_Flow.png-902a765d793db1424187c1f687bcd734.stex"
+path="res://.import/Terrain004_1K_Flow.png-ee1f06715882ff02d46c1c9f53015bd8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/third_party/PBR/Terrain004_1K-PNG/Terrain004_1K_Flow.png"
-dest_files=[ "res://.import/Terrain004_1K_Flow.png-902a765d793db1424187c1f687bcd734.stex" ]
+source_file="res://assets/third_party/textures/Terrain004_1K-PNG/Terrain004_1K_Flow.png"
+dest_files=[ "res://.import/Terrain004_1K_Flow.png-ee1f06715882ff02d46c1c9f53015bd8.stex" ]
 
 [params]
 

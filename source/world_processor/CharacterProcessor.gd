@@ -16,7 +16,7 @@ func spawn_character():
 	container.add_child(GlobalVariables.player_actor)
 	GlobalVariables.user_interface = interface_scene.instance()
 	container.add_child(GlobalVariables.user_interface)
-	GlobalVariables.player_actor.global_transform.origin = Vector3(0, 8.08, 0)
+	GlobalVariables.player_actor.global_transform.origin = Vector3(2002.831, 656.882, -1450.724)
 
 
 var frame_index = 0

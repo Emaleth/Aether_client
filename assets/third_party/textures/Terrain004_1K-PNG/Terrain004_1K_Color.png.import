@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Terrain004_1K_Color.png-791e7caba97023c4c21e40210abbffcf.s3tc.stex"
-path.etc="res://.import/Terrain004_1K_Color.png-791e7caba97023c4c21e40210abbffcf.etc.stex"
+path.s3tc="res://.import/Terrain004_1K_Color.png-343e07da81aefe0bd851e08ec323e53f.s3tc.stex"
+path.etc="res://.import/Terrain004_1K_Color.png-343e07da81aefe0bd851e08ec323e53f.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/third_party/PBR/Terrain004_1K-PNG/Terrain004_1K_Color.png"
-dest_files=[ "res://.import/Terrain004_1K_Color.png-791e7caba97023c4c21e40210abbffcf.s3tc.stex", "res://.import/Terrain004_1K_Color.png-791e7caba97023c4c21e40210abbffcf.etc.stex" ]
+source_file="res://assets/third_party/textures/Terrain004_1K-PNG/Terrain004_1K_Color.png"
+dest_files=[ "res://.import/Terrain004_1K_Color.png-343e07da81aefe0bd851e08ec323e53f.s3tc.stex", "res://.import/Terrain004_1K_Color.png-343e07da81aefe0bd851e08ec323e53f.etc.stex" ]
 
 [params]
 

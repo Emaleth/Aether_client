@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=10 format=2]
+[gd_resource type="ShaderMaterial" load_steps=7 format=2]
 
 [ext_resource path="res://resources/shaders/terrain_shader.tres" type="Shader" id=1]
 [ext_resource path="res://assets/custom_textures/splatmap.png" type="Texture" id=2]
@@ -6,40 +6,13 @@
 [ext_resource path="res://assets/third_party/PBR/Ground048_1K-PNG/Ground048_1K_Color.png" type="Texture" id=4]
 [ext_resource path="res://assets/third_party/PBR/Grass004_1K-PNG/Grass004_1K_Color.png" type="Texture" id=5]
 [ext_resource path="res://assets/third_party/PBR/Tiles086_1K-PNG/Tiles086_1K_Color.png" type="Texture" id=6]
-[ext_resource path="res://assets/third_party/PBR/Terrain004_2K.exr" type="Texture" id=7]
-
-[sub_resource type="Shader" id=1]
-code = "shader_type spatial;
-
-uniform float height_scale = 0.5;
-uniform sampler2D noise;
-uniform sampler2D normalmap;
-
-varying vec2 tex_position;
-
-void vertex() {
-  tex_position = VERTEX.xz / 2.0 + 0.5;
-  float height = texture(noise, tex_position).x;
-  VERTEX.y += height * height_scale;
-}
-
-//void fragment() {
-//  NORMALMAP = texture(normalmap, tex_position).xyz;
-//}"
-
-[sub_resource type="ShaderMaterial" id=2]
-shader = SubResource( 1 )
-shader_param/height_scale = 10.0
-shader_param/noise = ExtResource( 7 )
-shader_param/normalmap = ExtResource( 7 )
 
 [resource]
-next_pass = SubResource( 2 )
 shader = ExtResource( 1 )
-shader_param/red_scale = 100
-shader_param/green_scale = 100
-shader_param/blue_scale = 100
-shader_param/alpha_scale = 100
+shader_param/red_scale = 10000
+shader_param/green_scale = 10000
+shader_param/blue_scale = 10000
+shader_param/alpha_scale = 10000
 shader_param/red_diffuse = ExtResource( 4 )
 shader_param/green_diffuse = ExtResource( 5 )
 shader_param/blue_diffuse = ExtResource( 3 )
