@@ -1,0 +1,43 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://source/terrain/Terrain.gd" type="Script" id=1]
+[ext_resource path="res://Heightmap.png" type="Image" id=2]
+[ext_resource path="res://assets/custom_textures/splatmap.png" type="Texture" id=3]
+[ext_resource path="res://assets/third_party/PBR/Grass002_1K-PNG/Grass002_1K_Roughness.png" type="Texture" id=4]
+[ext_resource path="res://assets/third_party/PBR/Grass002_1K-PNG/Grass002_1K_Color.png" type="Texture" id=5]
+[ext_resource path="res://assets/third_party/PBR/Ground048_1K-PNG/Ground048_1K_Color.png" type="Texture" id=7]
+[ext_resource path="res://assets/third_party/PBR/Rock047_1K-PNG/Rock047_1K_Roughness.png" type="Texture" id=8]
+[ext_resource path="res://assets/third_party/PBR/Grass002_1K-PNG/Grass002_1K_NormalGL.png" type="Texture" id=9]
+[ext_resource path="res://assets/third_party/PBR/Ground048_1K-PNG/Ground048_1K_NormalGL.png" type="Texture" id=10]
+[ext_resource path="res://assets/third_party/PBR/Ground048_1K-PNG/Ground048_1K_Roughness.png" type="Texture" id=11]
+[ext_resource path="res://assets/third_party/PBR/Rock047_1K-PNG/Rock047_1K_NormalGL.png" type="Texture" id=12]
+[ext_resource path="res://assets/third_party/PBR/Rock047_1K-PNG/Rock047_1K_Color.png" type="Texture" id=13]
+
+[node name="Terrain" type="StaticBody"]
+script = ExtResource( 1 )
+height = 10
+heightmap = ExtResource( 2 )
+splatmap = ExtResource( 3 )
+red_channel_scale = 10
+red_channel_diffuse = ExtResource( 5 )
+red_channel_normal = ExtResource( 9 )
+red_channel_roughness = ExtResource( 4 )
+green_channel_scale = 10
+green_channel_diffuse = ExtResource( 7 )
+green_channel_normal = ExtResource( 10 )
+green_channel_roughness = ExtResource( 11 )
+blue_channel_scale = 10
+blue_channel_diffuse = ExtResource( 13 )
+blue_channel_normal = ExtResource( 12 )
+blue_channel_roughness = ExtResource( 8 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+visible = false
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( -0.654476, -0.359234, 0.665291, -0.370109, 0.919504, 0.132408, -0.659304, -0.159572, -0.734749, -22.4455, 4.03576, 13.5686 )
+shadow_enabled = true
+shadow_bias = 5.0
+spot_range = 100.0

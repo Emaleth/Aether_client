@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/Rock047_1K_NormalGL.png-523419e601e331c030cfea0ec05d2c27.s3tc.stex"
-path.etc="res://.import/Rock047_1K_NormalGL.png-523419e601e331c030cfea0ec05d2c27.etc.stex"
+path.s3tc="res://.import/Heightmap2.png-ec28300576eb65ade4160304e00eae21.s3tc.stex"
+path.etc="res://.import/Heightmap2.png-ec28300576eb65ade4160304e00eae21.etc.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/third_party/PBR/Rock047_1K-PNG/Rock047_1K_NormalGL.png"
-dest_files=[ "res://.import/Rock047_1K_NormalGL.png-523419e601e331c030cfea0ec05d2c27.s3tc.stex", "res://.import/Rock047_1K_NormalGL.png-523419e601e331c030cfea0ec05d2c27.etc.stex" ]
+source_file="res://Heightmap2.png"
+dest_files=[ "res://.import/Heightmap2.png-ec28300576eb65ade4160304e00eae21.s3tc.stex", "res://.import/Heightmap2.png-ec28300576eb65ade4160304e00eae21.etc.stex" ]
 
 [params]
 
@@ -22,7 +22,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=true
-flags/filter=true
+flags/filter=false
 flags/mipmaps=true
 flags/anisotropic=false
 flags/srgb=2
