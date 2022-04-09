@@ -10,16 +10,19 @@ export var red_channel_scale := 1
 export var red_channel_diffuse : Texture
 export var red_channel_normal : Texture
 export var red_channel_roughness : Texture
+export var red_channel_ao : Texture
 
 export var green_channel_scale := 1
 export var green_channel_diffuse : Texture
 export var green_channel_normal : Texture
 export var green_channel_roughness : Texture
+export var green_channel_ao : Texture
 
 export var blue_channel_scale := 1
 export var blue_channel_diffuse : Texture
 export var blue_channel_normal : Texture
 export var blue_channel_roughness : Texture
+export var blue_channel_ao : Texture
 
 
 var size = Vector2.ZERO
@@ -64,16 +67,19 @@ func configure_shader():
 	mesh_instance.mesh.material.set("shader_param/red_diffuse", red_channel_diffuse)
 	mesh_instance.mesh.material.set("shader_param/red_normal", red_channel_normal)
 	mesh_instance.mesh.material.set("shader_param/red_roughness", red_channel_roughness)
+	mesh_instance.mesh.material.set("shader_param/red_ao", red_channel_ao)
 	
 	mesh_instance.mesh.material.set("shader_param/green_scale", green_channel_scale)
 	mesh_instance.mesh.material.set("shader_param/green_diffuse", green_channel_diffuse)
 	mesh_instance.mesh.material.set("shader_param/green_normal", green_channel_normal)
 	mesh_instance.mesh.material.set("shader_param/green_roughness", green_channel_roughness)
+	mesh_instance.mesh.material.set("shader_param/green_ao", green_channel_ao)
 	
 	mesh_instance.mesh.material.set("shader_param/blue_scale", blue_channel_scale)
 	mesh_instance.mesh.material.set("shader_param/blue_diffuse", blue_channel_diffuse)
 	mesh_instance.mesh.material.set("shader_param/blue_normal", blue_channel_normal)
 	mesh_instance.mesh.material.set("shader_param/blue_roughness", blue_channel_roughness)
+	mesh_instance.mesh.material.set("shader_param/blue_ao", blue_channel_ao)
 	
 	
 func process_images():
