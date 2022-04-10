@@ -61,8 +61,7 @@ void fragment() {
 	roughness = normalize(roughness);
 	
 	ALBEDO = albedo[0].rgb + albedo[1].rgb + albedo[2].rgb;
-	NORMALMAP = texture(normalmap, UV).rgb + (normal[0].rgb + normal[1].rgb + normal[2].rgb);
-	NORMALMAP_DEPTH = 1.0;
+	NORMALMAP = mix(texture(normalmap, UV).rgb, (normal[0].rgb + normal[1].rgb + normal[2].rgb), 0.5);
 	ROUGHNESS = roughness.r + roughness.g + roughness.b;
 	AO = ao.r + ao.g + ao.b;
 }

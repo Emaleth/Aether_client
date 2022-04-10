@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://assets/third_party/meshes/Terrain004_1K.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/terrain/Terrain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/crafting_station/crafting_station.tscn" type="PackedScene" id=2]
 [ext_resource path="res://source/resource_node/resource_node.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/shop/shop.tscn" type="PackedScene" id=4]
@@ -8,45 +8,46 @@
 
 [node name="World" type="Node"]
 
-[node name="Terrain004_1K" parent="." instance=ExtResource( 1 )]
+[node name="Terrain" parent="." instance=ExtResource( 1 )]
 
 [node name="Sun" type="DirectionalLight" parent="."]
 transform = Transform( 1, 0, 0, 0, -0.642788, 0.766045, 0, -0.766045, -0.642788, 0, 100, 0 )
 light_energy = 2.0
 shadow_enabled = true
 shadow_color = Color( 0.6, 0.6, 0.6, 1 )
+directional_shadow_mode = 0
 
 [node name="NPCContainer" type="Node" parent="."]
 
 [node name="NPC" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2012.32, 657.366, -1450.7 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.318369, 1.64883, 28.9173 )
 
 [node name="NPC2" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2013.12, 657.187, -1444.66 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.20087, 1.59168, 27.4623 )
 
 [node name="NPC3" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2017.35, 657.388, -1450.42 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3962, 2.01578, 31.8071 )
 
 [node name="ResourceNodeContainer" type="Node" parent="."]
 
 [node name="resource_node" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2005.64, 656.876, -1435.72 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.59978, 5.827, -9.49561 )
 
 [node name="resource_node2" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2003.49, 656.882, -1435.93 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69286, 6.12102, -11.3774 )
 
 [node name="resource_node3" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2004.14, 656.827, -1434.33 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.95553, 6.20143, -9.43565 )
 
 [node name="ShopContainer" type="Node" parent="."]
 
 [node name="shop" parent="ShopContainer" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2008.6, 657.15, -1454.6 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31783, 2.66491, 10.3402 )
 
 [node name="CraftingStationContainer" type="Node" parent="."]
 
 [node name="crafting_station" parent="CraftingStationContainer" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2000.54, 656.815, -1443.17 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12834, 1.40767, -11.9478 )
 
 [node name="AbilityContainer" type="Node" parent="."]
 
