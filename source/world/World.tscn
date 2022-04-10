@@ -20,34 +20,34 @@ directional_shadow_mode = 0
 [node name="NPCContainer" type="Node" parent="."]
 
 [node name="NPC" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.318369, 1.64883, 28.9173 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.318369, 2.82353, 28.9173 )
 
 [node name="NPC2" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.20087, 1.59168, 27.4623 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.20087, 2.82353, 27.4623 )
 
 [node name="NPC3" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3962, 2.01578, 31.8071 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3962, 2.82353, 31.8071 )
 
 [node name="ResourceNodeContainer" type="Node" parent="."]
 
 [node name="resource_node" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.59978, 5.827, -9.49561 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.59978, 6.93837, -9.49561 )
 
 [node name="resource_node2" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69286, 6.12102, -11.3774 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69286, 7.66404, -11.3774 )
 
 [node name="resource_node3" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.95553, 6.20143, -9.43565 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.95553, 6.94147, -9.43565 )
 
 [node name="ShopContainer" type="Node" parent="."]
 
 [node name="shop" parent="ShopContainer" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31783, 2.66491, 10.3402 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31783, 2.82353, 20.1173 )
 
 [node name="CraftingStationContainer" type="Node" parent="."]
 
 [node name="crafting_station" parent="CraftingStationContainer" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12834, 1.40767, -11.9478 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12834, 6.23529, -11.9478 )
 
 [node name="AbilityContainer" type="Node" parent="."]
 
