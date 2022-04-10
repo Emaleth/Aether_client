@@ -1,4 +1,4 @@
-tool
+#tool
 extends StaticBody
 
 
@@ -33,7 +33,7 @@ var s_map_tex := ImageTexture.new()
 	
 onready var collision_shape := $CollisionShape
 onready var mesh_instance := $MeshInstance
-onready var terrain_shader := preload("res://resources/materials/terrain.tres").duplicate(true)
+onready var terrain_shader := preload("res://resources/materials/terrain.tres")
 
 
 func _ready() -> void:

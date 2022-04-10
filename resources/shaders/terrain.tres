@@ -8,6 +8,24 @@ uniform sampler2D heightmap;
 uniform sampler2D normalmap;
 uniform sampler2D splatmap;
 
+uniform sampler2D flat_diffuse;
+uniform sampler2D flat_normal;
+uniform sampler2D flat_roughness;
+uniform sampler2D flat_ao;
+uniform int flat_scale = 1;
+
+uniform sampler2D side_diffuse;
+uniform sampler2D side_normal;
+uniform sampler2D side_roughness;
+uniform sampler2D side_ao;
+uniform int side_scale = 1;
+
+uniform sampler2D top_diffuse;
+uniform sampler2D top_normal;
+uniform sampler2D top_roughness;
+uniform sampler2D top_ao;
+uniform int top_scale = 1;
+
 uniform sampler2D red_diffuse;
 uniform sampler2D red_normal;
 uniform sampler2D red_roughness;
@@ -35,34 +53,51 @@ void vertex() {
 }
 
 
-void fragment() {
+vec3 get_albedo(vec4 value, vec2 uv) {
 	mat3 albedo; 
+	albedo[0].rgb = texture(red_diffuse, uv * vec2(float(red_scale))).rgb * value.r;
+	albedo[1].rgb = texture(green_diffuse, uv * vec2(float(green_scale))).rgb * value.g;
+	albedo[2].rgb = texture(blue_diffuse, uv * vec2(float(blue_scale))).rgb * value.b;
+	return albedo[0].rgb + albedo[1].rgb + albedo[2].rgb;
+}
+
+
+vec3 get_normal(vec4 value, vec2 uv) {
 	mat3 normal; 
+	normal[0].rgb = texture(red_normal, uv * vec2(float(red_scale))).rgb * value.r;
+	normal[1].rgb = texture(green_normal, uv * vec2(float(green_scale))).rgb * value.g;
+	normal[2].rgb = texture(blue_normal, uv * vec2(float(blue_scale))).rgb * value.b;
+	return mix(texture(normalmap, uv).rgb, (normal[0].rgb + normal[1].rgb + normal[2].rgb), 0.5);
+}
+
+
+float get_roughness(vec4 value, vec2 uv) {
 	vec3 roughness; 
-	vec3 ao;
-	vec4 value = texture(splatmap, UV);
-	
-	albedo[0].rgb = texture(red_diffuse, UV * vec2(float(red_scale))).rgb * value.r;
-	albedo[1].rgb = texture(green_diffuse, UV * vec2(float(green_scale))).rgb * value.g;
-	albedo[2].rgb = texture(blue_diffuse, UV * vec2(float(blue_scale))).rgb * value.b;
-	
-	normal[0].rgb = texture(red_normal, UV * vec2(float(red_scale))).rgb * value.r;
-	normal[1].rgb = texture(green_normal, UV * vec2(float(green_scale))).rgb * value.g;
-	normal[2].rgb = texture(blue_normal, UV * vec2(float(blue_scale))).rgb * value.b;
-
-	roughness.r = texture(red_roughness, UV * vec2(float(red_scale))).r * value.r;
-	roughness.g = texture(green_roughness, UV * vec2(float(green_scale))).r * value.g;
-	roughness.b = texture(blue_roughness, UV * vec2(float(blue_scale))).r * value.b;
-
-	ao.r = texture(red_ao, UV * vec2(float(red_scale))).r * value.r;
-	ao.g = texture(green_ao, UV * vec2(float(green_scale))).r * value.g;
-	ao.b = texture(blue_ao, UV * vec2(float(blue_scale))).r * value.b;
-
+	roughness.r = texture(red_roughness, uv * vec2(float(red_scale))).r * value.r;
+	roughness.g = texture(green_roughness, uv * vec2(float(green_scale))).r * value.g;
+	roughness.b = texture(blue_roughness, uv * vec2(float(blue_scale))).r * value.b;
 	roughness = normalize(roughness);
+	return roughness.r + roughness.g + roughness.b;
+}
+
+
+float get_ao(vec4 value, vec2 uv) {
+	vec3 ao;
+	ao.r = texture(red_ao, uv * vec2(float(red_scale))).r * value.r;
+	ao.g = texture(green_ao, uv * vec2(float(green_scale))).r * value.g;
+	ao.b = texture(blue_ao, uv * vec2(float(blue_scale))).r * value.b;
+	return ao.r + ao.g + ao.b;
+}
+
+
+void fragment() {
+	vec4 value = texture(splatmap, UV);
+	vec3 normal = get_normal(value, UV); 
 	
-	ALBEDO = albedo[0].rgb + albedo[1].rgb + albedo[2].rgb;
-	NORMALMAP = mix(texture(normalmap, UV).rgb, (normal[0].rgb + normal[1].rgb + normal[2].rgb), 0.5);
-	ROUGHNESS = roughness.r + roughness.g + roughness.b;
-	AO = ao.r + ao.g + ao.b;
+	ALBEDO = get_albedo(value, UV);
+	NORMALMAP = normal;
+	NORMALMAP_DEPTH = normal.b * 2.0;
+	ROUGHNESS = get_roughness(value, UV);
+	AO = get_ao(value, UV);
 }
 "

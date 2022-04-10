@@ -54,4 +54,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12834, 6.23529, -11.9478 )
 [node name="PlayerContainer" type="Node" parent="."]
 
 [node name="EditorCameraPeg" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2002.83, 656.882, -1450.72 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.58439, 3.29412, 16.1693 )
