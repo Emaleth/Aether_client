@@ -4,27 +4,11 @@
 code = "shader_type spatial;
 
 
+uniform int max_altitude = 1;
+
 uniform sampler2D heightmap;
 uniform sampler2D normalmap;
 uniform sampler2D splatmap;
-
-uniform sampler2D flat_diffuse;
-uniform sampler2D flat_normal;
-uniform sampler2D flat_roughness;
-uniform sampler2D flat_ao;
-uniform int flat_scale = 1;
-
-uniform sampler2D side_diffuse;
-uniform sampler2D side_normal;
-uniform sampler2D side_roughness;
-uniform sampler2D side_ao;
-uniform int side_scale = 1;
-
-uniform sampler2D top_diffuse;
-uniform sampler2D top_normal;
-uniform sampler2D top_roughness;
-uniform sampler2D top_ao;
-uniform int top_scale = 1;
 
 uniform sampler2D red_diffuse;
 uniform sampler2D red_normal;
@@ -44,12 +28,10 @@ uniform sampler2D blue_roughness;
 uniform sampler2D blue_ao;
 uniform int blue_scale = 1;
 
-uniform int height_delta = 1;
-
 
 void vertex() {
 	float height = texture(heightmap, UV).r;
-	VERTEX.y += height * float(height_delta);
+	VERTEX.y = height * float(max_altitude);
 }
 
 

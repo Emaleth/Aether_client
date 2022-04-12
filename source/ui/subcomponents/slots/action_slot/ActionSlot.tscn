@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://source/ui/subcomponents/slots/action_slot/ActionSlot.gd" type="Script" id=1]
+[ext_resource path="res://assets/custom_textures/grid.png" type="Texture" id=2]
 [ext_resource path="res://assets/stylebox/slot.tres" type="StyleBox" id=3]
 [ext_resource path="res://resources/fonts/content_mini.tres" type="DynamicFont" id=4]
-[ext_resource path="res://assets/third_party/crosshairpack_kenney/Preview.png" type="Texture" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -138,7 +138,7 @@ mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 value = 34.0
-texture_progress = ExtResource( 5 )
+texture_progress = ExtResource( 2 )
 fill_mode = 5
 nine_patch_stretch = true
 __meta__ = {

@@ -20,38 +20,38 @@ directional_shadow_mode = 0
 [node name="NPCContainer" type="Node" parent="."]
 
 [node name="NPC" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.318369, 2.82353, 28.9173 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.337, 8.45614, 167.249 )
 
 [node name="NPC2" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6.20087, 2.82353, 27.4623 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 164.818, 8.8678, 165.794 )
 
 [node name="NPC3" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3962, 2.82353, 31.8071 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 166.623, 8.78352, 170.139 )
 
 [node name="ResourceNodeContainer" type="Node" parent="."]
 
 [node name="resource_node" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.59978, 6.93837, -9.49561 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 178.619, 15.3019, 128.836 )
 
 [node name="resource_node2" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8.69286, 7.66404, -11.3774 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 179.712, 15.736, 126.954 )
 
 [node name="resource_node3" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.95553, 6.94147, -9.43565 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 180.975, 15.3025, 128.896 )
 
 [node name="ShopContainer" type="Node" parent="."]
 
 [node name="shop" parent="ShopContainer" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 4.31783, 2.82353, 20.1173 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 175.337, 8.2504, 158.449 )
 
 [node name="CraftingStationContainer" type="Node" parent="."]
 
 [node name="crafting_station" parent="CraftingStationContainer" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.12834, 6.23529, -11.9478 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 161.891, 14.3206, 126.384 )
 
 [node name="AbilityContainer" type="Node" parent="."]
 
 [node name="PlayerContainer" type="Node" parent="."]
 
 [node name="EditorCameraPeg" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.58439, 3.29412, 16.1693 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -68.134, 29.3367, -11.6712 )
