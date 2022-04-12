@@ -1,21 +1,24 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://source/terrain/Terrain.gd" type="Script" id=1]
 [ext_resource path="res://assets/third_party/textures/Terrain001_2K.exr" type="Image" id=2]
-[ext_resource path="res://assets/third_party/PBR/Rocks024S_1K-PNG/Rocks024S_1K_Roughness.png" type="Texture" id=3]
-[ext_resource path="res://assets/third_party/PBR/Rock031_1K-PNG/Rock031_1K_Color.png" type="Texture" id=4]
-[ext_resource path="res://assets/third_party/PBR/Rock031_1K-PNG/Rock031_1K_NormalGL.png" type="Texture" id=5]
-[ext_resource path="res://assets/third_party/PBR/Grass003_1K-PNG/Grass003_1K_NormalGL.png" type="Texture" id=6]
-[ext_resource path="res://assets/third_party/PBR/Grass003_1K-PNG/Grass003_1K_Roughness.png" type="Texture" id=7]
-[ext_resource path="res://assets/third_party/PBR/Grass003_1K-PNG/Grass003_1K_Color.png" type="Texture" id=8]
+[ext_resource path="res://assets/third_party/PBR/Grass003_1K-PNG/Grass003_1K_NormalGL.png" type="Texture" id=3]
+[ext_resource path="res://assets/third_party/PBR/Grass003_1K-PNG/Grass003_1K_AmbientOcclusion.png" type="Texture" id=4]
+[ext_resource path="res://assets/third_party/PBR/Grass003_1K-PNG/Grass003_1K_Color.png" type="Texture" id=5]
+[ext_resource path="res://assets/third_party/PBR/Grass003_1K-PNG/Grass003_1K_Roughness.png" type="Texture" id=6]
+[ext_resource path="res://assets/third_party/textures/Terrain001_2K_sm.exr" type="Texture" id=7]
+[ext_resource path="res://assets/third_party/PBR/Rock031_1K-PNG/Rock031_1K_NormalGL.png" type="Texture" id=8]
 [ext_resource path="res://assets/third_party/PBR/Rock031_1K-PNG/Rock031_1K_AmbientOcclusion.png" type="Texture" id=9]
-[ext_resource path="res://assets/third_party/PBR/Grass003_1K-PNG/Grass003_1K_AmbientOcclusion.png" type="Texture" id=10]
-[ext_resource path="res://assets/third_party/PBR/Rocks024S_1K-PNG/Rocks024S_1K_Color.png" type="Texture" id=11]
-[ext_resource path="res://assets/third_party/PBR/Rock031_1K-PNG/Rock031_1K_Roughness.png" type="Texture" id=12]
-[ext_resource path="res://assets/third_party/PBR/Rocks024S_1K-PNG/Rocks024S_1K_AmbientOcclusion.png" type="Texture" id=13]
-[ext_resource path="res://assets/third_party/textures/Terrain001_2K_sm.exr" type="Texture" id=14]
-[ext_resource path="res://assets/third_party/PBR/Rocks024S_1K-PNG/Rocks024S_1K_NormalGL.png" type="Texture" id=15]
+[ext_resource path="res://assets/third_party/PBR/Rock031_1K-PNG/Rock031_1K_Color.png" type="Texture" id=10]
+[ext_resource path="res://assets/third_party/PBR/Rock031_1K-PNG/Rock031_1K_Roughness.png" type="Texture" id=11]
+[ext_resource path="res://assets/third_party/PBR/Ground048_1K-PNG/Ground048_1K_NormalGL.png" type="Texture" id=12]
+[ext_resource path="res://assets/third_party/PBR/Ground048_1K-PNG/Ground048_1K_Color.png" type="Texture" id=13]
+[ext_resource path="res://assets/third_party/PBR/Ground048_1K-PNG/Ground048_1K_Roughness.png" type="Texture" id=14]
+[ext_resource path="res://assets/third_party/PBR/PavingStones054_1K-PNG/PavingStones054_1K_AmbientOcclusion.png" type="Texture" id=15]
 [ext_resource path="res://resources/materials/terrain.tres" type="Material" id=16]
+[ext_resource path="res://assets/third_party/PBR/PavingStones054_1K-PNG/PavingStones054_1K_Roughness.png" type="Texture" id=18]
+[ext_resource path="res://assets/third_party/PBR/Ground048_1K-PNG/Ground048_1K_AmbientOcclusion.png" type="Texture" id=19]
+[ext_resource path="res://assets/third_party/PBR/PavingStones054_1K-PNG/PavingStones054_1K_NormalGL.png" type="Texture" id=20]
 
 [sub_resource type="HeightMapShape" id=1]
 map_width = 512
@@ -32,22 +35,26 @@ subdivide_depth = 511
 script = ExtResource( 1 )
 max_altitude = 100
 heightmap = ExtResource( 2 )
-splatmap = ExtResource( 14 )
-red_channel_scale = 100
-red_channel_diffuse = ExtResource( 4 )
-red_channel_normal = ExtResource( 5 )
-red_channel_roughness = ExtResource( 12 )
-red_channel_ao = ExtResource( 9 )
-green_channel_scale = 100
-green_channel_diffuse = ExtResource( 8 )
-green_channel_normal = ExtResource( 6 )
-green_channel_roughness = ExtResource( 7 )
-green_channel_ao = ExtResource( 10 )
-blue_channel_scale = 100
-blue_channel_diffuse = ExtResource( 11 )
-blue_channel_normal = ExtResource( 15 )
-blue_channel_roughness = ExtResource( 3 )
-blue_channel_ao = ExtResource( 13 )
+splatmap_0 = ExtResource( 7 )
+red_0_channel_scale = 100
+red_0_channel_diffuse = ExtResource( 5 )
+red_0_channel_normal = ExtResource( 3 )
+red_0_channel_roughness = ExtResource( 6 )
+red_0_channel_ao = ExtResource( 4 )
+green_0_channel_scale = 100
+green_0_channel_diffuse = ExtResource( 10 )
+green_0_channel_normal = ExtResource( 8 )
+green_0_channel_roughness = ExtResource( 11 )
+green_0_channel_ao = ExtResource( 9 )
+blue_0_channel_scale = 100
+blue_0_channel_diffuse = ExtResource( 13 )
+blue_0_channel_normal = ExtResource( 12 )
+blue_0_channel_roughness = ExtResource( 14 )
+blue_0_channel_ao = ExtResource( 19 )
+alpha_0_channel_scale = 100
+alpha_0_channel_normal = ExtResource( 20 )
+alpha_0_channel_roughness = ExtResource( 18 )
+alpha_0_channel_ao = ExtResource( 15 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 visible = false
