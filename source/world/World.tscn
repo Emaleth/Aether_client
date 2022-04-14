@@ -11,47 +11,71 @@
 [node name="Terrain" parent="." instance=ExtResource( 1 )]
 
 [node name="Sun" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, -0.642788, 0.766045, 0, -0.766045, -0.642788, 0, 100, 0 )
+transform = Transform( 1, 0, 0, 0, -0.642788, 0.766044, 0, -0.766044, -0.642788, 0, 100, 0 )
 light_energy = 2.0
 shadow_enabled = true
 shadow_color = Color( 0.6, 0.6, 0.6, 1 )
 directional_shadow_mode = 0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="NPCContainer" type="Node" parent="."]
 
 [node name="NPC" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.337, 8.45614, 167.249 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 171.337, 38.6625, 167.249 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="NPC2" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 164.818, 8.8678, 165.794 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 164.818, 39.6417, 165.794 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="NPC3" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 166.623, 8.78352, 170.139 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 166.623, 38.3335, 170.139 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ResourceNodeContainer" type="Node" parent="."]
 
 [node name="resource_node" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 178.619, 15.3019, 128.836 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 178.619, 43.9207, 128.836 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="resource_node2" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 179.712, 15.736, 126.954 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 179.712, 44.5874, 126.954 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="resource_node3" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 180.975, 15.3025, 128.896 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 180.975, 43.855, 128.896 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ShopContainer" type="Node" parent="."]
 
 [node name="shop" parent="ShopContainer" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 175.337, 8.2504, 158.449 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 175.337, 39.6304, 158.449 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CraftingStationContainer" type="Node" parent="."]
 
 [node name="crafting_station" parent="CraftingStationContainer" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 161.891, 14.3206, 126.384 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 161.891, 44.3151, 126.384 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AbilityContainer" type="Node" parent="."]
 
 [node name="PlayerContainer" type="Node" parent="."]
-
-[node name="EditorCameraPeg" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 43.3958, 90.9685, -44.9655 )

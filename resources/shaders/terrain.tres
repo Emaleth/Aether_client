@@ -6,39 +6,55 @@ code = "shader_type spatial;
 
 uniform int max_altitude = 1;
 
+uniform float rock_slope = 0.65;
+uniform float dirt_slope = 0.6;
+uniform float grass_slope = 0.0;
+
 uniform sampler2D heightmap;
 uniform sampler2D normalmap;
+uniform sampler2D splatmap;
 
-uniform bool splatmap_0_enabled;
-uniform sampler2D splatmap_0;
+uniform int rock_scale = 1;
+uniform sampler2D rock_diffuse;
+uniform sampler2D rock_normal;
+uniform sampler2D rock_roughness;
+uniform sampler2D rock_ao;
 
-uniform bool red_0_enabled;
-uniform int red_0_scale = 1;
-uniform sampler2D red_0_diffuse;
-uniform sampler2D red_0_normal;
-uniform sampler2D red_0_roughness;
-uniform sampler2D red_0_ao;
+uniform int dirt_scale = 1;
+uniform sampler2D dirt_diffuse;
+uniform sampler2D dirt_normal;
+uniform sampler2D dirt_roughness;
+uniform sampler2D dirt_ao;
 
-uniform bool green_0_enabled;
-uniform int green_0_scale = 1;
-uniform sampler2D green_0_diffuse;
-uniform sampler2D green_0_normal;
-uniform sampler2D green_0_roughness;
-uniform sampler2D green_0_ao;
+uniform int grass_scale = 1;
+uniform sampler2D grass_diffuse;
+uniform sampler2D grass_normal;
+uniform sampler2D grass_roughness;
+uniform sampler2D grass_ao;
 
-uniform bool blue_0_enabled;
-uniform int blue_0_scale = 1;
-uniform sampler2D blue_0_diffuse;
-uniform sampler2D blue_0_normal;
-uniform sampler2D blue_0_roughness;
-uniform sampler2D blue_0_ao;
+uniform int red_scale = 1;
+uniform sampler2D red_diffuse;
+uniform sampler2D red_normal;
+uniform sampler2D red_roughness;
+uniform sampler2D red_ao;
 
-uniform bool alpha_0_enabled;
-uniform int alpha_0_scale = 1;
-uniform sampler2D alpha_0_diffuse;
-uniform sampler2D alpha_0_normal;
-uniform sampler2D alpha_0_roughness;
-uniform sampler2D alpha_0_ao;
+uniform int green_scale = 1;
+uniform sampler2D green_diffuse;
+uniform sampler2D green_normal;
+uniform sampler2D green_roughness;
+uniform sampler2D green_ao;
+
+uniform int blue_scale = 1;
+uniform sampler2D blue_diffuse;
+uniform sampler2D blue_normal;
+uniform sampler2D blue_roughness;
+uniform sampler2D blue_ao;
+
+uniform int alpha_scale = 1;
+uniform sampler2D alpha_diffuse;
+uniform sampler2D alpha_normal;
+uniform sampler2D alpha_roughness;
+uniform sampler2D alpha_ao;
 
 
 void vertex() {
@@ -47,86 +63,99 @@ void vertex() {
 }
 
 
-vec3 get_albedo(vec4 value, vec2 uv) {
+vec3 get_albedo(vec4 value, float slope, vec2 uv) {
 	vec3 albedo = vec3(0.0); 
-	if (red_0_enabled == true) {
-		albedo += texture(red_0_diffuse, uv * vec2(float(red_0_scale))).rgb * value.r;
-	}
-	if (green_0_enabled == true) {
-		albedo += texture(green_0_diffuse, uv * vec2(float(green_0_scale))).rgb * value.g;
-	}
-	if (blue_0_enabled == true) {
-		albedo += texture(blue_0_diffuse, uv * vec2(float(blue_0_scale))).rgb * value.b;
-	}
-	if (alpha_0_enabled == true) {
-		albedo += texture(alpha_0_diffuse, uv * vec2(float(alpha_0_scale))).rgb * value.a;
-	}
-	return albedo;
+
+	if (slope > rock_slope) {
+		albedo = texture(rock_diffuse, uv * vec2(float(rock_scale))).rgb;
+	} 
+	else if (slope > dirt_slope) {
+		albedo = texture(dirt_diffuse, uv * vec2(float(dirt_scale))).rgb;
+	} 
+	else if (slope >= grass_slope) {
+		albedo = texture(grass_diffuse, uv * vec2(float(grass_scale))).rgb;
+	} 
+	
+	albedo = mix(albedo, texture(red_diffuse, uv * vec2(float(red_scale))).rgb, value.r);
+	albedo = mix(albedo, texture(green_diffuse, uv * vec2(float(green_scale))).rgb, value.g);
+	albedo = mix(albedo, texture(blue_diffuse, uv * vec2(float(blue_scale))).rgb, value.b);
+
+	return albedo.rgb;
 }
 
 
-vec3 get_normal(vec4 value, vec2 uv) {
+vec3 get_normal(vec4 value, float slope, vec2 uv) {
 	vec3 normal = vec3(0.0); 
-	if (red_0_enabled == true) {
-		normal += texture(red_0_normal, uv * vec2(float(red_0_scale))).rgb * value.r;
+
+	if (slope > rock_slope) {
+		normal = texture(rock_normal, uv * vec2(float(rock_scale))).rgb;
+	} 
+	else if (slope > dirt_slope) {
+		normal = texture(dirt_normal, uv * vec2(float(dirt_scale))).rgb;
+	} 
+	else if (slope > grass_slope) {
+		normal = texture(grass_normal, uv * vec2(float(grass_scale))).rgb;
 	}
-	if (green_0_enabled == true) {
-		normal += texture(green_0_normal, uv * vec2(float(green_0_scale))).rgb * value.g;
-	}
-	if (blue_0_enabled == true) {
-		normal += texture(blue_0_normal, uv * vec2(float(blue_0_scale))).rgb * value.b;
-	}
-	if (alpha_0_enabled == true) {
-		normal += texture(alpha_0_normal, uv * vec2(float(alpha_0_scale))).rgb * value.a;
-	}
+ 
+	normal = mix(normal, texture(red_normal, uv * vec2(float(red_scale))).rgb, value.r);
+	normal = mix(normal, texture(green_normal, uv * vec2(float(green_scale))).rgb, value.g);
+	normal = mix(normal, texture(blue_normal, uv * vec2(float(blue_scale))).rgb, value.b);
+
 	return mix(texture(normalmap, uv).rgb, normal, 0.5);
 }
 
 
-float get_roughness(vec4 value, vec2 uv) {
+float get_roughness(vec4 value, float slope, vec2 uv) {
 	float roughness = 0.0;
-	if (red_0_enabled == true) {
-		roughness += texture(red_0_roughness, uv * vec2(float(red_0_scale))).r * value.r;
-	}
-	if (green_0_enabled == true) {
-		roughness += texture(green_0_roughness, uv * vec2(float(green_0_scale))).r * value.g;
-	}
-	if (blue_0_enabled == true) {
-		roughness += texture(blue_0_roughness, uv * vec2(float(blue_0_scale))).r * value.b;
-	}
-	if (alpha_0_enabled == true) {
-		roughness += texture(alpha_0_roughness, uv * vec2(float(alpha_0_scale))).r * value.a;
-	}
+
+	if (slope > rock_slope) {
+		roughness = texture(rock_roughness, uv * vec2(float(rock_scale))).r;
+	} 
+	else if (slope > dirt_slope) {
+		roughness = texture(dirt_roughness, uv * vec2(float(dirt_scale))).r;
+	} 
+	else if (slope > grass_slope) {
+		roughness = texture(grass_roughness, uv * vec2(float(grass_scale))).r;
+	} 
+
+	roughness = mix(roughness, texture(red_roughness, uv * vec2(float(red_scale))).r, value.r);
+	roughness = mix(roughness, texture(green_roughness, uv * vec2(float(green_scale))).r, value.g);
+	roughness = mix(roughness, texture(blue_roughness, uv * vec2(float(blue_scale))).r, value.b);
+	
 	return max(roughness, 1.0);
 }
 
 
-float get_ao(vec4 value, vec2 uv) {
+float get_ao(vec4 value, float slope, vec2 uv) {
 	float ao = 0.0;
-	if (red_0_enabled == true) {
-		ao += texture(red_0_ao, uv * vec2(float(red_0_scale))).r * value.r;
-	}
-	if (red_0_enabled == true) {
-		ao += texture(green_0_ao, uv * vec2(float(green_0_scale))).r * value.g;
-	}
-	if (red_0_enabled == true) {
-		ao += texture(blue_0_ao, uv * vec2(float(blue_0_scale))).r * value.b;
-	}
-	if (red_0_enabled == true) {
-		ao += texture(alpha_0_ao, uv * vec2(float(alpha_0_scale))).r * value.a;
-	}
+
+	if (slope > rock_slope) {
+		ao = texture(rock_ao, uv * vec2(float(rock_scale))).r;
+	} 
+	else if (slope > dirt_slope) {
+		ao = texture(dirt_ao, uv * vec2(float(dirt_scale))).r;
+	} 
+	else if (slope > grass_slope) {
+		ao = texture(grass_ao, uv * vec2(float(grass_scale))).r;
+	} 
+
+	ao = mix(ao, texture(red_ao, uv * vec2(float(red_scale))).r, value.r);
+	ao = mix(ao, texture(green_ao, uv * vec2(float(green_scale))).r, value.g);
+	ao = mix(ao, texture(blue_ao, uv * vec2(float(blue_scale))).r, value.b);
+
 	return ao;
 }
 
 
 void fragment() {
-	vec4 value = texture(splatmap_0, UV);
-	vec3 normal = get_normal(value, UV); 
+	vec4 value = texture(splatmap, UV);
+	vec4 normal = texture(normalmap, UV);
+	float slope = max(max(normal.x, 1.0 - normal.x), max(normal.y, 1.0 - normal.y));
 	
-	ALBEDO = get_albedo(value, UV);
-	NORMALMAP = normal;
+	ALBEDO = get_albedo(value, slope, UV);
+	NORMALMAP = get_normal(value, slope, UV);
 	NORMALMAP_DEPTH = 2.0;
-	ROUGHNESS = get_roughness(value, UV);
-	AO = get_ao(value, UV);
+	ROUGHNESS = get_roughness(value, slope, UV);
+	AO = get_ao(value, slope, UV);
 }
 "
