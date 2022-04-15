@@ -8,9 +8,8 @@ export(int) var max_altitude = 1
 export(Image) var heightmap
 export(Texture) var splatmap
 
-export(float) var rock_slope = 0.65
-export(float) var dirt_slope = 0.6
-export(float) var grass_slope = 0.0
+export(float) var dirt_max_slope = 0.65
+export(float) var grass_max_slope = 0.6
 
 export(int) var rock_channel_scale = 1
 export(Texture) var rock_channel_diffuse
@@ -96,9 +95,8 @@ func configure_shader():
 	terrain_shader.set_shader_param("normalmap", generate_normalmap_texture())
 	terrain_shader.set_shader_param("splatmap", splatmap)
 	
-	terrain_shader.set_shader_param("rock_slope", rock_slope)
-	terrain_shader.set_shader_param("dirt_slope", dirt_slope)
-	terrain_shader.set_shader_param("grass_slope", grass_slope)
+	terrain_shader.set_shader_param("dirt_max_slope", dirt_max_slope)
+	terrain_shader.set_shader_param("grass_max_slope", grass_max_slope)
 
 	terrain_shader.set_shader_param("rock_scale", rock_channel_scale)
 	terrain_shader.set_shader_param("rock_diffuse", rock_channel_diffuse)
@@ -167,3 +165,7 @@ func configure_mesh():
 	mesh_instance.mesh.subdivide_width = map_size.x - 1
 	mesh_instance.mesh.subdivide_depth = map_size.y - 1
 	mesh_instance.mesh.set("material", terrain_shader)
+
+
+
+
