@@ -16,26 +16,23 @@ light_energy = 2.0
 shadow_enabled = true
 shadow_color = Color( 0.6, 0.6, 0.6, 1 )
 directional_shadow_mode = 0
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="NPCContainer" type="Node" parent="."]
 
 [node name="NPC" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 246.803, 93.4721, -132.431 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 315.496, 26.116, -333.658 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="NPC2" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 246.612, 93.5368, -129.548 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 315.305, 26.5551, -330.775 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="NPC3" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 242.089, 93.5789, -129.541 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 310.782, 26.9814, -330.768 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -43,19 +40,19 @@ __meta__ = {
 [node name="ResourceNodeContainer" type="Node" parent="."]
 
 [node name="resource_node" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 260.413, 93.7841, -166.506 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 336.516, 25.385, -332.741 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="resource_node2" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 261.506, 93.7686, -168.388 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 337.609, 24.9672, -334.623 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="resource_node3" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 262.769, 93.7852, -166.446 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 338.872, 25.2033, -332.681 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -63,7 +60,7 @@ __meta__ = {
 [node name="ShopContainer" type="Node" parent="."]
 
 [node name="shop" parent="ShopContainer" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 257.131, 93.66, -136.893 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 350.388, 26.6267, -321.311 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -71,7 +68,7 @@ __meta__ = {
 [node name="CraftingStationContainer" type="Node" parent="."]
 
 [node name="crafting_station" parent="CraftingStationContainer" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 243.685, 93.6691, -168.958 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 348.047, 24.302, -335.015 )
 __meta__ = {
 "_edit_lock_": true
 }

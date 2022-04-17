@@ -8,7 +8,7 @@ uniform int max_altitude = 1;
 
 uniform float grass_max_slope = 0.55;
 uniform float ground_max_slope = 0.6;
-uniform float gravel_max_slope = 0.65;
+uniform float gravel_max_slope = 0.7;
 
 uniform sampler2D heightmap;
 uniform sampler2D normalmap;
@@ -165,5 +165,6 @@ void fragment() {
 	NORMALMAP_DEPTH = 2.0;
 	ROUGHNESS = get_roughness(slope, UV);
 	AO = get_ao(slope, UV);
+	AO_LIGHT_AFFECT = 1.0;
 }
 "
