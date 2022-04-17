@@ -1,0 +1,87 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+
+
+uniform sampler2D splatmap;
+
+uniform int red_scale = 1;
+uniform sampler2D red_diffuse;
+uniform sampler2D red_normal;
+uniform sampler2D red_roughness;
+uniform sampler2D red_ao;
+
+uniform int green_scale = 1;
+uniform sampler2D green_diffuse;
+uniform sampler2D green_normal;
+uniform sampler2D green_roughness;
+uniform sampler2D green_ao;
+
+uniform int blue_scale = 1;
+uniform sampler2D blue_diffuse;
+uniform sampler2D blue_normal;
+uniform sampler2D blue_roughness;
+uniform sampler2D blue_ao;
+
+uniform int alpha_scale = 1;
+uniform sampler2D alpha_diffuse;
+uniform sampler2D alpha_normal;
+uniform sampler2D alpha_roughness;
+uniform sampler2D alpha_ao;
+
+
+vec3 get_albedo(vec4 value, vec2 uv) {
+	vec3 albedo = vec3(0.0); 
+	
+	albedo = mix(albedo, texture(red_diffuse, uv * vec2(float(red_scale))).rgb, value.r);
+	albedo = mix(albedo, texture(green_diffuse, uv * vec2(float(green_scale))).rgb, value.g);
+	albedo = mix(albedo, texture(blue_diffuse, uv * vec2(float(blue_scale))).rgb, value.b);
+
+	return albedo.rgb;
+}
+
+
+vec3 get_normal(vec4 value, vec2 uv) {
+	vec3 normal = vec3(0.0); 
+
+	normal = mix(normal, texture(red_normal, uv * vec2(float(red_scale))).rgb, value.r);
+	normal = mix(normal, texture(green_normal, uv * vec2(float(green_scale))).rgb, value.g);
+	normal = mix(normal, texture(blue_normal, uv * vec2(float(blue_scale))).rgb, value.b);
+
+	return normal;
+}
+
+
+float get_roughness(vec4 value, vec2 uv) {
+	float roughness = 0.0;
+
+	roughness = mix(roughness, texture(red_roughness, uv * vec2(float(red_scale))).r, value.r);
+	roughness = mix(roughness, texture(green_roughness, uv * vec2(float(green_scale))).r, value.g);
+	roughness = mix(roughness, texture(blue_roughness, uv * vec2(float(blue_scale))).r, value.b);
+	
+	return max(roughness, 1.0);
+}
+
+
+float get_ao(vec4 value, vec2 uv) {
+	float ao = 0.0;
+
+	ao = mix(ao, texture(red_ao, uv * vec2(float(red_scale))).r, value.r);
+	ao = mix(ao, texture(green_ao, uv * vec2(float(green_scale))).r, value.g);
+	ao = mix(ao, texture(blue_ao, uv * vec2(float(blue_scale))).r, value.b);
+
+	return ao;
+}
+
+
+void fragment() {
+	vec4 value = texture(splatmap, UV);
+
+	ALBEDO = get_albedo(value, UV);
+	NORMALMAP = get_normal(value, UV);
+	NORMALMAP_DEPTH = 2.0;
+	ROUGHNESS = get_roughness(value, UV);
+	AO = get_ao(value, UV);
+}
+"

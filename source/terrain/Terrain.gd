@@ -6,10 +6,10 @@ export(bool) var generate := false
 export(int) var max_altitude = 1
 
 export(Image) var heightmap
-export(Texture) var splatmap
 
-export(float) var dirt_max_slope = 0.65
-export(float) var grass_max_slope = 0.6
+export(float) var gravel_max_slope = 0.65
+export(float) var ground_max_slope = 0.6
+export(float) var grass_max_slope = 0.55
 
 export(int) var rock_channel_scale = 1
 export(Texture) var rock_channel_diffuse
@@ -17,11 +17,17 @@ export(Texture) var rock_channel_normal
 export(Texture) var rock_channel_roughness
 export(Texture) var rock_channel_ao
 
-export(int) var dirt_channel_scale = 1
-export(Texture) var dirt_channel_diffuse
-export(Texture) var dirt_channel_normal
-export(Texture) var dirt_channel_roughness
-export(Texture) var dirt_channel_ao
+export(int) var gravel_channel_scale = 1
+export(Texture) var gravel_channel_diffuse
+export(Texture) var gravel_channel_normal
+export(Texture) var gravel_channel_roughness
+export(Texture) var gravel_channel_ao
+
+export(int) var ground_channel_scale = 1
+export(Texture) var ground_channel_diffuse
+export(Texture) var ground_channel_normal
+export(Texture) var ground_channel_roughness
+export(Texture) var ground_channel_ao
 
 export(int) var grass_channel_scale = 1
 export(Texture) var grass_channel_diffuse
@@ -29,29 +35,6 @@ export(Texture) var grass_channel_normal
 export(Texture) var grass_channel_roughness
 export(Texture) var grass_channel_ao
 
-export(int) var red_channel_scale = 1
-export(Texture) var red_channel_diffuse
-export(Texture) var red_channel_normal
-export(Texture) var red_channel_roughness
-export(Texture) var red_channel_ao
-
-export(int) var green_channel_scale = 1
-export(Texture) var green_channel_diffuse
-export(Texture) var green_channel_normal
-export(Texture) var green_channel_roughness
-export(Texture) var green_channel_ao
-
-export(int) var blue_channel_scale = 1
-export(Texture) var blue_channel_diffuse
-export(Texture) var blue_channel_normal
-export(Texture) var blue_channel_roughness
-export(Texture) var blue_channel_ao
-
-export(int) var alpha_channel_scale = 1
-export(Texture) var alpha_channel_diffuse
-export(Texture) var alpha_channel_normal
-export(Texture) var alpha_channel_roughness
-export(Texture) var alpha_channel_ao
 
 var map_size : Vector2
 var collision_shape : CollisionShape
@@ -93,9 +76,9 @@ func configure_shader():
 	
 	terrain_shader.set_shader_param("heightmap", generate_heightmap_texture())
 	terrain_shader.set_shader_param("normalmap", generate_normalmap_texture())
-	terrain_shader.set_shader_param("splatmap", splatmap)
 	
-	terrain_shader.set_shader_param("dirt_max_slope", dirt_max_slope)
+	terrain_shader.set_shader_param("ground_max_slope", ground_max_slope)
+	terrain_shader.set_shader_param("gravel_max_slope", gravel_max_slope)
 	terrain_shader.set_shader_param("grass_max_slope", grass_max_slope)
 
 	terrain_shader.set_shader_param("rock_scale", rock_channel_scale)
@@ -104,41 +87,23 @@ func configure_shader():
 	terrain_shader.set_shader_param("rock_roughness", rock_channel_roughness)
 	terrain_shader.set_shader_param("rock_ao", rock_channel_ao)
 	
-	terrain_shader.set_shader_param("dirt_scale", dirt_channel_scale)
-	terrain_shader.set_shader_param("dirt_diffuse", dirt_channel_diffuse)
-	terrain_shader.set_shader_param("dirt_normal", dirt_channel_normal)
-	terrain_shader.set_shader_param("dirt_roughness", dirt_channel_roughness)
-	terrain_shader.set_shader_param("dirt_ao", dirt_channel_ao)
+	terrain_shader.set_shader_param("gravel_scale", gravel_channel_scale)
+	terrain_shader.set_shader_param("gravel_diffuse", gravel_channel_diffuse)
+	terrain_shader.set_shader_param("gravel_normal", gravel_channel_normal)
+	terrain_shader.set_shader_param("gravel_roughness", gravel_channel_roughness)
+	terrain_shader.set_shader_param("gravel_ao", gravel_channel_ao)
+	
+	terrain_shader.set_shader_param("ground_scale", ground_channel_scale)
+	terrain_shader.set_shader_param("ground_diffuse", ground_channel_diffuse)
+	terrain_shader.set_shader_param("ground_normal", ground_channel_normal)
+	terrain_shader.set_shader_param("ground_roughness", ground_channel_roughness)
+	terrain_shader.set_shader_param("ground_ao", ground_channel_ao)
 	
 	terrain_shader.set_shader_param("grass_scale", grass_channel_scale)
 	terrain_shader.set_shader_param("grass_diffuse", grass_channel_diffuse)
 	terrain_shader.set_shader_param("grass_normal", grass_channel_normal)
 	terrain_shader.set_shader_param("grass_roughness", grass_channel_roughness)
 	terrain_shader.set_shader_param("grass_ao", grass_channel_ao)
-
-	terrain_shader.set_shader_param("red_scale", red_channel_scale)
-	terrain_shader.set_shader_param("red_diffuse", red_channel_diffuse)
-	terrain_shader.set_shader_param("red_normal", red_channel_normal)
-	terrain_shader.set_shader_param("red_roughness", red_channel_roughness)
-	terrain_shader.set_shader_param("red_ao", red_channel_ao)
-
-	terrain_shader.set_shader_param("green_scale", green_channel_scale)
-	terrain_shader.set_shader_param("green_diffuse", green_channel_diffuse)
-	terrain_shader.set_shader_param("green_normal", green_channel_normal)
-	terrain_shader.set_shader_param("green_roughness", green_channel_roughness)
-	terrain_shader.set_shader_param("green_ao", green_channel_ao)
-
-	terrain_shader.set_shader_param("blue_scale", blue_channel_scale)
-	terrain_shader.set_shader_param("blue_diffuse", blue_channel_diffuse)
-	terrain_shader.set_shader_param("blue_normal", blue_channel_normal)
-	terrain_shader.set_shader_param("blue_roughness", blue_channel_roughness)
-	terrain_shader.set_shader_param("blue_ao", blue_channel_ao)
-
-	terrain_shader.set_shader_param("alpha_scale", alpha_channel_scale)
-	terrain_shader.set_shader_param("alpha_diffuse", alpha_channel_diffuse)
-	terrain_shader.set_shader_param("alpha_normal", alpha_channel_normal)
-	terrain_shader.set_shader_param("alpha_roughness", alpha_channel_roughness)
-	terrain_shader.set_shader_param("alpha_ao", alpha_channel_ao)
 
 
 func process_images():

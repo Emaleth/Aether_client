@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Terrain002_2K_halfres.exr-027fda549daa0ff2a6685a36803dacf0.image"
+
+[deps]
+
+source_file="res://assets/third_party/textures/Terrain002_2K_halfres.exr"
+dest_files=[ "res://.import/Terrain002_2K_halfres.exr-027fda549daa0ff2a6685a36803dacf0.image" ]
+
+[params]
+

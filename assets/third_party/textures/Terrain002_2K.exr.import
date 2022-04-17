@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Terrain002_2K.exr-57043f9cccad9b4a9c3a9b26fa59964e.image"
+
+[deps]
+
+source_file="res://assets/third_party/textures/Terrain002_2K.exr"
+dest_files=[ "res://.import/Terrain002_2K.exr-57043f9cccad9b4a9c3a9b26fa59964e.image" ]
+
+[params]
+
