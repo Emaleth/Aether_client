@@ -10,7 +10,6 @@ uniform float grass_max_slope = 0.55;
 uniform float ground_max_slope = 0.6;
 uniform float gravel_max_slope = 0.7;
 
-uniform sampler2D noise_tex;
 uniform sampler2D heightmap;
 uniform sampler2D normalmap;
 
@@ -38,13 +37,15 @@ uniform sampler2D grass_normal;
 uniform sampler2D grass_roughness;
 uniform sampler2D grass_ao;
 
+uniform sampler2D texture_tile_breaker_noise;
+
 
 float sum_vec3(vec3 v) {
 	return v.x + v.y + v.z;
 }
 
 vec3 texture_tile_breaker(sampler2D p_sampler, in vec2 x) {
-	float k = texture(noise_tex, 0.005*x).x; // cheap (cache friendly) lookup
+	float k = texture(texture_tile_breaker_noise, 0.005*x).x; // cheap (cache friendly) lookup
     
 	float index = k * 8.0;
 	float i = floor(index);
@@ -68,9 +69,9 @@ void vertex() {
 vec3 get_albedo(float slope, vec2 uv) {
 	vec3 albedo = vec3(0.0); 
 	
-	vec3 grass = texture(grass_diffuse, uv * vec2(float(grass_scale))).rgb;
-	vec3 ground = texture(ground_diffuse, uv * vec2(float(ground_scale))).rgb;
-	vec3 gravel = texture(gravel_diffuse, uv * vec2(float(gravel_scale))).rgb;
+	vec3 grass = texture_tile_breaker(grass_diffuse, uv * vec2(float(grass_scale))).rgb;
+	vec3 ground = texture_tile_breaker(ground_diffuse, uv * vec2(float(ground_scale))).rgb;
+	vec3 gravel = texture_tile_breaker(gravel_diffuse, uv * vec2(float(gravel_scale))).rgb;
 	vec3 rock = texture_tile_breaker(rock_diffuse, uv * vec2(float(rock_scale))).rgb;
 
 	if (slope <= grass_max_slope) {
@@ -96,9 +97,9 @@ vec3 get_albedo(float slope, vec2 uv) {
 vec3 get_normal(float slope, vec2 uv) {
 	vec3 normal = vec3(0.0); 
 	
-	vec3 grass = texture(grass_normal, uv * vec2(float(grass_scale))).rgb;
-	vec3 ground = texture(ground_normal, uv * vec2(float(ground_scale))).rgb;
-	vec3 gravel = texture(gravel_normal, uv * vec2(float(gravel_scale))).rgb;
+	vec3 grass = texture_tile_breaker(grass_normal, uv * vec2(float(grass_scale))).rgb;
+	vec3 ground = texture_tile_breaker(ground_normal, uv * vec2(float(ground_scale))).rgb;
+	vec3 gravel = texture_tile_breaker(gravel_normal, uv * vec2(float(gravel_scale))).rgb;
 	vec3 rock = texture_tile_breaker(rock_normal, uv * vec2(float(rock_scale))).rgb;
 	
 	if (slope <= grass_max_slope) {
@@ -124,9 +125,9 @@ vec3 get_normal(float slope, vec2 uv) {
 float get_roughness(float slope, vec2 uv) {
 	float roughness = 0.0;
 	
-	float grass = texture(grass_normal, uv * vec2(float(grass_scale))).r;
-	float ground = texture(ground_normal, uv * vec2(float(ground_scale))).r;
-	float gravel = texture(gravel_normal, uv * vec2(float(gravel_scale))).r;
+	float grass = texture_tile_breaker(grass_normal, uv * vec2(float(grass_scale))).r;
+	float ground = texture_tile_breaker(ground_normal, uv * vec2(float(ground_scale))).r;
+	float gravel = texture_tile_breaker(gravel_normal, uv * vec2(float(gravel_scale))).r;
 	float rock = texture_tile_breaker(rock_normal, uv * vec2(float(rock_scale))).r;
 	
 	if (slope <= grass_max_slope) {
@@ -152,9 +153,9 @@ float get_roughness(float slope, vec2 uv) {
 float get_ao(float slope, vec2 uv) {
 	float ao = 0.0;
 	
-	float grass = texture(grass_ao, uv * vec2(float(grass_scale))).r;
-	float ground = texture(ground_ao, uv * vec2(float(ground_scale))).r;
-	float gravel = texture(gravel_ao, uv * vec2(float(gravel_scale))).r;
+	float grass = texture_tile_breaker(grass_ao, uv * vec2(float(grass_scale))).r;
+	float ground = texture_tile_breaker(ground_ao, uv * vec2(float(ground_scale))).r;
+	float gravel = texture_tile_breaker(gravel_ao, uv * vec2(float(gravel_scale))).r;
 	float rock = texture_tile_breaker(rock_ao, uv * vec2(float(rock_scale))).r;
 	
 	if (slope <= grass_max_slope) {

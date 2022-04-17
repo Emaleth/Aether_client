@@ -35,6 +35,8 @@ export(Texture) var grass_channel_normal
 export(Texture) var grass_channel_roughness
 export(Texture) var grass_channel_ao
 
+export(Texture) var texture_tile_breaker_noise
+
 
 var map_size : Vector2
 var collision_shape : CollisionShape
@@ -104,6 +106,8 @@ func configure_shader():
 	terrain_shader.set_shader_param("grass_normal", grass_channel_normal)
 	terrain_shader.set_shader_param("grass_roughness", grass_channel_roughness)
 	terrain_shader.set_shader_param("grass_ao", grass_channel_ao)
+	
+	terrain_shader.set_shader_param("texture_tile_breaker_noise", texture_tile_breaker_noise)
 
 
 func process_images():
