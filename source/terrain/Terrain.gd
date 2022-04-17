@@ -7,9 +7,9 @@ export(int) var max_altitude = 1
 
 export(Image) var heightmap
 
-export(float) var gravel_max_slope = 0.65
-export(float) var ground_max_slope = 0.6
 export(float) var grass_max_slope = 0.55
+export(float) var ground_max_slope = 0.6
+export(float) var gravel_max_slope = 0.65
 
 export(int) var rock_channel_scale = 1
 export(Texture) var rock_channel_diffuse
