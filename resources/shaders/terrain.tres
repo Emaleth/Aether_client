@@ -6,46 +6,47 @@ code = "shader_type spatial;
 
 uniform int max_altitude = 1;
 
-uniform float grass_max_slope = 0.55;
-uniform float ground_max_slope = 0.6;
-uniform float gravel_max_slope = 0.7;
+uniform float steepness = 0.55;
 
 uniform sampler2D heightmap;
 uniform sampler2D normalmap;
 
-uniform int rock_scale = 1;
-uniform sampler2D rock_diffuse;
-uniform sampler2D rock_normal;
-uniform sampler2D rock_roughness;
-uniform sampler2D rock_ao;
+uniform sampler2D antitile_noise;
+uniform sampler2D ab_noise;
 
-uniform int gravel_scale = 1;
-uniform sampler2D gravel_diffuse;
-uniform sampler2D gravel_normal;
-uniform sampler2D gravel_roughness;
-uniform sampler2D gravel_ao;
+uniform vec2 texture0a_scale = vec2(1.0);
+uniform sampler2D texture0a_diffuse;
+uniform sampler2D texture0a_normal;
+uniform sampler2D texture0a_roughness;
+uniform sampler2D texture0a_ao;
 
-uniform int ground_scale = 1;
-uniform sampler2D ground_diffuse;
-uniform sampler2D ground_normal;
-uniform sampler2D ground_roughness;
-uniform sampler2D ground_ao;
+uniform vec2 texture0b_scale = vec2(1.0);
+uniform sampler2D texture0b_diffuse;
+uniform sampler2D texture0b_normal;
+uniform sampler2D texture0b_roughness;
+uniform sampler2D texture0b_ao;
 
-uniform int grass_scale = 1;
-uniform sampler2D grass_diffuse;
-uniform sampler2D grass_normal;
-uniform sampler2D grass_roughness;
-uniform sampler2D grass_ao;
+uniform vec2 texture1a_scale = vec2(1.0);
+uniform sampler2D texture1a_diffuse;
+uniform sampler2D texture1a_normal;
+uniform sampler2D texture1a_roughness;
+uniform sampler2D texture1a_ao;
 
-uniform sampler2D texture_tile_breaker_noise;
+uniform vec2 texture1b_scale = vec2(1.0);
+uniform sampler2D texture1b_diffuse;
+uniform sampler2D texture1b_normal;
+uniform sampler2D texture1b_roughness;
+uniform sampler2D texture1b_ao;
+
 
 
 float sum_vec3(vec3 v) {
 	return v.x + v.y + v.z;
 }
 
-vec3 texture_tile_breaker(sampler2D p_sampler, in vec2 x) {
-	float k = texture(texture_tile_breaker_noise, 0.005*x).x; // cheap (cache friendly) lookup
+
+vec3 texture_antitile(sampler2D p_sampler, in vec2 x) {
+	float k = texture(antitile_noise, 0.005*x).x; // cheap (cache friendly) lookup
     
 	float index = k * 8.0;
 	float i = floor(index);
@@ -60,8 +61,9 @@ vec3 texture_tile_breaker(sampler2D p_sampler, in vec2 x) {
 	return mix(cola, colb, smoothstep(0.2, 0.8, f - 0.1 * sum_vec3(cola-colb)));
 }
 
+
 void vertex() {
-	float height = texture(heightmap, UV).r;
+	float height = texture(heightmap, UV).a;
 	VERTEX.y = height * float(max_altitude);
 }
 
@@ -69,25 +71,17 @@ void vertex() {
 vec3 get_albedo(float slope, vec2 uv) {
 	vec3 albedo = vec3(0.0); 
 	
-	vec3 grass = texture_tile_breaker(grass_diffuse, uv * vec2(float(grass_scale))).rgb;
-	vec3 ground = texture_tile_breaker(ground_diffuse, uv * vec2(float(ground_scale))).rgb;
-	vec3 gravel = texture_tile_breaker(gravel_diffuse, uv * vec2(float(gravel_scale))).rgb;
-	vec3 rock = texture_tile_breaker(rock_diffuse, uv * vec2(float(rock_scale))).rgb;
+	vec3 texture0a = texture_antitile(texture0a_diffuse, uv * texture0a_scale).rgb;
+	vec3 texture0b = texture_antitile(texture0b_diffuse, uv * texture0b_scale).rgb;
+	vec3 texture1a = texture_antitile(texture1a_diffuse, uv * texture1a_scale).rgb;
+	vec3 texture1b = texture_antitile(texture1b_diffuse, uv * texture1b_scale).rgb;
 
-	if (slope <= grass_max_slope) {
-		float blend_amount = slope / grass_max_slope;
-		albedo = mix(grass, ground, blend_amount);
-	} 
-	else if (slope <= ground_max_slope) {
-		float blend_amount = (slope - grass_max_slope) * (1.0f / (ground_max_slope - grass_max_slope));
-		albedo = mix(ground, gravel, blend_amount);
-	} 
-	else if (slope <= gravel_max_slope) {
-		float blend_amount = (slope - ground_max_slope) * (1.0f / (gravel_max_slope - ground_max_slope));
-		albedo = mix(gravel, rock, blend_amount);
+	if (slope <= steepness) {
+		float blend_amount = slope / steepness;
+		albedo = mix(texture0a, texture1a, blend_amount);
 	} 
 	else {
-		albedo = rock;
+		albedo = texture1a;
 	} 
 	
 	return albedo.rgb;
@@ -96,54 +90,38 @@ vec3 get_albedo(float slope, vec2 uv) {
 
 vec3 get_normal(float slope, vec2 uv) {
 	vec3 normal = vec3(0.0); 
-	
-	vec3 grass = texture_tile_breaker(grass_normal, uv * vec2(float(grass_scale))).rgb;
-	vec3 ground = texture_tile_breaker(ground_normal, uv * vec2(float(ground_scale))).rgb;
-	vec3 gravel = texture_tile_breaker(gravel_normal, uv * vec2(float(gravel_scale))).rgb;
-	vec3 rock = texture_tile_breaker(rock_normal, uv * vec2(float(rock_scale))).rgb;
-	
-	if (slope <= grass_max_slope) {
-		float blend_amount = slope / grass_max_slope;
-		normal = mix(grass, ground, blend_amount);
-	} 
-	else if (slope <= ground_max_slope) {
-		float blend_amount = (slope - grass_max_slope) * (1.0f / (ground_max_slope - grass_max_slope));
-		normal = mix(ground, gravel, blend_amount);
-	} 
-	else if (slope <= gravel_max_slope) {
-		float blend_amount = (slope - ground_max_slope) * (1.0f / (gravel_max_slope - ground_max_slope));
-		normal = mix(gravel, rock, blend_amount);
+
+	vec3 texture0a = texture_antitile(texture0a_normal, uv * texture0a_scale).rgb;
+	vec3 texture0b = texture_antitile(texture0b_normal, uv * texture0b_scale).rgb;
+	vec3 texture1a = texture_antitile(texture1a_normal, uv * texture1a_scale).rgb;
+	vec3 texture1b = texture_antitile(texture1b_normal, uv * texture1b_scale).rgb;
+
+	if (slope <= steepness) {
+		float blend_amount = slope / steepness;
+		normal = mix(texture0a, texture1a, blend_amount);
 	} 
 	else {
-		normal = rock;
+		normal = texture1a;
 	} 
- 
+
 	return mix(texture(normalmap, uv).rgb, normal, 0.5);
 }
 
 
 float get_roughness(float slope, vec2 uv) {
 	float roughness = 0.0;
-	
-	float grass = texture_tile_breaker(grass_normal, uv * vec2(float(grass_scale))).r;
-	float ground = texture_tile_breaker(ground_normal, uv * vec2(float(ground_scale))).r;
-	float gravel = texture_tile_breaker(gravel_normal, uv * vec2(float(gravel_scale))).r;
-	float rock = texture_tile_breaker(rock_normal, uv * vec2(float(rock_scale))).r;
-	
-	if (slope <= grass_max_slope) {
-		float blend_amount = slope / grass_max_slope;
-		roughness = mix(grass, ground, blend_amount);
-	} 
-	else if (slope <= ground_max_slope) {
-		float blend_amount = (slope - grass_max_slope) * (1.0f / (ground_max_slope - grass_max_slope));
-		roughness = mix(ground, gravel, blend_amount);
-	} 
-	else if (slope <= gravel_max_slope) {
-		float blend_amount = (slope - ground_max_slope) * (1.0f / (gravel_max_slope - ground_max_slope));
-		roughness = mix(gravel, rock, blend_amount);
+
+	float texture0a = texture_antitile(texture0a_roughness, uv * texture0a_scale).r;
+	float texture0b = texture_antitile(texture0b_roughness, uv * texture0b_scale).r;
+	float texture1a = texture_antitile(texture1a_roughness, uv * texture1a_scale).r;
+	float texture1b = texture_antitile(texture1b_roughness, uv * texture1b_scale).r;
+
+	if (slope <= steepness) {
+		float blend_amount = slope / steepness;
+		roughness = mix(texture0a, texture1a, blend_amount);
 	} 
 	else {
-		roughness = rock;
+		roughness = texture1a;
 	} 
 
 	return max(roughness, 1.0);
@@ -152,26 +130,18 @@ float get_roughness(float slope, vec2 uv) {
 
 float get_ao(float slope, vec2 uv) {
 	float ao = 0.0;
-	
-	float grass = texture_tile_breaker(grass_ao, uv * vec2(float(grass_scale))).r;
-	float ground = texture_tile_breaker(ground_ao, uv * vec2(float(ground_scale))).r;
-	float gravel = texture_tile_breaker(gravel_ao, uv * vec2(float(gravel_scale))).r;
-	float rock = texture_tile_breaker(rock_ao, uv * vec2(float(rock_scale))).r;
-	
-	if (slope <= grass_max_slope) {
-		float blend_amount = slope / grass_max_slope;
-		ao = mix(grass, ground, blend_amount);
-	} 
-	else if (slope <= ground_max_slope) {
-		float blend_amount = (slope - grass_max_slope) * (1.0f / (ground_max_slope - grass_max_slope));
-		ao = mix(ground, gravel, blend_amount);
-	} 
-	else if (slope <= gravel_max_slope) {
-		float blend_amount = (slope - ground_max_slope) * (1.0f / (gravel_max_slope - ground_max_slope));
-		ao = mix(gravel, rock, blend_amount);
+
+	float texture0a = texture_antitile(texture0a_ao, uv * texture0a_scale).r;
+	float texture0b = texture_antitile(texture0b_ao, uv * texture0b_scale).r;
+	float texture1a = texture_antitile(texture1a_ao, uv * texture1a_scale).r;
+	float texture1b = texture_antitile(texture1b_ao, uv * texture1b_scale).r;
+
+	if (slope <= steepness) {
+		float blend_amount = slope / steepness;
+		ao = mix(texture0a, texture1a, blend_amount);
 	} 
 	else {
-		ao = rock;
+		ao = texture1a;
 	} 
 
 	return ao;
