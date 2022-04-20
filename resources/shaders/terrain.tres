@@ -14,6 +14,9 @@ uniform sampler2D antitile_noise;
 uniform sampler2D ab0_noise;
 uniform sampler2D ab1_noise;
 
+uniform float ab0_half_blend_amount = 0.1;
+uniform float ab1_half_blend_amount = 0.1;
+uniform float steepness_half_blend_amount = 0.1;
 uniform float triplanar_scale = 1.0;
 
 uniform vec2 texture0a_scale = vec2(1.0);
@@ -87,7 +90,6 @@ void vertex() {
 	vtx = VERTEX;
 	if (distance_culling()) {
 		VERTEX = vec3(sqrt(-MODELVIEW_MATRIX[3][3]));
-//		VERTEX = vec3(1.0 / 0.0);
 	} 
 	else {
 		uv_power_normal = pow(abs(mat3(WORLD_MATRIX) * NORMAL), vec3(1.0));
@@ -110,76 +112,231 @@ vec3 triplanar_texture(sampler2D p_sampler, vec2 tex_scale, vec3 p_triplanar_pos
 vec3 get_albedo(float slope, vec2 uv) {
 	vec3 albedo = vec3(0.0); 
 	
-	vec3 ab1_premix = mix(
-			triplanar_texture(texture1a_diffuse, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
-			triplanar_texture(texture1b_diffuse, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
-			texture(ab1_noise, uv).r);
-			
-	if (slope <= steepness) {
-		float blend_amount = slope / steepness;
-		albedo = mix(
-			mix(
+// FLAT
+	if (slope < steepness - steepness_half_blend_amount) {
+		float ab0_noise_sample = texture(ab0_noise, uv).r;
+		if (ab0_noise_sample < 0.5 - ab0_half_blend_amount) {
+			albedo = triplanar_texture(texture0a_diffuse, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		else if (ab0_noise_sample < 0.5 + ab0_half_blend_amount) {
+			albedo = mix(
 				triplanar_texture(texture0a_diffuse, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
 				triplanar_texture(texture0b_diffuse, texture0b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
-				texture(ab0_noise, uv).r),
-			ab1_premix,
-			blend_amount);
-	} 
-	else {
-		albedo = ab1_premix;
-	} 
+				(ab0_noise_sample - (0.5 - ab0_half_blend_amount)) * (1.0f / ((0.5 + ab0_half_blend_amount) - (0.5 - ab0_half_blend_amount))));
+		}
+		else {
+			albedo = triplanar_texture(texture0b_diffuse, texture0b_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+	}
 	
+// FLAT-STEEP MIX
+	else if (slope < steepness + steepness_half_blend_amount) {
+		float blend_amount =  (slope - (steepness - steepness_half_blend_amount)) * (1.0f / ((steepness + steepness_half_blend_amount) - (steepness - steepness_half_blend_amount)));
+		float ab0_noise_sample = texture(ab0_noise, uv).r;
+		vec3 ab0premix;
+		if (ab0_noise_sample < 0.5 - ab0_half_blend_amount) {
+			ab0premix = triplanar_texture(texture0a_diffuse, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		else if (ab0_noise_sample < 0.5 + ab0_half_blend_amount) {
+			ab0premix = mix(
+				triplanar_texture(texture0a_diffuse, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				triplanar_texture(texture0b_diffuse, texture0b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				(ab0_noise_sample - (0.5 - ab0_half_blend_amount)) * (1.0f / ((0.5 + ab0_half_blend_amount) - (0.5 - ab0_half_blend_amount))));
+		}
+		else {
+			ab0premix = triplanar_texture(texture0b_diffuse, texture0b_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		float ab1_noise_sample = texture(ab1_noise, uv).r;
+		vec3 ab1premix;
+		if (ab1_noise_sample < 0.5 - ab1_half_blend_amount) {
+			ab1premix = triplanar_texture(texture1a_diffuse, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		else if (ab1_noise_sample < 0.5 + ab1_half_blend_amount) {
+			ab1premix = mix(
+				triplanar_texture(texture1a_diffuse, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				triplanar_texture(texture1b_diffuse, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				(ab1_noise_sample - (0.5 - ab1_half_blend_amount)) * (1.0f / ((0.5 + ab1_half_blend_amount) - (0.5 - ab1_half_blend_amount))));
+		}
+		else {
+			ab1premix = triplanar_texture(texture1b_diffuse, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		albedo = mix(
+			ab0premix,
+			ab1premix,
+			blend_amount);
+	}
+	
+// STEEP
+	else {
+		float ab1_noise_sample = texture(ab1_noise, uv).r;
+		if (ab1_noise_sample < 0.5 - ab1_half_blend_amount) {
+			albedo = triplanar_texture(texture1a_diffuse, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		else if (ab1_noise_sample < 0.5 + ab1_half_blend_amount) {
+			albedo = mix(
+				triplanar_texture(texture1a_diffuse, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				triplanar_texture(texture1b_diffuse, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				(ab1_noise_sample - (0.5 - ab1_half_blend_amount)) * (1.0f / ((0.5 + ab1_half_blend_amount) - (0.5 - ab1_half_blend_amount))));
+		}
+		else {
+			albedo = triplanar_texture(texture1b_diffuse, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+	}
+	 
 	return albedo;
 }
 
 
 vec3 get_normal(float slope, vec2 uv) {
 	vec3 normal = vec3(0.0); 
-	
-	vec3 ab1_premix = mix(
-		triplanar_texture(texture1a_normal, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
-		triplanar_texture(texture1b_normal, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
-		texture(ab1_noise, uv).r);
-			
-	if (slope <= steepness) {
-		float blend_amount = slope / steepness;
-		normal = mix(
-			mix(
+
+// FLAT
+	if (slope < steepness - steepness_half_blend_amount) {
+		float ab0_noise_sample = texture(ab0_noise, uv).r;
+		if (ab0_noise_sample < 0.5 - ab0_half_blend_amount) {
+			normal = triplanar_texture(texture0a_normal, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		else if (ab0_noise_sample < 0.5 + ab0_half_blend_amount) {
+			normal = mix(
 				triplanar_texture(texture0a_normal, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
 				triplanar_texture(texture0b_normal, texture0b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
-				texture(ab0_noise, uv).r),
-			ab1_premix,
+				(ab0_noise_sample - (0.5 - ab0_half_blend_amount)) * (1.0f / ((0.5 + ab0_half_blend_amount) - (0.5 - ab0_half_blend_amount))));
+		}
+		else {
+			normal = triplanar_texture(texture0b_normal, texture0b_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+	}
+	
+// FLAT-STEEP MIX
+	else if (slope < steepness + steepness_half_blend_amount) {
+		float blend_amount =  (slope - (steepness - steepness_half_blend_amount)) * (1.0f / ((steepness + steepness_half_blend_amount) - (steepness - steepness_half_blend_amount)));
+		float ab0_noise_sample = texture(ab0_noise, uv).r;
+		vec3 ab0premix;
+		if (ab0_noise_sample < 0.5 - ab0_half_blend_amount) {
+			ab0premix = triplanar_texture(texture0a_normal, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		else if (ab0_noise_sample < 0.5 + ab0_half_blend_amount) {
+			ab0premix = mix(
+				triplanar_texture(texture0a_normal, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				triplanar_texture(texture0b_normal, texture0b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				(ab0_noise_sample - (0.5 - ab0_half_blend_amount)) * (1.0f / ((0.5 + ab0_half_blend_amount) - (0.5 - ab0_half_blend_amount))));
+		}
+		else {
+			ab0premix = triplanar_texture(texture0b_normal, texture0b_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		float ab1_noise_sample = texture(ab1_noise, uv).r;
+		vec3 ab1premix;
+		if (ab1_noise_sample < 0.5 - ab1_half_blend_amount) {
+			ab1premix = triplanar_texture(texture1a_normal, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		else if (ab1_noise_sample < 0.5 + ab1_half_blend_amount) {
+			ab1premix = mix(
+				triplanar_texture(texture1a_normal, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				triplanar_texture(texture1b_normal, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				(ab1_noise_sample - (0.5 - ab1_half_blend_amount)) * (1.0f / ((0.5 + ab1_half_blend_amount) - (0.5 - ab1_half_blend_amount))));
+		}
+		else {
+			ab1premix = triplanar_texture(texture1b_normal, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		normal = mix(
+			ab0premix,
+			ab1premix,
 			blend_amount);
-	} 
+	}
+	
+// STEEP
 	else {
-		normal = ab1_premix;
-	} 
-
+		float ab1_noise_sample = texture(ab1_noise, uv).r;
+		if (ab1_noise_sample < 0.5 - ab1_half_blend_amount) {
+			normal = triplanar_texture(texture1a_normal, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+		else if (ab1_noise_sample < 0.5 + ab1_half_blend_amount) {
+			normal = mix(
+				triplanar_texture(texture1a_normal, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				triplanar_texture(texture1b_normal, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+				(ab1_noise_sample - (0.5 - ab1_half_blend_amount)) * (1.0f / ((0.5 + ab1_half_blend_amount) - (0.5 - ab1_half_blend_amount))));
+		}
+		else {
+			normal = triplanar_texture(texture1b_normal, texture1b_scale, uv_triplanar_pos, uv_power_normal).rgb;
+		}
+	}
+	
 	return mix(texture(normalmap, uv).rgb, normal, 0.5);
 }
 
 
 float get_roughness(float slope, vec2 uv) {
 	float roughness = 0.0;
-	
-	float ab1_premix = mix(
-		triplanar_texture(texture1a_roughness, texture1a_scale, uv_triplanar_pos, uv_power_normal).r, 
-		triplanar_texture(texture1b_roughness, texture1b_scale, uv_triplanar_pos, uv_power_normal).r, 
-		texture(ab1_noise, uv).r);
-	
-	if (slope <= steepness) {
-		float blend_amount = slope / steepness;
-		roughness = mix(
-			mix(
+	// FLAT
+	if (slope < steepness - steepness_half_blend_amount) {
+		float ab0_noise_sample = texture(ab0_noise, uv).r;
+		if (ab0_noise_sample < 0.5 - ab0_half_blend_amount) {
+			roughness = triplanar_texture(texture0a_roughness, texture0a_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		else if (ab0_noise_sample < 0.5 + ab0_half_blend_amount) {
+			roughness = mix(
 				triplanar_texture(texture0a_roughness, texture0a_scale, uv_triplanar_pos, uv_power_normal).r, 
 				triplanar_texture(texture0b_roughness, texture0b_scale, uv_triplanar_pos, uv_power_normal).r, 
-				texture(ab0_noise, uv).r),
-			ab1_premix,
+				(ab0_noise_sample - (0.5 - ab0_half_blend_amount)) * (1.0f / ((0.5 + ab0_half_blend_amount) - (0.5 - ab0_half_blend_amount))));
+		}
+		else {
+			roughness = triplanar_texture(texture0b_roughness, texture0b_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+	}
+	
+// FLAT-STEEP MIX
+	else if (slope < steepness + steepness_half_blend_amount) {
+		float blend_amount =  (slope - (steepness - steepness_half_blend_amount)) * (1.0f / ((steepness + steepness_half_blend_amount) - (steepness - steepness_half_blend_amount)));
+		float ab0_noise_sample = texture(ab0_noise, uv).r;
+		float ab0premix;
+		if (ab0_noise_sample < 0.5 - ab0_half_blend_amount) {
+			ab0premix = triplanar_texture(texture0a_roughness, texture0a_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		else if (ab0_noise_sample < 0.5 + ab0_half_blend_amount) {
+			ab0premix = mix(
+				triplanar_texture(texture0a_roughness, texture0a_scale, uv_triplanar_pos, uv_power_normal).r, 
+				triplanar_texture(texture0b_roughness, texture0b_scale, uv_triplanar_pos, uv_power_normal).r, 
+				(ab0_noise_sample - (0.5 - ab0_half_blend_amount)) * (1.0f / ((0.5 + ab0_half_blend_amount) - (0.5 - ab0_half_blend_amount))));
+		}
+		else {
+			ab0premix = triplanar_texture(texture0b_roughness, texture0b_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		float ab1_noise_sample = texture(ab1_noise, uv).r;
+		float ab1premix;
+		if (ab1_noise_sample < 0.5 - ab1_half_blend_amount) {
+			ab1premix = triplanar_texture(texture1a_roughness, texture1a_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		else if (ab1_noise_sample < 0.5 + ab1_half_blend_amount) {
+			ab1premix = mix(
+				triplanar_texture(texture1a_roughness, texture1a_scale, uv_triplanar_pos, uv_power_normal).r, 
+				triplanar_texture(texture1b_roughness, texture1b_scale, uv_triplanar_pos, uv_power_normal).r, 
+				(ab1_noise_sample - (0.5 - ab1_half_blend_amount)) * (1.0f / ((0.5 + ab1_half_blend_amount) - (0.5 - ab1_half_blend_amount))));
+		}
+		else {
+			ab1premix = triplanar_texture(texture1b_roughness, texture1b_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		roughness = mix(
+			ab0premix,
+			ab1premix,
 			blend_amount);
-	} 
+	}
+	
+// STEEP
 	else {
-		roughness = ab1_premix;
-	} 
+		float ab1_noise_sample = texture(ab1_noise, uv).r;
+		if (ab1_noise_sample < 0.5 - ab1_half_blend_amount) {
+			roughness = triplanar_texture(texture1a_roughness, texture1a_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		else if (ab1_noise_sample < 0.5 + ab1_half_blend_amount) {
+			roughness = mix(
+				triplanar_texture(texture1a_roughness, texture1a_scale, uv_triplanar_pos, uv_power_normal).r, 
+				triplanar_texture(texture1b_roughness, texture1b_scale, uv_triplanar_pos, uv_power_normal).r, 
+				(ab1_noise_sample - (0.5 - ab1_half_blend_amount)) * (1.0f / ((0.5 + ab1_half_blend_amount) - (0.5 - ab1_half_blend_amount))));
+		}
+		else {
+			roughness = triplanar_texture(texture1b_roughness, texture1b_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+	}
 
 	return max(roughness, 1.0);
 }
@@ -188,23 +345,75 @@ float get_roughness(float slope, vec2 uv) {
 float get_ao(float slope, vec2 uv) {
 	float ao = 0.0;
 	
-	float ab1_premix = mix(
-		triplanar_texture(texture1a_ao, texture1a_scale, uv_triplanar_pos, uv_power_normal).r, 
-		triplanar_texture(texture1b_ao, texture1b_scale, uv_triplanar_pos, uv_power_normal).r, 
-		texture(ab1_noise, uv).r);
-
-	if (slope <= steepness) {
-		float blend_amount = slope / steepness;
-		ao = mix(
-			mix(
+// FLAT
+	if (slope < steepness - steepness_half_blend_amount) {
+		float ab0_noise_sample = texture(ab0_noise, uv).r;
+		if (ab0_noise_sample < 0.5 - ab0_half_blend_amount) {
+			ao = triplanar_texture(texture0a_ao, texture0a_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		else if (ab0_noise_sample < 0.5 + ab0_half_blend_amount) {
+			ao = mix(
 				triplanar_texture(texture0a_ao, texture0a_scale, uv_triplanar_pos, uv_power_normal).r, 
 				triplanar_texture(texture0b_ao, texture0b_scale, uv_triplanar_pos, uv_power_normal).r, 
-				texture(ab0_noise, uv).r),
-			ab1_premix,
+				(ab0_noise_sample - (0.5 - ab0_half_blend_amount)) * (1.0f / ((0.5 + ab0_half_blend_amount) - (0.5 - ab0_half_blend_amount))));
+		}
+		else {
+			ao = triplanar_texture(texture0b_ao, texture0b_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+	}
+	
+// FLAT-STEEP MIX
+	else if (slope < steepness + steepness_half_blend_amount) {
+		float blend_amount =  (slope - (steepness - steepness_half_blend_amount)) * (1.0f / ((steepness + steepness_half_blend_amount) - (steepness - steepness_half_blend_amount)));
+		float ab0_noise_sample = texture(ab0_noise, uv).r;
+		float ab0premix;
+		if (ab0_noise_sample < 0.5 - ab0_half_blend_amount) {
+			ab0premix = triplanar_texture(texture0a_ao, texture0a_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		else if (ab0_noise_sample < 0.5 + ab0_half_blend_amount) {
+			ab0premix = mix(
+				triplanar_texture(texture0a_ao, texture0a_scale, uv_triplanar_pos, uv_power_normal).r, 
+				triplanar_texture(texture0b_ao, texture0b_scale, uv_triplanar_pos, uv_power_normal).r, 
+				(ab0_noise_sample - (0.5 - ab0_half_blend_amount)) * (1.0f / ((0.5 + ab0_half_blend_amount) - (0.5 - ab0_half_blend_amount))));
+		}
+		else {
+			ab0premix = triplanar_texture(texture0b_ao, texture0b_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		float ab1_noise_sample = texture(ab1_noise, uv).r;
+		float ab1premix;
+		if (ab1_noise_sample < 0.5 - ab1_half_blend_amount) {
+			ab1premix = triplanar_texture(texture1a_ao, texture1a_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		else if (ab1_noise_sample < 0.5 + ab1_half_blend_amount) {
+			ab1premix = mix(
+				triplanar_texture(texture1a_ao, texture1a_scale, uv_triplanar_pos, uv_power_normal).r, 
+				triplanar_texture(texture1b_ao, texture1b_scale, uv_triplanar_pos, uv_power_normal).r, 
+				(ab1_noise_sample - (0.5 - ab1_half_blend_amount)) * (1.0f / ((0.5 + ab1_half_blend_amount) - (0.5 - ab1_half_blend_amount))));
+		}
+		else {
+			ab1premix = triplanar_texture(texture1b_ao, texture1b_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		ao = mix(
+			ab0premix,
+			ab1premix,
 			blend_amount);
-	} 
+	}
+	
+// STEEP
 	else {
-		ao = ab1_premix;
+		float ab1_noise_sample = texture(ab1_noise, uv).r;
+		if (ab1_noise_sample < 0.5 - ab1_half_blend_amount) {
+			ao = triplanar_texture(texture1a_ao, texture1a_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
+		else if (ab1_noise_sample < 0.5 + ab1_half_blend_amount) {
+			ao = mix(
+				triplanar_texture(texture1a_ao, texture1a_scale, uv_triplanar_pos, uv_power_normal).r, 
+				triplanar_texture(texture1b_ao, texture1b_scale, uv_triplanar_pos, uv_power_normal).r, 
+				(ab1_noise_sample - (0.5 - ab1_half_blend_amount)) * (1.0f / ((0.5 + ab1_half_blend_amount) - (0.5 - ab1_half_blend_amount))));
+		}
+		else {
+			ao = triplanar_texture(texture1b_ao, texture1b_scale, uv_triplanar_pos, uv_power_normal).r;
+		}
 	} 
 
 	return ao;

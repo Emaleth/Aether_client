@@ -11,6 +11,9 @@ export(Vector3) var terrain_scale = Vector3(1, 1, 1)
 export(float) var steepness = 0.55
 export(float) var culling_max_distance = 100.0
 export(float) var triplanar_scale = 1.0
+export(float) var ab0_half_blend_amount = 0.05
+export(float) var ab1_half_blend_amount = 0.05
+export(float) var steepness_half_blend_amount = 0.05
 
 export(Texture) var antitile_noise
 export(Texture) var ab0_noise
@@ -115,6 +118,10 @@ func configure_shader():
 	terrain_shader.set_shader_param("antitile_noise", antitile_noise)
 	terrain_shader.set_shader_param("ab0_noise", ab0_noise)
 	terrain_shader.set_shader_param("ab1_noise", ab1_noise)
+
+	terrain_shader.set_shader_param("ab0_half_blend_amount", ab0_half_blend_amount)
+	terrain_shader.set_shader_param("ab1_half_blend_amount", ab1_half_blend_amount)
+	terrain_shader.set_shader_param("steepness_half_blend_amount", steepness_half_blend_amount)
 
 
 func process_images():
