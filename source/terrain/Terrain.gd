@@ -5,12 +5,13 @@ export(bool) var generate := false
 
 export(int) var max_altitude = 1
 
-export(Image) var heightmap
+export(Image) var heightmap : Image
 export(Vector3) var terrain_scale = Vector3(1, 1, 1)
 
 export(float) var steepness = 0.55
 
-export(Texture) var ab_noise
+export(float) var triplanar_scale = 1.0
+
 export(Texture) var antitile_noise
 
 export(Vector2) var texture0a_channel_scale = Vector2(1, 1)
@@ -19,25 +20,11 @@ export(Texture) var texture0a_channel_normal
 export(Texture) var texture0a_channel_roughness
 export(Texture) var texture0a_channel_ao
 
-export(Vector2) var texture0b_channel_scale = Vector2(1, 1)
-export(Texture) var texture0b_channel_diffuse
-export(Texture) var texture0b_channel_normal
-export(Texture) var texture0b_channel_roughness
-export(Texture) var texture0b_channel_ao
-
 export(Vector2) var texture1a_channel_scale = Vector2(1, 1)
 export(Texture) var texture1a_channel_diffuse
 export(Texture) var texture1a_channel_normal
 export(Texture) var texture1a_channel_roughness
 export(Texture) var texture1a_channel_ao
-
-export(Vector2) var texture1b_channel_scale = Vector2(1, 1)
-export(Texture) var texture1b_channel_diffuse
-export(Texture) var texture1b_channel_normal
-export(Texture) var texture1b_channel_roughness
-export(Texture) var texture1b_channel_ao
-
-
 
 var heightmap_size : Vector2
 var collision_shape : CollisionShape
@@ -62,7 +49,9 @@ func initialize():
 
 
 func generate_collision_shape():
-	heightmap.convert(Image.FORMAT_RF)
+#	if heightmap.get_format() != Image.FORMAT_RF:
+#		heightmap.convert(Image.FORMAT_RF)
+#	heightmap.
 	collision_shape.shape = HeightMapShape.new()
 	collision_shape.shape.map_width = heightmap_size.x
 	collision_shape.shape.map_depth = heightmap_size.y
@@ -77,12 +66,13 @@ func generate_collision_shape():
 
 
 func configure_shader():
-	terrain_shader.set_shader_param("max_altitude", max_altitude)
+	terrain_shader.set_shader_param("max_altitude", max_altitude * terrain_scale.y)
 	
 	terrain_shader.set_shader_param("heightmap", generate_heightmap_texture())
 	terrain_shader.set_shader_param("normalmap", generate_normalmap_texture())
 	
 	terrain_shader.set_shader_param("steepness", steepness)
+	terrain_shader.set_shader_param("triplanar_scale", triplanar_scale)
 
 	terrain_shader.set_shader_param("texture0a_scale", texture0a_channel_scale)
 	terrain_shader.set_shader_param("texture0a_diffuse", texture0a_channel_diffuse)
@@ -90,26 +80,13 @@ func configure_shader():
 	terrain_shader.set_shader_param("texture0a_roughness", texture0a_channel_roughness)
 	terrain_shader.set_shader_param("texture0a_ao", texture0a_channel_ao)
 	
-	terrain_shader.set_shader_param("texture0b_scale", texture0b_channel_scale)
-	terrain_shader.set_shader_param("texture0b_diffuse", texture0b_channel_diffuse)
-	terrain_shader.set_shader_param("texture0b_normal", texture0b_channel_normal)
-	terrain_shader.set_shader_param("texture0b_roughness", texture0b_channel_roughness)
-	terrain_shader.set_shader_param("texture0b_ao", texture0b_channel_ao)
-	
 	terrain_shader.set_shader_param("texture1a_scale", texture1a_channel_scale)
 	terrain_shader.set_shader_param("texture1a_diffuse", texture1a_channel_diffuse)
 	terrain_shader.set_shader_param("texture1a_normal", texture1a_channel_normal)
 	terrain_shader.set_shader_param("texture1a_roughness", texture1a_channel_roughness)
 	terrain_shader.set_shader_param("texture1a_ao", texture1a_channel_ao)
 	
-	terrain_shader.set_shader_param("texture1b_scale", texture1b_channel_scale)
-	terrain_shader.set_shader_param("texture1b_diffuse", texture1b_channel_diffuse)
-	terrain_shader.set_shader_param("texture1b_normal", texture1b_channel_normal)
-	terrain_shader.set_shader_param("texture1b_roughness", texture1b_channel_roughness)
-	terrain_shader.set_shader_param("texture1b_ao", texture1b_channel_ao)
-	
 	terrain_shader.set_shader_param("antitile_noise", antitile_noise)
-	terrain_shader.set_shader_param("ab_noise", ab_noise)
 
 
 func process_images():
@@ -119,6 +96,7 @@ func process_images():
 func generate_heightmap_texture() -> ImageTexture:
 	var texture := ImageTexture.new()
 	texture.create_from_image(heightmap)
+#	texture.flags = ImageTexture.FLAG_MIPMAPS
 	return texture
 
 
@@ -136,7 +114,8 @@ func configure_mesh():
 	mesh_instance.mesh.subdivide_width = heightmap_size.x - 1
 	mesh_instance.mesh.subdivide_depth = heightmap_size.y - 1
 	mesh_instance.mesh.set("material", terrain_shader)
-	mesh_instance.scale = terrain_scale
+	mesh_instance.scale.x = terrain_scale.x
+	mesh_instance.scale.z = terrain_scale.z
 
 
 

@@ -2,17 +2,17 @@
 
 [resource]
 code = "shader_type spatial;
-
+render_mode world_vertex_coords;
 
 uniform int max_altitude = 1;
-
 uniform float steepness = 0.55;
 
 uniform sampler2D heightmap;
 uniform sampler2D normalmap;
 
 uniform sampler2D antitile_noise;
-uniform sampler2D ab_noise;
+
+uniform float triplanar_scale = 1.0;
 
 uniform vec2 texture0a_scale = vec2(1.0);
 uniform sampler2D texture0a_diffuse;
@@ -20,33 +20,27 @@ uniform sampler2D texture0a_normal;
 uniform sampler2D texture0a_roughness;
 uniform sampler2D texture0a_ao;
 
-uniform vec2 texture0b_scale = vec2(1.0);
-uniform sampler2D texture0b_diffuse;
-uniform sampler2D texture0b_normal;
-uniform sampler2D texture0b_roughness;
-uniform sampler2D texture0b_ao;
-
 uniform vec2 texture1a_scale = vec2(1.0);
 uniform sampler2D texture1a_diffuse;
 uniform sampler2D texture1a_normal;
 uniform sampler2D texture1a_roughness;
 uniform sampler2D texture1a_ao;
 
-uniform vec2 texture1b_scale = vec2(1.0);
-uniform sampler2D texture1b_diffuse;
-uniform sampler2D texture1b_normal;
-uniform sampler2D texture1b_roughness;
-uniform sampler2D texture1b_ao;
+varying vec3 uv_triplanar_pos;
+varying vec3 uv_power_normal;
 
-
+// Culling
+uniform float cull_max_dist = 100.0;
+varying mat4 mdv_mx;
+varying vec3 vtx;
 
 float sum_vec3(vec3 v) {
 	return v.x + v.y + v.z;
 }
 
 
-vec3 texture_antitile(sampler2D p_sampler, in vec2 x) {
-	float k = texture(antitile_noise, 0.005*x).x; // cheap (cache friendly) lookup
+vec3 texture_antitile(sampler2D p_sampler, in vec2 uv) {
+	float k = texture(antitile_noise, 0.005*uv).x; // cheap (cache friendly) lookup
     
 	float index = k * 8.0;
 	float i = floor(index);
@@ -55,53 +49,82 @@ vec3 texture_antitile(sampler2D p_sampler, in vec2 x) {
 	vec2 offa = sin(vec2(3.0,7.0)*(i+0.0)); // can replace with any other hash
 	vec2 offb = sin(vec2(3.0,7.0)*(i+1.0)); // can replace with any other hash
 	
-	vec3 cola = texture(p_sampler, x + offa).xyz;
-	vec3 colb = texture(p_sampler, x + offb).xyz;
+	vec3 cola = texture(p_sampler, uv + offa).xyz;
+	vec3 colb = texture(p_sampler, uv + offb).xyz;
     
 	return mix(cola, colb, smoothstep(0.2, 0.8, f - 0.1 * sum_vec3(cola-colb)));
 }
 
 
+
+bool distance_culling() {
+	float z_dist = clamp((mdv_mx * vec4(vtx, 1.0)).z * -1.0,0.0, 2000.0 + 10.0);
+	float x_dist = (mdv_mx * vec4(vtx, 1.0)).x;
+	float dist = sqrt(z_dist * z_dist + x_dist * x_dist);
+	if (dist > cull_max_dist || z_dist < 0.0) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 void vertex() {
 	float height = texture(heightmap, UV).a;
 	VERTEX.y = height * float(max_altitude);
+	mdv_mx = MODELVIEW_MATRIX;
+	vtx = VERTEX;
+	if (distance_culling()) {
+		VERTEX = vec3(1.0 / 0.0);
+	} 
+	else {
+		uv_power_normal = pow(abs(mat3(WORLD_MATRIX) * NORMAL), vec3(1.0));
+		uv_triplanar_pos = (WORLD_MATRIX * vec4(VERTEX, 1.0f)).xyz * triplanar_scale;
+		uv_power_normal /= dot(uv_power_normal, vec3(1.0));
+		uv_triplanar_pos *= vec3(1.0, -1.0, 1.0);
+	}
+}
+
+
+vec3 triplanar_texture(sampler2D p_sampler, vec2 tex_scale, vec3 p_triplanar_pos, vec3 p_weights) {
+	vec3 samp = vec3(0.0);
+	samp+= texture_antitile(p_sampler,p_triplanar_pos.xy * tex_scale.x) * p_weights.z;
+	samp+= texture_antitile(p_sampler,p_triplanar_pos.xz * tex_scale.xy) * p_weights.y;
+	samp+= texture_antitile(p_sampler,p_triplanar_pos.zy * tex_scale.y * vec2(-1.0,1.0)) * p_weights.x;
+	return samp;
 }
 
 
 vec3 get_albedo(float slope, vec2 uv) {
 	vec3 albedo = vec3(0.0); 
-	
-	vec3 texture0a = texture_antitile(texture0a_diffuse, uv * texture0a_scale).rgb;
-	vec3 texture0b = texture_antitile(texture0b_diffuse, uv * texture0b_scale).rgb;
-	vec3 texture1a = texture_antitile(texture1a_diffuse, uv * texture1a_scale).rgb;
-	vec3 texture1b = texture_antitile(texture1b_diffuse, uv * texture1b_scale).rgb;
 
 	if (slope <= steepness) {
 		float blend_amount = slope / steepness;
-		albedo = mix(texture0a, texture1a, blend_amount);
+		albedo = mix(
+			triplanar_texture(texture0a_diffuse, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+			triplanar_texture(texture1a_diffuse, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb, 
+			blend_amount);
 	} 
 	else {
-		albedo = texture1a;
+		albedo = triplanar_texture(texture1a_diffuse, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb;
 	} 
 	
-	return albedo.rgb;
+	return albedo;
 }
 
 
 vec3 get_normal(float slope, vec2 uv) {
 	vec3 normal = vec3(0.0); 
-
-	vec3 texture0a = texture_antitile(texture0a_normal, uv * texture0a_scale).rgb;
-	vec3 texture0b = texture_antitile(texture0b_normal, uv * texture0b_scale).rgb;
-	vec3 texture1a = texture_antitile(texture1a_normal, uv * texture1a_scale).rgb;
-	vec3 texture1b = texture_antitile(texture1b_normal, uv * texture1b_scale).rgb;
-
+	
 	if (slope <= steepness) {
 		float blend_amount = slope / steepness;
-		normal = mix(texture0a, texture1a, blend_amount);
+		normal = mix(
+			triplanar_texture(texture0a_normal, texture0a_scale, uv_triplanar_pos, uv_power_normal).rgb,
+			triplanar_texture(texture1a_normal, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb,
+			blend_amount);
 	} 
 	else {
-		normal = texture1a;
+		normal = triplanar_texture(texture1a_normal, texture1a_scale, uv_triplanar_pos, uv_power_normal).rgb;
 	} 
 
 	return mix(texture(normalmap, uv).rgb, normal, 0.5);
@@ -110,18 +133,16 @@ vec3 get_normal(float slope, vec2 uv) {
 
 float get_roughness(float slope, vec2 uv) {
 	float roughness = 0.0;
-
-	float texture0a = texture_antitile(texture0a_roughness, uv * texture0a_scale).r;
-	float texture0b = texture_antitile(texture0b_roughness, uv * texture0b_scale).r;
-	float texture1a = texture_antitile(texture1a_roughness, uv * texture1a_scale).r;
-	float texture1b = texture_antitile(texture1b_roughness, uv * texture1b_scale).r;
-
+	
 	if (slope <= steepness) {
 		float blend_amount = slope / steepness;
-		roughness = mix(texture0a, texture1a, blend_amount);
+		roughness = mix( 
+			triplanar_texture(texture0a_roughness, texture0a_scale, uv_triplanar_pos, uv_power_normal).r,
+			triplanar_texture(texture1a_roughness, texture1a_scale, uv_triplanar_pos, uv_power_normal).r,
+			blend_amount);
 	} 
 	else {
-		roughness = texture1a;
+		roughness = triplanar_texture(texture1a_roughness, texture1a_scale, uv_triplanar_pos, uv_power_normal).r;
 	} 
 
 	return max(roughness, 1.0);
@@ -130,18 +151,17 @@ float get_roughness(float slope, vec2 uv) {
 
 float get_ao(float slope, vec2 uv) {
 	float ao = 0.0;
-
-	float texture0a = texture_antitile(texture0a_ao, uv * texture0a_scale).r;
-	float texture0b = texture_antitile(texture0b_ao, uv * texture0b_scale).r;
-	float texture1a = texture_antitile(texture1a_ao, uv * texture1a_scale).r;
-	float texture1b = texture_antitile(texture1b_ao, uv * texture1b_scale).r;
+	
 
 	if (slope <= steepness) {
 		float blend_amount = slope / steepness;
-		ao = mix(texture0a, texture1a, blend_amount);
+		ao = mix(
+			triplanar_texture(texture0a_ao, texture0a_scale, uv_triplanar_pos, uv_power_normal).r,
+			triplanar_texture(texture1a_ao, texture1a_scale, uv_triplanar_pos, uv_power_normal).r,
+			blend_amount);
 	} 
 	else {
-		ao = texture1a;
+		ao = triplanar_texture(texture1a_ao, texture1a_scale, uv_triplanar_pos, uv_power_normal).r;
 	} 
 
 	return ao;
@@ -151,12 +171,17 @@ float get_ao(float slope, vec2 uv) {
 void fragment() {
 	vec3 normal = texture(normalmap, UV).rgb;
 	float slope = acos(normal.z);
-
-	ALBEDO = get_albedo(slope, UV);
-	NORMALMAP = get_normal(slope, UV);
-	NORMALMAP_DEPTH = 2.0;
-	ROUGHNESS = get_roughness(slope, UV);
-	AO = get_ao(slope, UV);
-	AO_LIGHT_AFFECT = 1.0;
+	
+	if (distance_culling()) {
+		discard
+	}
+	else {
+		ALBEDO = get_albedo(slope, UV);
+		NORMALMAP = get_normal(slope, UV);
+		NORMALMAP_DEPTH = 2.0;
+		ROUGHNESS = get_roughness(slope, UV);
+		AO = get_ao(slope, UV);
+		AO_LIGHT_AFFECT = 1.0;
+	}
 }
 "
