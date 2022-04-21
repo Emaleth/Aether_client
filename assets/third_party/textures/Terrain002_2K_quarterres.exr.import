@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Terrain002_2K_quarterres.exr-b22e430037a84a6be80fd87b4b067088.image"
+
+[deps]
+
+source_file="res://assets/third_party/textures/Terrain002_2K_quarterres.exr"
+dest_files=[ "res://.import/Terrain002_2K_quarterres.exr-b22e430037a84a6be80fd87b4b067088.image" ]
+
+[params]
+

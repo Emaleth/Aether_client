@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/Terrain002_2K_oneeighth.exr-801f3e9edabb4e3c97263078eb8954e5.image"
+
+[deps]
+
+source_file="res://assets/third_party/textures/Terrain002_2K_oneeighth.exr"
+dest_files=[ "res://.import/Terrain002_2K_oneeighth.exr-801f3e9edabb4e3c97263078eb8954e5.image" ]
+
+[params]
+

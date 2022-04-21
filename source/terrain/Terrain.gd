@@ -47,6 +47,8 @@ var heightmap_size : Vector2
 var collision_shape : CollisionShape
 var mesh_instance : MeshInstance
 var terrain_shader : Resource
+var grass_mesh : Resource
+var multi_mesh_instance : MultiMeshInstance
 
 
 
@@ -57,16 +59,20 @@ func _process(_delta: float) -> void:
 		process_images()
 		configure_mesh()
 		generate_collision_shape()
+		make_grass()
 		generate = false
 
 
 func initialize():
 	collision_shape = $CollisionShape
 	mesh_instance = $MeshInstance
+	multi_mesh_instance = $MultiMeshInstance
 	terrain_shader = preload("res://resources/materials/terrain.tres")
+	grass_mesh = preload("res://new_quadmesh.tres")
 
 
 func generate_collision_shape():
+	heightmap.convert(Image.FORMAT_RGBAF)
 	collision_shape.shape = HeightMapShape.new()
 	collision_shape.shape.map_width = heightmap_size.x
 	collision_shape.shape.map_depth = heightmap_size.y
@@ -149,3 +155,23 @@ func configure_mesh():
 	mesh_instance.mesh.set("material", terrain_shader)
 	mesh_instance.scale.x = terrain_scale.x
 	mesh_instance.scale.z = terrain_scale.z
+	
+	
+func make_grass():
+	var float_array := []
+	heightmap.lock()
+	for y in heightmap.get_height():
+		for x in heightmap.get_width():
+			float_array.append(Vector3(x - heightmap_size.x / 2, heightmap.get_pixel(x, y).r * max_altitude, y - heightmap_size.y / 2))
+	heightmap.unlock()
+
+	multi_mesh_instance.multimesh = MultiMesh.new()
+	multi_mesh_instance.multimesh.transform_format = MultiMesh.TRANSFORM_3D
+	multi_mesh_instance.multimesh.color_format = MultiMesh.COLOR_NONE
+	multi_mesh_instance.multimesh.custom_data_format = MultiMesh.CUSTOM_DATA_NONE
+	multi_mesh_instance.multimesh.instance_count = heightmap_size.x * heightmap_size.y
+	multi_mesh_instance.multimesh.visible_instance_count = heightmap_size.x * heightmap_size.y
+	multi_mesh_instance.multimesh.mesh = grass_mesh
+
+	for i in multi_mesh_instance.multimesh.visible_instance_count:
+		multi_mesh_instance.multimesh.set_instance_transform(i, Transform(Basis(), float_array[i]))
