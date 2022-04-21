@@ -86,7 +86,7 @@ bool distance_culling() {
 }
 
 void vertex() {
-	VERTEX.y = texture(heightmap, UV).a * float(max_altitude);
+	VERTEX.y = texture(heightmap, UV).r * float(max_altitude);
 	mdv_mx = MODELVIEW_MATRIX;
 	vtx = VERTEX;
 	if (distance_culling()) {

@@ -49,7 +49,8 @@ var mesh_instance : MeshInstance
 var terrain_shader : Resource
 
 
-func _process(delta: float) -> void:
+
+func _process(_delta: float) -> void:
 	if generate:
 		initialize()
 		configure_shader()
@@ -66,8 +67,6 @@ func initialize():
 
 
 func generate_collision_shape():
-#	if heightmap.get_format() != Image.FORMAT_RF:
-#		heightmap.convert(Image.FORMAT_RF)
 	collision_shape.shape = HeightMapShape.new()
 	collision_shape.shape.map_width = heightmap_size.x
 	collision_shape.shape.map_depth = heightmap_size.y
@@ -150,7 +149,3 @@ func configure_mesh():
 	mesh_instance.mesh.set("material", terrain_shader)
 	mesh_instance.scale.x = terrain_scale.x
 	mesh_instance.scale.z = terrain_scale.z
-
-
-
-
