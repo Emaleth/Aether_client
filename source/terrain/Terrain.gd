@@ -8,7 +8,7 @@ export(int) var max_altitude = 1
 export(Image) var heightmap : Image
 export(Vector3) var terrain_scale = Vector3(1, 1, 1)
 
-export(float) var steepness = 0.55
+export(float) var steepness = 0.5
 export(float) var culling_max_distance = 100.0
 export(float) var triplanar_scale = 1.0
 export(float) var ab0_half_blend_amount = 0.05
@@ -66,8 +66,8 @@ func initialize():
 
 
 func generate_collision_shape():
-	if heightmap.get_format() != Image.FORMAT_RF:
-		heightmap.convert(Image.FORMAT_RF)
+#	if heightmap.get_format() != Image.FORMAT_RF:
+#		heightmap.convert(Image.FORMAT_RF)
 	collision_shape.shape = HeightMapShape.new()
 	collision_shape.shape.map_width = heightmap_size.x
 	collision_shape.shape.map_depth = heightmap_size.y
