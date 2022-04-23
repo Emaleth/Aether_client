@@ -1,0 +1,14 @@
+# Blender v3.1.2 OBJ File: 'grass_blade.blend'
+# www.blender.org
+mtllib grass_blade.mtl
+o Blade_Plane
+v -0.000000 0.000000 0.056504
+v 0.000000 0.500000 -0.007483
+v -0.000000 0.000000 -0.056504
+vt 0.000000 0.000000
+vt 1.000000 0.000000
+vt 1.000000 1.000000
+vn 1.0000 -0.0000 0.0000
+usemtl None
+s off
+f 2/1/1 1/2/1 3/3/1
