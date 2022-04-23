@@ -1,0 +1,47 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type spatial;
+render_mode cull_disabled;
+
+uniform vec4 albedo : hint_color;
+//uniform float culling_max_distance = 100.0;
+
+//varying mat4 mdv_mx;
+//varying vec3 vtx;
+//
+//
+//bool distance_culling() {
+//	float z_dist = clamp((mdv_mx * vec4(vtx, 1.0)).z * -1.0,0.0, 2000.0 + 10.0);
+//	float x_dist = (mdv_mx * vec4(vtx, 1.0)).x;
+//	float dist = sqrt(z_dist * z_dist + x_dist * x_dist);
+//	if (dist > culling_max_distance || z_dist < 0.0) {
+//		return true;
+//	}
+//	else {
+//		return false;
+//	}
+//}
+
+
+//void vertex() {
+//	mdv_mx = MODELVIEW_MATRIX;
+//	vtx = VERTEX;
+//	if (distance_culling()) {
+//		VERTEX = vec3(sqrt(-MODELVIEW_MATRIX[3][3]));
+//	} else {
+//		MODELVIEW_MATRIX = INV_CAMERA_MATRIX * mat4(vec4(normalize(cross(vec3(0.0, 1.0, 0.0), CAMERA_MATRIX[2].xyz)),0.0),vec4(0.0, 1.0, 0.0, 0.0),vec4(normalize(cross(CAMERA_MATRIX[0].xyz, vec3(0.0, 1.0, 0.0))),0.0),WORLD_MATRIX[3]);
+		
+//	}
+//}
+
+
+void fragment() {
+//	if (distance_culling()) {
+//		discard;
+//	}
+//	else {
+		ALBEDO = albedo.rgb;
+//	}
+}
+"

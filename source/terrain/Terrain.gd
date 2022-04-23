@@ -2,6 +2,7 @@ tool
 extends StaticBody
 
 export(bool) var generate := false
+export(bool) var process_grass := false
 
 export(int) var max_altitude = 1
 
@@ -10,10 +11,12 @@ export(Vector3) var terrain_scale = Vector3(1, 1, 1)
 
 export(float) var steepness = 0.5
 export(float) var culling_max_distance = 100.0
+export(float) var grass_render_distance = 100
 export(float) var triplanar_scale = 1.0
 export(float) var ab0_half_blend_amount = 0.05
 export(float) var ab1_half_blend_amount = 0.05
 export(float) var steepness_half_blend_amount = 0.05
+export(float) var grass_density = 1
 
 export(Texture) var antitile_noise
 export(Texture) var ab0_noise
@@ -59,8 +62,11 @@ func _process(_delta: float) -> void:
 		process_images()
 		configure_mesh()
 		generate_collision_shape()
-		make_grass()
+		initialize_multi_mesh_instance()
 		generate = false
+		
+	if process_grass:
+		process_grass()
 
 
 func initialize():
@@ -138,11 +144,12 @@ func generate_heightmap_texture() -> ImageTexture:
 	texture.create_from_image(heightmap)
 	return texture
 
-
+var nrm
 func generate_normalmap_texture() -> ImageTexture:
 	var texture := ImageTexture.new()
 	var tmp_image : Image = heightmap.duplicate(true)
 	tmp_image.bumpmap_to_normalmap(max_altitude)
+	nrm = tmp_image.duplicate(true)
 	texture.create_from_image(tmp_image)
 	return texture
 
@@ -157,21 +164,56 @@ func configure_mesh():
 	mesh_instance.scale.z = terrain_scale.z
 	
 	
-func make_grass():
-	var float_array := []
-	heightmap.lock()
-	for y in heightmap.get_height():
-		for x in heightmap.get_width():
-			float_array.append(Vector3(x - heightmap_size.x / 2, heightmap.get_pixel(x, y).r * max_altitude, y - heightmap_size.y / 2))
-	heightmap.unlock()
-
+var final_grass_array := []
+var blades_array := []
+func initialize_multi_mesh_instance():
+	var grass_position_array := []
+	var grass_normal_array := []
+	final_grass_array = []
+	blades_array = []
+	
 	multi_mesh_instance.multimesh = MultiMesh.new()
 	multi_mesh_instance.multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	multi_mesh_instance.multimesh.color_format = MultiMesh.COLOR_NONE
 	multi_mesh_instance.multimesh.custom_data_format = MultiMesh.CUSTOM_DATA_NONE
-	multi_mesh_instance.multimesh.instance_count = heightmap_size.x * heightmap_size.y
-	multi_mesh_instance.multimesh.visible_instance_count = heightmap_size.x * heightmap_size.y
 	multi_mesh_instance.multimesh.mesh = grass_mesh
+	
+	heightmap.lock()
+	for y in heightmap.get_height():
+		for x in heightmap.get_width():
+			grass_position_array.append(Vector3(x - heightmap_size.x / 2, heightmap.get_pixel(x, y).r * max_altitude, y - heightmap_size.y / 2))
+	heightmap.unlock()
 
-	for i in multi_mesh_instance.multimesh.visible_instance_count:
-		multi_mesh_instance.multimesh.set_instance_transform(i, Transform(Basis(), float_array[i]))
+	nrm.lock()
+	for y in nrm.get_height():
+		for x in nrm.get_width():
+			grass_normal_array.append(Vector3(nrm.get_pixel(x, y).r, nrm.get_pixel(x, y).g, nrm.get_pixel(x, y).b))
+	nrm.unlock()
+
+	for i in grass_position_array.size():
+		if acos(grass_normal_array[i].z) < steepness:
+			var blades := []
+			for n in range(grass_density):
+				blades.append(Transform(
+					Basis(),
+					Vector3(
+						rand_range(grass_position_array[i].x - 0.55, grass_position_array[i].x + 0.55), 
+						rand_range(grass_position_array[i].y - 0.1, grass_position_array[i].y + 0.1), 
+						rand_range(grass_position_array[i].z - 0.55, grass_position_array[i].z + 0.55)
+						)
+					))
+			final_grass_array.append([grass_position_array[i], blades])
+				
+				
+func process_grass():
+	var peg = $Position3D
+	var valid_positions := []
+	
+	for i in final_grass_array.size():
+		if final_grass_array[i][0].distance_squared_to(peg.global_transform.origin) < pow(grass_render_distance, 2):
+			valid_positions.append_array(final_grass_array[i][1])
+		
+	multi_mesh_instance.multimesh.instance_count = valid_positions.size()
+	
+	for i in multi_mesh_instance.multimesh.instance_count:
+		multi_mesh_instance.multimesh.set_instance_transform(i, valid_positions[i])
