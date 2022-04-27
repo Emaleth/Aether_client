@@ -17,7 +17,6 @@ export(float) var culling_max_distance = 100.0
 export(float) var grass_render_distance = 5
 export(float) var triplanar_scale = 1.0
 export(float) var steepness_blend_amount = 0.05
-export(float) var grass_density = 50
 
 export(Texture) var antitile_noise
 
@@ -60,6 +59,10 @@ var mesh_instance : MeshInstance
 var multi_mesh_instance : MultiMeshInstance
 
 var grass_array := []
+
+
+func _ready() -> void:
+	initialize()
 
 
 func _process(_delta: float) -> void:
@@ -210,7 +213,6 @@ func process_grass():
 	multi_mesh_instance.multimesh.instance_count = valid_positions.size()
 	for i in multi_mesh_instance.multimesh.instance_count:
 		multi_mesh_instance.multimesh.set_instance_transform(i, valid_positions[i])
-	grass_shader.set_shader_param("character_position", peg.global_transform.origin)
 	
 	
 var height_probe : RayCast
