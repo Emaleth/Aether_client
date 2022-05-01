@@ -30,7 +30,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func get_input():
 	if GlobalVariables.user_interface.mode != GlobalVariables.user_interface.COMBAT:
 		return
-	if Input.is_action_pressed("primary_action"):
+	if Input.is_action_pressed("interact"):
 		var body = target_data.collider if target_data.size() > 0 else null
 		if body:
 			interact(body)
@@ -78,18 +78,18 @@ func interact(_body):
 				Server.request_loot_data(int(_body.name))
 				return
 
-	shoot()
-		
-
-func shoot():
-	var weapon = GlobalVariables.equipment_data["weapon"]
-	if not weapon:
-		return
-	var weapon_data = GlobalVariables.get_item_data(weapon["item"])
-	var w_cd : float = 1.0 / weapon_data[1]["rof"] * 1000
-	var current_time = Server.client_clock
-	if current_time - weapon["used"] < w_cd:
-		return
-	weapon["used"] = current_time
-	Server.send_weapon_use_request()
-	GlobalVariables.player_actor.weapon_pivot.get_node("MeshInstance").shoot()
+#	shoot()
+#
+#
+#func shoot():
+#	var weapon = GlobalVariables.equipment_data["weapon"]
+#	if not weapon:
+#		return
+#	var weapon_data = GlobalVariables.get_item_data(weapon["item"])
+#	var w_cd : float = 1.0 / weapon_data[1]["rof"] * 1000
+#	var current_time = Server.client_clock
+#	if current_time - weapon["used"] < w_cd:
+#		return
+#	weapon["used"] = current_time
+#	Server.send_weapon_use_request()
+##	GlobalVariables.player_actor.weapon_pivot.get_node("MeshInstance").shoot()

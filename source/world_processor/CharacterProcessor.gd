@@ -26,5 +26,5 @@ func send_player_state():
 		if frame_index >= 3:
 			Server.send_player_state(
 					GlobalVariables.player_actor.global_transform,
-					GlobalVariables.player_actor.get_node("weapon_pivot").global_transform.basis)
+					GlobalVariables.player_actor.ability_origin.global_transform.basis)
 			frame_index = 0

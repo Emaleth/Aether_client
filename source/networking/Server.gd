@@ -132,10 +132,6 @@ remote func recive_chat_state(chat_state):
 		emit_signal("s_update_chat_state", chat_state)
 
 	
-func send_weapon_use_request():
-	rpc_id(1, "request_weapon_use")
-	
-	
 func send_player_state(_player_transform : Transform, _looking_at_basis : Basis):
 	rpc_unreliable_id(1, "recive_player_state", _player_transform, _looking_at_basis)
 	
@@ -246,12 +242,11 @@ remote func recive_currency_data(_data : Dictionary): #OK
 	
 func request_item_buy(_shop_id : int, _index : int): #OK
 	rpc_id(1, "request_item_buy", _shop_id, _index)
-#	print("test buy")
 	
 	
 func request_item_sell(_shop_id : int, _index : int): #OK
 	rpc_id(1, "request_item_sell", _shop_id, _index)
-#	print("test sell")
+
 
 func request_ability_use(_index):
 	rpc_id(1, "request_ability_use", _index)

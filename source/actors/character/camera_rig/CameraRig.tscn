@@ -16,8 +16,8 @@ script = ExtResource( 1 )
 
 [node name="Camera" type="Camera" parent="."]
 cull_mask = 1
-h_offset = 0.3
 current = true
+fov = 80.0
 near = 0.01
 far = 1000.0
 

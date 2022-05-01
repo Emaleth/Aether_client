@@ -70,7 +70,7 @@ func update_in_the_tree():
 			for npc in buffer_index_table[index]["container"].get_children():
 				if buffer_index_table[index]["collection"].has(str(npc.name)):
 					npc.global_transform = buffer_index_table[index]["collection"][str(npc.name)][0]
-					npc.get_node("weapon_pivot").global_transform.basis = buffer_index_table[index]["collection"][str(npc.name)][1]
+					npc.ability_origin.global_transform.basis = buffer_index_table[index]["collection"][str(npc.name)][1]
 		else:
 			for npc in buffer_index_table[index]["container"].get_children():
 				if buffer_index_table[index]["collection"].has(str(npc.name)):

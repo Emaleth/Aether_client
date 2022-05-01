@@ -6,7 +6,7 @@ var gravity := -45
 var snap_vector := Vector3.DOWN
 var velocity := Vector3.ZERO
 
-onready var weapon_pivot := $weapon_pivot
+onready var ability_origin := $AbilityOrigin
 onready var camera_rig := $CameraRig
 
 
@@ -63,6 +63,6 @@ func rotate_camera_rig(_amount : Vector2) -> void:
 
 
 func aim(target_data):
-	weapon_pivot.look_at(target_data.position, Vector3.UP)
+	ability_origin.look_at(target_data.position, Vector3.UP)
 
 

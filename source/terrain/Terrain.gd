@@ -62,7 +62,7 @@ var grass_array := []
 
 
 func _ready() -> void:
-	initialize()
+	generate = true
 
 
 func _process(_delta: float) -> void:
@@ -76,7 +76,6 @@ func _process(_delta: float) -> void:
 		configure_grass_mesh()
 		generate_collision_shape()
 		initialize_multi_mesh_instance()
-		process_grass()
 		print("..:: World Generated in %ss ::.." % ((OS.get_ticks_msec() - t) / 1000.0)) 
 		generate = false
 
