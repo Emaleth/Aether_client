@@ -7,8 +7,8 @@ var data : Array
 onready var collision_shape := $CollisionShape
 
 
-func configure(_transform : Transform, _data : Array):
-	global_transform = _transform
+func configure(transform_array : Array, _data : Array):
+	global_transform = transform_array[1]
 	data = _data.duplicate(true)
 
 
