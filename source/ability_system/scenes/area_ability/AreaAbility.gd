@@ -11,10 +11,19 @@ var data : Array
 onready var collision_shape := $CollisionShape
 
 
-func configure(transform_array : Array, _data : Array):
+func configure(transform_array : Array, _data : Array, _caster_id : String):
 	global_transform = transform_array[0]
 	data = _data.duplicate(true)
+	caster_id = _caster_id
 	
+	
+func _physics_process(delta: float) -> void:
+	if data[1]["static"] == false:
+		if caster_id == str(get_tree().get_network_unique_id()):
+			global_transform = GlobalVariables.player_actor.global_transform
+		else:
+			global_transform = GlobalVariables.world.get_node("PlayerContainer/" + caster_id).global_transform
+		
 	
 func _ready() -> void:
 	lifetime_timer.start(data[1]["lifetime"])

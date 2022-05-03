@@ -7,7 +7,7 @@ var data : Array
 onready var collision_shape := $CollisionShape
 
 
-func configure(transform_array : Array, _data : Array):
+func configure(transform_array : Array, _data : Array, _caster_id : String):
 	global_transform = transform_array[1]
 	data = _data.duplicate(true)
 

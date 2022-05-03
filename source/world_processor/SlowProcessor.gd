@@ -4,6 +4,7 @@ extends Node
 onready var projectile_ability_scene := preload("res://source/ability_system/scenes/projectile_ability/ProjectileAbility.tscn")
 onready var area_ability_scene := preload("res://source/ability_system/scenes/area_ability/AreaAbility.tscn")
 
+
 var buffer_index_table := {
 	1 : { # PLAYERS
 		"collection" : {},
@@ -51,17 +52,7 @@ func update_world_state(world_state):
 
 func process_abilities(_data):
 	for i in _data:
-#		var ability_data = GlobalVariables.get_ability_data(i[0])
-#		var new_ability = null
-#		match ability_data[0]["type"]:
-#			"projectile":
-#				new_ability = projectile.instance()
-#			"area":
-#				new_ability = area.instance()
-#		new_ability.configure(i[1], ability_data)
-#		ability_container.add_child(new_ability, true)
-	
-		var ability_data = GlobalVariables.get_ability_data(i[0])
+		var ability_data = GlobalVariables.get_ability_data(i[1])
 		var new_ability = null
 		match ability_data[0]["type"]:
 			"projectile":
@@ -70,10 +61,6 @@ func process_abilities(_data):
 				new_ability = area_ability_scene.instance()
 			"raycast":
 				pass
-#		var transform_array = [
-#			player.global_transform,
-#			player.ability_origin.global_transform
-#		]
-		new_ability.configure(i[1], ability_data)
+		new_ability.configure(i[2], ability_data, i[0])
 		ability_container.add_child(new_ability, true)
 		
