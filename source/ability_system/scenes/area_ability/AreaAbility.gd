@@ -6,6 +6,7 @@ onready var lifetime_timer := $LifetimeTimer
 onready var tick_timer := $TickTimer
 
 var caster_id : String
+var offset : Vector3
 var data : Array
 
 onready var collision_shape := $CollisionShape
@@ -18,16 +19,20 @@ func configure(transform_array : Array, _data : Array, _caster_id : String):
 	
 	
 func _physics_process(delta: float) -> void:
-	if data[1]["static"] == false:
+	if data[1]["caster_bound"] == true:
 		if caster_id == str(get_tree().get_network_unique_id()):
-			global_transform = GlobalVariables.player_actor.global_transform
+			var caster_transform = GlobalVariables.player_actor.global_transform
+			global_transform.basis = caster_transform.basis
+			global_transform.origin = caster_transform.origin + offset
 		else:
-			global_transform = GlobalVariables.world.get_node("PlayerContainer/" + caster_id).global_transform
-		
+			var caster_transform = GlobalVariables.world.get_node("PlayerContainer/" + caster_id).global_transform
+			global_transform.basis = caster_transform.basis
+			global_transform.origin = caster_transform.origin + offset
 	
 func _ready() -> void:
 	lifetime_timer.start(data[1]["lifetime"])
 	tick_timer.start(data[1]["tick_time"])
+	offset = Vector3(0, 0.9, 0) if data[1]["caster_bound"] == true else Vector3.ZERO
 	tick() # fist tick
 	
 	

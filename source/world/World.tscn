@@ -9,8 +9,8 @@
 [node name="World" type="Node"]
 
 [node name="Terrain" parent="." instance=ExtResource( 1 )]
-generate = false
 culling_max_distance = 10.0
+grass_render_distance = 5
 
 [node name="NPCContainer" type="Node" parent="."]
 
