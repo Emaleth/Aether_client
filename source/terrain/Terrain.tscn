@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://source/terrain/Terrain.gd" type="Script" id=1]
 [ext_resource path="res://assets/third_party/textures/Terrain002_2K_oneeighth.exr" type="Image" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/third_party/PBR/Grass003_1K-PNG/Grass003_1K_Roughness.png" type="Texture" id=6]
 [ext_resource path="res://assets/custom/meshes/grass_patch.obj" type="ArrayMesh" id=7]
 [ext_resource path="res://assets/third_party/textures/empty_splatmap.png" type="Texture" id=8]
+[ext_resource path="res://environment.tres" type="Environment" id=9]
 [ext_resource path="res://assets/third_party/PBR/Rock038_1K-PNG/Rock038_1K_Color.png" type="Texture" id=12]
 [ext_resource path="res://resources/materials/terrain.tres" type="Material" id=16]
 [ext_resource path="res://assets/third_party/PBR/Rock038_1K-PNG/Rock038_1K_AmbientOcclusion.png" type="Texture" id=17]
@@ -55,12 +56,12 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-generate = true
 max_altitude = 60
 heightmap_image = ExtResource( 2 )
 normalmap_image = SubResource( 3 )
 splatmap = ExtResource( 8 )
 steepness = 0.6
+grass_render_distance = 5
 antitile_noise = SubResource( 2 )
 texture_flat_diffuse = ExtResource( 5 )
 texture_flat_normal = ExtResource( 3 )
@@ -74,7 +75,7 @@ terrain_shader = ExtResource( 16 )
 grass_shader = ExtResource( 21 )
 grass_mesh = ExtResource( 7 )
 
-[node name="CollisionShape" type="CollisionShape" parent="."]
+[node name="CollisionShape" type="CollisionShape" parent="." groups=["navmesh"]]
 visible = false
 shape = SubResource( 4 )
 __meta__ = {
@@ -112,5 +113,5 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Position3D" type="Position3D" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 69.4787, 6.99406, 80.5473 )
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 9 )

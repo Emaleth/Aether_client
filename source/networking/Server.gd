@@ -132,8 +132,8 @@ remote func recive_chat_state(chat_state):
 		emit_signal("s_update_chat_state", chat_state)
 
 	
-func send_player_state(_player_transform : Transform, _looking_at_basis : Basis):
-	rpc_unreliable_id(1, "recive_player_state", _player_transform, _looking_at_basis)
+#func send_player_state(_player_transform : Transform, _looking_at_basis : Basis):
+#	rpc_unreliable_id(1, "recive_player_state", _player_transform, _looking_at_basis)
 	
 	
 func request_item_discard(_index):
@@ -176,6 +176,10 @@ remote func receive_loot_data(_data, _npc_id):
 func request_material_gather(_material_id : String):
 	rpc_id(1, "request_material_gather", _material_id)
 
+
+func request_move(_pos):
+	rpc_id(1, "request_move", _pos)
+	
 		
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
@@ -183,7 +187,6 @@ remote func receive_data_tables(_data : Dictionary):
 		LocalDataTables.item_index = _data["item_index"]
 		LocalDataTables.armor_table = _data["armor_table"]
 		LocalDataTables.weapon_table = _data["weapon_table"]
-#		LocalDataTables.sidearm_table = _data["sidearm_table"]
 		LocalDataTables.material_table = _data["material_table"]
 		LocalDataTables.craft_recipe_table = _data["craft_recipe_table"]
 		LocalDataTables.ability_scroll_table = _data["ability_scroll_table"]
@@ -250,4 +253,18 @@ func request_item_sell(_shop_id : int, _index : int): #OK
 
 func request_ability_use(_index):
 	rpc_id(1, "request_ability_use", _index)
+
+
+remote func recive_spawn_data(_data : Dictionary):
+	pass
+	
+
+remote func recive_despawn_data(_data : Dictionary):
+	pass
+	
+
+remote func recive_motion_data(_data : Dictionary):
+	pass
+	
+	
 	

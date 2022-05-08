@@ -2,7 +2,8 @@ extends PanelContainer
 
 enum {LOGIN, REGISTER, LOADING}
 
-onready var game = preload("res://source/world_processor/WorldProcessor.tscn")
+#onready var game = preload("res://source/world_processor/WorldProcessor.tscn")
+onready var world : PackedScene = preload("res://source/world/World.tscn")
 
 onready var login_panel = $MarginContainer/VBoxContainer/CenterContainer/LoginPanel
 onready var register_panel = $MarginContainer/VBoxContainer/CenterContainer/RegisterPanel
@@ -39,7 +40,7 @@ func set_menu_state(state):
 
 		
 func enter_world():
-	get_tree().change_scene_to(game)
+	get_tree().change_scene_to(world)
 
 	
 func quit() -> void:

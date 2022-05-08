@@ -1,73 +1,20 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://source/terrain/Terrain.tscn" type="PackedScene" id=1]
-[ext_resource path="res://source/crafting_station/crafting_station.tscn" type="PackedScene" id=2]
-[ext_resource path="res://source/resource_node/resource_node.tscn" type="PackedScene" id=3]
-[ext_resource path="res://source/shop/shop.tscn" type="PackedScene" id=4]
-[ext_resource path="res://source/actors/npc/npc.tscn" type="PackedScene" id=7]
+[ext_resource path="res://source/world/World.gd" type="Script" id=2]
+[ext_resource path="res://source/camera_rig/CameraRig.tscn" type="PackedScene" id=5]
 
 [node name="World" type="Node"]
+script = ExtResource( 2 )
 
 [node name="Terrain" parent="." instance=ExtResource( 1 )]
-culling_max_distance = 10.0
-grass_render_distance = 5
+culling_max_distance = 300.0
 
-[node name="NPCContainer" type="Node" parent="."]
+[node name="CameraRig" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 51.5333, 0 )
 
-[node name="NPC" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 315.496, 26.116, -333.658 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Containers" type="Node" parent="."]
 
-[node name="NPC2" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 315.305, 26.5551, -330.775 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="Actors" type="Node" parent="Containers"]
 
-[node name="NPC3" parent="NPCContainer" instance=ExtResource( 7 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 310.782, 26.9814, -330.768 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="ResourceNodeContainer" type="Node" parent="."]
-
-[node name="resource_node" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 336.516, 25.385, -332.741 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="resource_node2" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 337.609, 24.9672, -334.623 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="resource_node3" parent="ResourceNodeContainer" instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 338.872, 25.2033, -332.681 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="ShopContainer" type="Node" parent="."]
-
-[node name="shop" parent="ShopContainer" instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 350.388, 26.6267, -321.311 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CraftingStationContainer" type="Node" parent="."]
-
-[node name="crafting_station" parent="CraftingStationContainer" instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 348.047, 24.302, -335.015 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="AbilityContainer" type="Node" parent="."]
-
-[node name="PlayerContainer" type="Node" parent="."]
+[node name="Abilities" type="Node" parent="Containers"]
