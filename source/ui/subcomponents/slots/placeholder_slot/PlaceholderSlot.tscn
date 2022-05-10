@@ -2,11 +2,8 @@
 
 [ext_resource path="res://source/ui/subcomponents/slots/placeholder_slot/PlaceholderSlot.gd" type="Script" id=1]
 
-[node name="SlotPlaceholder" type="PanelContainer"]
-margin_right = 14.0
-margin_bottom = 14.0
-rect_min_size = Vector2( 36, 36 )
+[node name="SlotPlaceholder" type="Button"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
