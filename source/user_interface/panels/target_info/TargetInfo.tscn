@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/user_interface/panels/target_info/TargetInfo.gd" type="Script" id=1]
-[ext_resource path="res://resources/stylebox/panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://resources/stylebox/slot.tres" type="StyleBox" id=2]
 
 [sub_resource type="StyleBoxLine" id=1]
 color = Color( 0.741176, 0.0862745, 0.0862745, 1 )

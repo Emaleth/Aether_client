@@ -10,12 +10,11 @@
 [ext_resource path="res://source/user_interface/panels/buttons/Buttons.tscn" type="PackedScene" id=8]
 [ext_resource path="res://source/ui/subcomponents/slots/placeholder_slot/PlaceholderSlot.tscn" type="PackedScene" id=9]
 [ext_resource path="res://resources/stylebox/panel.tres" type="StyleBox" id=10]
+[ext_resource path="res://resources/stylebox/slot.tres" type="StyleBox" id=11]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="StyleBoxEmpty" id=3]
 
 [node name="UserInterface" type="PanelContainer"]
 anchor_right = 1.0
@@ -67,38 +66,40 @@ margin_bottom = 768.0
 custom_styles/panel = SubResource( 2 )
 
 [node name="CharacterSheetContainer" type="PanelContainer" parent="Layer1"]
-margin_left = 261.0
-margin_top = 170.0
-margin_right = 1105.0
-margin_bottom = 598.0
+margin_left = 241.0
+margin_top = 150.0
+margin_right = 1125.0
+margin_bottom = 618.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 custom_styles/panel = ExtResource( 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Layer1/CharacterSheetContainer"]
-margin_left = 5.0
-margin_top = 5.0
-margin_right = 839.0
-margin_bottom = 423.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = 869.0
+margin_bottom = 453.0
 custom_constants/separation = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Layer1/CharacterSheetContainer/HBoxContainer"]
-margin_right = 284.0
-margin_bottom = 418.0
+margin_right = 294.0
+margin_bottom = 438.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
 
 [node name="EquipmentContainer" type="PanelContainer" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer"]
-margin_right = 284.0
-margin_bottom = 284.0
+margin_right = 294.0
+margin_bottom = 294.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = ExtResource( 11 )
 
 [node name="GridContainer" type="GridContainer" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer/EquipmentContainer"]
-margin_right = 284.0
-margin_bottom = 284.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 289.0
+margin_bottom = 289.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 8
@@ -456,21 +457,23 @@ margin_right = 284.0
 margin_bottom = 284.0
 
 [node name="HSeparator" type="HSeparator" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer"]
-margin_top = 289.0
-margin_right = 284.0
-margin_bottom = 293.0
+margin_top = 299.0
+margin_right = 294.0
+margin_bottom = 303.0
 
 [node name="InfoContainer" type="PanelContainer" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer"]
-margin_top = 298.0
-margin_right = 284.0
-margin_bottom = 418.0
+margin_top = 308.0
+margin_right = 294.0
+margin_bottom = 438.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = ExtResource( 11 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer/InfoContainer"]
-margin_right = 284.0
-margin_bottom = 120.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 289.0
+margin_bottom = 125.0
 bbcode_enabled = true
 bbcode_text = "< some text,
 some text,
@@ -491,28 +494,30 @@ some text >"
 fit_content_height = true
 
 [node name="VSeparator" type="VSeparator" parent="Layer1/CharacterSheetContainer/HBoxContainer"]
-margin_left = 289.0
-margin_right = 293.0
-margin_bottom = 418.0
+margin_left = 299.0
+margin_right = 303.0
+margin_bottom = 438.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Layer1/CharacterSheetContainer/HBoxContainer"]
-margin_left = 298.0
-margin_right = 834.0
-margin_bottom = 418.0
+margin_left = 308.0
+margin_right = 854.0
+margin_bottom = 438.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 5
 
 [node name="InventoryContainer" type="PanelContainer" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer2"]
-margin_right = 536.0
-margin_bottom = 363.0
+margin_right = 546.0
+margin_bottom = 381.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.9
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = ExtResource( 11 )
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer2/InventoryContainer"]
-margin_right = 536.0
-margin_bottom = 363.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 541.0
+margin_bottom = 376.0
 scroll_horizontal_enabled = false
 
 [node name="GridContainer" type="GridContainer" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer2/InventoryContainer/ScrollContainer"]
@@ -1347,453 +1352,437 @@ margin_right = 392.0
 margin_bottom = 356.0
 
 [node name="HSeparator" type="HSeparator" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 368.0
-margin_right = 536.0
-margin_bottom = 372.0
+margin_top = 386.0
+margin_right = 546.0
+margin_bottom = 390.0
 
 [node name="CurrencyContainer" type="PanelContainer" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 377.0
-margin_right = 536.0
-margin_bottom = 418.0
+margin_top = 395.0
+margin_right = 546.0
+margin_bottom = 438.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.1
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = ExtResource( 11 )
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layer1/CharacterSheetContainer/HBoxContainer/VBoxContainer2/CurrencyContainer"]
-margin_right = 536.0
-margin_bottom = 41.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 541.0
+margin_bottom = 38.0
 
 [node name="AbilityContainer" type="PanelContainer" parent="Layer1"]
 visible = false
-margin_left = 50.0
-margin_top = 50.0
-margin_right = 1316.0
-margin_bottom = 718.0
+margin_right = 1366.0
+margin_bottom = 768.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Layer1/AbilityContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 1259.0
-margin_bottom = 661.0
+margin_right = 1359.0
+margin_bottom = 761.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Layer1/AbilityContainer/HBoxContainer"]
-margin_right = 878.0
-margin_bottom = 654.0
+margin_right = 978.0
+margin_bottom = 754.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer"]
-margin_right = 878.0
-margin_bottom = 330.0
+margin_right = 978.0
+margin_bottom = 375.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="InfoContainer" type="PanelContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_right = 437.0
-margin_bottom = 330.0
+margin_right = 487.0
+margin_bottom = 375.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/InfoContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 430.0
-margin_bottom = 323.0
+margin_right = 480.0
+margin_bottom = 368.0
 
 [node name="EquipmentContainer" type="PanelContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-margin_left = 441.0
-margin_right = 878.0
-margin_bottom = 330.0
+margin_left = 491.0
+margin_right = 978.0
+margin_bottom = 375.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 430.0
-margin_bottom = 323.0
+margin_right = 480.0
+margin_bottom = 368.0
 columns = 8
 
 [node name="SlotPlaceholder" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_right = 36.0
-margin_bottom = 36.0
 
 [node name="SlotPlaceholder2" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 40.0
-margin_right = 76.0
-margin_bottom = 36.0
+margin_left = 36.0
+margin_right = 68.0
 
 [node name="SlotPlaceholder3" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 80.0
-margin_right = 116.0
-margin_bottom = 36.0
+margin_left = 72.0
+margin_right = 104.0
 
 [node name="SlotPlaceholder4" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 120.0
-margin_right = 156.0
-margin_bottom = 36.0
+margin_left = 108.0
+margin_right = 140.0
 
 [node name="SlotPlaceholder5" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 160.0
-margin_right = 196.0
-margin_bottom = 36.0
+margin_left = 144.0
+margin_right = 176.0
 
 [node name="SlotPlaceholder6" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 200.0
-margin_right = 236.0
-margin_bottom = 36.0
+margin_left = 180.0
+margin_right = 212.0
 
 [node name="SlotPlaceholder7" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 240.0
-margin_right = 276.0
-margin_bottom = 36.0
+margin_left = 216.0
+margin_right = 248.0
 
 [node name="SlotPlaceholder8" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 280.0
-margin_right = 316.0
-margin_bottom = 36.0
+margin_left = 252.0
+margin_right = 284.0
 
 [node name="SlotPlaceholder9" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_top = 40.0
-margin_right = 36.0
-margin_bottom = 76.0
+margin_top = 36.0
+margin_bottom = 68.0
 
 [node name="SlotPlaceholder10" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 40.0
-margin_top = 40.0
-margin_right = 76.0
-margin_bottom = 76.0
+margin_left = 36.0
+margin_top = 36.0
+margin_right = 68.0
+margin_bottom = 68.0
 
 [node name="SlotPlaceholder11" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 80.0
-margin_top = 40.0
-margin_right = 116.0
-margin_bottom = 76.0
+margin_left = 72.0
+margin_top = 36.0
+margin_right = 104.0
+margin_bottom = 68.0
 
 [node name="SlotPlaceholder12" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 120.0
-margin_top = 40.0
-margin_right = 156.0
-margin_bottom = 76.0
+margin_left = 108.0
+margin_top = 36.0
+margin_right = 140.0
+margin_bottom = 68.0
 
 [node name="SlotPlaceholder13" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 160.0
-margin_top = 40.0
-margin_right = 196.0
-margin_bottom = 76.0
+margin_left = 144.0
+margin_top = 36.0
+margin_right = 176.0
+margin_bottom = 68.0
 
 [node name="SlotPlaceholder14" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 200.0
-margin_top = 40.0
-margin_right = 236.0
-margin_bottom = 76.0
+margin_left = 180.0
+margin_top = 36.0
+margin_right = 212.0
+margin_bottom = 68.0
 
 [node name="SlotPlaceholder15" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 240.0
-margin_top = 40.0
-margin_right = 276.0
-margin_bottom = 76.0
+margin_left = 216.0
+margin_top = 36.0
+margin_right = 248.0
+margin_bottom = 68.0
 
 [node name="SlotPlaceholder16" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 280.0
-margin_top = 40.0
-margin_right = 316.0
-margin_bottom = 76.0
+margin_left = 252.0
+margin_top = 36.0
+margin_right = 284.0
+margin_bottom = 68.0
 
 [node name="SlotPlaceholder17" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_top = 80.0
-margin_right = 36.0
-margin_bottom = 116.0
+margin_top = 72.0
+margin_bottom = 104.0
 
 [node name="SlotPlaceholder18" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 40.0
-margin_top = 80.0
-margin_right = 76.0
-margin_bottom = 116.0
+margin_left = 36.0
+margin_top = 72.0
+margin_right = 68.0
+margin_bottom = 104.0
 
 [node name="SlotPlaceholder19" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 80.0
-margin_top = 80.0
-margin_right = 116.0
-margin_bottom = 116.0
+margin_left = 72.0
+margin_top = 72.0
+margin_right = 104.0
+margin_bottom = 104.0
 
 [node name="SlotPlaceholder20" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 120.0
-margin_top = 80.0
-margin_right = 156.0
-margin_bottom = 116.0
+margin_left = 108.0
+margin_top = 72.0
+margin_right = 140.0
+margin_bottom = 104.0
 
 [node name="SlotPlaceholder21" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 160.0
-margin_top = 80.0
-margin_right = 196.0
-margin_bottom = 116.0
+margin_left = 144.0
+margin_top = 72.0
+margin_right = 176.0
+margin_bottom = 104.0
 
 [node name="SlotPlaceholder22" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 200.0
-margin_top = 80.0
-margin_right = 236.0
-margin_bottom = 116.0
+margin_left = 180.0
+margin_top = 72.0
+margin_right = 212.0
+margin_bottom = 104.0
 
 [node name="SlotPlaceholder23" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 240.0
-margin_top = 80.0
-margin_right = 276.0
-margin_bottom = 116.0
+margin_left = 216.0
+margin_top = 72.0
+margin_right = 248.0
+margin_bottom = 104.0
 
 [node name="SlotPlaceholder24" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 280.0
-margin_top = 80.0
-margin_right = 316.0
-margin_bottom = 116.0
+margin_left = 252.0
+margin_top = 72.0
+margin_right = 284.0
+margin_bottom = 104.0
 
 [node name="SlotPlaceholder25" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_top = 120.0
-margin_right = 36.0
-margin_bottom = 156.0
+margin_top = 108.0
+margin_bottom = 140.0
 
 [node name="SlotPlaceholder26" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 40.0
-margin_top = 120.0
-margin_right = 76.0
-margin_bottom = 156.0
+margin_left = 36.0
+margin_top = 108.0
+margin_right = 68.0
+margin_bottom = 140.0
 
 [node name="SlotPlaceholder27" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 80.0
-margin_top = 120.0
-margin_right = 116.0
-margin_bottom = 156.0
+margin_left = 72.0
+margin_top = 108.0
+margin_right = 104.0
+margin_bottom = 140.0
 
 [node name="SlotPlaceholder28" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 120.0
-margin_top = 120.0
-margin_right = 156.0
-margin_bottom = 156.0
+margin_left = 108.0
+margin_top = 108.0
+margin_right = 140.0
+margin_bottom = 140.0
 
 [node name="SlotPlaceholder29" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 160.0
-margin_top = 120.0
-margin_right = 196.0
-margin_bottom = 156.0
+margin_left = 144.0
+margin_top = 108.0
+margin_right = 176.0
+margin_bottom = 140.0
 
 [node name="SlotPlaceholder30" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 200.0
-margin_top = 120.0
-margin_right = 236.0
-margin_bottom = 156.0
+margin_left = 180.0
+margin_top = 108.0
+margin_right = 212.0
+margin_bottom = 140.0
 
 [node name="SlotPlaceholder31" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 240.0
-margin_top = 120.0
-margin_right = 276.0
-margin_bottom = 156.0
+margin_left = 216.0
+margin_top = 108.0
+margin_right = 248.0
+margin_bottom = 140.0
 
 [node name="SlotPlaceholder32" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 280.0
-margin_top = 120.0
-margin_right = 316.0
-margin_bottom = 156.0
+margin_left = 252.0
+margin_top = 108.0
+margin_right = 284.0
+margin_bottom = 140.0
 
 [node name="SlotPlaceholder33" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_top = 160.0
-margin_right = 36.0
-margin_bottom = 196.0
+margin_top = 144.0
+margin_bottom = 176.0
 
 [node name="SlotPlaceholder34" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 40.0
-margin_top = 160.0
-margin_right = 76.0
-margin_bottom = 196.0
+margin_left = 36.0
+margin_top = 144.0
+margin_right = 68.0
+margin_bottom = 176.0
 
 [node name="SlotPlaceholder35" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 80.0
-margin_top = 160.0
-margin_right = 116.0
-margin_bottom = 196.0
+margin_left = 72.0
+margin_top = 144.0
+margin_right = 104.0
+margin_bottom = 176.0
 
 [node name="SlotPlaceholder36" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 120.0
-margin_top = 160.0
-margin_right = 156.0
-margin_bottom = 196.0
+margin_left = 108.0
+margin_top = 144.0
+margin_right = 140.0
+margin_bottom = 176.0
 
 [node name="SlotPlaceholder37" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 160.0
-margin_top = 160.0
-margin_right = 196.0
-margin_bottom = 196.0
+margin_left = 144.0
+margin_top = 144.0
+margin_right = 176.0
+margin_bottom = 176.0
 
 [node name="SlotPlaceholder38" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 200.0
-margin_top = 160.0
-margin_right = 236.0
-margin_bottom = 196.0
+margin_left = 180.0
+margin_top = 144.0
+margin_right = 212.0
+margin_bottom = 176.0
 
 [node name="SlotPlaceholder39" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 240.0
-margin_top = 160.0
-margin_right = 276.0
-margin_bottom = 196.0
+margin_left = 216.0
+margin_top = 144.0
+margin_right = 248.0
+margin_bottom = 176.0
 
 [node name="SlotPlaceholder40" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 280.0
-margin_top = 160.0
-margin_right = 316.0
-margin_bottom = 196.0
+margin_left = 252.0
+margin_top = 144.0
+margin_right = 284.0
+margin_bottom = 176.0
 
 [node name="SlotPlaceholder41" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_top = 200.0
-margin_right = 36.0
-margin_bottom = 236.0
+margin_top = 180.0
+margin_bottom = 212.0
 
 [node name="SlotPlaceholder42" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 40.0
-margin_top = 200.0
-margin_right = 76.0
-margin_bottom = 236.0
+margin_left = 36.0
+margin_top = 180.0
+margin_right = 68.0
+margin_bottom = 212.0
 
 [node name="SlotPlaceholder43" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 80.0
-margin_top = 200.0
-margin_right = 116.0
-margin_bottom = 236.0
+margin_left = 72.0
+margin_top = 180.0
+margin_right = 104.0
+margin_bottom = 212.0
 
 [node name="SlotPlaceholder44" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 120.0
-margin_top = 200.0
-margin_right = 156.0
-margin_bottom = 236.0
+margin_left = 108.0
+margin_top = 180.0
+margin_right = 140.0
+margin_bottom = 212.0
 
 [node name="SlotPlaceholder45" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 160.0
-margin_top = 200.0
-margin_right = 196.0
-margin_bottom = 236.0
+margin_left = 144.0
+margin_top = 180.0
+margin_right = 176.0
+margin_bottom = 212.0
 
 [node name="SlotPlaceholder46" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 200.0
-margin_top = 200.0
-margin_right = 236.0
-margin_bottom = 236.0
+margin_left = 180.0
+margin_top = 180.0
+margin_right = 212.0
+margin_bottom = 212.0
 
 [node name="SlotPlaceholder47" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 240.0
-margin_top = 200.0
-margin_right = 276.0
-margin_bottom = 236.0
+margin_left = 216.0
+margin_top = 180.0
+margin_right = 248.0
+margin_bottom = 212.0
 
 [node name="SlotPlaceholder48" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 280.0
-margin_top = 200.0
-margin_right = 316.0
-margin_bottom = 236.0
+margin_left = 252.0
+margin_top = 180.0
+margin_right = 284.0
+margin_bottom = 212.0
 
 [node name="SlotPlaceholder49" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_top = 240.0
-margin_right = 36.0
-margin_bottom = 276.0
+margin_top = 216.0
+margin_bottom = 248.0
 
 [node name="SlotPlaceholder50" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 40.0
-margin_top = 240.0
-margin_right = 76.0
-margin_bottom = 276.0
+margin_left = 36.0
+margin_top = 216.0
+margin_right = 68.0
+margin_bottom = 248.0
 
 [node name="SlotPlaceholder51" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 80.0
-margin_top = 240.0
-margin_right = 116.0
-margin_bottom = 276.0
+margin_left = 72.0
+margin_top = 216.0
+margin_right = 104.0
+margin_bottom = 248.0
 
 [node name="SlotPlaceholder52" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 120.0
-margin_top = 240.0
-margin_right = 156.0
-margin_bottom = 276.0
+margin_left = 108.0
+margin_top = 216.0
+margin_right = 140.0
+margin_bottom = 248.0
 
 [node name="SlotPlaceholder53" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 160.0
-margin_top = 240.0
-margin_right = 196.0
-margin_bottom = 276.0
+margin_left = 144.0
+margin_top = 216.0
+margin_right = 176.0
+margin_bottom = 248.0
 
 [node name="SlotPlaceholder54" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 200.0
-margin_top = 240.0
-margin_right = 236.0
-margin_bottom = 276.0
+margin_left = 180.0
+margin_top = 216.0
+margin_right = 212.0
+margin_bottom = 248.0
 
 [node name="SlotPlaceholder55" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 240.0
-margin_top = 240.0
-margin_right = 276.0
-margin_bottom = 276.0
+margin_left = 216.0
+margin_top = 216.0
+margin_right = 248.0
+margin_bottom = 248.0
 
 [node name="SlotPlaceholder56" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 280.0
-margin_top = 240.0
-margin_right = 316.0
-margin_bottom = 276.0
+margin_left = 252.0
+margin_top = 216.0
+margin_right = 284.0
+margin_bottom = 248.0
 
 [node name="SlotPlaceholder57" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_top = 280.0
-margin_right = 36.0
-margin_bottom = 316.0
+margin_top = 252.0
+margin_bottom = 284.0
 
 [node name="SlotPlaceholder58" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 40.0
-margin_top = 280.0
-margin_right = 76.0
-margin_bottom = 316.0
+margin_left = 36.0
+margin_top = 252.0
+margin_right = 68.0
+margin_bottom = 284.0
 
 [node name="SlotPlaceholder59" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 80.0
-margin_top = 280.0
-margin_right = 116.0
-margin_bottom = 316.0
+margin_left = 72.0
+margin_top = 252.0
+margin_right = 104.0
+margin_bottom = 284.0
 
 [node name="SlotPlaceholder60" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 120.0
-margin_top = 280.0
-margin_right = 156.0
-margin_bottom = 316.0
+margin_left = 108.0
+margin_top = 252.0
+margin_right = 140.0
+margin_bottom = 284.0
 
 [node name="SlotPlaceholder61" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 160.0
-margin_top = 280.0
-margin_right = 196.0
-margin_bottom = 316.0
+margin_left = 144.0
+margin_top = 252.0
+margin_right = 176.0
+margin_bottom = 284.0
 
 [node name="SlotPlaceholder62" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 200.0
-margin_top = 280.0
-margin_right = 236.0
-margin_bottom = 316.0
+margin_left = 180.0
+margin_top = 252.0
+margin_right = 212.0
+margin_bottom = 284.0
 
 [node name="SlotPlaceholder63" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 240.0
-margin_top = 280.0
-margin_right = 276.0
-margin_bottom = 316.0
+margin_left = 216.0
+margin_top = 252.0
+margin_right = 248.0
+margin_bottom = 284.0
 
 [node name="SlotPlaceholder64" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/HBoxContainer/EquipmentContainer/GridContainer" instance=ExtResource( 9 )]
-margin_left = 280.0
-margin_top = 280.0
-margin_right = 316.0
-margin_bottom = 316.0
+margin_left = 252.0
+margin_top = 252.0
+margin_right = 284.0
+margin_bottom = 284.0
 
 [node name="AbilityContainer" type="PanelContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer"]
-margin_top = 334.0
-margin_right = 878.0
-margin_bottom = 654.0
+margin_top = 379.0
+margin_right = 978.0
+margin_bottom = 754.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/AbilityContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 871.0
-margin_bottom = 313.0
+margin_right = 971.0
+margin_bottom = 368.0
 scroll_horizontal_enabled = false
 
 [node name="GridContainer" type="GridContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer/AbilityContainer/ScrollContainer"]
@@ -2362,13 +2351,13 @@ margin_right = 356.0
 margin_bottom = 356.0
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="Layer1/AbilityContainer/HBoxContainer"]
-margin_left = 882.0
-margin_right = 1252.0
-margin_bottom = 654.0
+margin_left = 982.0
+margin_right = 1352.0
+margin_bottom = 754.0
 
 [node name="InventoryContainer" type="PanelContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer2"]
 margin_right = 370.0
-margin_bottom = 433.0
+margin_bottom = 500.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
@@ -2376,7 +2365,7 @@ size_flags_stretch_ratio = 2.0
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 363.0
-margin_bottom = 426.0
+margin_bottom = 493.0
 scroll_horizontal_enabled = false
 
 [node name="GridContainer" type="GridContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer2/InventoryContainer/ScrollContainer"]
@@ -2945,8 +2934,8 @@ margin_right = 356.0
 margin_bottom = 356.0
 
 [node name="CurrencyContainer" type="PanelContainer" parent="Layer1/AbilityContainer/HBoxContainer/VBoxContainer2"]
-margin_top = 437.0
+margin_top = 504.0
 margin_right = 370.0
-margin_bottom = 654.0
+margin_bottom = 754.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

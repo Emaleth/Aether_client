@@ -1,6 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://source/user_interface/panels/spellz_and_stuff/SpellzAndStuff.gd" type="Script" id=1]
+[ext_resource path="res://resources/stylebox/slot.tres" type="StyleBox" id=2]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -248,66 +249,77 @@ columns = 10
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel2" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel3" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel4" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel5" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel6" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel7" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 216.0
 margin_right = 248.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel8" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 252.0
 margin_right = 284.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel9" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 288.0
 margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel10" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 324.0
 margin_right = 356.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel11" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel12" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 36.0
@@ -315,6 +327,7 @@ margin_top = 36.0
 margin_right = 68.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel13" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 72.0
@@ -322,6 +335,7 @@ margin_top = 36.0
 margin_right = 104.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel14" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 108.0
@@ -329,6 +343,7 @@ margin_top = 36.0
 margin_right = 140.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel15" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 144.0
@@ -336,6 +351,7 @@ margin_top = 36.0
 margin_right = 176.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel16" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 180.0
@@ -343,6 +359,7 @@ margin_top = 36.0
 margin_right = 212.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel17" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 216.0
@@ -350,6 +367,7 @@ margin_top = 36.0
 margin_right = 248.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel18" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 252.0
@@ -357,6 +375,7 @@ margin_top = 36.0
 margin_right = 284.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel19" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 288.0
@@ -364,6 +383,7 @@ margin_top = 36.0
 margin_right = 320.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel20" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/LeftPanelContainer/GridContainer"]
 margin_left = 324.0
@@ -371,6 +391,7 @@ margin_top = 36.0
 margin_right = 356.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/PanelContainer2/HBoxContainer"]
 margin_left = 360.0
@@ -394,66 +415,77 @@ columns = 10
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel2" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel3" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel4" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel5" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel6" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel7" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 216.0
 margin_right = 248.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel8" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 252.0
 margin_right = 284.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel9" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 288.0
 margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel10" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 324.0
 margin_right = 356.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel11" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel12" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 36.0
@@ -461,6 +493,7 @@ margin_top = 36.0
 margin_right = 68.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel13" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 72.0
@@ -468,6 +501,7 @@ margin_top = 36.0
 margin_right = 104.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel14" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 108.0
@@ -475,6 +509,7 @@ margin_top = 36.0
 margin_right = 140.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel15" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 144.0
@@ -482,6 +517,7 @@ margin_top = 36.0
 margin_right = 176.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel16" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 180.0
@@ -489,6 +525,7 @@ margin_top = 36.0
 margin_right = 212.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel17" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 216.0
@@ -496,6 +533,7 @@ margin_top = 36.0
 margin_right = 248.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel18" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 252.0
@@ -503,6 +541,7 @@ margin_top = 36.0
 margin_right = 284.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel19" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 288.0
@@ -510,6 +549,7 @@ margin_top = 36.0
 margin_right = 320.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="Panel20" type="Panel" parent="VBoxContainer/PanelContainer2/HBoxContainer/RightPanelContainer/GridContainer"]
 margin_left = 324.0
@@ -517,3 +557,4 @@ margin_top = 36.0
 margin_right = 356.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
+custom_styles/panel = ExtResource( 2 )
