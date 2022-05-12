@@ -38,7 +38,7 @@ func set_cooldown():
 		cooldown_label.hide()
 		return 
 	var current_time = Server.client_clock
-	var ability_data = GlobalVariables.get_ability_data(ability["ability"])
+	var ability_data = Variables.get_ability_data(ability["ability"])
 	cooldown = (float(ability_data[1]["cooldown"]) * 1000) - (current_time - ability["last_used"])
 	if cooldown > 0:
 		cooldown_tween.remove_all()

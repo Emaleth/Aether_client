@@ -7,11 +7,11 @@ onready var camera = $Camera
 
 
 func _ready() -> void:
-	GlobalVariables.camera_rig = self
+	Variables.camera_rig = self
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if GlobalVariables.user_interface.mode != GlobalVariables.user_interface.COMBAT:
+	if Variables.user_interface.mode != Variables.user_interface.COMBAT:
 		return
 	if event is InputEventMouseMotion:
 		rotate_camera_rig(event.relative)
@@ -22,15 +22,15 @@ func _unhandled_input(event: InputEvent) -> void:
 func rotate_camera_rig(_amount : Vector2) -> void:
 	# ROTATE CAMERA
 	# check if mouse motion is over deadzone amount
-	if _amount.length() <= GlobalSettings.mouse_deadzone:
+	if _amount.length() <= Settings.mouse_deadzone:
 		return
 
 	# horizontal rotation
-	rotation.y -= _amount.x * GlobalSettings.mouse_sensibility
+	rotation.y -= _amount.x * Settings.mouse_sensibility
 	rotation.y = clamp(rotation.y, deg2rad(-180), deg2rad(180))
 
 	# vertical rotation
-	rotation.x -= _amount.y * GlobalSettings.mouse_sensibility
+	rotation.x -= _amount.y * Settings.mouse_sensibility
 	rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(0))
 
 

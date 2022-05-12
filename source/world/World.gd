@@ -3,6 +3,7 @@ extends Node
 
 onready var actor_scene : PackedScene = preload("res://source/actor/Actor.tscn")
 onready var ability_scene : PackedScene 
+onready var camera_scene : PackedScene = preload("res://source/camera_rig/CameraRig.tscn") 
 
 
 func spawn_actors(_data : Dictionary):
@@ -19,3 +20,10 @@ func despawn_actors(_data : Dictionary):
 	
 func spawn_abilities(_data : Dictionary):
 	pass
+
+
+func instance_camera():
+	add_child(camera_scene.instance())
+	
+
+

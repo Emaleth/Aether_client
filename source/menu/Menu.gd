@@ -2,7 +2,6 @@ extends PanelContainer
 
 enum {LOGIN, REGISTER, LOADING}
 
-#onready var game = preload("res://source/world_processor/WorldProcessor.tscn")
 onready var world : PackedScene = preload("res://source/world/World.tscn")
 
 onready var login_panel = $MarginContainer/VBoxContainer/CenterContainer/LoginPanel

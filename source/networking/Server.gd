@@ -112,16 +112,6 @@ remote func return_token_verification_results(result, account_id):
 		else:
 			emit_signal("s_token_verification_failure")
 	
-	
-remote func recive_fast_world_state(world_state):
-	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("sig_update_fast_world_state", world_state)
-
-
-remote func recive_slow_world_state(world_state):
-	if get_tree().get_rpc_sender_id() == 1:
-		emit_signal("sig_update_slow_world_state", world_state)
-
 
 func send_chat_message(_message):
 	rpc_unreliable_id(1, "recive_chat_message", client_clock, _message)
@@ -131,10 +121,6 @@ remote func recive_chat_state(chat_state):
 	if get_tree().get_rpc_sender_id() == 1:
 		emit_signal("s_update_chat_state", chat_state)
 
-	
-#func send_player_state(_player_transform : Transform, _looking_at_basis : Basis):
-#	rpc_unreliable_id(1, "recive_player_state", _player_transform, _looking_at_basis)
-	
 	
 func request_item_discard(_index):
 	rpc_id(1, "request_item_discard", _index)
@@ -170,7 +156,7 @@ func request_loot_data(_npc_id):
 	
 remote func receive_loot_data(_data, _npc_id):
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.user_interface.conf_loot(_data, _npc_id)
+		Variables.user_interface.conf_loot(_data, _npc_id)
 		
 		
 func request_material_gather(_material_id : String):
@@ -183,63 +169,50 @@ func request_move(_pos):
 		
 remote func receive_data_tables(_data : Dictionary):
 	if get_tree().get_rpc_sender_id() == 1:
-		# ITEM DATA
-		LocalDataTables.item_index = _data["item_index"]
-		LocalDataTables.armor_table = _data["armor_table"]
-		LocalDataTables.weapon_table = _data["weapon_table"]
-		LocalDataTables.material_table = _data["material_table"]
-		LocalDataTables.craft_recipe_table = _data["craft_recipe_table"]
-		LocalDataTables.ability_scroll_table = _data["ability_scroll_table"]
-		# NPC DATA
-		LocalDataTables.npc_index = _data["npc_index"]
-		LocalDataTables.mob_table = _data["mob_table"]
-		LocalDataTables.shop_table = _data["shop_table"]
-		# ABILITY DATA
-		LocalDataTables.ability_index = _data["ability_index"]
-		LocalDataTables.projectile_table = _data["projectile_table"]
-		LocalDataTables.area_table = _data["area_table"]
-		LocalDataTables.raycast_table = _data["raycast_table"]
-				
+		Variables.item_index = _data["item_index"]
+		Variables.npc_index = _data["npc_index"]
+		Variables.ability_index = _data["ability_index"]
+	
 	
 remote func recive_equipment_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.equipment_data = _data
+		Variables.equipment_data = _data
 		emit_signal("update_equipment_ui", _data)
 
 
 remote func recive_action_bar_data(_data : Array): #OK
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.action_bar_data = _data
+		Variables.action_bar_data = _data
 		emit_signal("sig_update_action_bar_ui", _data)
 
 
 remote func recive_inventory_data(_data : Array): #OK
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.inventory_data = _data
+		Variables.inventory_data = _data
 		emit_signal("update_inventory_ui", _data)
 
 
 remote func recive_ability_data(_data : Array): #OK
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.ability_data = _data
+		Variables.ability_data = _data
 		emit_signal("update_ability_ui", _data)
 	
 	
 remote func recive_recipe_data(_data : Array):  #OK
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.recipe_data = _data
+		Variables.recipe_data = _data
 		emit_signal("update_crafting_ui", _data)
 			
 		
 remote func recive_attributes_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.attributes_data = _data
+		Variables.attributes_data = _data
 		emit_signal("sig_update_attributes", _data)
 			
 		
 remote func recive_currency_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:
-		GlobalVariables.currency_data = _data
+		Variables.currency_data = _data
 		emit_signal("sig_update_currency", _data)
 		
 	
@@ -255,15 +228,15 @@ func request_ability_use(_index):
 	rpc_id(1, "request_ability_use", _index)
 
 
-remote func recive_spawn_data(_data : Dictionary):
+remote func recive_actor_spawn_data(_data : Dictionary):
 	pass
 	
 
-remote func recive_despawn_data(_data : Dictionary):
+remote func recive_actor_despawn_data(_data : Dictionary):
 	pass
 	
 
-remote func recive_motion_data(_data : Dictionary):
+remote func recive_actor_motion_data(_data : Dictionary):
 	pass
 	
 	

@@ -13,7 +13,7 @@ config_version=4
 config/name="Aether - Client"
 run/main_scene="res://source/menu/Menu.tscn"
 boot_splash/bg_color=Color( 0.0941176, 0.0941176, 0.0941176, 1 )
-config/icon="res://assets/icons/client/gamepad.svg"
+config/icon="res://icon.svg"
 
 [audio]
 
@@ -23,11 +23,10 @@ default_bus_layout="res://audio_bus_layout.tres"
 
 Server="*res://source/networking/Server.gd"
 Gateway="*res://source/networking/Gateway.gd"
-LocalDataTables="*res://source/globals/local_data_tables.gd"
-GlobalVariables="*res://source/globals/global_variables.gd"
 AudioHandler="*res://source/audio_handler/AudioHandler.tscn"
-GlobalSettings="*res://source/globals/global_settings.gd"
-HelperMethods="*res://helper_methods.gd"
+Settings="*res://source/globals/Settings.gd"
+Variables="*res://source/globals/Variables.gd"
+Helper="*res://source/globals/Helper.gd"
 
 [debug]
 

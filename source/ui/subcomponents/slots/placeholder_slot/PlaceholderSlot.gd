@@ -1,4 +1,4 @@
-extends PanelContainer
+extends Button
 
 
 func _ready() -> void:
