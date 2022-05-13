@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://source/actor/Actor.gd" type="Script" id=1]
 
@@ -9,9 +9,6 @@ mid_height = 1.2
 [sub_resource type="CapsuleShape" id=2]
 radius = 0.3
 height = 1.2
-
-[sub_resource type="ViewportTexture" id=3]
-viewport_path = NodePath("Sprite3D/Viewport")
 
 [sub_resource type="StyleBoxEmpty" id=4]
 
@@ -34,7 +31,6 @@ radius = 0.3
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2, 0 )
 billboard = 1
 double_sided = false
-texture = SubResource( 3 )
 
 [node name="Viewport" type="Viewport" parent="Sprite3D"]
 size = Vector2( 164, 55 )
@@ -71,6 +67,6 @@ margin_bottom = 23.0
 self_modulate = Color( 1, 0, 0, 1 )
 margin_top = 27.0
 margin_right = 164.0
-margin_bottom = 41.0
+margin_bottom = 29.0
 rect_min_size = Vector2( 150, 0 )
 percent_visible = false

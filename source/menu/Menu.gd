@@ -39,7 +39,8 @@ func set_menu_state(state):
 
 		
 func enter_world():
-	get_tree().change_scene_to(world)
+	queue_free()
+#	get_tree().change_scene_to(GlobalWorld)
 
 	
 func quit() -> void:

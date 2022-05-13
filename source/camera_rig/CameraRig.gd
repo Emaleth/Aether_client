@@ -1,6 +1,7 @@
 extends SpringArm
 
-
+const MAX_ZOOM : int = 100
+const MIN_ZOOM : int = 5
 var raycast_lenght := 1000
 
 onready var camera = $Camera
@@ -11,12 +12,15 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if Variables.user_interface.mode != Variables.user_interface.COMBAT:
-		return
-	if event is InputEventMouseMotion:
-		rotate_camera_rig(event.relative)
+	if Input.is_action_pressed("rotate_camera"):
+		if event is InputEventMouseMotion:
+			rotate_camera_rig(event.relative)
 	if Input.is_action_just_pressed("move"):
 		move_to_position()
+	if Input.is_action_just_pressed("zoom_in"):
+		spring_length = max(MIN_ZOOM, spring_length - 1)
+	if Input.is_action_just_pressed("zoom_out"):
+		spring_length = min(MAX_ZOOM, spring_length + 1)
 
 
 func rotate_camera_rig(_amount : Vector2) -> void:
@@ -48,8 +52,6 @@ func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 func move_to_position() -> void:
 	var position = cast_ray_from_camera_to_mouse_pointer()
 	Server.request_move(position)
-
-
 
 
 

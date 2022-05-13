@@ -3,6 +3,7 @@
 [ext_resource path="res://source/camera_rig/CameraRig.gd" type="Script" id=1]
 
 [node name="CameraRig" type="SpringArm"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 0, 0 )
 spring_length = 7.0
 script = ExtResource( 1 )
 
