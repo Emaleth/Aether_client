@@ -31,11 +31,11 @@ func rotate_camera_rig(_amount : Vector2) -> void:
 
 	# horizontal rotation
 	rotation.y -= _amount.x * Settings.mouse_sensibility
-	rotation.y = clamp(rotation.y, deg2rad(-180), deg2rad(180))
+	rotation.y = wrapf(rotation.y, deg2rad(-180), deg2rad(180))
 
 	# vertical rotation
 	rotation.x -= _amount.y * Settings.mouse_sensibility
-	rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(0))
+	rotation.x = clamp(rotation.x, deg2rad(-80), deg2rad(15))
 
 
 func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:

@@ -70,3 +70,6 @@ margin_right = 164.0
 margin_bottom = 29.0
 rect_min_size = Vector2( 150, 0 )
 percent_visible = false
+
+[node name="CameraAnchor" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )

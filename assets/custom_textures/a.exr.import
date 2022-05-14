@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/a.exr-10f1542dcda7f37bf4c0e8893536ca51.image"
+
+[deps]
+
+source_file="res://assets/custom_textures/a.exr"
+dest_files=[ "res://.import/a.exr-10f1542dcda7f37bf4c0e8893536ca51.image" ]
+
+[params]
+
