@@ -237,8 +237,9 @@ remote func recive_actor_despawn_data(_data : Dictionary):
 	pass
 	
 
-remote func recive_actor_motion_data(_data : Dictionary):
-	pass
+remote func recive_actor_motion_data(_data : Array):
+	GlobalWorld.move_actors(_data)
+
 	
 	
 	

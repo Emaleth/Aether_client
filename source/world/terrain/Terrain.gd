@@ -97,13 +97,13 @@ func generate_collision_shape():
 	collision_shape.shape.map_data = sample_image_y_r(heightmap_image, max_altitude)
 	collision_shape.scale = terrain_scale
 	
-#	var navmesh : NavigationMesh = NavigationMesh.new()
-#	var vertices : PoolVector3Array = sample_image_xyz_r(heightmap_image, max_altitude)
-#	var indices : PoolIntArray
-#	for i in vertices.size() : indices.append(i) 
-#	navmesh.vertices = vertices
-#	navmesh.add_polygon(indices)
-#	$NavigationMeshInstance.navmesh = navmesh
+	var navmesh : NavigationMesh = NavigationMesh.new()
+	var vertices : PoolVector3Array = sample_image_xyz_r(heightmap_image, max_altitude)
+	var indices : PoolIntArray
+	for i in vertices.size() : indices.append(i) 
+	navmesh.vertices = vertices
+	navmesh.add_polygon(indices)
+	$NavigationMeshInstance.navmesh = navmesh
 
 
 func configure_shader():
