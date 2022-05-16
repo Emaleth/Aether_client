@@ -18,7 +18,8 @@ func spawn_actors(_data : Dictionary):
 	actor_container.add_child(actor)
 	if _data.keys()[0] == get_tree().get_network_unique_id():
 #		actor.camera_anchor.add_child(camera_scene.instance())
-		add_child(camera_scene.instance())
+		actor.bind_camera($CameraRig.get_path())
+#		add_child(camera_scene.instance())
 
 
 func move_actors(_data : Array):

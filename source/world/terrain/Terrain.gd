@@ -61,8 +61,8 @@ var multi_mesh_instance : MultiMeshInstance
 var grass_array := []
 
 
-func _ready() -> void:
-	generate = true
+#func _ready() -> void:
+#	generate = true
 
 
 func _process(_delta: float) -> void:
