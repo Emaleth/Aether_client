@@ -229,8 +229,8 @@ func request_move(_pos):
 	rpc_id(1, "request_move", _pos)
 	
 
-remote func recive_actor_spawn_data(_data : Dictionary):
-	GlobalWorld.spawn_actors(_data)
+#remote func recive_actor_spawn_data(_data : Dictionary):
+#	GlobalWorld.spawn_actors(_data)
 	
 
 remote func recive_actor_despawn_data(_data : Dictionary):

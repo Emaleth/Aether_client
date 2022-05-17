@@ -22,7 +22,6 @@ func configure(_data):
 
 
 func process_data():
-	name = str(data.keys()[0])
 	global_transform = data.values()[0]
 
 	

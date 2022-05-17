@@ -75,6 +75,7 @@ func _process(_delta: float) -> void:
 		configure_terrain_mesh()
 		configure_grass_mesh()
 		generate_collision_shape()
+		generate_navmesh()
 		initialize_multi_mesh_instance()
 		print("..:: World Generated in %ss ::.." % ((OS.get_ticks_msec() - t) / 1000.0)) 
 		generate = false
@@ -96,7 +97,9 @@ func generate_collision_shape():
 	collision_shape.shape.map_depth = heightmap_image.get_height()
 	collision_shape.shape.map_data = sample_image_y_r(heightmap_image, max_altitude)
 	collision_shape.scale = terrain_scale
+
 	
+func generate_navmesh():
 	var navmesh : NavigationMesh = NavigationMesh.new()
 	var vertices : PoolVector3Array = sample_image_xyz_r(heightmap_image, max_altitude)
 	var indices : PoolIntArray
