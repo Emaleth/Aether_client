@@ -50,13 +50,15 @@ func process_actor_delta_snapshot(_snapshot):
 		actor.name = str(i)
 		actor.configure(_snapshot["spawned"][i])
 		actor_container.add_child(actor, true)
-		if i == get_tree().get_network_unique_id():
+		if i == str(get_tree().get_network_unique_id()):
 			actor.bind_camera($CameraRig.get_path())
+		print(_snapshot["private"])
 	
 	for i in _snapshot["changed"].keys():
 		var actor = actor_container.get_node(str(i))
 		var path = navigation.get_simple_path(actor.global_transform.origin, _snapshot["changed"][i]["destination"])
 		actor.update_path(path)
+	
 
 #	for i in _snapshot["despawned"].keyes():
 			
