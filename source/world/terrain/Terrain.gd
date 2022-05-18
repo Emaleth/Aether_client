@@ -20,31 +20,26 @@ export(float) var steepness_blend_amount = 0.05
 
 export(Texture) var antitile_noise
 
-export(Vector2) var texture_flat_scale = Vector2(1, 1)
 export(Texture) var texture_flat_diffuse
 export(Texture) var texture_flat_normal
 export(Texture) var texture_flat_roughness
 export(Texture) var texture_flat_ao
 
-export(Vector2) var texture_slope_scale = Vector2(1, 1)
 export(Texture) var texture_slope_diffuse
 export(Texture) var texture_slope_normal
 export(Texture) var texture_slope_roughness
 export(Texture) var texture_slope_ao
 
-export(Vector2) var texture_red_scale = Vector2(1, 1)
 export(Texture) var texture_red_diffuse
 export(Texture) var texture_red_normal
 export(Texture) var texture_red_roughness
 export(Texture) var texture_red_ao
 
-export(Vector2) var texture_green_scale = Vector2(1, 1)
 export(Texture) var texture_green_diffuse
 export(Texture) var texture_green_normal
 export(Texture) var texture_green_roughness
 export(Texture) var texture_green_ao
 
-export(Vector2) var texture_blue_scale = Vector2(1, 1)
 export(Texture) var texture_blue_diffuse
 export(Texture) var texture_blue_normal
 export(Texture) var texture_blue_roughness
@@ -64,6 +59,7 @@ var grass_array := []
 func _ready() -> void:
 	initialize()
 	generate = true
+	enable_grass_processing = true
 
 
 func _process(_delta: float) -> void:
@@ -75,8 +71,8 @@ func _process(_delta: float) -> void:
 		configure_shader()
 		configure_terrain_mesh()
 		configure_grass_mesh()
-		generate_collision_shape()
-		generate_navmesh()
+#		generate_collision_shape()
+#		generate_navmesh()
 		initialize_multi_mesh_instance()
 		print("..:: World Generated in %ss ::.." % ((OS.get_ticks_msec() - t) / 1000.0)) 
 		generate = false
@@ -121,37 +117,30 @@ func configure_shader():
 	terrain_shader.set_shader_param("triplanar_scale", triplanar_scale)
 	terrain_shader.set_shader_param("culling_max_distance", culling_max_distance)
 
-	terrain_shader.set_shader_param("texture_flat_scale", texture_flat_scale)
 	terrain_shader.set_shader_param("texture_flat_diffuse", texture_flat_diffuse)
 	terrain_shader.set_shader_param("texture_flat_normal", texture_flat_normal)
 	terrain_shader.set_shader_param("texture_flat_roughness", texture_flat_roughness)
 	terrain_shader.set_shader_param("texture_flat_ao", texture_flat_ao)
 
-	terrain_shader.set_shader_param("texture_slope_scale", texture_slope_scale)
 	terrain_shader.set_shader_param("texture_slope_diffuse", texture_slope_diffuse)
 	terrain_shader.set_shader_param("texture_slope_normal", texture_slope_normal)
 	terrain_shader.set_shader_param("texture_slope_roughness", texture_slope_roughness)
 	terrain_shader.set_shader_param("texture_slope_ao", texture_slope_ao)
 
-	terrain_shader.set_shader_param("texture_red_scale", texture_red_scale)
 	terrain_shader.set_shader_param("texture_red_diffuse", texture_red_diffuse)
 	terrain_shader.set_shader_param("texture_red_normal", texture_red_normal)
 	terrain_shader.set_shader_param("texture_red_roughness", texture_red_roughness)
 	terrain_shader.set_shader_param("texture_red_ao", texture_red_ao)
 	
-	terrain_shader.set_shader_param("texture_green_scale", texture_green_scale)
 	terrain_shader.set_shader_param("texture_green_diffuse", texture_green_diffuse)
 	terrain_shader.set_shader_param("texture_green_normal", texture_green_normal)
 	terrain_shader.set_shader_param("texture_green_roughness", texture_green_roughness)
 	terrain_shader.set_shader_param("texture_green_ao", texture_green_ao)
 	
-	terrain_shader.set_shader_param("texture_blue_scale", texture_blue_scale)
 	terrain_shader.set_shader_param("texture_blue_diffuse", texture_blue_diffuse)
 	terrain_shader.set_shader_param("texture_blue_normal", texture_blue_normal)
 	terrain_shader.set_shader_param("texture_blue_roughness", texture_blue_roughness)
 	terrain_shader.set_shader_param("texture_blue_ao", texture_blue_ao)
-	
-	terrain_shader.set_shader_param("antitile_noise", antitile_noise)
 
 	terrain_shader.set_shader_param("steepness_blend_amount", steepness_blend_amount)
 
