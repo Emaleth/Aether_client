@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://resources/fonts/content.tres" type="DynamicFont" id=1]
+[ext_resource path="res://assets/stylebox/panel.tres" type="StyleBox" id=2]
+[ext_resource path="res://source/UI/layers/hud/panels/clock/Clock.gd" type="Script" id=3]
+
+[node name="Clock" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 33.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+custom_styles/panel = ExtResource( 2 )
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 3.0
+margin_top = 6.0
+margin_right = 43.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 1 )
+text = "[time]"
+align = 1
+valign = 1

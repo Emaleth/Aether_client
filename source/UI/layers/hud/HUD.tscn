@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://source/UI/layers/hud/panels/mapz/Mapz.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/UI/layers/hud/panels/chatz/Chatz.tscn" type="PackedScene" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://source/UI/layers/hud/panels/target_info/TargetInfo.tscn" type="PackedScene" id=4]
 [ext_resource path="res://source/UI/layers/hud/panels/spellz_and_stuff/SpellzAndStuff.tscn" type="PackedScene" id=5]
 [ext_resource path="res://source/UI/layers/hud/panels/buttons/Buttons.tscn" type="PackedScene" id=6]
+[ext_resource path="res://source/UI/layers/hud/panels/clock/Clock.tscn" type="PackedScene" id=7]
+[ext_resource path="res://source/UI/layers/hud/panels/debug/Debug.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -47,10 +49,10 @@ mouse_filter = 2
 custom_styles/panel = SubResource( 4 )
 
 [node name="Buttons" parent="." instance=ExtResource( 6 )]
-margin_left = 1324.0
-margin_top = 307.0
+margin_left = 1276.0
+margin_top = 344.0
 margin_right = 1356.0
-margin_bottom = 450.0
+margin_bottom = 413.0
 mouse_filter = 2
 size_flags_vertical = 4
 custom_styles/panel = SubResource( 5 )
@@ -64,3 +66,12 @@ mouse_filter = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 custom_styles/panel = SubResource( 6 )
+
+[node name="Debug" parent="." instance=ExtResource( 8 )]
+margin_right = 6.0
+margin_bottom = 66.0
+
+[node name="Clock" parent="." instance=ExtResource( 7 )]
+margin_left = 1310.0
+margin_right = 1356.0
+margin_bottom = 26.0

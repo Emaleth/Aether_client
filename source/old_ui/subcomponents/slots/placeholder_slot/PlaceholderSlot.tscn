@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://source/old_ui/subcomponents/slots/placeholder_slot/PlaceholderSlot.gd" type="Script" id=1]
+
+[node name="SlotPlaceholder" type="Button"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 40, 40 )
+script = ExtResource( 1 )

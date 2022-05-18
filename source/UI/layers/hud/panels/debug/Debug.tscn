@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/stylebox/panel.tres" type="StyleBox" id=1]
+[ext_resource path="res://source/UI/layers/hud/panels/debug/Debug.gd" type="Script" id=2]
+[ext_resource path="res://resources/fonts/content.tres" type="DynamicFont" id=3]
+
+[node name="Debug" type="PanelContainer"]
+margin_right = 14.0
+margin_bottom = 14.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+custom_styles/panel = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 11.0
+margin_bottom = 63.0
+custom_constants/separation = 0
+
+[node name="Latency" type="Label" parent="VBoxContainer"]
+margin_right = 8.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_fonts/font = ExtResource( 3 )
+
+[node name="FPS" type="Label" parent="VBoxContainer"]
+margin_top = 20.0
+margin_right = 8.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 3 )
+
+[node name="Clock" type="Label" parent="VBoxContainer"]
+margin_top = 40.0
+margin_right = 8.0
+margin_bottom = 60.0
+custom_fonts/font = ExtResource( 3 )

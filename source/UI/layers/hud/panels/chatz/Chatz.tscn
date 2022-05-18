@@ -20,19 +20,61 @@ margin_right = 200.0
 margin_bottom = 250.0
 mouse_filter = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+[node name="OutputPanel" type="PanelContainer" parent="VBoxContainer"]
 margin_right = 200.0
 margin_bottom = 222.0
 mouse_filter = 2
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 2 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer/PanelContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/OutputPanel"]
 margin_right = 200.0
 margin_bottom = 222.0
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/OutputPanel/ScrollContainer"]
+margin_right = 200.0
+margin_bottom = 222.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Template" type="VBoxContainer" parent="VBoxContainer/OutputPanel/ScrollContainer/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 34.0
 mouse_filter = 2
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/OutputPanel/ScrollContainer/VBoxContainer/Template"]
+margin_right = 200.0
+margin_bottom = 15.0
+
+[node name="Timestamp" type="RichTextLabel" parent="VBoxContainer/OutputPanel/ScrollContainer/VBoxContainer/Template/HBoxContainer"]
+margin_right = 49.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+text = "[TIME]"
+fit_content_height = true
+
+[node name="Sender" type="RichTextLabel" parent="VBoxContainer/OutputPanel/ScrollContainer/VBoxContainer/Template/HBoxContainer"]
+self_modulate = Color( 0.278431, 0.87451, 0.145098, 1 )
+margin_left = 53.0
+margin_right = 200.0
+margin_bottom = 15.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+text = "[sender]"
+fit_content_height = true
+
+[node name="Message" type="RichTextLabel" parent="VBoxContainer/OutputPanel/ScrollContainer/VBoxContainer/Template"]
+margin_top = 19.0
+margin_right = 200.0
+margin_bottom = 34.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+text = "[msg]"
+fit_content_height = true
+
+[node name="InputPanel" type="PanelContainer" parent="VBoxContainer"]
 margin_top = 226.0
 margin_right = 200.0
 margin_bottom = 250.0
@@ -40,6 +82,10 @@ mouse_filter = 2
 size_flags_vertical = 8
 custom_styles/panel = SubResource( 1 )
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/PanelContainer2"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/InputPanel"]
 margin_right = 200.0
 margin_bottom = 24.0
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="text_entered" from="VBoxContainer/InputPanel/LineEdit" to="." method="_on_LineEdit_text_entered"]

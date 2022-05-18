@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/old_ui/subcomponents/interaction_menu/InteractionMenu.tscn" type="PackedScene" id=1]
+[ext_resource path="res://source/old_ui/subcomponents/slots/crafting_slot/CraftingSlot.gd" type="Script" id=2]
+
+[node name="CraftingSlot" type="Button"]
+margin_right = 32.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
+expand_icon = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="InteractionMenu" parent="." instance=ExtResource( 1 )]
+craft_action_allowed = true
+
+[connection signal="pressed" from="." to="." method="_on_CraftingSlot_pressed"]

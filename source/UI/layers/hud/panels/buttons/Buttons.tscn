@@ -33,3 +33,6 @@ rect_min_size = Vector2( 32, 32 )
 text = "Dashboard"
 icon_align = 1
 expand_icon = true
+
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/DashboardButton" to="." method="_on_DashboardButton_pressed"]
