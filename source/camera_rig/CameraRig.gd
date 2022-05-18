@@ -50,13 +50,12 @@ func cast_ray_from_camera_to_mouse_pointer() -> Dictionary:
 
 
 func move_to_position() -> void:
-	var position = cast_ray_from_camera_to_mouse_pointer()
-	Server.request_move(position)
+	var destination = cast_ray_from_camera_to_mouse_pointer()
+	GlobalWorld.send_new_target_destination(destination)
 
 
-
-
-
+func enable(value : bool):
+	camera.current = value
 
 
 

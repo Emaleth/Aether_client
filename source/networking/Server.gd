@@ -162,13 +162,6 @@ remote func receive_loot_data(_data, _npc_id):
 func request_material_gather(_material_id : String):
 	rpc_id(1, "request_material_gather", _material_id)
 
-		
-remote func receive_data_tables(_data : Dictionary):
-	if get_tree().get_rpc_sender_id() == 1:
-		Variables.item_index = _data["item_index"]
-		Variables.npc_index = _data["npc_index"]
-		Variables.ability_index = _data["ability_index"]
-	
 	
 remote func recive_equipment_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:
@@ -223,23 +216,3 @@ func request_item_sell(_shop_id : int, _index : int): #OK
 func request_ability_use(_index):
 	rpc_id(1, "request_ability_use", _index)
 
-
-# hopefully good below
-func request_move(_pos):
-	rpc_id(1, "request_move", _pos)
-	
-
-#remote func recive_actor_spawn_data(_data : Dictionary):
-#	GlobalWorld.spawn_actors(_data)
-	
-
-remote func recive_actor_despawn_data(_data : Dictionary):
-	pass
-	
-
-remote func recive_actor_motion_data(_data : Array):
-	GlobalWorld.move_actors(_data)
-
-	
-	
-	

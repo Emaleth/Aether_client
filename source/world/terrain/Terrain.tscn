@@ -68,6 +68,7 @@ heightmap_image = ExtResource( 12 )
 normalmap_image = SubResource( 1 )
 splatmap = ExtResource( 2 )
 culling_max_distance = 1000
+grass_render_distance = 1
 antitile_noise = SubResource( 3 )
 texture_flat_diffuse = ExtResource( 10 )
 texture_flat_normal = ExtResource( 11 )

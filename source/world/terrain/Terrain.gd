@@ -61,8 +61,9 @@ var multi_mesh_instance : MultiMeshInstance
 var grass_array := []
 
 
-#func _ready() -> void:
-#	generate = true
+func _ready() -> void:
+	initialize()
+	generate = true
 
 
 func _process(_delta: float) -> void:
@@ -222,18 +223,19 @@ func initialize_multi_mesh_instance():
 
 
 func process_grass():
-	var peg = $Position3D
-	var valid_positions := []
-	for i in grass_array.size():
-		if grass_array[i][1].distance_squared_to(peg.global_transform.origin) < pow(grass_render_distance, 2):
-			if acos(grass_array[i][0].y) < steepness-0.1:
-				valid_positions.append(look_at_with_y(
-					Transform(Basis(), grass_array[i][1]),
-					grass_array[i][0],
-					grass_array[i][1].cross(grass_array[i][1] + grass_array[i][0])))
-	multi_mesh_instance.multimesh.instance_count = valid_positions.size()
-	for i in multi_mesh_instance.multimesh.instance_count:
-		multi_mesh_instance.multimesh.set_instance_transform(i, valid_positions[i])
+	var peg = Variables.player_actor
+	if peg:
+		var valid_positions := []
+		for i in grass_array.size():
+			if grass_array[i][1].distance_squared_to(peg.global_transform.origin) < pow(grass_render_distance, 2):
+				if acos(grass_array[i][0].y) < steepness-0.1:
+					valid_positions.append(look_at_with_y(
+						Transform(Basis(), grass_array[i][1]),
+						grass_array[i][0],
+						grass_array[i][1].cross(grass_array[i][1] + grass_array[i][0])))
+		multi_mesh_instance.multimesh.instance_count = valid_positions.size()
+		for i in multi_mesh_instance.multimesh.instance_count:
+			multi_mesh_instance.multimesh.set_instance_transform(i, valid_positions[i])
 	
 	
 var height_probe : RayCast
