@@ -26,11 +26,10 @@ Gateway="*res://source/networking/Gateway.gd"
 AudioHandler="*res://source/audio_handler/AudioHandler.tscn"
 Settings="*res://source/globals/Settings.gd"
 Variables="*res://source/globals/Variables.gd"
-Helper="*res://source/globals/Helper.gd"
 GlobalWorld="*res://source/world/World.tscn"
 Ui="*res://source/UI/UI.tscn"
 CameraRig="*res://source/camera_rig/CameraRig.tscn"
-Database="*res://Database.gd"
+Database="*res://source/globals/Database.gd"
 
 [debug]
 

@@ -2,8 +2,6 @@ extends PanelContainer
 
 enum {LOGIN, REGISTER, LOADING}
 
-onready var world : PackedScene = preload("res://source/world/World.tscn")
-
 onready var login_panel = $MarginContainer/VBoxContainer/CenterContainer/LoginPanel
 onready var register_panel = $MarginContainer/VBoxContainer/CenterContainer/RegisterPanel
 
@@ -39,8 +37,8 @@ func set_menu_state(state):
 
 		
 func enter_world():
+	CameraRig.enable(true)
 	queue_free()
-#	get_tree().change_scene_to(GlobalWorld)
 
 	
 func quit() -> void:

@@ -7,10 +7,6 @@ var raycast_lenght := 1000
 onready var camera = $Camera
 
 
-func _ready() -> void:
-	Variables.camera_rig = self
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	if Input.is_action_pressed("rotate_camera"):
 		if event is InputEventMouseMotion:

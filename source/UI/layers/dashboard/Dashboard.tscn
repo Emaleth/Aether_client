@@ -1627,3 +1627,15 @@ bbcode_enabled = true
 bbcode_text = "selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla blaselected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla blaselected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla"
 text = "selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla blaselected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla blaselected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla"
 fit_content_height = true
+
+[node name="Close" type="Button" parent="Bg"]
+self_modulate = Color( 1, 0, 0, 1 )
+margin_left = 1152.0
+margin_top = 7.0
+margin_right = 1199.0
+margin_bottom = 27.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+text = "Close"
+
+[connection signal="pressed" from="Bg/Close" to="." method="_on_Close_pressed"]

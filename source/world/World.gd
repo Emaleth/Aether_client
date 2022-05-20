@@ -11,6 +11,7 @@ onready var actor_scene : PackedScene = preload("res://source/actor/Actor.tscn")
 onready var ability_scene : PackedScene 
 
 onready var actor_container : Node = $Actors
+onready var terrain : StaticBody = $Navigation/Terrain
 onready var ability_container : Node = $Abilities
 onready var navigation : Navigation = $Navigation
 
@@ -35,6 +36,8 @@ func process_actor_delta_snapshot(_snapshot):
 		update_actor(_id, _snapshot)
 	for _id in _snapshot["despawned"].keys():
 		despawn_actor(_id, _snapshot)
+		
+	Ui.process_private_snapshot(_snapshot["private"])
 
 
 func process_ability_delta_snapshot(_snapshot):
@@ -47,7 +50,7 @@ func _ready() -> void:
 	pass
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	pass
 
 #################################_FUNCTIONS_####################################
@@ -60,7 +63,7 @@ func spawn_actor(_id, _snapshot):
 	if _id == str(get_tree().get_network_unique_id()):
 		actor.bind_camera(CameraRig.get_path())
 		CameraRig.enable(true)
-		Variables.player_actor = actor
+		terrain.grass_target = actor
 	print("Spawned actor id: %s" % _id)
 #
 #
@@ -84,21 +87,3 @@ func spawn_ability(_id, _snapshot):
 	ability_container.add_child(ability)
 	print("Spawned ability id: %s" % _id)
 	
-	
-	
-	
-
-			
-#func draw_path(path_array):
-#	var im = get_node("Draw")
-#	im.set_material_override(m)
-#	im.clear()
-#	im.begin(Mesh.PRIMITIVE_POINTS, null)
-#	im.add_vertex(path_array[0])
-#	im.add_vertex(path_array[path_array.size() - 1])
-#	im.end()
-#	im.begin(Mesh.PRIMITIVE_LINE_STRIP, null)
-#	for x in path:
-#		im.add_vertex(x)
-#	im.end()
-

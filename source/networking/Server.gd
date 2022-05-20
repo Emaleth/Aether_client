@@ -13,8 +13,8 @@ var delta_latency = 0
 var latency_array = []
 var decimal_collector : float = 0
 # signals
-signal sig_update_fast_world_state
-signal sig_update_slow_world_state
+#signal sig_update_fast_world_state
+#signal sig_update_slow_world_state
 signal sig_update_currency
 signal sig_update_attributes
 signal sig_update_action_bar_ui
@@ -106,7 +106,7 @@ remote func fetch_token():
 	
 remote func return_token_verification_results(result, account_id):
 	if get_tree().get_rpc_sender_id() == 1:
-		print(account_id)
+#		print(account_id)
 		if result == true:
 			emit_signal("s_token_verification_success")
 		else:

@@ -51,10 +51,11 @@ export(Mesh) var grass_mesh : Mesh
 
 var collision_shape : CollisionShape
 var mesh_instance : MeshInstance
+var navigation_mesh_instance : NavigationMeshInstance
 var multi_mesh_instance : MultiMeshInstance
 
 var grass_array := []
-
+var grass_target = null
 
 func _ready() -> void:
 	initialize()
@@ -65,7 +66,7 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if generate:
 		var t = OS.get_ticks_msec()
-		print("..:: starting ::..")
+		print("..:: starting world generation ::..")
 		initialize()
 		generate_normalmap_image()
 		configure_shader()
@@ -84,6 +85,7 @@ func _process(_delta: float) -> void:
 func initialize():
 	collision_shape = $CollisionShape
 	mesh_instance = $MeshInstance
+	navigation_mesh_instance = $NavigationMeshInstance
 	multi_mesh_instance = $MultiMeshInstance
 	height_probe = $RayCast
 
@@ -103,7 +105,7 @@ func generate_navmesh():
 	for i in vertices.size() : indices.append(i) 
 	navmesh.vertices = vertices
 	navmesh.add_polygon(indices)
-	$NavigationMeshInstance.navmesh = navmesh
+	navigation_mesh_instance.navmesh = navmesh
 
 
 func configure_shader():
@@ -212,11 +214,10 @@ func initialize_multi_mesh_instance():
 
 
 func process_grass():
-	var peg = Variables.player_actor
-	if peg:
+	if grass_target:
 		var valid_positions := []
 		for i in grass_array.size():
-			if grass_array[i][1].distance_squared_to(peg.global_transform.origin) < pow(grass_render_distance, 2):
+			if grass_array[i][1].distance_squared_to(grass_target.global_transform.origin) < pow(grass_render_distance, 2):
 				if acos(grass_array[i][0].y) < steepness-0.1:
 					valid_positions.append(look_at_with_y(
 						Transform(Basis(), grass_array[i][1]),
