@@ -6,11 +6,8 @@ onready var fps_label = $VBoxContainer/FPS
 onready var clock_label = $VBoxContainer/Clock
 
 
-func conf(_latency):
-	latency_label.text = "Latency: %s" % _latency
-	
-	
 func _physics_process(_delta: float) -> void:
+	latency_label.text = "Latency: %s" % Server.latency
 	fps_label.text = "Fps: %s" % Engine.get_frames_per_second()
 	clock_label.text = format_time()
 
