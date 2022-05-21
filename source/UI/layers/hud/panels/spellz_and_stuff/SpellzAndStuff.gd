@@ -1,10 +1,10 @@
 extends PanelContainer
 
 
-onready var health_bar_container : HBoxContainer = $VBoxContainer/PanelContainer/VBoxContainer/HealthBar
-onready var mana_bar_container : HBoxContainer = $VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/RightPanelContainer/VBoxContainer/ManaBar
-onready var stamina_bar_container : HBoxContainer = $VBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/RightPanelContainer/VBoxContainer/StaminaBar
-onready var casting_bar_container : HBoxContainer = $VBoxContainer/PanelContainer3/HBoxContainer/PanelContainer3/CastingBar
+onready var health_bar_container : HBoxContainer = $VBoxContainer/HealthBar
+onready var mana_bar_container : HBoxContainer = $VBoxContainer/VBoxContainer/VBoxContainer/ManaBar
+onready var stamina_bar_container : HBoxContainer = $VBoxContainer/VBoxContainer/VBoxContainer/StaminaBar
+onready var casting_bar_container : HBoxContainer = $VBoxContainer/HBoxContainer/CastingBar
 
 
 func _ready() -> void:

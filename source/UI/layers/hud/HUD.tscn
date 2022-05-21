@@ -41,9 +41,9 @@ margin_right = 778.0
 mouse_filter = 2
 
 [node name="SpellzAndStuff" parent="." instance=ExtResource( 5 )]
-margin_left = 316.0
-margin_top = 608.0
-margin_right = 1040.0
+margin_left = 317.0
+margin_top = 629.0
+margin_right = 1039.0
 margin_bottom = 758.0
 mouse_filter = 2
 custom_styles/panel = SubResource( 4 )
