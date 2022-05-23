@@ -6,6 +6,7 @@
 margin_right = 64.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 256, 16 )
+mouse_filter = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
 script = ExtResource( 1 )
@@ -15,17 +16,22 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 249.0
 margin_bottom = 27.0
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 margin_right = 16.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 16, 16 )
+mouse_filter = 2
+expand = true
+stretch_mode = 7
 
 [node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
 margin_left = 20.0
 margin_top = 2.0
 margin_right = 242.0
 margin_bottom = 17.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 6
 bbcode_text = "[ITEM NAME]"
@@ -38,6 +44,7 @@ margin_left = 7.0
 margin_top = 7.0
 margin_right = 249.0
 margin_bottom = 27.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -45,6 +52,7 @@ size_flags_vertical = 3
 margin_left = 10.0
 margin_right = 232.0
 margin_bottom = 20.0
+mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 4

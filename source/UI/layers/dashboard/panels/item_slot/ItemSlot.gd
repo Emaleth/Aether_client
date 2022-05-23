@@ -4,8 +4,8 @@ var item_id = null
 var slot_id = null
 var container_type = null
 
-onready var slot_icon =  $HBoxContainer/TextureRect
-onready var slot_label = $HBoxContainer/RichTextLabel
+onready var slot_icon : TextureRect =  $HBoxContainer/TextureRect
+onready var slot_label : RichTextLabel = $HBoxContainer/RichTextLabel
 onready var interaction_menu = $CenterContainer/InteractionMenu
 
 onready var equip_button : Button = $CenterContainer/InteractionMenu/Equip
@@ -14,16 +14,18 @@ onready var discard_button : Button = $CenterContainer/InteractionMenu/Discard
 onready var use_button : Button = $CenterContainer/InteractionMenu/Use
 
 
-func configure(_slot_id, _data, _container_type):
-	item_id = _data["item_id"]
-	slot_id = _slot_id
-	container_type = _container_type
-	
+func _ready() -> void:
 	dummy_config()
-	
 	set_item_icon()
 	configure_interaction_menu()
+
 	
+func configure(_slot_id, _data, _container_type):
+	if _data != null:
+		item_id = _data["item_id"]
+		slot_id = _slot_id
+		container_type = _container_type
+		
 	
 func dummy_config() -> void:
 	interaction_menu.hide()
@@ -51,9 +53,9 @@ func configure_interaction_menu():
 func set_item_icon() -> void:
 	if item_id:
 		var item_icon_path = "res://assets/icons/item/%s.svg" % str(item_id)
-		slot_icon.icon = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/third_party/icons/no_icon.svg")
+		slot_icon.texture = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/third_party/icons/no_icon.svg")
 	else:
-		slot_icon.icon = null
+		slot_icon.texture = null
 #
 #
 #func set_amount_label() -> void:
@@ -72,18 +74,26 @@ func _on_ItemSlot_gui_input(event: InputEvent) -> void:
 
 func _on_Equip_pressed() -> void:
 	Server.request_item_equip(slot_id)
+	interaction_menu.hide()
+	$Node/Control.hide()
 
 
 func _on_Discard_pressed() -> void:
 	Server.request_item_discard(slot_id)
+	interaction_menu.hide()
+	$Node/Control.hide()
 
 
 func _on_Use_pressed() -> void:
 	Server.request_item_use(slot_id)
-
+	interaction_menu.hide()
+	$Node/Control.hide()
+	
 
 func _on_Unequip_pressed() -> void:
 	Server.request_item_unequip(slot_id)
+	interaction_menu.hide()
+	$Node/Control.hide()
 
 
 func _on_Control_gui_input(event: InputEvent) -> void:

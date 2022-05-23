@@ -175,7 +175,7 @@ remote func recive_action_bar_data(_data : Array): #OK
 		emit_signal("sig_update_action_bar_ui", _data)
 
 
-remote func recive_inventory_data(_data : Array): #OK
+remote func recive_inventory_data(_data : Dictionary): #OK
 	if get_tree().get_rpc_sender_id() == 1:
 		Variables.inventory_data = _data
 		emit_signal("update_inventory_ui", _data)

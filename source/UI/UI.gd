@@ -30,4 +30,4 @@ func process_private_snapshot(_snapshot):
 	if _snapshot.has("action_bar_data"): pass
 	if _snapshot.has("recipes_data"): pass
 	if _snapshot.has("inventory_data"):
-		$Dashboard/Bg/HBoxContainer/MiddleContainer/RightSector/Inventory.configure(_snapshot["inventory_data"])
+		$Dashboard/Bg/HBoxContainer/RightContainer/RightSector/Inventory.configure(_snapshot["inventory_data"])
