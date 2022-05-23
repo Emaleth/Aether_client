@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://source/UI/layers/hud/panels/spellz_and_stuff/SpellzAndStuff.gd" type="Script" id=1]
-[ext_resource path="res://assets/third_party/icons/sparkles.svg" type="Texture" id=2]
-[ext_resource path="res://assets/third_party/icons/heart-organ.svg" type="Texture" id=3]
-[ext_resource path="res://assets/third_party/icons/liberty-wing.svg" type="Texture" id=4]
+[ext_resource path="res://assets/third_party/icons/mana.svg" type="Texture" id=2]
+[ext_resource path="res://assets/third_party/icons/health.svg" type="Texture" id=3]
+[ext_resource path="res://assets/third_party/icons/stamina.svg" type="Texture" id=4]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 

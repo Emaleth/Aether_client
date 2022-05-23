@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/no_icon.svg-42d726ef9d1536897e801feeaad9b496.stex"
+path="res://.import/health.svg-94a862205a35a572f1244e3815993723.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/icons/no_icon.svg"
-dest_files=[ "res://.import/no_icon.svg-42d726ef9d1536897e801feeaad9b496.stex" ]
+source_file="res://assets/third_party/icons/health.svg"
+dest_files=[ "res://.import/health.svg-94a862205a35a572f1244e3815993723.stex" ]
 
 [params]
 

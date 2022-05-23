@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/sparkles.svg-333e92de83bbe1df307b3f37a5242134.stex"
+path="res://.import/no_icon.svg-24828040af88d346aed4d174b00d8ea3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/third_party/icons/sparkles.svg"
-dest_files=[ "res://.import/sparkles.svg-333e92de83bbe1df307b3f37a5242134.stex" ]
+source_file="res://assets/third_party/icons/no_icon.svg"
+dest_files=[ "res://.import/no_icon.svg-24828040af88d346aed4d174b00d8ea3.stex" ]
 
 [params]
 

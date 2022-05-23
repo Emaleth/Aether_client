@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/heart-organ.svg-2269b2cf27923fdf53c1bb6cbc0163f1.stex"
+path="res://.import/stamina.svg-a0cce35f04fc8da281d1b1f2649486c7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/third_party/icons/heart-organ.svg"
-dest_files=[ "res://.import/heart-organ.svg-2269b2cf27923fdf53c1bb6cbc0163f1.stex" ]
+source_file="res://assets/third_party/icons/stamina.svg"
+dest_files=[ "res://.import/stamina.svg-a0cce35f04fc8da281d1b1f2649486c7.stex" ]
 
 [params]
 

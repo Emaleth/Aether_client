@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://source/old_ui/subcomponents/slots/placeholder_slot/PlaceholderSlot.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/UI/layers/dashboard/Dashboard.gd" type="Script" id=2]
+[ext_resource path="res://source/UI/layers/dashboard/panels/inventory/Inventory.tscn" type="PackedScene" id=3]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 80.0
@@ -20,10 +21,6 @@ content_margin_left = 15.0
 content_margin_right = 15.0
 content_margin_top = 15.0
 content_margin_bottom = 15.0
-
-[sub_resource type="StyleBoxEmpty" id=4]
-
-[sub_resource type="StyleBoxEmpty" id=5]
 
 [node name="Dashboard" type="PanelContainer"]
 anchor_right = 1.0
@@ -51,15 +48,17 @@ size_flags_vertical = 3
 custom_constants/separation = 0
 
 [node name="LeftContainer" type="PanelContainer" parent="Bg/HBoxContainer"]
-margin_right = 264.0
+margin_right = 476.0
 margin_bottom = 664.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
 custom_styles/panel = SubResource( 2 )
 
 [node name="LeftSector" type="VBoxContainer" parent="Bg/HBoxContainer/LeftContainer"]
 margin_left = 15.0
 margin_top = 15.0
-margin_right = 249.0
+margin_right = 461.0
 margin_bottom = 649.0
 mouse_filter = 2
 size_flags_vertical = 3
@@ -67,14 +66,14 @@ custom_constants/separation = 15
 
 [node name="AccountInfoContainer" type="PanelContainer" parent="Bg/HBoxContainer/LeftContainer/LeftSector"]
 unique_name_in_owner = true
-margin_right = 234.0
+margin_right = 446.0
 margin_bottom = 44.0
 mouse_filter = 2
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Bg/HBoxContainer/LeftContainer/LeftSector/AccountInfoContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 227.0
+margin_right = 439.0
 margin_bottom = 37.0
 mouse_filter = 2
 bbcode_text = "account:i: 00000 
@@ -85,23 +84,23 @@ fit_content_height = true
 
 [node name="HSeparator2" type="HSeparator" parent="Bg/HBoxContainer/LeftContainer/LeftSector"]
 margin_top = 59.0
-margin_right = 234.0
+margin_right = 446.0
 margin_bottom = 63.0
 mouse_filter = 2
 
 [node name="EquipmentContainer" type="PanelContainer" parent="Bg/HBoxContainer/LeftContainer/LeftSector"]
 unique_name_in_owner = true
 margin_top = 78.0
-margin_right = 234.0
+margin_right = 446.0
 margin_bottom = 402.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="GridContainer" type="GridContainer" parent="Bg/HBoxContainer/LeftContainer/LeftSector/EquipmentContainer"]
-margin_left = 7.0
+margin_left = 113.0
 margin_top = 7.0
-margin_right = 227.0
+margin_right = 333.0
 margin_bottom = 317.0
 mouse_filter = 2
 size_flags_horizontal = 4
@@ -345,14 +344,14 @@ mouse_filter = 2
 
 [node name="HSeparator" type="HSeparator" parent="Bg/HBoxContainer/LeftContainer/LeftSector"]
 margin_top = 417.0
-margin_right = 234.0
+margin_right = 446.0
 margin_bottom = 421.0
 mouse_filter = 2
 
 [node name="StatsContainer" type="PanelContainer" parent="Bg/HBoxContainer/LeftContainer/LeftSector"]
 unique_name_in_owner = true
 margin_top = 436.0
-margin_right = 234.0
+margin_right = 446.0
 margin_bottom = 634.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -361,7 +360,7 @@ size_flags_vertical = 3
 [node name="RichTextLabel" type="RichTextLabel" parent="Bg/HBoxContainer/LeftContainer/LeftSector/StatsContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 227.0
+margin_right = 439.0
 margin_bottom = 191.0
 mouse_filter = 2
 size_flags_horizontal = 3
@@ -385,41 +384,35 @@ some text,
 some text >"
 fit_content_height = true
 
-[node name="VSeparator" type="VSeparator" parent="Bg/HBoxContainer"]
-margin_left = 264.0
-margin_right = 268.0
-margin_bottom = 664.0
-mouse_filter = 2
-
-[node name="MiddleContainer" type="PanelContainer" parent="Bg/HBoxContainer"]
-margin_left = 268.0
-margin_right = 820.0
+[node name="RightContainer" type="PanelContainer" parent="Bg/HBoxContainer"]
+margin_left = 476.0
+margin_right = 1192.0
 margin_bottom = 664.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.6
 custom_styles/panel = SubResource( 3 )
 
-[node name="RightSector" type="VBoxContainer" parent="Bg/HBoxContainer/MiddleContainer"]
+[node name="RightSector" type="VBoxContainer" parent="Bg/HBoxContainer/RightContainer"]
 margin_left = 15.0
 margin_top = 15.0
-margin_right = 537.0
+margin_right = 701.0
 margin_bottom = 649.0
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 15
 
-[node name="CurrencyContainer" type="PanelContainer" parent="Bg/HBoxContainer/MiddleContainer/RightSector"]
+[node name="CurrencyContainer" type="PanelContainer" parent="Bg/HBoxContainer/RightContainer/RightSector"]
 unique_name_in_owner = true
-margin_right = 522.0
+margin_right = 686.0
 margin_bottom = 44.0
 mouse_filter = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Bg/HBoxContainer/MiddleContainer/RightSector/CurrencyContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="Bg/HBoxContainer/RightContainer/RightSector/CurrencyContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 515.0
+margin_right = 679.0
 margin_bottom = 37.0
 mouse_filter = 2
 bbcode_text = "gold: 0 								diamonds: 0 
@@ -428,1205 +421,10 @@ text = "gold: 0 								diamonds: 0
 rubees: 0 							emeralds: 0"
 fit_content_height = true
 
-[node name="HSeparator" type="HSeparator" parent="Bg/HBoxContainer/MiddleContainer/RightSector"]
+[node name="Inventory" parent="Bg/HBoxContainer/RightContainer/RightSector" instance=ExtResource( 3 )]
 margin_top = 59.0
-margin_right = 522.0
-margin_bottom = 63.0
-
-[node name="InventoryContainer" type="PanelContainer" parent="Bg/HBoxContainer/MiddleContainer/RightSector"]
-unique_name_in_owner = true
-margin_top = 78.0
-margin_right = 522.0
+margin_right = 686.0
 margin_bottom = 634.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.6
-custom_styles/panel = SubResource( 4 )
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer"]
-margin_right = 522.0
-margin_bottom = 556.0
-
-[node name="InventoryContainer2" type="PanelContainer" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer"]
-margin_right = 522.0
-margin_bottom = 556.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.6
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 515.0
-margin_bottom = 549.0
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer"]
-margin_right = 508.0
-margin_bottom = 518.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-scroll_vertical_enabled = false
-
-[node name="GridContainer" type="VFlowContainer" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer"]
-margin_right = 670.0
-margin_bottom = 506.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-custom_constants/vseparation = 5
-custom_constants/hseparation = 5
-
-[node name="SlotPlaceholder" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_right = 40.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder2" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 45.0
-margin_right = 40.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder3" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 90.0
-margin_right = 40.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder4" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 135.0
-margin_right = 40.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder5" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 180.0
-margin_right = 40.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder6" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 225.0
-margin_right = 40.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder7" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 270.0
-margin_right = 40.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder8" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 315.0
-margin_right = 40.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder9" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 360.0
-margin_right = 40.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder10" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 405.0
-margin_right = 40.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder121" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_top = 450.0
-margin_right = 40.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder122" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_right = 85.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder123" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 45.0
-margin_right = 85.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder124" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 90.0
-margin_right = 85.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder125" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 135.0
-margin_right = 85.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder126" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 180.0
-margin_right = 85.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder127" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 225.0
-margin_right = 85.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder128" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 270.0
-margin_right = 85.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder129" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 315.0
-margin_right = 85.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder130" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 360.0
-margin_right = 85.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder131" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 405.0
-margin_right = 85.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder132" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 45.0
-margin_top = 450.0
-margin_right = 85.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder133" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_right = 130.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder134" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 45.0
-margin_right = 130.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder135" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 90.0
-margin_right = 130.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder136" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 135.0
-margin_right = 130.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder137" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 180.0
-margin_right = 130.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder138" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 225.0
-margin_right = 130.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder139" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 270.0
-margin_right = 130.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder140" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 315.0
-margin_right = 130.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder141" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 360.0
-margin_right = 130.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder142" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 405.0
-margin_right = 130.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder143" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 90.0
-margin_top = 450.0
-margin_right = 130.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder144" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_right = 175.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder145" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 45.0
-margin_right = 175.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder146" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 90.0
-margin_right = 175.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder147" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 135.0
-margin_right = 175.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder148" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 180.0
-margin_right = 175.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder149" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 225.0
-margin_right = 175.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder150" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 270.0
-margin_right = 175.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder151" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 315.0
-margin_right = 175.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder152" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 360.0
-margin_right = 175.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder153" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 405.0
-margin_right = 175.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder154" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 135.0
-margin_top = 450.0
-margin_right = 175.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder155" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_right = 220.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder156" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 45.0
-margin_right = 220.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder11" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 90.0
-margin_right = 220.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder12" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 135.0
-margin_right = 220.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder13" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 180.0
-margin_right = 220.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder14" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 225.0
-margin_right = 220.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder15" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 270.0
-margin_right = 220.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder16" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 315.0
-margin_right = 220.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder17" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 360.0
-margin_right = 220.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder18" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 405.0
-margin_right = 220.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder19" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 180.0
-margin_top = 450.0
-margin_right = 220.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder20" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_right = 265.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder21" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 45.0
-margin_right = 265.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder22" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 90.0
-margin_right = 265.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder23" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 135.0
-margin_right = 265.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder24" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 180.0
-margin_right = 265.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder25" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 225.0
-margin_right = 265.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder26" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 270.0
-margin_right = 265.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder27" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 315.0
-margin_right = 265.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder28" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 360.0
-margin_right = 265.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder29" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 405.0
-margin_right = 265.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder30" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 225.0
-margin_top = 450.0
-margin_right = 265.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder31" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_right = 310.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder32" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 45.0
-margin_right = 310.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder33" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 90.0
-margin_right = 310.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder34" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 135.0
-margin_right = 310.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder35" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 180.0
-margin_right = 310.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder36" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 225.0
-margin_right = 310.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder37" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 270.0
-margin_right = 310.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder38" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 315.0
-margin_right = 310.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder39" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 360.0
-margin_right = 310.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder40" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 405.0
-margin_right = 310.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder41" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 270.0
-margin_top = 450.0
-margin_right = 310.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder42" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_right = 355.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder43" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 45.0
-margin_right = 355.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder44" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 90.0
-margin_right = 355.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder45" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 135.0
-margin_right = 355.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder46" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 180.0
-margin_right = 355.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder47" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 225.0
-margin_right = 355.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder48" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 270.0
-margin_right = 355.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder49" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 315.0
-margin_right = 355.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder50" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 360.0
-margin_right = 355.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder51" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 405.0
-margin_right = 355.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder52" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 315.0
-margin_top = 450.0
-margin_right = 355.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder53" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_right = 400.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder54" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 45.0
-margin_right = 400.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder55" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 90.0
-margin_right = 400.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder56" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 135.0
-margin_right = 400.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder57" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 180.0
-margin_right = 400.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder58" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 225.0
-margin_right = 400.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder59" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 270.0
-margin_right = 400.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder60" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 315.0
-margin_right = 400.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder61" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 360.0
-margin_right = 400.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder62" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 405.0
-margin_right = 400.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder63" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 360.0
-margin_top = 450.0
-margin_right = 400.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder64" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_right = 445.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder65" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 45.0
-margin_right = 445.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder66" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 90.0
-margin_right = 445.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder67" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 135.0
-margin_right = 445.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder68" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 180.0
-margin_right = 445.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder69" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 225.0
-margin_right = 445.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder70" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 270.0
-margin_right = 445.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder71" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 315.0
-margin_right = 445.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder72" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 360.0
-margin_right = 445.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder73" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 405.0
-margin_right = 445.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder74" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 405.0
-margin_top = 450.0
-margin_right = 445.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder75" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_right = 490.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder76" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 45.0
-margin_right = 490.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder77" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 90.0
-margin_right = 490.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder78" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 135.0
-margin_right = 490.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder79" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 180.0
-margin_right = 490.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder80" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 225.0
-margin_right = 490.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder81" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 270.0
-margin_right = 490.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder82" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 315.0
-margin_right = 490.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder83" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 360.0
-margin_right = 490.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder84" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 405.0
-margin_right = 490.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder85" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 450.0
-margin_top = 450.0
-margin_right = 490.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder86" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_right = 535.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder87" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 45.0
-margin_right = 535.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder88" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 90.0
-margin_right = 535.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder89" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 135.0
-margin_right = 535.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder90" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 180.0
-margin_right = 535.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder91" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 225.0
-margin_right = 535.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder92" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 270.0
-margin_right = 535.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder93" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 315.0
-margin_right = 535.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder94" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 360.0
-margin_right = 535.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder95" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 405.0
-margin_right = 535.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder96" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 495.0
-margin_top = 450.0
-margin_right = 535.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder97" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_right = 580.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder98" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 45.0
-margin_right = 580.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder99" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 90.0
-margin_right = 580.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder100" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 135.0
-margin_right = 580.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder101" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 180.0
-margin_right = 580.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder102" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 225.0
-margin_right = 580.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder103" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 270.0
-margin_right = 580.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder104" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 315.0
-margin_right = 580.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder105" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 360.0
-margin_right = 580.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder106" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 405.0
-margin_right = 580.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder107" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 540.0
-margin_top = 450.0
-margin_right = 580.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder108" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_right = 625.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder109" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 45.0
-margin_right = 625.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder110" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 90.0
-margin_right = 625.0
-margin_bottom = 130.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder111" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 135.0
-margin_right = 625.0
-margin_bottom = 175.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder112" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 180.0
-margin_right = 625.0
-margin_bottom = 220.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder113" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 225.0
-margin_right = 625.0
-margin_bottom = 265.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder114" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 270.0
-margin_right = 625.0
-margin_bottom = 310.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder115" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 315.0
-margin_right = 625.0
-margin_bottom = 355.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder116" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 360.0
-margin_right = 625.0
-margin_bottom = 400.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder117" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 405.0
-margin_right = 625.0
-margin_bottom = 445.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder118" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 585.0
-margin_top = 450.0
-margin_right = 625.0
-margin_bottom = 490.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder119" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 630.0
-margin_right = 670.0
-margin_bottom = 40.0
-mouse_filter = 2
-
-[node name="SlotPlaceholder120" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/ScrollContainer/GridContainer" instance=ExtResource( 1 )]
-margin_left = 630.0
-margin_top = 45.0
-margin_right = 670.0
-margin_bottom = 85.0
-mouse_filter = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer"]
-margin_top = 522.0
-margin_right = 508.0
-margin_bottom = 542.0
-custom_styles/panel = SubResource( 5 )
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/PanelContainer"]
-margin_left = 193.0
-margin_right = 314.0
-margin_bottom = 20.0
-size_flags_horizontal = 4
-
-[node name="Button" type="Button" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/PanelContainer/HBoxContainer"]
-margin_right = 21.0
-margin_bottom = 20.0
-text = "#"
-
-[node name="Button2" type="Button" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/PanelContainer/HBoxContainer"]
-margin_left = 25.0
-margin_right = 46.0
-margin_bottom = 20.0
-text = "#"
-
-[node name="Button3" type="Button" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/PanelContainer/HBoxContainer"]
-margin_left = 50.0
-margin_right = 71.0
-margin_bottom = 20.0
-text = "#"
-
-[node name="Button4" type="Button" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/PanelContainer/HBoxContainer"]
-margin_left = 75.0
-margin_right = 96.0
-margin_bottom = 20.0
-text = "#"
-
-[node name="Button5" type="Button" parent="Bg/HBoxContainer/MiddleContainer/RightSector/InventoryContainer/VBoxContainer/InventoryContainer2/VBoxContainer/PanelContainer/HBoxContainer"]
-margin_left = 100.0
-margin_right = 121.0
-margin_bottom = 20.0
-text = "#"
-
-[node name="HSeparator" type="VSeparator" parent="Bg/HBoxContainer"]
-margin_left = 820.0
-margin_right = 824.0
-margin_bottom = 664.0
-mouse_filter = 2
-
-[node name="RightContainer" type="PanelContainer" parent="Bg/HBoxContainer"]
-margin_left = 824.0
-margin_right = 1192.0
-margin_bottom = 664.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.4
-custom_styles/panel = SubResource( 3 )
-
-[node name="InfoContainer" type="PanelContainer" parent="Bg/HBoxContainer/RightContainer"]
-margin_left = 15.0
-margin_top = 15.0
-margin_right = 353.0
-margin_bottom = 649.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Bg/HBoxContainer/RightContainer/InfoContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 331.0
-margin_bottom = 627.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Bg/HBoxContainer/RightContainer/InfoContainer/ScrollContainer"]
-margin_right = 324.0
-margin_bottom = 620.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-bbcode_enabled = true
-bbcode_text = "selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla blaselected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla blaselected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla"
-text = "selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla blaselected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla blaselected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla selected item info here bla bla bla"
-fit_content_height = true
 
 [node name="Close" type="Button" parent="Bg"]
 self_modulate = Color( 1, 0, 0, 1 )

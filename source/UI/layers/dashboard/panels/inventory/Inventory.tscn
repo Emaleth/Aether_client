@@ -1,0 +1,528 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://source/UI/layers/dashboard/panels/inventory/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://source/UI/layers/dashboard/panels/item_slot/ItemSlot.tscn" type="PackedScene" id=2]
+
+[node name="Inventory" type="PanelContainer"]
+margin_right = 681.0
+margin_bottom = 556.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.6
+script = ExtResource( 1 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 674.0
+margin_bottom = 549.0
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+margin_right = 655.0
+margin_bottom = 3796.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ItemSlot" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_right = 256.0
+margin_bottom = 34.0
+
+[node name="ItemSlot2" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 38.0
+margin_right = 256.0
+margin_bottom = 72.0
+
+[node name="ItemSlot3" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 76.0
+margin_right = 256.0
+margin_bottom = 110.0
+
+[node name="ItemSlot4" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 114.0
+margin_right = 256.0
+margin_bottom = 148.0
+
+[node name="ItemSlot5" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 152.0
+margin_right = 256.0
+margin_bottom = 186.0
+
+[node name="ItemSlot6" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 190.0
+margin_right = 256.0
+margin_bottom = 224.0
+
+[node name="ItemSlot7" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 228.0
+margin_right = 256.0
+margin_bottom = 262.0
+
+[node name="ItemSlot8" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 266.0
+margin_right = 256.0
+margin_bottom = 300.0
+
+[node name="ItemSlot9" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 304.0
+margin_right = 256.0
+margin_bottom = 338.0
+
+[node name="ItemSlot10" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 342.0
+margin_right = 256.0
+margin_bottom = 376.0
+
+[node name="ItemSlot11" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 380.0
+margin_right = 256.0
+margin_bottom = 414.0
+
+[node name="ItemSlot12" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 418.0
+margin_right = 256.0
+margin_bottom = 452.0
+
+[node name="ItemSlot13" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 456.0
+margin_right = 256.0
+margin_bottom = 490.0
+
+[node name="ItemSlot14" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 494.0
+margin_right = 256.0
+margin_bottom = 528.0
+
+[node name="ItemSlot15" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 532.0
+margin_right = 256.0
+margin_bottom = 566.0
+
+[node name="ItemSlot16" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 570.0
+margin_right = 256.0
+margin_bottom = 604.0
+
+[node name="ItemSlot17" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 608.0
+margin_right = 256.0
+margin_bottom = 642.0
+
+[node name="ItemSlot18" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 646.0
+margin_right = 256.0
+margin_bottom = 680.0
+
+[node name="ItemSlot19" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 684.0
+margin_right = 256.0
+margin_bottom = 718.0
+
+[node name="ItemSlot20" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 722.0
+margin_right = 256.0
+margin_bottom = 756.0
+
+[node name="ItemSlot21" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 760.0
+margin_right = 256.0
+margin_bottom = 794.0
+
+[node name="ItemSlot22" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 798.0
+margin_right = 256.0
+margin_bottom = 832.0
+
+[node name="ItemSlot23" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 836.0
+margin_right = 256.0
+margin_bottom = 870.0
+
+[node name="ItemSlot24" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 874.0
+margin_right = 256.0
+margin_bottom = 908.0
+
+[node name="ItemSlot25" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 912.0
+margin_right = 256.0
+margin_bottom = 946.0
+
+[node name="ItemSlot26" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 950.0
+margin_right = 256.0
+margin_bottom = 984.0
+
+[node name="ItemSlot27" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 988.0
+margin_right = 256.0
+margin_bottom = 1022.0
+
+[node name="ItemSlot28" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1026.0
+margin_right = 256.0
+margin_bottom = 1060.0
+
+[node name="ItemSlot29" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1064.0
+margin_right = 256.0
+margin_bottom = 1098.0
+
+[node name="ItemSlot30" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1102.0
+margin_right = 256.0
+margin_bottom = 1136.0
+
+[node name="ItemSlot31" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1140.0
+margin_right = 256.0
+margin_bottom = 1174.0
+
+[node name="ItemSlot32" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1178.0
+margin_right = 256.0
+margin_bottom = 1212.0
+
+[node name="ItemSlot33" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1216.0
+margin_right = 256.0
+margin_bottom = 1250.0
+
+[node name="ItemSlot34" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1254.0
+margin_right = 256.0
+margin_bottom = 1288.0
+
+[node name="ItemSlot35" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1292.0
+margin_right = 256.0
+margin_bottom = 1326.0
+
+[node name="ItemSlot36" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1330.0
+margin_right = 256.0
+margin_bottom = 1364.0
+
+[node name="ItemSlot37" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1368.0
+margin_right = 256.0
+margin_bottom = 1402.0
+
+[node name="ItemSlot38" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1406.0
+margin_right = 256.0
+margin_bottom = 1440.0
+
+[node name="ItemSlot39" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1444.0
+margin_right = 256.0
+margin_bottom = 1478.0
+
+[node name="ItemSlot40" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1482.0
+margin_right = 256.0
+margin_bottom = 1516.0
+
+[node name="ItemSlot41" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1520.0
+margin_right = 256.0
+margin_bottom = 1554.0
+
+[node name="ItemSlot42" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1558.0
+margin_right = 256.0
+margin_bottom = 1592.0
+
+[node name="ItemSlot43" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1596.0
+margin_right = 256.0
+margin_bottom = 1630.0
+
+[node name="ItemSlot44" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1634.0
+margin_right = 256.0
+margin_bottom = 1668.0
+
+[node name="ItemSlot45" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1672.0
+margin_right = 256.0
+margin_bottom = 1706.0
+
+[node name="ItemSlot46" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1710.0
+margin_right = 256.0
+margin_bottom = 1744.0
+
+[node name="ItemSlot47" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1748.0
+margin_right = 256.0
+margin_bottom = 1782.0
+
+[node name="ItemSlot48" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1786.0
+margin_right = 256.0
+margin_bottom = 1820.0
+
+[node name="ItemSlot49" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1824.0
+margin_right = 256.0
+margin_bottom = 1858.0
+
+[node name="ItemSlot50" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1862.0
+margin_right = 256.0
+margin_bottom = 1896.0
+
+[node name="ItemSlot51" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1900.0
+margin_right = 256.0
+margin_bottom = 1934.0
+
+[node name="ItemSlot52" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1938.0
+margin_right = 256.0
+margin_bottom = 1972.0
+
+[node name="ItemSlot53" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 1976.0
+margin_right = 256.0
+margin_bottom = 2010.0
+
+[node name="ItemSlot54" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2014.0
+margin_right = 256.0
+margin_bottom = 2048.0
+
+[node name="ItemSlot55" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2052.0
+margin_right = 256.0
+margin_bottom = 2086.0
+
+[node name="ItemSlot56" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2090.0
+margin_right = 256.0
+margin_bottom = 2124.0
+
+[node name="ItemSlot57" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2128.0
+margin_right = 256.0
+margin_bottom = 2162.0
+
+[node name="ItemSlot58" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2166.0
+margin_right = 256.0
+margin_bottom = 2200.0
+
+[node name="ItemSlot59" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2204.0
+margin_right = 256.0
+margin_bottom = 2238.0
+
+[node name="ItemSlot60" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2242.0
+margin_right = 256.0
+margin_bottom = 2276.0
+
+[node name="ItemSlot61" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2280.0
+margin_right = 256.0
+margin_bottom = 2314.0
+
+[node name="ItemSlot62" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2318.0
+margin_right = 256.0
+margin_bottom = 2352.0
+
+[node name="ItemSlot63" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2356.0
+margin_right = 256.0
+margin_bottom = 2390.0
+
+[node name="ItemSlot64" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2394.0
+margin_right = 256.0
+margin_bottom = 2428.0
+
+[node name="ItemSlot65" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2432.0
+margin_right = 256.0
+margin_bottom = 2466.0
+
+[node name="ItemSlot66" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2470.0
+margin_right = 256.0
+margin_bottom = 2504.0
+
+[node name="ItemSlot67" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2508.0
+margin_right = 256.0
+margin_bottom = 2542.0
+
+[node name="ItemSlot68" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2546.0
+margin_right = 256.0
+margin_bottom = 2580.0
+
+[node name="ItemSlot69" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2584.0
+margin_right = 256.0
+margin_bottom = 2618.0
+
+[node name="ItemSlot70" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2622.0
+margin_right = 256.0
+margin_bottom = 2656.0
+
+[node name="ItemSlot71" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2660.0
+margin_right = 256.0
+margin_bottom = 2694.0
+
+[node name="ItemSlot72" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2698.0
+margin_right = 256.0
+margin_bottom = 2732.0
+
+[node name="ItemSlot73" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2736.0
+margin_right = 256.0
+margin_bottom = 2770.0
+
+[node name="ItemSlot74" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2774.0
+margin_right = 256.0
+margin_bottom = 2808.0
+
+[node name="ItemSlot75" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2812.0
+margin_right = 256.0
+margin_bottom = 2846.0
+
+[node name="ItemSlot76" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2850.0
+margin_right = 256.0
+margin_bottom = 2884.0
+
+[node name="ItemSlot77" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2888.0
+margin_right = 256.0
+margin_bottom = 2922.0
+
+[node name="ItemSlot78" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2926.0
+margin_right = 256.0
+margin_bottom = 2960.0
+
+[node name="ItemSlot79" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 2964.0
+margin_right = 256.0
+margin_bottom = 2998.0
+
+[node name="ItemSlot80" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3002.0
+margin_right = 256.0
+margin_bottom = 3036.0
+
+[node name="ItemSlot81" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3040.0
+margin_right = 256.0
+margin_bottom = 3074.0
+
+[node name="ItemSlot82" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3078.0
+margin_right = 256.0
+margin_bottom = 3112.0
+
+[node name="ItemSlot83" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3116.0
+margin_right = 256.0
+margin_bottom = 3150.0
+
+[node name="ItemSlot84" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3154.0
+margin_right = 256.0
+margin_bottom = 3188.0
+
+[node name="ItemSlot85" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3192.0
+margin_right = 256.0
+margin_bottom = 3226.0
+
+[node name="ItemSlot86" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3230.0
+margin_right = 256.0
+margin_bottom = 3264.0
+
+[node name="ItemSlot87" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3268.0
+margin_right = 256.0
+margin_bottom = 3302.0
+
+[node name="ItemSlot88" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3306.0
+margin_right = 256.0
+margin_bottom = 3340.0
+
+[node name="ItemSlot89" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3344.0
+margin_right = 256.0
+margin_bottom = 3378.0
+
+[node name="ItemSlot90" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3382.0
+margin_right = 256.0
+margin_bottom = 3416.0
+
+[node name="ItemSlot91" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3420.0
+margin_right = 256.0
+margin_bottom = 3454.0
+
+[node name="ItemSlot92" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3458.0
+margin_right = 256.0
+margin_bottom = 3492.0
+
+[node name="ItemSlot93" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3496.0
+margin_right = 256.0
+margin_bottom = 3530.0
+
+[node name="ItemSlot94" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3534.0
+margin_right = 256.0
+margin_bottom = 3568.0
+
+[node name="ItemSlot95" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3572.0
+margin_right = 256.0
+margin_bottom = 3606.0
+
+[node name="ItemSlot96" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3610.0
+margin_right = 256.0
+margin_bottom = 3644.0
+
+[node name="ItemSlot97" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3648.0
+margin_right = 256.0
+margin_bottom = 3682.0
+
+[node name="ItemSlot98" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3686.0
+margin_right = 256.0
+margin_bottom = 3720.0
+
+[node name="ItemSlot99" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3724.0
+margin_right = 256.0
+margin_bottom = 3758.0
+
+[node name="ItemSlot100" parent="ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+margin_top = 3762.0
+margin_right = 256.0
+margin_bottom = 3796.0
