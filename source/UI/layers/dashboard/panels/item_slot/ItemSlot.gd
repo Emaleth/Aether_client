@@ -1,17 +1,18 @@
 extends PanelContainer
 
-var item_id = null
-var slot_id = null
 var container_type = null
+var slot_id = null
+var item_data = null
 
-onready var slot_icon : TextureRect =  $HBoxContainer/TextureRect
-onready var slot_label : RichTextLabel = $HBoxContainer/RichTextLabel
-onready var interaction_menu = $CenterContainer/InteractionMenu
+onready var slot_icon : TextureRect =  $VBoxContainer/HBoxContainer/TextureRect
+onready var name_label : Label = $VBoxContainer/HBoxContainer/NameLabel
+onready var amount_label : Label = $VBoxContainer/HBoxContainer/AmountLabel
+onready var interaction_menu = $VBoxContainer/InteractionMenu
 
-onready var equip_button : Button = $CenterContainer/InteractionMenu/Equip
-onready var unequip_button : Button = $CenterContainer/InteractionMenu/Unequip
-onready var discard_button : Button = $CenterContainer/InteractionMenu/Discard
-onready var use_button : Button = $CenterContainer/InteractionMenu/Use
+onready var equip_button : Button = $VBoxContainer/InteractionMenu/Equip
+onready var unequip_button : Button = $VBoxContainer/InteractionMenu/Unequip
+onready var discard_button : Button = $VBoxContainer/InteractionMenu/Discard
+onready var use_button : Button = $VBoxContainer/InteractionMenu/Use
 
 
 func _ready() -> void:
@@ -22,19 +23,19 @@ func _ready() -> void:
 	
 func configure(_slot_id, _data, _container_type):
 	if _data != null:
-		item_id = _data["item_id"]
 		slot_id = _slot_id
+		item_data = _data
 		container_type = _container_type
 		
 	
 func dummy_config() -> void:
 	interaction_menu.hide()
-	hint_tooltip = "text" if item_id else ""
+	hint_tooltip = "text" if item_data else ""
 	$Node/Control.hide()
 #
 #
 func configure_interaction_menu():
-	if item_id:
+	if item_data:
 		if container_type == "inventory":
 			equip_button.show()
 			unequip_button.hide()
@@ -51,23 +52,30 @@ func configure_interaction_menu():
 #
 #
 func set_item_icon() -> void:
-	if item_id:
-		var item_icon_path = "res://assets/icons/item/%s.svg" % str(item_id)
+	if item_data:
+		var item_icon_path = "res://assets/icons/item/%s.svg" % str(item_data["item_id"])
 		slot_icon.texture = load(item_icon_path) if ResourceLoader.exists(item_icon_path) else preload("res://assets/third_party/icons/no_icon.svg")
 	else:
 		slot_icon.texture = null
+
+
+func set_name_label() -> void:
+	if item_data:
+		name_label.text = item_data["item_id"]
+	else:
+		name_label.text = ""
+
 #
-#
-#func set_amount_label() -> void:
-#	if item:
-#		amount_label.text = "" if item["amount"] == 1 else str(item["amount"])
-#	else:
-#		amount_label.text = ""
+func set_amount_label() -> void:
+	if item_data:
+		amount_label.text = item_data["amount"] if int(item_data["amount"]) > 1 else ""
+	else:
+		amount_label.text = ""
 
 
 func _on_ItemSlot_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
-		if item_id:
+		if item_data:
 			interaction_menu.show()
 			$Node/Control.show()
 
