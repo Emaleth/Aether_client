@@ -104,7 +104,7 @@ remote func fetch_token():
 		rpc_id(1, "return_token", token)
 	
 	
-remote func return_token_verification_results(result, account_id):
+remote func return_token_verification_results(result, _account_id):
 	if get_tree().get_rpc_sender_id() == 1:
 #		print(account_id)
 		if result == true:
@@ -153,56 +153,56 @@ func request_loot_pickup(_npc_id, _index):
 func request_loot_data(_npc_id):
 	rpc_id(1, "request_loot_data", _npc_id)
 
-	
-remote func receive_loot_data(_data, _npc_id):
-	if get_tree().get_rpc_sender_id() == 1:
-		Variables.user_interface.conf_loot(_data, _npc_id)
+#
+#remote func receive_loot_data(_data, _npc_id):
+#	if get_tree().get_rpc_sender_id() == 1:
+#		Variables.user_interface.conf_loot(_data, _npc_id)
 		
 		
 func request_material_gather(_material_id : String):
 	rpc_id(1, "request_material_gather", _material_id)
 
 	
-remote func recive_equipment_data(_data : Dictionary): #OK
-	if get_tree().get_rpc_sender_id() == 1:
-		Variables.equipment_data = _data
-		emit_signal("update_equipment_ui", _data)
+#remote func recive_equipment_data(_data : Dictionary): #OK
+#	if get_tree().get_rpc_sender_id() == 1:
+#		Variables.equipment_data = _data
+#		emit_signal("update_equipment_ui", _data)
 
 
-remote func recive_action_bar_data(_data : Array): #OK
-	if get_tree().get_rpc_sender_id() == 1:
-		Variables.action_bar_data = _data
-		emit_signal("sig_update_action_bar_ui", _data)
+#remote func recive_action_bar_data(_data : Array): #OK
+#	if get_tree().get_rpc_sender_id() == 1:
+#		Variables.action_bar_data = _data
+#		emit_signal("sig_update_action_bar_ui", _data)
 
 
-remote func recive_inventory_data(_data : Dictionary): #OK
-	if get_tree().get_rpc_sender_id() == 1:
-		Variables.inventory_data = _data
-		emit_signal("update_inventory_ui", _data)
+#remote func recive_inventory_data(_data : Dictionary): #OK
+#	if get_tree().get_rpc_sender_id() == 1:
+#		Variables.inventory_data = _data
+#		emit_signal("update_inventory_ui", _data)
 
 
-remote func recive_ability_data(_data : Array): #OK
-	if get_tree().get_rpc_sender_id() == 1:
-		Variables.ability_data = _data
-		emit_signal("update_ability_ui", _data)
+#remote func recive_ability_data(_data : Array): #OK
+#	if get_tree().get_rpc_sender_id() == 1:
+#		Variables.ability_data = _data
+#		emit_signal("update_ability_ui", _data)
 	
 	
-remote func recive_recipe_data(_data : Array):  #OK
-	if get_tree().get_rpc_sender_id() == 1:
-		Variables.recipe_data = _data
-		emit_signal("update_crafting_ui", _data)
+#remote func recive_recipe_data(_data : Array):  #OK
+#	if get_tree().get_rpc_sender_id() == 1:
+#		Variables.recipe_data = _data
+#		emit_signal("update_crafting_ui", _data)
 			
 		
-remote func recive_attributes_data(_data : Dictionary): #OK
-	if get_tree().get_rpc_sender_id() == 1:
-		Variables.attributes_data = _data
-		emit_signal("sig_update_attributes", _data)
+#remote func recive_attributes_data(_data : Dictionary): #OK
+#	if get_tree().get_rpc_sender_id() == 1:
+#		Variables.attributes_data = _data
+#		emit_signal("sig_update_attributes", _data)
 			
 		
-remote func recive_currency_data(_data : Dictionary): #OK
-	if get_tree().get_rpc_sender_id() == 1:
-		Variables.currency_data = _data
-		emit_signal("sig_update_currency", _data)
+#remote func recive_currency_data(_data : Dictionary): #OK
+#	if get_tree().get_rpc_sender_id() == 1:
+#		Variables.currency_data = _data
+#		emit_signal("sig_update_currency", _data)
 		
 	
 func request_item_buy(_shop_id : int, _index : int): #OK

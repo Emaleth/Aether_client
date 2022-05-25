@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://source/UI/layers/dashboard/panels/equipment/EquipmentContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://source/UI/layers/dashboard/Dashboard.gd" type="Script" id=2]
 [ext_resource path="res://source/UI/layers/dashboard/panels/inventory/Inventory.tscn" type="PackedScene" id=3]
 [ext_resource path="res://source/UI/layers/dashboard/panels/account_info/AccountInfoContainer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://source/UI/layers/dashboard/panels/currency/CurrencyContainer.tscn" type="PackedScene" id=5]
+[ext_resource path="res://source/UI/layers/dashboard/panels/stats/StatsContainer.tscn" type="PackedScene" id=6]
 
 [sub_resource type="StyleBoxEmpty" id=1]
 content_margin_left = 80.0
@@ -68,48 +70,13 @@ custom_constants/separation = 15
 [node name="AccountInfoContainer" parent="Bg/HBoxContainer/LeftContainer/LeftSector" instance=ExtResource( 4 )]
 
 [node name="EquipmentContainer" parent="Bg/HBoxContainer/LeftContainer/LeftSector" instance=ExtResource( 1 )]
+margin_left = 128.0
+margin_top = 56.0
+margin_right = 318.0
+margin_bottom = 318.0
 
-[node name="HSeparator" type="HSeparator" parent="Bg/HBoxContainer/LeftContainer/LeftSector"]
-margin_top = 382.0
-margin_right = 446.0
-margin_bottom = 386.0
-mouse_filter = 2
-
-[node name="StatsContainer" type="PanelContainer" parent="Bg/HBoxContainer/LeftContainer/LeftSector"]
-unique_name_in_owner = true
-margin_top = 401.0
-margin_right = 446.0
-margin_bottom = 634.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Bg/HBoxContainer/LeftContainer/LeftSector/StatsContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 439.0
-margin_bottom = 226.0
-mouse_filter = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-bbcode_enabled = true
-bbcode_text = "< some text,
-some text,
-some text,
-some text,
-some text,
-some text,
-some text,
-some text >"
-text = "< some text,
-some text,
-some text,
-some text,
-some text,
-some text,
-some text,
-some text >"
-fit_content_height = true
+[node name="StatsContainer" parent="Bg/HBoxContainer/LeftContainer/LeftSector" instance=ExtResource( 6 )]
+margin_top = 346.0
 
 [node name="RightContainer" type="PanelContainer" parent="Bg/HBoxContainer"]
 margin_left = 476.0
@@ -130,23 +97,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 15
 
-[node name="CurrencyContainer" type="PanelContainer" parent="Bg/HBoxContainer/RightContainer/RightSector"]
-unique_name_in_owner = true
-margin_right = 686.0
-margin_bottom = 44.0
-mouse_filter = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Bg/HBoxContainer/RightContainer/RightSector/CurrencyContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 679.0
-margin_bottom = 37.0
-mouse_filter = 2
-bbcode_text = "gold: 0 								diamonds: 0 
-rubees: 0 							emeralds: 0"
-text = "gold: 0 								diamonds: 0 
-rubees: 0 							emeralds: 0"
-fit_content_height = true
+[node name="CurrencyContainer" parent="Bg/HBoxContainer/RightContainer/RightSector" instance=ExtResource( 5 )]
 
 [node name="Inventory" parent="Bg/HBoxContainer/RightContainer/RightSector" instance=ExtResource( 3 )]
 margin_top = 59.0

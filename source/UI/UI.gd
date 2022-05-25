@@ -23,8 +23,12 @@ func process_private_snapshot(_snapshot):
 		hud.spells_and_resources.set_health_bar(_snapshot["resources_data"]["health"]["current"], _snapshot["resources_data"]["health"]["max"])
 		hud.spells_and_resources.set_mana_bar(_snapshot["resources_data"]["mana"]["current"], _snapshot["resources_data"]["mana"]["max"])
 		hud.spells_and_resources.set_stamina_bar(_snapshot["resources_data"]["stamina"]["current"], _snapshot["resources_data"]["stamina"]["max"])
-	if _snapshot.has("currency_data"): pass
-	if _snapshot.has("attributes_data"): pass
+	if _snapshot.has("currency_data"):
+		pass
+#		dashboard.currency
+	if _snapshot.has("attributes_data"): 
+		pass
+#		dashboard.attributes_and_stats
 	if _snapshot.has("equipment_data"): 
 		dashboard.equipment.configure(_snapshot["equipment_data"])
 	if _snapshot.has("abilities_data"): pass

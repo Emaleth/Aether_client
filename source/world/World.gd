@@ -17,32 +17,27 @@ onready var navigation : Navigation = $Navigation
 
 #################################_API_##########################################
 
-remote func recive_actor_delta_snapshot(_snapshot : Dictionary):
-	process_actor_delta_snapshot(_snapshot)
+remote func recive_delta_snapshot(_snapshot : Dictionary):
+	process_delta_snapshot(_snapshot)
 
-
-remote func recive_ability_delta_snapshot(_snapshot : Dictionary):
-	process_ability_delta_snapshot(_snapshot)
 	
 func send_new_target_destination(_pos):
 	rpc_id(1, "recive_new_target_destination", _pos)
 	
 ###################################_MAIN_#######################################
 
-func process_actor_delta_snapshot(_snapshot):
+func process_delta_snapshot(_snapshot):
 	for _id in _snapshot["spawned"].keys():
 		spawn_actor(_id, _snapshot)
 	for _id in _snapshot["changed"].keys():
 		update_actor(_id, _snapshot)
 	for _id in _snapshot["despawned"].keys():
 		despawn_actor(_id, _snapshot)
+	for _id in _snapshot["abilities"].keys():
+		spawn_ability(_id, _snapshot)
 		
 	Ui.process_private_snapshot(_snapshot["private"])
 
-
-func process_ability_delta_snapshot(_snapshot):
-	for _id in _snapshot["spawned"].keys():
-		spawn_ability(_id, _snapshot)
 		
 #############################_BUILT-IN_#########################################
 
@@ -64,7 +59,7 @@ func spawn_actor(_id, _snapshot):
 		actor.bind_camera(CameraRig.get_path())
 		CameraRig.enable(true)
 		terrain.grass_target = actor
-	print("Spawned actor id: %s" % _id)
+	print("Spawned actor tmp_id: %s" % _id)
 #
 #
 func update_actor(_id, _snapshot):
@@ -78,12 +73,12 @@ func update_actor(_id, _snapshot):
 func despawn_actor(_id, _snapshot):
 	var actor = actor_container.get_node(str(_id))
 	actor.queue_free()
-	print("Despawned actor id: %s" % _id)
+	print("Despawned actor tmp_id: %s" % _id)
 	
 	
 func spawn_ability(_id, _snapshot):
 	var ability = ability_scene.instance()
 	ability.configure(_snapshot[_id])
 	ability_container.add_child(ability)
-	print("Spawned ability id: %s" % _id)
+	print("Spawned ability tmp_id: %s" % _id)
 	
