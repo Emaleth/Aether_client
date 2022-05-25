@@ -8,7 +8,7 @@ onready var scroll_container = $VBoxContainer/OutputPanel/ScrollContainer
 onready var scroll_tween := $Tween
 
 func _ready() -> void:
-	Server.connect("s_update_chat_state", self, "update_chat_box")
+#	Server.connect("s_update_chat_state", self, "update_chat_box")
 	template_chat_line.hide()
 
 	

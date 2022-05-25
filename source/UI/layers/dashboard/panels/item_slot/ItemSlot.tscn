@@ -13,12 +13,13 @@ onready var slot_icon : TextureRect =  $VBoxContainer/HBoxContainer/TextureRect
 onready var name_label : Label = $VBoxContainer/HBoxContainer/NameLabel
 onready var amount_label : Label = $VBoxContainer/HBoxContainer/AmountLabel
 onready var interaction_menu = $VBoxContainer/InteractionMenu
+onready var separator = $VBoxContainer/HSeparator
 
 onready var equip_button : Button = $VBoxContainer/InteractionMenu/Equip
 onready var unequip_button : Button = $VBoxContainer/InteractionMenu/Unequip
 onready var discard_button : Button = $VBoxContainer/InteractionMenu/Discard
 onready var use_button : Button = $VBoxContainer/InteractionMenu/Use
-onready var interaction_bg := $Node/Control
+
 
 func _ready() -> void:
 	hint_tooltip = \"text\" if item_data else \"\"
@@ -48,20 +49,21 @@ func set_mode(_mode):
 	match _mode:
 		NORMAL:
 			interaction_menu.hide()
-			interaction_bg.hide()
+			separator.hide()
 			amount_label.show()
 			name_label.show()
 			rect_min_size = Vector2(256, 16)
 		EXTENDED:
 			interaction_menu.show()
-			interaction_bg.show()
+			separator.show()
+			interaction_menu.force_update_transform()
 			amount_label.show()
 			name_label.show()
 		COMPACT:
 			amount_label.hide()
+			separator.hide()
 			name_label.hide()
 			interaction_menu.hide()
-			interaction_bg.hide()
 			rect_min_size = Vector2(32, 32)
 		
 		
@@ -124,80 +126,65 @@ func _on_ItemSlot_gui_input(event: InputEvent) -> void:
 
 func _on_Equip_pressed() -> void:
 	Server.request_item_equip(slot_id)
-	match container_type:
-		\"inventory\":
-			set_mode(NORMAL)
-		\"equipment\":
-			set_mode(COMPACT)
 
 
 func _on_Discard_pressed() -> void:
 	Server.request_item_discard(slot_id)
-	match container_type:
-		\"inventory\":
-			set_mode(NORMAL)
-		\"equipment\":
-			set_mode(COMPACT)
 
 
 func _on_Use_pressed() -> void:
 	Server.request_item_use(slot_id)
-	match container_type:
-		\"inventory\":
-			set_mode(NORMAL)
-		\"equipment\":
-			set_mode(COMPACT)
 	
 
 func _on_Unequip_pressed() -> void:
 	Server.request_item_unequip(slot_id)
+
+
+func _on_ItemSlot_mouse_entered() -> void:
+	if item_data:
+		set_mode(EXTENDED)
+		
+		
+func _on_ItemSlot_mouse_exited() -> void:
 	match container_type:
 		\"inventory\":
 			set_mode(NORMAL)
 		\"equipment\":
 			set_mode(COMPACT)
-	
-
-func _on_Control_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		match container_type:
-			\"inventory\":
-				set_mode(NORMAL)
-			\"equipment\":
-				set_mode(COMPACT)
-			
-				
 
 "
 
 [node name="ItemSlot" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1334.0
-margin_bottom = -736.0
+margin_right = -1110.0
+margin_bottom = -730.0
 rect_min_size = Vector2( 32, 32 )
 mouse_filter = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = SubResource( 1 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 93.0
-margin_bottom = 23.0
-size_flags_horizontal = 2
+margin_right = 339.0
+margin_bottom = 27.0
+mouse_filter = 2
+size_flags_horizontal = 3
 size_flags_vertical = 2
+custom_constants/separation = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 86.0
-margin_bottom = 16.0
+margin_bottom = 20.0
 mouse_filter = 2
 size_flags_horizontal = 3
 
 [node name="AmountLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+margin_top = 2.0
 margin_right = 16.0
-margin_bottom = 16.0
+margin_bottom = 18.0
 rect_min_size = Vector2( 16, 16 )
 size_flags_horizontal = 0
 text = "[0]"
@@ -205,7 +192,7 @@ text = "[0]"
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 margin_left = 20.0
 margin_right = 36.0
-margin_bottom = 16.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 16, 16 )
 mouse_filter = 2
 expand = true
@@ -213,56 +200,56 @@ stretch_mode = 7
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 40.0
-margin_top = 1.0
+margin_top = 3.0
 margin_right = 86.0
-margin_bottom = 15.0
+margin_bottom = 17.0
 size_flags_horizontal = 3
 text = "[NAME]"
 
-[node name="InteractionMenu" type="GridContainer" parent="VBoxContainer"]
-visible = false
-margin_top = 20.0
-margin_right = 222.0
-margin_bottom = 40.0
+[node name="HSeparator" type="VSeparator" parent="VBoxContainer"]
+margin_left = 96.0
+margin_right = 100.0
+margin_bottom = 20.0
 mouse_filter = 2
-size_flags_horizontal = 6
-size_flags_vertical = 3
-columns = 4
+
+[node name="InteractionMenu" type="HBoxContainer" parent="VBoxContainer"]
+margin_left = 110.0
+margin_right = 332.0
+margin_bottom = 20.0
+mouse_filter = 2
+size_flags_horizontal = 3
+alignment = 1
 
 [node name="Equip" type="Button" parent="VBoxContainer/InteractionMenu"]
 margin_right = 47.0
 margin_bottom = 20.0
+mouse_filter = 1
 text = "Equip"
 
 [node name="Unequip" type="Button" parent="VBoxContainer/InteractionMenu"]
 margin_left = 51.0
 margin_right = 117.0
 margin_bottom = 20.0
+mouse_filter = 1
 text = "Unequip"
 
 [node name="Discard" type="Button" parent="VBoxContainer/InteractionMenu"]
 margin_left = 121.0
 margin_right = 181.0
 margin_bottom = 20.0
+mouse_filter = 1
 text = "Discard"
 
 [node name="Use" type="Button" parent="VBoxContainer/InteractionMenu"]
 margin_left = 185.0
 margin_right = 222.0
 margin_bottom = 20.0
+mouse_filter = 1
 text = "Use"
 
-[node name="Node" type="Node" parent="."]
-
-[node name="Control" type="Control" parent="Node"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[connection signal="gui_input" from="." to="." method="_on_ItemSlot_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_ItemSlot_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_ItemSlot_mouse_exited"]
 [connection signal="pressed" from="VBoxContainer/InteractionMenu/Equip" to="." method="_on_Equip_pressed"]
 [connection signal="pressed" from="VBoxContainer/InteractionMenu/Unequip" to="." method="_on_Unequip_pressed"]
 [connection signal="pressed" from="VBoxContainer/InteractionMenu/Discard" to="." method="_on_Discard_pressed"]
 [connection signal="pressed" from="VBoxContainer/InteractionMenu/Use" to="." method="_on_Use_pressed"]
-[connection signal="gui_input" from="Node/Control" to="." method="_on_Control_gui_input"]

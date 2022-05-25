@@ -15,17 +15,17 @@ var decimal_collector : float = 0
 # signals
 #signal sig_update_fast_world_state
 #signal sig_update_slow_world_state
-signal sig_update_currency
-signal sig_update_attributes
-signal sig_update_action_bar_ui
+#signal sig_update_currency
+#signal sig_update_attributes
+#signal sig_update_action_bar_ui
 
 signal s_token_verification_success
 signal s_token_verification_failure
-signal s_update_chat_state
-signal update_inventory_ui
-signal update_equipment_ui
-signal update_ability_ui
-signal update_crafting_ui
+#signal s_update_chat_state
+#signal update_inventory_ui
+#signal update_equipment_ui
+#signal update_ability_ui
+#signal update_crafting_ui
 
 
 func _physics_process(delta: float) -> void:
