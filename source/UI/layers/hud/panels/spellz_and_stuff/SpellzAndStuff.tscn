@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://source/UI/layers/hud/panels/spellz_and_stuff/SpellzAndStuff.gd" type="Script" id=1]
 [ext_resource path="res://assets/third_party/icons/mana.svg" type="Texture" id=2]
 [ext_resource path="res://assets/third_party/icons/health.svg" type="Texture" id=3]
 [ext_resource path="res://assets/third_party/icons/stamina.svg" type="Texture" id=4]
+[ext_resource path="res://assets/third_party/icons/spell_casting.svg" type="Texture" id=5]
 
 [sub_resource type="StyleBoxEmpty" id=3]
 
@@ -14,6 +15,8 @@ bg_color = Color( 0.298039, 0, 0.501961, 1 )
 
 [sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0, 0, 0, 0.392157 )
+
+[sub_resource type="StyleBoxEmpty" id=13]
 
 [sub_resource type="StyleBoxEmpty" id=12]
 
@@ -26,7 +29,7 @@ bg_color = Color( 0, 0, 1, 1 )
 [sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 1, 0.678431, 0, 1 )
 
-[node name="SpellzAndStuff" type="PanelContainer"]
+[node name="SpellsAndResources" type="PanelContainer"]
 margin_right = 716.0
 margin_bottom = 121.0
 size_flags_horizontal = 4
@@ -36,38 +39,40 @@ script = ExtResource( 1 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_right = 722.0
-margin_bottom = 129.0
+margin_bottom = 131.0
 custom_constants/separation = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Casting" type="HBoxContainer" parent="VBoxContainer"]
 margin_right = 722.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Casting"]
 margin_right = 238.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 6 )
 
-[node name="CastingBar" type="HBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="CastingBar" type="HBoxContainer" parent="VBoxContainer/Casting"]
 margin_left = 242.0
 margin_right = 480.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/CastingBar"]
-margin_right = 12.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 12, 12 )
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Casting/CastingBar"]
+self_modulate = Color( 0.298039, 0, 0.501961, 1 )
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 5 )
 expand = true
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/CastingBar"]
-margin_left = 16.0
-margin_top = 3.0
-margin_right = 222.0
-margin_bottom = 9.0
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/Casting/CastingBar"]
+margin_left = 20.0
+margin_top = 5.0
+margin_right = 218.0
+margin_bottom = 11.0
 rect_min_size = Vector2( 0, 6 )
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -76,47 +81,47 @@ custom_styles/bg = SubResource( 8 )
 value = 53.0
 percent_visible = false
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/HBoxContainer/CastingBar"]
-margin_left = 226.0
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Casting/CastingBar"]
+margin_left = 222.0
 margin_right = 238.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 12, 12 )
-expand = true
+margin_bottom = 16.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 13 )
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/Casting"]
 margin_left = 484.0
 margin_right = 722.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 6 )
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
-margin_top = 12.0
+margin_top = 16.0
 margin_right = 722.0
-margin_bottom = 37.0
-custom_constants/separation = 25
+margin_bottom = 31.0
+custom_constants/separation = 15
 custom_styles/separator = SubResource( 12 )
 
 [node name="HealthBar" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
-margin_top = 37.0
+margin_top = 31.0
 margin_right = 722.0
-margin_bottom = 49.0
+margin_bottom = 47.0
 
 [node name="TextureRect3" type="TextureRect" parent="VBoxContainer/HealthBar"]
 self_modulate = Color( 1, 0, 0, 1 )
-margin_right = 12.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 12, 12 )
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 3 )
 expand = true
 
 [node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HealthBar"]
-margin_left = 16.0
-margin_top = 3.0
-margin_right = 706.0
-margin_bottom = 9.0
+margin_left = 20.0
+margin_top = 5.0
+margin_right = 702.0
+margin_bottom = 11.0
 rect_min_size = Vector2( 0, 6 )
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -126,45 +131,39 @@ custom_styles/bg = SubResource( 8 )
 value = 25.0
 percent_visible = false
 
-[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/HealthBar"]
-self_modulate = Color( 1, 0, 0, 1 )
-margin_left = 710.0
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/HealthBar"]
+margin_left = 706.0
 margin_right = 722.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 12, 12 )
-texture = ExtResource( 3 )
-expand = true
+margin_bottom = 16.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 13 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
-margin_top = 49.0
+[node name="ManaStamina" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 47.0
 margin_right = 722.0
-margin_bottom = 61.0
-
-[node name="VBoxContainer" type="HBoxContainer" parent="VBoxContainer/VBoxContainer"]
-margin_right = 722.0
-margin_bottom = 12.0
+margin_bottom = 63.0
 size_flags_vertical = 4
 custom_constants/separation = 10
 
-[node name="ManaBar" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="ManaBar" type="HBoxContainer" parent="VBoxContainer/ManaStamina"]
 unique_name_in_owner = true
 margin_right = 356.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/VBoxContainer/VBoxContainer/ManaBar"]
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/ManaStamina/ManaBar"]
 self_modulate = Color( 0, 0, 1, 1 )
-margin_right = 12.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 12, 12 )
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
 texture = ExtResource( 2 )
 expand = true
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/VBoxContainer/VBoxContainer/ManaBar"]
-margin_left = 16.0
-margin_top = 3.0
-margin_right = 356.0
-margin_bottom = 9.0
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/ManaStamina/ManaBar"]
+margin_left = 20.0
+margin_top = 5.0
+margin_right = 336.0
+margin_bottom = 11.0
 rect_min_size = Vector2( 0, 6 )
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -174,17 +173,33 @@ custom_styles/bg = SubResource( 8 )
 value = 25.0
 percent_visible = false
 
-[node name="StaminaBar" type="HBoxContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer"]
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ManaStamina/ManaBar"]
+margin_left = 340.0
+margin_right = 356.0
+margin_bottom = 16.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 13 )
+
+[node name="StaminaBar" type="HBoxContainer" parent="VBoxContainer/ManaStamina"]
 unique_name_in_owner = true
 margin_left = 366.0
 margin_right = 722.0
-margin_bottom = 12.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 
-[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/VBoxContainer/VBoxContainer/StaminaBar"]
-margin_top = 3.0
-margin_right = 340.0
-margin_bottom = 9.0
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/ManaStamina/StaminaBar"]
+self_modulate = Color( 1, 0.678431, 0, 1 )
+margin_right = 16.0
+margin_bottom = 16.0
+rect_min_size = Vector2( 16, 16 )
+texture = ExtResource( 4 )
+expand = true
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/ManaStamina/StaminaBar"]
+margin_left = 20.0
+margin_top = 5.0
+margin_right = 336.0
+margin_bottom = 11.0
 rect_min_size = Vector2( 0, 6 )
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -194,282 +209,280 @@ custom_styles/bg = SubResource( 8 )
 value = 25.0
 percent_visible = false
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/VBoxContainer/StaminaBar"]
-self_modulate = Color( 1, 0.678431, 0, 1 )
-margin_left = 344.0
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/ManaStamina/StaminaBar"]
+margin_left = 340.0
 margin_right = 356.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 12, 12 )
-texture = ExtResource( 4 )
-expand = true
+margin_bottom = 16.0
+custom_constants/separation = 16
+custom_styles/separator = SubResource( 13 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 61.0
+[node name="Ability" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 63.0
 margin_right = 722.0
-margin_bottom = 129.0
+margin_bottom = 131.0
 custom_constants/separation = 10
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer/Ability"]
 margin_right = 356.0
 margin_bottom = 68.0
 columns = 10
 
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel3" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel4" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel5" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel5" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel6" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel6" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel7" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel7" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 216.0
 margin_right = 248.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel8" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel8" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 252.0
 margin_right = 284.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel9" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel9" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 288.0
 margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel10" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel10" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 324.0
 margin_right = 356.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel11" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel11" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel12" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel12" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 36.0
 margin_top = 36.0
 margin_right = 68.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel13" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel13" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 72.0
 margin_top = 36.0
 margin_right = 104.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel14" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel14" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 108.0
 margin_top = 36.0
 margin_right = 140.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel15" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel15" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 144.0
 margin_top = 36.0
 margin_right = 176.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel16" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel16" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 180.0
 margin_top = 36.0
 margin_right = 212.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel17" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel17" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 216.0
 margin_top = 36.0
 margin_right = 248.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel18" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel18" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 252.0
 margin_top = 36.0
 margin_right = 284.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel19" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel19" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 288.0
 margin_top = 36.0
 margin_right = 320.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel20" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer"]
+[node name="Panel20" type="Panel" parent="VBoxContainer/Ability/GridContainer"]
 margin_left = 324.0
 margin_top = 36.0
 margin_right = 356.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="GridContainer2" type="GridContainer" parent="VBoxContainer/HBoxContainer2"]
+[node name="GridContainer2" type="GridContainer" parent="VBoxContainer/Ability"]
 margin_left = 366.0
 margin_right = 722.0
 margin_bottom = 68.0
 columns = 10
 
-[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_right = 32.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 36.0
 margin_right = 68.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel3" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel3" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 72.0
 margin_right = 104.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel4" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel4" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 108.0
 margin_right = 140.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel5" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel5" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 144.0
 margin_right = 176.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel6" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel6" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 180.0
 margin_right = 212.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel7" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel7" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 216.0
 margin_right = 248.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel8" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel8" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 252.0
 margin_right = 284.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel9" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel9" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 288.0
 margin_right = 320.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel10" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel10" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 324.0
 margin_right = 356.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel11" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel11" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_top = 36.0
 margin_right = 32.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel12" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel12" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 36.0
 margin_top = 36.0
 margin_right = 68.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel13" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel13" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 72.0
 margin_top = 36.0
 margin_right = 104.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel14" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel14" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 108.0
 margin_top = 36.0
 margin_right = 140.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel15" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel15" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 144.0
 margin_top = 36.0
 margin_right = 176.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel16" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel16" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 180.0
 margin_top = 36.0
 margin_right = 212.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel17" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel17" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 216.0
 margin_top = 36.0
 margin_right = 248.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel18" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel18" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 252.0
 margin_top = 36.0
 margin_right = 284.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel19" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel19" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 288.0
 margin_top = 36.0
 margin_right = 320.0
 margin_bottom = 68.0
 rect_min_size = Vector2( 32, 32 )
 
-[node name="Panel20" type="Panel" parent="VBoxContainer/HBoxContainer2/GridContainer2"]
+[node name="Panel20" type="Panel" parent="VBoxContainer/Ability/GridContainer2"]
 margin_left = 324.0
 margin_top = 36.0
 margin_right = 356.0

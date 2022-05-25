@@ -42,7 +42,7 @@ mouse_filter = 2
 
 [node name="SpellzAndStuff" parent="." instance=ExtResource( 5 )]
 margin_left = 317.0
-margin_top = 629.0
+margin_top = 617.0
 margin_right = 1039.0
 margin_bottom = 758.0
 mouse_filter = 2

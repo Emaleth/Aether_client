@@ -60,7 +60,7 @@ var grass_target = null
 func _ready() -> void:
 	initialize()
 	generate = true
-	enable_grass_processing = true
+#	enable_grass_processing = true
 
 
 func _process(_delta: float) -> void:

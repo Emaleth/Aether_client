@@ -63,12 +63,11 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
-enable_grass_processing = true
 max_altitude = 60
 heightmap_image = ExtResource( 12 )
 normalmap_image = SubResource( 13 )
 splatmap = ExtResource( 2 )
-culling_max_distance = 1000
+culling_max_distance = 20
 grass_render_distance = 1
 antitile_noise = SubResource( 3 )
 texture_flat_diffuse = ExtResource( 10 )
