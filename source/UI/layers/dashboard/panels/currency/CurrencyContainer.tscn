@@ -8,14 +8,17 @@ margin_bottom = 44.0
 mouse_filter = 2
 script = ExtResource( 1 )
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 679.0
 margin_bottom = 37.0
-mouse_filter = 2
-bbcode_text = "gold: 0 								diamonds: 0 
-rubees: 0 							emeralds: 0"
-text = "gold: 0 								diamonds: 0 
-rubees: 0 							emeralds: 0"
-fit_content_height = true
+
+[node name="GoldLabel" type="Label" parent="HBoxContainer"]
+margin_top = 8.0
+margin_right = 672.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+align = 1
+valign = 1

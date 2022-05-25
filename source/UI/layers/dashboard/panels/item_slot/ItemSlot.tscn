@@ -13,7 +13,6 @@ onready var slot_icon : TextureRect =  $VBoxContainer/HBoxContainer/TextureRect
 onready var name_label : Label = $VBoxContainer/HBoxContainer/NameLabel
 onready var amount_label : Label = $VBoxContainer/HBoxContainer/AmountLabel
 onready var interaction_menu = $VBoxContainer/InteractionMenu
-onready var separator = $VBoxContainer/HSeparator
 
 onready var equip_button : Button = $VBoxContainer/InteractionMenu/Equip
 onready var unequip_button : Button = $VBoxContainer/InteractionMenu/Unequip
@@ -39,54 +38,47 @@ func configure(_slot_id, _data, _container_type):
 	container_type = _container_type
 	
 	
-func dummy_config() -> void:
-	interaction_menu.hide()
-	hint_tooltip = \"text\" if item_data else \"\"
-	$Node/Control.hide()
+#func dummy_config() -> void:
+#	interaction_menu.hide()
+#	hint_tooltip = \"text\" if item_data else \"\"
+#	$Node/Control.hide()
 
 
 func set_mode(_mode):
 	match _mode:
 		NORMAL:
-			interaction_menu.hide()
-			separator.hide()
+			for i in interaction_menu.get_children():
+				i.hide()
 			amount_label.show()
 			name_label.show()
-			rect_min_size = Vector2(256, 16)
+			rect_min_size = Vector2(256, 38)
 		EXTENDED:
-			interaction_menu.show()
-			separator.show()
-			interaction_menu.force_update_transform()
+			for i in interaction_menu.get_children():
+				if i.disabled == false:
+					i.show()
 			amount_label.show()
 			name_label.show()
 		COMPACT:
 			amount_label.hide()
-			separator.hide()
 			name_label.hide()
-			interaction_menu.hide()
+			for i in interaction_menu.get_children():
+				i.hide()
 			rect_min_size = Vector2(32, 32)
+			rect_size = Vector2(32, 32)
 		
 		
 func configure_interaction_menu():
 	if item_data:
 		if container_type == \"inventory\":
-			equip_button.show()
 			equip_button.disabled = false
-			unequip_button.hide()
 			unequip_button.disabled = true
-			discard_button.show()
 			discard_button.disabled = false
-			use_button.show()
 			use_button.disabled = false
 			
 		if container_type == \"equipment\":
-			equip_button.hide()
 			equip_button.disabled = true
-			unequip_button.show()
 			unequip_button.disabled = false
-			discard_button.hide()
 			discard_button.disabled = true
-			use_button.hide()
 			use_button.disabled = true
 	
 #
@@ -157,9 +149,9 @@ func _on_ItemSlot_mouse_exited() -> void:
 [node name="ItemSlot" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1110.0
+margin_right = -1020.0
 margin_bottom = -730.0
-rect_min_size = Vector2( 32, 32 )
+rect_min_size = Vector2( 256, 38 )
 mouse_filter = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -167,50 +159,49 @@ script = SubResource( 1 )
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
 margin_left = 7.0
-margin_top = 7.0
+margin_top = 9.0
 margin_right = 339.0
-margin_bottom = 27.0
+margin_bottom = 29.0
 mouse_filter = 2
 size_flags_horizontal = 3
-size_flags_vertical = 2
+size_flags_vertical = 6
 custom_constants/separation = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 86.0
-margin_bottom = 20.0
+margin_left = 7.0
+margin_top = 2.0
+margin_right = 93.0
+margin_bottom = 18.0
 mouse_filter = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
+size_flags_vertical = 6
 
 [node name="AmountLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
-margin_top = 2.0
 margin_right = 16.0
-margin_bottom = 18.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 16, 16 )
 size_flags_horizontal = 0
+size_flags_vertical = 6
 text = "[0]"
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 margin_left = 20.0
 margin_right = 36.0
-margin_bottom = 20.0
+margin_bottom = 16.0
 rect_min_size = Vector2( 16, 16 )
 mouse_filter = 2
+size_flags_vertical = 6
 expand = true
 stretch_mode = 7
 
 [node name="NameLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
 margin_left = 40.0
-margin_top = 3.0
+margin_top = 1.0
 margin_right = 86.0
-margin_bottom = 17.0
+margin_bottom = 15.0
 size_flags_horizontal = 3
+size_flags_vertical = 6
 text = "[NAME]"
-
-[node name="HSeparator" type="VSeparator" parent="VBoxContainer"]
-margin_left = 96.0
-margin_right = 100.0
-margin_bottom = 20.0
-mouse_filter = 2
 
 [node name="InteractionMenu" type="HBoxContainer" parent="VBoxContainer"]
 margin_left = 110.0
@@ -234,6 +225,7 @@ mouse_filter = 1
 text = "Unequip"
 
 [node name="Discard" type="Button" parent="VBoxContainer/InteractionMenu"]
+self_modulate = Color( 1, 0, 0, 1 )
 margin_left = 121.0
 margin_right = 181.0
 margin_bottom = 20.0
