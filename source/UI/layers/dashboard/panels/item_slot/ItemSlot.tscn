@@ -23,6 +23,8 @@ onready var use_button : Button = $VBoxContainer/InteractionMenu/Use
 func _ready() -> void:
 	hint_tooltip = \"text\" if item_data else \"\"
 	set_item_icon()
+	set_name_label()
+	set_amount_label()
 	configure_interaction_menu()
 	match container_type:
 		\"inventory\":
@@ -105,7 +107,7 @@ func set_name_label() -> void:
 #
 func set_amount_label() -> void:
 	if item_data:
-		amount_label.text = item_data[\"amount\"] if int(item_data[\"amount\"]) > 1 else \"\"
+		amount_label.text = str(item_data[\"amount\"]) if int(item_data[\"amount\"]) > 1 else \"\"
 	else:
 		amount_label.text = \"\"
 
